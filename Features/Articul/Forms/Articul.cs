@@ -282,8 +282,8 @@ namespace SewingProduction.Features.Articul
                 txbSumStrVznos.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Sum_strvznos), true, DataSourceUpdateMode.Never);
                 txbSumSebRaskr.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Sum_sebraskr), true, DataSourceUpdateMode.Never);
                 txbSumKomplNum.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Sum_komplnum), true, DataSourceUpdateMode.Never);
-
-
+                txbSebRecom.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Seb_rekom), true, DataSourceUpdateMode.Never);
+                txbCalcSebRecom.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Calc_seb_rekom), true, DataSourceUpdateMode.Never);
                 #endregion
 
                 #region коэфициенты
