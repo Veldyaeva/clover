@@ -199,6 +199,9 @@
     <Compile Update="Features\Tabel\Forms\TabelMain.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\Tabel\Reports\Blank.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Features\TeamWork\Forms\AnnLog.cs">
       <SubType>Form</SubType>
     </Compile>
