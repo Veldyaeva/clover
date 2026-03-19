@@ -123,8 +123,8 @@ namespace SewingProduction.Features.Articul.Service
                 }
 
 
-                string query = "select vsk.kod, vsk.kodd,vsk.articul,vsk.grup,vsk.mod,va.tmName "+
-                    "from dbo.view_spArticulKodd vsk "+
+                string query = "select vsk.kod, vsk.kodd,vsk.articul,vsk.grup,vsk.mod,va.tmName, vsk.arh "+
+                    "from dbo.view_spArticulKodd_all vsk "+
                     "inner join view_art va on vsk.kod = va.kod "+
                     "WHERE vsk.articul like @articul ";
 

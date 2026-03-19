@@ -20,7 +20,7 @@ namespace SewingProduction.Features.Articul.Models
         public string Sost { get; set; }
         public string Kle { get; set; }
         public string tmName { get; set; }
-
+        public int Arh { get; set; }
 
     }
 }

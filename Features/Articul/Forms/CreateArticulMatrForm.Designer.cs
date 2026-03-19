@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue1 = new DevExpress.XtraEditors.FormatConditionRuleValue();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateArticulMatrForm));
+            gcArhCompare = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemCheckEdit8 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             repositoryItemCheckEdit9 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             repositoryItemCheckEdit10 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
@@ -112,8 +115,10 @@
             simpleSeparator1 = new DevExpress.XtraLayout.SimpleSeparator();
             emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            btnSelectModel = new SewingProduction.Core.Class.CustomSimpleButton();
+            layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit9).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit10).BeginInit();
@@ -146,9 +151,18 @@
             ((System.ComponentModel.ISupportInitialize)simpleSeparator1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
             SuspendLayout();
+            // 
+            // gcArhCompare
+            // 
+            gcArhCompare.Caption = "Архив";
+            gcArhCompare.Name = "gcArhCompare";
+            gcArhCompare.Visible = true;
+            gcArhCompare.VisibleIndex = 5;
+            gcArhCompare.Width = 40;
             // 
             // repositoryItemCheckEdit8
             // 
@@ -214,7 +228,7 @@
             gridArtMatr.MainView = gridViewArtMatrEdit;
             gridArtMatr.Name = "gridArtMatr";
             gridArtMatr.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit1, repositoryItemCheckEdit2, repositoryItemCheckEdit3, repositoryItemCheckEdit4, repositoryItemCheckEdit5, repositoryItemCheckEdit6, repositoryItemCheckEdit7, repositoryItemLookUpEdit1, repositoryItemLookUpEdit2, repositoryItemSearchLookUpEdit1, repositoryItemSearchLookUpEdit2 });
-            gridArtMatr.Size = new System.Drawing.Size(1768, 338);
+            gridArtMatr.Size = new System.Drawing.Size(1768, 340);
             gridArtMatr.TabIndex = 0;
             gridArtMatr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewArtMatrEdit, gridViewArtMatr });
             // 
@@ -772,26 +786,27 @@
             // 
             // customLayoutControl1
             // 
+            customLayoutControl1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            customLayoutControl1.Controls.Add(btnSelectModel);
             customLayoutControl1.Controls.Add(gridArtCompare);
             customLayoutControl1.Controls.Add(articulControl1);
             customLayoutControl1.Controls.Add(gridArtMatr);
-            customLayoutControl1.Dock = System.Windows.Forms.DockStyle.Top;
             customLayoutControl1.Font = new System.Drawing.Font("Arial", 10F);
             customLayoutControl1.Location = new System.Drawing.Point(0, 0);
             customLayoutControl1.Name = "customLayoutControl1";
-            customLayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(-1028, 237, 650, 400);
+            customLayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(-772, 168, 650, 400);
             customLayoutControl1.Root = Root;
-            customLayoutControl1.Size = new System.Drawing.Size(1772, 654);
+            customLayoutControl1.Size = new System.Drawing.Size(1772, 650);
             customLayoutControl1.TabIndex = 3;
             customLayoutControl1.Text = "customLayoutControl1";
             // 
             // gridArtCompare
             // 
             gridArtCompare.Font = new System.Drawing.Font("Arial", 10F);
-            gridArtCompare.Location = new System.Drawing.Point(72, 344);
+            gridArtCompare.Location = new System.Drawing.Point(2, 346);
             gridArtCompare.MainView = gridViewArtCompare;
             gridArtCompare.Name = "gridArtCompare";
-            gridArtCompare.Size = new System.Drawing.Size(390, 308);
+            gridArtCompare.Size = new System.Drawing.Size(460, 302);
             gridArtCompare.TabIndex = 4;
             gridArtCompare.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewArtCompare });
             // 
@@ -799,7 +814,16 @@
             // 
             gridViewArtCompare.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewArtCompare.Appearance.FocusedRow.Options.UseFont = true;
-            gridViewArtCompare.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gcKoddCompare, gcGrupCompare, gcArticulCompare, gcModCompare, gcTMCompare });
+            gridViewArtCompare.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gcArhCompare, gcKoddCompare, gcGrupCompare, gcArticulCompare, gcModCompare, gcTMCompare });
+            gridFormatRule1.ApplyToRow = true;
+            gridFormatRule1.Column = gcArhCompare;
+            gridFormatRule1.Name = "Format0";
+            formatConditionRuleValue1.Appearance.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            formatConditionRuleValue1.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue1.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue1.Value1 = "1";
+            gridFormatRule1.Rule = formatConditionRuleValue1;
+            gridViewArtCompare.FormatRules.Add(gridFormatRule1);
             gridViewArtCompare.GridControl = gridArtCompare;
             gridViewArtCompare.Name = "gridViewArtCompare";
             gridViewArtCompare.OptionsView.ShowGroupPanel = false;
@@ -811,7 +835,7 @@
             gcKoddCompare.Name = "gcKoddCompare";
             gcKoddCompare.Visible = true;
             gcKoddCompare.VisibleIndex = 0;
-            gcKoddCompare.Width = 78;
+            gcKoddCompare.Width = 57;
             // 
             // gcGrupCompare
             // 
@@ -819,7 +843,7 @@
             gcGrupCompare.Name = "gcGrupCompare";
             gcGrupCompare.Visible = true;
             gcGrupCompare.VisibleIndex = 1;
-            gcGrupCompare.Width = 140;
+            gcGrupCompare.Width = 142;
             // 
             // gcArticulCompare
             // 
@@ -827,7 +851,7 @@
             gcArticulCompare.Name = "gcArticulCompare";
             gcArticulCompare.Visible = true;
             gcArticulCompare.VisibleIndex = 2;
-            gcArticulCompare.Width = 140;
+            gcArticulCompare.Width = 93;
             // 
             // gcModCompare
             // 
@@ -835,7 +859,6 @@
             gcModCompare.Name = "gcModCompare";
             gcModCompare.Visible = true;
             gcModCompare.VisibleIndex = 3;
-            gcModCompare.Width = 143;
             // 
             // gcTMCompare
             // 
@@ -843,23 +866,24 @@
             gcTMCompare.Name = "gcTMCompare";
             gcTMCompare.Visible = true;
             gcTMCompare.VisibleIndex = 4;
+            gcTMCompare.Width = 32;
             // 
             // articulControl1
             // 
             articulControl1.IsReadOnly = true;
-            articulControl1.Location = new System.Drawing.Point(466, 345);
+            articulControl1.Location = new System.Drawing.Point(466, 347);
             articulControl1.Name = "articulControl1";
-            articulControl1.Size = new System.Drawing.Size(1304, 258);
+            articulControl1.Size = new System.Drawing.Size(1304, 274);
             articulControl1.TabIndex = 2;
             // 
             // Root
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, simpleSeparator1, emptySpaceItem1, layoutControlItem2, emptySpaceItem2, layoutControlItem3 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, simpleSeparator1, emptySpaceItem1, layoutControlItem2, layoutControlItem3, emptySpaceItem2, layoutControlItem4 });
             Root.Name = "Root";
             Root.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            Root.Size = new System.Drawing.Size(1772, 654);
+            Root.Size = new System.Drawing.Size(1772, 650);
             Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -867,42 +891,68 @@
             layoutControlItem1.Control = gridArtMatr;
             layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(1772, 342);
+            layoutControlItem1.Size = new System.Drawing.Size(1772, 344);
             layoutControlItem1.TextVisible = false;
             // 
             // simpleSeparator1
             // 
-            simpleSeparator1.Location = new System.Drawing.Point(464, 342);
+            simpleSeparator1.Location = new System.Drawing.Point(464, 344);
             simpleSeparator1.Name = "simpleSeparator1";
             simpleSeparator1.Size = new System.Drawing.Size(1308, 1);
             // 
             // emptySpaceItem1
             // 
-            emptySpaceItem1.Location = new System.Drawing.Point(464, 605);
+            emptySpaceItem1.Location = new System.Drawing.Point(1118, 623);
+            emptySpaceItem1.MinSize = new System.Drawing.Size(104, 24);
             emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new System.Drawing.Size(1308, 49);
+            emptySpaceItem1.Size = new System.Drawing.Size(654, 27);
+            emptySpaceItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             // 
             // layoutControlItem2
             // 
             layoutControlItem2.Control = articulControl1;
-            layoutControlItem2.Location = new System.Drawing.Point(464, 343);
+            layoutControlItem2.Location = new System.Drawing.Point(464, 345);
+            layoutControlItem2.MinSize = new System.Drawing.Size(5, 5);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new System.Drawing.Size(1308, 262);
+            layoutControlItem2.Size = new System.Drawing.Size(1308, 278);
+            layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem2.TextVisible = false;
-            // 
-            // emptySpaceItem2
-            // 
-            emptySpaceItem2.Location = new System.Drawing.Point(0, 342);
-            emptySpaceItem2.Name = "emptySpaceItem2";
-            emptySpaceItem2.Size = new System.Drawing.Size(70, 312);
             // 
             // layoutControlItem3
             // 
             layoutControlItem3.Control = gridArtCompare;
-            layoutControlItem3.Location = new System.Drawing.Point(70, 342);
+            layoutControlItem3.Location = new System.Drawing.Point(0, 344);
+            layoutControlItem3.MaxSize = new System.Drawing.Size(640, 306);
+            layoutControlItem3.MinSize = new System.Drawing.Size(104, 24);
             layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new System.Drawing.Size(394, 312);
+            layoutControlItem3.Size = new System.Drawing.Size(464, 306);
+            layoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem3.TextVisible = false;
+            // 
+            // emptySpaceItem2
+            // 
+            emptySpaceItem2.Location = new System.Drawing.Point(791, 623);
+            emptySpaceItem2.Name = "emptySpaceItem2";
+            emptySpaceItem2.Size = new System.Drawing.Size(327, 27);
+            // 
+            // btnSelectModel
+            // 
+            btnSelectModel.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            btnSelectModel.Appearance.Options.UseFont = true;
+            btnSelectModel.Location = new System.Drawing.Point(466, 625);
+            btnSelectModel.Name = "btnSelectModel";
+            btnSelectModel.Size = new System.Drawing.Size(323, 23);
+            btnSelectModel.StyleController = customLayoutControl1;
+            btnSelectModel.TabIndex = 5;
+            btnSelectModel.Text = "Выбрать/создать модель для";
+            // 
+            // layoutControlItem4
+            // 
+            layoutControlItem4.Control = btnSelectModel;
+            layoutControlItem4.Location = new System.Drawing.Point(464, 623);
+            layoutControlItem4.Name = "layoutControlItem4";
+            layoutControlItem4.Size = new System.Drawing.Size(327, 27);
+            layoutControlItem4.TextVisible = false;
             // 
             // CreateArticulMatrForm
             // 
@@ -947,8 +997,9 @@
             ((System.ComponentModel.ISupportInitialize)simpleSeparator1).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
             ResumeLayout(false);
         }
 
@@ -1030,7 +1081,6 @@
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private ArticulControl articulControl1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
         private Core.Class.CustomGridControl gridArtCompare;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewArtCompare;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
@@ -1039,5 +1089,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcArticulCompare;
         private DevExpress.XtraGrid.Columns.GridColumn gcModCompare;
         private DevExpress.XtraGrid.Columns.GridColumn gcTMCompare;
+        private DevExpress.XtraGrid.Columns.GridColumn gcArhCompare;
+        private Core.Class.CustomSimpleButton btnSelectModel;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
     }
 }

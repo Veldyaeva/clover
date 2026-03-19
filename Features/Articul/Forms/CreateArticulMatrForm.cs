@@ -148,6 +148,7 @@ namespace SewingProduction.Features.Articul.Forms
             gcArticulCompare.FieldName = nameof(SpArtPreviewModel.Articul);
             gcModCompare.FieldName = nameof(SpArtPreviewModel.Mod);
             gcTMCompare.FieldName = nameof(SpArtPreviewModel.tmName);
+            gcArhCompare.FieldName = nameof (SpArtPreviewModel.Arh);
 
         }
 
