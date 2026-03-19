@@ -101,6 +101,12 @@ namespace SewingProduction.Features.Articul.Models
             get => Komb_izd == "1" || string.Equals(Komb_izd, "true", StringComparison.OrdinalIgnoreCase);
             set => Komb_izd = value ? "1" : "0";
         }
+        [NotMapped]
+        public bool KrujFlag
+        {
+            get => Kruj == 1 || string.Equals(Komb_izd, "true", StringComparison.OrdinalIgnoreCase);
+            set => Kruj = (short)(value ? 1 : 0);
+        }
 
         // Arh — int, чекбокс — bool.
         [NotMapped]

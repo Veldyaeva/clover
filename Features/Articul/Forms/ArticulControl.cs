@@ -308,8 +308,9 @@ namespace SewingProduction.Features.Articul.Forms
             //галки вяз отделки
             _controlToArtNormProperty[chbKombIzd] = artType.GetProperty(nameof(SpArticulPreviewModel.KombIzdFlag));
             _controlToArtNormProperty[chbKombDet] = artType.GetProperty(nameof(SpArticulPreviewModel.KombDetFlag));
+            _controlToArtNormProperty[chbKruj] = artType.GetProperty(nameof(SpArticulPreviewModel.KrujFlag));
             //архив
-          //  _controlToArtNormProperty[chbArh] = artType.GetProperty(nameof(SpArticulPreviewModel.ArhFlag));
+            //  _controlToArtNormProperty[chbArh] = artType.GetProperty(nameof(SpArticulPreviewModel.ArhFlag));
 
             #endregion
 
