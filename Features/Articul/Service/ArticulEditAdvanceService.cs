@@ -26,11 +26,8 @@ namespace SewingProduction.Features.Articul.Service
         {
             try
             {
-                string query = "select * from dbo.view_art WHERE kodd = @kodd";
-                //var bb = await _dbService.GetListAsync<ArticulModel>(query, new { kodd });
-                //var ret = new BindingList<ArticulModel>(bb);
-                //bb = null;
-                //return ret;
+                string query = "select kod, trim(razm) razm , po from dbo.view_art WHERE kodd = @kodd";
+
                 return new BindingList<ArticulModel>(await _dbService.GetListAsync<ArticulModel>(query, new { kodd }));
 
             }
@@ -76,6 +73,6 @@ namespace SewingProduction.Features.Articul.Service
             }
         }
 
-
+        
     }
 }

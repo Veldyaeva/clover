@@ -122,7 +122,9 @@ namespace SewingProduction.Features.Articul.Service
                 return null;
             }
 
-}
+        }
+
+
         public async Task<BindingList<SpArticulKomplSostModel>> GetSostavkomplForKod(string kod)
         {
             try
