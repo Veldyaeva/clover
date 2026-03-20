@@ -20,6 +20,26 @@ using System.Globalization;
 
 namespace SewingProduction.Features.Articul.Forms
 {
+    public sealed class FieldComparisonItem
+    {
+        public string PropertyName { get; init; } = "";
+        public object? ExpectedValue { get; init; }
+        public string? DisplayName { get; init; }
+    }
+
+    public sealed class FieldMismatch
+    {
+        public string PropertyName { get; init; } = "";
+        public object? ExpectedValue { get; init; }
+        public object? ActualValue { get; init; }
+        public Control? Control { get; init; }
+    }
+
+    public sealed class ComparisonResult
+    {
+        public bool IsMatch => Mismatches.Count == 0;
+        public List<FieldMismatch> Mismatches { get; } = new();
+    }
     public partial class ArticulControl : DevExpress.XtraEditors.XtraUserControl
     {
         private readonly DatabaseHelper _dbHelperAce;
@@ -33,6 +53,152 @@ namespace SewingProduction.Features.Articul.Forms
         private readonly DXErrorProvider _dx = new DXErrorProvider();
 
         private bool _isReadOnly = true;
+        private readonly Dictionary<string, Control> _propertyToControl =
+    new(StringComparer.OrdinalIgnoreCase);
+
+        private readonly Dictionary<Control, Color> _originalBackColors = new();
+
+        private void BuildComparisonMap()
+        {
+            _propertyToControl.Clear();
+
+            foreach (var kv in _controlToArtNormProperty)
+            {
+                if (kv.Key != null && kv.Value != null)
+                    _propertyToControl[kv.Value.Name] = kv.Key;
+            }
+
+            RegisterSeries("txbNorm_t", "Norm_t");
+            RegisterSeries("txbTkanSeb_t", "Seb_t");
+            RegisterSeries("txbBrak", "Brak_t");
+            RegisterSeries("txtBrakPercent", "Brak_percent");
+            RegisterSeries("txbKfKach", "Kf_tkan_kach");
+            RegisterSeries("txbOpis_t", "Opis_t");
+            RegisterSeries("tkb", "Tkb");
+        }
+
+        private void RegisterSeries(string controlPrefix, string propertyPrefix)
+        {
+            foreach (var c in GetAllControls(this))
+            {
+                if (string.IsNullOrWhiteSpace(c.Name)) continue;
+                if (!c.Name.StartsWith(controlPrefix, StringComparison.Ordinal)) continue;
+
+                var suffix = GetNumericSuffix(c.Name);
+                if (suffix == null) continue;
+
+                _propertyToControl[propertyPrefix + suffix] = c;
+            }
+        }
+
+        private static string? GetNumericSuffix(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name)) return null;
+            var i = name.Length - 1;
+            while (i >= 0 && char.IsDigit(name[i])) i--;
+            var start = i + 1;
+            return start < name.Length ? name.Substring(start) : null;
+        }
+        public ComparisonResult CompareAndHighlight(IEnumerable<FieldComparisonItem> items)
+        {
+            ClearComparisonHighlight();
+
+            if (Model == null)
+                return new ComparisonResult();
+
+            BuildComparisonMap();
+
+            var result = new ComparisonResult();
+            var modelType = Model.GetType();
+
+            foreach (var item in items)
+            {
+                var prop = modelType.GetProperty(item.PropertyName);
+                if (prop == null) continue;
+
+                var actual = prop.GetValue(Model);
+                if (AreEquivalent(actual, item.ExpectedValue))
+                    continue;
+
+                _propertyToControl.TryGetValue(item.PropertyName, out var control);
+
+                if (control != null)
+                    MarkMismatch(control);
+
+                result.Mismatches.Add(new FieldMismatch
+                {
+                    PropertyName = item.PropertyName,
+                    ExpectedValue = item.ExpectedValue,
+                    ActualValue = actual,
+                    Control = control
+                });
+            }
+
+            return result;
+        }
+        private static bool AreEquivalent(object? actual, object? expected)
+        {
+            if (actual == null && expected == null) return true;
+            if (actual == null || expected == null) return false;
+
+            if (actual is decimal or double or float ||
+                expected is decimal or double or float)
+            {
+                var a = Convert.ToDecimal(actual);
+                var e = Convert.ToDecimal(expected);
+                return Math.Abs(a - e) < 0.01m;
+            }
+
+            if (actual is DateTime adt || expected is DateTime edt)
+            {
+                var a = Convert.ToDateTime(actual).Date;
+                var e = Convert.ToDateTime(expected).Date;
+                return a == e;
+            }
+
+            return string.Equals(
+                Convert.ToString(actual)?.Trim(),
+                Convert.ToString(expected)?.Trim(),
+                StringComparison.OrdinalIgnoreCase);
+        }
+
+        public void ClearComparisonHighlight()
+        {
+            foreach (var kv in _originalBackColors.ToList())
+                ClearMark(kv.Key);
+
+            _dx.ClearErrors();
+        }
+
+        private void MarkMismatch(Control c)
+        {
+            if (!_originalBackColors.ContainsKey(c))
+                _originalBackColors[c] = c.BackColor;
+
+            if (c is BaseEdit be)
+            {
+                be.Properties.Appearance.BackColor = Color.MistyRose;
+                _dx.SetError(be, "Значение отличается");
+            }
+            else
+            {
+                c.BackColor = Color.MistyRose;
+                _dx.SetError(c, "Значение отличается");
+            }
+        }
+
+        private void ClearMark(Control c)
+        {
+            if (!_originalBackColors.TryGetValue(c, out var color))
+                return;
+
+            if (c is BaseEdit be)
+                be.Properties.Appearance.BackColor = color;
+            else
+                c.BackColor = color;
+
+            _dx.SetError(c, "");
+        }
 
         private void LogSuccess(string message, string scope)
         {
