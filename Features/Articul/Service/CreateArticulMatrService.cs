@@ -41,7 +41,8 @@ namespace SewingProduction.Features.Articul.Service
                     "dbo.spCreateArticulMatr",
                     param: null,
                     transaction: null,
-                    commandType: CommandType.StoredProcedure
+                    commandType: CommandType.StoredProcedure,
+                    commandTimeout: 120 //в секундах
                     );
 
                 return new BindingList<CreateArticulMatrModel>(result.AsList());

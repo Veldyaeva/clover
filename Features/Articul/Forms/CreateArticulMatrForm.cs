@@ -3,6 +3,7 @@ using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using SewingProduction.Core.Models;
+using SewingProduction.Core.Services;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
 using SewingProduction.Features.KnittingProduction.Models;
@@ -17,6 +18,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DevExpress.Skins.SolidColorHelper;
 
 namespace SewingProduction.Features.Articul.Forms
 {
@@ -25,6 +27,8 @@ namespace SewingProduction.Features.Articul.Forms
     {
         private DatabaseHelper _dbHelper;
         private DbService _dbService;
+        private readonly MatrixService _matrixService;
+
         private CreateArticulMatrService _createArticulMatrService = new CreateArticulMatrService();
         private ArticulDataService _articulDataService = new ArticulDataService();
         private readonly ILogger _logger = new FileLogger();
@@ -54,6 +58,8 @@ namespace SewingProduction.Features.Articul.Forms
             gridArtMatr.DataSource = _bindingSourceArtMatr;
             gridArtCompare.DataSource = _bindingSourceArticulCompare;
 
+            _matrixService = new MatrixService(_dbHelper);
+
         }
 
         private async void CreateArticulMatr_Load(object sender, EventArgs e)
@@ -75,6 +81,8 @@ namespace SewingProduction.Features.Articul.Forms
 
             articulControl1.BindTo(_bsDetails);
             articulControl1.IsReadOnly = true;
+
+            
 
             InitializeBindings();
             BindGost();
@@ -135,6 +143,11 @@ namespace SewingProduction.Features.Articul.Forms
             gcCertRazmNames.FieldName = nameof(CreateArticulMatrModel.RazmNames);
             gcDatePublic.FieldName = nameof(CreateArticulMatrModel.DatePublic);
             gcCertDatePublic.FieldName = nameof(CreateArticulMatrModel.DatePublic);
+            gcArticle.FieldName = nameof(CreateArticulMatrModel.Article);
+            gcCertArticle.FieldName = nameof(CreateArticulMatrModel.Article);
+            gcRepeatArticle.FieldName = nameof(CreateArticulMatrModel.RepeatArticle);
+            gcCertRepeatArticle.FieldName = nameof(CreateArticulMatrModel.RepeatArticle);
+
 
             //поля уточнения для отд сертификации
             gcCertidGost.FieldName = nameof(CreateArticulMatrModel.Id_gost);
@@ -351,6 +364,10 @@ namespace SewingProduction.Features.Articul.Forms
                     return;
 
                 _bindingSourceArticulCompare.DataSource = await _createArticulMatrService.GetArticulsForCompareAsync(currentRow.Articul);
+
+                string imagePath = await _matrixService.GetFileEskizNN(currentRow.Nn);
+                pictureBoxMatrix.ImageLocation = string.IsNullOrWhiteSpace(imagePath) ? null : imagePath;
+
             }
             catch (Exception ex)
             {
@@ -366,11 +383,17 @@ namespace SewingProduction.Features.Articul.Forms
             {
                 var currentRow = _bindingSourceArticulCompare.Current as SpArtPreviewModel;
                 string kod = currentRow?.Kod;
+
+                gridViewArtCompare.ShowLoadingPanel();
+
                 _bsDetails?.Clear();
                 if (string.IsNullOrEmpty(kod))
                     return;
 
                 _bsDetails.DataSource = await _articulDataService.GetByKodAsync(kod);
+                
+                gridViewArtCompare.HideLoadingPanel();
+
             }
             catch (Exception ex)
             {
