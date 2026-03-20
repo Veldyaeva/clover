@@ -2,17 +2,24 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.CodeParser;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraReports.UI;
 using Microsoft.Extensions.DependencyInjection;
 using SewingProduction.Core;
 using SewingProduction.Core.interfaces;
 using SewingProduction.Core.services;
 using SewingProduction.Features.Sprav.DataService;
+using SewingProduction.Features.Sprav.Reports;
+using SewingProduction.Features.Tabel.Reports;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
-
 namespace SewingProduction.form
 {
     /// <summary>
@@ -34,7 +41,7 @@ namespace SewingProduction.form
             DatabaseHelper dbHelper = new DatabaseHelper();
             _oborudBrigDataService = new OborudBrigDataService(dbHelper);
             _sbHub = AppServices.Services?.GetService<IAppServiceBrokerHub>() ?? new AppServiceBrokerHub();
-          //  ThemeManager.UpdateTheme(this);
+            //  ThemeManager.UpdateTheme(this);
         }
         #region service broker
         private async void OborudBrig_Load_1(object sender, EventArgs e)
@@ -212,6 +219,46 @@ namespace SewingProduction.form
         private void OborudBrig_FormClosing(object sender, FormClosingEventArgs e)
         {
             try { _sbHub.UnsubscribeAsync(_sbHubOwnerId).GetAwaiter().GetResult(); } catch { }
+        }
+        private void customButtonExcel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OborudBrigReport reportFull = new OborudBrigReport();
+                reportFull.CreateDocument();
+
+                OborudBrigReportTotal reportTotal = new OborudBrigReportTotal();
+                reportTotal.CreateDocument();
+
+                reportFull.PrintingSystem.Pages.AddRange(reportTotal.PrintingSystem.Pages);
+
+                using (SaveFileDialog sfd = new SaveFileDialog())
+                {
+                    sfd.Filter = "Excel (*.xlsx)|*.xlsx";
+                    sfd.FileName = "Оборудование.xlsx";
+
+                    if (sfd.ShowDialog() != DialogResult.OK)
+                        return;
+
+                    DevExpress.XtraPrinting.XlsxExportOptions options =
+                        new DevExpress.XtraPrinting.XlsxExportOptions();
+
+                    options.ExportMode = DevExpress.XtraPrinting.XlsxExportMode.SingleFilePageByPage;
+                    options.ShowGridLines = true;
+                    options.SheetName = "Отчет";
+
+                    reportFull.PrintingSystem.ExportToXlsx(sfd.FileName, options);
+
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(sfd.FileName)
+                    {
+                        UseShellExecute = true
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 

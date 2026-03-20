@@ -175,6 +175,12 @@
     <Compile Update="Features\Furnit\UserControl\FurnitZayavView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Features\Sprav\Reports\OborudBrigReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Features\Sprav\Reports\OborudBrigReportTotal.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Features\Tabel\Forms\CalculatorDay.cs">
       <SubType>Form</SubType>
     </Compile>
