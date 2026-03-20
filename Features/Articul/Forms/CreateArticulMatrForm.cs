@@ -82,7 +82,7 @@ namespace SewingProduction.Features.Articul.Forms
             articulControl1.BindTo(_bsDetails);
             articulControl1.IsReadOnly = true;
 
-            
+
 
             InitializeBindings();
             BindGost();
@@ -161,7 +161,7 @@ namespace SewingProduction.Features.Articul.Forms
             gcArticulCompare.FieldName = nameof(SpArtPreviewModel.Articul);
             gcModCompare.FieldName = nameof(SpArtPreviewModel.Mod);
             gcTMCompare.FieldName = nameof(SpArtPreviewModel.tmName);
-            gcArhCompare.FieldName = nameof (SpArtPreviewModel.Arh);
+            gcArhCompare.FieldName = nameof(SpArtPreviewModel.Arh);
 
         }
 
@@ -391,7 +391,7 @@ namespace SewingProduction.Features.Articul.Forms
                     return;
 
                 _bsDetails.DataSource = await _articulDataService.GetByKodAsync(kod);
-                
+                await CompareSelectedArticulAsync();
                 gridViewArtCompare.HideLoadingPanel();
 
             }
@@ -401,5 +401,43 @@ namespace SewingProduction.Features.Articul.Forms
                 throw;
             }
         }
+        private async Task CompareSelectedArticulAsync()
+        {
+            var matrixRow = _bindingSourceArtMatr.Current as CreateArticulMatrModel;
+            var comparePreview = _bindingSourceArticulCompare.Current as SpArtPreviewModel;
+
+            articulControl1.ClearComparisonHighlight();
+
+            if (matrixRow == null || comparePreview == null || string.IsNullOrWhiteSpace(comparePreview.Kod))
+            {
+                _bsDetails.Clear();
+                return;
+            }
+
+            var details = await _articulDataService.GetByKodAsync(comparePreview.Kod);
+            _bsDetails.DataSource = details;
+            _bsDetails.ResetBindings(false);
+
+            var compareItems = BuildComparisonItems(matrixRow);
+            var result = articulControl1.CompareAndHighlight(compareItems);
+
+            // тут можно сохранить флаг в поле формы
+            // _lastCompareOk = result.IsMatch;
+        }
+        private static List<FieldComparisonItem> BuildComparisonItems(CreateArticulMatrModel row)
+        {
+            return new List<FieldComparisonItem>
+    {
+        new() { PropertyName = "Articul", ExpectedValue = row.Articul },
+        new() { PropertyName = "Mod", ExpectedValue = row.Mod },
+        new() { PropertyName = "tmName", ExpectedValue = row.Tm_name },
+        new() { PropertyName = "Grup", ExpectedValue = row.Grup },
+        new() { PropertyName = "Id_gost", ExpectedValue = row.Id_gost },
+        new() { PropertyName = "Sost", ExpectedValue = row.Sost },
+        new() { PropertyName = "Sost2", ExpectedValue = row.Sost2 },
+        new() { PropertyName = "Sost3", ExpectedValue = row.Sost3 }
+    };
+        }
+
     }
 }
