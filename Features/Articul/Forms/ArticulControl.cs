@@ -223,10 +223,10 @@ namespace SewingProduction.Features.Articul.Forms
 
         private (string ControlPropertyName, DataSourceUpdateMode UpdateMode) GetBindingTarget(Control control)
         {
-            // В read-only режиме не пишем обратно в модель.
+            // В read-only режиме не пишем обратно в модель
             var mode = _isReadOnly ? DataSourceUpdateMode.Never : DataSourceUpdateMode.OnPropertyChanged;
 
-            // твои поля — CustomTextBox => TextBoxBase
+            // CustomTextBox => TextBoxBase
             if (control is TextBoxBase)
                 return ("Text", mode);
 
@@ -280,6 +280,7 @@ namespace SewingProduction.Features.Articul.Forms
             _controlToArtNormProperty.Clear();
             var artType = typeof(SpArticulPreviewModel);
             _controlToArtNormProperty[txbKod] = artType.GetProperty(nameof(SpArticulPreviewModel.Kod));
+            _controlToArtNormProperty[txbTkb] = artType.GetProperty(nameof(SpArticulPreviewModel.Tkb));
             _controlToArtNormProperty[txbArticul] = artType.GetProperty(nameof(SpArticulPreviewModel.Articul));
             _controlToArtNormProperty[txbPo] = artType.GetProperty(nameof(SpArticulPreviewModel.Po));
             _controlToArtNormProperty[txbMod] = artType.GetProperty(nameof(SpArticulPreviewModel.Mod));

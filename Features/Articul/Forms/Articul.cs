@@ -1,4 +1,5 @@
 using DevExpress.Data.Internal;
+using DevExpress.DataAccess.DataFederation;
 using DevExpress.Office.Utils;
 using DevExpress.Utils.Extensions;
 using DevExpress.Xpf.Editors;
@@ -14,6 +15,7 @@ using DevExpress.XtraRichEdit.Model;
 using DevExpress.XtraVerticalGrid;
 using DevExpress.XtraWaitForm;
 using SewingProduction.Core.Class;
+using SewingProduction.Core.helpers;
 using SewingProduction.Core.interfaces;
 using SewingProduction.Core.Models;
 using SewingProduction.Extensions;
@@ -101,6 +103,7 @@ namespace SewingProduction.Features.Articul
             _dbHelperAce = new DatabaseHelper();
             _dbService = new DbService(_dbHelperAce);
             InitializeComponent();
+            InitialiseEmptyZero();
             _currentUser = user;
             InitHeaderButtonTags();
         }
@@ -176,6 +179,82 @@ namespace SewingProduction.Features.Articul
                 LogError(ex, nameof(Articul_Load));
             }
         }
+
+        private void InitialiseEmptyZero()
+        {
+            try
+            {
+
+                #region Затраты на изготовление
+                txbNormt.ShowEmptyWhenZero();
+
+
+                // нормы/себестоимость/брак и назначение полотна
+                EmptyZeroByRange("txbNorm_t");
+                EmptyZeroByRange("txbTkanSeb_t");
+                EmptyZeroByRange("txbBrak");
+                EmptyZeroByRange("txtBrakPercent");
+                EmptyZeroByRange("txbKfKach");
+                //void EmptyZeroByPrefix(string prefix)
+                //{
+                //    var edits = this.Controls
+                //        .Find("", true)
+                //        .OfType<DevExpress.XtraEditors.TextEdit>()
+                //        .Where(c => c.Name.StartsWith(prefix));
+
+                //    foreach (var edit in edits)
+                //        edit.ShowEmptyWhenZero();
+                //}
+                void EmptyZeroByRange(string prefix, int from = 1, int to = 7)
+                {
+                    for (int i = from; i <= to; i++)
+                    {
+                        string controlName = $"{prefix}{i}";
+
+                        var edit = this.Controls.Find(controlName, true).FirstOrDefault() as DevExpress.XtraEditors.TextEdit;
+                        edit?.ShowEmptyWhenZero();
+                    }
+                }              
+                #endregion
+
+                #region брак
+                txbBrakAll.ShowEmptyWhenZero();
+                txbSeb.ShowEmptyWhenZero();
+
+                #endregion
+                #region Норма/сек + зарплата 
+
+                txbSek.ShowEmptyWhenZero();
+                txbSekVyaz.ShowEmptyWhenZero();
+                txbSekShv.ShowEmptyWhenZero();
+                txbSekKr.ShowEmptyWhenZero();
+                //зарплатаShowEmptyWhenZero();
+                txbSumZarpl.ShowEmptyWhenZero();
+                txbSumDopOpl.ShowEmptyWhenZero();
+                txbSumStrVznos.ShowEmptyWhenZero();
+                txbSumSebRaskr.ShowEmptyWhenZero();
+                txbSumKomplNum.ShowEmptyWhenZero();
+                txbSebRecom.ShowEmptyWhenZero();
+                txbCalcSebRecom.ShowEmptyWhenZero();
+                #endregion
+
+                #region коэфициенты
+
+                txbSebDop.ShowEmptyWhenZero();
+                txbKoefPr.ShowEmptyWhenZero();
+                txbKoefVedDG.ShowEmptyWhenZero();
+                txbSebProizv.ShowEmptyWhenZero();
+                txbKoef.ShowEmptyWhenZero();
+                #endregion
+
+            }
+            catch (Exception ex)
+            {
+                LogError(ex, nameof(InitializeBindings));
+                throw;
+            }
+        }
+
         private async Task ReloadPreviewAsync()
         {
             gridControl1.ShowLoadingPanel();
@@ -284,6 +363,7 @@ namespace SewingProduction.Features.Articul
                 txbSumKomplNum.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Sum_komplnum), true, DataSourceUpdateMode.Never);
                 txbSebRecom.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Seb_rekom), true, DataSourceUpdateMode.Never);
                 txbCalcSebRecom.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Calc_seb_rekom), true, DataSourceUpdateMode.Never);
+                txbSebz.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Seb_z), true, DataSourceUpdateMode.Never);
                 #endregion
 
                 #region коэфициенты
