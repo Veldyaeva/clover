@@ -356,9 +356,8 @@ namespace SewingProduction.Features.Articul.Forms
                 //    int rowHandle = view.GetSelectedRows()[0];
                 //    currentRow = view.GetRow(rowHandle) as CreateArticulMatrModel;
                 //}
-                // может отличаться от _bindingSourceArtMatr.Current, если включена мультивыделение и выделено несколько строк, тогда Current будет указывать на первую выделенную строку, а не на ту, на которую фактически кликнули.
-                // Поэтому лучше брать данные из самого грида по rowHandle, который точно соответствует строке, на которую кликнули.
 
+                articulControl1.ClearComparisonHighlight();
                 var currentRow = _bindingSourceArtMatr.Current as CreateArticulMatrModel;
                 if (currentRow == null)
                     return;
@@ -388,9 +387,11 @@ namespace SewingProduction.Features.Articul.Forms
 
                 _bsDetails?.Clear();
                 if (string.IsNullOrEmpty(kod))
+                {
+                    gridViewArtCompare.HideLoadingPanel();
                     return;
-
-                _bsDetails.DataSource = await _articulDataService.GetByKodAsync(kod);
+                }
+      //          _bsDetails.DataSource = await _articulDataService.GetByKodAsync(kod);
                 await CompareSelectedArticulAsync();
                 gridViewArtCompare.HideLoadingPanel();
 
@@ -418,25 +419,10 @@ namespace SewingProduction.Features.Articul.Forms
             _bsDetails.DataSource = details;
             _bsDetails.ResetBindings(false);
 
-            var compareItems = BuildComparisonItems(matrixRow);
+            var compareItems = CreateArticulMatrComparisonBuilder.Build(matrixRow);
             var result = articulControl1.CompareAndHighlight(compareItems);
-
             // тут можно сохранить флаг в поле формы
-            // _lastCompareOk = result.IsMatch;
-        }
-        private static List<FieldComparisonItem> BuildComparisonItems(CreateArticulMatrModel row)
-        {
-            return new List<FieldComparisonItem>
-    {
-        new() { PropertyName = "Articul", ExpectedValue = row.Articul },
-        new() { PropertyName = "Mod", ExpectedValue = row.Mod },
-        new() { PropertyName = "tmName", ExpectedValue = row.Tm_name },
-        new() { PropertyName = "Grup", ExpectedValue = row.Grup },
-        new() { PropertyName = "Id_gost", ExpectedValue = row.Id_gost },
-        new() { PropertyName = "Sost", ExpectedValue = row.Sost },
-        new() { PropertyName = "Sost2", ExpectedValue = row.Sost2 },
-        new() { PropertyName = "Sost3", ExpectedValue = row.Sost3 }
-    };
+             bool _lastCompareOk = result.IsMatch;
         }
 
     }
