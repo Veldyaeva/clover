@@ -226,16 +226,40 @@
     <Compile Update="Features\TeamWork\Forms\TeamWork.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.Diagnostics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.EventBridge.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork.Events.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork.Helpers.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.Lifecycle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.UiState.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.Unbinding.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork.WorkDivisions.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.CloneUtils.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.Contracts.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.UiState.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\UserDistribution\Forms\AboutBox.cs">
