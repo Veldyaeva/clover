@@ -33,6 +33,9 @@ namespace SewingProduction.Features.Articul.Forms
         private readonly Dictionary<Control, Color> _originalBackColors = new();
         private readonly FieldComparisonService _comparisonService = new();
         private bool _comparisonMapBuilt;
+        /// <summary>
+        /// Построить маппинг между именами свойств модели и контролами для сравнения.
+        /// </summary>
         private void BuildComparisonMap()
         {
             _propertyToControl.Clear();

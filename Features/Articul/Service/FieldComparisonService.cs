@@ -4,8 +4,17 @@ using System.Collections.Generic;
 
 namespace SewingProduction.Features.Articul.Service
 {
+    /// <summary>
+    /// Сервис для сравнения полей модели с ожидаемыми значениями.
+    /// </summary>
     public sealed class FieldComparisonService
     {
+        /// <summary>
+        /// Сравнивает поля фактической модели с ожидаемыми значениями и возвращает результат сравнения.
+        /// </summary>
+        /// <param name="actualModel"></param>
+        /// <param name="expectedItems"></param>
+        /// <returns></returns>
         public ComparisonResult Compare(
             object? actualModel,
             IEnumerable<FieldComparisonItem> expectedItems)
@@ -38,7 +47,12 @@ namespace SewingProduction.Features.Articul.Service
 
             return result;
         }
-
+        /// <summary>
+        /// Сравнивает два значения с учетом нормализации строк и допустимой погрешности для чисел.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         private static bool AreEqual(object? left, object? right)
         {
             left = Normalize(left);
@@ -57,6 +71,11 @@ namespace SewingProduction.Features.Articul.Service
             return Equals(left, right);
         }
 
+        /// <summary>
+        /// Нормализует значение для сравнения: обрезает строки и заменяет null на null, а пустые строки на string.Empty.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         private static object? Normalize(object? value)
         {
             if (value == null)
@@ -92,6 +111,9 @@ namespace SewingProduction.Features.Articul.Service
         public bool IsMatch => Mismatches.Count == 0;
         public List<FieldMismatch> Mismatches { get; } = new();
     }
+    /// <summary>
+    /// Построитель списка полей для сравнения модели CreateArticulMatrModel с моделью SpArticulPreviewModel.
+    /// </summary>
     public static class CreateArticulMatrComparisonBuilder
     {
         public static IReadOnlyList<FieldComparisonItem> Build(CreateArticulMatrModel row)
