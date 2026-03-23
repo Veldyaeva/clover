@@ -1,22 +1,16 @@
 using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Controls;
-using SewingProduction.Features.Articul;
+using DevExpress.XtraEditors.DXErrorProvider;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
-using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.XtraEditors.DXErrorProvider;
-using System.Globalization;
 
 namespace SewingProduction.Features.Articul.Forms
 {

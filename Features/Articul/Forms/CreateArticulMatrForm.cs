@@ -1,12 +1,10 @@
 ﻿using DevExpress.Mvvm.Native;
-using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using SewingProduction.Core.Models;
 using SewingProduction.Core.Services;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
-using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
@@ -18,7 +16,6 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static DevExpress.Skins.SolidColorHelper;
 
 namespace SewingProduction.Features.Articul.Forms
 {
@@ -42,6 +39,8 @@ namespace SewingProduction.Features.Articul.Forms
         private List<GostGrupIzdViewModel> _gostGroupAll;
 
         private readonly BindingSource _bsDetails = new(); // источник для деталей
+
+        private bool _lastCompareResult;
 
         public CreateArticulMatrForm(UserClass user) : base(user)
         {
@@ -358,6 +357,7 @@ namespace SewingProduction.Features.Articul.Forms
                 //}
 
                 articulControl1.ClearComparisonHighlight();
+                _bsDetails.Clear();
                 var currentRow = _bindingSourceArtMatr.Current as CreateArticulMatrModel;
                 if (currentRow == null)
                     return;
@@ -391,7 +391,7 @@ namespace SewingProduction.Features.Articul.Forms
                     gridViewArtCompare.HideLoadingPanel();
                     return;
                 }
-      //          _bsDetails.DataSource = await _articulDataService.GetByKodAsync(kod);
+                //          _bsDetails.DataSource = await _articulDataService.GetByKodAsync(kod);
                 await CompareSelectedArticulAsync();
                 gridViewArtCompare.HideLoadingPanel();
 
@@ -400,6 +400,10 @@ namespace SewingProduction.Features.Articul.Forms
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при загрузке данных детализации артикула сравнения");
                 throw;
+            }
+            finally
+            {
+                gridViewArtCompare.HideLoadingPanel();
             }
         }
         private async Task CompareSelectedArticulAsync()
@@ -422,7 +426,7 @@ namespace SewingProduction.Features.Articul.Forms
             var compareItems = CreateArticulMatrComparisonBuilder.Build(matrixRow);
             var result = articulControl1.CompareAndHighlight(compareItems);
             // тут можно сохранить флаг в поле формы
-             bool _lastCompareOk = result.IsMatch;
+             _lastCompareResult = result.IsMatch;
         }
 
     }
