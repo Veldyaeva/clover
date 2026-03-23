@@ -605,6 +605,12 @@ namespace SewingProduction.Core.Models
             get => _seb_rekom;
             set => SetField(ref _seb_rekom, value);
         }
+        private decimal _calc_seb_rekom;
+        public decimal Calc_seb_rekom
+        {
+            get => _calc_seb_rekom;
+            set => SetField(ref _calc_seb_rekom, value);
+        }
         // поля заполняются при изменении разделения труда
         //-----
         [NotMapped] public decimal Sum_zarpl { get; set; }

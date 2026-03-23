@@ -2,6 +2,7 @@
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using SewingProduction.Core.Models;
+using SewingProduction.Core.Services;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
 using SewingProduction.Features.UserDistribution.Helpers;
@@ -23,15 +24,23 @@ namespace SewingProduction.Features.Articul.Forms
     {
         private DatabaseHelper _dbHelper;
         private DbService _dbService;
+        private readonly MatrixService _matrixService;
+
         private CreateArticulMatrService _createArticulMatrService = new CreateArticulMatrService();
+        private ArticulDataService _articulDataService = new ArticulDataService();
         private readonly ILogger _logger = new FileLogger();
 
         private bool _isEditing = false; // флаг для отслеживания, находится ли грид в режиме редактирования
 
         private BindingSource _bindingSourceArtMatr;
+        private BindingSource _bindingSourceArticulCompare;
+
         //private BindingSource _bindingSourceGostGrupAll;
         private List<GostGrupIzdViewModel> _gostGroupAll;
 
+        private readonly BindingSource _bsDetails = new(); // источник для деталей
+
+        private bool _lastCompareResult;
 
         public CreateArticulMatrForm(UserClass user) : base(user)
         {
@@ -42,10 +51,13 @@ namespace SewingProduction.Features.Articul.Forms
 
 
             _bindingSourceArtMatr = new BindingSource { };
+            _bindingSourceArticulCompare = new BindingSource { };
 
             //if (gridArtMatr != null) gridArtMatr.DataSource = _bindingSourceArtMatr;
             gridArtMatr.DataSource = _bindingSourceArtMatr;
+            gridArtCompare.DataSource = _bindingSourceArticulCompare;
 
+            _matrixService = new MatrixService(_dbHelper);
 
         }
 
@@ -66,6 +78,10 @@ namespace SewingProduction.Features.Articul.Forms
             gridViewArtMatr.HideLoadingPanel();
             gridViewArtMatrEdit.HideLoadingPanel();
 
+            articulControl1.BindTo(_bsDetails);
+            articulControl1.IsReadOnly = true;
+
+
 
             InitializeBindings();
             BindGost();
@@ -82,7 +98,7 @@ namespace SewingProduction.Features.Articul.Forms
         private void SetPermisions()
         {
             gridArtMatr.MainView = _isEditing ? gridViewArtMatrEdit : gridViewArtMatr;
-
+            customSimpleButtonPermissions.Visible = false;
         }
         private void InitializeBindings()
         {
@@ -126,6 +142,11 @@ namespace SewingProduction.Features.Articul.Forms
             gcCertRazmNames.FieldName = nameof(CreateArticulMatrModel.RazmNames);
             gcDatePublic.FieldName = nameof(CreateArticulMatrModel.DatePublic);
             gcCertDatePublic.FieldName = nameof(CreateArticulMatrModel.DatePublic);
+            gcArticle.FieldName = nameof(CreateArticulMatrModel.Article);
+            gcCertArticle.FieldName = nameof(CreateArticulMatrModel.Article);
+            gcRepeatArticle.FieldName = nameof(CreateArticulMatrModel.RepeatArticle);
+            gcCertRepeatArticle.FieldName = nameof(CreateArticulMatrModel.RepeatArticle);
+
 
             //поля уточнения для отд сертификации
             gcCertidGost.FieldName = nameof(CreateArticulMatrModel.Id_gost);
@@ -134,8 +155,15 @@ namespace SewingProduction.Features.Articul.Forms
             //запрет редактирования полей, которые не должны редактироваться напрямую пользователем, а заполняются через выбор из справочника и/или автоматически
             gcCertDateCertificationApproval.OptionsColumn.AllowEdit = false;
 
+            gcKoddCompare.FieldName = nameof(SpArtPreviewModel.Kodd);
+            gcGrupCompare.FieldName = nameof(SpArtPreviewModel.Grup);
+            gcArticulCompare.FieldName = nameof(SpArtPreviewModel.Articul);
+            gcModCompare.FieldName = nameof(SpArtPreviewModel.Mod);
+            gcTMCompare.FieldName = nameof(SpArtPreviewModel.tmName);
+            gcArhCompare.FieldName = nameof(SpArtPreviewModel.Arh);
 
         }
+
         private async void BindGost()
         {
             try
@@ -293,8 +321,8 @@ namespace SewingProduction.Features.Articul.Forms
                     }
                     else
                     {
-                        var res = await _createArticulMatrService.GetStatusForArticulAsync(_currentItem.Nn, _currentItem.Id_gost, _currentItem.Ag_id) ;
-                        if (res != null )
+                        var res = await _createArticulMatrService.GetStatusForArticulAsync(_currentItem.Nn, _currentItem.Id_gost, _currentItem.Ag_id);
+                        if (res != null)
                         {
                             _currentItem.DateCertificationApproval = res.DateCertificationApproval;
                             //обновляем только ячейку с датой утверждения, чтобы не сбрасывать фокус и не уходить из режима редактирования
@@ -314,5 +342,109 @@ namespace SewingProduction.Features.Articul.Forms
                 throw;
             }
         }
+        /// <summary>
+        /// При смене фокусной строки в гриде матрицы загружаем данные для сравнения и эскиз для текущего артикула матрицы,
+        /// при этом очищаем предыдущую подсветку сравнения и детали от предыдущего сравнения, чтобы не было "висячих" данных от предыдущего сравнения, 
+        /// так как новый артикул может не совпадать с предыдущим артикулом сравнения и по нему могут быть другие детали и другой эскиз,
+        /// а также может не быть артикула для сравнения вообще, тогда детали и эскиз должны быть очищены
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void gridArtMatr_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            try
+            {
+                //var view = gridArtMatr.FocusedView as GridView;
+                //var currentRow = null as CreateArticulMatrModel ;
+
+                //if (view.SelectedRowsCount == 1)
+                //{
+                //    int rowHandle = view.GetSelectedRows()[0];
+                //    currentRow = view.GetRow(rowHandle) as CreateArticulMatrModel;
+                //}
+
+                articulControl1.ClearComparisonHighlight();   //очищаем подсветку сравнения при смене артикула в матрице, чтобы не было "висячей" подсветки от предыдущего сравнения
+                _bsDetails.Clear();// очищаем детали от предыдущего сравнения
+                var currentRow = _bindingSourceArtMatr.Current as CreateArticulMatrModel;// получаем текущую выбранную строку из матрицы
+                if (currentRow == null)// если строка не выбрана, выходим из метода
+                    return;
+
+                _bindingSourceArticulCompare.DataSource = await _createArticulMatrService.GetArticulsForCompareAsync(currentRow.Articul);// загружаем данные для сравнения в другой грид
+
+                string imagePath = await _matrixService.GetFileEskizNN(currentRow.Nn);// загружаем эскиз для текущего артикула матрицы
+                pictureBoxMatrix.ImageLocation = string.IsNullOrWhiteSpace(imagePath) ? null : imagePath;// отображаем эскиз, если он есть, или очищаем картинку, если эскиза нет
+
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при загрузке данных для сравнения артикула");
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// При смене фокусной строки в гриде сравнения загружаем детали для выбранного артикула сравнения и выполняем сравнение с текущим артикулом матрицы,
+        /// результат сравнения сохраняем в поле _lastCompareResult, чтобы при сохранении матрицы знать, нужно ли сохранять изменения или нет
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void gridViewArtCompare_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            try
+            {
+                var currentRow = _bindingSourceArticulCompare.Current as SpArtPreviewModel;// получаем текущую выбранную строку из грида сравнения
+                string kod = currentRow?.Kod;// извлекаем код артикула для загрузки деталей, если строка выбрана, или null, если строка не выбрана
+
+                gridViewArtCompare.ShowLoadingPanel();// показываем индикатор загрузки, так как загрузка деталей может занять некоторое время
+
+                _bsDetails?.Clear();// очищаем предыдущие детали, чтобы не было "висячих" данных от предыдущего сравнения, пока загружаются новые детали
+                if (string.IsNullOrEmpty(kod))// если код артикула для сравнения не выбран, скрываем индикатор загрузки и выходим из метода
+                {
+                    gridViewArtCompare.HideLoadingPanel();// скрываем индикатор загрузки и
+                    return;// выходим из метода, так как нет артикула для загрузки деталей
+                }
+                //          _bsDetails.DataSource = await _articulDataService.GetByKodAsync(kod);
+                await CompareSelectedArticulAsync();// загружаем детали для выбранного артикула сравнения и выполняем сравнение с текущим артикулом матрицы, результат сравнения сохраняем в поле _lastCompareResult, чтобы при сохранении матрицы знать, нужно ли сохранять изменения или нет
+                gridViewArtCompare.HideLoadingPanel();// скрываем индикатор загрузки после завершения загрузки деталей и сравнения
+
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при загрузке данных детализации артикула сравнения");
+                throw;
+            }
+            finally
+            {
+                gridViewArtCompare.HideLoadingPanel();
+            }
+        }
+        /// <summary>
+        /// Загружает детали для выбранного артикула сравнения и выполняет сравнение с текущим артикулом матрицы, результат сравнения сохраняет в поле _lastCompareResult, 
+        /// чтобы при сохранении матрицы знать, нужно ли сохранять изменения или нет
+        /// </summary>
+        /// <returns></returns>
+        private async Task CompareSelectedArticulAsync()
+        {
+            var matrixRow = _bindingSourceArtMatr.Current as CreateArticulMatrModel;// получаем текущую выбранную строку из матрицы, с которой будем сравнивать
+            var comparePreview = _bindingSourceArticulCompare.Current as SpArtPreviewModel;// получаем текущую выбранную строку из грида сравнения, с которой будем сравнивать
+
+            articulControl1.ClearComparisonHighlight();// очищаем предыдущую подсветку сравнения, чтобы не было "висячей" подсветки от предыдущего сравнения
+
+            if (matrixRow == null || comparePreview == null || string.IsNullOrWhiteSpace(comparePreview.Kod))// если не выбрана строка для сравнения или в выбранной строке нет кода артикула для сравнения, очищаем детали и выходим из метода, так как нечего сравнивать
+            {
+                _bsDetails.Clear();// очищаем детали, чтобы не было "висячих" данных от предыдущего сравнения, так как нет артикула для сравнения
+                return;
+            }
+
+            var details = await _articulDataService.GetByKodAsync(comparePreview.Kod);// загружаем детали для выбранного артикула сравнения
+            _bsDetails.DataSource = details;// устанавливаем источник данных для деталей, которые отображаются в articulControl1, при этом articulControl1 должен автоматически обновить отображение деталей, так как он привязан к _bsDetails
+            _bsDetails.ResetBindings(false);// сбрасываем привязки, чтобы гарантировать обновление отображения деталей в articulControl1, так как мы изменили источник данных
+
+            var compareItems = CreateArticulMatrComparisonBuilder.Build(matrixRow);// создаем список полей для сравнения на основе текущей строки матрицы, который будет использоваться в articulControl1 для сравнения и подсветки различий
+            var result = articulControl1.CompareAndHighlight(compareItems);// выполняем сравнение и подсветку различий в articulControl1, результат сравнения сохраняем в переменной result, которая содержит информацию о том, совпадают ли артикулы полностью (IsMatch) и какие поля отличаются (Mismatches)
+                                                                           // тут можно сохранить флаг в поле формы
+            _lastCompareResult = result.IsMatch;// сохраняем результат сравнения в поле формы, чтобы при сохранении матрицы знать, нужно ли сохранять изменения или нет, так как если артикулы совпадают полностью, то сохранять изменения не нужно, так как они не изменились по сравнению с выбранным артикулом сравнения
+        }
+
     }
 }

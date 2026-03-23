@@ -550,6 +550,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         private async void simpleButton2_Click(object sender, EventArgs e)
         {
+            simpleButton2.Enabled = false;
             try
             {
                 // Если смена уже запущена — завершаем смену: запись в БД, остановка таймера и смена текста
@@ -668,6 +669,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 XtraMessageBox.Show(this, $"Ошибка при назначении табельного номера: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 LogError(ex, "simpleButton2_Click");
             }
+            simpleButton2.Enabled = true;
         }
 
         private bool ShowShiftEndConfirmationDialog()
