@@ -1,5 +1,7 @@
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Features.TeamWork.Helpers;
+using SewingProduction.Features.TeamWork.Models;
+using SewingProduction.Helpers;
 using SewingProduction.Models;
 using System;
 using System.Collections;
@@ -41,22 +43,15 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
 
 
-            ArtNormN CopyedWorkDivisionShell = selectedAnnToDuplicate.CloneOperationalData();
-            // Инициализируем корректный начальный статус для дубля
-            CopyedWorkDivisionShell.Status = (int)Status.Preliminary;
-            CopyedWorkDivisionShell.StatusText = StatusHelper.GetStatusText(CopyedWorkDivisionShell.Status);
-            CopyedWorkDivisionShell.AnnID = 0;
-            CopyedWorkDivisionShell.Arh = false;
-            CopyedWorkDivisionShell.dateCreate = DateTime.Now;
-            CopyedWorkDivisionShell.dateUpdate = null;
-
-            int newAnnId = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, CopyedWorkDivisionShell);
-            if (newAnnId <= 0)
+            var duplicateDraft = await _teamWorkService.CreateDuplicateDraftAsync(selectedAnnToDuplicate);
+            if (!duplicateDraft.Success || duplicateDraft.NewAnnId <= 0)
             {
-                MessageBox.Show("Ошибка при создании новой записи РТ в базе данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(duplicateDraft.Error ?? "Ошибка при создании новой записи РТ в базе данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 await _logger.LogWarningAsync("Ошибка при создании новой записи РТ в базе данных", "DuplicateWorkDivision_Click_Internal");
                 return;
             }
+            int newAnnId = duplicateDraft.NewAnnId;
+            ArtNormN CopyedWorkDivisionShell = duplicateDraft.DraftAnn;
 
             // Открываем форму редактирования клона (немодально)
             var teamWorkAdvanceTW = OpenAdvanceFormNonModal(bufferId, (int)Mode.Clone, newId: newAnnId, oldId: selectedAnnToDuplicate.AnnID);
@@ -113,8 +108,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     // Удаляем созданную запись из списка и базы
                     _bindingList.Remove(CopyedWorkDivisionShell);
                     _bindingSource.ResetBindings(false);
-                    await _artNormService.DeleteRelatedNormTables(newAnnId);
-                    await _artNormService.DeleteByAnnId(TableNames.Ann, newAnnId);
+                    await _teamWorkService.RollbackDraftAsync(newAnnId);
                 }
             };
         }

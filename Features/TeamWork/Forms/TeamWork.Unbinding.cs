@@ -107,33 +107,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (result != DialogResult.Yes)
                     return;
 
-                int totalAffectedRows = 0;
-
-                // Обрабатываем каждый элемент для отвязки
-                foreach (var nzpItem in itemsToUnbind)
+                var unbindResult = await _teamWorkService.UnbindArticlesAsync(selectedAnn, itemsToUnbind);
+                if (!unbindResult.Success)
                 {
-                    string kod = nzpItem.kodd.ToString(); // код артикула из строки НЗП
-                    int annIdNzpRow = nzpItem.annId; // AnnID РТ из строки НЗП
-                    string articul = nzpItem.articul?.TrimEnd(' ') ?? string.Empty;
-
-                    await _logger.LogEventAsync($"Отвязка артикула KOD: {kod}, articul: {articul}, AnnID: {annIdNzpRow}", "UnbindArticles");
-                    var parameters = new Dictionary<string, object>
-                {
-                    { "@annID", annIdNzpRow },
-                    { "@kod", kod },
-                    { "@art", articul}
-                };
-                    // Вызов метода для отвязки артикула в sp_articul
-                    await _dbService.UpdateFieldAsync(TableNames.Art, "annId", string.Empty, "left(kod, 7) = @kod AND articul = @art AND annID = @annId", parameters);//_artNormService.ResetAnnIdinArticul(kod);
-                    await _dbService.UpdateFieldAsync(TableNames.Ann, "size_label", null, TableNames.AnnId, annIdNzpRow);
-
-                    // Обновление статуса РТ
-                    await _dbService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, "parentId", annIdNzpRow);
-
-                    totalAffectedRows++;
+                    MessageBox.Show($"Ошибка при отвязывании артикулов: {unbindResult.Error}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
+                int totalAffectedRows = unbindResult.AffectedRows;
 
-                // Логируем операцию
                 await _logger.LogEventAsync($"Отвязано {totalAffectedRows} артикулов от РТ. AnnID: {selectedAnn.AnnID}, {displayInfo}", "UnbindArticles");
 
                 // Показываем результат
