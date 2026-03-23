@@ -1,6 +1,6 @@
 ﻿
 using SewingProduction.Core.Class;
-namespace SewingProduction.Features.Sprav
+namespace SewingProduction.Features.Sprav.Forms
 {
     partial class EditTarif
     {
