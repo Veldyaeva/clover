@@ -19,55 +19,36 @@ namespace SewingProduction.Features.UserDistribution.Forms.User
 {
     public partial class UserRole : CustomForm
     {
-        private readonly UserModelDataService _userModelDataService;
-        private readonly UserRoleDataService _userRoleDataService;
+        private readonly UserModelDataService _userModelDataService = new UserModelDataService();
+        private readonly RoleDataService _roleService = new RoleDataService();
+        private readonly UserRoleDataService _userRoleDataService = new UserRoleDataService();
         private UserModel _selectedUser;
         private List<RoleModel> _selectedRole;
         private List<UserRoleModel> _selectedUserRole;
         public UserRole(UserClass user) : base(user)
         {
             InitializeComponent();
-            _userRoleDataService = new UserRoleDataService();
-            _userModelDataService = new UserModelDataService();
+        }
+        public UserRole(UserClass user, UserModel selectedUser) : base(user)
+        {
+            InitializeComponent();
+            _selectedUser = selectedUser;
         }
         #region Initialization
         protected override async void OnShown(EventArgs e)
         {
             base.OnShown(e);
             await InitializeFormAsync();
-            HideTechnicalColumns();
-            ApplyUserSorting();
         }
         private async Task InitializeFormAsync()
         {
             customGridControlUser.DataSource =
                 await _userModelDataService.GetUsersHierarchyAsync(_user);
 
-            /* _selectedRolePodr =
-                 await _userPodrDataService.GetAvailablePodrTablesByRoleAsync(
-                     CurrentUser.User.UserId);
+            customGridControlRole.DataSource 
+                = await _roleService.GetListRolesAsync(_user);
 
-             customGridControlRole.DataSource = await LoadPodrAsync();
-
-             _selectedUserPodr =
-                 await _userPodrDataService.LoadAllUserPodrAsync();
          }
-         public async Task<List<UserPodrModel>> LoadPodrAsync(int? userId = null)
-         {
-             var result = new List<UserPodrModel>();
-
-             foreach (var table in _selectedRolePodr)
-             {
-                 var part = await _userPodrDataService.LoadPodrFromTableAsync(
-                     table.PodrTableID,
-                     table.PodrTableName
-                     );
-
-                 result.AddRange(part);
-             }
-
-             return result;*/
-        }
         #endregion 
 
         #region GridViewClick
@@ -103,11 +84,9 @@ namespace SewingProduction.Features.UserDistribution.Forms.User
 
             _selectedUser = user;
 
-            ApplyPodrChecksFromCache(_selectedUser.UserID);
-
-            ApplyPodrGroupingAndSorting();
+            ApplyRoleChecksFromCache(_selectedUser.UserID);
         }
-        private void ApplyPodrChecksFromCache(int userId)
+        private void ApplyRoleChecksFromCache(int userId)
         {
             //var userLinks = _selectedUserRole
             //    .Where(x => x.UserID == userId)
@@ -293,78 +272,6 @@ namespace SewingProduction.Features.UserDistribution.Forms.User
         #endregion 
 
         #region Technical
-        private void HideTechnicalColumns()
-        {
-            gridViewUser.BeginUpdate();
-            gridViewRole.BeginUpdate();
-            try
-            {
-                gridViewUser.Columns["UserID"].Visible = false;
-                gridViewUser.Columns["FioID"].Visible = false;
-
-                gridViewRole.Columns["PodrID"].Visible = false;
-                gridViewRole.Columns["PodrTableID"].Visible = false;
-                gridViewRole.Columns["UserPodrID"].Visible = false;
-
-                gridViewRole.Columns["IsSelected"].VisibleIndex = 1;
-                gridViewRole.Columns["Name"].VisibleIndex = 2;
-                gridViewRole.Columns["PodrTableName"].VisibleIndex = 3;
-            }
-            finally
-            {
-                gridViewUser.EndUpdate();
-                gridViewRole.EndUpdate();
-            }
-        }
-        private void ApplyUserSorting()
-        {
-            gridViewUser.BeginSort();
-            try
-            {
-                gridViewUser.ClearSorting();
-                gridViewUser.Columns[nameof(UserModel.Fio)]
-                    .SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
-            }
-            finally
-            {
-                gridViewUser.EndSort();
-            }
-        }
-
-        private void ApplyPodrGroupingAndSorting()
-        {
-            var colSelected = gridViewRole.Columns[nameof(UserPodrModel.IsSelected)];
-            var colOrg = gridViewRole.Columns[nameof(UserPodrModel.PodrTableName)];
-            var colName = gridViewRole.Columns[nameof(UserPodrModel.Name)];
-
-            gridViewRole.BeginUpdate();
-            try
-            {
-                gridViewRole.ClearGrouping();
-                gridViewRole.ClearSorting();
-
-                colSelected.GroupIndex = 0;
-
-                colSelected.SortOrder = DevExpress.Data.ColumnSortOrder.Descending;
-
-                colName.SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
-                colName.SortIndex = 1;
-
-                colOrg.SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
-                colOrg.SortIndex = 2;
-
-                gridViewRole.OptionsBehavior.AutoExpandAllGroups = true;
-                gridViewRole.OptionsView.ShowGroupPanel = false;
-
-                gridViewRole.Columns["IsSelected"].Visible = true;
-                gridViewRole.OptionsView.ShowGroupedColumns = true;
-            }
-            finally
-            {
-                gridViewRole.EndUpdate();
-            }
-        }
-
         private void gridViewPodr_CustomDrawGroupRow(object sender, RowObjectCustomDrawEventArgs e)
         {
             var view = (GridView)sender;
@@ -373,14 +280,11 @@ namespace SewingProduction.Features.UserDistribution.Forms.User
             if (info == null)
                 return;
 
-            // группируем только по IsSelected
             if (info.Column == null || info.Column.FieldName != nameof(UserPodrModel.IsSelected))
                 return;
 
-            // RowHandle группы
             int groupHandle = e.RowHandle;
 
-            // значение группы берём у View
             object groupValueObj = view.GetGroupRowValue(groupHandle);
             bool isSelectedGroup = groupValueObj != null && Convert.ToBoolean(groupValueObj);
 

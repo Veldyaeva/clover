@@ -228,7 +228,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             Brig.Name = "Brig";
             Brig.Visible = true;
             Brig.VisibleIndex = 1;
-            Brig.Width = 381;
+            Brig.Width = 87;
             // 
             // repositoryItemLookUpEditBrig
             // 
@@ -259,7 +259,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             Fio.Name = "Fio";
             Fio.Visible = true;
             Fio.VisibleIndex = 2;
-            Fio.Width = 383;
+            Fio.Width = 87;
             // 
             // repositoryItemLookUpEditFio
             // 

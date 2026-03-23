@@ -1,6 +1,6 @@
 ﻿
 using SewingProduction.Core.Class;
-namespace SewingProduction.Features.Sprav
+namespace SewingProduction.Features.Sprav.Forms
 {
     partial class EditTarif
     {
@@ -175,10 +175,8 @@ namespace SewingProduction.Features.Sprav
             // 
             // customButtonExcel
             // 
-            // customButtonExcel.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonExcel.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonExcel.Font = new System.Drawing.Font("Arial", 10F);
-            // customButtonExcel.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonExcel.Location = new System.Drawing.Point(1013, 3);
             customButtonExcel.MaximumSize = new System.Drawing.Size(0, 40);
             customButtonExcel.Name = "customButtonExcel";
@@ -190,10 +188,8 @@ namespace SewingProduction.Features.Sprav
             // 
             // customButtonArhiv
             // 
-            // customButtonArhiv.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonArhiv.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonArhiv.Font = new System.Drawing.Font("Arial", 10F);
-            // customButtonArhiv.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonArhiv.Location = new System.Drawing.Point(869, 3);
             customButtonArhiv.MaximumSize = new System.Drawing.Size(0, 40);
             customButtonArhiv.Name = "customButtonArhiv";
@@ -220,9 +216,7 @@ namespace SewingProduction.Features.Sprav
             // 
             // gridViewZp
             // 
-            // gridViewZp.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewZp.Appearance.EvenRow.Options.UseBackColor = true;
-            // gridViewZp.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewZp.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewZp.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewZp.Appearance.FocusedRow.Options.UseFont = true;
@@ -365,6 +359,7 @@ namespace SewingProduction.Features.Sprav
             tableLayoutPanel1.SetColumnSpan(customGroupBoxAdd, 2);
             customGroupBoxAdd.Controls.Add(tableLayoutPanel2);
             customGroupBoxAdd.Dock = System.Windows.Forms.DockStyle.Fill;
+            customGroupBoxAdd.Font = new System.Drawing.Font("Arial", 10F);
             customGroupBoxAdd.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             customGroupBoxAdd.Location = new System.Drawing.Point(869, 99);
             customGroupBoxAdd.Name = "customGroupBoxAdd";
@@ -406,7 +401,7 @@ namespace SewingProduction.Features.Sprav
             tableLayoutPanel2.Controls.Add(customLabelWhereUses, 0, 10);
             tableLayoutPanel2.Controls.Add(customCheckBoxArhiv, 0, 12);
             tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel2.Location = new System.Drawing.Point(3, 17);
+            tableLayoutPanel2.Location = new System.Drawing.Point(3, 19);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 13;
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -422,82 +417,78 @@ namespace SewingProduction.Features.Sprav
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel2.Size = new System.Drawing.Size(280, 539);
+            tableLayoutPanel2.Size = new System.Drawing.Size(280, 537);
             tableLayoutPanel2.TabIndex = 3;
             // 
             // customComboBoxPriznByh
             // 
-            // customComboBoxPriznByh.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customComboBoxPriznByh.Dock = System.Windows.Forms.DockStyle.Fill;
             customComboBoxPriznByh.Font = new System.Drawing.Font("Arial", 10F);
-            // customComboBoxPriznByh.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customComboBoxPriznByh.FormattingEnabled = true;
             customComboBoxPriznByh.Items.AddRange(new object[] { "0 - Нет доступа", "1 - Просмотр", "2 - Редактор" });
-            customComboBoxPriznByh.Location = new System.Drawing.Point(87, 315);
+            customComboBoxPriznByh.Location = new System.Drawing.Point(87, 292);
             customComboBoxPriznByh.Name = "customComboBoxPriznByh";
             customComboBoxPriznByh.Size = new System.Drawing.Size(190, 24);
             customComboBoxPriznByh.TabIndex = 50;
             // 
             // customLabelPriznByh
             // 
-            customLabelPriznByh.AutoSize = true;
+            customLabelPriznByh.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelPriznByh.Appearance.Options.UseFont = true;
+            customLabelPriznByh.Appearance.Options.UseTextOptions = true;
+            customLabelPriznByh.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelPriznByh.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelPriznByh.Dock = System.Windows.Forms.DockStyle.Left;
-            customLabelPriznByh.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelPriznByh.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelPriznByh.Location = new System.Drawing.Point(3, 312);
+            customLabelPriznByh.Location = new System.Drawing.Point(3, 292);
             customLabelPriznByh.Name = "customLabelPriznByh";
-            customLabelPriznByh.Size = new System.Drawing.Size(73, 32);
+            customLabelPriznByh.Size = new System.Drawing.Size(70, 16);
             customLabelPriznByh.TabIndex = 49;
             customLabelPriznByh.Text = "Бухгалтеры";
-            customLabelPriznByh.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelPriznByh.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customComboBoxPriznEco
             // 
-            // customComboBoxPriznEco.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customComboBoxPriznEco.Dock = System.Windows.Forms.DockStyle.Fill;
             customComboBoxPriznEco.Font = new System.Drawing.Font("Arial", 10F);
-            // customComboBoxPriznEco.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customComboBoxPriznEco.FormattingEnabled = true;
             customComboBoxPriznEco.Items.AddRange(new object[] { "0 - Нет доступа", "1 - Просмотр", "2 - Редактор" });
-            customComboBoxPriznEco.Location = new System.Drawing.Point(87, 283);
+            customComboBoxPriznEco.Location = new System.Drawing.Point(87, 262);
             customComboBoxPriznEco.Name = "customComboBoxPriznEco";
             customComboBoxPriznEco.Size = new System.Drawing.Size(190, 24);
             customComboBoxPriznEco.TabIndex = 46;
             // 
             // customLabelPriznEco
             // 
-            customLabelPriznEco.AutoSize = true;
+            customLabelPriznEco.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelPriznEco.Appearance.Options.UseFont = true;
+            customLabelPriznEco.Appearance.Options.UseTextOptions = true;
+            customLabelPriznEco.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelPriznEco.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelPriznEco.Dock = System.Windows.Forms.DockStyle.Left;
-            customLabelPriznEco.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelPriznEco.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelPriznEco.Location = new System.Drawing.Point(3, 280);
+            customLabelPriznEco.Location = new System.Drawing.Point(3, 262);
             customLabelPriznEco.Name = "customLabelPriznEco";
-            customLabelPriznEco.Size = new System.Drawing.Size(72, 32);
+            customLabelPriznEco.Size = new System.Drawing.Size(73, 16);
             customLabelPriznEco.TabIndex = 45;
             customLabelPriznEco.Text = "Экономисты";
-            customLabelPriznEco.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelPriznEco.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customComboBoxOrg
             // 
-            // customComboBoxOrg.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customComboBoxOrg.Dock = System.Windows.Forms.DockStyle.Fill;
             customComboBoxOrg.Font = new System.Drawing.Font("Arial", 10F);
-            // customComboBoxOrg.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customComboBoxOrg.FormattingEnabled = true;
-            customComboBoxOrg.Location = new System.Drawing.Point(87, 251);
+            customComboBoxOrg.Location = new System.Drawing.Point(87, 232);
             customComboBoxOrg.Name = "customComboBoxOrg";
             customComboBoxOrg.Size = new System.Drawing.Size(190, 24);
             customComboBoxOrg.TabIndex = 43;
             // 
             // customTextBoxOpis
             // 
-            // customTextBoxOpis.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxOpis.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxOpis.Dock = System.Windows.Forms.DockStyle.Fill;
             customTextBoxOpis.ErrorColor = System.Drawing.Color.Red;
             customTextBoxOpis.ErrorMessage = null;
             customTextBoxOpis.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxOpis.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxOpis.Location = new System.Drawing.Point(87, 87);
             customTextBoxOpis.Multiline = true;
             customTextBoxOpis.Name = "customTextBoxOpis";
@@ -506,102 +497,112 @@ namespace SewingProduction.Features.Sprav
             // 
             // customLabelNull
             // 
-            customLabelNull.AutoSize = true;
+            customLabelNull.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelNull.Appearance.Options.UseFont = true;
+            customLabelNull.Appearance.Options.UseTextOptions = true;
+            customLabelNull.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelNull.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelNull.Dock = System.Windows.Forms.DockStyle.Left;
-            customLabelNull.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelNull.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelNull.Location = new System.Drawing.Point(3, 58);
+            customLabelNull.Location = new System.Drawing.Point(3, 61);
             customLabelNull.Name = "customLabelNull";
-            customLabelNull.Size = new System.Drawing.Size(0, 26);
+            customLabelNull.Size = new System.Drawing.Size(0, 16);
             customLabelNull.TabIndex = 40;
-            customLabelNull.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelNull.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabelOrg
             // 
-            customLabelOrg.AutoSize = true;
+            customLabelOrg.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelOrg.Appearance.Options.UseFont = true;
+            customLabelOrg.Appearance.Options.UseTextOptions = true;
+            customLabelOrg.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelOrg.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelOrg.Dock = System.Windows.Forms.DockStyle.Left;
-            customLabelOrg.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelOrg.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelOrg.Location = new System.Drawing.Point(3, 248);
+            customLabelOrg.Location = new System.Drawing.Point(3, 232);
             customLabelOrg.Name = "customLabelOrg";
-            customLabelOrg.Size = new System.Drawing.Size(78, 32);
+            customLabelOrg.Size = new System.Drawing.Size(77, 16);
             customLabelOrg.TabIndex = 39;
             customLabelOrg.Text = "Организация";
-            customLabelOrg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelOrg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabelZnach
             // 
-            customLabelZnach.AutoSize = true;
+            customLabelZnach.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelZnach.Appearance.Options.UseFont = true;
+            customLabelZnach.Appearance.Options.UseTextOptions = true;
+            customLabelZnach.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelZnach.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelZnach.Dock = System.Windows.Forms.DockStyle.Left;
-            customLabelZnach.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelZnach.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelZnach.Location = new System.Drawing.Point(3, 219);
+            customLabelZnach.Location = new System.Drawing.Point(3, 203);
             customLabelZnach.Name = "customLabelZnach";
-            customLabelZnach.Size = new System.Drawing.Size(70, 29);
+            customLabelZnach.Size = new System.Drawing.Size(57, 16);
             customLabelZnach.TabIndex = 38;
             customLabelZnach.Text = "Значение";
-            customLabelZnach.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelZnach.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabelDate
             // 
-            customLabelDate.AutoSize = true;
+            customLabelDate.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelDate.Appearance.Options.UseFont = true;
             customLabelDate.Dock = System.Windows.Forms.DockStyle.Left;
-            customLabelDate.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelDate.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelDate.Location = new System.Drawing.Point(3, 171);
+            customLabelDate.Location = new System.Drawing.Point(3, 174);
             customLabelDate.Name = "customLabelDate";
-            customLabelDate.Size = new System.Drawing.Size(68, 48);
+            customLabelDate.Size = new System.Drawing.Size(133, 16);
             customLabelDate.TabIndex = 37;
             customLabelDate.Text = "Дата начала действия";
+            customLabelDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabelType
             // 
-            customLabelType.AutoSize = true;
+            customLabelType.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelType.Appearance.Options.UseFont = true;
+            customLabelType.Appearance.Options.UseTextOptions = true;
+            customLabelType.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelType.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelType.Dock = System.Windows.Forms.DockStyle.Left;
-            customLabelType.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelType.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelType.Location = new System.Drawing.Point(3, 141);
+            customLabelType.Location = new System.Drawing.Point(3, 144);
             customLabelType.Name = "customLabelType";
-            customLabelType.Size = new System.Drawing.Size(31, 30);
+            customLabelType.Size = new System.Drawing.Size(21, 16);
             customLabelType.TabIndex = 36;
             customLabelType.Text = "Тип";
-            customLabelType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabelOpis
             // 
-            customLabelOpis.AutoSize = true;
+            customLabelOpis.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelOpis.Appearance.Options.UseFont = true;
+            customLabelOpis.Appearance.Options.UseTextOptions = true;
+            customLabelOpis.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelOpis.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelOpis.Dock = System.Windows.Forms.DockStyle.Left;
-            customLabelOpis.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelOpis.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelOpis.Location = new System.Drawing.Point(3, 84);
+            customLabelOpis.Location = new System.Drawing.Point(3, 87);
             customLabelOpis.Name = "customLabelOpis";
-            customLabelOpis.Size = new System.Drawing.Size(73, 57);
+            customLabelOpis.Size = new System.Drawing.Size(88, 16);
             customLabelOpis.TabIndex = 34;
             customLabelOpis.Text = "Наименование";
-            customLabelOpis.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelOpis.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabelRazm
             // 
-            customLabelRazm.AutoSize = true;
+            customLabelRazm.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelRazm.Appearance.Options.UseFont = true;
+            customLabelRazm.Appearance.Options.UseTextOptions = true;
+            customLabelRazm.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelRazm.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelRazm.Dock = System.Windows.Forms.DockStyle.Left;
-            customLabelRazm.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelRazm.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelRazm.Location = new System.Drawing.Point(3, 29);
+            customLabelRazm.Location = new System.Drawing.Point(3, 32);
             customLabelRazm.Name = "customLabelRazm";
-            customLabelRazm.Size = new System.Drawing.Size(62, 29);
+            customLabelRazm.Size = new System.Drawing.Size(53, 16);
             customLabelRazm.TabIndex = 31;
             customLabelRazm.Text = "Ед. Изм.";
-            customLabelRazm.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelRazm.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customTextBoxName
             // 
-            // customTextBoxName.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxName.Dock = System.Windows.Forms.DockStyle.Fill;
             customTextBoxName.ErrorColor = System.Drawing.Color.Red;
             customTextBoxName.ErrorMessage = null;
             customTextBoxName.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxName.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxName.Location = new System.Drawing.Point(87, 3);
             customTextBoxName.Name = "customTextBoxName";
             customTextBoxName.Size = new System.Drawing.Size(190, 23);
@@ -609,40 +610,38 @@ namespace SewingProduction.Features.Sprav
             // 
             // customLabelName
             // 
-            customLabelName.AutoSize = true;
+            customLabelName.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelName.Appearance.Options.UseFont = true;
+            customLabelName.Appearance.Options.UseTextOptions = true;
+            customLabelName.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelName.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelName.Dock = System.Windows.Forms.DockStyle.Left;
-            customLabelName.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelName.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelName.Location = new System.Drawing.Point(3, 0);
+            customLabelName.Location = new System.Drawing.Point(3, 3);
             customLabelName.Name = "customLabelName";
-            customLabelName.Size = new System.Drawing.Size(35, 29);
+            customLabelName.Size = new System.Drawing.Size(25, 16);
             customLabelName.TabIndex = 26;
             customLabelName.Text = "Имя";
-            customLabelName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customTextBoxZnach
             // 
-            // customTextBoxZnach.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxZnach.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxZnach.Dock = System.Windows.Forms.DockStyle.Fill;
             customTextBoxZnach.ErrorColor = System.Drawing.Color.Red;
             customTextBoxZnach.ErrorMessage = null;
             customTextBoxZnach.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxZnach.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customTextBoxZnach.Location = new System.Drawing.Point(87, 222);
+            customTextBoxZnach.Location = new System.Drawing.Point(87, 203);
             customTextBoxZnach.Name = "customTextBoxZnach";
             customTextBoxZnach.Size = new System.Drawing.Size(190, 23);
             customTextBoxZnach.TabIndex = 21;
             // 
             // customTextBoxRazm
             // 
-            // customTextBoxRazm.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxRazm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxRazm.Dock = System.Windows.Forms.DockStyle.Fill;
             customTextBoxRazm.ErrorColor = System.Drawing.Color.Red;
             customTextBoxRazm.ErrorMessage = null;
             customTextBoxRazm.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxRazm.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxRazm.Location = new System.Drawing.Point(87, 32);
             customTextBoxRazm.Name = "customTextBoxRazm";
             customTextBoxRazm.Size = new System.Drawing.Size(190, 23);
@@ -652,7 +651,6 @@ namespace SewingProduction.Features.Sprav
             // 
             customCheckBoxNotRazm.AutoSize = true;
             customCheckBoxNotRazm.Font = new System.Drawing.Font("Arial", 10F);
-            // customCheckBoxNotRazm.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customCheckBoxNotRazm.Location = new System.Drawing.Point(87, 61);
             customCheckBoxNotRazm.Name = "customCheckBoxNotRazm";
             customCheckBoxNotRazm.Size = new System.Drawing.Size(139, 20);
@@ -663,10 +661,8 @@ namespace SewingProduction.Features.Sprav
             // 
             // customComboBoxType
             // 
-            // customComboBoxType.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customComboBoxType.Dock = System.Windows.Forms.DockStyle.Fill;
             customComboBoxType.Font = new System.Drawing.Font("Arial", 10F);
-            // customComboBoxType.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customComboBoxType.FormattingEnabled = true;
             customComboBoxType.Location = new System.Drawing.Point(87, 144);
             customComboBoxType.Name = "customComboBoxType";
@@ -675,10 +671,8 @@ namespace SewingProduction.Features.Sprav
             // 
             // customDateTimePickerBegin
             // 
-            // customDateTimePickerBegin.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customDateTimePickerBegin.Dock = System.Windows.Forms.DockStyle.Fill;
             customDateTimePickerBegin.Font = new System.Drawing.Font("Arial", 10F);
-            // customDateTimePickerBegin.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customDateTimePickerBegin.Location = new System.Drawing.Point(87, 174);
             customDateTimePickerBegin.Name = "customDateTimePickerBegin";
             customDateTimePickerBegin.ObjectName = null;
@@ -687,11 +681,9 @@ namespace SewingProduction.Features.Sprav
             // 
             // customButtonSave
             // 
-            // customButtonSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonSave.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonSave.Font = new System.Drawing.Font("Arial", 10F);
-            // customButtonSave.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customButtonSave.Location = new System.Drawing.Point(87, 453);
+            customButtonSave.Location = new System.Drawing.Point(87, 428);
             customButtonSave.MaximumSize = new System.Drawing.Size(0, 50);
             customButtonSave.MinimumSize = new System.Drawing.Size(0, 40);
             customButtonSave.Name = "customButtonSave";
@@ -703,11 +695,9 @@ namespace SewingProduction.Features.Sprav
             // 
             // customButtonOtm
             // 
-            // customButtonOtm.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonOtm.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonOtm.Font = new System.Drawing.Font("Arial", 10F);
-            // customButtonOtm.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customButtonOtm.Location = new System.Drawing.Point(3, 453);
+            customButtonOtm.Location = new System.Drawing.Point(3, 428);
             customButtonOtm.MaximumSize = new System.Drawing.Size(0, 50);
             customButtonOtm.MinimumSize = new System.Drawing.Size(0, 40);
             customButtonOtm.Name = "customButtonOtm";
@@ -719,14 +709,12 @@ namespace SewingProduction.Features.Sprav
             // 
             // customTextBoxWhereUses
             // 
-            // customTextBoxWhereUses.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxWhereUses.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxWhereUses.Dock = System.Windows.Forms.DockStyle.Fill;
             customTextBoxWhereUses.ErrorColor = System.Drawing.Color.Red;
             customTextBoxWhereUses.ErrorMessage = null;
             customTextBoxWhereUses.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxWhereUses.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customTextBoxWhereUses.Location = new System.Drawing.Point(87, 347);
+            customTextBoxWhereUses.Location = new System.Drawing.Point(87, 322);
             customTextBoxWhereUses.MinimumSize = new System.Drawing.Size(180, 100);
             customTextBoxWhereUses.Multiline = true;
             customTextBoxWhereUses.Name = "customTextBoxWhereUses";
@@ -735,23 +723,24 @@ namespace SewingProduction.Features.Sprav
             // 
             // customLabelWhereUses
             // 
-            customLabelWhereUses.AutoSize = true;
+            customLabelWhereUses.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelWhereUses.Appearance.Options.UseFont = true;
+            customLabelWhereUses.Appearance.Options.UseTextOptions = true;
+            customLabelWhereUses.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelWhereUses.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelWhereUses.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelWhereUses.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelWhereUses.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelWhereUses.Location = new System.Drawing.Point(3, 344);
+            customLabelWhereUses.Location = new System.Drawing.Point(3, 322);
             customLabelWhereUses.Name = "customLabelWhereUses";
-            customLabelWhereUses.Size = new System.Drawing.Size(78, 106);
+            customLabelWhereUses.Size = new System.Drawing.Size(78, 100);
             customLabelWhereUses.TabIndex = 48;
             customLabelWhereUses.Text = "Где используется";
-            customLabelWhereUses.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelWhereUses.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customCheckBoxArhiv
             // 
             customCheckBoxArhiv.AutoSize = true;
             customCheckBoxArhiv.Font = new System.Drawing.Font("Arial", 10F);
-            // customCheckBoxArhiv.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customCheckBoxArhiv.Location = new System.Drawing.Point(3, 509);
+            customCheckBoxArhiv.Location = new System.Drawing.Point(3, 484);
             customCheckBoxArhiv.Name = "customCheckBoxArhiv";
             customCheckBoxArhiv.Size = new System.Drawing.Size(64, 20);
             customCheckBoxArhiv.TabIndex = 51;
@@ -772,9 +761,7 @@ namespace SewingProduction.Features.Sprav
             // 
             // gridViewHistory
             // 
-            // gridViewHistory.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewHistory.Appearance.EvenRow.Options.UseBackColor = true;
-            // gridViewHistory.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewHistory.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewHistory.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewHistory.Appearance.FocusedRow.Options.UseFont = true;
@@ -830,10 +817,8 @@ namespace SewingProduction.Features.Sprav
             // 
             // customButtonEdit
             // 
-            // customButtonEdit.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonEdit.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonEdit.Font = new System.Drawing.Font("Arial", 10F);
-            // customButtonEdit.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonEdit.Location = new System.Drawing.Point(869, 35);
             customButtonEdit.MaximumSize = new System.Drawing.Size(0, 40);
             customButtonEdit.Name = "customButtonEdit";
@@ -845,10 +830,8 @@ namespace SewingProduction.Features.Sprav
             // 
             // customButtonAdd
             // 
-            // customButtonAdd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonAdd.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonAdd.Font = new System.Drawing.Font("Arial", 10F);
-            // customButtonAdd.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonAdd.Location = new System.Drawing.Point(1013, 35);
             customButtonAdd.MaximumSize = new System.Drawing.Size(0, 40);
             customButtonAdd.Name = "customButtonAdd";
@@ -867,6 +850,7 @@ namespace SewingProduction.Features.Sprav
             customGroupBoxFiltr.Controls.Add(customRadioButtonExp);
             customGroupBoxFiltr.Controls.Add(customRadioButtonAceKle);
             customGroupBoxFiltr.Dock = System.Windows.Forms.DockStyle.Fill;
+            customGroupBoxFiltr.Font = new System.Drawing.Font("Arial", 10F);
             customGroupBoxFiltr.Location = new System.Drawing.Point(436, 3);
             customGroupBoxFiltr.Name = "customGroupBoxFiltr";
             customGroupBoxFiltr.Size = new System.Drawing.Size(427, 26);
@@ -878,7 +862,6 @@ namespace SewingProduction.Features.Sprav
             customRadioButtonMay.Anchor = System.Windows.Forms.AnchorStyles.None;
             customRadioButtonMay.AutoSize = true;
             customRadioButtonMay.Font = new System.Drawing.Font("Arial", 10F);
-            // customRadioButtonMay.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customRadioButtonMay.Location = new System.Drawing.Point(268, 2);
             customRadioButtonMay.Name = "customRadioButtonMay";
             customRadioButtonMay.ObjectName = null;
@@ -895,7 +878,6 @@ namespace SewingProduction.Features.Sprav
             customRadioButtonAll.AutoSize = true;
             customRadioButtonAll.Checked = true;
             customRadioButtonAll.Font = new System.Drawing.Font("Arial", 10F);
-            // customRadioButtonAll.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customRadioButtonAll.Location = new System.Drawing.Point(339, 2);
             customRadioButtonAll.Name = "customRadioButtonAll";
             customRadioButtonAll.ObjectName = null;
@@ -911,7 +893,6 @@ namespace SewingProduction.Features.Sprav
             customRadioButtonExp.Anchor = System.Windows.Forms.AnchorStyles.None;
             customRadioButtonExp.AutoSize = true;
             customRadioButtonExp.Font = new System.Drawing.Font("Arial", 10F);
-            // customRadioButtonExp.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customRadioButtonExp.Location = new System.Drawing.Point(134, 2);
             customRadioButtonExp.Name = "customRadioButtonExp";
             customRadioButtonExp.ObjectName = null;
@@ -926,7 +907,6 @@ namespace SewingProduction.Features.Sprav
             customRadioButtonAceKle.Anchor = System.Windows.Forms.AnchorStyles.None;
             customRadioButtonAceKle.AutoSize = true;
             customRadioButtonAceKle.Font = new System.Drawing.Font("Arial", 10F);
-            // customRadioButtonAceKle.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customRadioButtonAceKle.Location = new System.Drawing.Point(23, 2);
             customRadioButtonAceKle.Name = "customRadioButtonAceKle";
             customRadioButtonAceKle.ObjectName = null;
@@ -944,6 +924,7 @@ namespace SewingProduction.Features.Sprav
             customGroupBoxPriznSign.Controls.Add(customCheckBoxByh);
             customGroupBoxPriznSign.Controls.Add(customCheckBoxEco);
             customGroupBoxPriznSign.Dock = System.Windows.Forms.DockStyle.Fill;
+            customGroupBoxPriznSign.Font = new System.Drawing.Font("Arial", 10F);
             customGroupBoxPriznSign.Location = new System.Drawing.Point(3, 3);
             customGroupBoxPriznSign.Name = "customGroupBoxPriznSign";
             customGroupBoxPriznSign.Size = new System.Drawing.Size(427, 26);
@@ -955,7 +936,6 @@ namespace SewingProduction.Features.Sprav
             customCheckBoxProg.Anchor = System.Windows.Forms.AnchorStyles.None;
             customCheckBoxProg.AutoSize = true;
             customCheckBoxProg.Font = new System.Drawing.Font("Arial", 10F);
-            // customCheckBoxProg.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customCheckBoxProg.Location = new System.Drawing.Point(284, 2);
             customCheckBoxProg.Name = "customCheckBoxProg";
             customCheckBoxProg.Size = new System.Drawing.Size(135, 20);
@@ -969,7 +949,6 @@ namespace SewingProduction.Features.Sprav
             customCheckBoxByh.Anchor = System.Windows.Forms.AnchorStyles.None;
             customCheckBoxByh.AutoSize = true;
             customCheckBoxByh.Font = new System.Drawing.Font("Arial", 10F);
-            // customCheckBoxByh.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customCheckBoxByh.Location = new System.Drawing.Point(148, 2);
             customCheckBoxByh.Name = "customCheckBoxByh";
             customCheckBoxByh.Size = new System.Drawing.Size(113, 20);
@@ -983,7 +962,6 @@ namespace SewingProduction.Features.Sprav
             customCheckBoxEco.Anchor = System.Windows.Forms.AnchorStyles.None;
             customCheckBoxEco.AutoSize = true;
             customCheckBoxEco.Font = new System.Drawing.Font("Arial", 10F);
-            // customCheckBoxEco.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customCheckBoxEco.Location = new System.Drawing.Point(13, 2);
             customCheckBoxEco.Name = "customCheckBoxEco";
             customCheckBoxEco.Size = new System.Drawing.Size(119, 20);
@@ -994,10 +972,8 @@ namespace SewingProduction.Features.Sprav
             // 
             // customButtonCopy
             // 
-            // customButtonCopy.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonCopy.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonCopy.Font = new System.Drawing.Font("Arial", 10F);
-            // customButtonCopy.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonCopy.Location = new System.Drawing.Point(1013, 67);
             customButtonCopy.MaximumSize = new System.Drawing.Size(0, 40);
             customButtonCopy.Name = "customButtonCopy";
@@ -1009,7 +985,6 @@ namespace SewingProduction.Features.Sprav
             // 
             // customTabControlZpTarif
             // 
-            // customTabControlZpTarif.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTabControlZpTarif.Appearance.Options.UseForeColor = true;
             customTabControlZpTarif.Dock = System.Windows.Forms.DockStyle.Fill;
             customTabControlZpTarif.Location = new System.Drawing.Point(0, 0);
@@ -1060,9 +1035,7 @@ namespace SewingProduction.Features.Sprav
             // 
             // gridViewTR
             // 
-            // gridViewTR.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewTR.Appearance.EvenRow.Options.UseBackColor = true;
-            // gridViewTR.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewTR.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewTR.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewTR.Appearance.FocusedRow.Options.UseFont = true;
@@ -1145,10 +1118,8 @@ namespace SewingProduction.Features.Sprav
             // 
             // customButtonAddTrr
             // 
-            // customButtonAddTrr.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonAddTrr.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonAddTrr.Font = new System.Drawing.Font("Arial", 10F);
-            // customButtonAddTrr.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonAddTrr.Location = new System.Drawing.Point(3, 624);
             customButtonAddTrr.Name = "customButtonAddTrr";
             customButtonAddTrr.Size = new System.Drawing.Size(283, 34);

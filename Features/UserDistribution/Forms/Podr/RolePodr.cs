@@ -39,7 +39,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             _allRolePodr = await _rolePodrDataService.LoadAllRolePodrAsync();
 
-            customGridControlRole.DataSource = await _roleService.GetListRolesAsync(CurrentUser.User.UserId);
+            customGridControlRole.DataSource = await _roleService.GetListRolesAsync(_user);
             customGridControlRole.RefreshDataSource();
 
             customGridControlTable.DataSource = await _tableService.GetListTableAsync();

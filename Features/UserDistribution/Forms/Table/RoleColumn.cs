@@ -56,7 +56,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
 
         private async Task LoadRolesAsync()
         {
-            _roles = await _roleService.GetListRolesAsync(_user.UserId);
+            _roles = await _roleService.GetListRolesAsync(_user);
             customGridControlRole.DataSource = _roles;
             customGridControlRole.RefreshDataSource();
         }
