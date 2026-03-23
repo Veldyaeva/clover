@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -559,23 +559,7 @@ namespace SewingProduction.Helpers
 
         public void popUpMenuCopy(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
-            if (e.MenuType == GridMenuType.Row && e.HitInfo.Column != null)
-            {
-                var view = sender as GridView;
-                // Копировать содержимое ячейки
-                var copyCellItem = new DevExpress.Utils.Menu.DXMenuItem("Копировать", (_, __) =>
-                {
-                    int rowHandle = e.HitInfo.RowHandle;
-                    var col = e.HitInfo.Column;
-                    if (rowHandle >= 0 && col != null)
-                    {
-                        var cellText = view.GetRowCellDisplayText(rowHandle, col);
-                        if (!string.IsNullOrEmpty(cellText))
-                            Clipboard.SetText(cellText);
-                    }
-                });
-                e.Menu.Items.Add(copyCellItem);
-            }
+            GridContextMenuHelper.AddCopyCellMenuItem(sender, e);
         }
 
         #region LookUpHelper
