@@ -1,5 +1,6 @@
 using SewingProduction.Features.TeamWork.Forms;
 using SewingProduction.Features.TeamWork.Interfaces;
+using SewingProduction.Helpers;
 using System;
 
 namespace SewingProduction.Features.TeamWork.Services
@@ -11,6 +12,7 @@ namespace SewingProduction.Features.TeamWork.Services
     public class TeamWorkUIService : ITeamWorkUIService
     {
         private readonly TeamWork_AdvanceTW _form;
+        private readonly ILogger _logger = new FileLogger();
 
         public TeamWorkUIService(TeamWork_AdvanceTW form)
         {
@@ -64,7 +66,10 @@ namespace SewingProduction.Features.TeamWork.Services
                         view.MakeRowVisible(rowHandle);
                     }
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    _ = _logger.LogErrorAsync(ex, $"Не удалось восстановить фокус в TeamWorkUIService. rowHandle={rowHandle}");
+                }
             }));
         }
     }

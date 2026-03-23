@@ -61,7 +61,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _lastFocusedAnnId = row.AnnID;
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                _ = _logger.LogErrorAsync(ex, "ANNgridView_FocusedRowChanged: не удалось сохранить _lastFocusedAnnId");
+            }
             ANNgridView_FocusedRowChanged_Internal(sender, e);
         }
 

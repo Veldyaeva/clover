@@ -106,7 +106,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (targetAnnId == 0 && _bindingList.Count > 0)
                         targetAnnId = _bindingList[0].AnnID;
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    await _logger.LogErrorAsync(ex, "LoadWorkDivisions: failed to resolve targetAnnId");
+                }
 
                 if (targetAnnId > 0)
                     await LoadRelatedData(targetAnnId);
@@ -708,12 +711,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _bindingSource.ResetBindings(false);
                     TryFocusAndRefreshRowByAnnId(ANNgridView, newItem.AnnID);
 
-                    _ = Task.Run(async () =>
-                    {
-                        await _secondsUpdateManager.StartSecondsUpdateAsync(newItem.AnnID, ANNgridView, _bindingList, ShowSecondsUpdateStatus);
-                        await Task.Delay(3000);
-                        ClearSecondsUpdateStatus();
-                    });
+                    _ = RunSecondsUpdateSafeAsync(newItem.AnnID, ANNgridView, _bindingList);
 
                     // Показываем сообщение о создании комплекта или обычного РТ
                     if (modeForNewForm == (int)Mode.Kit)
@@ -1006,13 +1004,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
 
             // Запускаем асинхронное обновление секунд для новой записи
-            _ = Task.Run(async () =>
-            {
-                await _secondsUpdateManager.StartSecondsUpdateAsync(newRow.AnnID, ANNgridView, _bindingList, ShowSecondsUpdateStatus);
-                // Очищаем статус через 3 секунды после завершения
-                await Task.Delay(3000);
-                ClearSecondsUpdateStatus();
-            });
+            _ = RunSecondsUpdateSafeAsync(newRow.AnnID, ANNgridView, _bindingList);
         }
         private async Task HandleCancelledEdit(ArtNormN selectedItem, ArtNormN newRow, int? oldStatus)
         {

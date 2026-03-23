@@ -90,7 +90,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                     ButtonEditWd.VisibleLogic = true;
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                _ = _logger.LogErrorAsync(ex, "ButtonEditOnlyAdv_VisibleChanged");
+            }
         }
 
         private async void XtraTabControl1_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)

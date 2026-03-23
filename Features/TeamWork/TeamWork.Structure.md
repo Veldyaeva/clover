@@ -45,7 +45,7 @@
   - Логика отвязки артикулов от РТ и обновления НЗП после отвязки.
   - Пакетная отвязка выполняется через use-case оркестратора.
 
-- `Services/TeamWorkService.cs` (`TeamWorkOrchestrator`)
+- `Services/ITeamWorkOrchestrator.cs` + `Services/TeamWorkService.cs` (`TeamWorkOrchestrator`)
   - Координация сценариев use-case без UI:
     - загрузка РТ/связанных данных,
     - создание и откат черновика дубля,
@@ -56,6 +56,12 @@
     - пакетное утверждение/обновление даты и статуса РТ,
     - обновление `sp_articul.arh` для выбранного артикула в контексте AnnID,
     - завершение и откат сценария `архив+копия`.
+
+- `Models/UseCases/*.cs`
+  - Типизированные результаты use-case операций оркестратора (`*Result`, `*BatchResult`, `*Item`).
+
+- `Services/ArtNormRepository.cs` + `Services/ArtNormService.cs`
+  - Базовый репозиторий `ArtNormRepository`; основная реализация пока остается в `ArtNormService.cs` (режим совместимости перед полным rename файла).
 
 ### Правило поддержания структуры
 

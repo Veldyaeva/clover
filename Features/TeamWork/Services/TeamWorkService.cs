@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using SewingProduction.Features.TeamWork.Helpers;
+using SewingProduction.Features.TeamWork.Models.UseCases;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
@@ -14,7 +15,7 @@ namespace SewingProduction.Features.TeamWork.Services
     /// Сервис уровня приложения для TeamWork: orchestration/координация загрузки и обновления связанных данных.
     /// Не выполняет SQL напрямую (делегирует ArtNormRepository), не содержит UI.
     /// </summary>
-    public class TeamWorkOrchestrator
+    public class TeamWorkOrchestrator : ITeamWorkOrchestrator
     {
         private readonly ArtNormRepository _artNormService;
         private readonly DbService _dbService;
@@ -343,8 +344,16 @@ namespace SewingProduction.Features.TeamWork.Services
         {
             var result = new MarkForDeletionBatchResult();
             var ids = annIds?.Distinct().Where(id => id > 0).ToList() ?? new List<int>();
-            if (ids.Count == 0 || string.IsNullOrWhiteSpace(computerName))
+            if (ids.Count == 0)
             {
+                result.Success = true;
+                return result;
+            }
+
+            if (string.IsNullOrWhiteSpace(computerName))
+            {
+                result.Errors.Add("Не задано имя компьютера для пометки на удаление.");
+                result.Success = false;
                 return result;
             }
 
@@ -392,6 +401,12 @@ namespace SewingProduction.Features.TeamWork.Services
         {
             var result = new ApproveBatchResult();
             var ids = annIds?.Distinct().Where(id => id > 0).ToList() ?? new List<int>();
+            if (ids.Count == 0)
+            {
+                result.Success = true;
+                return result;
+            }
+
             foreach (var annId in ids)
             {
                 try
@@ -399,6 +414,7 @@ namespace SewingProduction.Features.TeamWork.Services
                     var approval = await ApproveWorkDivisionAsync(annId, string.Empty);
                     if (approval.Success)
                     {
+                        result.UpdatedAnnIds.Add(annId);
                         result.Items.Add(new ApproveBatchItem
                         {
                             AnnId = annId,
@@ -511,6 +527,12 @@ namespace SewingProduction.Features.TeamWork.Services
         {
             var result = new BatchStatusUpdateResult();
             var ids = annIds?.Distinct().Where(id => id > 0).ToList() ?? new List<int>();
+            if (ids.Count == 0)
+            {
+                result.Success = true;
+                return result;
+            }
+
             foreach (var annId in ids)
             {
                 try
@@ -530,90 +552,4 @@ namespace SewingProduction.Features.TeamWork.Services
         }
     }
 
-    // Models/TeamWorkReloadResult.cs
-    public class TeamWorkReloadResult
-    {
-        public List<ArtNormN> Data { get; set; }
-        public int? FocusAnnId { get; set; }
-        public int? FocusRowHandle { get; set; }
-        public bool Success { get; set; }
-        public string Error { get; set; }
-    }
-
-    public class RelatedDataResult
-    {
-        public List<NormRask> NormRask { get; set; }
-        public List<NormKont> NormKont { get; set; }
-        public List<NormRasz> NormRasz { get; set; }
-        public bool Success { get; set; }
-        public string Error { get; set; }
-    }
-
-    public class DuplicateDraftResult
-    {
-        public bool Success { get; set; }
-        public int NewAnnId { get; set; }
-        public ArtNormN DraftAnn { get; set; }
-        public string Error { get; set; }
-    }
-
-    public class UnbindArticlesResult
-    {
-        public bool Success { get; set; }
-        public int AffectedRows { get; set; }
-        public string Error { get; set; }
-    }
-
-    public class ApproveWorkDivisionResult
-    {
-        public bool Success { get; set; }
-        public DateTime ApprovedAt { get; set; }
-        public int Status { get; set; }
-        public string StatusText { get; set; }
-        public string Message { get; set; }
-        public string Error { get; set; }
-    }
-
-    public class BatchStatusUpdateResult
-    {
-        public bool Success { get; set; }
-        public List<int> UpdatedAnnIds { get; set; } = new List<int>();
-        public List<string> Errors { get; set; } = new List<string>();
-    }
-
-    public class ArchAndCopyFinalizeResult
-    {
-        public bool Success { get; set; }
-        public int NewStatus { get; set; }
-        public string NewStatusText { get; set; }
-        public string Error { get; set; }
-    }
-
-    public class SpArticulArchUpdateResult
-    {
-        public bool Success { get; set; }
-        public string Error { get; set; }
-    }
-
-    public class MarkForDeletionBatchResult
-    {
-        public bool Success { get; set; }
-        public List<int> UpdatedAnnIds { get; set; } = new List<int>();
-        public List<string> Errors { get; set; } = new List<string>();
-    }
-
-    public class ApproveBatchResult
-    {
-        public bool Success { get; set; }
-        public List<ApproveBatchItem> Items { get; set; } = new List<ApproveBatchItem>();
-        public List<string> Errors { get; set; } = new List<string>();
-    }
-
-    public class ApproveBatchItem
-    {
-        public int AnnId { get; set; }
-        public DateTime ApprovedAt { get; set; }
-        public int Status { get; set; }
-        public string StatusText { get; set; }
-    }
 }

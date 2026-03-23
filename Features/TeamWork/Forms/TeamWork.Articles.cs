@@ -362,7 +362,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 //1.Сначала загружаем изображение(быстрая операция)
-                LoadGridImage(pictureBox2, annId: annId);
+                await LoadGridImage(pictureBox2, annId: annId);
 
                 // 2. Затем загружаем основные данные
                 token.ThrowIfCancellationRequested();
@@ -894,7 +894,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Загружаем или очищаем изображение
                 if (kodInt > 0)
                 {
-                    await Task.Run(() => LoadGridImage(pictureBox3, kod: kodInt));
+                    await LoadGridImage(pictureBox3, kod: kodInt);
                 }
                 else
                 {

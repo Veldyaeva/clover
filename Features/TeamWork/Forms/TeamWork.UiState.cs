@@ -2,10 +2,12 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SewingProduction.Models;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -54,22 +56,31 @@ namespace SewingProduction.Features.TeamWork.Forms
                 this.Text = $"Нормативные расценки - {message}";
 
                 // Через 3 секунды сбрасываем заголовок
-                Task.Run(async () =>
-                {
-                    await Task.Delay(3000);
-                    if (this.InvokeRequired)
-                    {
-                        this.Invoke((MethodInvoker)(() => this.Text = "Нормативные расценки"));
-                    }
-                    else
-                    {
-                        this.Text = "Нормативные расценки";
-                    }
-                });
+                _ = ResetFormTitleDelayedAsync();
             }
             catch (Exception ex)
             {
                 _logger?.LogErrorAsync(ex, "Ошибка при отображении статусного сообщения");
+            }
+        }
+
+        private async Task ResetFormTitleDelayedAsync()
+        {
+            try
+            {
+                await Task.Delay(3000);
+                if (this.InvokeRequired)
+                {
+                    this.Invoke((MethodInvoker)(() => this.Text = "Нормативные расценки"));
+                }
+                else
+                {
+                    this.Text = "Нормативные расценки";
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при отложенном сбросе заголовка формы");
             }
         }
 
@@ -81,7 +92,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 ANNgridView.RowStyle -= ANNgridView_RowStyle;
                 ANNgridView.RowStyle += ANNgridView_RowStyle;
             }
-            catch { }
+            catch (Exception ex)
+            {
+                _ = _logger.LogErrorAsync(ex, "ApplyAnnGridRowStyling");
+            }
         }
 
         private void ANNgridView_RowStyle(object sender, RowStyleEventArgs e)
@@ -101,7 +115,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                _ = _logger.LogErrorAsync(ex, "ANNgridView_RowStyle");
+            }
         }
 
         private void FocusFirstResultAndLoadRelated()
@@ -290,6 +307,26 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
 
             return true;
+        }
+
+        private async Task RunSecondsUpdateSafeAsync(int annId, GridView gridView, BindingList<ArtNormN> source)
+        {
+            if (annId <= 0 || gridView == null)
+            {
+                return;
+            }
+
+            try
+            {
+                await _secondsUpdateManager.StartSecondsUpdateAsync(annId, gridView, source, ShowSecondsUpdateStatus);
+                await Task.Delay(3000);
+                ClearSecondsUpdateStatus();
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка фонового обновления секунд для AnnID={annId}");
+                ClearSecondsUpdateStatus();
+            }
         }
     }
 }

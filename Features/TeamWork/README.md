@@ -31,7 +31,7 @@
     - `InsertEntityAsync`, `UpdateEntityAsync`, `UpdateFieldAsync`, `DeleteEntityAsync`.
     - `ExecuteSpWithStatusAsync`.
 
-- **`ArtNormRepository`** (`Features\TeamWork\Services\ArtNormService.cs`)
+- **`ArtNormRepository`** (`Features\TeamWork\Services\ArtNormRepository.cs`, совместимость: `ArtNormService.cs`)
   - Профильный репозиторий для РТ и норм:
     - загрузка РТ: `GetArtNormData`, `GetArtNormDataById`, `GetArtNormDataCurrent`, `GetArtNormDataByArticul`;
     - загрузка норм: `GetRelatedNormRasz`, `GetRelatedNormRask`, `GetRelatedNormKont`, `GetCalculatedSekFromViewAsync`;
@@ -41,7 +41,7 @@
     - выборка эскизов: `GetImage`;
     - очистка связанных норм: `DeleteRelatedNormTables`.
 
-- **`TeamWorkOrchestrator`** (`Features\TeamWork\Services\TeamWorkService.cs`)
+- **`ITeamWorkOrchestrator` / `TeamWorkOrchestrator`** (`Features\TeamWork\Services\ITeamWorkOrchestrator.cs`, `Features\TeamWork\Services\TeamWorkService.cs`)
   - Координация загрузки данных:
     - `LoadWorkDivisionsWithFocusAsync` – загрузка списка РТ с восстановлением фокуса.
     - `RefreshRelatedDataAsync` – пакетная загрузка `NormRasz/NormRask/NormKont` по `AnnId`.
@@ -58,6 +58,7 @@
 - `TeamWorkBuffer` – буфер для операций «комплект».
 - `RtSnapshotService` – управление снапшотами РТ и построение diff при утверждении.
 - `GridOverlayLoader` – типовой паттерн асинхронной загрузки в грид с оверлеем.
+- `Features\TeamWork\Models\UseCases\*` – типизированные результаты use-case сценариев оркестратора.
 
 ---
 
@@ -269,10 +270,8 @@
     - определяют выбранные НЗП (по флагу `IsChecked` или текущей строке);
     - определяют соответствующее РТ (`ArtNormN` или `MyDataANN` → `GetArtNormDataById`);
     - подтверждают операцию с пользователем (показывают AnnId, группу, модель, артикул);
-    - для каждого выбранного элемента:
-      - выполняют `UPDATE sp_articul SET annId = NULL` с дополнительными условиями по коду/артикулу/AnnId;
-      - обнуляют `size_label` в `art_norm_n` для РТ;
-      - при необходимости обновляют статусы потомков по `parentId`;
+    - пакетная бизнес-операция выполняется через `TeamWorkOrchestrator.UnbindArticlesAsync`;
+    - форма отвечает только за подтверждение, выбор строк и последующее UI-обновление;
     - после отвязки:
       - перезагружают связанные данные по РТ (`LoadRelatedData(AnnId)`),
       - обновляют НЗП (`RefreshNzpData`),
@@ -282,7 +281,7 @@
   - `PreArchLoad` / `ArchLoad` – заполняют Grids предварительного архива и архива из `artNormNView` по статусам 4 и 3.
   - `RefreshArchData` – переиспользует `ArchLoad`, затем обновляет источник данных.
   - `RestoreFromArchive_Internal` – восстанавливает выбранные РТ из архива:
-    - меняет статус с `Archive` (3) на `Preliminary` (1) в `art_norm_n`;
+    - пакетно делегирует смену статуса в `TeamWorkOrchestrator.RestoreWorkDivisionsFromArchiveAsync`;
     - удаляет восстановленные записи из списка архива;
     - добавляет их обратно в основной список РТ.
 
@@ -328,7 +327,8 @@
   - управления архивами РТ,
   - запуска пересчёта себестоимости и уведомления бригад.
 - Вся работа с БД разбита на уровни:
-  - `DatabaseHelper` → `DbService` (универсальный слой) → `ArtNormRepository` (предметный слой TeamWork) → `TeamWorkOrchestrator` и форма.
+  - `DatabaseHelper` → `DbService` (универсальный слой) → `ArtNormRepository` (предметный слой TeamWork) → `ITeamWorkOrchestrator/TeamWorkOrchestrator` → форма.
+- Для batch use-case операций (`архив`, `restore`, `mark-for-deletion`, `approve-batch`) пустой набор `AnnId` трактуется как no-op с успешным результатом.
 - Основные связные объекты БД:
   - представления: `ArtNormNView`, `normraszview`, `NormRaszSek_view`, `articulListGroupBySizeLabel`, `View_sp_articul`, `view_sprav_men`;
   - процедуры: `dbo.updateSebZArticulPsz`, `dbo.pztOperUpdateFast`, `dbo.GetNZPByKoddRT`, `dbo.GetPztCountsByKoddRT`, `dbo.GetNZPAndOperByKoddRT`;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -20,7 +20,9 @@ namespace SewingProduction.Services
     /// Репозиторий работы с базой данных для таблиц art_norm, norm_rasz, norm_rask, norm_kont и доп.обработки.
     /// Использует Dapper для ускоренного доступа к данным.
     /// </summary>
-    public class ArtNormRepository
+    // NOTE: Class kept in this file for backward compatibility.
+    // Canonical file for further extensions: Services/ArtNormRepository.cs.
+    public partial class ArtNormRepository
     {
         private readonly DatabaseHelper _dbHelper;
         //    private readonly HybridLogger _logger = new HybridLogger();
@@ -688,6 +690,7 @@ WHERE nr.annId = @annId";
             }
             catch (Exception ex)
             {
+                await _logger.LogErrorAsync(ex, $"GetNzpWithPztCounts failed for AnnID={annId}");
                 Debug.WriteLine(ex.ToString());
                 return null;
             }
@@ -716,6 +719,7 @@ WHERE nr.annId = @annId";
             }
             catch (Exception ex)
             {
+                await _logger.LogErrorAsync(ex, $"GetWorkingBrigs failed for AnnID={annId}");
                 Debug.WriteLine(ex.ToString());
                 return null;
             }

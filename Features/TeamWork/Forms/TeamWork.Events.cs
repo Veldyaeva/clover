@@ -393,8 +393,8 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 await Task.WhenAll(wdToBindTask, unboundArtsTask);
 
-                var wdToBindResults = wdToBindTask.Result;
-                var unboundArtsResults = unboundArtsTask.Result;
+                var wdToBindResults = await wdToBindTask;
+                var unboundArtsResults = await unboundArtsTask;
                 // Обновляем данные в gridView_unboundArts
                 if (unboundArtsResults != null && unboundArtsResults.Any())
                 {
@@ -467,8 +467,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 var selectedItem = view.GetRow(FocusedRowHandle) as ArtNormN;
-                LoadGridImage(pictureBox1, annId: selectedItem.AnnID); if (selectedItem != null)
+                if (selectedItem != null)
                 {
+                    await LoadGridImage(pictureBox1, annId: selectedItem.AnnID);
                     bool disableButton = selectedItem.Status == (int)Status.Archive
                                       || selectedItem.Status == (int)Status.PreliminaryArchive;
                     ButtonArchAndCopyWd.Enabled = !disableButton;
@@ -557,20 +558,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                                 }
                                 finally
                                 {
-                                    try { ANNgridView.EndDataUpdate(); } catch { }
+                                    try { ANNgridView.EndDataUpdate(); }
+                                    catch (Exception ex) { _ = _logger.LogErrorAsync(ex, "ButtonEditWd_Click_Internal: ANNgridView.EndDataUpdate"); }
                                 }
                             }
                         }
                         await LoadRelatedData(selectedAnnId);
 
                         // Запускаем асинхронное обновление секунд для отредактированной записи
-                        _ = Task.Run(async () =>
-                        {
-                            await _secondsUpdateManager.StartSecondsUpdateAsync(selectedAnnId, ANNgridView, _bindingList, ShowSecondsUpdateStatus);
-                            // Очищаем статус через 3 секунды после завершения
-                            await Task.Delay(3000);
-                            ClearSecondsUpdateStatus();
-                        });
+                        _ = RunSecondsUpdateSafeAsync(selectedAnnId, ANNgridView, _bindingList);
 
                         // Отображаем сообщение об успешном редактировании
                         //MessageBox.Show("Запись успешно отредактирована.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -699,14 +695,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                         // Запускаем асинхронное обновление секунд для отредактированной записи
                         if (updatedArtNormN != null && updatedArtNormN.AnnID > 0)
                         {
-                            _ = Task.Run(async () =>
-                            {
-                                await _secondsUpdateManager.StartSecondsUpdateAsync(updatedArtNormN.AnnID, gridView,
-                                    forMyDataAnnView ? null : _bindingList, ShowSecondsUpdateStatus);
-                                // Очищаем статус через 3 секунды после завершения
-                                await Task.Delay(3000);
-                                ClearSecondsUpdateStatus();
-                            });
+                            _ = RunSecondsUpdateSafeAsync(
+                                updatedArtNormN.AnnID,
+                                gridView,
+                                forMyDataAnnView ? null : _bindingList);
                         }
                     }
                 };
@@ -828,7 +820,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                             }
                             finally
                             {
-                                try { gridView_wdToBind.EndDataUpdate(); } catch { }
+                                try { gridView_wdToBind.EndDataUpdate(); }
+                                catch (Exception ex) { _ = _logger.LogErrorAsync(ex, "simpleButton2_Click_Internal: gridView_wdToBind.EndDataUpdate"); }
                             }
 
                             // Также фокусируемся на записи в основном ANNgridView в одном батче
@@ -840,17 +833,13 @@ namespace SewingProduction.Features.TeamWork.Forms
                             }
                             finally
                             {
-                                try { ANNgridView.EndDataUpdate(); } catch { }
+                                try { ANNgridView.EndDataUpdate(); }
+                                catch (Exception ex) { _ = _logger.LogErrorAsync(ex, "simpleButton2_Click_Internal: ANNgridView.EndDataUpdate"); }
                             }
 
                             await _logger.LogEventAsync($"Запись ANN (ID: {newAnnId}) успешно создана/обновлена из артикула.", "simpleButton2_Click_Internal");
 
-                            _ = Task.Run(async () =>
-                            {
-                                await _secondsUpdateManager.StartSecondsUpdateAsync(newAnnId, ANNgridView, _bindingList, ShowSecondsUpdateStatus);
-                                await Task.Delay(3000);
-                                ClearSecondsUpdateStatus();
-                            });
+                            _ = RunSecondsUpdateSafeAsync(newAnnId, ANNgridView, _bindingList);
 
                             //MessageBox.Show("Новая предварительная запись успешно создана/обновлена.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             await _logger.LogEventAsync("Новая предварительная запись успешно создана/обновлена.", "simpleButton2_Click_Internal");

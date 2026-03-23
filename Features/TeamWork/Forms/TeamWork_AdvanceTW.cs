@@ -82,7 +82,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 gridControlRaskr?.RefreshDataSource();
                 gridControlKont?.RefreshDataSource();
             }
-            catch { }
+            catch (Exception ex)
+            {
+                LogSuppressedException("RefreshAllGridsForService", ex);
+            }
         }
         public async Task ShowStatusForService(string message, int delayMs)
         {
@@ -90,6 +93,10 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
         public void HighlightControlForService(Control control) => HighlightControl(control);
         public void UnhighlightControlForService(Control control) => UnhighlightControl(control);
+        private void LogSuppressedException(string context, Exception ex = null)
+        {
+            _ = _logger.LogErrorAsync(ex ?? new Exception("Suppressed exception"), $"Suppressed: {context}");
+        }
         private static List<FioModel> _cachedFioData;
         private bool _isCustomEditFormOpen = false;
         private bool _okPressed = false;
@@ -230,7 +237,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (layoutControlGroup10 != null)
                     layoutControlGroup10.CustomButtonClick += LayoutControlGroup10_CustomButtonClick;
             }
-            catch { }
+            catch (Exception ex)
+            {
+                LogSuppressedException("Subscribe header button click handlers", ex);
+            }
         }
         #endregion
 
@@ -280,7 +290,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                LogSuppressedException("InitHeaderButtonTags", ex);
+            }
         }
 
         // Обработчик кликов по header-buttons: блок общих действий (undo/save/save-as)
@@ -907,7 +920,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                         }
                         finally
                         {
-                            try { gridViewRasz.EndDataUpdate(); } catch { }
+                            try { gridViewRasz.EndDataUpdate(); }
+                            catch (Exception ex) { LogSuppressedException("AddNewRaszOperation: EndDataUpdate", ex); }
                         }
 
                         // Открываем форму редактирования через небольшую задержку
@@ -1038,7 +1052,17 @@ namespace SewingProduction.Features.TeamWork.Forms
                         _normRaszList,
                         bindingSource1,
                         _logger,
-                        (act) => { try { if (!this.IsDisposed && this.IsHandleCreated) this.BeginInvoke((MethodInvoker)(() => act())); } catch { } }
+                        (act) =>
+                        {
+                            try
+                            {
+                                if (!this.IsDisposed && this.IsHandleCreated) this.BeginInvoke((MethodInvoker)(() => act()));
+                            }
+                            catch (Exception ex)
+                            {
+                                LogSuppressedException("SecondsAggregator.BeginInvoke", ex);
+                            }
+                        }
                     );
                 }
 
@@ -1375,7 +1399,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                     finally
                     {
                         // SafeUpdate сам завершил обновление
-                        try { gridViewKont.EndDataUpdate(); } catch { }
+                        try { gridViewKont.EndDataUpdate(); }
+                        catch (Exception ex) { LogSuppressedException("TeamWork_AdvanceTW_Load: gridViewKont.EndDataUpdate", ex); }
                     }
                 }
                 _hasUnsavedChanges = false;
@@ -1391,7 +1416,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Отписываемся от событий при выходе из формы и очищаем ресурсы DnD
                 this.FormClosed += (s, args) =>
                 {
-                    try { TeamWorkBuffer.BufferChanged -= OnBufferChanged; } catch { }
+                    try { TeamWorkBuffer.BufferChanged -= OnBufferChanged; }
+                    catch (Exception ex) { LogSuppressedException("FormClosed: unsubscribe TeamWorkBuffer.BufferChanged", ex); }
                     try
                     {
                         if (_raszPopupHandler != null)
@@ -1425,10 +1451,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                             _listChangedHandlersAttached = false;
                         }
                     }
-                    catch { }
-                    try { _raszOpsController?.Detach(); } catch { }
+                    catch (Exception ex) { LogSuppressedException("FormClosed: detach handlers", ex); }
+                    try { _raszOpsController?.Detach(); }
+                    catch (Exception ex) { LogSuppressedException("FormClosed: _raszOpsController.Detach", ex); }
                     try { _presenter?.Detach(); }
-                    catch { }
+                    catch (Exception ex) { LogSuppressedException("FormClosed: _presenter.Detach", ex); }
                     finally
                     {
                         // Сброс внутренних флагов и состояния DnD/последнего выбора
@@ -1667,9 +1694,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                         if (gridViewRaskr != null && gridViewRaskr.OptionsBehavior.EditingMode == GridEditingMode.Inplace)
                             gridViewRaskr.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
 
-                        try { _gridHelper.SaveGridViewSettings(gridViewRaskr, "AdvanceTW_gridViewRaskrLayout.xml"); } catch { }
-                        try { _gridHelper.SaveGridViewSettings(gridViewKont, "AdvanceTW_gridViewKontLayout.xml"); } catch { }
-                        try { _gridHelper.SaveGridViewSettings(gridViewRasz, "AdvanceTW_gridViewRaszLayout.xml"); } catch { }
+                        try { _gridHelper.SaveGridViewSettings(gridViewRaskr, "AdvanceTW_gridViewRaskrLayout.xml"); }
+                        catch (Exception ex) { LogSuppressedException("FormClosing: save gridViewRaskr settings", ex); }
+                        try { _gridHelper.SaveGridViewSettings(gridViewKont, "AdvanceTW_gridViewKontLayout.xml"); }
+                        catch (Exception ex) { LogSuppressedException("FormClosing: save gridViewKont settings", ex); }
+                        try { _gridHelper.SaveGridViewSettings(gridViewRasz, "AdvanceTW_gridViewRaszLayout.xml"); }
+                        catch (Exception ex) { LogSuppressedException("FormClosing: save gridViewRasz settings", ex); }
                     });
                 }
                 catch (Exception ex)
@@ -1694,14 +1724,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
                     else
                     {
-                        PerformCleanupOnCancel();
+                        await PerformCleanupOnCancel();
                     }
                 }
                 else
                 {
                     if (IsDraftCreationMode())
                     {
-                        PerformCleanupOnCancel();
+                        await PerformCleanupOnCancel();
                     }
                 }
             }
@@ -1713,7 +1743,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             return _mode == (int)Mode.NewWorkDivision;
         }
 
-        private async void PerformCleanupOnCancel()
+        private async Task PerformCleanupOnCancel()
         {
             try
             {
@@ -1891,7 +1921,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Гарантируем разворот всех групп после настройки
                 ExpandAllRaszGroups();
             }
-            catch { }
+            catch (Exception ex)
+            {
+                LogSuppressedException("EnableRaszGroupingAndExpand", ex);
+            }
         }
 
         private void ExpandAllRaszGroups()
@@ -1903,7 +1936,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 try { gridViewRasz.ExpandAllGroups(); }
                 finally { gridViewRasz.EndUpdate(); }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                LogSuppressedException("ExpandAllRaszGroups", ex);
+            }
         }
 
         // Автопрокрутка — используем встроенную в DevExpress (удалён самописный таймер)
@@ -1958,7 +1994,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                         row.IsBeingAdded = false; // подтверждено сохранением
                     }
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    LogSuppressedException("gridViewRasz_EditFormHidden: Update branch", ex);
+                }
             }
             _originalNormRaszDataBeforeEdit = null; // Убедимся, что очищено после любого закрытия формы редактирования
         }
@@ -2404,7 +2443,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
                 finally { }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                LogSuppressedException("SaveChangesWithoutClose", ex);
+            }
         }
 
         // Сохранение данных без закрытия формы
@@ -3015,7 +3057,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
             finally
             {
-                try { gridViewRasz.EndDataUpdate(); } catch { }
+                try { gridViewRasz.EndDataUpdate(); }
+                catch (Exception ex) { LogSuppressedException("ImportFromBufferPresenterAsync: gridViewRasz.EndDataUpdate", ex); }
             }
             await ShowStatusMessage("Операции из буфера добавлены для комплекта");
         }
@@ -3235,8 +3278,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                     try
                     {
                         // Обновляем и раскрываем группы, чтобы строка стала видимой
-                        try { gridViewRasz.RefreshData(); } catch { }
-                        try { ExpandAllRaszGroups(); } catch { }
+                        try { gridViewRasz.RefreshData(); }
+                        catch (Exception ex) { LogSuppressedException("SetFocusToOperation: gridViewRasz.RefreshData", ex); }
+                        try { ExpandAllRaszGroups(); }
+                        catch (Exception ex) { LogSuppressedException("SetFocusToOperation: ExpandAllRaszGroups", ex); }
 
                         int rowHandle = DevExpress.XtraGrid.GridControl.InvalidRowHandle;
 
@@ -3248,16 +3293,18 @@ namespace SewingProduction.Features.TeamWork.Forms
                                 rowHandle = gridViewRasz.LocateByValue(nameof(NormRasz.nrID), operation.nrID);
                             }
                         }
-                        catch { }
+                        catch (Exception ex) { LogSuppressedException("SetFocusToOperation: LocateByValue nrID", ex); }
 
                         // 2) Иначе используем индекс из BindingSource (ListSource для GridView)
                         if (!gridViewRasz.IsValidRowHandle(rowHandle))
                         {
                             int listSourceIndex = -1;
-                            try { listSourceIndex = _normRaszBindingSource != null ? _normRaszBindingSource.IndexOf(operation) : -1; } catch { }
+                            try { listSourceIndex = _normRaszBindingSource != null ? _normRaszBindingSource.IndexOf(operation) : -1; }
+                            catch (Exception ex) { LogSuppressedException("SetFocusToOperation: BindingSource.IndexOf", ex); }
                             if (listSourceIndex >= 0)
                             {
-                                try { rowHandle = gridViewRasz.GetRowHandle(listSourceIndex); } catch { }
+                                try { rowHandle = gridViewRasz.GetRowHandle(listSourceIndex); }
+                                catch (Exception ex) { LogSuppressedException("SetFocusToOperation: GetRowHandle", ex); }
                             }
                         }
 
@@ -3277,7 +3324,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                                     }
                                 }
                             }
-                            catch { }
+                            catch (Exception ex) { LogSuppressedException("SetFocusToOperation: fallback scan", ex); }
                         }
 
                         if (gridViewRasz.IsValidRowHandle(rowHandle))
@@ -3285,7 +3332,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                             _uiService?.RestoreFocusRow(gridViewRasz, rowHandle);
                         }
                     }
-                    catch { }
+                    catch (Exception ex) { LogSuppressedException("SetFocusToOperation: BeginInvoke body", ex); }
                 }));
             }
             catch (Exception ex)
@@ -3311,7 +3358,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                     SetFocusToOperation(focusOperation);
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                LogSuppressedException("ApplyPostStructureUi", ex);
+            }
         }
         private void FinalizeRaszBatch(NormRasz focusOperation = null, bool clearSelection = false)
         {
@@ -3321,7 +3371,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 TWGridHelper.sortGridView(gridViewRasz);
                 ApplyPostStructureUi(focusOperation, clearSelection);
             }
-            catch { }
+            catch (Exception ex)
+            {
+                LogSuppressedException("FinalizeRaszBatch", ex);
+            }
         }
 
         /// <summary>
@@ -3464,7 +3517,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                             }
                             finally
                             {
-                                try { gridViewRasz.EndDataUpdate(); } catch { }
+                                try { gridViewRasz.EndDataUpdate(); }
+                                catch (Exception ex) { LogSuppressedException("AddSuboperation: EndDataUpdate", ex); }
                             }
 
                             gridViewRasz.GridControl.BeginInvoke(new Action(() =>

@@ -35,7 +35,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly SplitContainerHelper _splitContainerHelper = new SplitContainerHelper();
         private readonly FormSettingsHelper _formSettingsHelper = new FormSettingsHelper();
         private readonly SecondsUpdateManager _secondsUpdateManager;
-        private TeamWorkOrchestrator _teamWorkService;
+        private readonly ITeamWorkOrchestrator _teamWorkService;
         private UIHelper _uiHelper;
         private int bufferId = 0;
         private BindingList<ArtNormN> _bindingList;
@@ -101,10 +101,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
             _artNormService = new ArtNormRepository(_dbHelper);
+            _jabberSender = new JabberSender(_dbHelper);
             _secondsUpdateManager = new SecondsUpdateManager(_artNormService, _logger);
             _teamWorkService = new TeamWorkOrchestrator(_artNormService, _dbService, _dbHelper, _jabberSender, _logger);
             _uiHelper = new UIHelper(_logger);
-            _jabberSender = new JabberSender(_dbHelper);
 
             // Инициализация основных BindingList и BindingSource
             _bindingList = new BindingList<ArtNormN>();
