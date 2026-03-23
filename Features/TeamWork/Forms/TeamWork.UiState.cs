@@ -224,5 +224,72 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _logger?.LogErrorAsync(ex, "Ошибка при очистке статуса");
             }
         }
+
+        /// <summary>
+        /// Применяет результат утверждения к строке грида.
+        /// </summary>
+        private void ApplyApprovalToGridRow(GridView gridView, int rowHandle, DateTime approvedAt, int status, string statusText)
+        {
+            if (gridView == null || rowHandle < 0)
+            {
+                return;
+            }
+
+            gridView.SetRowCellValue(rowHandle, "dateUpdate", approvedAt);
+            gridView.SetRowCellValue(rowHandle, "status", status);
+            gridView.SetRowCellValue(rowHandle, "StatusText", statusText);
+            gridView.RefreshRow(rowHandle);
+        }
+
+        /// <summary>
+        /// Обновляет строку грида по AnnID, если она найдена.
+        /// </summary>
+        private bool TryRefreshRowByAnnId(GridView gridView, int annId)
+        {
+            if (gridView == null || annId <= 0)
+            {
+                return false;
+            }
+
+            int rowHandle = gridView.LocateByValue("AnnID", annId);
+            if (rowHandle < 0)
+            {
+                return false;
+            }
+
+            gridView.RefreshRow(rowHandle);
+            return true;
+        }
+
+        /// <summary>
+        /// Фокусирует строку грида по AnnID, прокручивает к ней и обновляет.
+        /// </summary>
+        private bool TryFocusAndRefreshRowByAnnId(GridView gridView, int annId)
+        {
+            if (gridView == null || annId <= 0)
+            {
+                return false;
+            }
+
+            int rowHandle = gridView.LocateByValue("AnnID", annId);
+            if (rowHandle < 0)
+            {
+                return false;
+            }
+
+            gridView.BeginUpdate();
+            try
+            {
+                gridView.FocusedRowHandle = rowHandle;
+                gridView.MakeRowVisible(rowHandle);
+                gridView.RefreshRow(rowHandle);
+            }
+            finally
+            {
+                gridView.EndUpdate();
+            }
+
+            return true;
+        }
     }
 }

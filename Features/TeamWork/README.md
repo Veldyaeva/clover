@@ -201,7 +201,7 @@
   - При двойном клике по пустой ячейке (`CommandsEditDateNull_DoubleClick`):
     - проверяется сложность и наличие вязальных операций;
     - выводится подтверждение пользователю;
-    - вызывается `UpdateDateAndStatusAsync(annId, gridView, rowHandle, art)`:
+    - вызывается use-case оркестратора `TeamWorkOrchestrator.ApproveWorkDivisionAsync(annId, art)`:
       - `dbo.updateSebZArticulPsz(@xAnnID)` – пересчёт справочников;
       - обновление полей `data_obn` и `status` в `art_norm_n` через `UpdateFieldAsync`;
       - поиск действующих бригад по РТ (`GetWorkingBrigs` → `GetNZPByKoddRT`);

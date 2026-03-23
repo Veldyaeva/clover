@@ -496,57 +496,30 @@ namespace SewingProduction.Features.TeamWork.Forms
                 await _logger.LogEventAsync($"User prompted to update data for AnnID: {annId}, user response: {result}", "CommandsEditDateNull_DoubleClick");
                 if (result == DialogResult.Yes)
                 {
-                    bool success = await UpdateDateAndStatusAsync(annId, view, rowHandle, art: articul);
-                    if (success)
+                    var approval = await _teamWorkService.ApproveWorkDivisionAsync(annId, articul);
+                    if (approval.Success)
                     {
+                        if (view != null && rowHandle >= 0)
+                        {
+                            ApplyApprovalToGridRow(
+                                view,
+                                rowHandle,
+                                approval.ApprovedAt,
+                                approval.Status,
+                                approval.StatusText);
+                        }
+
+                        await _logger.LogEventAsync($"Данные обновлены для записи AnnID: {annId}, дата: {approval.ApprovedAt:dd.MM.yyyy}, статус: {approval.StatusText}", "CommandsEditDateNull_DoubleClick");
                         //MessageBox.Show("Данные успешно обновлены!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         await _logger.LogEventAsync("Данные успешно обновлены!", "CommandsEditDateNull_DoubleClick");
                     }
                     else
                     {
+                        await _logger.LogErrorAsync(new Exception(approval.Error), $"Ошибка утверждения данных для записи AnnID: {annId}");
                         MessageBox.Show("Ошибка при обновлении данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         await _logger.LogWarningAsync("Ошибка при обновлении данных!", "CommandsEditDateNull_DoubleClick");
                     }
                 }
-            }
-        }
-
-        /// <summary>
-        /// Общий метод для утверждения РТ, обновления даты и статуса записи
-        /// </summary>
-        /// <param name="annId">ID записи для обновления</param>
-        /// <param name="gridView">Грид для обновления UI</param>
-        /// <param name="rowHandle">Номер строки в гриде</param>
-        /// <returns>true если обновление прошло успешно</returns>
-        private async Task<bool> UpdateDateAndStatusAsync(int annId, GridView gridView, int rowHandle, string art = "")
-        {
-            try
-            {
-                var approval = await _teamWorkService.ApproveWorkDivisionAsync(annId, art);
-                if (!approval.Success)
-                {
-                    await _logger.LogErrorAsync(new Exception(approval.Error), $"Ошибка утверждения данных для записи AnnID: {annId}");
-                    return false;
-                }
-
-                // 4) Обновляем UI
-
-                // Обновляем UI в гриде
-                if (gridView != null && rowHandle >= 0)
-                {
-                    gridView.SetRowCellValue(rowHandle, "dateUpdate", approval.ApprovedAt);
-                    gridView.SetRowCellValue(rowHandle, "status", approval.Status);
-                    gridView.SetRowCellValue(rowHandle, "StatusText", approval.StatusText);
-                    gridView.RefreshRow(rowHandle);
-                }
-
-                await _logger.LogEventAsync($"Данные обновлены для записи AnnID: {annId}, дата: {approval.ApprovedAt:dd.MM.yyyy}, статус: {approval.StatusText}", "UpdateDateAndStatus");
-                return true;
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, $"Ошибка при обновлении данных для записи AnnID: {annId}");
-                return false;
             }
         }
         /// <summary>
@@ -733,21 +706,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
 
                     _bindingSource.ResetBindings(false);
-                    int newRowHandle = ANNgridView.LocateByValue("AnnID", newItem.AnnID);
-                    if (newRowHandle >= 0)
-                    {
-                        ANNgridView.BeginUpdate();
-                        try
-                        {
-                            ANNgridView.FocusedRowHandle = newRowHandle;
-                            ANNgridView.MakeRowVisible(newRowHandle);
-                            ANNgridView.RefreshRow(newRowHandle);
-                        }
-                        finally
-                        {
-                            ANNgridView.EndUpdate();
-                        }
-                    }
+                    TryFocusAndRefreshRowByAnnId(ANNgridView, newItem.AnnID);
 
                     _ = Task.Run(async () =>
                     {
@@ -1020,36 +979,23 @@ namespace SewingProduction.Features.TeamWork.Forms
         private async Task HandleSuccessfulEdit(ArtNormN selectedItem, ArtNormN newRow, bool hasNZP)
         {
             if (newRow == null) return;
-
-            int newStatus = hasNZP ? (int)Status.PreliminaryArchive : (int)Status.Archive;
+            var finalize = await _teamWorkService.FinalizeArchAndCopyAsync(selectedItem.AnnID, newRow.AnnID, hasNZP);
+            if (!finalize.Success)
+            {
+                await _logger.LogWarningAsync($"Не удалось завершить 'архив+копия': {finalize.Error}", "ArchAndCopy");
+                return;
+            }
+            int newStatus = finalize.NewStatus;
 
             await _logger.LogEventAsync($"Установка нового статуса: {newStatus}", "ArchAndCopy");
 
             selectedItem.Status = newStatus;
-            selectedItem.StatusText = StatusHelper.GetStatusText(newStatus);
-
-            await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", newStatus, TableNames.AnnId, selectedItem.AnnID);
+            selectedItem.StatusText = finalize.NewStatusText;
 
             UpdateRowInBindingList(newRow);
-            if (!hasNZP)
-                await _dbService.UpdateFieldAsync("sp_Articul", "annId", newRow.AnnID, "annId", selectedItem.AnnID);
 
             // Фокусируемся на новой строке после успешного редактирования
-            int rowHandle = ANNgridView.LocateByValue("AnnID", newRow.AnnID);
-            if (rowHandle >= 0)
-            {
-                ANNgridView.BeginUpdate();
-                try
-                {
-                    ANNgridView.FocusedRowHandle = rowHandle;
-                    ANNgridView.MakeRowVisible(rowHandle); // Прокручиваем до строки
-                    ANNgridView.RefreshRow(rowHandle);
-                }
-                finally
-                {
-                    ANNgridView.EndUpdate();
-                }
-            }
+            TryFocusAndRefreshRowByAnnId(ANNgridView, newRow.AnnID);
 
             await _logger.LogEventAsync($"Запись ID={selectedItem.AnnID} архивирована. Создана новая запись ID={newRow.AnnID}, нзп {(hasNZP ? "отсутствует" : "присутствует")}", "ArchAndCopy");
 
@@ -1076,15 +1022,12 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 selectedItem.Status = oldStatus.Value;
                 selectedItem.StatusText = StatusHelper.GetStatusText(oldStatus.Value);
-
-                await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", oldStatus.Value, TableNames.AnnId, selectedItem.AnnID);
             }
-
-            if (newRow != null && newRow.AnnID > 0)
+            await _teamWorkService.RollbackArchAndCopyAsync(selectedItem?.AnnID ?? 0, oldStatus, newRow?.AnnID);
+            if (newRow != null)
             {
                 _bindingList.Remove(newRow);
                 _bindingSource.Remove(newRow);
-                await _artNormService.DeleteByAnnId(TableNames.Ann, newRow.AnnID);
             }
 
             _bindingSource.ResetBindings(false);
@@ -1093,30 +1036,16 @@ namespace SewingProduction.Features.TeamWork.Forms
             // Фокусируемся на исходной строке после отмены
             if (selectedItem != null)
             {
-                int rowHandle = ANNgridView.LocateByValue("AnnID", selectedItem.AnnID);
-                if (rowHandle >= 0)
-                {
-                    ANNgridView.BeginUpdate();
-                    try
-                    {
-                        ANNgridView.FocusedRowHandle = rowHandle;
-                        ANNgridView.MakeRowVisible(rowHandle); // Прокручиваем до строки
-                        ANNgridView.RefreshRow(rowHandle);
-                    }
-                    finally
-                    {
-                        ANNgridView.EndUpdate();
-                    }
-                }
+                TryFocusAndRefreshRowByAnnId(ANNgridView, selectedItem.AnnID);
             }
         }
         private async Task HandleArchAndCopyError(ArtNormN selectedItem, ArtNormN newRow, int? oldStatus, Exception ex)
         {
-            if (newRow != null && newRow.AnnID > 0)
+            await _teamWorkService.RollbackArchAndCopyAsync(selectedItem?.AnnID ?? 0, oldStatus, newRow?.AnnID);
+            if (newRow != null)
             {
                 _bindingList.Remove(newRow);
                 _bindingSource.Remove(newRow);
-                await _artNormService.DeleteByAnnId(TableNames.Ann, newRow.AnnID);
             }
 
             if (oldStatus.HasValue && selectedItem != null)
@@ -1125,29 +1054,13 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 selectedItem.Status = oldStatus.Value;
                 selectedItem.StatusText = StatusHelper.GetStatusText(oldStatus.Value);
-
-                await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", oldStatus.Value, TableNames.AnnId, selectedItem.AnnID);
             }
 
             // Фокусируемся на исходной строке после ошибки
             if (selectedItem != null)
             {
                 _bindingSource.ResetBindings(false);
-                int rowHandle = ANNgridView.LocateByValue("AnnID", selectedItem.AnnID);
-                if (rowHandle >= 0)
-                {
-                    ANNgridView.BeginUpdate();
-                    try
-                    {
-                        ANNgridView.FocusedRowHandle = rowHandle;
-                        ANNgridView.MakeRowVisible(rowHandle); // Прокручиваем до строки
-                        ANNgridView.RefreshRow(rowHandle);
-                    }
-                    finally
-                    {
-                        ANNgridView.EndUpdate();
-                    }
-                }
+                TryFocusAndRefreshRowByAnnId(ANNgridView, selectedItem.AnnID);
             }
 
             await _logger.LogErrorAsync(ex, "Ошибка при архивировании и копировании записи");
@@ -1162,21 +1075,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _bindingList[index] = newRow;
                 _bindingSource.ResetBindings(false);
 
-                int rowHandle = ANNgridView.LocateByValue("AnnID", newRow.AnnID);
-                if (rowHandle >= 0)
-                {
-                    ANNgridView.BeginUpdate();
-                    try
-                    {
-                        ANNgridView.FocusedRowHandle = rowHandle;
-                        ANNgridView.MakeRowVisible(rowHandle); // Прокручиваем до строки
-                        ANNgridView.RefreshRow(rowHandle);
-                    }
-                    finally
-                    {
-                        ANNgridView.EndUpdate();
-                    }
-                }
+                TryFocusAndRefreshRowByAnnId(ANNgridView, newRow.AnnID);
             }
         }
         private async Task<bool> checkNzp(int selectedAnnId)

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -436,25 +436,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                int rowHandle = ANNgridView.LocateByValue("AnnID", annId);
-
-                if (rowHandle >= 0)
+                if (TryFocusAndRefreshRowByAnnId(ANNgridView, annId))
                 {
-                    ANNgridView.BeginUpdate();
-                    try
-                    {
-                        ANNgridView.FocusedRowHandle = rowHandle;
-                        ANNgridView.MakeRowVisible(rowHandle);
-                        ANNgridView.RefreshRow(rowHandle);
-                    }
-                    finally
-                    {
-                        ANNgridView.EndUpdate();
-                    }
-
                     // Загружаем связанные данные для восстановленной записи
                     await LoadRelatedData(annId);
-                    await _logger.LogEventAsync($"Фокус восстановлен на AnnID: {annId}, RowHandle: {rowHandle}", "RestoreFocus");
+                    await _logger.LogEventAsync($"Фокус восстановлен на AnnID: {annId}", "RestoreFocus");
                     return true;
                 }
                 else

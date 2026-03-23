@@ -70,40 +70,12 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                     _bindingList.Add(CopyedWorkDivisionShell);
                     _bindingSource.ResetBindings(false);
-                    rowHandle = ANNgridView.LocateByValue("AnnID", CopyedWorkDivisionShell.AnnID);
-                    if (rowHandle >= 0)
-                    {
-                        ANNgridView.BeginUpdate();
-                        try
-                        {
-                            ANNgridView.FocusedRowHandle = rowHandle;
-                            ANNgridView.MakeRowVisible(rowHandle);
-                            ANNgridView.RefreshRow(rowHandle);
-                        }
-                        finally
-                        {
-                            ANNgridView.EndUpdate();
-                        }
-                    }
+                    TryFocusAndRefreshRowByAnnId(ANNgridView, CopyedWorkDivisionShell.AnnID);
                 }
                 else
                 {
                     // Возврат к исходной строке
-                    rowHandle = ANNgridView.LocateByValue("AnnID", selectedAnnToDuplicate.AnnID);
-                    if (rowHandle >= 0)
-                    {
-                        ANNgridView.BeginUpdate();
-                        try
-                        {
-                            ANNgridView.FocusedRowHandle = rowHandle;
-                            ANNgridView.MakeRowVisible(rowHandle);
-                            ANNgridView.RefreshRow(rowHandle);
-                        }
-                        finally
-                        {
-                            ANNgridView.EndUpdate();
-                        }
-                    }
+                    TryFocusAndRefreshRowByAnnId(ANNgridView, selectedAnnToDuplicate.AnnID);
 
                     // Удаляем созданную запись из списка и базы
                     _bindingList.Remove(CopyedWorkDivisionShell);

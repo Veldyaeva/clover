@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DevExpress.Data.Filtering;
@@ -553,13 +553,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                                 try
                                 {
                                     _bindingSource.ResetBindings(false);
-                                    int rowHandle = ANNgridView.LocateByValue("AnnID", updatedItem.AnnID);
-                                    if (rowHandle >= 0)
-                                    {
-                                        ANNgridView.FocusedRowHandle = rowHandle;
-                                        ANNgridView.MakeRowVisible(rowHandle);
-                                        ANNgridView.RefreshRow(rowHandle);
-                                    }
+                                    TryFocusAndRefreshRowByAnnId(ANNgridView, updatedItem.AnnID);
                                 }
                                 finally
                                 {
@@ -688,21 +682,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                             _bindingList[i] = updatedArtNormN;
                         }
                         bindingSource.ResetBindings(false);
-                        int rowHandle = gridView.LocateByValue("AnnID", updatedArtNormN.AnnID);
-                        if (rowHandle >= 0)
-                        {
-                            gridView.BeginUpdate();
-                            try
-                            {
-                                gridView.FocusedRowHandle = rowHandle;
-                                gridView.MakeRowVisible(rowHandle); // Прокручиваем до строки
-                                gridView.RefreshRow(rowHandle);
-                            }
-                            finally
-                            {
-                                gridView.EndUpdate();
-                            }
-                        }
+                        TryFocusAndRefreshRowByAnnId(gridView, updatedArtNormN.AnnID);
 
                         // Если редактирование было для второй вкладки (MyDataANN view), обновим NormRasz для customGridControl3
                         if (forMyDataAnnView && updatedArtNormN != null && updatedArtNormN.AnnID > 0)
@@ -803,12 +783,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     ANNgridControl?.RefreshDataSource(); // Обновляем контрол, если ResetBindings недостаточно
 
                     // Позиционируемся на новой строке
-                    int rowHandle = ANNgridView.LocateByValue("AnnID", newAnnId);
-                    if (rowHandle != GridControl.InvalidRowHandle)
-                    {
-                        ANNgridView.FocusedRowHandle = rowHandle;
-                        ANNgridView.MakeRowVisible(rowHandle); // Прокручиваем до строки
-                    }
+                    TryFocusAndRefreshRowByAnnId(ANNgridView, newAnnId);
                 }
                 else
                 {
@@ -848,13 +823,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                             try
                             {
                                 _myDataAnnBindingSource.ResetBindings(false);
-                                int finalRowHandle = gridView_wdToBind.LocateByValue("AnnID", newAnnId);
-                                if (finalRowHandle != GridControl.InvalidRowHandle)
-                                {
-                                    gridView_wdToBind.RefreshRow(finalRowHandle);
-                                    gridView_wdToBind.FocusedRowHandle = finalRowHandle;
-                                    gridView_wdToBind.MakeRowVisible(finalRowHandle);
-                                }
+                                TryFocusAndRefreshRowByAnnId(gridView_wdToBind, newAnnId);
                                 gridView_wdToBind.RefreshData();
                             }
                             finally
@@ -867,13 +836,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                             try
                             {
                                 _bindingSource.ResetBindings(false);
-                                int annRowHandle = ANNgridView.LocateByValue("AnnID", newAnnId);
-                                if (annRowHandle >= 0)
-                                {
-                                    ANNgridView.FocusedRowHandle = annRowHandle;
-                                    ANNgridView.MakeRowVisible(annRowHandle);
-                                    ANNgridView.RefreshRow(annRowHandle);
-                                }
+                                TryFocusAndRefreshRowByAnnId(ANNgridView, newAnnId);
                             }
                             finally
                             {
@@ -1041,59 +1004,29 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (result != DialogResult.Yes)
                     return;
 
-                // Обрабатываем каждую запись
                 int successCount = 0;
                 var errors = new List<string>();
 
                 ANNgridView.BeginUpdate();
                 try
                 {
-                    foreach (var item in selectedItems)
+                    var markBatch = await _teamWorkService.MarkWorkDivisionsForDeletionAsync(
+                        selectedItems.Select(x => x.AnnID),
+                        currentDate,
+                        computerName);
+                    errors.AddRange(markBatch.Errors);
+                    successCount = markBatch.UpdatedAnnIds.Count;
+
+                    foreach (var item in selectedItems.Where(i => markBatch.UpdatedAnnIds.Contains(i.AnnID)))
                     {
-                        try
-                        {
-                            // SQL запрос для пометки на удаление
-                            string sqlQuery = "UPDATE art_norm_n SET annDateDel = @currentDate, annCompDel = @computerName WHERE annID = @annID";
+                        // Обновляем объект в памяти
+                        item.dateDel = currentDate;
+                        item.compDel = computerName;
 
-                            var parameters = new Dictionary<string, object>
-                            {
-                                { "@annID", item.AnnID },
-                                { "@currentDate", currentDate },
-                                { "@computerName", computerName }
-                            };
+                        // Обновляем строку в гриде
+                        TryRefreshRowByAnnId(ANNgridView, item.AnnID);
 
-                            // Выполняем обновление
-                            int affectedRows = await _dbHelper.ExecuteNonQueryWithRowCountAsync(sqlQuery, parameters);
-
-                            if (affectedRows > 0)
-                            {
-                                // Обновляем объект в памяти
-                                item.dateDel = currentDate;
-                                item.compDel = computerName;
-
-                                // Обновляем строку в гриде
-                                int rowHandle = ANNgridView.LocateByValue("AnnID", item.AnnID);
-                                if (rowHandle >= 0)
-                                {
-                                    ANNgridView.RefreshRow(rowHandle);
-                                }
-
-                                successCount++;
-                                await _logger.LogEventAsync($"РТ помечено на удаление. AnnID: {item.AnnID}, Группа: {item.grup?.TrimEnd(' ')}, Модель: {item.Mod?.TrimEnd(' ')}, Артикул: {item.Articul?.TrimEnd(' ')}, Дата: {currentDate:dd.MM.yyyy HH:mm:ss}, Компьютер: {computerName}", "MarkForDeletion");
-                            }
-                            else
-                            {
-                                string errorMsg = $"AnnID: {item.AnnID} - не удалось обновить в БД";
-                                errors.Add(errorMsg);
-                                await _logger.LogErrorAsync(new Exception("affectedRows = 0"), $"Не удалось пометить РТ на удаление. AnnID: {item.AnnID}");
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            string errorMsg = $"AnnID: {item.AnnID} - {ex.Message}";
-                            errors.Add(errorMsg);
-                            await _logger.LogErrorAsync(ex, $"Ошибка при пометке РТ на удаление. AnnID: {item.AnnID}");
-                        }
+                        await _logger.LogEventAsync($"РТ помечено на удаление. AnnID: {item.AnnID}, Группа: {item.grup?.TrimEnd(' ')}, Модель: {item.Mod?.TrimEnd(' ')}, Артикул: {item.Articul?.TrimEnd(' ')}, Дата: {currentDate:dd.MM.yyyy HH:mm:ss}, Компьютер: {computerName}", "MarkForDeletion");
                     }
                 }
                 finally
@@ -1234,56 +1167,49 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (result != DialogResult.Yes)
                     return;
 
-                // Текущая дата для установки
-                DateTime currentDate = DateTime.Now;
-
-                // Обновляем дату для каждой выбранной записи
                 int successCount = 0;
                 var errors = new List<string>();
+                DateTime shownDate = DateTime.Now;
 
                 activeGridView.BeginUpdate();
                 try
                 {
-                    foreach (int annId in selectedAnnIds)
+                    var approveBatch = await _teamWorkService.ApproveWorkDivisionsBatchAsync(selectedAnnIds);
+                    errors.AddRange(approveBatch.Errors);
+                    successCount = approveBatch.Items.Count;
+                    if (approveBatch.Items.Count > 0)
                     {
-                        try
+                        shownDate = approveBatch.Items[0].ApprovedAt;
+                    }
+
+                    foreach (var approvedItem in approveBatch.Items)
+                    {
+                        // Обновляем UI в гриде
+                        int rowHandle = activeGridView.LocateByValue("AnnID", approvedItem.AnnId);
+                        if (rowHandle >= 0)
                         {
-                            // Используем общий метод для обновления даты и статуса
-                            int rowHandle = activeGridView.LocateByValue("AnnID", annId);
-                            bool success = await UpdateDateAndStatusAsync(annId, activeGridView, rowHandle);
-
-                            if (success)
-                            {
-                                // Обновляем объект в памяти в зависимости от типа
-                                foreach (var item in selectedItems)
-                                {
-                                    if (item is ArtNormN artNorm && artNorm.AnnID == annId)
-                                    {
-                                        artNorm.dateUpdate = currentDate;
-                                        artNorm.Status = (int)Status.Actual;
-                                        artNorm.StatusText = "Актуальное";
-                                        break;
-                                    }
-                                    else if (item is MyDataANN myDataAnn && myDataAnn.AnnID == annId)
-                                    {
-                                        // MyDataANN может не иметь поля dateUpdate, но мы обновляем в БД
-                                        break;
-                                    }
-                                }
-
-                                successCount++;
-                            }
-                            else
-                            {
-                                string errorMsg = $"AnnID: {annId} - не удалось обновить данные";
-                                errors.Add(errorMsg);
-                            }
+                            ApplyApprovalToGridRow(
+                                activeGridView,
+                                rowHandle,
+                                approvedItem.ApprovedAt,
+                                approvedItem.Status,
+                                approvedItem.StatusText);
                         }
-                        catch (Exception ex)
+
+                        // Обновляем объект в памяти в зависимости от типа
+                        foreach (var item in selectedItems)
                         {
-                            string errorMsg = $"AnnID: {annId} - {ex.Message}";
-                            errors.Add(errorMsg);
-                            await _logger.LogErrorAsync(ex, $"Ошибка при обновлении данных для записи AnnID: {annId}");
+                            if (item is ArtNormN artNorm && artNorm.AnnID == approvedItem.AnnId)
+                            {
+                                artNorm.dateUpdate = approvedItem.ApprovedAt;
+                                artNorm.Status = approvedItem.Status;
+                                artNorm.StatusText = approvedItem.StatusText;
+                                break;
+                            }
+                            if (item is MyDataANN myDataAnn && myDataAnn.AnnID == approvedItem.AnnId)
+                            {
+                                break;
+                            }
                         }
                     }
                 }
@@ -1302,8 +1228,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (errors.Count == 0)
                 {
                     string successMessage = successCount == 1
-                        ? $"Данные успешно обновлены для записи. Дата: {currentDate:dd.MM.yyyy}, статус: Актуальное"
-                        : $"Данные обновлены для {successCount} записей. Дата: {currentDate:dd.MM.yyyy}, статус: Актуальное";
+                        ? $"Данные успешно обновлены для записи. Дата: {shownDate:dd.MM.yyyy}, статус: Актуальное"
+                        : $"Данные обновлены для {successCount} записей. Дата: {shownDate:dd.MM.yyyy}, статус: Актуальное";
 
                     //  MessageBox.Show(successMessage, "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     await _logger.LogEventAsync(successMessage, "SetUpdateDate_Internal");
@@ -1404,32 +1330,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (result != DialogResult.Yes)
                     return;
                 await _logger.LogEventAsync($"Пользователь подтвердил обновление arch для AnnID: {annId}, Артикул: {articul}", "UpdateSpArticulArch_Internal");
-                // SQL запрос для обновления поля arch
-                //string sqlQuery = @"
-                //    UPDATE sp_articul sa 
-                //    SET sa.arh = 1
-                //    WHERE left(sa.kod, 7) = @kod 
-                //    AND ann.articul = @art  
-                //    AND ann.annID = @annId";
-                string sqlQuery = @"UPDATE sa
-                    SET sa.arh = 1
-                    FROM dbo.sp_articul AS sa
-                    JOIN dbo.art_norm_n AS ann ON ann.AnnID = sa.AnnID
-                    WHERE left(sa.kod, 7) = @kod 
-                    AND sa.articul = @art  
-                    AND ann.annID = @annId";
-                var parameters = new Dictionary<string, object>
+                var archUpdate = await _teamWorkService.UpdateSpArticulArchAsync(annId, kod, articul);
+                if (!archUpdate.Success)
                 {
-                    { "@annId", annId },
-                    { "@art", articul },
-                    { "@kod", kod }
-                };
-
-                // Выполняем обновление
-                await _dbHelper.ExecuteQueryAsync(sqlQuery, parameters);
-
-                // Логируем операцию
-                await _logger.LogEventAsync($"Обновлено поле arch для записей AnnID: {annId}, Артикул: {articul}", "UpdateSpArticulArch");
+                    MessageBox.Show($"Ошибка при обновлении: {archUpdate.Error}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
             }
             catch (Exception ex)
@@ -1505,46 +1411,29 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
                 await _logger.LogEventAsync($"Пользователь подтвердил архивирование {selectedItems.Count} записей", "SetArchiveStatus_Internal");
 
-                // Обновляем статус для каждой выбранной записи
                 int successCount = 0;
                 var errors = new List<string>();
 
                 ANNgridView.BeginUpdate();
                 try
                 {
+                    var candidates = selectedItems.Where(x => x.Status != (int)Status.Archive).ToList();
+                    var batch = await _teamWorkService.ArchiveWorkDivisionsAsync(candidates.Select(x => x.AnnID));
+                    errors.AddRange(batch.Errors);
+                    successCount = batch.UpdatedAnnIds.Count;
+
                     foreach (var item in selectedItems)
                     {
-                        try
+                        if (batch.UpdatedAnnIds.Contains(item.AnnID))
                         {
-                            // Проверяем, что запись можно архивировать
-                            if (item.Status == (int)Status.Archive)
-                            {
-                                await _logger.LogEventAsync($"Запись AnnID: {item.AnnID} уже имеет архивный статус", "SetArchiveStatus");
-                                continue;
-                            }
-
-                            // Обновляем статус в базе данных
-                            await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", (int)Status.Archive, TableNames.AnnId, item.AnnID);
-
-                            // Обновляем объект в памяти
                             item.Status = (int)Status.Archive;
                             item.StatusText = StatusHelper.GetStatusText((int)Status.Archive);
-
-                            // Обновляем строку в гриде
-                            int rowHandle = ANNgridView.LocateByValue("AnnID", item.AnnID);
-                            if (rowHandle >= 0)
-                            {
-                                ANNgridView.RefreshRow(rowHandle);
-                            }
-
-                            successCount++;
+                            TryRefreshRowByAnnId(ANNgridView, item.AnnID);
                             await _logger.LogEventAsync($"Статус записи AnnID: {item.AnnID} изменен на 'Архивное'", "SetArchiveStatus");
                         }
-                        catch (Exception ex)
+                        else if (item.Status == (int)Status.Archive)
                         {
-                            string errorMsg = $"AnnID: {item.AnnID} - {ex.Message}";
-                            errors.Add(errorMsg);
-                            await _logger.LogErrorAsync(ex, $"Ошибка при архивировании записи AnnID: {item.AnnID}");
+                            await _logger.LogEventAsync($"Запись AnnID: {item.AnnID} уже имеет архивный статус", "SetArchiveStatus");
                         }
                     }
                 }
