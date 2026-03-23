@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using SewingProduction.Features.TeamWork.Helpers;
@@ -16,12 +17,16 @@ namespace SewingProduction.Features.TeamWork.Services
     {
         private readonly ArtNormRepository _artNormService;
         private readonly DbService _dbService;
+        private readonly DatabaseHelper _dbHelper;
+        private readonly IJabberSender _jabberSender;
         private readonly ILogger _logger;
 
-        public TeamWorkOrchestrator(ArtNormRepository artNormService, DbService dbService, ILogger logger)
+        public TeamWorkOrchestrator(ArtNormRepository artNormService, DbService dbService, DatabaseHelper dbHelper, IJabberSender jabberSender, ILogger logger)
         {
             _artNormService = artNormService;
             _dbService = dbService;
+            _dbHelper = dbHelper;
+            _jabberSender = jabberSender;
             _logger = logger;
         }
 
@@ -217,6 +222,89 @@ namespace SewingProduction.Features.TeamWork.Services
                 return new UnbindArticlesResult { Success = false, Error = ex.Message, AffectedRows = totalAffectedRows };
             }
         }
+
+        /// <summary>
+        /// Утверждает РТ: пересчет, обновление статуса, построение diff и рассылка уведомления бригадам.
+        /// </summary>
+        public async Task<ApproveWorkDivisionResult> ApproveWorkDivisionAsync(int annId, string art)
+        {
+            if (annId <= 0)
+            {
+                return new ApproveWorkDivisionResult { Success = false, Error = "Некорректный AnnID." };
+            }
+
+            try
+            {
+                var parameters = new Dictionary<string, object> { { "@xAnnID", annId } };
+                await _dbHelper.ExecuteQueryAsync("dbo.updateSebZArticulPsz", parameters, CommandType.StoredProcedure);
+                await _dbService.UpdateFieldAsync(TableNames.Ann, "data_obn", DateTime.Now, TableNames.AnnId, annId);
+                await _dbService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, TableNames.AnnId, annId);
+
+                string diffText = await TryBuildApprovalDiffAsync(annId);
+                string message = ComposeApprovalMessage(art, diffText);
+                await SendToBrigadesAsync(annId, message);
+
+                return new ApproveWorkDivisionResult
+                {
+                    Success = true,
+                    ApprovedAt = DateTime.Now,
+                    Status = (int)Status.Actual,
+                    StatusText = "Актуальное",
+                    Message = message
+                };
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка утверждения РТ AnnID={annId}");
+                return new ApproveWorkDivisionResult { Success = false, Error = ex.Message };
+            }
+        }
+
+        private async Task SendToBrigadesAsync(int annId, string message)
+        {
+            var brigades = await _artNormService.GetWorkingBrigs(annId);
+            var brigIds = brigades?.Select(b => b.id_brig).Where(id => id > 0).Distinct().ToArray();
+            if (brigIds is { Length: > 0 })
+            {
+                await _jabberSender.SendToBrigsAsync(brigIds, message);
+                await _logger.LogEventAsync($"Отправлено '{message}' в {brigIds.Length} бригад(ы) для annId={annId}", "ApproveWorkDivisionAsync");
+            }
+            else
+            {
+                await _logger.LogEventAsync($"Бригад для рассылки не найдено (annId={annId})", "ApproveWorkDivisionAsync");
+            }
+        }
+
+        private async Task<string> TryBuildApprovalDiffAsync(int annId)
+        {
+            var snapSvc = new RtSnapshotService(_dbService, _dbHelper, _logger);
+            if (!await snapSvc.HasPendingAsync(annId))
+                return null;
+
+            var approvedAt = DateTime.Now;
+            try
+            {
+                return await snapSvc.CompareWithCurrentAsync(annId, approvedAt);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка построения diff для AnnID: {annId}");
+                return null;
+            }
+        }
+
+        private static string ComposeApprovalMessage(string art, string diffText, int maxLen = 3800)
+        {
+            var intro = $"Внимание! Схема разделения {art} утверждена и обновлена технологом. Проверьте операции, прежде чем начать работу!";
+            var full = string.IsNullOrWhiteSpace(diffText)
+                ? intro
+                : intro + Environment.NewLine + Environment.NewLine + diffText;
+
+            if (full.Length <= maxLen) return full;
+
+            const string tail = "\n...(сообщение обрезано)";
+            return full.Substring(0, Math.Max(0, maxLen - tail.Length)) + tail;
+        }
     }
 
     // Models/TeamWorkReloadResult.cs
@@ -250,6 +338,16 @@ namespace SewingProduction.Features.TeamWork.Services
     {
         public bool Success { get; set; }
         public int AffectedRows { get; set; }
+        public string Error { get; set; }
+    }
+
+    public class ApproveWorkDivisionResult
+    {
+        public bool Success { get; set; }
+        public DateTime ApprovedAt { get; set; }
+        public int Status { get; set; }
+        public string StatusText { get; set; }
+        public string Message { get; set; }
         public string Error { get; set; }
     }
 }

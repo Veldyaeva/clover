@@ -1,4 +1,4 @@
-﻿using DevExpress.CodeParser;
+using DevExpress.CodeParser;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
@@ -522,44 +522,25 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                // Вызываем процедуру updateSebZArticulPsz для обновления данных во всех справочниках
-                var parameters = new Dictionary<string, object>
+                var approval = await _teamWorkService.ApproveWorkDivisionAsync(annId, art);
+                if (!approval.Success)
                 {
-                    { "@xAnnID", annId }
-                };
-                await _dbHelper.ExecuteQueryAsync(
-    "dbo.updateSebZArticulPsz",
-    parameters,
-    CommandType.StoredProcedure
-);
-                // Обновляем дату обновления в базе данных
-                await _dbService.UpdateFieldAsync(TableNames.Ann, "data_obn", DateTime.Now, TableNames.AnnId, annId);
-
-                // Обновляем статус на "Актуальное"
-                await _dbService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, TableNames.AnnId, annId);
-
-                // Отправляем сообщение в бригаду
-                //await SendMsgToBrig(annId, $"Внимание! Схема разделения {art} была обновлена технологом, проверьте операции, прежде чем начать работу!");
-                // 2) Считаем diff ПОСЛЕ всех апдейтов в БД
-                string diffText = await TryBuildApprovalDiffAsync(annId);
-
-                // 3) Формируем сообщение в бригаду (с diff, если он есть)
-                string msg = ComposeApprovalMessage(art, diffText);
-              //  MessageBox.Show(msg, "message", MessageBoxButtons.RetryCancel, MessageBoxIcon.Exclamation); // messageBox для теста
-                await SendMsgToBrig(annId, msg);
+                    await _logger.LogErrorAsync(new Exception(approval.Error), $"Ошибка утверждения данных для записи AnnID: {annId}");
+                    return false;
+                }
 
                 // 4) Обновляем UI
 
                 // Обновляем UI в гриде
                 if (gridView != null && rowHandle >= 0)
                 {
-                    gridView.SetRowCellValue(rowHandle, "dateUpdate", DateTime.Now);
-                    gridView.SetRowCellValue(rowHandle, "status", (int)Status.Actual);
-                    gridView.SetRowCellValue(rowHandle, "StatusText", "Актуальное");
+                    gridView.SetRowCellValue(rowHandle, "dateUpdate", approval.ApprovedAt);
+                    gridView.SetRowCellValue(rowHandle, "status", approval.Status);
+                    gridView.SetRowCellValue(rowHandle, "StatusText", approval.StatusText);
                     gridView.RefreshRow(rowHandle);
                 }
 
-                await _logger.LogEventAsync($"Данные обновлены для записи AnnID: {annId}, дата: {DateTime.Now:dd.MM.yyyy}, статус: Актуальное", "UpdateDateAndStatus");
+                await _logger.LogEventAsync($"Данные обновлены для записи AnnID: {annId}, дата: {approval.ApprovedAt:dd.MM.yyyy}, статус: {approval.StatusText}", "UpdateDateAndStatus");
                 return true;
             }
             catch (Exception ex)
@@ -567,52 +548,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 await _logger.LogErrorAsync(ex, $"Ошибка при обновлении данных для записи AnnID: {annId}");
                 return false;
             }
-        }
-
-        /// <summary>
-        /// Пытается построить текстовый diff и помечает снимок как использованный.
-        /// Если активного снимка нет — вернёт null.
-        /// </summary>
-        private async Task<string> TryBuildApprovalDiffAsync(int annId)
-        {
-            var snapSvc = new RtSnapshotService(_dbService, _dbHelper, _logger);
-
-            // Снимок должен быть снят ранее (при первом сохранении с очищенной датой).
-            if (!await snapSvc.HasPendingAsync(annId))
-                return null;
-
-            // Покажем фактическое время утверждения в заголовке diff
-            var approvedAt = DateTime.Now;
-
-            try
-            {
-                // CompareWithCurrentAsync читает ТЕКУЩЕЕ состояние из БД и «съедает» снимок (Consumed=1)
-                return await snapSvc.CompareWithCurrentAsync(annId, approvedAt);
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, $"Ошибка построения diff для AnnID: {annId}");
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Склеивает служебный текст и diff. Ограничивает размер, чтобы не «захлебнуть» мессенджер.
-        /// </summary>
-        private static string ComposeApprovalMessage(string art, string diffText, int maxLen = 3800)
-        {
-            var intro = $"Внимание! Схема разделения {art} утверждена и обновлена технологом. " +
-                        $"Проверьте операции, прежде чем начать работу!";
-
-            var full = string.IsNullOrWhiteSpace(diffText)
-                ? intro
-                : intro + Environment.NewLine + Environment.NewLine + diffText;
-
-            if (full.Length <= maxLen) return full;
-
-            // Если текст слишком длинный — обрезаем «по-человечески»
-            const string tail = "\n…(сообщение обрезано)";
-            return full.Substring(0, Math.Max(0, maxLen - tail.Length)) + tail;
         }
         /// <summary>
         /// Обрабатываем клик по кнопке утверждения РТ на вкладке Текущие Работы
