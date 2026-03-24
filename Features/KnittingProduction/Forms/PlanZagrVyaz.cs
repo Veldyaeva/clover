@@ -867,8 +867,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     case 2:
                     case 3:
                         gridControlSmenZadany.MainView = gridViewSmenZadanyOtp;
-                        layoutControlGroup2.CustomHeaderButtons[5].Properties.Visible = false;
-                        layoutControlGroup2.CustomHeaderButtons[6].Properties.Visible = false;
+                        //layoutControlGroup2.CustomHeaderButtons[5].Properties.Visible = false;
+                        //layoutControlGroup2.CustomHeaderButtons[6].Properties.Visible = false;
                         //layoutControlGroup2.CustomHeaderButtons[7].Properties.Visible = false;
                         //layoutControlGroup2.CustomHeaderButtons[8].Properties.Visible = false;
                         //layoutControlGroup2.CustomHeaderButtons[9].Properties.Visible = false;
