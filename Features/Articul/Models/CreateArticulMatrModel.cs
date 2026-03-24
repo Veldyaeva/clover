@@ -22,7 +22,9 @@ namespace SewingProduction.Features.Articul.Models
         public string Tsn_name { get; set; }
         public string Tb_id { get; set; }
         public string Mod { get; set; }
+        public string ModMatrix { get; set; }
         public string Articul { get; set; }
+        
         public DateTime? DatePublic { get; set; }
         public string Tm_name { get; set; }
         public string Grup { get; set; }

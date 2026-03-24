@@ -142,8 +142,8 @@ namespace SewingProduction.Features.Articul.Forms
             gcCertRazmNames.FieldName = nameof(CreateArticulMatrModel.RazmNames);
             gcDatePublic.FieldName = nameof(CreateArticulMatrModel.DatePublic);
             gcCertDatePublic.FieldName = nameof(CreateArticulMatrModel.DatePublic);
-            gcArticle.FieldName = nameof(CreateArticulMatrModel.Article);
-            gcCertArticle.FieldName = nameof(CreateArticulMatrModel.Article);
+            gcModMatrix.FieldName = nameof(CreateArticulMatrModel.ModMatrix);
+            gcCertModMatrix.FieldName = nameof(CreateArticulMatrModel.ModMatrix);
             gcRepeatArticle.FieldName = nameof(CreateArticulMatrModel.RepeatArticle);
             gcCertRepeatArticle.FieldName = nameof(CreateArticulMatrModel.RepeatArticle);
 
