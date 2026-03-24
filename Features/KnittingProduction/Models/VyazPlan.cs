@@ -475,7 +475,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public decimal szHoursToDo { get; set; }
         [NotMapped] public decimal szHoursDone { get; set; }
         [NotMapped] public decimal szShiftVNV { get; set; }
-        [NotMapped] public decimal szDTab { get; set; }
+        [NotMapped] public string szDTab { get; set; }
     }
     public class KnitWorkingShiftSmen
     {

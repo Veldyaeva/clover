@@ -460,13 +460,13 @@ namespace SewingProduction.Features.KnittingProduction.Services
             }
         }
 
-        public async Task<BindingSource> GetNaryadZadanyVyaz(int tab, int kmlID, CancellationToken cancellationToken)
+        public async Task<BindingSource> GetNaryadZadanyVyaz(int tab, int kmlID, int podrKod, CancellationToken cancellationToken)
         {
             try
             {
                 await using var connection = _dbHelper.GetConnection();
-                const string query = @"EXEC planZagrVyazTabKmlID_view @xPzvTab = @Tab, @xPzvKmlID = @KmlID";
-                var command = new CommandDefinition(query, new { Tab = tab, KmlID = kmlID }, cancellationToken: cancellationToken);
+                const string query = @"EXEC planZagrVyazTabKmlID_view @xPzvTab = @Tab, @xPzvKmlID = @KmlID, @xKodPodr = @PodrKod";
+                var command = new CommandDefinition(query, new { Tab = tab, KmlID = kmlID, PodrKod = podrKod }, cancellationToken: cancellationToken);
 
                 var list = (await connection
                     .QueryAsync<NaryadZadanyVyaz>(command))

@@ -14,6 +14,7 @@ using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraReports.UI;
+using Microsoft.IdentityModel.Logging;
 using Newtonsoft.Json;
 using Org.BouncyCastle.Asn1.Ocsp;
 using SewingProduction.Core.Class.Settings;
@@ -83,6 +84,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private static ServiceBrokerService _sbService;
         private static BulkHelper _bulkHelper;
         private static GridHelper _gridHelper;
+        private static LayoutControlGroupHelper _lcgHelper;
         //        private static BindingSourceHelper _bSHelper;
         private readonly ILogger _logger = new FileLogger();
         private readonly VyazService _vyazService;
@@ -182,6 +184,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _sbController = new ServiceBrokerController(this);
             _bulkHelper = new BulkHelper();
             _gridHelper = new GridHelper();
+            _lcgHelper = new LayoutControlGroupHelper();
 
             _vyazService = new VyazService(_dbHelper);
             _mlService = new MlService(_dbHelper);
@@ -256,7 +259,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     {
                         //int xTopRowIndex = gridViewSmenZadany.TopRowIndex;
                         //int xFocusedRowHandle = gridViewSmenZadany.FocusedRowHandle;
-                        await LoadSmenZadanyVyazNewDataAsync(vyazPodrKod); // сменное задание
+                        //await LoadSmenZadanyVyazNewDataAsync(vyazPodrKod); // сменное задание
+                        await LoadSmenZadanyVyazNewDataAsync(1); // сменное задание
                         //await InvokeOnUiAsync(async () =>
                         //{
                         //    gridViewSmenZadany.TopRowIndex = xTopRowIndex;
@@ -266,7 +270,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                     ["knitWorkingShiftNewCurrentSmen_view"] = async () =>
                     {
-                        SmenZadanyFocusedRowChanged(advBandedGridViewSmenZadany.FocusedRowHandle); // наряд-задание
+                        SmenZadanyFocusedRowChanged(advBandedGridViewSmenZadany, advBandedGridViewSmenZadany.FocusedRowHandle); // наряд-задание ВЗП
+                        SmenZadanyFocusedRowChanged(gridViewSmenZadanyOtp, gridViewSmenZadanyOtp.FocusedRowHandle); // наряд-задание Отп, РЦ
                     },
 
                     ["GetPlanZagrVyazByPachList"] = async () =>
@@ -532,9 +537,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 switch (vyazPodrKod)
                 {
                     case 1:
-                        layoutControlGroup7.CustomHeaderButtons[0].Properties.Visible = true;
-                        layoutControlGroup7.CustomHeaderButtons[1].Properties.Visible = true;
-                        layoutControlGroup7.CustomHeaderButtons[2].Properties.Visible = true;
+                        //layoutControlGroup7.CustomHeaderButtons[0].Properties.Visible = true;
+                        //layoutControlGroup7.CustomHeaderButtons[1].Properties.Visible = true;
+                        //layoutControlGroup7.CustomHeaderButtons[2].Properties.Visible = true;
+                        _lcgHelper.SetButtonsVisible(
+                            layoutControlGroup7,
+                            false,
+                            "lcg3HideAll",
+                            "lcg3HideAllSeparator",
+                            "lcg3ShowAll"
+                        );
                         #region описание gridControlPlanTotalHoursByKnitMachine "общие часы по вяз машинам/зонам"
                         layoutControlItemPlanTotalQuantityByArticul.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                         layoutControlItemPlanTotalHoursByKnitMachine.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
@@ -867,6 +879,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     case 2:
                     case 3:
                         gridControlSmenZadany.MainView = gridViewSmenZadanyOtp;
+                        _lcgHelper.SetButtonsVisible(
+                            layoutControlGroup2,
+                            false,
+                            "lcg2HideAll",
+                            "lcg2HideAllSeparator",
+                            "lcg2ShowAll",
+                            "lcg2ShowAllSeparator",
+                            "lcg2ShowFIO",
+                            "lcg2ShowFIOSeparator",
+                            "lcg2ShowMH"
+                        );
                         //layoutControlGroup2.CustomHeaderButtons[5].Properties.Visible = false;
                         //layoutControlGroup2.CustomHeaderButtons[6].Properties.Visible = false;
                         //layoutControlGroup2.CustomHeaderButtons[7].Properties.Visible = false;
@@ -890,6 +913,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //TODO : если понадобится, можно будет донастроить высоту строк заголовков колонок, но пока не нужно
                 #endregion
 
+                _lcgHelper.SetButtonsVisible(
+                            layoutControlGroup3,
+                            false,
+                            "lcg3HideAll",
+                            "lcg3HideAllSeparator",
+                            "lcg3ShowAll"
+                        );
                 _naryadZadanyVyazBindingSource = new BindingSource { DataSource = new BindingList<NaryadZadanyVyaz>() };
                 #region gridControlNaryadZadany "наряд-задание"
                 gridControlNaryadZadany.DataSource = _naryadZadanyVyazBindingSource;
@@ -929,6 +959,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridNaryadZadanyColumnPzvTab.OptionsColumn.AllowEdit = false;
 
                 gridViewNaryadZadany.OptionsView.ShowGroupPanel = false;
+                if (vyazPodrKod == 2 || vyazPodrKod == 3)
+                {
+                    gridViewNaryadZadany.ClearGrouping();
+                }
                 gridNaryadZadanyColumnSekObServ.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
                 gridNaryadZadanyColumnSekObServ.DisplayFormat.FormatString = "#,0.00;-#,0.00;";
 
@@ -1504,6 +1538,25 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                             Application.Idle -= ExpandGroupsOnIdle;
                             Application.Idle += ExpandGroupsOnIdle;
                             gridControlSmenZadany.EndUpdate();
+                            switch (vyazPodrKod)
+                            {
+                                case 1:
+                                    advBandedGridViewSmenZadany.BeginSort();
+                                    advBandedGridViewSmenZadany.ClearSorting();
+                                    advBandedGridViewSmenZadany.SortInfo.Add(new GridColumnSortInfo(bandedGridSmenZadanyColumnKmaNumber, ColumnSortOrder.Ascending));
+                                    advBandedGridViewSmenZadany.SortInfo.Add(new GridColumnSortInfo(bandedGridSmenZadanyColumnKmlNumber, ColumnSortOrder.Ascending));
+                                    advBandedGridViewSmenZadany.EndSort();
+                                    break;
+                                case 2:
+                                case 3:
+                                    gridViewSmenZadany.BeginSort();
+                                    gridViewSmenZadany.ClearSorting();
+                                    gridViewSmenZadany.SortInfo.Add(new GridColumnSortInfo(gridSmenZadanyOtpColumnSzFio, ColumnSortOrder.Ascending));
+                                    //gridViewSmenZadany.SortInfo.Add(new GridColumnSortInfo(gridZadanyListColumnNom, ColumnSortOrder.Ascending));
+                                    gridViewSmenZadany.EndSort();
+                                    break;
+                            }
+                            
                         });
 
                         await SetStatusAsync(bs.Count == 0 ? "Нет данных" : "Готово");
@@ -1530,6 +1583,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             await SetLoadingAsync(false);
             Debug.WriteLine($"LoadSmenZadanyVyazDataAsync completed");
         }
+        //private async Task LoadSmenZadanyVyazNewDataAsync(int _xKodProizv)
         private async Task LoadSmenZadanyVyazNewDataAsync(int _xKodProizv)
         {
             try
@@ -1558,7 +1612,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                                     _smenZadanyVyazBindingSource,
                                     _smenZadanyVyazNewBindingSource,
                                     HashMode.ExcludeOnly,
-                                    keyProperties: new[] { "kwsKmaID", "kwsmlKmlID", "typeID" },
+                                    keyProperties: new[] { "kwsKmaID", "kwsmlKmlID", "typeID", "szTab" },
                                     hashProperties: new[] { "IsNew", "IsModified", "IsDeleted" }
                                 );
 
@@ -1566,8 +1620,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                                     _smenZadanyVyazBindingSource,
                                     changes,
                                     UpdateFieldsMode.ExcludeOnly,
-                                    keyProperties: new[] { "kwsKmaID", "kwsmlKmlID", "typeID" },
-                                    gridViewPZVOperList,
+                                    keyProperties: new[] { "kwsKmaID", "kwsmlKmlID", "typeID", "szTab" },
+                                    (GridView)gridControlSmenZadany.MainView,
                                     fields: new[] { "IsNew", "IsModified", "IsDeleted" }
                                 );
 
@@ -1640,7 +1694,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 });
 
                 // 3️ долгий запрос
-                var bs = await _vyazService.GetNaryadZadanyVyaz(tab, kmlID, token);
+                var bs = await _vyazService.GetNaryadZadanyVyaz(tab, kmlID, vyazPodrKod, token);
 
                 // если отменили — просто выходим
                 if (token.IsCancellationRequested)
@@ -3639,7 +3693,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     foreach (var record in checkList)
                     {
-                        if (record.olKodPodr != 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+                        if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
                         {
                             record.ErrorSelection = 1;
                             record.SyncSelection = 0;
@@ -3741,7 +3795,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     foreach (var record in checkList)
                     {
-                        if (record.olKodPodr != 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+                        if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
                         {
                             record.ErrorSelection = 1;
                             record.SyncSelection = 0;
@@ -3883,7 +3937,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             try
             {
                 Debug.WriteLine($"Starting TabWorkAssignment for pzvID={_xPzvID}, column={_xColumn}");
-                SmenZadanyVyaz curr = _smenZadanyVyazBindingSource.Current as SmenZadanyVyaz;
+                //SmenZadanyVyaz curr = _smenZadanyVyazBindingSource.Current as SmenZadanyVyaz;
+                GridView _gridView = (GridView)gridControlSmenZadany.MainView;
+                var currentSmenZadanyVyaz = _gridView.GetRow(_gridView.FocusedRowHandle) as SmenZadanyVyaz;
+                if (currentSmenZadanyVyaz == null)
+                    return;
+
+                int xKwsTabStart = vyazPodrKod == 1 ? currentSmenZadanyVyaz.kwsTabStart : currentSmenZadanyVyaz.szTab;
+
                 _pZVOperListByPachListBindingSource.ResetBindings(false);
                 var checkList = _pZVOperListByPachListBindingSource.List
                     .OfType<PZVOperList>()
@@ -3891,14 +3952,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     .ToList();
                 if (checkList.Count != 0)
                 {
-                    if (curr == null || curr.kwsTabStart == null || curr.kwsTabStart == 0)
+                    if (currentSmenZadanyVyaz == null || xKwsTabStart == null || xKwsTabStart == 0)
                     {
                         MessageBox.Show("Не выбранн работниик для назначения");
                         return;
                     }
                     foreach (var record in checkList)
                     {
-                        if (record.olKodPodr != 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+                        if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
                         {
                             record.ErrorSelection = 1;
                             record.SyncSelection = 0;
@@ -3928,7 +3989,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                             record.SyncSelection = 0;
                             continue;
                         }
-                        if (!CompareTabAndMachineArea(record.olPzvKmlID, curr.kwsTabStart))
+                        if (record.olKodPodr == 1 && !CompareTabAndMachineArea(record.olPzvKmlID, xKwsTabStart))
                         {
                             record.ErrorSelection = 1;
                             record.SyncSelection = 0;
@@ -3943,7 +4004,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     .Where(x => x.SyncSelection == 1)
                     .Select(x => x.olPzvID)   // новый маппер
                     .ToList();
-                await SetTabToPzvID(filteredList, curr.kwsTabStart, curr.kwsID);
+                await SetTabToPzvID(filteredList, xKwsTabStart, currentSmenZadanyVyaz.kwsID);
 
                 var errList = _pZVOperListByPachListBindingSource.List
                     .OfType<PZVOperList>()
@@ -4033,7 +4094,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     foreach (var record in checkList)
                     {
-                        if (record.olKodPodr != 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя отменить назначение работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+                        if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя отменить назначение работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
                         {
                             record.ErrorSelection = 1;
                             record.SyncSelection = 0;
@@ -4364,21 +4425,21 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     foreach (var record in checkList)
                     {
-                        if (record.olPzvKwsID == 0)
+                        if (record.olKodPodr == 1 && record.olPzvKwsID == 0)
                         {
                             MessageBox.Show($"Операция не назначена на смену, нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})");
                             record.ErrorSelection = 1;
                             record.SyncSelection = 0;
                             continue;
                         }
-                        if (!(CheckPZVShiftOpened(record.olPzvKwsID, $"нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")
+                        if (record.olKodPodr == 1 && !(CheckPZVShiftOpened(record.olPzvKwsID, $"нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")
                             && !CheckPZVShiftClosed(record.olPzvKwsID, $"нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")))
                         {
                             record.ErrorSelection = 1;
                             record.SyncSelection = 0;
                             continue;
                         }
-                        if (record.olKodPodr != 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+                        if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
                         {
                             record.ErrorSelection = 1;
                             record.SyncSelection = 0;
@@ -4476,21 +4537,21 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     foreach (var record in checkList)
                     {
-                        if (record.olPzvKwsID == 0)
+                        if (record.olKodPodr == 1 && record.olPzvKwsID == 0)
                         {
                             MessageBox.Show($"Операция не назначена на смену, нельзя отменить начало выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})");
                             record.ErrorSelection = 1;
                             record.SyncSelection = 0;
                             continue;
                         }
-                        if (!(CheckPZVShiftOpened(record.olPzvKwsID, $"нельзя отменить начало выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")
+                        if (record.olKodPodr == 1 && !(CheckPZVShiftOpened(record.olPzvKwsID, $"нельзя отменить начало выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")
                             && !CheckPZVShiftClosed(record.olPzvKwsID, $"нельзя отменить начало выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")))
                         {
                             record.ErrorSelection = 1;
                             record.SyncSelection = 0;
                             continue;
                         }
-                        if (record.olKodPodr != 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+                        if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
                         {
                             record.ErrorSelection = 1;
                             record.SyncSelection = 0;
@@ -4573,21 +4634,21 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     foreach (var record in checkList)
                     {
-                        if (record.olPzvKwsID == 0)
+                        if (record.olKodPodr == 1 && record.olPzvKwsID == 0)
                         {
                             MessageBox.Show($"Операция не назначена на смену, нельзя завершить выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})");
                             record.ErrorSelection = 1;
                             record.SyncSelection = 0;
                             continue;
                         }
-                        if (!(CheckPZVShiftOpened(record.olPzvKwsID, $"нельзя завершить выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")
+                        if (record.olKodPodr == 1 && !(CheckPZVShiftOpened(record.olPzvKwsID, $"нельзя завершить выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")
                             && !CheckPZVShiftClosed(record.olPzvKwsID, $"нельзя завершить выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")))
                         {
                             record.ErrorSelection = 1;
                             record.SyncSelection = 0;
                             continue;
                         }
-                        if (record.olKodPodr != 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+                        if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
                         {
                             record.ErrorSelection = 1;
                             record.SyncSelection = 0;
@@ -4669,21 +4730,21 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     foreach (var record in checkList)
                     {
-                        if (record.olPzvKwsID == 0)
+                        if (record.olKodPodr == 1 && record.olPzvKwsID == 0)
                         {
                             MessageBox.Show($"Операция не назначена на смену, нельзя отменить окончание выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})");
                             record.ErrorSelection = 1;
                             record.SyncSelection = 0;
                             continue;
                         }
-                        if (!(CheckPZVShiftOpened(record.olPzvKwsID, $"нельзя отменить окончание выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")
+                        if (record.olKodPodr == 1 && !(CheckPZVShiftOpened(record.olPzvKwsID, $"нельзя отменить окончание выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")
                             && !CheckPZVShiftClosed(record.olPzvKwsID, $"нельзя отменить окончание выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")))
                         {
                             record.ErrorSelection = 1;
                             record.SyncSelection = 0;
                             continue;
                         }
-                        if (record.olKodPodr != 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+                        if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
                         {
                             record.ErrorSelection = 1;
                             record.SyncSelection = 0;
@@ -4914,7 +4975,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     case 4:
                         //MessageBox.Show("Обновление сменного задания");
-                        await LoadSmenZadanyVyazNewDataAsync(vyazPodrKod);
+                        //await LoadSmenZadanyVyazNewDataAsync(vyazPodrKod);
+                        await LoadSmenZadanyVyazNewDataAsync(1);
                         break;
                     case 6:
                         advBandedGridViewSmenZadany.CollapseAllGroups();
@@ -5022,7 +5084,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { });
 
 
-                await LoadSmenZadanyVyazNewDataAsync(vyazPodrKod); ;
+                //await LoadSmenZadanyVyazNewDataAsync(vyazPodrKod); ;
+                await LoadSmenZadanyVyazNewDataAsync(1);
 
                 var changes = BindingSourceHelper.GetChanges<SmenZadanyVyaz>(
                         _smenZadanyVyazBindingSource,
@@ -5090,7 +5153,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 Debug.WriteLine($"advBandedGridViewSmenZadany_FocusedRowChanged triggered for new focused row handle {e.FocusedRowHandle}");
                 var _view = sender as AdvBandedGridView;
                 TopRowIndexSmenZadany = _view.FocusedRowHandle;
-                SmenZadanyFocusedRowChanged(e.FocusedRowHandle);
+                SmenZadanyFocusedRowChanged(_view, e.FocusedRowHandle);
                 Debug.WriteLine($"Finished advBandedGridViewSmenZadany_FocusedRowChanged for new focused row handle {e.FocusedRowHandle}");
             }
             catch (Exception ex)
@@ -5098,16 +5161,23 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 MessageBox.Show($"Ошибка advBandedGridViewSmenZadany_FocusedRowChanged: {ex.Message}");
             }
         }
-        private async void SmenZadanyFocusedRowChanged(int _focusedRowHandle)
+        private async void SmenZadanyFocusedRowChanged(GridView _gridView, int _focusedRowHandle)
         {
             try
             {
                 Debug.WriteLine($"SmenZadanyFocusedRowChanged triggered for focused row handle {_focusedRowHandle}");
-                var currentSmenZadanyVyaz = _smenZadanyVyazBindingSource.Current as SmenZadanyVyaz;
+                //var currentSmenZadanyVyaz = _smenZadanyVyazBindingSource.Current as SmenZadanyVyaz;
+                var currentSmenZadanyVyaz = _gridView.GetRow(_gridView.FocusedRowHandle) as SmenZadanyVyaz;
+                
                 if (currentSmenZadanyVyaz == null)
                     return;
-                await LoadKnitWorkingShiftSmenToMoveDataAsync(currentSmenZadanyVyaz.kwsKmaID);
-                int _xTab = currentSmenZadanyVyaz.kwsTabStart;
+                
+                if (vyazPodrKod == 1)
+                {
+                    await LoadKnitWorkingShiftSmenToMoveDataAsync(currentSmenZadanyVyaz.kwsKmaID);
+                }
+                
+                int _xTab = vyazPodrKod == 1? currentSmenZadanyVyaz.kwsTabStart : currentSmenZadanyVyaz.szTab;
                 int _xKmlID = currentSmenZadanyVyaz.kwsmlKmlID;
                 int _groupLevel = gridViewNaryadZadany.GetRowLevel(_focusedRowHandle);
 
@@ -5820,6 +5890,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private void gridViewRzvPachListByNom_CustomUnboundColumnData(object sender, CustomColumnDataEventArgs e)
         {
             if (e.IsGetData) e.Value = e.ListSourceRowIndex + 1;
+        }
+
+        private void gridViewSmenZadanyOtp_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        {
+            try
+            {
+                Debug.WriteLine($"gridViewSmenZadanyOtp_FocusedRowChanged triggered for new focused row handle {e.FocusedRowHandle}");
+                var _view = sender as GridView;
+                TopRowIndexSmenZadany = _view.FocusedRowHandle;
+                SmenZadanyFocusedRowChanged(_view, e.FocusedRowHandle);
+                Debug.WriteLine($"Finished gridViewSmenZadanyOtp_FocusedRowChanged for new focused row handle {e.FocusedRowHandle}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка gridViewSmenZadanyOtp_FocusedRowChanged: {ex.Message}");
+            }
         }
     }
 }
