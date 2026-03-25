@@ -92,11 +92,11 @@ namespace SewingProduction.Features.Articul.Service
         {
             if (string.Equals(item.PropertyName, nameof(SpArticulPreviewModel.Articul), StringComparison.OrdinalIgnoreCase))
             {
-                // Если в матрице заполнен "повторный артикул" — сравниваем строго (полное совпадение).
+                // в матрице заполнен "повторный артикул" — сравниваем строго 
                 if (item.FullMatch)
                     return AreEqualArticulFull(left, right);
 
-                // Иначе сравниваем частично.
+                // Иначе сравниваем частично
                 return AreEqualArticulPartial(left, right);
             }
 
@@ -138,7 +138,7 @@ namespace SewingProduction.Features.Articul.Service
             if (left is string ls && right is string rs)
                 return string.Equals(ls, rs, StringComparison.OrdinalIgnoreCase);
 
-            // На случай если "артикул" неожиданно придет не строкой — используем обычную проверку.
+            //на всякий
             return AreEqual(left, right);
         }
 
@@ -181,7 +181,7 @@ namespace SewingProduction.Features.Articul.Service
     public sealed class ComparisonResult
     {
         // Подсветка ошибок делается по `Mismatches`,
-        // а результат "совпало/не совпало" игнорирует часть полей (например, Сезон).
+        // а результат "совпало/не совпало" игнорирует часть полей (сезон).
         public bool IsMatch => SignificantMismatches.Count == 0;
         public List<FieldMismatch> Mismatches { get; } = new();
         public List<FieldMismatch> SignificantMismatches { get; } = new();
@@ -272,12 +272,6 @@ namespace SewingProduction.Features.Articul.Service
                     PropertyName = nameof(SpArticulPreviewModel.Sost3),
                     ExpectedValue = row.Sost3,
                     DisplayName = "Подклад / наполнитель"
-                },
-                new()
-                {
-                    PropertyName = nameof(SpArticulPreviewModel.Razm),
-                    ExpectedValue = row.RazmNames,
-                    DisplayName = "Размер"
                 },
                 new()
                 {

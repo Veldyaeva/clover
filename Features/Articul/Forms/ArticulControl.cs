@@ -98,7 +98,7 @@ namespace SewingProduction.Features.Articul.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при сравнении данных!!!!!!!!!!: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _=SafeLogAsync(() => _logger.LogErrorAsync(ex, $"{LoggerContext}.CompareAndHighlight"));
                 return result;
             }
             return result;
@@ -132,7 +132,6 @@ namespace SewingProduction.Features.Articul.Forms
 
                 ce.Properties.Appearance.ForeColor = Color.Red;
                 ce.ForeColor = Color.Red;
-                // DevExpress применяет ForeColor только когда включена опция UseForeColor.
                 ce.Properties.Appearance.Options.UseForeColor = true;
                 _dx.SetError(ce, "Значение отличается");
             }
