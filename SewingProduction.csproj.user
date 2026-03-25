@@ -247,6 +247,9 @@
     <Compile Update="Features\UserDistribution\Forms\Role\AllRole.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\UserDistribution\Forms\Role\RoleFormObject.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\UserDistribution\Forms\User\AllUser.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -6,6 +6,7 @@ using DevExpress.XtraDialogs.FileExplorerExtensions;
 using DevExpress.XtraGrid.Views.Grid;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Features.UserDistribution.DataService;
+using SewingProduction.Features.UserDistribution.Forms.MasterRight;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Helpers;
@@ -15,6 +16,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
 {
     public partial class AllUser : CustomForm
     {
+        public MrUserMode StartMode { get; set; } = MrUserMode.None;
         private readonly UserModel _userModel;
         private readonly UserClass _user;
         //private BindingList<UserModel> _userModelList;
@@ -37,10 +39,27 @@ namespace SewingProduction.Features.UserDistribution.Forms
             _userModelDataService = new UserModelDataService();
             _userRoleDataService = new UserRoleDataService();
             _roleDataService = new RoleDataService();
-            _allRoleDataService = new AllRoleDataService(dbHelper);
+            _allRoleDataService = new AllRoleDataService();
             _allProfileDataService = new AllProfileDataService(dbHelper);
             _user = user;
             SetupGrid();
+        }
+        protected override async void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+
+            await Task.Delay(100);
+
+            switch (StartMode)
+            {
+                case MrUserMode.New:
+                    StartCreateNewUser();
+                    break;
+
+                case MrUserMode.Copy:
+                    StartCopyUser();
+                    break;
+            }
         }
         private async void AllUser_Load(object sender, EventArgs e)
         {
@@ -56,20 +75,20 @@ namespace SewingProduction.Features.UserDistribution.Forms
             gridViewUsers.MasterRowGetRelationName += (s, e) => e.RelationName = "Роли";
             gridViewUsers.MasterRowGetChildList += async (s, e) =>
             {
-                e.ChildList = (await _userRoleDataService.GetRolesWithFlags(selectedUserId)).DefaultView;
+                e.ChildList = (await _userRoleDataService.GetRolesForUser(selectedUserId)).DefaultView;
             };
 
             gridViewRoles.CellValueChanging += async (s, e) =>
             {
                 Console.WriteLine("CellValueChanging");
-                if (e.Column.FieldName == "HasRole")
+                if (e.Column.FieldName == "IsSelected")
                 {
                     GridView roleView = s as GridView;
                     var row = roleView.GetDataRow(e.RowHandle);
                     int roleId = Convert.ToInt32(row["RoleID"]);
                     int userId = Convert.ToInt32(row["UserID"]);
-                    bool hasRole = Convert.ToBoolean(e.Value);
-                    if (hasRole)
+                    bool IsSelected = Convert.ToBoolean(e.Value);
+                    if (IsSelected)
                     {
                         await _userRoleDataService.AssignRoleAsync(userId, roleId);
                     }
@@ -150,7 +169,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             var Id = gridViewUsers.GetFocusedRowCellValue("UserID");
             selectedUserId = (Id != null && Id != DBNull.Value) ? Convert.ToInt32(Id) : 0;
-            Console.WriteLine("selected UserId: " + selectedUserId);
+            //Console.WriteLine("selected UserId: " + selectedUserId);
         }
         private void gridViewRoles_FocusedRow()
         {
@@ -159,7 +178,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             {
                 var Id = activeView.GetFocusedRowCellValue("RoleID");
                 selectedRoleId = Id != null ? Convert.ToInt32(Id) : 0;
-                Console.WriteLine("selected RoleId: " + selectedRoleId);
+                //Console.WriteLine("selected RoleId: " + selectedRoleId);
             }
         }
 
@@ -191,7 +210,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             var currentUser = gridViewUsers.GetFocusedRow() as UserModel;
             if (currentUser == null) return;
-            
+
             var names = Enumerable.Range(0, gridViewUsers.RowCount)
                 .Select(i => (gridViewUsers.GetRow(i) as UserModel)?.UserName)
                 .Where(n => !string.IsNullOrEmpty(n))
@@ -257,5 +276,24 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 mainForm.OpenForm(new UserPodr(_user));
             }
         }
+        #region master right
+        public void StartCreateNewUser()
+        {
+            gridViewUsers.AddNewRow();
+            customButtonCopyUser.Visible = false;
+            customButtonShareUser.Visible = false;
+            customButtonUserPodr.Visible = false;
+            customButtonDeleteUser.Visible = false;
+        }
+
+        public void StartCopyUser()
+        {
+            customButtonAddUser.Visible = false;
+            customButtonShareUser.Visible = false;
+            customButtonUserPodr.Visible = false;
+            customButtonDeleteUser.Visible = false;
+        }
+        #endregion
+
     }
 }

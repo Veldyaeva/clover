@@ -29,11 +29,11 @@ namespace SewingProduction.Features.UserDistribution.Models
             };
             return await _dbService.SaveEntityAsync("UserRoles", "UserRolesID", model);
         }
-        public async Task<DataTable> GetRolesWithFlags(int userId)
+        public async Task<DataTable> GetRolesForUser(int userId)
         {
             string query = @"
             SELECT r.RoleID, r.RoleName, r.Description,
-                   CASE WHEN ur.UserID IS NOT NULL THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS HasRole,
+                   CASE WHEN ur.UserID IS NOT NULL THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS IsSelected,
                    @UserID AS UserID
             FROM Roles r
             LEFT JOIN UserRoles ur ON r.RoleID = ur.RoleID AND ur.UserID = @UserID

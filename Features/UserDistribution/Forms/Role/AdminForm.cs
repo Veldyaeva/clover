@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
+using SewingProduction.Services;
 
 namespace SewingProduction.Features.UserDistribution.Forms
 {
@@ -19,7 +20,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         public AdminForm(UserClass user) : base(user)
         {
             InitializeComponent();
-            _adminFormDataService = new AdminFormDataService(dbHelper);
+            _adminFormDataService = new AdminFormDataService();
             _user = user;
         }
 
@@ -392,9 +393,9 @@ namespace SewingProduction.Features.UserDistribution.Forms
     public class AdminFormDataService
     {
         private readonly DatabaseHelper _dbHelper;
-        public AdminFormDataService(DatabaseHelper dbHelper)
+        public AdminFormDataService()
         {
-            _dbHelper = dbHelper;
+            _dbHelper = new DatabaseHelper();
         }
         public async Task<System.Data.DataTable> GetUser()
         {
@@ -487,7 +488,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         }
         private async void SetPravaForObject(int newId)
         {
-            AllRoleDataService allRoleDataService = new AllRoleDataService(_dbHelper);
+            AllRoleDataService allRoleDataService = new AllRoleDataService();
             await allRoleDataService.UpdateRoleObjectMode(1, newId, 2);
             Console.WriteLine("Назначены права администратору, объект:" + newId.ToString());
         }

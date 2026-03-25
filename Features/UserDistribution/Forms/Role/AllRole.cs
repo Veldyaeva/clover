@@ -8,6 +8,7 @@ using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
+using SewingProduction.Services;
 
 namespace SewingProduction.Features.UserDistribution.Forms
 {
@@ -23,7 +24,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         public AllRole(UserClass user) : base(user)
         {
             InitializeComponent();
-            _allRoleDataService = new AllRoleDataService(dbHelper);
+            _allRoleDataService = new AllRoleDataService();
             _user = user;
             SetupGrid();
         }
@@ -400,9 +401,9 @@ namespace SewingProduction.Features.UserDistribution.Forms
     public class AllRoleDataService
     {
         private readonly DatabaseHelper _dbHelper;
-        public AllRoleDataService(DatabaseHelper dbHelper)
+        public AllRoleDataService()
         {
-            _dbHelper = dbHelper;
+            _dbHelper = new DatabaseHelper();
         }
 
         #region бд роли

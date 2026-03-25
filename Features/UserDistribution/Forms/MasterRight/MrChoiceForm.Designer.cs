@@ -28,46 +28,87 @@
         /// </summary>
         private void InitializeComponent()
         {
-            customCheckedListBox1 = new CustomCheckedListBox();
-            resourcesCheckedListBoxControl1 = new DevExpress.XtraScheduler.UI.ResourcesCheckedListBoxControl();
-            ((System.ComponentModel.ISupportInitialize)resourcesCheckedListBoxControl1).BeginInit();
+            layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            treeListSteps = new DevExpress.XtraTreeList.TreeList();
+            colName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItemTree = new DevExpress.XtraLayout.LayoutControlItem();
+            ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
+            layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)treeListSteps).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItemTree).BeginInit();
             SuspendLayout();
             // 
-            // customCheckedListBox1
+            // layoutControl1
             // 
-            customCheckedListBox1.Font = new System.Drawing.Font("Arial", 10F);
-            customCheckedListBox1.FormattingEnabled = true;
-            customCheckedListBox1.Items.AddRange(new object[] { "Создать нового пользователя", "аа", "ааб" });
-            customCheckedListBox1.Location = new System.Drawing.Point(12, 12);
-            customCheckedListBox1.Name = "customCheckedListBox1";
-            customCheckedListBox1.ObjectName = null;
-            customCheckedListBox1.Size = new System.Drawing.Size(300, 256);
-            customCheckedListBox1.TabIndex = 0;
+            layoutControl1.Controls.Add(treeListSteps);
+            layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            layoutControl1.Location = new System.Drawing.Point(0, 0);
+            layoutControl1.Name = "layoutControl1";
+            layoutControl1.Root = Root;
+            layoutControl1.Size = new System.Drawing.Size(985, 530);
+            layoutControl1.TabIndex = 0;
+            layoutControl1.Text = "layoutControl1";
             // 
-            // resourcesCheckedListBoxControl1
+            // treeListSteps
             // 
-            resourcesCheckedListBoxControl1.Items.AddRange(new DevExpress.XtraEditors.Controls.CheckedListBoxItem[] { new DevExpress.XtraEditors.Controls.CheckedListBoxItem(null), new DevExpress.XtraEditors.Controls.CheckedListBoxItem(null) });
-            resourcesCheckedListBoxControl1.Location = new System.Drawing.Point(345, 38);
-            resourcesCheckedListBoxControl1.Name = "resourcesCheckedListBoxControl1";
-            resourcesCheckedListBoxControl1.Size = new System.Drawing.Size(268, 199);
-            resourcesCheckedListBoxControl1.TabIndex = 1;
+            treeListSteps.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] { colName });
+            treeListSteps.Location = new System.Drawing.Point(12, 12);
+            treeListSteps.Name = "treeListSteps";
+            treeListSteps.OptionsBehavior.AllowRecursiveNodeChecking = true;
+            treeListSteps.OptionsView.CheckBoxStyle = DevExpress.XtraTreeList.DefaultNodeCheckBoxStyle.Check;
+            treeListSteps.Size = new System.Drawing.Size(961, 506);
+            treeListSteps.TabIndex = 4;
+            treeListSteps.AfterCheckNode += treeListSteps_AfterCheckNode;
+            // 
+            // colName
+            // 
+            colName.Caption = "Шаг";
+            colName.FieldName = "Name";
+            colName.Name = "colName";
+            colName.Visible = true;
+            colName.VisibleIndex = 0;
+            // 
+            // Root
+            // 
+            Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            Root.GroupBordersVisible = false;
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItemTree });
+            Root.Name = "Root";
+            Root.Size = new System.Drawing.Size(985, 530);
+            Root.TextVisible = false;
+            // 
+            // layoutControlItemTree
+            // 
+            layoutControlItemTree.Control = treeListSteps;
+            layoutControlItemTree.Location = new System.Drawing.Point(0, 0);
+            layoutControlItemTree.Name = "layoutControlItemTree";
+            layoutControlItemTree.Size = new System.Drawing.Size(965, 510);
+            layoutControlItemTree.TextVisible = false;
             // 
             // MrChoiceForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1185, 602);
-            Controls.Add(resourcesCheckedListBoxControl1);
-            Controls.Add(customCheckedListBox1);
+            ClientSize = new System.Drawing.Size(985, 530);
+            Controls.Add(layoutControl1);
             Name = "MrChoiceForm";
-            Text = "MrChoiceForm";
-            ((System.ComponentModel.ISupportInitialize)resourcesCheckedListBoxControl1).EndInit();
+            Text = "Выбор шагов мастера";
+            ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
+            layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)treeListSteps).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Root).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItemTree).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private CustomCheckedListBox customCheckedListBox1;
-        private DevExpress.XtraScheduler.UI.ResourcesCheckedListBoxControl resourcesCheckedListBoxControl1;
+        private DevExpress.XtraLayout.LayoutControl layoutControl1;
+        private DevExpress.XtraTreeList.TreeList treeListSteps;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn colName;
+        private DevExpress.XtraLayout.LayoutControlGroup Root;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItemTree;
     }
 }

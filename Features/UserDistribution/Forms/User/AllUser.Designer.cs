@@ -129,7 +129,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // HasRole1
             // 
             HasRole1.Caption = "Доступ";
-            HasRole1.FieldName = "HasRole";
+            HasRole1.FieldName = "IsSelected";
             HasRole1.MinWidth = 23;
             HasRole1.Name = "HasRole1";
             HasRole1.Visible = true;

@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using Org.BouncyCastle.Asn1.Crmf;
 
-namespace SewingProduction.Features.UserDistribution.Forms.User
+namespace SewingProduction.Features.UserDistribution.Forms
 {
     partial class UserRole
         {
@@ -36,11 +36,11 @@ namespace SewingProduction.Features.UserDistribution.Forms.User
             gridViewRole = new DevExpress.XtraGrid.Views.Grid.GridView();
             IsSelectedRole = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemCheckEditPodr = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            NameRole = new DevExpress.XtraGrid.Columns.GridColumn();
+            RoleName = new DevExpress.XtraGrid.Columns.GridColumn();
             DescriptionRole = new DevExpress.XtraGrid.Columns.GridColumn();
-            PodrID = new DevExpress.XtraGrid.Columns.GridColumn();
-            PodrTableID = new DevExpress.XtraGrid.Columns.GridColumn();
-            UserPodrID = new DevExpress.XtraGrid.Columns.GridColumn();
+            RoleID = new DevExpress.XtraGrid.Columns.GridColumn();
+            RoleTableID = new DevExpress.XtraGrid.Columns.GridColumn();
+            UserRoleID = new DevExpress.XtraGrid.Columns.GridColumn();
             customGridControlUser = new SewingProduction.Core.Class.CustomGridControl();
             gridViewUser = new DevExpress.XtraGrid.Views.Grid.GridView();
             UserID = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -85,11 +85,11 @@ namespace SewingProduction.Features.UserDistribution.Forms.User
             // customGridControlRole
             // 
             customGridControlRole.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControlRole.Location = new System.Drawing.Point(574, 45);
+            customGridControlRole.Location = new System.Drawing.Point(574, 44);
             customGridControlRole.MainView = gridViewRole;
             customGridControlRole.Name = "customGridControlRole";
             customGridControlRole.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEditPodr });
-            customGridControlRole.Size = new System.Drawing.Size(605, 560);
+            customGridControlRole.Size = new System.Drawing.Size(605, 561);
             customGridControlRole.TabIndex = 5;
             customGridControlRole.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewRole });
             // 
@@ -109,7 +109,7 @@ namespace SewingProduction.Features.UserDistribution.Forms.User
             gridViewRole.Appearance.Row.Options.UseFont = true;
             gridViewRole.Appearance.TopNewRow.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             gridViewRole.Appearance.TopNewRow.Options.UseFont = true;
-            gridViewRole.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { IsSelectedRole, NameRole, DescriptionRole, PodrID, PodrTableID, UserPodrID });
+            gridViewRole.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { IsSelectedRole, RoleName, DescriptionRole, RoleID, RoleTableID, UserRoleID });
             gridViewRole.GridControl = customGridControlRole;
             gridViewRole.Name = "gridViewRole";
             gridViewRole.OptionsView.EnableAppearanceEvenRow = true;
@@ -127,7 +127,7 @@ namespace SewingProduction.Features.UserDistribution.Forms.User
             IsSelectedRole.Name = "IsSelectedRole";
             IsSelectedRole.Visible = true;
             IsSelectedRole.VisibleIndex = 0;
-            IsSelectedRole.Width = 102;
+            IsSelectedRole.Width = 89;
             // 
             // repositoryItemCheckEditPodr
             // 
@@ -136,16 +136,16 @@ namespace SewingProduction.Features.UserDistribution.Forms.User
             repositoryItemCheckEditPodr.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
             repositoryItemCheckEditPodr.CheckedChanged += repositoryItemCheckEditPodr_CheckedChanged;
             // 
-            // NameRole
+            // RoleName
             // 
-            NameRole.Caption = "Роль";
-            NameRole.FieldName = "Name";
-            NameRole.Name = "NameRole";
-            NameRole.OptionsColumn.AllowEdit = false;
-            NameRole.OptionsColumn.ReadOnly = true;
-            NameRole.Visible = true;
-            NameRole.VisibleIndex = 1;
-            NameRole.Width = 216;
+            RoleName.Caption = "Роль";
+            RoleName.FieldName = "RoleName";
+            RoleName.Name = "RoleName";
+            RoleName.OptionsColumn.AllowEdit = false;
+            RoleName.OptionsColumn.ReadOnly = true;
+            RoleName.Visible = true;
+            RoleName.VisibleIndex = 1;
+            RoleName.Width = 230;
             // 
             // DescriptionRole
             // 
@@ -156,43 +156,43 @@ namespace SewingProduction.Features.UserDistribution.Forms.User
             DescriptionRole.OptionsColumn.ReadOnly = true;
             DescriptionRole.Visible = true;
             DescriptionRole.VisibleIndex = 2;
-            DescriptionRole.Width = 183;
+            DescriptionRole.Width = 195;
             // 
-            // PodrID
+            // RoleID
             // 
-            PodrID.Caption = "PodrID";
-            PodrID.FieldName = "PodrID";
-            PodrID.Name = "PodrID";
-            PodrID.OptionsColumn.AllowEdit = false;
-            PodrID.OptionsColumn.ReadOnly = true;
-            PodrID.Width = 31;
+            RoleID.Caption = "RoleID";
+            RoleID.FieldName = "RoleID";
+            RoleID.Name = "RoleID";
+            RoleID.OptionsColumn.AllowEdit = false;
+            RoleID.OptionsColumn.ReadOnly = true;
+            RoleID.Width = 31;
             // 
-            // PodrTableID
+            // RoleTableID
             // 
-            PodrTableID.Caption = "PodrTableID";
-            PodrTableID.FieldName = "PodrTableID";
-            PodrTableID.Name = "PodrTableID";
-            PodrTableID.OptionsColumn.AllowEdit = false;
-            PodrTableID.OptionsColumn.ReadOnly = true;
-            PodrTableID.Width = 24;
+            RoleTableID.Caption = "RoleTableID";
+            RoleTableID.FieldName = "RoleTableID";
+            RoleTableID.Name = "RoleTableID";
+            RoleTableID.OptionsColumn.AllowEdit = false;
+            RoleTableID.OptionsColumn.ReadOnly = true;
+            RoleTableID.Width = 24;
             // 
-            // UserPodrID
+            // UserRoleID
             // 
-            UserPodrID.Caption = "UserPodrID";
-            UserPodrID.FieldName = "UserPodrID";
-            UserPodrID.Name = "UserPodrID";
-            UserPodrID.OptionsColumn.AllowEdit = false;
-            UserPodrID.OptionsColumn.ReadOnly = true;
-            UserPodrID.Width = 24;
+            UserRoleID.Caption = "UserRoleID";
+            UserRoleID.FieldName = "UserRoleID";
+            UserRoleID.Name = "UserRoleID";
+            UserRoleID.OptionsColumn.AllowEdit = false;
+            UserRoleID.OptionsColumn.ReadOnly = true;
+            UserRoleID.Width = 24;
             // 
             // customGridControlUser
             // 
             customGridControlUser.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            customGridControlUser.Location = new System.Drawing.Point(24, 45);
+            customGridControlUser.Location = new System.Drawing.Point(24, 44);
             customGridControlUser.MainView = gridViewUser;
             customGridControlUser.Name = "customGridControlUser";
             customGridControlUser.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEditUser });
-            customGridControlUser.Size = new System.Drawing.Size(522, 560);
+            customGridControlUser.Size = new System.Drawing.Size(522, 561);
             customGridControlUser.TabIndex = 4;
             customGridControlUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewUser });
             customGridControlUser.Click += customGridControlUser_Click;
@@ -233,7 +233,7 @@ namespace SewingProduction.Features.UserDistribution.Forms.User
             UserName.OptionsColumn.ReadOnly = true;
             UserName.Visible = true;
             UserName.VisibleIndex = 0;
-            UserName.Width = 119;
+            UserName.Width = 116;
             // 
             // FioID
             // 
@@ -253,7 +253,7 @@ namespace SewingProduction.Features.UserDistribution.Forms.User
             Fio.OptionsColumn.ReadOnly = true;
             Fio.Visible = true;
             Fio.VisibleIndex = 1;
-            Fio.Width = 200;
+            Fio.Width = 119;
             // 
             // IsSelected
             // 
@@ -263,7 +263,7 @@ namespace SewingProduction.Features.UserDistribution.Forms.User
             IsSelected.Name = "IsSelected";
             IsSelected.Visible = true;
             IsSelected.VisibleIndex = 2;
-            IsSelected.Width = 125;
+            IsSelected.Width = 92;
             // 
             // repositoryItemCheckEditUser
             // 
@@ -295,7 +295,7 @@ namespace SewingProduction.Features.UserDistribution.Forms.User
             layoutControlItem1.Control = customGridControlUser;
             layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(526, 564);
+            layoutControlItem1.Size = new System.Drawing.Size(526, 565);
             layoutControlItem1.TextVisible = false;
             // 
             // layoutControlGroupRole
@@ -311,7 +311,7 @@ namespace SewingProduction.Features.UserDistribution.Forms.User
             layoutControlItem2.Control = customGridControlRole;
             layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new System.Drawing.Size(609, 564);
+            layoutControlItem2.Size = new System.Drawing.Size(609, 565);
             layoutControlItem2.TextVisible = false;
             // 
             // UserRole
@@ -321,7 +321,7 @@ namespace SewingProduction.Features.UserDistribution.Forms.User
             ClientSize = new System.Drawing.Size(1203, 629);
             Controls.Add(layoutControl1);
             Name = "UserRole";
-            Text = "Администрирование табеля";
+            Text = "Назначение ролей пользователю";
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)customGridControlRole).EndInit();
@@ -350,10 +350,10 @@ namespace SewingProduction.Features.UserDistribution.Forms.User
             private Core.Class.CustomGridControl customGridControlRole;
             private DevExpress.XtraGrid.Views.Grid.GridView gridViewRole;
             private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
-            private DevExpress.XtraGrid.Columns.GridColumn PodrID;
-            private DevExpress.XtraGrid.Columns.GridColumn PodrTableID;
+            private DevExpress.XtraGrid.Columns.GridColumn RoleID;
+            private DevExpress.XtraGrid.Columns.GridColumn RoleTableID;
             private DevExpress.XtraGrid.Columns.GridColumn DescriptionRole;
-            private DevExpress.XtraGrid.Columns.GridColumn NameRole;
+            private DevExpress.XtraGrid.Columns.GridColumn RoleName;
             private DevExpress.XtraGrid.Columns.GridColumn IsSelectedRole;
             private DevExpress.XtraGrid.Columns.GridColumn UserID;
             private DevExpress.XtraGrid.Columns.GridColumn UserName;
@@ -362,6 +362,6 @@ namespace SewingProduction.Features.UserDistribution.Forms.User
             private DevExpress.XtraGrid.Columns.GridColumn IsSelected;
             private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEditPodr;
             private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEditUser;
-            private DevExpress.XtraGrid.Columns.GridColumn UserPodrID;
+            private DevExpress.XtraGrid.Columns.GridColumn UserRoleID;
         }
     }

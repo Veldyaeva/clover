@@ -29,7 +29,7 @@ namespace SewingProduction.Features.UserDistribution
         {
             InitializeComponent();
             _user = user;
-            _data = new AllRoleDataService(_db);
+            _data = new AllRoleDataService();
             SetupUiBehavior();
         }
         public AllDistribution()

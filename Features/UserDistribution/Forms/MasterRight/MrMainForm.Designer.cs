@@ -28,31 +28,171 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            ((System.ComponentModel.ISupportInitialize)panelControl1).BeginInit();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MrMainForm));
+            splitContainerControlMain = new DevExpress.XtraEditors.SplitContainerControl();
+            panelControlSteps = new DevExpress.XtraEditors.PanelControl();
+            listBoxControlSteps = new DevExpress.XtraEditors.ListBoxControl();
+            panelContent = new DevExpress.XtraEditors.PanelControl();
+            panelControlBottom = new DevExpress.XtraEditors.PanelControl();
+            customButtonCancel = new SewingProduction.Core.Class.CustomButton();
+            btnFinish = new SewingProduction.Core.Class.CustomButton();
+            btnBack = new SewingProduction.Core.Class.CustomButton();
+            btnNext = new SewingProduction.Core.Class.CustomButton();
+            ((System.ComponentModel.ISupportInitialize)splitContainerControlMain).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitContainerControlMain.Panel1).BeginInit();
+            splitContainerControlMain.Panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainerControlMain.Panel2).BeginInit();
+            splitContainerControlMain.Panel2.SuspendLayout();
+            splitContainerControlMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)panelControlSteps).BeginInit();
+            panelControlSteps.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)listBoxControlSteps).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)panelContent).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)panelControlBottom).BeginInit();
+            panelControlBottom.SuspendLayout();
             SuspendLayout();
             // 
-            // panelControl1
+            // splitContainerControlMain
             // 
-            panelControl1.Location = new System.Drawing.Point(12, 12);
-            panelControl1.Name = "panelControl1";
-            panelControl1.Size = new System.Drawing.Size(1224, 600);
-            panelControl1.TabIndex = 0;
+            splitContainerControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            splitContainerControlMain.Location = new System.Drawing.Point(0, 0);
+            splitContainerControlMain.Name = "splitContainerControlMain";
+            // 
+            // splitContainerControlMain.Panel1
+            // 
+            splitContainerControlMain.Panel1.Controls.Add(panelControlSteps);
+            splitContainerControlMain.Panel1.Text = "Panel1";
+            // 
+            // splitContainerControlMain.Panel2
+            // 
+            splitContainerControlMain.Panel2.Controls.Add(panelContent);
+            splitContainerControlMain.Panel2.Controls.Add(panelControlBottom);
+            splitContainerControlMain.Panel2.Text = "Panel2";
+            splitContainerControlMain.Size = new System.Drawing.Size(1400, 800);
+            splitContainerControlMain.SplitterPosition = 280;
+            splitContainerControlMain.TabIndex = 0;
+            // 
+            // panelControlSteps
+            // 
+            panelControlSteps.Controls.Add(listBoxControlSteps);
+            panelControlSteps.Dock = System.Windows.Forms.DockStyle.Fill;
+            panelControlSteps.Location = new System.Drawing.Point(0, 0);
+            panelControlSteps.Name = "panelControlSteps";
+            panelControlSteps.Size = new System.Drawing.Size(280, 800);
+            panelControlSteps.TabIndex = 0;
+            // 
+            // listBoxControlSteps
+            // 
+            listBoxControlSteps.Appearance.Font = new System.Drawing.Font("Arial", 11F);
+            listBoxControlSteps.Appearance.Options.UseFont = true;
+            listBoxControlSteps.Dock = System.Windows.Forms.DockStyle.Fill;
+            listBoxControlSteps.Location = new System.Drawing.Point(2, 2);
+            listBoxControlSteps.Name = "listBoxControlSteps";
+            listBoxControlSteps.Size = new System.Drawing.Size(276, 796);
+            listBoxControlSteps.TabIndex = 0;
+            // 
+            // panelContent
+            // 
+            panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            panelContent.Location = new System.Drawing.Point(0, 0);
+            panelContent.Name = "panelContent";
+            panelContent.Size = new System.Drawing.Size(1110, 738);
+            panelContent.TabIndex = 0;
+            // 
+            // panelControlBottom
+            // 
+            panelControlBottom.Controls.Add(customButtonCancel);
+            panelControlBottom.Controls.Add(btnFinish);
+            panelControlBottom.Controls.Add(btnBack);
+            panelControlBottom.Controls.Add(btnNext);
+            panelControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            panelControlBottom.Location = new System.Drawing.Point(0, 738);
+            panelControlBottom.Name = "panelControlBottom";
+            panelControlBottom.Size = new System.Drawing.Size(1110, 62);
+            panelControlBottom.TabIndex = 1;
+            // 
+            // customButtonCancel
+            // 
+            customButtonCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            customButtonCancel.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonCancel.Location = new System.Drawing.Point(12, 18);
+            customButtonCancel.Name = "customButtonCancel";
+            customButtonCancel.Size = new System.Drawing.Size(120, 30);
+            customButtonCancel.TabIndex = 0;
+            customButtonCancel.Text = "Отмена";
+            customButtonCancel.UseVisualStyleBackColor = true;
+            customButtonCancel.Click += btnCancel_Click;
+            // 
+            // btnFinish
+            // 
+            btnFinish.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            btnFinish.Font = new System.Drawing.Font("Arial", 10F);
+            btnFinish.Location = new System.Drawing.Point(724, 18);
+            btnFinish.Name = "btnFinish";
+            btnFinish.Size = new System.Drawing.Size(120, 30);
+            btnFinish.TabIndex = 1;
+            btnFinish.Text = "Завершить";
+            btnFinish.UseVisualStyleBackColor = true;
+            btnFinish.Click += btnFinish_Click;
+            // 
+            // btnBack
+            // 
+            btnBack.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            btnBack.Font = new System.Drawing.Font("Arial", 10F);
+            btnBack.Location = new System.Drawing.Point(850, 18);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new System.Drawing.Size(120, 30);
+            btnBack.TabIndex = 2;
+            btnBack.Text = "Назад";
+            btnBack.UseVisualStyleBackColor = true;
+            btnBack.Click += btnBack_Click;
+            // 
+            // btnNext
+            // 
+            btnNext.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            btnNext.Font = new System.Drawing.Font("Arial", 10F);
+            btnNext.Location = new System.Drawing.Point(976, 18);
+            btnNext.Name = "btnNext";
+            btnNext.Size = new System.Drawing.Size(120, 30);
+            btnNext.TabIndex = 3;
+            btnNext.Text = "Далее";
+            btnNext.UseVisualStyleBackColor = true;
+            btnNext.Click += btnNext_Click;
             // 
             // MrMainForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1248, 661);
-            Controls.Add(panelControl1);
+            ClientSize = new System.Drawing.Size(1400, 800);
+            Controls.Add(splitContainerControlMain);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "MrMainForm";
             Text = "Мастер распределения прав";
-            ((System.ComponentModel.ISupportInitialize)panelControl1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)splitContainerControlMain.Panel1).EndInit();
+            splitContainerControlMain.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainerControlMain.Panel2).EndInit();
+            splitContainerControlMain.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainerControlMain).EndInit();
+            splitContainerControlMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)panelControlSteps).EndInit();
+            panelControlSteps.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)listBoxControlSteps).EndInit();
+            ((System.ComponentModel.ISupportInitialize)panelContent).EndInit();
+            ((System.ComponentModel.ISupportInitialize)panelControlBottom).EndInit();
+            panelControlBottom.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private DevExpress.XtraEditors.PanelControl panelControl1;
+        private DevExpress.XtraEditors.SplitContainerControl splitContainerControlMain;
+        private DevExpress.XtraEditors.PanelControl panelControlSteps;
+        private DevExpress.XtraEditors.ListBoxControl listBoxControlSteps;
+        private DevExpress.XtraEditors.PanelControl panelContent;
+        private DevExpress.XtraEditors.PanelControl panelControlBottom;
+        private SewingProduction.Core.Class.CustomButton customButtonCancel;
+        private SewingProduction.Core.Class.CustomButton btnFinish;
+        private SewingProduction.Core.Class.CustomButton btnBack;
+        private SewingProduction.Core.Class.CustomButton btnNext;
     }
 }
