@@ -265,7 +265,6 @@ namespace SewingProduction.Features.Articul
                 // включить редактирование (если нужно)
                 // articulControl1.IsReadOnly = false;
 
-
                 // (желательно) чтобы при повторном вызове не плодились биндинги
                 chbIsUpak.DataBindings.Clear();
                 chbIsFurnit.DataBindings.Clear();

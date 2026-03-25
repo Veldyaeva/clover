@@ -27,6 +27,7 @@ namespace SewingProduction.Features.Articul.Models
         
         public DateTime? DatePublic { get; set; }
         public string Tm_name { get; set; }
+        public string Kle {  get; set; }
         public string Grup { get; set; }
         public string Text_mo { get; set; }
         public string Kod_v { get; set; }
@@ -48,7 +49,6 @@ namespace SewingProduction.Features.Articul.Models
         public string Sost3 { get; set; }
         public int Ag_id { get; set; }
         public int Id_gost { get; set; }
-
         public DateTime? DateCertificationApproval { get; set; }
 
 
