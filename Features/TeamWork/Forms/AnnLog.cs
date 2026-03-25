@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -150,7 +150,10 @@ namespace SewingProduction.Features.TeamWork.Forms
 				gridView1.CalcPreviewText -= GridView1_CalcPreviewText;
 				gridView1.CalcPreviewText += GridView1_CalcPreviewText;
 			}
-			catch { }
+			catch (Exception ex)
+			{
+				_ = _logger.LogErrorAsync(ex, "ConfigureGridForCompactRow");
+			}
 		}
 
 		// Обработчик формирования текста превью
@@ -207,7 +210,10 @@ namespace SewingProduction.Features.TeamWork.Forms
 				}
 				e.PreviewText = sb.ToString();
 			}
-			catch { }
+			catch (Exception ex)
+			{
+				_ = _logger.LogErrorAsync(ex, "GridView1_CalcPreviewText");
+			}
 		}
 
 		// Поиск первого существующего столбца по списку возможных имён

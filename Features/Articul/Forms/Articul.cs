@@ -145,6 +145,7 @@ namespace SewingProduction.Features.Articul
 
                 //привязываем правую панель
                 InitializeBindings();
+                AttachGridCopyContextMenus();
 
                 //обновляем состояние кнопки архива при загрузке
                 SyncArchiveButtonCaption();
@@ -157,6 +158,35 @@ namespace SewingProduction.Features.Articul
             {
                 LogError(ex, nameof(Articul_Load));
             }
+        }
+
+        private void AttachGridCopyContextMenus()
+        {
+            // Унифицированное ПКМ-меню "Копировать значение ячейки" для гридов.
+            gridControl1.PopupMenuShowing -= GridCopyPopupMenuShowing;
+            gridControl1.PopupMenuShowing += GridCopyPopupMenuShowing;
+
+            gridView1.PopupMenuShowing -= GridCopyPopupMenuShowing;
+            gridView1.PopupMenuShowing += GridCopyPopupMenuShowing;
+
+            // gridArt has 2 views (gridControl1 and gridView3)
+            gridView3.PopupMenuShowing -= GridCopyPopupMenuShowing;
+            gridView3.PopupMenuShowing += GridCopyPopupMenuShowing;
+
+            gridViewKomplSost.PopupMenuShowing -= GridCopyPopupMenuShowing;
+            gridViewKomplSost.PopupMenuShowing += GridCopyPopupMenuShowing;
+
+            // cGridKomplSost has 2 views (gridViewKomplSost and gridView2)
+            gridView2.PopupMenuShowing -= GridCopyPopupMenuShowing;
+            gridView2.PopupMenuShowing += GridCopyPopupMenuShowing;
+
+            gridViewNaborSost.PopupMenuShowing -= GridCopyPopupMenuShowing;
+            gridViewNaborSost.PopupMenuShowing += GridCopyPopupMenuShowing;
+        }
+
+        private void GridCopyPopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            GridContextMenuHelper.AddCopyCellMenuItem(sender, e);
         }
 
         private void InitialiseEmptyZero()

@@ -1,4 +1,4 @@
-﻿using DevExpress.Mvvm.Native;
+using DevExpress.Mvvm.Native;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using SewingProduction.Core.Models;
@@ -374,12 +374,26 @@ namespace SewingProduction.Features.Articul.Forms
                 string imagePath = await _matrixService.GetFileEskizNN(currentRow.Nn);// загружаем эскиз для текущего артикула матрицы
                 pictureBoxMatrix.ImageLocation = string.IsNullOrWhiteSpace(imagePath) ? null : imagePath;// отображаем эскиз, если он есть, или очищаем картинку, если эскиза нет
 
+                await fillCompareTable();
+
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при загрузке данных для сравнения артикула");
                 throw;
             }
+        }
+
+        private async Task fillCompareTable()
+        {
+            var currentRow1 = _bindingSourceArticulCompare.Current as SpArtPreviewModel;// получаем текущую выбранную строку из грида сравнения
+            string kod = currentRow1?.Kod;// извлекаем код артикула для загрузки деталей, если строка выбрана, или null, если строка не выбрана
+
+            gridViewArtCompare.ShowLoadingPanel();// показываем индикатор загрузки, так как загрузка деталей может занять некоторое время
+            _bsDetails?.Clear();// очищаем предыдущие детали, чтобы не было "висячих" данных от предыдущего сравнения, пока загружаются новые детали
+            //          _bsDetails.DataSource = await _articulDataService.GetByKodAsync(kod);
+            await CompareSelectedArticulAsync();// загружаем детали для выбранного артикула сравнения и выполняем сравнение с текущим артикулом матрицы, результат сравнения сохраняем в поле _lastCompareResult, чтобы при сохранении матрицы знать, нужно ли сохранять изменения или нет
+            gridViewArtCompare.HideLoadingPanel();// скрываем индикатор загрузки после завершения загрузки деталей и сравнения
         }
 
         /// <summary>
@@ -392,21 +406,8 @@ namespace SewingProduction.Features.Articul.Forms
         {
             try
             {
-                var currentRow = _bindingSourceArticulCompare.Current as SpArtPreviewModel;// получаем текущую выбранную строку из грида сравнения
-                string kod = currentRow?.Kod;// извлекаем код артикула для загрузки деталей, если строка выбрана, или null, если строка не выбрана
-
-                gridViewArtCompare.ShowLoadingPanel();// показываем индикатор загрузки, так как загрузка деталей может занять некоторое время
-
-                _bsDetails?.Clear();// очищаем предыдущие детали, чтобы не было "висячих" данных от предыдущего сравнения, пока загружаются новые детали
-                if (string.IsNullOrEmpty(kod))// если код артикула для сравнения не выбран, скрываем индикатор загрузки и выходим из метода
-                {
-                    gridViewArtCompare.HideLoadingPanel();// скрываем индикатор загрузки и
-                    return;// выходим из метода, так как нет артикула для загрузки деталей
-                }
-                //          _bsDetails.DataSource = await _articulDataService.GetByKodAsync(kod);
-                await CompareSelectedArticulAsync();// загружаем детали для выбранного артикула сравнения и выполняем сравнение с текущим артикулом матрицы, результат сравнения сохраняем в поле _lastCompareResult, чтобы при сохранении матрицы знать, нужно ли сохранять изменения или нет
-                gridViewArtCompare.HideLoadingPanel();// скрываем индикатор загрузки после завершения загрузки деталей и сравнения
-
+                //var currentRow = _bindingSourceArticulCompare.Current as SpArticulPreviewModel;// получаем текущую выбранную строку из грида сравнения
+                await fillCompareTable();
             }
             catch (Exception ex)
             {
@@ -417,7 +418,9 @@ namespace SewingProduction.Features.Articul.Forms
             {
                 gridViewArtCompare.HideLoadingPanel();
             }
+
         }
+
         /// <summary>
         /// Загружает детали для выбранного артикула сравнения и выполняет сравнение с текущим артикулом матрицы, результат сравнения сохраняет в поле _lastCompareResult, 
         /// чтобы при сохранении матрицы знать, нужно ли сохранять изменения или нет
@@ -425,26 +428,41 @@ namespace SewingProduction.Features.Articul.Forms
         /// <returns></returns>
         private async Task CompareSelectedArticulAsync()
         {
-            var matrixRow = _bindingSourceArtMatr.Current as CreateArticulMatrModel;// получаем текущую выбранную строку из матрицы, с которой будем сравнивать
-            var comparePreview = _bindingSourceArticulCompare.Current as SpArtPreviewModel;// получаем текущую выбранную строку из грида сравнения, с которой будем сравнивать
-
-            articulControl1.ClearComparisonHighlight();// очищаем предыдущую подсветку сравнения, чтобы не было "висячей" подсветки от предыдущего сравнения
-
-            if (matrixRow == null || comparePreview == null || string.IsNullOrWhiteSpace(comparePreview.Kod))// если не выбрана строка для сравнения или в выбранной строке нет кода артикула для сравнения, очищаем детали и выходим из метода, так как нечего сравнивать
+            try
             {
-                _bsDetails.Clear();// очищаем детали, чтобы не было "висячих" данных от предыдущего сравнения, так как нет артикула для сравнения
-                return;
+                var matrixRow = _bindingSourceArtMatr.Current as CreateArticulMatrModel;// получаем текущую выбранную строку из матрицы, с которой будем сравнивать
+                var compareRow = _bindingSourceArticulCompare.Current as SpArtPreviewModel;// получаем текущую выбранную строку из грида сравнения, с которой будем сравнивать
+                
+
+                articulControl1.ClearComparisonHighlight();// очищаем предыдущую подсветку сравнения, чтобы не было "висячей" подсветки от предыдущего сравнения
+
+                string kod = compareRow?.Kod;// извлекаем код артикула для загрузки деталей, если строка выбрана, или null, если строка не выбрана
+
+                //SpArticulPreviewModel comparePreview = await _articulDataService.GetByKodAsync(kod);
+
+
+                if (matrixRow == null || compareRow == null || string.IsNullOrWhiteSpace(compareRow.Kod))// если не выбрана строка для сравнения или в выбранной строке нет кода артикула для сравнения, очищаем детали и выходим из метода, так как нечего сравнивать
+                {
+                    _bsDetails.Clear();// очищаем детали, чтобы не было "висячих" данных от предыдущего сравнения, так как нет артикула для сравнения
+                    _lastCompareResult = false;
+                    return;
+                }
+
+                var details = await _articulDataService.GetByKodAsync(compareRow.Kod);// загружаем детали для выбранного артикула сравнения
+                _bsDetails.DataSource = details;// устанавливаем источник данных для деталей, которые отображаются в articulControl1, при этом articulControl1 должен автоматически обновить отображение деталей, так как он привязан к _bsDetails
+                _bsDetails.ResetBindings(false);// сбрасываем привязки, чтобы гарантировать обновление отображения деталей в articulControl1, так как мы изменили источник данных
+
+                var compareItems = CreateArticulMatrComparisonBuilder.Build(matrixRow);// создаем список полей для сравнения на основе текущей строки матрицы, который будет использоваться в articulControl1 для сравнения и подсветки различий
+                var result = articulControl1.CompareAndHighlight(compareItems);// выполняем сравнение и подсветку различий в articulControl1, результат сравнения сохраняем в переменной result, которая содержит информацию о том, совпадают ли артикулы полностью (IsMatch) и какие поля отличаются (Mismatches)
+                                                                               // тут можно сохранить флаг в поле формы
+                _lastCompareResult = result.IsMatch;// сохраняем результат сравнения в поле формы, чтобы при сохранении матрицы знать, нужно ли сохранять изменения или нет, так как если артикулы совпадают полностью, то сохранять изменения не нужно, так как они не изменились по сравнению с выбранным артикулом сравнения
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString() +"213");
+                _lastCompareResult = false;
             }
 
-            var details = await _articulDataService.GetByKodAsync(comparePreview.Kod);// загружаем детали для выбранного артикула сравнения
-            _bsDetails.DataSource = details;// устанавливаем источник данных для деталей, которые отображаются в articulControl1, при этом articulControl1 должен автоматически обновить отображение деталей, так как он привязан к _bsDetails
-            _bsDetails.ResetBindings(false);// сбрасываем привязки, чтобы гарантировать обновление отображения деталей в articulControl1, так как мы изменили источник данных
-
-            var compareItems = CreateArticulMatrComparisonBuilder.Build(matrixRow);// создаем список полей для сравнения на основе текущей строки матрицы, который будет использоваться в articulControl1 для сравнения и подсветки различий
-            var result = articulControl1.CompareAndHighlight(compareItems);// выполняем сравнение и подсветку различий в articulControl1, результат сравнения сохраняем в переменной result, которая содержит информацию о том, совпадают ли артикулы полностью (IsMatch) и какие поля отличаются (Mismatches)
-                                                                           // тут можно сохранить флаг в поле формы
-            _lastCompareResult = result.IsMatch;// сохраняем результат сравнения в поле формы, чтобы при сохранении матрицы знать, нужно ли сохранять изменения или нет, так как если артикулы совпадают полностью, то сохранять изменения не нужно, так как они не изменились по сравнению с выбранным артикулом сравнения
         }
-
     }
 }
