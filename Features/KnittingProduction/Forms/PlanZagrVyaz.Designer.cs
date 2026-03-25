@@ -598,12 +598,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridSmenZadanyOtpColumnSzFio.Name = "gridSmenZadanyOtpColumnSzFio";
             gridSmenZadanyOtpColumnSzFio.Visible = true;
             gridSmenZadanyOtpColumnSzFio.VisibleIndex = 0;
-            gridSmenZadanyOtpColumnSzFio.Width = 200;
+            gridSmenZadanyOtpColumnSzFio.Width = 145;
             // 
             // gridSmenZadanyOtpColumnSzDolgn
             // 
             gridSmenZadanyOtpColumnSzDolgn.Caption = "Д";
             gridSmenZadanyOtpColumnSzDolgn.Name = "gridSmenZadanyOtpColumnSzDolgn";
+            gridSmenZadanyOtpColumnSzDolgn.OptionsColumn.FixedWidth = true;
             gridSmenZadanyOtpColumnSzDolgn.Visible = true;
             gridSmenZadanyOtpColumnSzDolgn.VisibleIndex = 1;
             gridSmenZadanyOtpColumnSzDolgn.Width = 45;
@@ -612,73 +613,82 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             gridSmenZadanyOtpColumnSzTab.Caption = "Номер МОД";
             gridSmenZadanyOtpColumnSzTab.Name = "gridSmenZadanyOtpColumnSzTab";
+            gridSmenZadanyOtpColumnSzTab.OptionsColumn.FixedWidth = true;
             gridSmenZadanyOtpColumnSzTab.Visible = true;
             gridSmenZadanyOtpColumnSzTab.VisibleIndex = 2;
-            gridSmenZadanyOtpColumnSzTab.Width = 45;
+            gridSmenZadanyOtpColumnSzTab.Width = 60;
             // 
             // gridSmenZadanyOtpColumnSzKoefVNV
             // 
             gridSmenZadanyOtpColumnSzKoefVNV.Caption = "КЭ ВНВ";
             gridSmenZadanyOtpColumnSzKoefVNV.Name = "gridSmenZadanyOtpColumnSzKoefVNV";
+            gridSmenZadanyOtpColumnSzKoefVNV.OptionsColumn.FixedWidth = true;
             gridSmenZadanyOtpColumnSzKoefVNV.Visible = true;
             gridSmenZadanyOtpColumnSzKoefVNV.VisibleIndex = 3;
-            gridSmenZadanyOtpColumnSzKoefVNV.Width = 35;
+            gridSmenZadanyOtpColumnSzKoefVNV.Width = 45;
             // 
             // gridSmenZadanyOtpColumnSzPlanHours
             // 
             gridSmenZadanyOtpColumnSzPlanHours.Caption = "План на смену, ч/час";
             gridSmenZadanyOtpColumnSzPlanHours.Name = "gridSmenZadanyOtpColumnSzPlanHours";
+            gridSmenZadanyOtpColumnSzPlanHours.OptionsColumn.FixedWidth = true;
             gridSmenZadanyOtpColumnSzPlanHours.Visible = true;
             gridSmenZadanyOtpColumnSzPlanHours.VisibleIndex = 4;
-            gridSmenZadanyOtpColumnSzPlanHours.Width = 55;
+            gridSmenZadanyOtpColumnSzPlanHours.Width = 70;
             // 
             // gridSmenZadanyOtpColumnSzNaznHours
             // 
             gridSmenZadanyOtpColumnSzNaznHours.Caption = "Задание на смену, ч/час";
             gridSmenZadanyOtpColumnSzNaznHours.Name = "gridSmenZadanyOtpColumnSzNaznHours";
+            gridSmenZadanyOtpColumnSzNaznHours.OptionsColumn.FixedWidth = true;
             gridSmenZadanyOtpColumnSzNaznHours.Visible = true;
             gridSmenZadanyOtpColumnSzNaznHours.VisibleIndex = 5;
-            gridSmenZadanyOtpColumnSzNaznHours.Width = 55;
+            gridSmenZadanyOtpColumnSzNaznHours.Width = 70;
             // 
             // gridSmenZadanyOtpColumnSzPlanNaznPercent
             // 
-            gridSmenZadanyOtpColumnSzPlanNaznPercent.Caption = "Обеспеченность раб., %";
+            gridSmenZadanyOtpColumnSzPlanNaznPercent.Caption = "Обеспе ченность раб., %";
             gridSmenZadanyOtpColumnSzPlanNaznPercent.Name = "gridSmenZadanyOtpColumnSzPlanNaznPercent";
+            gridSmenZadanyOtpColumnSzPlanNaznPercent.OptionsColumn.FixedWidth = true;
             gridSmenZadanyOtpColumnSzPlanNaznPercent.Visible = true;
             gridSmenZadanyOtpColumnSzPlanNaznPercent.VisibleIndex = 6;
-            gridSmenZadanyOtpColumnSzPlanNaznPercent.Width = 55;
+            gridSmenZadanyOtpColumnSzPlanNaznPercent.Width = 70;
             // 
             // gridSmenZadanyOtpColumnSzHoursToDo
             // 
             gridSmenZadanyOtpColumnSzHoursToDo.Caption = "Задание в работу, ч/час";
             gridSmenZadanyOtpColumnSzHoursToDo.Name = "gridSmenZadanyOtpColumnSzHoursToDo";
+            gridSmenZadanyOtpColumnSzHoursToDo.OptionsColumn.FixedWidth = true;
             gridSmenZadanyOtpColumnSzHoursToDo.Visible = true;
             gridSmenZadanyOtpColumnSzHoursToDo.VisibleIndex = 7;
-            gridSmenZadanyOtpColumnSzHoursToDo.Width = 55;
+            gridSmenZadanyOtpColumnSzHoursToDo.Width = 70;
             // 
             // gridSmenZadanyOtpColumnSzHoursDone
             // 
             gridSmenZadanyOtpColumnSzHoursDone.Caption = "Задание выполнено, ч/час";
             gridSmenZadanyOtpColumnSzHoursDone.Name = "gridSmenZadanyOtpColumnSzHoursDone";
+            gridSmenZadanyOtpColumnSzHoursDone.OptionsColumn.FixedWidth = true;
             gridSmenZadanyOtpColumnSzHoursDone.Visible = true;
             gridSmenZadanyOtpColumnSzHoursDone.VisibleIndex = 8;
-            gridSmenZadanyOtpColumnSzHoursDone.Width = 55;
+            gridSmenZadanyOtpColumnSzHoursDone.Width = 80;
             // 
             // gridSmenZadanyOtpColumnSzShiftVNV
             // 
             gridSmenZadanyOtpColumnSzShiftVNV.Caption = "КЭ ВНВ смены";
             gridSmenZadanyOtpColumnSzShiftVNV.Name = "gridSmenZadanyOtpColumnSzShiftVNV";
+            gridSmenZadanyOtpColumnSzShiftVNV.OptionsColumn.FixedWidth = true;
             gridSmenZadanyOtpColumnSzShiftVNV.Visible = true;
             gridSmenZadanyOtpColumnSzShiftVNV.VisibleIndex = 9;
-            gridSmenZadanyOtpColumnSzShiftVNV.Width = 35;
+            gridSmenZadanyOtpColumnSzShiftVNV.Width = 50;
             // 
             // gridSmenZadanyOtpColumnSzDTab
             // 
             gridSmenZadanyOtpColumnSzDTab.Caption = "День в табеле";
             gridSmenZadanyOtpColumnSzDTab.Name = "gridSmenZadanyOtpColumnSzDTab";
+            gridSmenZadanyOtpColumnSzDTab.OptionsColumn.FixedWidth = true;
             gridSmenZadanyOtpColumnSzDTab.Visible = true;
             gridSmenZadanyOtpColumnSzDTab.VisibleIndex = 10;
-            gridSmenZadanyOtpColumnSzDTab.Width = 35;
+            gridSmenZadanyOtpColumnSzDTab.Width = 60;
             // 
             // gridControlSmenZadany
             // 
@@ -1190,7 +1200,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridPlanTotalQuantityByArticulColumnKod
             // 
-            gridPlanTotalQuantityByArticulColumnKod.Caption = "kod";
+            gridPlanTotalQuantityByArticulColumnKod.Caption = "Kod";
             gridPlanTotalQuantityByArticulColumnKod.Name = "gridPlanTotalQuantityByArticulColumnKod";
             // 
             // gridPlanTotalQuantityByArticulColumnArticul
