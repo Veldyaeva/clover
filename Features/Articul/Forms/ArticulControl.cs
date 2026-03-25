@@ -31,6 +31,8 @@ namespace SewingProduction.Features.Articul.Forms
     new(StringComparer.OrdinalIgnoreCase);
 
         private readonly Dictionary<Control, Color> _originalBackColors = new();
+        private readonly Dictionary<Control, Color> _originalForeColors = new();
+        private readonly Dictionary<Control, bool> _originalUseForeColors = new();
         private readonly FieldComparisonService _comparisonService = new();
         private bool _comparisonMapBuilt;
         /// <summary>
@@ -77,57 +79,28 @@ namespace SewingProduction.Features.Articul.Forms
             var start = i + 1;
             return start < name.Length ? name.Substring(start) : null;
         }
-        //public ComparisonResult CompareAndHighlight(IEnumerable<FieldComparisonItem> items)
-        //{
-        //    ClearComparisonHighlight();
-
-        //    if (Model == null)
-        //        return new ComparisonResult();
-
-        //    BuildComparisonMap();
-
-        //    var result = new ComparisonResult();
-        //    var modelType = Model.GetType();
-
-        //    foreach (var item in items)
-        //    {
-        //        var prop = modelType.GetProperty(item.PropertyName);
-        //        if (prop == null) continue;
-
-        //        var actual = prop.GetValue(Model);
-        //        if (AreEquivalent(actual, item.ExpectedValue))
-        //            continue;
-
-        //        _propertyToControl.TryGetValue(item.PropertyName, out var control);
-
-        //        if (control != null)
-        //            MarkMismatch(control);
-
-        //        result.Mismatches.Add(new FieldMismatch
-        //        {
-        //            PropertyName = item.PropertyName,
-        //            ExpectedValue = item.ExpectedValue,
-        //            ActualValue = actual,
-        //            Control = control
-        //        });
-        //    }
-
-        //    return result;
-        //}
 
         public ComparisonResult CompareAndHighlight(IEnumerable<FieldComparisonItem> items)
         {
-            ClearComparisonHighlight();
-            //BuildComparisonMap();
-            EnsureComparisonMap();
-            var result = _comparisonService.Compare(Model, items);
-
-            foreach (var mismatch in result.Mismatches)
+            var result = new ComparisonResult();
+            try
             {
-                if (_propertyToControl.TryGetValue(mismatch.PropertyName, out var control))
-                    MarkMismatch(control);
-            }
+                ClearComparisonHighlight();
+                //BuildComparisonMap();
+                EnsureComparisonMap();
+                result = _comparisonService.Compare(Model, items);
 
+                foreach (var mismatch in result.Mismatches)
+                {
+                    if (_propertyToControl.TryGetValue(mismatch.PropertyName, out var control))
+                        MarkMismatch(control);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сравнении данных!!!!!!!!!!: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return result;
+            }
             return result;
         }
         private void EnsureComparisonMap()
@@ -149,7 +122,20 @@ namespace SewingProduction.Features.Articul.Forms
             if (!_originalBackColors.ContainsKey(c))
                 _originalBackColors[c] = c.BackColor;
 
-            if (c is BaseEdit be)
+            if (c is DevExpress.XtraEditors.CheckEdit ce)
+            {
+                if (!_originalForeColors.ContainsKey(c))
+                {
+                    _originalForeColors[c] = ce.Properties.Appearance.ForeColor;
+                    _originalUseForeColors[c] = ce.Properties.Appearance.Options.UseForeColor;
+                }
+
+                ce.Properties.Appearance.ForeColor = Color.Red;
+                // DevExpress применяет ForeColor только когда включена опция UseForeColor.
+                ce.Properties.Appearance.Options.UseForeColor = true;
+                _dx.SetError(ce, "Значение отличается");
+            }
+            else if (c is BaseEdit be)
             {
                 be.Properties.Appearance.BackColor = Color.MistyRose;
                 _dx.SetError(be, "Значение отличается");
@@ -163,14 +149,32 @@ namespace SewingProduction.Features.Articul.Forms
 
         private void ClearMark(Control c)
         {
-            if (!_originalBackColors.TryGetValue(c, out var color))
-                return;
+            if (c is DevExpress.XtraEditors.CheckEdit ce)
+            {
+                if (_originalForeColors.TryGetValue(c, out var fore))
+                {
+                    ce.Properties.Appearance.ForeColor = fore;
+                    _originalForeColors.Remove(c);
+                }
 
-            if (c is BaseEdit be)
-                be.Properties.Appearance.BackColor = color;
+                if (_originalUseForeColors.TryGetValue(c, out var use))
+                {
+                    ce.Properties.Appearance.Options.UseForeColor = use;
+                    _originalUseForeColors.Remove(c);
+                }
+            }
             else
-                c.BackColor = color;
+            {
+                if (!_originalBackColors.TryGetValue(c, out var color))
+                    return;
 
+                if (c is BaseEdit be)
+                    be.Properties.Appearance.BackColor = color;
+                else
+                    c.BackColor = color;
+            }
+
+            _originalBackColors.Remove(c);
             _dx.SetError(c, "");
         }
 

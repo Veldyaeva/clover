@@ -1,6 +1,10 @@
-﻿using SewingProduction.Features.Articul.Models;
+using DevExpress.CodeParser;
+using SewingProduction.Features.Articul.Models;
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
+
+#nullable enable
 
 namespace SewingProduction.Features.Articul.Service
 {
@@ -19,34 +23,44 @@ namespace SewingProduction.Features.Articul.Service
             object? actualModel,
             IEnumerable<FieldComparisonItem> expectedItems)
         {
-            var result = new ComparisonResult();
+            try {
+                var result = new ComparisonResult();
 
-            if (actualModel == null || expectedItems == null)
-                return result;
+                if (actualModel == null || expectedItems == null)
+                    return result;
 
-            var modelType = actualModel.GetType();
+                var modelType = actualModel.GetType();
 
-            foreach (var item in expectedItems)
-            {
-                var prop = modelType.GetProperty(item.PropertyName);
-                if (prop == null)
-                    continue;
-
-                var actual = prop.GetValue(actualModel);
-
-                if (AreEqual(actual, item.ExpectedValue))
-                    continue;
-
-                result.Mismatches.Add(new FieldMismatch
+                foreach (var item in expectedItems)
                 {
-                    PropertyName = item.PropertyName,
-                    ActualValue = actual,
-                    ExpectedValue = item.ExpectedValue
-                });
-            }
+                    var prop = modelType.GetProperty(item.PropertyName);
+                    if (prop == null)
+                        continue;
+                    var actual = prop.GetValue(actualModel);
 
-            return result;
-        }
+                    if (AreEqualWithRules(item.PropertyName, actual, item.ExpectedValue))
+                        continue;
+
+                    var mismatch = new FieldMismatch
+                    {
+                        PropertyName = item.PropertyName,
+                        ActualValue = actual,
+                        ExpectedValue = item.ExpectedValue,
+                        Control = null // Здесь можно добавить логику для определения связанного UI-контрола, если необходимо
+                    };
+
+                    // Для подсветки учитываем все расхождения
+                    result.Mismatches.Add(mismatch);
+
+                    // Для итогового совпадения игнорируем "подсветить-но-не-валидировать" поля (например, Сезон)
+                    if (!IsHighlightOnlyField(item.PropertyName))
+                        result.SignificantMismatches.Add(mismatch);
+                }
+
+                return result;
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message.ToString()); return new ComparisonResult(); }
+            }
         /// <summary>
         /// Сравнивает два значения с учетом нормализации строк и допустимой погрешности для чисел.
         /// </summary>
@@ -66,6 +80,41 @@ namespace SewingProduction.Features.Articul.Service
                 var l = Convert.ToDecimal(left);
                 var r = Convert.ToDecimal(right);
                 return Math.Abs(l - r) < 0.01m;
+            }
+
+            return Equals(left, right);
+        }
+
+        private static bool IsHighlightOnlyField(string propertyName) =>
+            string.Equals(propertyName, nameof(SpArticulPreviewModel.SeasonName), StringComparison.OrdinalIgnoreCase);
+
+        private static bool AreEqualWithRules(string propertyName, object? left, object? right)
+        {
+            if (string.Equals(propertyName, nameof(SpArticulPreviewModel.Articul), StringComparison.OrdinalIgnoreCase))
+                return AreEqualArticulPartial(left, right);
+
+            return AreEqual(left, right);
+        }
+
+        private static bool AreEqualArticulPartial(object? left, object? right)
+        {
+            left = Normalize(left);
+            right = Normalize(right);
+
+            if (left == null && right == null) return true;
+            if (left == null || right == null) return false;
+
+            if (left is string ls && right is string rs)
+            {
+                // Normalize превращает пустые значения в string.Empty
+                if (ls.Length == 0 && rs.Length == 0) return true;
+
+                if (string.Equals(ls, rs, StringComparison.OrdinalIgnoreCase))
+                    return true;
+
+                // Частичное совпадение: одно содержит другое.
+                return ls.Contains(rs, StringComparison.OrdinalIgnoreCase) ||
+                       rs.Contains(ls, StringComparison.OrdinalIgnoreCase);
             }
 
             return Equals(left, right);
@@ -103,13 +152,16 @@ namespace SewingProduction.Features.Articul.Service
         public string PropertyName { get; init; } = "";
         public object? ExpectedValue { get; init; }
         public object? ActualValue { get; init; }
-        //     public Control? Control { get; init; }
+        public Control? Control { get; init; }
     }
 
     public sealed class ComparisonResult
     {
-        public bool IsMatch => Mismatches.Count == 0;
+        // Подсветка ошибок делается по `Mismatches`,
+        // а результат "совпало/не совпало" игнорирует часть полей (например, Сезон).
+        public bool IsMatch => SignificantMismatches.Count == 0;
         public List<FieldMismatch> Mismatches { get; } = new();
+        public List<FieldMismatch> SignificantMismatches { get; } = new();
     }
     /// <summary>
     /// Построитель списка полей для сравнения модели CreateArticulMatrModel с моделью SpArticulPreviewModel.
@@ -118,16 +170,18 @@ namespace SewingProduction.Features.Articul.Service
     {
         public static IReadOnlyList<FieldComparisonItem> Build(CreateArticulMatrModel row)
         {
-            if (row == null)
-                return Array.Empty<FieldComparisonItem>();
+            try
+            {
+                if (row == null)
+                    return Array.Empty<FieldComparisonItem>();
 
-            return new List<FieldComparisonItem>
+                return new List<FieldComparisonItem>
             {
                 new()
                 {
                     PropertyName = nameof(SpArticulPreviewModel.Articul),
                     ExpectedValue = row.Articul,
-                    DisplayName = "Артикул"
+                    DisplayName = "Артикул",
                 },
                 new()
                 {
@@ -143,9 +197,33 @@ namespace SewingProduction.Features.Articul.Service
                 },
                 new()
                 {
+                    PropertyName = nameof(SpArticulPreviewModel.Tkb),
+                    ExpectedValue = row.Tb_id,
+                    DisplayName = "ТКБ"
+                },
+                new()
+                {
+                    PropertyName = nameof(SpArticulPreviewModel.SeasonName),
+                    ExpectedValue = row.Tsn_name,
+                    DisplayName = "Сезон"
+                },
+                new()
+                {
+                    PropertyName = nameof(SpArticulPreviewModel.AssortName),
+                    ExpectedValue = row.Text_mo,
+                    DisplayName = "Ассортимент"
+                },
+                new()
+                {
                     PropertyName = nameof(SpArticulPreviewModel.Grup),
                     ExpectedValue = row.Grup,
                     DisplayName = "Группа"
+                },
+                new()
+                {
+                    PropertyName = nameof(SpArticulPreviewModel.GrupMenName),
+                    ExpectedValue = row.Grupmen_name,
+                    DisplayName = "Менеджер"
                 },
                 new()
                 {
@@ -170,10 +248,24 @@ namespace SewingProduction.Features.Articul.Service
                     PropertyName = nameof(SpArticulPreviewModel.Sost3),
                     ExpectedValue = row.Sost3,
                     DisplayName = "Подклад / наполнитель"
+                },
+                new()
+                {
+                    PropertyName = nameof(SpArticulPreviewModel.Razm),
+                    ExpectedValue = row.RazmNames,
+                    DisplayName = "Размер"
+                },
+                new()
+                {
+                    PropertyName = nameof(SpArticulPreviewModel.KrujFlag),
+                    ExpectedValue = row.Kruj == 1,
+                    DisplayName = "Кружево"
                 }
             };
+            }
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message.ToString()); return Array.Empty<FieldComparisonItem>(); }
         }
     }
 }
-
 
