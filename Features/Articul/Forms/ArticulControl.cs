@@ -131,6 +131,7 @@ namespace SewingProduction.Features.Articul.Forms
                 }
 
                 ce.Properties.Appearance.ForeColor = Color.Red;
+                ce.ForeColor = Color.Red;
                 // DevExpress применяет ForeColor только когда включена опция UseForeColor.
                 ce.Properties.Appearance.Options.UseForeColor = true;
                 _dx.SetError(ce, "Значение отличается");

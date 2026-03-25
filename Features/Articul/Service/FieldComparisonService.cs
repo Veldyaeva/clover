@@ -38,7 +38,7 @@ namespace SewingProduction.Features.Articul.Service
                         continue;
                     var actual = prop.GetValue(actualModel);
 
-                    if (AreEqualWithRules(item.PropertyName, actual, item.ExpectedValue))
+                    if (AreEqualWithRules(item, actual, item.ExpectedValue))
                         continue;
 
                     var mismatch = new FieldMismatch
@@ -88,10 +88,17 @@ namespace SewingProduction.Features.Articul.Service
         private static bool IsHighlightOnlyField(string propertyName) =>
             string.Equals(propertyName, nameof(SpArticulPreviewModel.SeasonName), StringComparison.OrdinalIgnoreCase);
 
-        private static bool AreEqualWithRules(string propertyName, object? left, object? right)
+        private static bool AreEqualWithRules(FieldComparisonItem item, object? left, object? right)
         {
-            if (string.Equals(propertyName, nameof(SpArticulPreviewModel.Articul), StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(item.PropertyName, nameof(SpArticulPreviewModel.Articul), StringComparison.OrdinalIgnoreCase))
+            {
+                // Если в матрице заполнен "повторный артикул" — сравниваем строго (полное совпадение).
+                if (item.FullMatch)
+                    return AreEqualArticulFull(left, right);
+
+                // Иначе сравниваем частично.
                 return AreEqualArticulPartial(left, right);
+            }
 
             return AreEqual(left, right);
         }
@@ -120,6 +127,21 @@ namespace SewingProduction.Features.Articul.Service
             return Equals(left, right);
         }
 
+        private static bool AreEqualArticulFull(object? left, object? right)
+        {
+            left = Normalize(left);
+            right = Normalize(right);
+
+            if (left == null && right == null) return true;
+            if (left == null || right == null) return false;
+
+            if (left is string ls && right is string rs)
+                return string.Equals(ls, rs, StringComparison.OrdinalIgnoreCase);
+
+            // На случай если "артикул" неожиданно придет не строкой — используем обычную проверку.
+            return AreEqual(left, right);
+        }
+
         /// <summary>
         /// Нормализует значение для сравнения: обрезает строки и заменяет null на null, а пустые строки на string.Empty.
         /// </summary>
@@ -145,6 +167,7 @@ namespace SewingProduction.Features.Articul.Service
         public string PropertyName { get; init; } = "";
         public object? ExpectedValue { get; init; }
         public string? DisplayName { get; init; }
+        public bool FullMatch { get; init; }
     }
 
     public sealed class FieldMismatch
@@ -180,8 +203,9 @@ namespace SewingProduction.Features.Articul.Service
                 new()
                 {
                     PropertyName = nameof(SpArticulPreviewModel.Articul),
-                    ExpectedValue = row.Articul,
-                    DisplayName = "Артикул",
+                    ExpectedValue = string.IsNullOrWhiteSpace(row.RepeatArticle) ? row.Articul : row.RepeatArticle,
+                    DisplayName = string.IsNullOrWhiteSpace(row.RepeatArticle) ? "Артикул" : "Артикул (повторный)",
+                    FullMatch = !string.IsNullOrWhiteSpace(row.RepeatArticle),
                 },
                 new()
                 {
