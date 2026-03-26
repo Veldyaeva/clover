@@ -116,20 +116,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// Таймер смены (идёт с момента нажатия 'Начать смену' до 'Закончить смену').
         /// </summary>
         private readonly System.Windows.Forms.Timer _shiftTimer = new System.Windows.Forms.Timer();
-        private readonly System.Windows.Forms.Timer _blinkCheckTimer = new System.Windows.Forms.Timer();
-        private readonly System.Windows.Forms.Timer _blinkTimer = new System.Windows.Forms.Timer();
-        private bool _isBlinking;
         private bool _isGroupRowCellHandlerAttached;
-        private string _lastBlinkWindowKey;
         private GridGroupSummaryItem _planChasGroupSummaryItem;
         private GridGroupSummaryItem _factChasGroupSummaryItem;
-        private DateTime _blinkEndTime;
-        private Color _buttonDefaultBackColor;
         private Color _planFooterColor;
         private Color _factFooterColor;
-        private TimeSpan _blinkTimeMorning = new TimeSpan(8, 0, 0);
-        private TimeSpan _blinkTimeEvening = new TimeSpan(20, 0, 0);
-        private int _blinkDurationMinutes = 1;
+        private readonly KnitterBlinkController _blinkController;
         private decimal _maxHoursClosedShift = 14m;
         private bool _showAllAssignedWhenClosed = false;
         private Button _adminSettingsButton;
@@ -218,6 +210,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _orchestrator = new KnitterOrchestrator(repo, new FileLogger());
                 _workSpaceService = new KnitterWorkSpaceService(repo);
                 _planFocusService = new KnitterPlanFocusService(this, PlanZagrVyazGridControl, bandedGridView3);
+                _blinkController = new KnitterBlinkController(simpleButton2);
                 PlanZagrVyazGridControl.DataSource = _planBindingSource;
 
                 // Детализация на втором уровне настраивается в Designer: advBandedGridView1 является шаблоном уровня "ArtNom"
@@ -275,6 +268,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _orchestrator = orchestrator ?? throw new ArgumentNullException(nameof(orchestrator));
                 _workSpaceService = new KnitterWorkSpaceService(shiftWorkflowGateway ?? throw new ArgumentNullException(nameof(shiftWorkflowGateway)));
                 _planFocusService = new KnitterPlanFocusService(this, PlanZagrVyazGridControl, bandedGridView3);
+                _blinkController = new KnitterBlinkController(simpleButton2);
                 dataLayoutControl1.DataSource = _planBindingSource;
                 ConfigureAdvBandedGridColumns();
                 PlanZagrVyazGridControl.DataSource = _planBindingSource;
@@ -786,7 +780,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 ShowUpDown = true,
                 Location = new Point(150, 16),
                 Width = 120,
-                Value = DateTime.Today.Add(_blinkTimeMorning)
+                Value = DateTime.Today.Add(_blinkController.MorningTime)
             };
 
             var lblBlink2 = new Label { Text = "Время мигания 2:", Location = new Point(10, 55), AutoSize = true };
@@ -796,7 +790,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 ShowUpDown = true,
                 Location = new Point(150, 51),
                 Width = 120,
-                Value = DateTime.Today.Add(_blinkTimeEvening)
+                Value = DateTime.Today.Add(_blinkController.EveningTime)
             };
 
             var lblMaxHours = new Label { Text = "MaxHours (закрытая):", Location = new Point(10, 90), AutoSize = true };
@@ -827,104 +821,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             if (form.ShowDialog(this) == DialogResult.OK)
             {
-                _blinkTimeMorning = timeBlink1.Value.TimeOfDay;
-                _blinkTimeEvening = timeBlink2.Value.TimeOfDay;
+                _blinkController.MorningTime = timeBlink1.Value.TimeOfDay;
+                _blinkController.EveningTime = timeBlink2.Value.TimeOfDay;
                 _maxHoursClosedShift = numMaxHours.Value;
                 _showAllAssignedWhenClosed = chkShowAllAssigned.Checked;
-
-                // Сбросим ключ окна, чтобы мигание могло сработать с новыми настройками
-                _lastBlinkWindowKey = null;
+                _blinkController.ResetWindow();
             }
         }
 
         private void SetupBlinkTimers()
         {
-            _buttonDefaultBackColor = simpleButton2.BackColor;
-            _blinkCheckTimer.Interval = 15_000; // раз в 15 секунд проверяем окно 8:00/20:00
-            _blinkCheckTimer.Tick += BlinkCheckTimer_Tick;
-            _blinkCheckTimer.Start();
-
-            _blinkTimer.Interval = 500; // мигаем раз в полсекунды
-            _blinkTimer.Tick += BlinkTimer_Tick;
-        }
-
-        private void BlinkCheckTimer_Tick(object sender, EventArgs e)
-        {
-            if (_isBlinking)
-                return;
-
-            var now = DateTime.Now;
-            var windowKey = GetBlinkWindowKey(now);
-            if (windowKey == null)
-                return;
-            if (windowKey == _lastBlinkWindowKey)
-                return; // уже мигали в этом окне
-
-            var windowStart = GetWindowStart(now);
-            if (now >= windowStart && now <= windowStart.AddMinutes(1))
-            {
-                StartBlink(windowKey, windowStart.AddMinutes(1));
-            }
-        }
-
-        private void BlinkTimer_Tick(object sender, EventArgs e)
-        {
-            if (!_isBlinking)
-                return;
-
-            if (DateTime.Now >= _blinkEndTime)
-            {
-                StopBlink();
-                return;
-            }
-
-            // Тоггл цвета между фиолетовым и дефолтным
-            simpleButton2.BackColor = simpleButton2.BackColor == Color.MediumPurple
-                ? _buttonDefaultBackColor
-                : Color.MediumPurple;
-        }
-
-        private void StartBlink(string windowKey, DateTime endTime)
-        {
-            _isBlinking = true;
-            _blinkEndTime = endTime;
-            _lastBlinkWindowKey = windowKey;
-            _blinkTimer.Start();
-        }
-
-        private void StopBlink()
-        {
-            _blinkTimer.Stop();
-            _isBlinking = false;
-            simpleButton2.BackColor = _buttonDefaultBackColor;
-        }
-
-        private static string GetBlinkWindowKey(DateTime now)
-        {
-            if (IsInBlinkWindow(now))
-            {
-                return $"{now:yyyyMMdd}_{now.Hour}";
-            }
-            return null;
-        }
-
-        private static DateTime GetWindowStart(DateTime now)
-        {
-            if (now.Hour >= 15 && now.Hour < 17)
-                return new DateTime(now.Year, now.Month, now.Day, 16, 13, 0);
-            if (now.Hour >= 17)
-                return new DateTime(now.Year, now.Month, now.Day, 20, 0, 0);
-            // до 8 утра: окно предыдущего дня в 20:00 уже прошло, следующее — 8:00 сегодняшнего
-            return new DateTime(now.Year, now.Month, now.Day, 8, 0, 0);
-        }
-
-        private static bool IsInBlinkWindow(DateTime now)
-        {
-            var start8 = new DateTime(now.Year, now.Month, now.Day, 16, 8, 0);
-            var start20 = new DateTime(now.Year, now.Month, now.Day, 16, 7, 0);
-
-            return (now >= start8 && now <= start8.AddMinutes(1)) ||
-                   (now >= start20 && now <= start20.AddMinutes(1));
+            _blinkController.Start();
         }
 
         /// <summary>
@@ -1540,10 +1447,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _idleTimer.Dispose();
                 _shiftTimer.Stop();
                 _shiftTimer.Dispose();
-                _blinkCheckTimer.Stop();
-                _blinkCheckTimer.Dispose();
-                _blinkTimer.Stop();
-                _blinkTimer.Dispose();
+                _blinkController.Dispose();
             };
         }
 
