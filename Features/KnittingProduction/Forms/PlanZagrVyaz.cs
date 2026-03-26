@@ -603,10 +603,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 switch (vyazPodrKod)
                 {
                     case 1:
-                        gridZadanyListColumnPszNom.Visible = true;
-                        gridZadanyListColumnPszNom.VisibleIndex = 0;
+                        gridZadanyListColumnSyncSelection.Visible = true;
+                        gridZadanyListColumnSyncSelection.VisibleIndex = 0;
                         gridZadanyListColumnNom.Visible = true;
-                        gridZadanyListColumnPszNom.VisibleIndex = 1;
+                        gridZadanyListColumnNom.VisibleIndex = 1;
                         gridZadanyListColumnArticul.Visible = true;
                         gridZadanyListColumnArticul.VisibleIndex = 2;
                         gridZadanyListColumnZvet.Visible = true;
@@ -617,12 +617,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         gridZadanyListColumnDatePryazZayav.VisibleIndex = 5;
                         gridZadanyListColumnData_plan.Visible = true;
                         gridZadanyListColumnData_plan.VisibleIndex = 6;
+                        gridZadanyListColumnPszNom.Visible = true;
+                        gridZadanyListColumnPszNom.VisibleIndex = 7;
                         gridZadanyListColumnVid_stir.Visible = true;
-                        gridZadanyListColumnVid_stir.VisibleIndex = 7;
+                        gridZadanyListColumnVid_stir.VisibleIndex = 8;
                         gridZadanyListColumnDopr_name.Visible = true;
-                        gridZadanyListColumnDopr_name.VisibleIndex = 8;
-                        gridZadanyListColumnSyncSelection.Visible = true;
-                        gridZadanyListColumnSyncSelection.VisibleIndex = 9;
+                        gridZadanyListColumnDopr_name.VisibleIndex = 9;
                         gridZadanyListColumnGradacia.Visible = true;
                         gridZadanyListColumnGradacia.VisibleIndex = 10;
 
@@ -709,6 +709,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridRzvPachListByNomColumnGradacia.FieldName = "gradacia";
                 gridRzvPachListByNomColumnSyncSelection.FieldName = "SyncSelection";
 
+                _gridHelper.AutoRowFilterConfig(gridViewRzvPachListByNom as GridView, 0);
+                //gridViewRzvPachListByNom.BestFitColumns();
+
                 switch (vyazPodrKod)
                 {
                     case 1:
@@ -732,15 +735,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     case 3:
                         gridRzvPachListByNomColumnSerialNumber.Visible = true;
                         gridRzvPachListByNomColumnSerialNumber.VisibleIndex = 0;
+                        gridRzvPachListByNomColumnSerialNumber.Width = 20;
                         gridRzvPachListByNomColumnN_pach.Visible = true;
                         gridRzvPachListByNomColumnN_pach.VisibleIndex = 1;
+                        gridRzvPachListByNomColumnN_pach.Width = 50;
                         gridRzvPachListByNomColumnRazm.Visible = true;
                         gridRzvPachListByNomColumnRazm.VisibleIndex = 2;
                         gridRzvPachListByNomColumnKol.Visible = true;
                         gridRzvPachListByNomColumnKol.VisibleIndex = 3;
+                        gridRzvPachListByNomColumnKol.Width = 40;
+                        gridRzvPachListByNomColumnSyncSelection.Visible = true;
+                        gridRzvPachListByNomColumnSyncSelection.VisibleIndex = 4;
+                        gridRzvPachListByNomColumnSyncSelection.Width = 20;
 
                         gridRzvPachListByNomColumnGradacia.Visible = false;
-                        gridRzvPachListByNomColumnSyncSelection.Visible = false;
 
                         //gridRzvPachListByNomColumnNomZad.Visible = false;
                         //gridRzvPachListByNomColumnNom.Visible = false;
@@ -962,6 +970,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 if (vyazPodrKod == 2 || vyazPodrKod == 3)
                 {
                     gridViewNaryadZadany.ClearGrouping();
+                    gridNaryadZadanyColumnKmlNumber.Visible = false;
+                    gridNaryadZadanyColumnPzvNom.Visible = false;
+                    gridNaryadZadanyColumnPzvTab.Visible = false;
                 }
                 gridNaryadZadanyColumnSekObServ.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
                 gridNaryadZadanyColumnSekObServ.DisplayFormat.FormatString = "#,0.00;-#,0.00;";
@@ -980,7 +991,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 #endregion
 
                 #region описание gridControlArtNormN "заголовок РТ"
-                gridControlArtNormN.DataSource = _artNormNBindingSource;
+                    gridControlArtNormN.DataSource = _artNormNBindingSource;
                 gridArtNormNColumnAnnID.FieldName = "annID";
                 gridArtNormNColumnGrup.FieldName = "grup";
                 gridArtNormNColumnArticul.FieldName = "Articul";
@@ -2506,6 +2517,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (!view.IsValidRowHandle(rh) || !view.IsDataRow(rh)) return;
 
             FocusRowWithScrollAndFire(view, rh, ref _suppressZadanyFocusHandler, forceFire: true);
+
+            // после снятия suppress вызываем обработчик вручную
+            gridViewZadanyList_FocusedRowChanged(
+                view,
+                new FocusedRowChangedEventArgs(-1, view.FocusedRowHandle)
+            );
 
             _pendingPszNom = null;
             _autoSelectPending = false;
@@ -5581,27 +5598,138 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         private async void FindPzvNomZadInNzp()
+        //{
+        //    Debug.WriteLine($"FindPzvNomZadInNzp started with search text: {textBoxPzvNomZadSearch.Text}");
+        //    _autoSelectPending = true;
+        //    string pszNom = NormalizeNom(textBoxPzvNomZadSearch.Text);
+        //    if (pszNom.Length == 0) return;
+
+        //    switch (vyazPodrKod)
+        //    {
+        //        case 1:
+        //            FindPzvNomZadInMachineListNzp(pszNom);
+        //            break;
+        //        case 2:
+        //        case 3:
+        //            FindPzvNomZadInArticulListNzp(pszNom);
+        //            break;
+        //    }
+
+        //    _autoSelectPending = false;
+        //    Debug.WriteLine($"FindPzvNomZadInNzp completed for search text: {textBoxPzvNomZadSearch.Text}");
+        //}
         {
             Debug.WriteLine($"FindPzvNomZadInNzp started with search text: {textBoxPzvNomZadSearch.Text}");
             _autoSelectPending = true;
             string pszNom = NormalizeNom(textBoxPzvNomZadSearch.Text);
             if (pszNom.Length == 0) return;
-
             switch (vyazPodrKod)
             {
                 case 1:
                     FindPzvNomZadInMachineListNzp(pszNom);
+                    //  // Параметр вместо интерполяции
+                    //  int kmlId = _dbHelper.ExecuteScalar(
+                    //      @"SELECT TOP (1) pszm.pszkmKmlID
+                    //FROM plan_sezon_zad_knitMachine pszm
+                    //WHERE pszm.pszkmPszNom = @pszNom",
+                    //      new Dictionary<string, object>
+                    //      {
+                    //          ["@pszNom"] = pszNom
+                    //      });
+
+                    //  if (kmlId <= 0) return;
+
+                    //  _pendingPszNom = pszNom;
+
+                    //  //------------------------------------
+                    //  var colKnitMachine = gridViewPlanTotalHoursByKnitMachine.Columns.FirstOrDefault(c => c.FieldName == "kmlID");
+                    //  if (colKnitMachine == null) return;
+
+                    //  int rhKnitMachine = gridViewPlanTotalHoursByKnitMachine.LocateByValue(0, colKnitMachine, kmlId);
+                    //  if (!gridViewPlanTotalHoursByKnitMachine.IsValidRowHandle(rhKnitMachine) || !gridViewPlanTotalHoursByKnitMachine.IsDataRow(rhKnitMachine)) return;
+
+                    //  gridViewPlanTotalHoursByKnitMachine.BeginUpdate();
+                    //  try
+                    //  {
+                    //      gridViewPlanTotalHoursByKnitMachine.FocusedRowHandle = rhKnitMachine;
+                    //      gridViewPlanTotalHoursByKnitMachine.MakeRowVisible(rhKnitMachine);
+                    //      gridViewPlanTotalHoursByKnitMachine.ClearSelection();
+                    //      gridViewPlanTotalHoursByKnitMachine.SelectRow(rhKnitMachine);
+                    //  }
+                    //  finally
+                    //  {
+                    //      gridViewPlanTotalHoursByKnitMachine.EndUpdate();
+                    //  }
+                    //-----------------------------------
                     break;
                 case 2:
                 case 3:
                     FindPzvNomZadInArticulListNzp(pszNom);
+                    //  // Параметр вместо интерполяции
+                    //  //int count = ExecuteScalar<int>("SELECT COUNT(*) FROM Users");
+                    //  string _xKod = _dbHelper.ExecuteScalar<string>(
+                    //      @"SELECT TOP (1) left(rzv.kod, 7) as kod
+                    //FROM raskr_zeh_vyaz rzv
+                    //WHERE zad_pl = @pszNom",
+                    //      new Dictionary<string, object>
+                    //      {
+                    //          ["@pszNom"] = pszNom
+                    //      });
+
+                    //  if (Convert.ToInt32(_xKod) <= 0) return;
+
+                    //  _pendingPszNom = pszNom;
+
+                    //  //------------------------------------
+                    //  var colArticulKod = gridViewPlanTotalQuantityByArticul.Columns.FirstOrDefault(c => c.FieldName == "Kod");
+                    //  if (colArticulKod == null) return;
+
+                    //  int rhArticulKod = gridViewPlanTotalQuantityByArticul.LocateByValue(0, colArticulKod, _xKod);
+                    //  if (!gridViewPlanTotalQuantityByArticul.IsValidRowHandle(rhArticulKod) || !gridViewPlanTotalQuantityByArticul.IsDataRow(rhArticulKod)) return;
+
+                    //  gridViewPlanTotalQuantityByArticul.BeginUpdate();
+                    //  try
+                    //  {
+                    //      gridViewPlanTotalQuantityByArticul.FocusedRowHandle = rhArticulKod;
+                    //      gridViewPlanTotalQuantityByArticul.MakeRowVisible(rhArticulKod);
+                    //      gridViewPlanTotalQuantityByArticul.ClearSelection();
+                    //      gridViewPlanTotalQuantityByArticul.SelectRow(rhArticulKod);
+                    //  }
+                    //  finally
+                    //  {
+                    //      gridViewPlanTotalQuantityByArticul.EndUpdate();
+                    //  }
+                    //-----------------------------------
                     break;
+            }
+            
+            //var colNomZadany = gridViewZadanyList.Columns.FirstOrDefault(c => c.FieldName == "kmlID");
+            var colNomZadany = gridViewZadanyList.Columns.FirstOrDefault(c => c.FieldName == "pszNom");
+            if (colNomZadany == null) return;
+
+            int rhNomZadany = gridViewZadanyList.LocateByValue(0, colNomZadany, _pendingPszNom);
+            if (!gridViewZadanyList.IsValidRowHandle(rhNomZadany) || !gridViewZadanyList.IsDataRow(rhNomZadany)) return;
+
+            gridViewZadanyList.BeginUpdate();
+            try
+            {
+                if (gridViewZadanyList.FocusedRowHandle == rhNomZadany)
+                    gridViewZadanyList.FocusedRowHandle = GridControl.InvalidRowHandle;
+
+                gridViewZadanyList.FocusedRowHandle = rhNomZadany;
+                gridViewZadanyList.MakeRowVisible(rhNomZadany);
+                gridViewZadanyList.ClearSelection();
+                gridViewZadanyList.SelectRow(rhNomZadany);
+            }
+            finally
+            {
+                gridViewZadanyList.EndUpdate();
             }
 
             _autoSelectPending = false;
             Debug.WriteLine($"FindPzvNomZadInNzp completed for search text: {textBoxPzvNomZadSearch.Text}");
         }
-        private async void FindPzvNomZadInMachineListNzp(string _pszNom)
+        private void FindPzvNomZadInMachineListNzp(string _pszNom)
         {
             // Параметр вместо интерполяции
             int kmlId = _dbHelper.ExecuteScalar(
@@ -5622,11 +5750,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (colKnitMachine == null) return;
 
             int rhKnitMachine = gridViewPlanTotalHoursByKnitMachine.LocateByValue(0, colKnitMachine, kmlId);
-            if (!gridViewPlanTotalHoursByKnitMachine.IsValidRowHandle(rhKnitMachine) || !gridViewPlanTotalHoursByKnitMachine.IsDataRow(rhKnitMachine)) return;
+            if (!gridViewPlanTotalHoursByKnitMachine.IsValidRowHandle(rhKnitMachine) 
+                || !gridViewPlanTotalHoursByKnitMachine.IsDataRow(rhKnitMachine)) return;
 
             gridViewPlanTotalHoursByKnitMachine.BeginUpdate();
             try
             {
+                if (gridViewPlanTotalHoursByKnitMachine.FocusedRowHandle == rhKnitMachine)
+                    gridViewPlanTotalHoursByKnitMachine.FocusedRowHandle = GridControl.InvalidRowHandle;
+
                 gridViewPlanTotalHoursByKnitMachine.FocusedRowHandle = rhKnitMachine;
                 gridViewPlanTotalHoursByKnitMachine.MakeRowVisible(rhKnitMachine);
                 gridViewPlanTotalHoursByKnitMachine.ClearSelection();
@@ -5638,26 +5770,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
 
             //-----------------------------------
-            var colNomZadany = gridViewZadanyList.Columns.FirstOrDefault(c => c.FieldName == "kmlID");
-            if (colNomZadany == null) return;
-
-            int rhNomZadany = gridViewZadanyList.LocateByValue(0, colNomZadany, _pendingPszNom);
-            if (!gridViewZadanyList.IsValidRowHandle(rhNomZadany) || !gridViewZadanyList.IsDataRow(rhNomZadany)) return;
-
-            gridViewZadanyList.BeginUpdate();
-            try
-            {
-                gridViewZadanyList.FocusedRowHandle = rhNomZadany;
-                gridViewZadanyList.MakeRowVisible(rhNomZadany);
-                gridViewZadanyList.ClearSelection();
-                gridViewZadanyList.SelectRow(rhNomZadany);
-            }
-            finally
-            {
-                gridViewZadanyList.EndUpdate();
-            }
         }
-        private async void FindPzvNomZadInArticulListNzp(string _pszNom)
+        private void FindPzvNomZadInArticulListNzp(string _pszNom)
         {
             // Параметр вместо интерполяции
             //int count = ExecuteScalar<int>("SELECT COUNT(*) FROM Users");
@@ -5679,11 +5793,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (colArticulKod == null) return;
 
             int rhArticulKod = gridViewPlanTotalQuantityByArticul.LocateByValue(0, colArticulKod, _xKod);
-            if (!gridViewPlanTotalQuantityByArticul.IsValidRowHandle(rhArticulKod) || !gridViewPlanTotalQuantityByArticul.IsDataRow(rhArticulKod)) return;
+            if (!gridViewPlanTotalQuantityByArticul.IsValidRowHandle(rhArticulKod) 
+                || !gridViewPlanTotalQuantityByArticul.IsDataRow(rhArticulKod)) return;
 
             gridViewPlanTotalQuantityByArticul.BeginUpdate();
             try
             {
+                if (gridViewPlanTotalQuantityByArticul.FocusedRowHandle == rhArticulKod)
+                    gridViewPlanTotalQuantityByArticul.FocusedRowHandle = GridControl.InvalidRowHandle;
+
                 gridViewPlanTotalQuantityByArticul.FocusedRowHandle = rhArticulKod;
                 gridViewPlanTotalQuantityByArticul.MakeRowVisible(rhArticulKod);
                 gridViewPlanTotalQuantityByArticul.ClearSelection();
@@ -5694,27 +5812,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridViewPlanTotalQuantityByArticul.EndUpdate();
             }
             //-----------------------------------
-            //await InvokeOnUiAsync(async () =>
-            //{
-                var colNomZadany = gridViewZadanyList.Columns.FirstOrDefault(c => c.FieldName == "pszNom");
-                if (colNomZadany == null) return;
-
-                int rhNomZadany = gridViewZadanyList.LocateByValue(0, colNomZadany, _pendingPszNom);
-                if (!gridViewZadanyList.IsValidRowHandle(rhNomZadany) || !gridViewZadanyList.IsDataRow(rhNomZadany)) return;
-
-                gridViewZadanyList.BeginUpdate();
-                try
-                {
-                    gridViewZadanyList.FocusedRowHandle = rhNomZadany;
-                    gridViewZadanyList.MakeRowVisible(rhNomZadany);
-                    gridViewZadanyList.ClearSelection();
-                    gridViewZadanyList.SelectRow(rhNomZadany);
-                }
-                finally
-                {
-                    gridViewZadanyList.EndUpdate();
-                }
-            //});
         }
         private void textBoxPzvNomZadSearch_TextChanged(object sender, EventArgs e)
         {

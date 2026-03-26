@@ -3325,7 +3325,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridRzvPachListByNomColumnRazm.Name = "gridRzvPachListByNomColumnRazm";
             gridRzvPachListByNomColumnRazm.OptionsFilter.AllowFilter = false;
             gridRzvPachListByNomColumnRazm.Visible = true;
-            gridRzvPachListByNomColumnRazm.VisibleIndex = 2;
+            gridRzvPachListByNomColumnRazm.VisibleIndex = 5;
             gridRzvPachListByNomColumnRazm.Width = 79;
             // 
             // gridRzvPachListByNomColumnKol
@@ -3336,7 +3336,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridRzvPachListByNomColumnKol.Name = "gridRzvPachListByNomColumnKol";
             gridRzvPachListByNomColumnKol.OptionsFilter.AllowFilter = false;
             gridRzvPachListByNomColumnKol.Visible = true;
-            gridRzvPachListByNomColumnKol.VisibleIndex = 3;
+            gridRzvPachListByNomColumnKol.VisibleIndex = 2;
             gridRzvPachListByNomColumnKol.Width = 35;
             // 
             // gridRzvPachListByNomColumnGradacia
@@ -3365,7 +3365,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridRzvPachListByNomColumnSyncSelection.Name = "gridRzvPachListByNomColumnSyncSelection";
             gridRzvPachListByNomColumnSyncSelection.OptionsFilter.AllowFilter = false;
             gridRzvPachListByNomColumnSyncSelection.Visible = true;
-            gridRzvPachListByNomColumnSyncSelection.VisibleIndex = 4;
+            gridRzvPachListByNomColumnSyncSelection.VisibleIndex = 3;
             gridRzvPachListByNomColumnSyncSelection.Width = 20;
             // 
             // repositoryItemCheckEdit2
@@ -3381,9 +3381,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridRzvPachListByNomColumnSerialNumber.Caption = "№ п/п";
             gridRzvPachListByNomColumnSerialNumber.FieldName = "gridRzvPachListByNomColumnSerialNumber";
             gridRzvPachListByNomColumnSerialNumber.Name = "gridRzvPachListByNomColumnSerialNumber";
+            gridRzvPachListByNomColumnSerialNumber.OptionsColumn.FixedWidth = true;
             gridRzvPachListByNomColumnSerialNumber.UnboundDataType = typeof(int);
             gridRzvPachListByNomColumnSerialNumber.Visible = true;
-            gridRzvPachListByNomColumnSerialNumber.VisibleIndex = 5;
+            gridRzvPachListByNomColumnSerialNumber.VisibleIndex = 4;
             gridRzvPachListByNomColumnSerialNumber.Width = 20;
             // 
             // gridControlZadanyList
