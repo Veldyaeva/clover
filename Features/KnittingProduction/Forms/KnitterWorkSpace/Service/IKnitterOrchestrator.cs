@@ -25,47 +25,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         Task<int> StartWorkingShiftAsync(int tabStart, int? kmaId, string kmaNum);
         Task EndWorkingShiftAsync(int shiftId, int tabEnd);
         Task<(int? kmaId, string kmaNum)> GetZoneByTabAsync(int tab);
-        Task<(int? shiftId, DateTime? dateStart)> GetOpenShiftByTabAsync(int tab);
+		Task<(int? shiftId, DateTime? dateStart)> GetOpenShiftByTabAsync(int tab);
         Task<(int? shiftId, int? tabStart, DateTime? dateStart)> GetOpenShiftByZoneAsync(int kmaId);
-        Task UpdatePzvKwsIdAsync(IEnumerable<int> pzvIds, int kwsId);
+		Task UpdatePzvKwsIdAsync(IEnumerable<int> pzvIds, int kwsId);
         Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(int? currentShiftId, decimal v);
-    }
-    public interface IKnitterWorkSpaceService
-    {
-        Task<StartShiftResult> StartShiftAsync(StartShiftCommand command);
-        Task<CloseShiftResult> CloseShiftAsync(CloseShiftCommand command);
-
-    }
-
-    public class CloseShiftResult
-    {
-        internal bool Success;
-        internal bool HasUnfinishedOperations;
-        internal object UnfinishedPzvIds;
-    }
-
-    public class StartShiftResult
-    {
-        internal bool Success;
-        internal string ErrorMessage;
-        internal int? ShiftId;
-        internal DateTime? ShiftStartTime;
-    }
-
-    public class CloseShiftCommand
-    {
-        internal int ShiftId;
-        internal int TabEnd;
-        internal decimal MinHours;
-        internal List<KnitterPZVModel> CurrentRows;
-    }
-
-    public class StartShiftCommand
-    {
-        internal int Tab;
-        internal int? KmaId;
-        internal string KmaNum;
-        internal List<int> PzvIds;
+        Task<int> StartShiftWorkflowAsync(int tabStart, int? kmaId, string kmaNum, IEnumerable<int> pzvIds);
+        Task CloseShiftWorkflowAsync(int shiftId, int tabEnd, decimal minHours);
     }
 }
 

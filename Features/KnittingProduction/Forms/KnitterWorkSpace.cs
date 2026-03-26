@@ -134,6 +134,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private Button _adminSettingsButton;
         private CancellationTokenSource? _sbCts;
         private int _serviceBrokerShutdownStarted;
+        
         /// <summary>
         /// Флаг активной смены.
         /// </summary>
@@ -214,7 +215,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 var dbHelper = new DatabaseHelper();
                 IKnitterRepository repo = new KnitterRepository(dbHelper);
                 _orchestrator = new KnitterOrchestrator(repo, new FileLogger());
-
+                _workSpaceService = new KnitterWorkSpaceService(_orchestrator);
                 PlanZagrVyazGridControl.DataSource = _planBindingSource;
 
                 // Детализация на втором уровне настраивается в Designer: advBandedGridView1 является шаблоном уровня "ArtNom"
@@ -265,6 +266,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _sbController = new ServiceBrokerController(this);
                 _sbHub = AppServices.Services.GetRequiredService<IAppServiceBrokerHub>();
                 _orchestrator = orchestrator ?? throw new ArgumentNullException(nameof(orchestrator));
+                _workSpaceService = new KnitterWorkSpaceService(_orchestrator);
                 dataLayoutControl1.DataSource = _planBindingSource;
                 ConfigureAdvBandedGridColumns();
                 PlanZagrVyazGridControl.DataSource = _planBindingSource;
@@ -691,6 +693,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridView3?.RefreshData();
             advBandedGridView1?.RefreshData();
             RefreshFooterSummaries();
+        }
+
+        private void RefreshHighlight()
+        {
+            bandedGridView3?.RefreshData();
+            advBandedGridView1?.RefreshData();
         }
 
         /// <summary>
@@ -2855,15 +2863,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         #endregion
     }
 }
-    internal class PlanFocusSnap
-    {
-        public string TaskNum;
-        public string Machine;
-        public int? DetailPzvId;
-        public int MasterTop;
-        public int? DetailTop;
-        public bool WasInDetail;
-}
+
 
 
     

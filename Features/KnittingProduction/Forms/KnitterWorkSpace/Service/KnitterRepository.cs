@@ -337,25 +337,9 @@ ORDER BY fio";
         {
             try
             {
-                if (pzvIds == null)
-                    return;
-
-                var ids = pzvIds.Distinct().ToArray();
-                if (ids.Length == 0)
-                    return;
                 using (var connection = _dbHelper.GetConnection())
                 {
-                     const string sql = @"UPDATE dbo.planZagrVyaz
- SET pzvTab = @tab,
-     pzvDateNaznTab = GETDATE(),
-     -- переносим плановое количество в назначенное
-     pzvKolNazn = ISNULL(pzvKol, 0),
-     pzvSekNazn = ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0),
-     pzvChasNazn = CAST(ROUND((ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0)) / 3600.0, 2) AS decimal(16,2))
- WHERE pzvID IN @ids";
-    // -- после назначения плановое поле НЕ обнуляем, чтобы кол-во к выполнению НЕ стало 0 - не надо их занулять!!!
-
-                    await connection.ExecuteAsync(sql, new { tab, ids });
+                    await UpdatePzvTabAsync(connection, transaction: null, pzvIds, tab);
                 }
             }
             catch (Exception ex)
@@ -526,30 +510,17 @@ WHERE pzvID = @pzvId;
                 {
                     using (var tx = connection.BeginTransaction())
                     {
-                        var kwsId = 0;
                         try
                         {
-                            const string sqlMain = @"
-INSERT INTO ACE.dbo.knitWorkingShiftNew (kwsTabStart, kwsKmaID, kwsKmsID, kwsDateStart)
-VALUES (@tabStart, @kmaId, @kmsID, GETDATE());
-SELECT CAST(SCOPE_IDENTITY() AS int);";
-                            kwsId = await connection.ExecuteScalarAsync<int>(sqlMain, new { tabStart, kmaId, kmsId, kmaNum }, transaction: tx);
-
-                            // запись машин зоны в таблицу knitWorkingShiftMachineListNew
-                            const string sqlList = @"
-INSERT INTO ACE.dbo.knitWorkingShiftMachineListNew (kwsmlKwsID, kwsmlKmlID, kwsmlKodOb, kiwsmlLongRep)
-SELECT @kwsId, mlv.kmlID, mlv.kmlKodOb, mlv.kmlLongRep
-FROM ACE.dbo.knitMachineList_view mlv
-WHERE mlv.kmlKmaID = @kmaId;";
-                            await connection.ExecuteAsync(sqlList, new { kwsId, kmaId }, transaction: tx);
-                        }
-                        catch (Exception ex) { tx.Rollback(); return kwsId; }
-                        finally
-                        {
+                            var kwsId = await StartWorkingShiftAsync(connection, tx, tabStart, kmaId, kmaNum, kmsId);
                             tx.Commit();
+                            return kwsId;
                         }
-                        return kwsId;
-
+                        catch
+                        {
+                            tx.Rollback();
+                            throw;
+                        }
                     }
                 }
             }
@@ -663,17 +634,9 @@ ORDER BY kwsDateStart DESC";
 		{
 			try
 			{
-				if (pzvIds == null)
-					return;
-				var ids = pzvIds.Distinct().ToArray();
-				if (ids.Length == 0)
-					return;
-				using (var connection = _dbHelper.GetConnection())//, pzvKolNazn = pzvKol, pzvSekNazn = pzvSek, pzvChasNazn = pzvNChasi 
+				using (var connection = _dbHelper.GetConnection())
 				{
-					const string sql = @"UPDATE dbo.planZagrVyaz
-SET pzvKwsID = @kwsId
-WHERE pzvID IN @ids";
-					await connection.ExecuteAsync(sql, new { kwsId, ids });
+					await UpdatePzvKwsIdAsync(connection, transaction: null, pzvIds, kwsId);
 				}
 			}
 			catch (Exception ex)
@@ -682,6 +645,61 @@ WHERE pzvID IN @ids";
 			}
 		}
 
+        public async Task<int> StartShiftWorkflowAsync(int tabStart, int? kmaId, string kmaNum, IEnumerable<int> pzvIds)
+        {
+            try
+            {
+                var ids = NormalizeIds(pzvIds);
+                using (var connection = _dbHelper.GetConnection())
+                using (var tx = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        await UpdatePzvTabAsync(connection, tx, ids, tabStart);
+                        var shiftId = await StartWorkingShiftAsync(connection, tx, tabStart, kmaId, kmaNum, kmsId: 0);
+                        await UpdatePzvKwsIdAsync(connection, tx, ids, shiftId);
+                        tx.Commit();
+                        return shiftId;
+                    }
+                    catch
+                    {
+                        tx.Rollback();
+                        throw;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"StartShiftWorkflowAsync failed (tabStart={tabStart})", ex);
+            }
+        }
+
+        public async Task CloseShiftWorkflowAsync(int shiftId, int tabEnd, decimal minHours)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                using (var tx = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        await AdjustNotStartedBeforeShiftEndAsync(connection, tx, shiftId, minHours);
+                        await EndWorkingShiftAsync(connection, tx, shiftId, tabEnd);
+                        tx.Commit();
+                    }
+                    catch
+                    {
+                        tx.Rollback();
+                        throw;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"CloseShiftWorkflowAsync failed (shiftId={shiftId}, tabEnd={tabEnd})", ex);
+            }
+        }
+
         public sealed class MachineHoursStat
         {
             public int pzvKmlID { get; set; }
@@ -689,6 +707,94 @@ WHERE pzvID IN @ids";
             public decimal KeptAssignedHours { get; set; }
             public decimal TotalForCheck { get; set; }
             public int StillLessThanMin { get; set; }
+        }
+
+        private static int[] NormalizeIds(IEnumerable<int> pzvIds)
+        {
+            if (pzvIds == null)
+                return Array.Empty<int>();
+
+            return pzvIds
+                .Where(id => id > 0)
+                .Distinct()
+                .ToArray();
+        }
+
+        private static async Task UpdatePzvTabAsync(System.Data.SqlClient.SqlConnection connection, IDbTransaction transaction, IEnumerable<int> pzvIds, int tab)
+        {
+            var ids = NormalizeIds(pzvIds);
+            if (ids.Length == 0)
+                return;
+
+            const string sql = @"UPDATE dbo.planZagrVyaz
+SET pzvTab = @tab,
+    pzvDateNaznTab = GETDATE(),
+    -- переносим плановое количество в назначенное
+    pzvKolNazn = ISNULL(pzvKol, 0),
+    pzvSekNazn = ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0),
+    pzvChasNazn = CAST(ROUND((ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0)) / 3600.0, 2) AS decimal(16,2))
+WHERE pzvID IN @ids";
+            await connection.ExecuteAsync(sql, new { tab, ids }, transaction: transaction);
+        }
+
+        private static async Task<int> StartWorkingShiftAsync(System.Data.SqlClient.SqlConnection connection, IDbTransaction transaction, int tabStart, int? kmaId, string kmaNum, int? kmsId)
+        {
+            const string sqlMain = @"
+INSERT INTO ACE.dbo.knitWorkingShiftNew (kwsTabStart, kwsKmaID, kwsKmsID, kwsDateStart)
+VALUES (@tabStart, @kmaId, @kmsID, GETDATE());
+SELECT CAST(SCOPE_IDENTITY() AS int);";
+            var kwsId = await connection.ExecuteScalarAsync<int>(sqlMain, new { tabStart, kmaId, kmsId, kmaNum }, transaction: transaction);
+
+            const string sqlList = @"
+INSERT INTO ACE.dbo.knitWorkingShiftMachineListNew (kwsmlKwsID, kwsmlKmlID, kwsmlKodOb, kiwsmlLongRep)
+SELECT @kwsId, mlv.kmlID, mlv.kmlKodOb, mlv.kmlLongRep
+FROM ACE.dbo.knitMachineList_view mlv
+WHERE mlv.kmlKmaID = @kmaId;";
+            await connection.ExecuteAsync(sqlList, new { kwsId, kmaId }, transaction: transaction);
+
+            return kwsId;
+        }
+
+        private static async Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(System.Data.SqlClient.SqlConnection connection, IDbTransaction transaction, int kwsId, decimal minHours)
+        {
+            if (minHours <= 0)
+                minHours = 12m;
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@KwsId", kwsId, DbType.Int32);
+            parameters.Add("@MinHours", minHours, DbType.Decimal);
+
+            using (var multi = await connection.QueryMultipleAsync(
+                sql: "dbo.PZV_AdjustNotStartedBeforeShiftEnd",
+                param: parameters,
+                transaction: transaction,
+                commandType: CommandType.StoredProcedure,
+                commandTimeout: 60))
+            {
+                return (await multi.ReadAsync<MachineHoursStat>()).ToList();
+            }
+        }
+
+        private static async Task EndWorkingShiftAsync(System.Data.SqlClient.SqlConnection connection, IDbTransaction transaction, int shiftId, int tabEnd)
+        {
+            const string sql = @"
+UPDATE ACE.dbo.knitWorkingShiftNew
+SET kwsTabEnd = @tabEnd,
+    kwsDateEnd = GETDATE()
+WHERE kwsID = @shiftId AND (kwsDel = 0 OR kwsDel IS NULL) AND kwsDateEnd IS NULL;";
+            await connection.ExecuteAsync(sql, new { shiftId, tabEnd }, transaction: transaction);
+        }
+
+        private static async Task UpdatePzvKwsIdAsync(System.Data.SqlClient.SqlConnection connection, IDbTransaction transaction, IEnumerable<int> pzvIds, int kwsId)
+        {
+            var ids = NormalizeIds(pzvIds);
+            if (ids.Length == 0)
+                return;
+
+            const string sql = @"UPDATE dbo.planZagrVyaz
+SET pzvKwsID = @kwsId
+WHERE pzvID IN @ids";
+            await connection.ExecuteAsync(sql, new { kwsId, ids }, transaction: transaction);
         }
 
     }
