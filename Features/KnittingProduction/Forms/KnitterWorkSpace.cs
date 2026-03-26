@@ -197,7 +197,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 var dbHelper = new DatabaseHelper();
                 IKnitterRepository repo = new KnitterRepository(dbHelper);
-                _orchestrator = new KnitterOrchestrator(repo, new FileLogger());
+                _orchestrator = new KnitterOrchestrator(repo);
                 _workSpaceService = new KnitterWorkSpaceService(repo, _logger);
                 _planFocusService = new KnitterPlanFocusService(this, PlanZagrVyazGridControl, bandedGridView3);
                 _gridVisualService = new KnitterGridVisualService(
