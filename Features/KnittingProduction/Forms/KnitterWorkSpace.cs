@@ -111,7 +111,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// <summary>
         /// Таймер для отслеживания бездействия пользователя (1 минута).
         /// </summary>
-        private readonly System.Windows.Forms.Timer _idleTimer = new System.Windows.Forms.Timer();
         /// <summary>
         /// Таймер смены (идёт с момента нажатия 'Начать смену' до 'Закончить смену').
         /// </summary>
@@ -122,6 +121,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private Color _planFooterColor;
         private Color _factFooterColor;
         private readonly KnitterBlinkController _blinkController;
+        private readonly KnitterIdleSplashController _idleSplashController;
         private decimal _maxHoursClosedShift = 14m;
         private bool _showAllAssignedWhenClosed = false;
         private Button _adminSettingsButton;
@@ -153,13 +153,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// <summary>
         /// Список ФИО для повторного показа сплеша при бездействии.
         /// </summary>
-        private List<FioModel> _cachedFioList;
-
-        /// <summary>
-        /// Флаг, указывающий, что сплеш выбора сотрудника уже открыт.
-        /// </summary>
-        private bool _isSplashShowing = false;
-
         private void LogSuccess(string message, string scope)
         {
             _ = SafeLogAsync(() => _logger.LogEventAsync(message, $"{LoggerContext}.{scope}"));
@@ -211,6 +204,18 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _workSpaceService = new KnitterWorkSpaceService(repo);
                 _planFocusService = new KnitterPlanFocusService(this, PlanZagrVyazGridControl, bandedGridView3);
                 _blinkController = new KnitterBlinkController(simpleButton2);
+                _idleSplashController = new KnitterIdleSplashController(
+                    this,
+                    this,
+                    dataLayoutControl1,
+                    () => int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tab) ? tab : (int?)null,
+                    tab =>
+                    {
+                        FioGridLookUpEdit.EditValue = tab;
+                        TabGridLookUpEdit.EditValue = tab;
+                    },
+                    Close,
+                    LogWarning);
                 PlanZagrVyazGridControl.DataSource = _planBindingSource;
 
                 // Детализация на втором уровне настраивается в Designer: advBandedGridView1 является шаблоном уровня "ArtNom"
@@ -269,6 +274,18 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _workSpaceService = new KnitterWorkSpaceService(shiftWorkflowGateway ?? throw new ArgumentNullException(nameof(shiftWorkflowGateway)));
                 _planFocusService = new KnitterPlanFocusService(this, PlanZagrVyazGridControl, bandedGridView3);
                 _blinkController = new KnitterBlinkController(simpleButton2);
+                _idleSplashController = new KnitterIdleSplashController(
+                    this,
+                    this,
+                    dataLayoutControl1,
+                    () => int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tab) ? tab : (int?)null,
+                    tab =>
+                    {
+                        FioGridLookUpEdit.EditValue = tab;
+                        TabGridLookUpEdit.EditValue = tab;
+                    },
+                    Close,
+                    LogWarning);
                 dataLayoutControl1.DataSource = _planBindingSource;
                 ConfigureAdvBandedGridColumns();
                 PlanZagrVyazGridControl.DataSource = _planBindingSource;
@@ -341,86 +358,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 dateEdit1.EditValue = DateTime.Now;
 
                 // Сохраняем список для повторного показа сплеша при бездействии
-                _cachedFioList = fioList;
-
-                PresentFioSelectionSplash(fioList, defaultTab);
+                _idleSplashController.UpdateFioList(fioList);
+                _idleSplashController.ShowSelectionSplash(defaultTab);
             }
             catch (Exception ex)
             {
                 XtraMessageBox.Show(this, $"Ошибка загрузки списка сотрудников: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 LogError(ex, "InitializeAsync");
-            }
-        }
-
-        private void PresentFioSelectionSplash(IReadOnlyCollection<FioModel> fioList, int defaultTab)
-        {
-            if (fioList == null || fioList.Count == 0)
-            {
-                XtraMessageBox.Show(this, "Список сотрудников пуст. Обратитесь к администратору.", "Нет данных", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LogWarning("Список сотрудников пуст при показе выбора табельного номера.", nameof(PresentFioSelectionSplash));
-                return;
-            }
-
-            // Останавливаем таймер бездействия, пока показывается сплеш
-            _idleTimer.Stop();
-
-            int? currentTab = int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int parsedTab)
-                ? parsedTab
-                : (int?)null;
-
-            int? initialTab = currentTab;
-            if (initialTab is null && fioList.Any(f => f.Tab == defaultTab))
-            {
-                initialTab = defaultTab;
-            }
-
-            _isSplashShowing = true;
-            double oldOpacity = this.Opacity;
-            Form overlay = null;
-            try
-            {
-                // Перекрываем только текущую вкладку/форму KnitterWorkSpace, не блокируя остальные вкладки/кнопки
-                overlay = new Form();
-                overlay.FormBorderStyle = FormBorderStyle.None;
-                overlay.StartPosition = FormStartPosition.Manual;
-                overlay.ShowInTaskbar = false;
-                overlay.BackColor = System.Drawing.Color.AliceBlue;
-                overlay.TopMost = false; // достаточно быть над текущей формой
-                overlay.Owner = this;
-
-                // Берём границы основного layout текущей вкладки; если что-то пойдёт не так — используем всю клиентскую область формы
-                var bounds = dataLayoutControl1?.RectangleToScreen(dataLayoutControl1.ClientRectangle)
-                    ?? this.RectangleToScreen(this.ClientRectangle);
-                overlay.Bounds = bounds;
-                overlay.Show();
-
-                using (var splash = new FioSelectionSplash(fioList, initialTab))
-                {
-                    splash.StartPosition = FormStartPosition.CenterScreen;
-                    var result = splash.ShowDialog(overlay);
-                    if (result == DialogResult.OK && splash.SelectedTab.HasValue)
-                    {
-                        FioGridLookUpEdit.EditValue = splash.SelectedTab.Value;
-                        TabGridLookUpEdit.EditValue = splash.SelectedTab.Value;
-                        // Перезапускаем таймер после успешного выбора
-                        ResetIdleTimer();
-                    }
-                    else
-                    {
-                        BeginInvoke(new Action(Close));
-                    }
-                }
-            }
-            finally
-            {
-                // Убираем оверлей и возвращаем видимость формы
-                if (overlay != null)
-                {
-                    try { overlay.Close(); } catch { }
-                    overlay.Dispose();
-                }
-                this.Opacity = oldOpacity;
-                _isSplashShowing = false;
             }
         }
 
@@ -525,7 +469,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             try
             {
                 // Сбрасываем таймер бездействия при активности пользователя
-                ResetIdleTimer();
+                _idleSplashController.Reset();
 
                 if (FioGridLookUpEdit.EditValue == null || !int.TryParse(FioGridLookUpEdit.EditValue.ToString(), out int tab))
                 {
@@ -747,7 +691,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             FioGridLookUpEdit.Properties.DataSource = fioList;
             TabGridLookUpEdit.Properties.DataSource = fioList;
-            _cachedFioList = fioList;
+                _idleSplashController.UpdateFioList(fioList);
 
             if (int.TryParse(currentSelection, out int tab) && fioList.Any(f => f.Tab == tab))
             {
@@ -1423,86 +1367,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         private void SetupIdleTimer()
         {
-            _idleTimer.Interval = 180000000; // 1 минута = 60000 миллисекунд
-            _idleTimer.Tick += IdleTimer_Tick;
-
-            // Подписываемся на события активности для сброса таймера
-            this.MouseMove += (s, e) => ResetIdleTimer();
-            this.KeyDown += (s, e) => ResetIdleTimer();
-            this.MouseClick += (s, e) => ResetIdleTimer();
-            this.MouseDown += (s, e) => ResetIdleTimer();
-            this.KeyPress += (s, e) => ResetIdleTimer();
-
-            // Подписываемся на события активности после полной загрузки формы
-            this.Shown += (s, e) =>
-            {
-                // Также отслеживаем активность в дочерних контролах
-                AttachActivityHandlers(this);
-            };
-
-            // Останавливаем таймер при закрытии формы
+            _idleSplashController.Start();
             this.FormClosing += (s, e) =>
             {
-                _idleTimer.Stop();
-                _idleTimer.Dispose();
                 _shiftTimer.Stop();
                 _shiftTimer.Dispose();
                 _blinkController.Dispose();
+                _idleSplashController.Dispose();
             };
-        }
-
-        /// <summary>
-        /// Рекурсивно подписывается на события активности для всех дочерних контролов.
-        /// </summary>
-        private void AttachActivityHandlers(Control parent)
-        {
-            foreach (Control control in parent.Controls)
-            {
-                control.MouseMove += (s, e) => ResetIdleTimer();
-                control.MouseClick += (s, e) => ResetIdleTimer();
-                control.MouseDown += (s, e) => ResetIdleTimer();
-                control.KeyDown += (s, e) => ResetIdleTimer();
-                control.KeyPress += (s, e) => ResetIdleTimer();
-
-                // Рекурсивно обрабатываем вложенные контролы
-                if (control.HasChildren)
-                {
-                    AttachActivityHandlers(control);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Обработчик таймера бездействия: показывает сплеш выбора сотрудника.
-        /// </summary>
-        private void IdleTimer_Tick(object sender, EventArgs e)
-        {
-            // Не показываем сплеш, если он уже открыт
-            if (_isSplashShowing)
-                return;
-
-            // Останавливаем таймер перед показом сплеша
-            _idleTimer.Stop();
-
-            // Показываем сплеш с сохраненным списком ФИО
-            if (_cachedFioList != null && _cachedFioList.Count > 0)
-            {
-                const int defaultTab = 1438;
-                PresentFioSelectionSplash(_cachedFioList, defaultTab);
-            }
-        }
-
-        /// <summary>
-        /// Сбрасывает таймер бездействия, перезапуская отсчет с начала.
-        /// </summary>
-        private void ResetIdleTimer()
-        {
-            // Не сбрасываем таймер, если сплеш уже открыт
-            if (_isSplashShowing)
-                return;
-
-            _idleTimer.Stop();
-            _idleTimer.Start();
         }
 
         /// <summary>
