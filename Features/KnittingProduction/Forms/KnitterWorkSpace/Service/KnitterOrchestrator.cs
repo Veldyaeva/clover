@@ -1,9 +1,15 @@
+using DevExpress.Xpf.Core;
+using DevExpress.XtraEditors;
+using DevExpress.XtraExport.Helpers;
+using DevExpress.XtraGrid.Views.BandedGrid;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using SewingProduction.Models;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using static SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service.KnitterRepository;
 
 namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
@@ -125,6 +131,215 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         public Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(int? currentShiftId, decimal v) => _repo.AdjustNotStartedBeforeShiftEndAsync(currentShiftId, 12m);
 
 
+    }
+    public class KnitterWorkSpaceService : IKnitterWorkSpaceService
+    {
+        private readonly IKnitterOrchestrator _orchestrator;
+        public KnitterWorkSpaceService(IKnitterOrchestrator orchestrator)
+        {
+            _orchestrator = orchestrator;
+        }
+
+        public Task<StartShiftResult> StartShiftAsync(StartShiftCommand command)
+        {
+            if (command == null)
+                throw new ArgumentNullException(nameof(command));
+
+            if (command.Tab <= 0)
+                return new StartShiftResult { Success = false, ErrorMessage = "Не выбран сотрудник." };
+
+            if (command.PzvIds == null || command.PzvIds.Count == 0)
+                return new StartShiftResult { Success = false, ErrorMessage = "Нет строк для назначения." };
+
+            if (command.KmaId.HasValue)
+            {
+                var openShift = await _orchestrator.GetOpenShiftByZoneAsync(command.KmaId.Value);
+                if (openShift.shiftId.HasValue)
+                {
+                    return new StartShiftResult
+                    {
+                        Success = false,
+                        ErrorMessage = $"В зоне {command.KmaNum} уже открыта смена."
+                    };
+                }
+            }
+
+            await _orchestrator.SetPzvTabAsync(command.PzvIds, command.Tab);
+
+            var shiftId = await _orchestrator.StartWorkingShiftAsync(command.Tab, command.KmaId, command.KmaNum);
+            if (shiftId <= 0)
+            {
+                return new StartShiftResult
+                {
+                    Success = false,
+                    ErrorMessage = "Не удалось открыть смену."
+                };
+            }
+
+            await _orchestrator.UpdatePzvKwsIdAsync(command.PzvIds, shiftId);
+
+            return new StartShiftResult
+            {
+                Success = true,
+                ShiftId = shiftId,
+                ShiftStartTime = DateTime.Now
+            };
+            //simpleButton2.Enabled = false;
+            //try
+            //{
+            //    // Если смена уже запущена — завершаем смену: запись в БД, остановка таймера и смена текста
+            //    if (_isShiftRunning)
+            //    {
+            //        if (!ShowShiftEndConfirmationDialog())
+            //            return;
+            //        // Перед завершением смены: обработать все операции; если есть незавершённые — не закрываем.
+            //        var canClose = await ProcessOperationsOnShiftEndAsync();
+            //        if (!canClose)
+            //            return;
+
+            //        // Очищаем список незавершённых операций при успешном закрытии смены
+            //        _unfinishedOperationIds.Clear();
+            //        // Обновляем отображение, чтобы убрать подсветку
+            //        this.BeginInvoke(new Action(() =>
+            //        {
+            //            bandedGridView3?.RefreshData();
+            //            advBandedGridView1?.RefreshData();
+            //        }));
+            //        //// снимаем назначение у всех НЕ начатых в текущей смене
+            //        var stat = (await _orchestrator.AdjustNotStartedBeforeShiftEndAsync(_currentShiftId, 12m)).ToList();
+
+            //        if (!int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tabEnd) || tabEnd <= 0)
+            //        {
+            //            XtraMessageBox.Show(this, "Не удалось определить табель при завершении смены.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //            LogWarning("Не удалось определить табель при завершении смены.", "Shift.End");
+            //        }
+            //        else if (_currentShiftId.HasValue && _currentShiftId.Value > 0)
+            //        {
+            //            int shiftID = _currentShiftId.Value;
+            //            await _orchestrator.EndWorkingShiftAsync(_currentShiftId.Value, tabEnd);
+            //            // Перезагрузим план, чтобы обновить статусы/проценты
+            //            await LoadPlanForTabAsync(tabEnd, forceReload: true);
+            //            LogSuccess($"Смена успешно завершена. ShiftId={shiftID}, Tab={tabEnd}", "Shift.End");
+            //        }
+
+            //        await RefreshFioListAsync();
+            //        ApplyShiftUi(false, null, null);
+            //        return;
+            //    }
+
+            //    if (!int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int selectedTab) || selectedTab <= 0)
+            //    {
+            //        XtraMessageBox.Show(this, "Выберите сотрудника для назначения табельного номера.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //        LogWarning("Попытка старта смены без выбранного сотрудника.", "Shift.Start");
+            //        return;
+            //    }
+
+            //    // Проверка: нельзя открыть вторую смену в зоне
+            //    if (_currentKmaId.HasValue)
+            //    {
+            //        var openByZone = await _orchestrator.GetOpenShiftByZoneAsync(_currentKmaId.Value);
+            //        if (openByZone.shiftId.HasValue)
+            //        {
+            //            XtraMessageBox.Show(this, $"В зоне {_currentKmaNum} уже открыта смена (таб. {openByZone.tabStart}), сначала завершите её.", "Смена уже открыта", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //            LogWarning($"Попытка открыть смену в зоне {_currentKmaNum} при уже открытой смене (tab={openByZone.tabStart}).", "Shift.Start");
+            //            return;
+            //        }
+            //    }
+
+            //    // Назначаем таб ВСЕМ загруженным строкам 
+            //    var rowsForUpdate = _planPresenter.AllRows?.ToList() ?? new List<KnitterPZVModel>();
+            //    if (!rowsForUpdate.Any())
+            //    {
+            //        XtraMessageBox.Show(this, "Нет строк для назначения табельного номера.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //        LogWarning("Нет строк для назначения табельного номера при старте смены.", "Shift.Start");
+            //        return;
+            //    }
+
+            //    var pzvIds = rowsForUpdate
+            //        .Select(r => r.pzvID)
+            //        .Where(id => id > 0)
+            //        .Distinct()
+            //        .ToList();
+
+            //    if (pzvIds.Count == 0)
+            //    {
+            //        XtraMessageBox.Show(this, "Не удалось определить записи для обновления.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        LogWarning("Список pzvID пуст при старте смены.", "Shift.Start");
+            //        return;
+            //    }
+
+
+            //    // Успешный старт смены: фиксируем в БД, проставляем pzvKwsID для всех! операций, меняем текст кнопки и запускаем таймер
+            //    try
+            //    {
+            //        await _orchestrator.SetPzvTabAsync(pzvIds, selectedTab);
+            //        _currentShiftId = await _orchestrator.StartWorkingShiftAsync(selectedTab, _currentKmaId, _currentKmaNum);
+            //        if (_currentShiftId.HasValue && _currentShiftId.Value > 0)
+            //        {
+            //            await _orchestrator.UpdatePzvKwsIdAsync(pzvIds, _currentShiftId.Value);
+
+
+            //            // Обновим план после проставления pzvKwsID
+            //            await LoadPlanForTabAsync(selectedTab, forceReload: true);
+            //            await RefreshFioListAsync();
+
+            //            ApplyShiftUi(true, _currentShiftId, DateTime.Now);
+            //            LogSuccess($"Смена успешно начата. ShiftId={_currentShiftId.Value}, Tab={selectedTab}, Rows={pzvIds.Count}", "Shift.Start");
+            //        }
+            //        else
+            //        {
+            //            XtraMessageBox.Show(this, "Не удалось получить ID смены для обновления операций.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //            LogWarning("StartWorkingShiftAsync вернул некорректный ID смены: " + _currentShiftId, "Shift.Start");
+            //        }
+            //    }
+            //    catch (Exception exStart)
+            //    {
+            //        XtraMessageBox.Show(this, $"Не удалось записать начало смены: {exStart.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        LogError(exStart, "Shift.Start");
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    XtraMessageBox.Show(this, $"Ошибка при назначении табельного номера: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    LogError(ex, "simpleButton2_Click");
+            //}
+            //simpleButton2.Enabled = true;
+        }
+
+        public Task<CloseShiftResult> CloseShiftAsync(CloseShiftCommand command)
+        {
+            if (command == null)
+                throw new ArgumentNullException(nameof(command));
+
+            if (command.ShiftId <= 0)
+                return new CloseShiftResult { Success = false };
+
+            var unfinished = (command.CurrentRows ?? new List<KnitterPZVModel>())
+                .Where(r => r.pzvDateStart != null && r.pzvDateEnd == null)
+                .Select(r => r.pzvID)
+                .Distinct()
+                .ToList();
+
+            if (unfinished.Count > 0)
+            {
+                return new CloseShiftResult
+                {
+                    Success = false,
+                    HasUnfinishedOperations = true,
+                    UnfinishedPzvIds = unfinished
+                };
+            }
+
+            await _orchestrator.AdjustNotStartedBeforeShiftEndAsync(command.ShiftId, command.MinHours);
+            await _orchestrator.EndWorkingShiftAsync(command.ShiftId, command.TabEnd);
+
+            return new CloseShiftResult
+            {
+                Success = true,
+                HasUnfinishedOperations = false,
+                UnfinishedPzvIds = new List<int>()
+            };
+        }
     }
 }
 
