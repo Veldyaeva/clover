@@ -674,6 +674,18 @@ ORDER BY kwsDateStart DESC";
             }
         }
 
+        public async Task SplitNotStartedOnShiftCloseAsync(int pzvId)
+        {
+            try
+            {
+                await SplitPzvByModeAsync(pzvId, mode: 2, qtyFact: 0);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"SplitNotStartedOnShiftCloseAsync failed (pzvId={pzvId})", ex);
+            }
+        }
+
         public async Task CloseShiftWorkflowAsync(int shiftId, int tabEnd, decimal minHours)
         {
             try

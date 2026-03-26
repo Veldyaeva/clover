@@ -7,7 +7,7 @@ using static SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Servic
 
 namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 {
-    public interface IKnitterRepository
+    public interface IKnitterRepository : IKnitterShiftWorkflowGateway
     {
         Task<List<FioModel>> GetFioListAsync();
         Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab);
@@ -28,8 +28,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         Task<(int? shiftId, int? tabStart, DateTime? dateStart)> GetOpenShiftByZoneAsync(int kmaId);
 		Task UpdatePzvKwsIdAsync(IEnumerable<int> pzvIds, int kwsId);
         Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(int? currentShiftId, decimal v);
-        Task<int> StartShiftWorkflowAsync(int tabStart, int? kmaId, string kmaNum, IEnumerable<int> pzvIds);
-        Task CloseShiftWorkflowAsync(int shiftId, int tabEnd, decimal minHours);
     }
 }
 

@@ -215,7 +215,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 var dbHelper = new DatabaseHelper();
                 IKnitterRepository repo = new KnitterRepository(dbHelper);
                 _orchestrator = new KnitterOrchestrator(repo, new FileLogger());
-                _workSpaceService = new KnitterWorkSpaceService(_orchestrator);
+                _workSpaceService = new KnitterWorkSpaceService(repo);
                 PlanZagrVyazGridControl.DataSource = _planBindingSource;
 
                 // Детализация на втором уровне настраивается в Designer: advBandedGridView1 является шаблоном уровня "ArtNom"
@@ -256,17 +256,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         /// <param name="orchestrator">Оркестратор доменной логики.</param>
         public KnitterWorkSpace(IKnitterOrchestrator orchestrator)
+            : this(orchestrator, new KnitterRepository(new DatabaseHelper()))
+        {
+        }
+
+        public KnitterWorkSpace(IKnitterOrchestrator orchestrator, IKnitterShiftWorkflowGateway shiftWorkflowGateway)
         {
             try
             {
-                System.Diagnostics.Debug.WriteLine("[KnitterWorkSpace] ctor(IKnitterOrchestrator) start");
+                System.Diagnostics.Debug.WriteLine("[KnitterWorkSpace] ctor(IKnitterOrchestrator, IKnitterShiftWorkflowGateway) start");
                 InitializeComponent();
                 _planFooterColor = Color.LightCoral;
                 _factFooterColor = Color.LightSkyBlue;
                 _sbController = new ServiceBrokerController(this);
                 _sbHub = AppServices.Services.GetRequiredService<IAppServiceBrokerHub>();
                 _orchestrator = orchestrator ?? throw new ArgumentNullException(nameof(orchestrator));
-                _workSpaceService = new KnitterWorkSpaceService(_orchestrator);
+                _workSpaceService = new KnitterWorkSpaceService(shiftWorkflowGateway ?? throw new ArgumentNullException(nameof(shiftWorkflowGateway)));
                 dataLayoutControl1.DataSource = _planBindingSource;
                 ConfigureAdvBandedGridColumns();
                 PlanZagrVyazGridControl.DataSource = _planBindingSource;
@@ -301,7 +306,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             catch (Exception ex)
             {
                 XtraMessageBox.Show(this, $"Ошибка инициализации формы: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                LogError(ex, "Ctor.Orchestrator");
+                LogError(ex, "Ctor.OrchestratorAndShiftWorkflowGateway");
             }
         }
 
@@ -583,11 +588,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         {
                             _unfinishedOperationIds = res.UnfinishedPzvIds.ToHashSet();
                             RefreshHighlight();
+                            FocusFirstUnfinishedOperation();
+                            XtraMessageBox.Show(this, "В смене есть начатые, но не завершённые операции. Завершите операции, прежде чем закончить смену.", "Завершение операций", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             LogWarning("Есть начатые и не завершённые операции. Смену закрывать нельзя", logContext);
                             return;
                         }
 
-                        LogWarning(res.ToString(), logContext);
+                        LogWarning(string.IsNullOrWhiteSpace(res.ErrorMessage) ? "Не удалось завершить смену." : res.ErrorMessage, logContext);
                         return;
                     }
 
@@ -699,6 +706,26 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             bandedGridView3?.RefreshData();
             advBandedGridView1?.RefreshData();
+        }
+
+        private void FocusFirstUnfinishedOperation()
+        {
+            var firstUnfinished = (_planPresenter.AllRows ?? Enumerable.Empty<KnitterPZVModel>())
+                .FirstOrDefault(r => r != null && _unfinishedOperationIds.Contains(r.pzvID));
+
+            if (firstUnfinished == null)
+                return;
+
+            var snap = new PlanFocusSnap
+            {
+                MasterTop = bandedGridView3?.TopRowIndex ?? 0,
+                TaskNum = KnitterPlanUtils.NormalizeTaskNum(firstUnfinished.pzvNomZad),
+                Machine = KnitterPlanUtils.NormalizeMachineKey(firstUnfinished.kmlNumber),
+                DetailPzvId = firstUnfinished.pzvID,
+                WasInDetail = true
+            };
+
+            RestorePlanFocus(snap, preferDetailId: firstUnfinished.pzvID);
         }
 
         /// <summary>
@@ -895,66 +922,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             return (now >= start8 && now <= start8.AddMinutes(1)) ||
                    (now >= start20 && now <= start20.AddMinutes(1));
-        }
-
-        /// <summary>
-        /// При завершении смены: для неначатых — split mode=2 с отриц. количеством; для начатых без конца — спросить факт и закрыть.
-        /// </summary>
-        private async Task<bool> ProcessOperationsOnShiftEndAsync()
-        {
-            var rows = _planPresenter.AllRows?.Where(r => r != null && r.pzvID > 0).ToList() ?? new List<KnitterPZVModel>();
-            if (!rows.Any())
-                return true;
-
-
-            // Начатые, но не завершённые → спросить факт, закрыть, при необходимости split по факту
-            var inProgress = rows.Where(r => r.pzvDateStart != null && r.pzvDateEnd == null).ToList();
-            if (inProgress.Any())
-            {
-                // Сохраняем ID незавершённых операций для подсветки
-                _unfinishedOperationIds = new HashSet<int>(inProgress.Where(r => r.pzvID > 0).Select(r => r.pzvID));
-
-                // Сразу обновляем отображение для подсветки незавершённых операций
-                bandedGridView3?.RefreshData();
-                advBandedGridView1?.RefreshData();
-
-                // Позиционируемся на первую незавершённую операцию и разворачиваем её группы
-                var firstUnfinished = inProgress.FirstOrDefault(r => r.pzvID > 0);
-                if (firstUnfinished != null)
-                {
-                    var snap = new PlanFocusSnap
-                    {
-                        MasterTop = bandedGridView3?.TopRowIndex ?? 0,
-                        TaskNum = KnitterPlanUtils.NormalizeTaskNum(firstUnfinished.pzvNomZad),
-                        Machine = KnitterPlanUtils.NormalizeMachineKey(firstUnfinished.kmlNumber),
-                        DetailPzvId = firstUnfinished.pzvID,
-                        WasInDetail = true
-                    };
-
-                    RestorePlanFocus(snap, preferDetailId: firstUnfinished.pzvID);
-                }
-
-                // Показываем сообщение после обновления отображения
-                MessageBox.Show("В смене есть начатые, но не завершённые операции. Завершите операции, прежде чем закончить смену.", "Завершение операций", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LogWarning($"Нельзя завершить смену: есть незавершенные операции ({inProgress.Count}).", nameof(ProcessOperationsOnShiftEndAsync));
-                return false;
-            }
-            // Неначатые (нет даты старта и окончания) → split mode=2
-            var notStarted = rows.Where(r => r.pzvDateStart == null && r.pzvDateEnd == null).ToList();
-            foreach (var row in notStarted)
-            {
-                try
-                { //если завершается в конце смены с фактом 0 - это случай 2 с отрицательной строкой
-                    await _orchestrator.SplitPzvAsync(row.pzvID, 2, 0);
-                }
-                catch
-                {
-                    LogWarning($"SplitPzvAsync завершился ошибкой для pzvID={row.pzvID} (mode=2, qtyFact=0).", nameof(ProcessOperationsOnShiftEndAsync));
-                    // Игнорируем сбой split одной операции, продолжаем остальные
-                }
-            }
-
-            return true;
         }
 
         /// <summary>

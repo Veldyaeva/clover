@@ -60,11 +60,5 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
         public Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(int? currentShiftId, decimal v) =>
             _repo.AdjustNotStartedBeforeShiftEndAsync(currentShiftId, v);
-
-        public Task<int> StartShiftWorkflowAsync(int tabStart, int? kmaId, string kmaNum, IEnumerable<int> pzvIds) =>
-            _repo.StartShiftWorkflowAsync(tabStart, kmaId, kmaNum, pzvIds);
-
-        public Task CloseShiftWorkflowAsync(int shiftId, int tabEnd, decimal minHours) =>
-            _repo.CloseShiftWorkflowAsync(shiftId, tabEnd, minHours);
     }
 }
