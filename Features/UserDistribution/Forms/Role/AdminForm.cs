@@ -5,7 +5,9 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.Charts.Native;
 using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Features.UserDistribution.Forms.MasterRight;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
@@ -14,6 +16,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
 {
     public partial class AdminForm : CustomForm
     {
+        public MrWizardContext StartMode = new MrWizardContext();
         private readonly AdminFormDataService _adminFormDataService;
         DatabaseHelper dbHelper = new DatabaseHelper();
         private readonly UserClass _user;
@@ -22,6 +25,20 @@ namespace SewingProduction.Features.UserDistribution.Forms
             InitializeComponent();
             _adminFormDataService = new AdminFormDataService();
             _user = user;
+        }
+        protected override async void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+
+            await Task.Delay(100);
+            if (StartMode.AdminNeedAddMenu || StartMode.AdminNeedAddForms || StartMode.AdminNeedAddElements)
+            {
+                VisibleButtonFalse();
+                if (StartMode.AdminNeedAddMenu) { StartAddMenu(); }
+                if (StartMode.AdminNeedAddForms) { StartAddForms(); }
+                if (StartMode.AdminNeedAddElements) { StartAddElements(); } 
+            }
+
         }
 
         private void AdminForm_Load(object sender, EventArgs e)
@@ -219,6 +236,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
 
         private async void customButtonLoadObject_Click(object sender, EventArgs e)
         {
+            await LoadObjects();
+        }
+        private async Task LoadObjects()
+        {
             if (gridViewForms.FocusedRowHandle < 0)
             {
                 MessageBox.Show("Выберите форму.");
@@ -238,6 +259,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
         }
 
         private async void customButtonLoadForm_Click(object sender, EventArgs e)
+        {
+            await LoadForms();
+        }
+        private async Task LoadForms()
         {
             try
             {
@@ -303,20 +328,23 @@ namespace SewingProduction.Features.UserDistribution.Forms
         #region menu
         private async void customButtonLoadMenu_Click(object sender, EventArgs e)
         {
+            await LoadMenu();
+        }
+        private async Task LoadMenu()
+        {
             if (gridViewForms.FocusedRowHandle < 0)
             {
                 MessageBox.Show("Выберите форму!");
                 return;
             }
 
-            int formID = Convert.ToInt32(gridViewForms.GetFocusedRowCellValue("ProjectFormsID"));
-            string formName = gridViewForms.GetFocusedRowCellValue("NameForm")?.ToString();
-
-            if (formName != "SpMainForm")
+            if (!FocusMainFormRow())
             {
-                MessageBox.Show("Выберите основную форму!");
+                MessageBox.Show("Форма SpMainForm не найдена в списке.");
                 return;
             }
+
+            int formID = Convert.ToInt32(gridViewForms.GetFocusedRowCellValue("ProjectFormsID"));
 
             var mainForm = Application.OpenForms.OfType<SpMainForm>().FirstOrDefault();
             if (mainForm == null)
@@ -338,7 +366,18 @@ namespace SewingProduction.Features.UserDistribution.Forms
             await Objects_Load();
             MessageBox.Show("Пункты меню (BarManager) успешно добавлены в базу данных.");
         }
+        private bool FocusMainFormRow()
+        {
+            int rowHandle = gridViewForms.LocateByValue("NameForm", "SpMainForm");
 
+            if (rowHandle < 0)
+                return false;
+
+            gridViewForms.FocusedRowHandle = rowHandle;
+            gridViewForms.MakeRowVisible(rowHandle);
+
+            return true;
+        }
         #endregion
 
         private void customButtonOpen_Click(object sender, EventArgs e)
@@ -388,6 +427,42 @@ namespace SewingProduction.Features.UserDistribution.Forms
             }
             mainForm.OpenForm(formInstance, sender);
         }
+
+
+        #region master right
+        public async void StartAddForms()
+        {
+            await LoadForms();
+            customButtonLoadForm.Visible = true;
+            customButtonFormAdd.Visible = true;
+            customButtonDeleteForm.Visible = true;
+        }
+
+        public async void StartAddElements()
+        {
+            //await LoadObjects();
+            customButtonAddObject.Visible = true;
+            customButtonDeleteObject.Visible = true;
+            customButtonLoadObject.Visible = true;
+        }
+
+        public async void StartAddMenu()
+        {
+            await LoadMenu();
+            customButtonLoadMenu.Visible = true;
+        }
+        public void VisibleButtonFalse()
+        {
+            customButtonOpen.Visible = false;
+            customButtonLoadForm.Visible = false;
+            customButtonLoadMenu.Visible = false;
+            customButtonFormAdd.Visible = false;
+            customButtonDeleteForm.Visible = false;
+            customButtonAddObject.Visible = false;
+            customButtonDeleteObject.Visible = false;
+            customButtonLoadObject.Visible = false;
+        }
+        #endregion
     }
 
     public class AdminFormDataService

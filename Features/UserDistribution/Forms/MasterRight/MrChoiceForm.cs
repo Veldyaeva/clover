@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using DevExpress.XtraTreeList.Nodes;
 
@@ -86,6 +87,10 @@ namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
                 TreeListNode adminForm = treeListSteps.AppendNode(new object[] { "Добавить элементы / формы" }, null);
                 adminForm.Tag = "AdminForm";
 
+                TreeListNode addMenu = treeListSteps.AppendNode(
+                    new object[] { "Добавить пункты меню" }, adminForm);
+                addMenu.Tag = "AddMenu";
+
                 TreeListNode addForms = treeListSteps.AppendNode(
                     new object[] { "Добавить формы" }, adminForm);
                 addForms.Tag = "AddForms";
@@ -93,10 +98,6 @@ namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
                 TreeListNode addElements = treeListSteps.AppendNode(
                     new object[] { "Добавить элементы" }, adminForm);
                 addElements.Tag = "AddElements";
-
-                TreeListNode addMenu = treeListSteps.AppendNode(
-                    new object[] { "Добавить пункты меню" }, adminForm);
-                addMenu.Tag = "AddMenu";
 
                 TreeListNode assignRoleObject = treeListSteps.AppendNode(
                     new object[] { "Добавить объекты в роль" }, null);
@@ -217,6 +218,11 @@ namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
                         context.NeedAdminForm = true;
                         break;
 
+                    case "AddMenu":
+                        context.NeedAdminForm = true;
+                        context.AdminNeedAddMenu = true;
+                        break;
+
                     case "AddForms":
                         context.NeedAdminForm = true;
                         context.AdminNeedAddForms = true;
@@ -225,11 +231,6 @@ namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
                     case "AddElements":
                         context.NeedAdminForm = true;
                         context.AdminNeedAddElements = true;
-                        break;
-
-                    case "AddMenu":
-                        context.NeedAdminForm = true;
-                        context.AdminNeedAddMenu = true;
                         break;
 
                     case "AssignRoleObject":
@@ -244,7 +245,118 @@ namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
 
             return context;
         }
+        public void SetContext(MrWizardContext context)
+        {
+            if (context == null)
+                return;
 
+            treeListSteps.BeginUpdate();
+            try
+            {
+                foreach (TreeListNode node in treeListSteps.Nodes)
+                {
+                    SetCheckedRecursive(node, false);
+                }
+
+                TreeListNode createUserNode = FindNodeByTag("CreateUser");
+                TreeListNode newUserNode = FindNodeByTag("NewUser");
+                TreeListNode copyUserNode = FindNodeByTag("CopyUser");
+
+                TreeListNode createRoleNode = FindNodeByTag("CreateRole");
+                TreeListNode newRoleNode = FindNodeByTag("NewRole");
+                TreeListNode copyRoleNode = FindNodeByTag("CopyRole");
+
+                TreeListNode adminFormNode = FindNodeByTag("AdminForm");
+                TreeListNode addFormsNode = FindNodeByTag("AddForms");
+                TreeListNode addElementsNode = FindNodeByTag("AddElements");
+                TreeListNode addMenuNode = FindNodeByTag("AddMenu");
+
+                TreeListNode assignRoleObjectNode = FindNodeByTag("AssignRoleObject");
+                TreeListNode assignUserRoleNode = FindNodeByTag("AssignUserRole");
+
+                if (context.NeedCreateUser && createUserNode != null)
+                    createUserNode.Checked = true;
+
+                if (context.UserMode == MrUserMode.New && newUserNode != null)
+                    newUserNode.Checked = true;
+
+                if (context.UserMode == MrUserMode.Copy && copyUserNode != null)
+                    copyUserNode.Checked = true;
+
+                if (context.NeedCreateRole && createRoleNode != null)
+                    createRoleNode.Checked = true;
+
+                if (context.RoleMode == MrRoleMode.New && newRoleNode != null)
+                    newRoleNode.Checked = true;
+
+                if (context.RoleMode == MrRoleMode.Copy && copyRoleNode != null)
+                    copyRoleNode.Checked = true;
+
+                if (context.NeedAdminForm && adminFormNode != null)
+                    adminFormNode.Checked = true;
+
+                if (context.AdminNeedAddMenu && addMenuNode != null)
+                    addMenuNode.Checked = true;
+
+                if (context.AdminNeedAddForms && addFormsNode != null)
+                    addFormsNode.Checked = true;
+
+                if (context.AdminNeedAddElements && addElementsNode != null)
+                    addElementsNode.Checked = true;
+
+                if (context.NeedAssignRoleObject && assignRoleObjectNode != null)
+                    assignRoleObjectNode.Checked = true;
+
+                if (context.NeedAssignUserRole && assignUserRoleNode != null)
+                    assignUserRoleNode.Checked = true;
+            }
+            finally
+            {
+                treeListSteps.EndUpdate();
+            }
+        }
+        private TreeListNode FindNodeByTag(string tag)
+        {
+            foreach (TreeListNode node in treeListSteps.Nodes)
+            {
+                TreeListNode found = FindNodeByTagRecursive(node, tag);
+                if (found != null)
+                    return found;
+            }
+
+            return null;
+        }
+
+        private TreeListNode FindNodeByTagRecursive(TreeListNode node, string tag)
+        {
+            if (node == null)
+                return null;
+
+            if (Convert.ToString(node.Tag) == tag)
+                return node;
+
+            foreach (TreeListNode child in node.Nodes)
+            {
+                TreeListNode found = FindNodeByTagRecursive(child, tag);
+                if (found != null)
+                    return found;
+            }
+
+            return null;
+        }
+
+        private void SetCheckedRecursive(TreeListNode node, bool isChecked)
+        {
+            if (node == null)
+                return;
+
+            node.Checked = isChecked;
+
+            foreach (TreeListNode child in node.Nodes)
+            {
+                SetCheckedRecursive(child, isChecked);
+            }
+        }
         private bool HasSelectedAnyStep(MrWizardContext context)
         {
             return context.NeedCreateUser
@@ -295,6 +407,7 @@ namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
 
         public MrUserMode UserMode { get; set; } = MrUserMode.None;
         public MrRoleMode RoleMode { get; set; } = MrRoleMode.None;
+        //public List<MrAdminMode> AdminMode { get; set; } = new List<MrAdminMode>();
 
         public bool AdminNeedAddForms { get; set; }
         public bool AdminNeedAddElements { get; set; }
@@ -314,4 +427,12 @@ namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
         New = 1,
         Copy = 2
     }
+
+    //public enum MrAdminMode
+    //{
+    //    None = 0,
+    //    Menu = 1,
+    //    Form = 2,
+    //    Object = 3
+    //}
 }

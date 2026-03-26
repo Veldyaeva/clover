@@ -14,6 +14,7 @@ namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
 
         private Form _currentInnerForm;
         private List<MrStepItem> _steps = new List<MrStepItem>();
+        private string _help = null;
         private int _currentStepIndex = -1;
         private MrWizardContext _context = new MrWizardContext();
 
@@ -22,11 +23,6 @@ namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
             _user = user;
 
             InitializeComponent();
-
-            btnBack.Click += btnBack_Click;
-            btnNext.Click += btnNext_Click;
-            btnFinish.Click += btnFinish_Click;
-            customButtonCancel.Click += btnCancel_Click;
         }
 
         protected override void OnShown(EventArgs e)
@@ -121,6 +117,60 @@ namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
             UpdateButtons();
         }
 
+        private void BuildHelpFromContext()
+        {
+            _help = "";
+
+            if (_context.NeedCreateUser)
+            {
+                _help += "Форма пользователей, ";
+
+                if (_context.UserMode == MrUserMode.New)
+                {
+                    _help += "введите данные и нажмите 'Сохранить', ";
+                }
+
+                if (_context.UserMode == MrUserMode.Copy)
+                {
+                    _help += "выберите пользователя и нажмите кнопку 'Копировать пользователя', ";
+                }
+            }
+
+            if (_context.NeedCreateRole)
+            {
+                _help += "Форма роли, ";
+
+                if (_context.RoleMode == MrRoleMode.New)
+                {
+                    _help += "введите данные и нажмите 'Сохранить', ";
+                }
+
+                if (_context.RoleMode == MrRoleMode.Copy)
+                {
+                    _help += "выберите роль и нажмите кнопку 'Копировать пользователя', ";
+                }
+            }
+
+            if (_context.NeedAdminForm)
+            {
+                _help += "";
+            }
+
+            if (_context.NeedAssignRoleObject)
+            {
+                _help += "";
+            }
+
+            if (_context.NeedAssignUserRole)
+            {
+                _help += "";
+            }
+
+            _help += (_currentStepIndex >= 0 && _currentStepIndex < _steps.Count) ? "\n Нажмите 'Далее'" : "";
+            _help += (_steps.Count > 1 && _currentStepIndex == _steps.Count - 1) ? "\n Нажмите 'Завершить'" : "";
+
+            customTextBoxHelp.Text = _help;
+        }
         private void RefreshStepList()
         {
             listBoxControlSteps.Items.Clear();
@@ -130,7 +180,7 @@ namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
                 MrStepItem step = _steps[i];
 
                 string markerCurrent = i == _currentStepIndex ? "►" : " ";
-                string markerDone = step.IsDone ? "[x]" : "[ ]";
+                string markerDone = step.IsDone ? "[V]" : "[ ]";
 
                 listBoxControlSteps.Items.Add($"{markerCurrent} {markerDone} {step.Caption}");
             }
@@ -147,6 +197,7 @@ namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
             ShowInnerForm(form);
             RefreshStepList();
             UpdateButtons();
+            BuildHelpFromContext();
         }
 
         private Form CreateStepForm(MrStepType stepType)
@@ -156,6 +207,7 @@ namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
                 case MrStepType.Choice:
                     MrChoiceForm choiceForm = new MrChoiceForm();
                     choiceForm.OnApplySteps = ApplyChoiceSteps;
+                    choiceForm.SetContext(_context);
                     return choiceForm;
 
                 case MrStepType.CreateUser:
@@ -165,7 +217,7 @@ namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
                     return CreateRoleStepForm();
 
                 case MrStepType.AdminForm:
-                    return new AdminForm(_user);
+                    return CreateAdminStepForm();
 
                 case MrStepType.AssignRoleObject:
                     return new RoleFormObject(_user);
@@ -188,22 +240,14 @@ namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
         private Form CreateRoleStepForm()
         {
             AllRole form = new AllRole(_user);
+            form.StartMode = _context.RoleMode;
+            return form;
+        }
 
-            switch (_context.RoleMode)
-            {
-                case MrRoleMode.New:
-                    // form.StartCreateNewRole();
-                    break;
-
-                case MrRoleMode.Copy:
-                    // form.StartCopyRole();
-                    break;
-
-                case MrRoleMode.None:
-                default:
-                    break;
-            }
-
+        private Form CreateAdminStepForm()
+        {
+            AdminForm form = new AdminForm(_user);
+            form.StartMode = _context;
             return form;
         }
 
@@ -315,6 +359,11 @@ namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
         }
 
         #endregion
+
+        private void MrMainForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public enum MrStepType

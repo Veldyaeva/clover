@@ -31,7 +31,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private readonly AllRoleDataService _allRoleDataService;
         private readonly AllProfileDataService _allProfileDataService;
         private int selectedRoleId = -1;
-        private int selectedUserId = -1;
+        private int selectedUserId = -1; 
         public AllUser(UserClass user) : base(user)
         {
             InitializeComponent();

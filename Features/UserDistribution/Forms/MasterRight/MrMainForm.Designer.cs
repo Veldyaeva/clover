@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MrMainForm));
             splitContainerControlMain = new DevExpress.XtraEditors.SplitContainerControl();
             panelControlSteps = new DevExpress.XtraEditors.PanelControl();
+            customTextBoxHelp = new SewingProduction.Core.Class.CustomTextBox();
             listBoxControlSteps = new DevExpress.XtraEditors.ListBoxControl();
             panelContent = new DevExpress.XtraEditors.PanelControl();
             panelControlBottom = new DevExpress.XtraEditors.PanelControl();
@@ -68,8 +69,8 @@
             splitContainerControlMain.Panel2.Controls.Add(panelContent);
             splitContainerControlMain.Panel2.Controls.Add(panelControlBottom);
             splitContainerControlMain.Panel2.Text = "Panel2";
-            splitContainerControlMain.Size = new System.Drawing.Size(1400, 800);
-            splitContainerControlMain.SplitterPosition = 280;
+            splitContainerControlMain.Size = new System.Drawing.Size(1400, 825);
+            splitContainerControlMain.SplitterPosition = 263;
             splitContainerControlMain.TabIndex = 0;
             // 
             // panelControlSteps
@@ -78,17 +79,28 @@
             panelControlSteps.Dock = System.Windows.Forms.DockStyle.Fill;
             panelControlSteps.Location = new System.Drawing.Point(0, 0);
             panelControlSteps.Name = "panelControlSteps";
-            panelControlSteps.Size = new System.Drawing.Size(280, 800);
+            panelControlSteps.Size = new System.Drawing.Size(263, 825);
             panelControlSteps.TabIndex = 0;
+            // 
+            // customTextBoxHelp
+            // 
+            customTextBoxHelp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            customTextBoxHelp.ErrorColor = System.Drawing.Color.Red;
+            customTextBoxHelp.ErrorMessage = null;
+            customTextBoxHelp.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            customTextBoxHelp.Location = new System.Drawing.Point(141, 17);
+            customTextBoxHelp.Multiline = true;
+            customTextBoxHelp.Name = "customTextBoxHelp";
+            customTextBoxHelp.Size = new System.Drawing.Size(595, 63);
+            customTextBoxHelp.TabIndex = 1;
             // 
             // listBoxControlSteps
             // 
-            listBoxControlSteps.Appearance.Font = new System.Drawing.Font("Arial", 11F);
+            listBoxControlSteps.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold);
             listBoxControlSteps.Appearance.Options.UseFont = true;
-            listBoxControlSteps.Dock = System.Windows.Forms.DockStyle.Fill;
-            listBoxControlSteps.Location = new System.Drawing.Point(2, 2);
+            listBoxControlSteps.Location = new System.Drawing.Point(5, 5);
             listBoxControlSteps.Name = "listBoxControlSteps";
-            listBoxControlSteps.Size = new System.Drawing.Size(276, 796);
+            listBoxControlSteps.Size = new System.Drawing.Size(253, 256);
             listBoxControlSteps.TabIndex = 0;
             // 
             // panelContent
@@ -96,28 +108,29 @@
             panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
             panelContent.Location = new System.Drawing.Point(0, 0);
             panelContent.Name = "panelContent";
-            panelContent.Size = new System.Drawing.Size(1110, 738);
+            panelContent.Size = new System.Drawing.Size(1127, 733);
             panelContent.TabIndex = 0;
             // 
             // panelControlBottom
             // 
+            panelControlBottom.Controls.Add(customTextBoxHelp);
             panelControlBottom.Controls.Add(customButtonCancel);
             panelControlBottom.Controls.Add(btnFinish);
             panelControlBottom.Controls.Add(btnBack);
             panelControlBottom.Controls.Add(btnNext);
             panelControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            panelControlBottom.Location = new System.Drawing.Point(0, 738);
+            panelControlBottom.Location = new System.Drawing.Point(0, 733);
             panelControlBottom.Name = "panelControlBottom";
-            panelControlBottom.Size = new System.Drawing.Size(1110, 62);
+            panelControlBottom.Size = new System.Drawing.Size(1127, 92);
             panelControlBottom.TabIndex = 1;
             // 
             // customButtonCancel
             // 
             customButtonCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             customButtonCancel.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonCancel.Location = new System.Drawing.Point(12, 18);
+            customButtonCancel.Location = new System.Drawing.Point(15, 17);
             customButtonCancel.Name = "customButtonCancel";
-            customButtonCancel.Size = new System.Drawing.Size(120, 30);
+            customButtonCancel.Size = new System.Drawing.Size(120, 63);
             customButtonCancel.TabIndex = 0;
             customButtonCancel.Text = "Отмена";
             customButtonCancel.UseVisualStyleBackColor = true;
@@ -127,9 +140,9 @@
             // 
             btnFinish.Anchor = System.Windows.Forms.AnchorStyles.Right;
             btnFinish.Font = new System.Drawing.Font("Arial", 10F);
-            btnFinish.Location = new System.Drawing.Point(724, 18);
+            btnFinish.Location = new System.Drawing.Point(742, 17);
             btnFinish.Name = "btnFinish";
-            btnFinish.Size = new System.Drawing.Size(120, 30);
+            btnFinish.Size = new System.Drawing.Size(120, 63);
             btnFinish.TabIndex = 1;
             btnFinish.Text = "Завершить";
             btnFinish.UseVisualStyleBackColor = true;
@@ -139,9 +152,9 @@
             // 
             btnBack.Anchor = System.Windows.Forms.AnchorStyles.Right;
             btnBack.Font = new System.Drawing.Font("Arial", 10F);
-            btnBack.Location = new System.Drawing.Point(850, 18);
+            btnBack.Location = new System.Drawing.Point(868, 17);
             btnBack.Name = "btnBack";
-            btnBack.Size = new System.Drawing.Size(120, 30);
+            btnBack.Size = new System.Drawing.Size(120, 63);
             btnBack.TabIndex = 2;
             btnBack.Text = "Назад";
             btnBack.UseVisualStyleBackColor = true;
@@ -151,9 +164,9 @@
             // 
             btnNext.Anchor = System.Windows.Forms.AnchorStyles.Right;
             btnNext.Font = new System.Drawing.Font("Arial", 10F);
-            btnNext.Location = new System.Drawing.Point(976, 18);
+            btnNext.Location = new System.Drawing.Point(994, 17);
             btnNext.Name = "btnNext";
-            btnNext.Size = new System.Drawing.Size(120, 30);
+            btnNext.Size = new System.Drawing.Size(120, 63);
             btnNext.TabIndex = 3;
             btnNext.Text = "Далее";
             btnNext.UseVisualStyleBackColor = true;
@@ -163,11 +176,12 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1400, 800);
+            ClientSize = new System.Drawing.Size(1400, 825);
             Controls.Add(splitContainerControlMain);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "MrMainForm";
             Text = "Мастер распределения прав";
+            Load += MrMainForm_Load;
             ((System.ComponentModel.ISupportInitialize)splitContainerControlMain.Panel1).EndInit();
             splitContainerControlMain.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainerControlMain.Panel2).EndInit();
@@ -180,6 +194,7 @@
             ((System.ComponentModel.ISupportInitialize)panelContent).EndInit();
             ((System.ComponentModel.ISupportInitialize)panelControlBottom).EndInit();
             panelControlBottom.ResumeLayout(false);
+            panelControlBottom.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -194,5 +209,6 @@
         private SewingProduction.Core.Class.CustomButton btnFinish;
         private SewingProduction.Core.Class.CustomButton btnBack;
         private SewingProduction.Core.Class.CustomButton btnNext;
+        private Core.Class.CustomTextBox customTextBoxHelp;
     }
 }

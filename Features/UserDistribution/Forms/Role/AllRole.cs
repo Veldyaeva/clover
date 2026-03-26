@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Features.UserDistribution.Forms.MasterRight;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
@@ -14,6 +15,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
 {
     public partial class AllRole : CustomForm
     {
+        public MrRoleMode StartMode { get; set; } = MrRoleMode.None;
         private readonly AllRoleDataService _allRoleDataService;
         DatabaseHelper dbHelper = new DatabaseHelper();
         private readonly UserClass _user;
@@ -27,6 +29,23 @@ namespace SewingProduction.Features.UserDistribution.Forms
             _allRoleDataService = new AllRoleDataService();
             _user = user;
             SetupGrid();
+        }
+        protected override async void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+
+            await Task.Delay(100);
+
+            switch (StartMode)
+            {
+                case MrRoleMode.New:
+                    StartCreateNewRole();
+                    break;
+
+                case MrRoleMode.Copy:
+                    StartCopyRole();
+                    break;
+            }
         }
         private async void customGridControlRoles_Load(object sender, EventArgs e)
         {
@@ -396,6 +415,22 @@ namespace SewingProduction.Features.UserDistribution.Forms
             Console.WriteLine(originalRoleId.ToString() + ", " + newRoleId.ToString());
         }
 
+        #endregion
+
+        #region master right
+        public void StartCreateNewRole()
+        {
+            gridViewRoles.AddNewRow();
+            customButtonAddRole.Visible = false;
+            customButtonCopyRole.Visible = false;
+            customButtonDeleteRole.Visible = false;
+        }
+
+        public void StartCopyRole()
+        {
+            customButtonAddRole.Visible = false;
+            customButtonDeleteRole.Visible = false;
+        }
         #endregion
     }
     public class AllRoleDataService

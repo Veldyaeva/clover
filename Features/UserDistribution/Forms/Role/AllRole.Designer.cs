@@ -80,8 +80,16 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // gridViewForms
             // 
+            gridViewForms.Appearance.FocusedRow.Font = new System.Drawing.Font("Times New Roman", 14.25F);
+            gridViewForms.Appearance.FocusedRow.Options.UseFont = true;
+            gridViewForms.Appearance.GroupRow.Font = new System.Drawing.Font("Times New Roman", 14.25F);
+            gridViewForms.Appearance.GroupRow.Options.UseFont = true;
+            gridViewForms.Appearance.HeaderPanel.Font = new System.Drawing.Font("Times New Roman", 14.25F);
+            gridViewForms.Appearance.HeaderPanel.Options.UseFont = true;
             gridViewForms.Appearance.Row.BackColor = System.Drawing.Color.FromArgb(255, 224, 192);
+            gridViewForms.Appearance.Row.Font = new System.Drawing.Font("Times New Roman", 14.25F);
             gridViewForms.Appearance.Row.Options.UseBackColor = true;
+            gridViewForms.Appearance.Row.Options.UseFont = true;
             gridViewForms.AppearancePrint.EvenRow.BackColor = System.Drawing.Color.FromArgb(192, 255, 255);
             gridViewForms.AppearancePrint.EvenRow.Options.UseBackColor = true;
             gridViewForms.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { ProjectFormsID, NameForm, HasAccess, NameFormRus });
@@ -173,8 +181,14 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // gridViewUsers
             // 
+            gridViewUsers.Appearance.FocusedRow.Font = new System.Drawing.Font("Times New Roman", 14.25F);
+            gridViewUsers.Appearance.FocusedRow.Options.UseFont = true;
+            gridViewUsers.Appearance.HeaderPanel.Font = new System.Drawing.Font("Times New Roman", 14.25F);
+            gridViewUsers.Appearance.HeaderPanel.Options.UseFont = true;
             gridViewUsers.Appearance.Row.BackColor = System.Drawing.Color.FromArgb(250, 250, 200);
+            gridViewUsers.Appearance.Row.Font = new System.Drawing.Font("Times New Roman", 14.25F);
             gridViewUsers.Appearance.Row.Options.UseBackColor = true;
+            gridViewUsers.Appearance.Row.Options.UseFont = true;
             gridViewUsers.AppearancePrint.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 192, 255);
             gridViewUsers.AppearancePrint.EvenRow.Options.UseBackColor = true;
             gridViewUsers.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { UserID, UserNameUsers, HasRole });
@@ -220,7 +234,15 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // gridViewRoles
             // 
+            gridViewRoles.Appearance.FocusedRow.Font = new System.Drawing.Font("Times New Roman", 14.25F);
+            gridViewRoles.Appearance.FocusedRow.Options.UseFont = true;
+            gridViewRoles.Appearance.GroupRow.Font = new System.Drawing.Font("Times New Roman", 14.25F);
+            gridViewRoles.Appearance.GroupRow.Options.UseFont = true;
+            gridViewRoles.Appearance.HeaderPanel.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            gridViewRoles.Appearance.HeaderPanel.Options.UseFont = true;
+            gridViewRoles.Appearance.Row.Font = new System.Drawing.Font("Times New Roman", 14.25F);
             gridViewRoles.Appearance.Row.Options.UseBackColor = true;
+            gridViewRoles.Appearance.Row.Options.UseFont = true;
             gridViewRoles.AppearancePrint.EvenRow.Options.UseBackColor = true;
             gridViewRoles.AppearancePrint.EvenRow.Options.UseBorderColor = true;
             gridViewRoles.AppearancePrint.GroupRow.Options.UseBackColor = true;
@@ -300,8 +322,14 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // gridViewObject
             // 
+            gridViewObject.Appearance.GroupRow.Font = new System.Drawing.Font("Times New Roman", 14.25F);
+            gridViewObject.Appearance.GroupRow.Options.UseFont = true;
+            gridViewObject.Appearance.HeaderPanel.Font = new System.Drawing.Font("Times New Roman", 14.25F);
+            gridViewObject.Appearance.HeaderPanel.Options.UseFont = true;
             gridViewObject.Appearance.Row.BackColor = System.Drawing.Color.FromArgb(255, 192, 128);
+            gridViewObject.Appearance.Row.Font = new System.Drawing.Font("Times New Roman", 14.25F);
             gridViewObject.Appearance.Row.Options.UseBackColor = true;
+            gridViewObject.Appearance.Row.Options.UseFont = true;
             gridViewObject.AppearancePrint.EvenRow.BackColor = System.Drawing.Color.FromArgb(192, 192, 255);
             gridViewObject.AppearancePrint.EvenRow.Options.UseBackColor = true;
             gridViewObject.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { ObjectID, ObjectName, HasAccessObject, ObjectNameRus });
