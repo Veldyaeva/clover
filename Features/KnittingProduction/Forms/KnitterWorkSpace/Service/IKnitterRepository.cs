@@ -7,7 +7,7 @@ using static SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Servic
 
 namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 {
-    public interface IKnitterRepository : IKnitterShiftWorkflowGateway
+    public interface IKnitterRepository : IKnitterShiftGateway
     {
         Task<List<FioModel>> GetFioListAsync();
         Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab);

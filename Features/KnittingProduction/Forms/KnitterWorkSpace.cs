@@ -260,11 +260,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
         }
 
-        public KnitterWorkSpace(IKnitterOrchestrator orchestrator, IKnitterShiftWorkflowGateway shiftWorkflowGateway)
+        public KnitterWorkSpace(IKnitterOrchestrator orchestrator, IKnitterShiftGateway shiftWorkflowGateway)
         {
             try
             {
-                System.Diagnostics.Debug.WriteLine("[KnitterWorkSpace] ctor(IKnitterOrchestrator, IKnitterShiftWorkflowGateway) start");
+                System.Diagnostics.Debug.WriteLine("[KnitterWorkSpace] ctor(IKnitterOrchestrator, IKnitterShiftGateway) start");
                 InitializeComponent();
                 _planFooterColor = Color.LightCoral;
                 _factFooterColor = Color.LightSkyBlue;

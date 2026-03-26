@@ -645,71 +645,12 @@ ORDER BY kwsDateStart DESC";
 			}
 		}
 
-        public async Task<int> StartShiftWorkflowAsync(int tabStart, int? kmaId, string kmaNum, IEnumerable<int> pzvIds)
+        public Task<IKnitterShiftTransaction> BeginShiftTransactionAsync()
         {
-            try
-            {
-                var ids = NormalizeIds(pzvIds);
-                using (var connection = _dbHelper.GetConnection())
-                using (var tx = connection.BeginTransaction())
-                {
-                    try
-                    {
-                        await UpdatePzvTabAsync(connection, tx, ids, tabStart);
-                        var shiftId = await StartWorkingShiftAsync(connection, tx, tabStart, kmaId, kmaNum, kmsId: 0);
-                        await UpdatePzvKwsIdAsync(connection, tx, ids, shiftId);
-                        tx.Commit();
-                        return shiftId;
-                    }
-                    catch
-                    {
-                        tx.Rollback();
-                        throw;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"StartShiftWorkflowAsync failed (tabStart={tabStart})", ex);
-            }
-        }
-
-        public async Task SplitNotStartedOnShiftCloseAsync(int pzvId)
-        {
-            try
-            {
-                await SplitPzvByModeAsync(pzvId, mode: 2, qtyFact: 0);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"SplitNotStartedOnShiftCloseAsync failed (pzvId={pzvId})", ex);
-            }
-        }
-
-        public async Task CloseShiftWorkflowAsync(int shiftId, int tabEnd, decimal minHours)
-        {
-            try
-            {
-                using (var connection = _dbHelper.GetConnection())
-                using (var tx = connection.BeginTransaction())
-                {
-                    try
-                    {
-                        await AdjustNotStartedBeforeShiftEndAsync(connection, tx, shiftId, minHours);
-                        await EndWorkingShiftAsync(connection, tx, shiftId, tabEnd);
-                        tx.Commit();
-                    }
-                    catch
-                    {
-                        tx.Rollback();
-                        throw;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"CloseShiftWorkflowAsync failed (shiftId={shiftId}, tabEnd={tabEnd})", ex);
-            }
+            var connection = _dbHelper.GetConnection();
+            var transaction = connection.BeginTransaction();
+            IKnitterShiftTransaction scope = new ShiftTransactionScope(connection, transaction);
+            return Task.FromResult(scope);
         }
 
         public sealed class MachineHoursStat
@@ -767,6 +708,45 @@ WHERE mlv.kmlKmaID = @kmaId;";
             return kwsId;
         }
 
+        private static async Task<IReadOnlyList<PzvSplitResult>> SplitPzvByModeAsync(System.Data.SqlClient.SqlConnection connection, IDbTransaction transaction, int pzvId, int mode, int qtyFact)
+        {
+            var parameters = new
+            {
+                pzvId,
+                mode,
+                qtyFact,
+                userName = (string)null
+            };
+
+            var ids = new List<PzvSplitResult>();
+            using (var grid = await connection.QueryMultipleAsync(
+                "dbo.PZV_Split",
+                param: parameters,
+                transaction: transaction,
+                commandTimeout: 60,
+                commandType: CommandType.StoredProcedure))
+            {
+                if (mode == 2 && !grid.IsConsumed)
+                {
+                    try
+                    {
+                        var head = await grid.ReadAsync();
+                    }
+                    catch
+                    {
+                    }
+                }
+
+                if (!grid.IsConsumed)
+                {
+                    var newIds = await grid.ReadAsync<PzvSplitResult>();
+                    ids.AddRange(newIds);
+                }
+            }
+
+            return ids;
+        }
+
         private static async Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(System.Data.SqlClient.SqlConnection connection, IDbTransaction transaction, int kwsId, decimal minHours)
         {
             if (minHours <= 0)
@@ -807,6 +787,62 @@ WHERE kwsID = @shiftId AND (kwsDel = 0 OR kwsDel IS NULL) AND kwsDateEnd IS NULL
 SET pzvKwsID = @kwsId
 WHERE pzvID IN @ids";
             await connection.ExecuteAsync(sql, new { kwsId, ids }, transaction: transaction);
+        }
+
+        private sealed class ShiftTransactionScope : IKnitterShiftTransaction
+        {
+            private readonly System.Data.SqlClient.SqlConnection _connection;
+            private readonly IDbTransaction _transaction;
+            private bool _completed;
+
+            public ShiftTransactionScope(System.Data.SqlClient.SqlConnection connection, IDbTransaction transaction)
+            {
+                _connection = connection;
+                _transaction = transaction;
+            }
+
+            public Task UpdatePzvTabAsync(IEnumerable<int> pzvIds, int tab) =>
+                KnitterRepository.UpdatePzvTabAsync(_connection, _transaction, pzvIds, tab);
+
+            public Task<int> StartWorkingShiftAsync(int tabStart, int? kmaId, string kmaNum, int? kmsId = 0) =>
+                KnitterRepository.StartWorkingShiftAsync(_connection, _transaction, tabStart, kmaId, kmaNum, kmsId);
+
+            public Task UpdatePzvKwsIdAsync(IEnumerable<int> pzvIds, int kwsId) =>
+                KnitterRepository.UpdatePzvKwsIdAsync(_connection, _transaction, pzvIds, kwsId);
+
+            public Task<IReadOnlyList<PzvSplitResult>> SplitPzvByModeAsync(int pzvId, int mode, int qtyFact) =>
+                KnitterRepository.SplitPzvByModeAsync(_connection, _transaction, pzvId, mode, qtyFact);
+
+            public Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(int? currentShiftId, decimal minHours) =>
+                KnitterRepository.AdjustNotStartedBeforeShiftEndAsync(_connection, _transaction, currentShiftId ?? 0, minHours);
+
+            public Task EndWorkingShiftAsync(int shiftId, int tabEnd) =>
+                KnitterRepository.EndWorkingShiftAsync(_connection, _transaction, shiftId, tabEnd);
+
+            public Task CommitAsync()
+            {
+                _transaction.Commit();
+                _completed = true;
+                return Task.CompletedTask;
+            }
+
+            public ValueTask DisposeAsync()
+            {
+                try
+                {
+                    if (!_completed)
+                    {
+                        _transaction.Rollback();
+                    }
+                }
+                finally
+                {
+                    _transaction.Dispose();
+                    _connection.Dispose();
+                }
+
+                return ValueTask.CompletedTask;
+            }
         }
 
     }
