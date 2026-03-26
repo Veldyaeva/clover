@@ -92,6 +92,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// Презентер, который собирает иерархию мастер-деталь и настраивает события.
         /// </summary>
         private readonly KnitterPlanPresenter _planPresenter = new KnitterPlanPresenter();
+        private readonly KnitterPlanFocusService _planFocusService;
         /// <summary>
         /// Список ID незавершённых операций (pzvID) для подсветки красным цветом
         /// </summary>
@@ -216,6 +217,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 IKnitterRepository repo = new KnitterRepository(dbHelper);
                 _orchestrator = new KnitterOrchestrator(repo, new FileLogger());
                 _workSpaceService = new KnitterWorkSpaceService(repo);
+                _planFocusService = new KnitterPlanFocusService(this, PlanZagrVyazGridControl, bandedGridView3);
                 PlanZagrVyazGridControl.DataSource = _planBindingSource;
 
                 // Детализация на втором уровне настраивается в Designer: advBandedGridView1 является шаблоном уровня "ArtNom"
@@ -272,6 +274,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _sbHub = AppServices.Services.GetRequiredService<IAppServiceBrokerHub>();
                 _orchestrator = orchestrator ?? throw new ArgumentNullException(nameof(orchestrator));
                 _workSpaceService = new KnitterWorkSpaceService(shiftWorkflowGateway ?? throw new ArgumentNullException(nameof(shiftWorkflowGateway)));
+                _planFocusService = new KnitterPlanFocusService(this, PlanZagrVyazGridControl, bandedGridView3);
                 dataLayoutControl1.DataSource = _planBindingSource;
                 ConfigureAdvBandedGridColumns();
                 PlanZagrVyazGridControl.DataSource = _planBindingSource;
@@ -725,7 +728,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 WasInDetail = true
             };
 
-            RestorePlanFocus(snap, preferDetailId: firstUnfinished.pzvID);
+            _planFocusService.Restore(snap, preferDetailId: firstUnfinished.pzvID);
         }
 
         /// <summary>
@@ -1265,7 +1268,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             // Снимаем снапшот фокуса до любых RefreshData: после ApplyPzvDateAsync/RefreshData фокус сбрасывается,
             // и при факт < назн (split) CapturePlanFocus() тогда ловил бы уже другую машину/строку.
-            var focusSnap = CapturePlanFocusFromRow(currentRow, _view);
+            var focusSnap = _planFocusService.CaptureFromRow(currentRow, _view);
 
             // Если плановое количество уже перенесено в назначенное (pzvKol обнулён), используем pzvKolNazn как "к выполнению"
             int defaultQty = currentRow?.pzvKolNazn ?? 0;
@@ -1386,7 +1389,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // Принудительно обновляем detail для текущей master-строки:
                 // DevExpress кеширует child-list в master-detail, и после ребинда
                 // detail может не пересобраться пока не сделать Collapse/Expand.
-                int masterHandle = FindMasterHandleBySnap(focusSnap);
+                int masterHandle = _planFocusService.FindMasterHandleBySnap(focusSnap);
                 if (masterHandle >= 0)
                 {
                     // важно: RefreshData не пересоздаёт detail, но помогает применить новые данные к master
@@ -1408,7 +1411,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 var fin = refreshedPlan.FirstOrDefault(r => r.pzvID == currentRow.pzvID);
                 Debug.WriteLine($"Finished pzvDateEnd = {fin?.pzvDateEnd:dd.MM HH:mm:ss}");
 
-                RestorePlanFocus(focusSnap, preferDetailId);
+                _planFocusService.Restore(focusSnap, preferDetailId);
             }
             else
             {
@@ -1418,22 +1421,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             // Обновляем статус/процент после завершения операции
             RefreshStatusColumns();
-        }
-        private int FindMasterHandleBySnap(PlanFocusSnap snap)
-        {
-            if (snap == null) return DevExpress.XtraGrid.GridControl.InvalidRowHandle;
-
-            for (int rh = 0; rh < bandedGridView3.RowCount; rh++)
-            {
-                if (!bandedGridView3.IsDataRow(rh)) continue;
-                if (bandedGridView3.GetRow(rh) is not KnitterPZVModel row) continue;
-
-                if (KnitterPlanUtils.NormalizeTaskNum(row.pzvNomZad) == snap.TaskNum &&
-                    KnitterPlanUtils.NormalizeMachineKey(row.kmlNumber) == snap.Machine)
-                    return rh;
-            }
-
-            return DevExpress.XtraGrid.GridControl.InvalidRowHandle;
         }
         /// <summary>
         /// Унифицированный метод для установки даты в колонках "Начато"/"Закончено":
@@ -1524,24 +1511,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 LogError(ex, "PzvDateEndButtonEdit_DoubleClick");
             }
         }
-        private sealed class ExpansionState
-        {
-            public static ExpansionState Empty { get; } = new ExpansionState(new HashSet<string>(), new HashSet<(string MachineKey, string ArtKey, int? Nom)>());
-
-            public ExpansionState(HashSet<string> machineKeys, HashSet<(string MachineKey, string ArtKey, int? Nom)> artNomKeys)
-            {
-                MachineKeys = machineKeys ?? new HashSet<string>();
-                ArtNomKeys = artNomKeys ?? new HashSet<(string MachineKey, string ArtKey, int? Nom)>();
-            }
-
-            public HashSet<string> MachineKeys { get; }
-            public HashSet<(string MachineKey, string ArtKey, int? Nom)> ArtNomKeys { get; }
-        }
-        private static string NormalizeMachineKey(string kmlNumber)
-        {
-            return string.IsNullOrWhiteSpace(kmlNumber) ? string.Empty : kmlNumber.Trim();
-        }
-
         /// <summary>
         /// Настраивает таймер бездействия и подписывается на события активности пользователя.
         /// </summary>
@@ -2160,12 +2129,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 // Считаем статус по суммам часов из БД:
                 // bandedGridColumn26 (pzvChasNazn) и bandedGridColumn27 (pzvNChasi)
-                var machineKey = NormalizeMachineKey(row.kmlNumber);
+                var machineKey = KnitterPlanUtils.NormalizeMachineKey(row.kmlNumber);
                 var taskKey = KnitterPlanUtils.NormalizeTaskNum(row.pzvNomZad);
                 var rows = _planPresenter.AllRows?
                     .Where(r =>
                         r != null &&
-                        string.Equals(NormalizeMachineKey(r.kmlNumber), machineKey, StringComparison.OrdinalIgnoreCase) &&
+                        string.Equals(KnitterPlanUtils.NormalizeMachineKey(r.kmlNumber), machineKey, StringComparison.OrdinalIgnoreCase) &&
                         string.Equals(KnitterPlanUtils.NormalizeTaskNum(r.pzvNomZad), taskKey, StringComparison.OrdinalIgnoreCase))
                     .ToList() ?? new List<KnitterPZVModel>();
 
@@ -2313,120 +2282,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             SetViewState(bandedGridView3);
             SetViewState(advBandedGridView1);
         }
-        private sealed class PlanFocusSnap
-        {
-            public string TaskNum;
-            public string Machine;
-            public int? DetailPzvId;
-            public int MasterTop;
-            public int? DetailTop;
-            public bool WasInDetail;
-        }
-
-        private PlanFocusSnap CapturePlanFocus()
-        {
-            var snap = new PlanFocusSnap
-            {
-                MasterTop = bandedGridView3.TopRowIndex
-            };
-
-            var fv = PlanZagrVyazGridControl.FocusedView as DevExpress.XtraGrid.Views.Grid.GridView;
-            snap.WasInDetail = fv != null && fv != bandedGridView3;
-
-            if (bandedGridView3.GetFocusedRow() is KnitterPZVModel m)
-            {
-                snap.TaskNum = KnitterPlanUtils.NormalizeTaskNum(m.pzvNomZad);
-                snap.Machine = KnitterPlanUtils.NormalizeMachineKey(m.kmlNumber);
-            }
-
-            if (snap.WasInDetail && fv?.GetFocusedRow() is KnitterPZVModel d && d.pzvID > 0)
-            {
-                snap.DetailPzvId = d.pzvID;
-                snap.DetailTop = fv.TopRowIndex;
-            }
-
-            return snap;
-        }
-
-        /// <summary>
-        /// Строит снапшот фокуса по строке и текущему виду (без чтения FocusedRow после RefreshData).
-        /// Используется при завершении операции до вызова ApplyPzvDateAsync/RefreshData, чтобы не терять машину при факт &lt; назн.
-        /// </summary>
-        private PlanFocusSnap CapturePlanFocusFromRow(KnitterPZVModel? currentRow, GridView detailView)
-        {
-            var snap = new PlanFocusSnap
-            {
-                MasterTop = bandedGridView3?.TopRowIndex ?? 0,
-                WasInDetail = detailView != null && detailView != bandedGridView3
-            };
-
-            if (currentRow != null)
-            {
-                snap.TaskNum = KnitterPlanUtils.NormalizeTaskNum(currentRow.pzvNomZad);
-                snap.Machine = KnitterPlanUtils.NormalizeMachineKey(currentRow.kmlNumber);
-                if (currentRow.pzvID > 0)
-                {
-                    snap.DetailPzvId = currentRow.pzvID;
-                    if (detailView != null)
-                        snap.DetailTop = detailView.TopRowIndex;
-                }
-            }
-
-            return snap;
-        }
-
-        private void RestorePlanFocus(PlanFocusSnap snap, int? preferDetailId = null)
-        {
-            if (snap == null) return;
-
-            var masterView = bandedGridView3;
-            if (masterView == null) return;
-
-            // 1) Найти мастер-строку по ключу (по всем data rows, не только видимым)
-            int masterHandle = DevExpress.XtraGrid.GridControl.InvalidRowHandle;
-
-            for (int rh = 0; rh < masterView.RowCount; rh++)
-            {
-                if (!masterView.IsDataRow(rh)) continue;
-
-                if (masterView.GetRow(rh) is not KnitterPZVModel row) continue;
-
-                if (KnitterPlanUtils.NormalizeTaskNum(row.pzvNomZad) == snap.TaskNum &&
-                    KnitterPlanUtils.NormalizeMachineKey(row.kmlNumber) == snap.Machine)
-                {
-                    masterHandle = rh;
-                    break;
-                }
-            }
-
-            if (masterHandle < 0) return;
-
-            // 2) Фокус и видимость мастера
-            masterView.FocusedRowHandle = masterHandle;
-            masterView.MakeRowVisible(masterHandle, true);
-
-            // 3) Целевая detail-строка
-            int? targetDetailId = preferDetailId ?? snap.DetailPzvId;
-            if (!targetDetailId.HasValue || targetDetailId.Value <= 0) return;
-
-            // 4) Раскрыть master-detail
-            if (!masterView.GetMasterRowExpanded(masterHandle))
-                masterView.ExpandMasterRow(masterHandle);
-
-            // 5) Detail view создаётся лениво → берём на следующем UI-такте
-            BeginInvoke(new Action(() =>
-            {
-                var detail = masterView.GetDetailView(masterHandle, 0) as DevExpress.XtraGrid.Views.Grid.GridView;
-                if (detail == null) return;
-
-                int drh = detail.LocateByValue("pzvID", targetDetailId.Value);
-                if (drh < 0) return;
-
-                detail.FocusedRowHandle = drh;
-                detail.MakeRowVisible(drh, true);
-            }));
-        }
-
         private async Task LoadPlanForTabAsync(int tab, bool forceReload = false)
         {
             if (!forceReload && _currentLoadedTab.HasValue && _currentLoadedTab.Value == tab)
@@ -2451,7 +2306,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             // Сохраняем фокус до перезагрузки (обновление по Service Broker иначе сбрасывает фокус).
             // Снимок делаем до await — после await продолжение может выполниться не на UI-потоке.
-            var focusSnap = CapturePlanFocus();
+            var focusSnap = _planFocusService.CaptureCurrent();
 
             var plan = await _orchestrator.GetPlanByTabAsync(tab, kwsId, _currentKmaId, onlyUnassigned, expandByNr, maxHours, includeFinished: isAdmin);
 
@@ -2469,7 +2324,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>(), clearTabs: false);
                 RefreshFooterSummaries();
                 _currentLoadedTab = tab;
-                RestorePlanFocus(focusSnap);
+                _planFocusService.Restore(focusSnap);
             }
 
             if (InvokeRequired)
