@@ -9,10 +9,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
     public class KnitterWorkSpaceService : IKnitterWorkSpaceService
     {
         private readonly IKnitterShiftGateway _shiftGateway;
+        private readonly ILogger _logger;
+        private const string LoggerContext = "KnitterWorkSpaceService";
 
-        public KnitterWorkSpaceService(IKnitterShiftGateway shiftGateway)
+        public KnitterWorkSpaceService(IKnitterShiftGateway shiftGateway, ILogger? logger = null)
         {
             _shiftGateway = shiftGateway ?? throw new ArgumentNullException(nameof(shiftGateway));
+            _logger = logger ?? new FileLogger();
         }
 
         public async Task<StartShiftResult> StartShiftAsync(StartShiftCommand command)
@@ -110,9 +113,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                     {
                         await tx.SplitPzvByModeAsync(pzvId, mode: 2, qtyFact: 0);
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        // Сохраняем старое поведение: сбой split одной строки не должен блокировать закрытие смены.
+                        await SafeLogAsync(() => _logger.LogErrorAsync(
+                            ex,
+                            $"{LoggerContext}.{nameof(CloseShiftAsync)}.SplitPzvByModeAsync(pzvId={pzvId})"));
                     }
                 }
 
@@ -128,6 +133,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 HasUnfinishedOperations = false,
                 UnfinishedPzvIds = new List<int>()
             };
+        }
+
+        private static async Task SafeLogAsync(Func<Task> writeLog)
+        {
+            try
+            {
+                await writeLog().ConfigureAwait(false);
+            }
+            catch
+            {
+            }
         }
     }
 }

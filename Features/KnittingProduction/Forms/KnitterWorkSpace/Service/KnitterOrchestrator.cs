@@ -58,7 +58,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
         public Task UpdatePzvKwsIdAsync(IEnumerable<int> pzvIds, int kwsId) => _repo.UpdatePzvKwsIdAsync(pzvIds, kwsId);
 
-        public Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(int? currentShiftId, decimal v) =>
-            _repo.AdjustNotStartedBeforeShiftEndAsync(currentShiftId, v);
+        public Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(int shiftId, decimal minHours) =>
+            _repo.AdjustNotStartedBeforeShiftEndAsync(shiftId, minHours);
     }
 }

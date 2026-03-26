@@ -93,13 +93,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         private readonly KnitterPlanPresenter _planPresenter = new KnitterPlanPresenter();
         private readonly KnitterPlanFocusService _planFocusService;
+        private readonly KnitterGridVisualService _gridVisualService;
         /// <summary>
         /// Список ID незавершённых операций (pzvID) для подсветки красным цветом
         /// </summary>
         private HashSet<int> _unfinishedOperationIds = new HashSet<int>();
         private CheckBox _adminToggle;
         private CheckBox _expandNrToggle;
-        private RepositoryItemProgressBar _statusProgressBar;
+        private RepositoryItemProgressBar? _statusProgressBar;
         private DevExpress.XtraGrid.GridGroupSummaryItem _pzvChasNaznGroupSumItem;
 
         // Вью для третьего уровня (деталь детальной таблицы)
@@ -118,8 +119,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private bool _isGroupRowCellHandlerAttached;
         private GridGroupSummaryItem _planChasGroupSummaryItem;
         private GridGroupSummaryItem _factChasGroupSummaryItem;
-        private Color _planFooterColor;
-        private Color _factFooterColor;
+        private Color _planFooterColor = Color.LightCoral;
+        private Color _factFooterColor = Color.LightSkyBlue;
         private readonly KnitterBlinkController _blinkController;
         private readonly KnitterIdleSplashController _idleSplashController;
         private decimal _maxHoursClosedShift = 14m;
@@ -190,19 +191,21 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 System.Diagnostics.Debug.WriteLine("[KnitterWorkSpace] ctor(UserClass) start");
                 InitializeComponent();
-                _planFooterColor = Color.LightCoral;
-                _factFooterColor = Color.LightSkyBlue;
                 _sbController = new ServiceBrokerController(this);
                 _sbHub = AppServices.Services.GetRequiredService<IAppServiceBrokerHub>();
                 dataLayoutControl1.DataSource = _planBindingSource;
 
-                ConfigureAdvBandedGridColumns();
-
                 var dbHelper = new DatabaseHelper();
                 IKnitterRepository repo = new KnitterRepository(dbHelper);
                 _orchestrator = new KnitterOrchestrator(repo, new FileLogger());
-                _workSpaceService = new KnitterWorkSpaceService(repo);
+                _workSpaceService = new KnitterWorkSpaceService(repo, _logger);
                 _planFocusService = new KnitterPlanFocusService(this, PlanZagrVyazGridControl, bandedGridView3);
+                _gridVisualService = new KnitterGridVisualService(
+                    bandedGridView3,
+                    advBandedGridView1,
+                    gridColumn8,
+                    () => _planPresenter.AllRows ?? Array.Empty<KnitterPZVModel>(),
+                    LogError);
                 _blinkController = new KnitterBlinkController(simpleButton2);
                 _idleSplashController = new KnitterIdleSplashController(
                     this,
@@ -233,16 +236,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 SetupShiftTimer();
                 InitAdminToggle();
                 InitExpandNrToggle();
-                SetupStatusColumn();
+                _gridVisualService.Initialize();
                 SetupRowStyling();
-                SetupGridFonts();
-                bandedGridView3.MasterRowExpanded += BandedGridView3_MasterRowExpanded;
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
-                advBandedGridView1.CustomDrawGroupRow -= AdvBandedGridView1_CustomDrawGroupRow;
-                advBandedGridView1.CustomDrawGroupRow += AdvBandedGridView1_CustomDrawGroupRow;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
-                bandedGridView3.CustomDrawFooterCell += BandedGridView3_CustomDrawFooterCell;
             }
             catch (Exception ex)
             {
@@ -255,24 +253,23 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// Вариант конструктора с внедрением зависимостей (DI).
         /// </summary>
         /// <param name="orchestrator">Оркестратор доменной логики.</param>
-        public KnitterWorkSpace(IKnitterOrchestrator orchestrator)
-            : this(orchestrator, new KnitterRepository(new DatabaseHelper()))
-        {
-        }
-
         public KnitterWorkSpace(IKnitterOrchestrator orchestrator, IKnitterShiftGateway shiftWorkflowGateway)
         {
             try
             {
                 System.Diagnostics.Debug.WriteLine("[KnitterWorkSpace] ctor(IKnitterOrchestrator, IKnitterShiftGateway) start");
                 InitializeComponent();
-                _planFooterColor = Color.LightCoral;
-                _factFooterColor = Color.LightSkyBlue;
                 _sbController = new ServiceBrokerController(this);
                 _sbHub = AppServices.Services.GetRequiredService<IAppServiceBrokerHub>();
                 _orchestrator = orchestrator ?? throw new ArgumentNullException(nameof(orchestrator));
-                _workSpaceService = new KnitterWorkSpaceService(shiftWorkflowGateway ?? throw new ArgumentNullException(nameof(shiftWorkflowGateway)));
+                _workSpaceService = new KnitterWorkSpaceService(shiftWorkflowGateway ?? throw new ArgumentNullException(nameof(shiftWorkflowGateway)), _logger);
                 _planFocusService = new KnitterPlanFocusService(this, PlanZagrVyazGridControl, bandedGridView3);
+                _gridVisualService = new KnitterGridVisualService(
+                    bandedGridView3,
+                    advBandedGridView1,
+                    gridColumn8,
+                    () => _planPresenter.AllRows ?? Array.Empty<KnitterPZVModel>(),
+                    LogError);
                 _blinkController = new KnitterBlinkController(simpleButton2);
                 _idleSplashController = new KnitterIdleSplashController(
                     this,
@@ -287,7 +284,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     Close,
                     LogWarning);
                 dataLayoutControl1.DataSource = _planBindingSource;
-                ConfigureAdvBandedGridColumns();
                 PlanZagrVyazGridControl.DataSource = _planBindingSource;
                 // Детализация на втором уровне настраивается в Designer: advBandedGridView1 является шаблоном уровня "ArtNom"
                 this.Load += async (s, e) =>
@@ -305,17 +301,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 InitAdminToggle();
                 InitExpandNrToggle();
                 //InitAdminSettingsButton();
-                SetupStatusColumn();
+                _gridVisualService.Initialize();
                 SetupBlinkTimers();
                 SetupRowStyling();
-                SetupGridFonts();
-                bandedGridView3.MasterRowExpanded += BandedGridView3_MasterRowExpanded;
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
-                advBandedGridView1.CustomDrawGroupRow -= AdvBandedGridView1_CustomDrawGroupRow;
-                advBandedGridView1.CustomDrawGroupRow += AdvBandedGridView1_CustomDrawGroupRow;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
-                bandedGridView3.CustomDrawFooterCell += BandedGridView3_CustomDrawFooterCell;
             }
             catch (Exception ex)
             {
@@ -638,9 +629,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private void RefreshStatusColumns()
         {
             // Форсируем перерасчёт unbound-колонок (процент/статус)
-            bandedGridView3?.RefreshData();
-            advBandedGridView1?.RefreshData();
-            RefreshFooterSummaries();
+            _gridVisualService.RefreshStatusColumns();
         }
 
         private void RefreshHighlight()
@@ -674,8 +663,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         private void RefreshFooterSummaries()
         {
-            bandedGridView3?.UpdateSummary();
-            advBandedGridView1?.UpdateSummary();
+            _gridVisualService.RefreshFooterSummaries();
         }
 
         /// <summary>
@@ -1372,6 +1360,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 _shiftTimer.Stop();
                 _shiftTimer.Dispose();
+                _gridVisualService.Dispose();
                 _blinkController.Dispose();
                 _idleSplashController.Dispose();
             };

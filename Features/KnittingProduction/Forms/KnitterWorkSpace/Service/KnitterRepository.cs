@@ -471,11 +471,11 @@ WHERE pzvID = @pzvId;
 
 
         public async Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(
-            int? kwsId,
+            int shiftId,
             decimal minHours)
         {
-            if (kwsId is null || kwsId <= 0)
-                throw new ArgumentException("kwsId must be > 0 for shift end adjustment.", nameof(kwsId));
+            if (shiftId <= 0)
+                throw new ArgumentOutOfRangeException(nameof(shiftId));
 
             if (minHours <= 0)
                 minHours = 12m;
@@ -485,7 +485,7 @@ WHERE pzvID = @pzvId;
                 using var connection = _dbHelper.GetConnection();
 
                 var parameters = new DynamicParameters();
-                parameters.Add("@KwsId", kwsId.Value, DbType.Int32);
+                parameters.Add("@KwsId", shiftId, DbType.Int32);
                 parameters.Add("@MinHours", minHours, DbType.Decimal);
 
                 using var multi = await connection.QueryMultipleAsync(
@@ -499,7 +499,7 @@ WHERE pzvID = @pzvId;
             }
             catch (Exception ex)
             {
-                throw new Exception($"AdjustNotStartedBeforeShiftEnd failed (kwsId={kwsId}, minHours={minHours})", ex);
+                throw new Exception($"AdjustNotStartedBeforeShiftEnd failed (kwsId={shiftId}, minHours={minHours})", ex);
             }
         }
         public async Task<int> StartWorkingShiftAsync(int tabStart, int? kmaId, string kmaNum, int? kmsId = 0)
@@ -813,8 +813,8 @@ WHERE pzvID IN @ids";
             public Task<IReadOnlyList<PzvSplitResult>> SplitPzvByModeAsync(int pzvId, int mode, int qtyFact) =>
                 KnitterRepository.SplitPzvByModeAsync(_connection, _transaction, pzvId, mode, qtyFact);
 
-            public Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(int? currentShiftId, decimal minHours) =>
-                KnitterRepository.AdjustNotStartedBeforeShiftEndAsync(_connection, _transaction, currentShiftId ?? 0, minHours);
+            public Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(int shiftId, decimal minHours) =>
+                KnitterRepository.AdjustNotStartedBeforeShiftEndAsync(_connection, _transaction, shiftId, minHours);
 
             public Task EndWorkingShiftAsync(int shiftId, int tabEnd) =>
                 KnitterRepository.EndWorkingShiftAsync(_connection, _transaction, shiftId, tabEnd);
