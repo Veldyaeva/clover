@@ -398,7 +398,7 @@ namespace SewingProduction.Features.Articul.Forms
             customSearchLookUpEdit2View.OptionsSelection.EnableAppearanceFocusedCell = false;
             customSearchLookUpEdit2View.OptionsView.ShowGroupPanel = false;
             // 
-            // gridColumn5
+            // gcCertMod1
             // 
             gridColumn5.Caption = "ГОСТ";
             gridColumn5.FieldName = "Id_gost";
@@ -407,7 +407,7 @@ namespace SewingProduction.Features.Articul.Forms
             gridColumn5.VisibleIndex = 0;
             gridColumn5.Width = 111;
             // 
-            // gridColumn6
+            // gcCertTm_name1
             // 
             gridColumn6.Caption = "№ группы";
             gridColumn6.FieldName = "Ag_id";
@@ -416,13 +416,13 @@ namespace SewingProduction.Features.Articul.Forms
             gridColumn6.VisibleIndex = 1;
             gridColumn6.Width = 120;
             // 
-            // gridColumn7
+            // gcCertGrup1
             // 
             gridColumn7.FieldName = "Ag_name_sokr";
             gridColumn7.Name = "gridColumn7";
             gridColumn7.Width = 193;
             // 
-            // gridColumn8
+            // gcCertText_mo1
             // 
             gridColumn8.Caption = "ТНВД";
             gridColumn8.FieldName = "Ag_tnved";
@@ -677,7 +677,7 @@ namespace SewingProduction.Features.Articul.Forms
             repositoryItemSearchLookUpEditGostView.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
             repositoryItemSearchLookUpEditGostView.OptionsView.ShowGroupPanel = false;
             // 
-            // gridColumn4
+            // gcCertArticul1
             // 
             gridColumn4.Caption = "ГОСТ";
             gridColumn4.FieldName = "Id_gost";
@@ -770,7 +770,7 @@ namespace SewingProduction.Features.Articul.Forms
             repositoryItemSearchLookUpEditGrupView.OptionsView.ShowGroupPanel = false;
             repositoryItemSearchLookUpEditGrupView.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(colN_g, DevExpress.Data.ColumnSortOrder.Descending) });
             // 
-            // gridColumn1
+            // gcCertGrupmen_name1
             // 
             gridColumn1.Caption = "ГОСТ";
             gridColumn1.FieldName = "Id_gost";
@@ -779,7 +779,7 @@ namespace SewingProduction.Features.Articul.Forms
             gridColumn1.VisibleIndex = 0;
             gridColumn1.Width = 107;
             // 
-            // gridColumn2
+            // gcCertTsn_name1
             // 
             gridColumn2.Caption = "Группа";
             gridColumn2.FieldName = "Ag_id";
@@ -802,7 +802,7 @@ namespace SewingProduction.Features.Articul.Forms
             colAg_tnved.VisibleIndex = 3;
             colAg_tnved.Width = 237;
             // 
-            // gridColumn3
+            // gcCertTb_id1
             // 
             gridColumn3.Caption = "Название";
             gridColumn3.FieldName = "N_i";

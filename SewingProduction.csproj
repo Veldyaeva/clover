@@ -10,6 +10,7 @@
     <ApplicationIcon>Resources\AppIcons\favicon.ico</ApplicationIcon>
     <SignAssembly>False</SignAssembly>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -17,6 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\Articul\Forms\Articul_lena.cs" />
     <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace.patched.cs" />
   </ItemGroup>
 
@@ -27,9 +29,19 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Help\Features\Sprav\Forms\EditTarif.html" />
+    <None Remove="Help\Features\Sprav\Forms\img\EditTarif.png" />
+    <None Remove="Help\Features\Sprav\Forms\img\EditTarif1.png" />
+    <None Remove="Help\Features\Sprav\Forms\img\EditTarif2.png" />
+    <None Remove="Help\Features\Tabel\Forms\OtvlRab.html" />
+  </ItemGroup>
+
 
 
   <ItemGroup>
+    <Content Include="Help\Features\Sprav\Forms\EditTarif.html" />
+    <Content Include="Help\Features\Tabel\Forms\OtvlRab.html" />
     <Content Include="Help\Features\TeamWork\Forms\img\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -245,6 +257,12 @@
     <Content Include="Resources\loading_dude.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Help\Features\Sprav\Forms\img\EditTarif.png" />
+    <Content Include="Help\Features\Sprav\Forms\img\EditTarif1.png" />
+    <Content Include="Help\Features\Sprav\Forms\img\EditTarif2.png" />
   </ItemGroup>
 
   <ItemGroup>

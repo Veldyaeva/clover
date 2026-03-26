@@ -1058,7 +1058,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colkod_o2.VisibleIndex = 0;
             colkod_o2.Width = 61;
             // 
-            // gridColumn1
+            // gcCertGrupmen_name1
             // 
             gridColumn1.Caption = "№ п/оп.";
             gridColumn1.FieldName = "n1";
@@ -1513,7 +1513,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn26.VisibleIndex = 6;
             gridColumn26.Width = 82;
             // 
-            // gridColumn3
+            // gcCertTb_id1
             // 
             gridColumn3.Caption = "Код";
             gridColumn3.FieldName = "Kod";
@@ -1738,7 +1738,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colsek_shv.VisibleIndex = 7;
             colsek_shv.Width = 62;
             // 
-            // gridColumn5
+            // gcCertMod1
             // 
             gridColumn5.Caption = "Статус";
             gridColumn5.FieldName = "StatusText";
@@ -3288,7 +3288,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn28.Visible = true;
             gridColumn28.VisibleIndex = 4;
             // 
-            // gridColumn8
+            // gcCertText_mo1
             // 
             gridColumn8.Caption = "Статус";
             gridColumn8.FieldName = "Status";
@@ -3313,7 +3313,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colstatus1.VisibleIndex = 6;
             colstatus1.Width = 120;
             // 
-            // gridColumn6
+            // gcCertTm_name1
             // 
             gridColumn6.Caption = "gridColumn6";
             gridColumn6.FieldName = "_isChecked";
@@ -3393,7 +3393,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             код.VisibleIndex = 0;
             код.Width = 53;
             // 
-            // gridColumn2
+            // gcCertTsn_name1
             // 
             gridColumn2.Caption = " ";
             gridColumn2.ColumnEdit = repositoryItemCheckEdit1;
@@ -3451,7 +3451,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             блок.Visible = true;
             блок.VisibleIndex = 5;
             // 
-            // gridColumn7
+            // gcCertGrup1
             // 
             gridColumn7.Caption = "Ранее увязанные";
             gridColumn7.ColumnEdit = repositoryItemButtonEdit2;
@@ -3460,7 +3460,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn7.Name = "gridColumn7";
             gridColumn7.Width = 129;
             // 
-            // gridColumn4
+            // gcCertArticul1
             // 
             gridColumn4.Caption = "gridColumn4";
             gridColumn4.FieldName = "_isChecked";

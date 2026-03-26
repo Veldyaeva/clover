@@ -1494,7 +1494,7 @@ namespace SewingProduction.form
             customButtonSpDol.Text = "Справочник должностей";
             customButtonSpDol.Click += customButtonSpDol_Click;
             // 
-            // gridColumn4
+            // gcCertArticul1
             // 
             gridColumn4.AppearanceCell.Options.UseTextOptions = true;
             gridColumn4.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
@@ -1507,7 +1507,7 @@ namespace SewingProduction.form
             gridColumn4.VisibleIndex = 1;
             gridColumn4.Width = 206;
             // 
-            // gridColumn5
+            // gcCertMod1
             // 
             gridColumn5.AppearanceCell.Options.UseTextOptions = true;
             gridColumn5.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
@@ -1534,7 +1534,7 @@ namespace SewingProduction.form
             text_ob_tip.VisibleIndex = 3;
             text_ob_tip.Width = 42;
             // 
-            // gridColumn6
+            // gcCertTm_name1
             // 
             gridColumn6.AppearanceCell.Options.UseTextOptions = true;
             gridColumn6.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
@@ -1592,7 +1592,7 @@ namespace SewingProduction.form
             gridColumn15.VisibleIndex = 5;
             gridColumn15.Width = 78;
             // 
-            // gridColumn2
+            // gcCertTsn_name1
             // 
             gridColumn2.Caption = "Дата рожд.";
             gridColumn2.Name = "gridColumn2";
@@ -1608,7 +1608,7 @@ namespace SewingProduction.form
             gridColumn16.VisibleIndex = 13;
             gridColumn16.Width = 61;
             // 
-            // gridColumn1
+            // gcCertGrupmen_name1
             // 
             gridColumn1.Caption = "Телефон";
             gridColumn1.Name = "gridColumn1";

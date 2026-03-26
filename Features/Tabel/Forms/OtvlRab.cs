@@ -9,8 +9,11 @@ using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraReports.UI;
 using SewingProduction.Features.Tabel.Models;
+using SewingProduction.Features.Tabel.Reports;
 using SewingProduction.Features.Tabel.Services;
 using SewingProduction.Features.UserDistribution.Helpers;
 
@@ -566,5 +569,22 @@ namespace SewingProduction.Features.Tabel.Forms
 
         #endregion
 
+        private void customButton4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Blank report = new Blank();
+                report.PrintDialog();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(
+                    $"Ошибка при открытии бланка на печать: {ex.Message}",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+
+        }
     }
 }

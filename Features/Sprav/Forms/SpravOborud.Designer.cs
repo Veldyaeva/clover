@@ -447,7 +447,7 @@ namespace SewingProduction.form
             repositoryItemCheckEdit1.AutoHeight = false;
             repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
             // 
-            // gridColumn3
+            // gcCertTb_id1
             // 
             gridColumn3.Caption = "Код";
             gridColumn3.Name = "gridColumn3";
@@ -455,7 +455,7 @@ namespace SewingProduction.form
             gridColumn3.VisibleIndex = 0;
             gridColumn3.Width = 43;
             // 
-            // gridColumn4
+            // gcCertArticul1
             // 
             gridColumn4.Caption = "Код";
             gridColumn4.Name = "gridColumn4";
@@ -472,7 +472,7 @@ namespace SewingProduction.form
             сkod_ob.VisibleIndex = 0;
             сkod_ob.Width = 43;
             // 
-            // gridColumn5
+            // gcCertMod1
             // 
             gridColumn5.Caption = "Код";
             gridColumn5.FieldName = "kod_ob";
@@ -499,7 +499,7 @@ namespace SewingProduction.form
             gridColumn10.VisibleIndex = 3;
             gridColumn10.Width = 57;
             // 
-            // gridColumn1
+            // gcCertGrupmen_name1
             // 
             gridColumn1.Caption = "Скрыть из \"оборудование бригад\"";
             gridColumn1.FieldName = "pokaz";
@@ -508,7 +508,7 @@ namespace SewingProduction.form
             gridColumn1.VisibleIndex = 4;
             gridColumn1.Width = 57;
             // 
-            // gridColumn2
+            // gcCertTsn_name1
             // 
             gridColumn2.Caption = "Скрыть из \"оборудование бригад\"";
             gridColumn2.FieldName = "pokaz";
@@ -531,7 +531,7 @@ namespace SewingProduction.form
             simpleButtonArhiv.Visible = false;
             simpleButtonArhiv.Click += simpleButtonArhiv_Click;
             // 
-            // gridColumn6
+            // gcCertTm_name1
             // 
             gridColumn6.Caption = "Вид";
             gridColumn6.FieldName = "ko_ob_all";
@@ -540,7 +540,7 @@ namespace SewingProduction.form
             gridColumn6.VisibleIndex = 3;
             gridColumn6.Width = 74;
             // 
-            // gridColumn7
+            // gcCertGrup1
             // 
             gridColumn7.Caption = "Вид";
             gridColumn7.FieldName = "ko_ob_all";
@@ -559,7 +559,7 @@ namespace SewingProduction.form
             checkEditArhiv.TabIndex = 7;
             checkEditArhiv.CheckedChanged += checkEditArhiv_CheckedChanged;
             // 
-            // gridColumn8
+            // gcCertText_mo1
             // 
             gridColumn8.Name = "gridColumn8";
             gridColumn8.Visible = true;

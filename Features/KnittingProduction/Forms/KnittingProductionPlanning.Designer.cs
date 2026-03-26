@@ -693,7 +693,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridView1.OptionsView.EnableAppearanceEvenRow = true;
             gridView1.OptionsView.ShowGroupPanel = false;
             // 
-            // gridColumn1
+            // gcCertGrupmen_name1
             // 
             gridColumn1.MinWidth = 23;
             gridColumn1.Name = "gridColumn1";
@@ -701,7 +701,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumn1.VisibleIndex = 3;
             gridColumn1.Width = 87;
             // 
-            // gridColumn2
+            // gcCertTsn_name1
             // 
             gridColumn2.MinWidth = 23;
             gridColumn2.Name = "gridColumn2";
@@ -1229,7 +1229,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             splitterItem1.Name = "splitterItem1";
             splitterItem1.Size = new System.Drawing.Size(1767, 10);
             // 
-            // gridColumn4
+            // gcCertArticul1
             // 
             gridColumn4.Caption = "Артикул";
             gridColumn4.Name = "gridColumn4";

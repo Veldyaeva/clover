@@ -530,52 +530,52 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customCheckBoxMyForm.UseVisualStyleBackColor = true;
             customCheckBoxMyForm.CheckedChanged += customCheckBoxMyForm_CheckedChanged;
             // 
-            // gridColumn2
+            // gcCertTsn_name1
             // 
             gridColumn2.FieldName = "NameForm";
             gridColumn2.Name = "gridColumn2";
             gridColumn2.Visible = true;
             gridColumn2.VisibleIndex = 1;
             // 
-            // gridColumn3
+            // gcCertTb_id1
             // 
             gridColumn3.FieldName = "NameForm";
             gridColumn3.Name = "gridColumn3";
             gridColumn3.Visible = true;
             gridColumn3.VisibleIndex = 1;
             // 
-            // gridColumn4
+            // gcCertArticul1
             // 
             gridColumn4.FieldName = "NameForm";
             gridColumn4.Name = "gridColumn4";
             gridColumn4.Visible = true;
             gridColumn4.VisibleIndex = 1;
             // 
-            // gridColumn1
+            // gcCertGrupmen_name1
             // 
             gridColumn1.Name = "gridColumn1";
             gridColumn1.Visible = true;
             gridColumn1.VisibleIndex = 3;
             // 
-            // gridColumn5
+            // gcCertMod1
             // 
             gridColumn5.Name = "gridColumn5";
             gridColumn5.Visible = true;
             gridColumn5.VisibleIndex = 3;
             // 
-            // gridColumn6
+            // gcCertTm_name1
             // 
             gridColumn6.Name = "gridColumn6";
             gridColumn6.Visible = true;
             gridColumn6.VisibleIndex = 3;
             // 
-            // gridColumn7
+            // gcCertGrup1
             // 
             gridColumn7.Name = "gridColumn7";
             gridColumn7.Visible = true;
             gridColumn7.VisibleIndex = 3;
             // 
-            // gridColumn8
+            // gcCertText_mo1
             // 
             gridColumn8.Name = "gridColumn8";
             gridColumn8.Visible = true;

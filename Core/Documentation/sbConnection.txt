@@ -1,0 +1,77 @@
+# ServiceBroker: шаблон для новой формы
+Необходимо для старта:
+	##У формы уже есть удобные методы для reload (Articul):
+		ReloadPreviewAsync() — перезагрузка левого грида.
+		RefreshArtPreviewAsync() — перезагрузка с попыткой сохранить позицию.
+		LoadArticulAsync(kod, kodd) — перезагрузка правой карточки.
+	Это отлично подходит под RestartDataByObjectNameAsync.
+Нужно сделать:
+	##1) Добавить контракт SB к форме
+	###Сигнатура класса:
+		было: public partial class Articul : CustomForm
+		нужно: public partial class Articul : CustomForm, IServiceBrokerHost
+	##2) Добавить поля SB в Articul
+		По аналогии с рабочими формами:
+		private readonly ServiceBrokerController _sbController;
+		private ServiceBrokerService _sbService;
+		private CancellationTokenSource _sbCts;
+		private int _serviceBrokerShutdownStarted;
+		private Dictionary<string, Func<Task>> _objectRestartMap = new(...);
+		private readonly HashSet<string> _ignoredServiceBrokerTables = new(...);
+
+	##Инициализация в конструкторе:
+		_sbController = new ServiceBrokerController(this);
+		_sbService = new ServiceBrokerService(new DatabaseHelper("ace"));
+
+	##3) Реализовать IServiceBrokerHost в Articul
+		Нужны эти члены:
+		ServiceBrokerFormName => GetType().Name
+		UseSchemaInListenName => true
+		IgnoredTables => _ignoredServiceBrokerTables
+		RefreshPriorities (словарь приоритетов)
+		ServiceBrokerObjects => _objectRestartMap.Keys.ToArray()
+		LoadListenInfoByObjectNameAsync(...)
+		RestartDataByObjectNameAsync(...)
+	##4) Сформировать map объектов reload (InitObjectRestartMap)
+		Для Articul логика обычно такая:
+		объект для превью-списка → await RefreshArtPreviewAsync();
+		объект(ы) деталей текущего кода → await LoadArticulAsync(current.Kod, current.Kodd);
+		Примерно так (имена объектов ты подставляешь из БД-метаданных):
+			"ArticulPreviewObject" -> RefreshArtPreviewAsync
+			"ArticulDetailsObject" -> LoadArticulAsync(current...)
+			"ArticulDrObject" -> LoadArticulAsync(current...)
+			"ArticulKomplObject" -> LoadArticulAsync(current...)
+			"ArticulNaborObject" -> LoadArticulAsync(current...)
+	##5) Старт SB в Articul_Load
+		В конце Articul_Load (после первичной загрузки данных) добавить:
+			_sbCts = new CancellationTokenSource();
+			InitObjectRestartMap();
+			await InitServiceBrokerAsync(_sbCts.Token);
+			И сделать метод InitServiceBrokerAsync(ct):
+			await _sbController.InitAsync(ct);
+			лог Listening tables: ...
+	##6) Реакция на события SB
+			UpdateDataInFormAsync(table, changedFieldsCsv):
+			внутри 
+			await _sbController.HandleUpdateAsync(table, changedFieldsCsv ?? string.Empty);
+		лог статистики координатора (опционально)
+			RestartDataByObjectNameAsync(objectName, ct):
+		через UI-safe invoke
+		из _objectRestartMap запускать нужный reload
+		для деталей проверять bsPreview.Current перед LoadArticulAsync(...)
+	##7) Корректное выключение SB
+		Уже есть Articul_FormClosed.
+		Добавить lifecycle shutdown как в PlanZagrVyaz/Knitter:
+			метод ShutdownServiceBrokerAsync()
+			Interlocked.Exchange guard
+			Cancel для _sbCts
+			await _sbController.DisposeAsync()
+			await _sbService.DisposeAsync()
+			Dispose() у _sbCts вызывать в FormClosing (лучше) и fallback в FormClosed.
+	##8) Критический момент: метаданные SB-объектов
+			ServiceBrokerController слушает таблицы через LoadListenInfoByObjectNameAsync, а тот берет данные из getSQLObjectSource.
+			Значит нужно, чтобы в БД были записи для твоих object names.
+			Если записей нет — SB не поднимется (будет пустой listen list).
+
+Проверка SQL:
+SELECT *FROM dbo.getSQLObjectSourceWHERE objectName IN (  '...',  '...',  '...',  '...');

@@ -83,6 +83,16 @@ namespace SewingProduction.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа DevExpress.Utils.Svg.SvgImage.
         /// </summary>
+        public static DevExpress.Utils.Svg.SvgImage bo_validation {
+            get {
+                object obj = ResourceManager.GetObject("bo_validation", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа DevExpress.Utils.Svg.SvgImage.
+        /// </summary>
         public static DevExpress.Utils.Svg.SvgImage convertto {
             get {
                 object obj = ResourceManager.GetObject("convertto", resourceCulture);
@@ -96,6 +106,16 @@ namespace SewingProduction.Properties {
         public static System.Drawing.Bitmap Exit {
             get {
                 object obj = ResourceManager.GetObject("Exit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap highlightactiveelements_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("highlightactiveelements_16x16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

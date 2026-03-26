@@ -17,6 +17,8 @@ using DevExpress.XtraReports.UI;
 using Microsoft.IdentityModel.Logging;
 using Newtonsoft.Json;
 using Org.BouncyCastle.Asn1.Ocsp;
+using Microsoft.Extensions.DependencyInjection;
+using SewingProduction.Core;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Core.helpers;
 using SewingProduction.Core.interfaces;
@@ -66,6 +68,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
 
         private readonly ServiceBrokerController _sbController;
+        private readonly IAppServiceBrokerHub _sbHub;
+        private readonly string _sbHubOwnerId = $"PlanZagrVyaz:{Guid.NewGuid():N}";
 
         // Таблицы, изменения в которых НЕ должны инициировать обновление UI
         // (типичные LEFT JOIN справочники и прочий "шум").
@@ -81,7 +85,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private static DbService _dbService;
         private static MlService _mlService;
         private static ArtNormRepository _anService;
-        private static ServiceBrokerService _sbService;
+        private readonly ServiceBrokerService _sbService;
         private static BulkHelper _bulkHelper;
         private static GridHelper _gridHelper;
         private static LayoutControlGroupHelper _lcgHelper;
@@ -182,6 +186,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _anService = new ArtNormRepository(_dbHelper);
             _sbService = new ServiceBrokerService(_dbHelper);
             _sbController = new ServiceBrokerController(this);
+            _sbHub = AppServices.Services.GetRequiredService<IAppServiceBrokerHub>();
             _bulkHelper = new BulkHelper();
             _gridHelper = new GridHelper();
             _lcgHelper = new LayoutControlGroupHelper();
@@ -331,9 +336,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         public async Task InitServiceBrokerAsync(CancellationToken ct)
         {
-            await _sbController.InitAsync(ct);
+            await _sbController.InitAsync(ct, startBrokers: false);
 
-            var tables = _sbController.Helper?.GetListeningTables() ?? Array.Empty<string>();
+            var tableFields = _sbController.Helper?.GetUnionFieldsByTableSnapshot()
+                              ?? new Dictionary<string, IReadOnlyCollection<string>>();
+            await _sbHub.SubscribeAsync(
+                ownerId: _sbHubOwnerId,
+                ownerName: ServiceBrokerFormName,
+                tableFields: tableFields,
+                onTableChangedAsync: async (table, fields) =>
+                    await InvokeOnUiAsync(async () => await UpdateDataInFormAsync(table, fields)),
+                ct: ct);
+
+            var tables = tableFields.Keys;
             Debug.WriteLine($"[PlanZagrVyaz] Listening tables: {string.Join(", ", tables)}");
 
             //------------------------
@@ -5432,6 +5447,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 try { _loadCts?.Cancel(); } catch { }
                 try { _lifetimeCts?.Cancel(); } catch { }
+                try { await _sbHub.UnsubscribeAsync(_sbHubOwnerId); } catch { }
 
                 // Важно: дожидаемся корректного снятия SqlDependency/ServiceBroker диалогов.
                 await _sbController.DisposeAsync();
@@ -5442,6 +5458,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
             finally
             {
+                try { await _sbService.DisposeAsync(); } catch { }
                 try { _lifetimeCts?.Dispose(); } catch { }
                 _lifetimeCts = null;
 

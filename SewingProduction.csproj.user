@@ -73,6 +73,9 @@
     <Compile Update="Features\Articul\Forms\ArticulEditAdvance.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\Articul\Forms\CreateArticulMatrForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\Articul\Forms\EditArticul.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +172,12 @@
     <Compile Update="Features\Furnit\UserControl\FurnitZayavView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Features\Sprav\Reports\OborudBrigReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Features\Sprav\Reports\OborudBrigReportTotal.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Features\Tabel\Forms\CalculatorDay.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -176,6 +185,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Tabel\Forms\ChooseUin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Tabel\Forms\EmployeeDismissal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Tabel\Forms\EmployeeTransfer .cs">
@@ -189,6 +201,9 @@
     </Compile>
     <Compile Update="Features\Tabel\Forms\TabelMain.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Tabel\Reports\Blank.cs">
+      <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Features\TeamWork\Forms\AnnLog.cs">
       <SubType>Form</SubType>

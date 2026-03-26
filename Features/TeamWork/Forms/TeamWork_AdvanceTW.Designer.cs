@@ -622,7 +622,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewRasz.RowUpdated += gridViewRasz_RowUpdated;
             gridViewRasz.RowEditCanceled += gridViewRasz_RowEditCanceled;
             // 
-            // gridColumn2
+            // gcCertTsn_name1
             // 
             resources.ApplyResources(gridColumn2, "gridColumn2");
             gridColumn2.FieldName = "nrId";
@@ -736,7 +736,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn38.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             gridColumn38.OptionsEditForm.VisibleIndex = 4;
             // 
-            // gridColumn4
+            // gcCertArticul1
             // 
             resources.ApplyResources(gridColumn4, "gridColumn4");
             gridColumn4.ColumnEdit = repositoryItemLookUpEdit_kodProizv;
@@ -824,7 +824,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn30.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             gridColumn30.OptionsEditForm.VisibleIndex = 2;
             // 
-            // gridColumn5
+            // gcCertMod1
             // 
             resources.ApplyResources(gridColumn5, "gridColumn5");
             gridColumn5.FieldName = "TextProizv";
@@ -834,7 +834,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn5.OptionsEditForm.Caption = resources.GetString("gridColumn5.OptionsEditForm.Caption");
             gridColumn5.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             // 
-            // gridColumn6
+            // gcCertTm_name1
             // 
             resources.ApplyResources(gridColumn6, "gridColumn6");
             gridColumn6.FieldName = "TextVyaz";
@@ -844,7 +844,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn6.OptionsEditForm.Caption = resources.GetString("gridColumn6.OptionsEditForm.Caption");
             gridColumn6.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             // 
-            // gridColumn7
+            // gcCertGrup1
             // 
             resources.ApplyResources(gridColumn7, "gridColumn7");
             gridColumn7.FieldName = "Obor";

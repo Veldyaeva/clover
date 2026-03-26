@@ -1,4 +1,5 @@
 using SewingProduction.Core.Class.Settings;
+using SewingProduction.Core.helpers;
 using SewingProduction.Core.interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,8 @@ using System.Threading.Tasks;
 namespace SewingProduction.Core.helpers
 {
     /// <summary>
-    /// РљРѕРјРїРѕР·РёС†РёРѕРЅРЅС‹Р№ РєРѕРЅС‚СЂРѕР»Р»РµСЂ ServiceBroker Р±РµР· Р±Р°Р·РѕРІРѕР№ С„РѕСЂРјС‹.
-    /// РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ: С„РѕСЂРјР° (CustomForm) СЂРµР°Р»РёР·СѓРµС‚ IServiceBrokerHost Рё РІС‹Р·С‹РІР°РµС‚ InitAsync.
+    /// Композиционный контроллер ServiceBroker без базовой формы.
+    /// Использование: форма (CustomForm) реализует IServiceBrokerHost и вызывает InitAsync.
     /// </summary>
     public sealed class ServiceBrokerController : IAsyncDisposable
     {
@@ -27,68 +28,80 @@ namespace SewingProduction.Core.helpers
             _host = host ?? throw new ArgumentNullException(nameof(host));
         }
 
-        public async Task InitAsync(CancellationToken ct)
+        public async Task InitAsync(CancellationToken ct, bool startBrokers = true)
         {
-            //lock (_initLock)
-            //{
-            //    if (_initialized) return;
-            //    _initialized = true;
-            //}
-
-            var sbSettings = SettingsManager.GetServiceBrokerSettings();
-            Coordinator = new EnhancedRefreshCoordinator(
-                reloadByObjectNameAsync: async (obj) => await _host.RestartDataByObjectNameAsync(obj, ct).ConfigureAwait(false),
-                debounce: TimeSpan.FromMilliseconds(sbSettings.DebounceMs),
-                throttle: sbSettings.ThrottleMs > 0 ? TimeSpan.FromMilliseconds(sbSettings.ThrottleMs) : null,
-                maxWait: TimeSpan.FromMilliseconds(sbSettings.MaxWaitMs),
-                maxBatchSize: sbSettings.MaxBatchSize,
-                maxParallelReloads: sbSettings.MaxParallelReloads,
-                maxCascadeDepth: sbSettings.MaxCascadeDepth);
-
-            foreach (var kv in _host.RefreshPriorities ?? new Dictionary<string, int>())
-                Coordinator.SetPriority(kv.Key, kv.Value);
-
-            Helper = new ServiceBrokerHelper(
-                owner: _host,
-                loadByObjectAsync: (obj, token) => _host.LoadListenInfoByObjectNameAsync(obj, token))
             {
-                UseSchemaInListenName = _host.UseSchemaInListenName
-            };
+                if (_initialized)
+                    return;
+            }
 
-            if (_host.IgnoredTables != null)
+            if (!ServiceBrokerSettings.Enabled)
+                return;
+
+            try
             {
-                foreach (var t in _host.IgnoredTables.Where(x => !string.IsNullOrWhiteSpace(x)))
+                var sbSettings = SettingsManager.GetServiceBrokerSettings();
+
+                Coordinator = new EnhancedRefreshCoordinator(
+                    reloadByObjectNameAsync: async (obj) => await _host.RestartDataByObjectNameAsync(obj, ct).ConfigureAwait(false),
+                    debounce: TimeSpan.FromMilliseconds(sbSettings.DebounceMs),
+                    throttle: sbSettings.ThrottleMs > 0 ? TimeSpan.FromMilliseconds(sbSettings.ThrottleMs) : null,
+                    maxWait: TimeSpan.FromMilliseconds(sbSettings.MaxWaitMs),
+                    maxBatchSize: sbSettings.MaxBatchSize,
+                    maxParallelReloads: sbSettings.MaxParallelReloads,
+                    maxCascadeDepth: sbSettings.MaxCascadeDepth);
+
+                foreach (var kv in _host.RefreshPriorities ?? new Dictionary<string, int>())
+                    Coordinator.SetPriority(kv.Key, kv.Value);
+
+                Helper = new ServiceBrokerHelper(
+                    owner: _host,
+                    loadByObjectAsync: (obj, token) => _host.LoadListenInfoByObjectNameAsync(obj, token))
                 {
-                    var tt = t.Trim();
-                    Helper.IgnoredTables.Add(tt);
-                    if (!tt.Contains('.'))
-                        Helper.IgnoredTables.Add("dbo." + tt);
+                    UseSchemaInListenName = _host.UseSchemaInListenName
+                };
+
+                if (_host.IgnoredTables != null)
+                {
+                    foreach (var t in _host.IgnoredTables.Where(x => !string.IsNullOrWhiteSpace(x)))
+                    {
+                        var tt = t.Trim();
+                        Helper.IgnoredTables.Add(tt);
+                        if (!tt.Contains('.'))
+                            Helper.IgnoredTables.Add("dbo." + tt);
+                    }
+                }
+
+                var objects = _host.ServiceBrokerObjects?
+                    .Where(x => !string.IsNullOrWhiteSpace(x))
+                    .Distinct(StringComparer.OrdinalIgnoreCase)
+                    .ToList() ?? new List<string>();
+
+                if (objects.Count == 0)
+                {
+                    Debug.WriteLine($"[{_host.ServiceBrokerFormName}] InitAsync called, but ServiceBrokerObjects is empty");
+                    return;
+                }
+
+                await Helper.InitAndStartAsync(objects, ct, startBrokers).ConfigureAwait(false);
+
+                lock (_initLock)
+                {
+                    _initialized = true;
                 }
             }
-
-            var objects = _host.ServiceBrokerObjects?
-                .Where(x => !string.IsNullOrWhiteSpace(x))
-                .Distinct(StringComparer.OrdinalIgnoreCase)
-                .ToList() ?? new List<string>();
-
-            if (objects.Count == 0)
+            catch
             {
-                Debug.WriteLine($"[{_host.ServiceBrokerFormName}] InitAsync called, but ServiceBrokerObjects is empty");
-                return;
+                lock (_initLock)
+                {
+                    _initialized = false;
+                }
+                throw;
             }
-
-            await Helper.InitAndStartAsync(objects, ct).ConfigureAwait(false);
-            lock (_initLock)
-            {
-                if (_initialized) return;
-                _initialized = true;
-            }
-
         }
-
         /// <summary>
-        /// Р‘Р°Р·РѕРІР°СЏ РѕР±СЂР°Р±РѕС‚РєР° РѕР±РЅРѕРІР»РµРЅРёСЏ (table->objectName->РєРѕРѕСЂРґРёРЅР°С‚РѕСЂ).
-        /// Р’С‹Р·С‹РІР°Р№С‚Рµ РёР· IDataUpdatableFormAsyncV2.UpdateDataInFormAsync.
+        /// Базовая обработка обновления (table->objectName->координатор).
+        /// Вызывайте из IDataUpdatableFormAsyncV2.UpdateDataInFormAsync.
         /// </summary>
         public async Task HandleUpdateAsync(string tableName, string fieldsChangedCsv)
         {
@@ -103,7 +116,6 @@ namespace SewingProduction.Core.helpers
             Coordinator.RequestBatch(affected);
             return;
         }
-
         public async ValueTask DisposeAsync()
         {
             try
