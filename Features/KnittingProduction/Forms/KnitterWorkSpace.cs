@@ -673,12 +673,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (firstUnfinished == null)
                 return;
 
-            var snap = new PlanFocusSnap
+            var snap = new GridStateHelper.MasterDetailFocusState<(string TaskNum, string MachineKey), int>
             {
                 MasterTop = bandedGridView3?.TopRowIndex ?? 0,
-                TaskNum = KnitterPlanUtils.NormalizeTaskNum(firstUnfinished.pzvNomZad),
-                Machine = KnitterPlanUtils.NormalizeMachineKey(firstUnfinished.kmlNumber),
-                DetailPzvId = firstUnfinished.pzvID,
+                HasMasterKey = true,
+                MasterKey = (
+                    KnitterPlanUtils.NormalizeTaskNum(firstUnfinished.pzvNomZad),
+                    KnitterPlanUtils.NormalizeMachineKey(firstUnfinished.kmlNumber)),
+                HasDetailKey = true,
+                DetailKey = firstUnfinished.pzvID,
                 WasInDetail = true
             };
 
@@ -1248,37 +1251,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     }
                 }
 
-                var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab, _currentShiftId, _currentKmaId, false, false, 14);
-                var ids = new HashSet<int>(refreshedPlan.Select(r => r.pzvID));
-                Debug.WriteLine($"Has remainder? {ids.Contains(preferDetailId ?? -1)}");
-                _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
-
-                // Принудительно обновляем detail для текущей master-строки:
-                // DevExpress кеширует child-list в master-detail, и после ребинда
-                // detail может не пересобраться пока не сделать Collapse/Expand.
-                int masterHandle = _planFocusService.FindMasterHandleBySnap(focusSnap);
-                if (masterHandle >= 0)
-                {
-                    // важно: RefreshData не пересоздаёт detail, но помогает применить новые данные к master
-                    bandedGridView3.RefreshData();
-
-                    // Если мастер раскрыт — заставляем пересобрать detail view
-                    if (bandedGridView3.GetMasterRowExpanded(masterHandle))
-                    {
-                        bandedGridView3.RefreshRow(masterHandle);
-
-                        // Иногда detail view уже создан — обновим и его
-                        var detail = bandedGridView3.GetDetailView(masterHandle, 0) as GridView;
-                        detail?.RefreshData();
-                    }
-                }
-
-                var rem = refreshedPlan.FirstOrDefault(r => r.pzvID == preferDetailId);
-                Debug.WriteLine($"Remainder nrModels = {rem?.nrModels?.Count ?? -1}, rzvModels = {rem?.rzvModels?.Count ?? -1}");
-                var fin = refreshedPlan.FirstOrDefault(r => r.pzvID == currentRow.pzvID);
-                Debug.WriteLine($"Finished pzvDateEnd = {fin?.pzvDateEnd:dd.MM HH:mm:ss}");
-
-                _planFocusService.Restore(focusSnap, preferDetailId);
+                await ReloadPlanAndRestoreFocusAsync(tab, focusSnap, preferDetailId);
             }
             else
             {
@@ -2075,6 +2048,93 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             SetViewState(bandedGridView3);
             SetViewState(advBandedGridView1);
         }
+
+        private (int? kwsId, bool onlyUnassigned, decimal maxHours, bool expandByNr, bool includeFinished) GetCurrentPlanQueryOptions()
+        {
+            bool isAdmin = _adminToggle?.Checked == true;
+            bool isShiftOpen = _isShiftRunning && _currentShiftId.HasValue;
+
+            return (
+                kwsId: isShiftOpen ? _currentShiftId : 0,
+                onlyUnassigned: !isShiftOpen && !_showAllAssignedWhenClosed,
+                maxHours: isShiftOpen ? 240m : _maxHoursClosedShift,
+                expandByNr: _expandNrToggle?.Checked == true,
+                includeFinished: isAdmin);
+        }
+
+        private void ApplyPlanToUi(
+            int tab,
+            List<KnitterPZVModel>? plan,
+            GridStateHelper.MasterDetailFocusState<(string TaskNum, string MachineKey), int> focusSnap,
+            int? preferDetailId = null)
+        {
+            void Apply()
+            {
+                if (IsDisposed || bandedGridView3 == null)
+                    return;
+
+                if (plan != null)
+                {
+                    foreach (var row in plan)
+                    {
+                        EnsureFactHours(row);
+                    }
+                }
+
+                _planPresenter.BindGroupDetails(
+                    bandedGridView3,
+                    advBandedGridView1,
+                    _planBindingSource,
+                    plan ?? new List<KnitterPZVModel>(),
+                    clearTabs: false);
+
+                RefreshFooterSummaries();
+                _currentLoadedTab = tab;
+                _planFocusService.Restore(focusSnap, preferDetailId);
+            }
+
+            if (InvokeRequired)
+                Invoke(new Action(Apply));
+            else
+                Apply();
+        }
+
+        private void RefreshExpandedMasterDetailForSnap(GridStateHelper.MasterDetailFocusState<(string TaskNum, string MachineKey), int> focusSnap)
+        {
+            int masterHandle = _planFocusService.FindMasterHandleBySnap(focusSnap);
+            if (masterHandle < 0 || bandedGridView3 == null)
+                return;
+
+            bandedGridView3.RefreshData();
+
+            if (!bandedGridView3.GetMasterRowExpanded(masterHandle))
+                return;
+
+            bandedGridView3.RefreshRow(masterHandle);
+
+            var detail = bandedGridView3.GetDetailView(masterHandle, 0) as GridView;
+            detail?.RefreshData();
+        }
+
+        private async Task ReloadPlanAndRestoreFocusAsync(
+            int tab,
+            GridStateHelper.MasterDetailFocusState<(string TaskNum, string MachineKey), int> focusSnap,
+            int? preferDetailId = null)
+        {
+            var options = GetCurrentPlanQueryOptions();
+            var plan = await _orchestrator.GetPlanByTabAsync(
+                tab,
+                options.kwsId,
+                _currentKmaId,
+                options.onlyUnassigned,
+                options.expandByNr,
+                options.maxHours,
+                includeFinished: options.includeFinished);
+
+            ApplyPlanToUi(tab, plan, focusSnap, preferDetailId);
+            RefreshExpandedMasterDetailForSnap(focusSnap);
+        }
+
         private async Task LoadPlanForTabAsync(int tab, bool forceReload = false)
         {
             if (!forceReload && _currentLoadedTab.HasValue && _currentLoadedTab.Value == tab)
@@ -2085,45 +2145,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             await UpdateZoneAsync(tab);
             await UpdateShiftStateAsync(tab);
 
-            bool isAdmin = _adminToggle?.Checked == true;
-            bool isShiftOpen = _isShiftRunning && _currentShiftId.HasValue;
-
-            // Режимы выборки:
-            // - закрытая смена: только неназначенные, ограничение 14ч
-            // - открытая смена: назначенные на текущую смену, без лимита по часам
-            // - админ: includeFinished=true (видит завершённые)
-            int? kwsId = isShiftOpen ? _currentShiftId : 0;
-            bool onlyUnassigned = !isShiftOpen && !_showAllAssignedWhenClosed;
-            decimal maxHours = isShiftOpen ? 240m : _maxHoursClosedShift;
-            bool expandByNr = _expandNrToggle?.Checked == true;
-
             // Сохраняем фокус до перезагрузки (обновление по Service Broker иначе сбрасывает фокус).
             // Снимок делаем до await — после await продолжение может выполниться не на UI-потоке.
             var focusSnap = _planFocusService.CaptureCurrent();
-
-            var plan = await _orchestrator.GetPlanByTabAsync(tab, kwsId, _currentKmaId, onlyUnassigned, expandByNr, maxHours, includeFinished: isAdmin);
-
-            // Привязка и восстановление фокуса — только в UI-потоке (после await контекст мог смениться)
-            void ApplyPlanAndRestoreFocus()
-            {
-                if (IsDisposed || bandedGridView3 == null) return;
-                if (plan != null)
-                {
-                    foreach (var row in plan)
-                    {
-                        EnsureFactHours(row);
-                    }
-                }
-                _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>(), clearTabs: false);
-                RefreshFooterSummaries();
-                _currentLoadedTab = tab;
-                _planFocusService.Restore(focusSnap);
-            }
-
-            if (InvokeRequired)
-                Invoke(new Action(ApplyPlanAndRestoreFocus));
-            else
-                ApplyPlanAndRestoreFocus();
+            await ReloadPlanAndRestoreFocusAsync(tab, focusSnap);
         }
 
         private async Task UpdateZoneAsync(int tab)

@@ -1,6 +1,7 @@
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.BandedGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Core.helpers;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using System;
 using System.Windows.Forms;
@@ -9,6 +10,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 {
     public sealed class KnitterPlanFocusService
     {
+        private static readonly Func<KnitterPZVModel, (string TaskNum, string MachineKey)> MasterKeySelector =
+            row => (
+                KnitterPlanUtils.NormalizeTaskNum(row.pzvNomZad),
+                KnitterPlanUtils.NormalizeMachineKey(row.kmlNumber));
+
         private readonly Control _uiHost;
         private readonly GridControl _gridControl;
         private readonly BandedGridView _masterView;
@@ -20,110 +26,45 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
             _masterView = masterView ?? throw new ArgumentNullException(nameof(masterView));
         }
 
-        public PlanFocusSnap CaptureCurrent()
+        public GridStateHelper.MasterDetailFocusState<(string TaskNum, string MachineKey), int> CaptureCurrent() =>
+            GridStateHelper.CaptureMasterDetailFocus<KnitterPZVModel, KnitterPZVModel, (string TaskNum, string MachineKey), int>(
+                _gridControl,
+                _masterView,
+                MasterKeySelector,
+                MasterKeySelector,
+                row => row.pzvID);
+
+        public GridStateHelper.MasterDetailFocusState<(string TaskNum, string MachineKey), int> CaptureFromRow(KnitterPZVModel? currentRow, GridView detailView) =>
+            currentRow == null
+                ? new GridStateHelper.MasterDetailFocusState<(string TaskNum, string MachineKey), int> { MasterTop = _masterView?.TopRowIndex ?? 0 }
+                : GridStateHelper.CaptureMasterDetailFocusFromRow<KnitterPZVModel, (string TaskNum, string MachineKey), int>(
+                    _masterView,
+                    detailView,
+                    currentRow,
+                    MasterKeySelector,
+                    row => row.pzvID);
+
+        public int FindMasterHandleBySnap(GridStateHelper.MasterDetailFocusState<(string TaskNum, string MachineKey), int> snap)
         {
-            var snap = new PlanFocusSnap
-            {
-                MasterTop = _masterView.TopRowIndex
-            };
-
-            var focusedView = _gridControl.FocusedView as GridView;
-            snap.WasInDetail = focusedView != null && focusedView != _masterView;
-
-            if (_masterView.GetFocusedRow() is KnitterPZVModel masterRow)
-            {
-                snap.TaskNum = KnitterPlanUtils.NormalizeTaskNum(masterRow.pzvNomZad);
-                snap.Machine = KnitterPlanUtils.NormalizeMachineKey(masterRow.kmlNumber);
-            }
-
-            if (snap.WasInDetail && focusedView?.GetFocusedRow() is KnitterPZVModel detailRow && detailRow.pzvID > 0)
-            {
-                snap.DetailPzvId = detailRow.pzvID;
-                snap.DetailTop = focusedView.TopRowIndex;
-            }
-
-            return snap;
-        }
-
-        public PlanFocusSnap CaptureFromRow(KnitterPZVModel? currentRow, GridView detailView)
-        {
-            var snap = new PlanFocusSnap
-            {
-                MasterTop = _masterView?.TopRowIndex ?? 0,
-                WasInDetail = detailView != null && detailView != _masterView
-            };
-
-            if (currentRow != null)
-            {
-                snap.TaskNum = KnitterPlanUtils.NormalizeTaskNum(currentRow.pzvNomZad);
-                snap.Machine = KnitterPlanUtils.NormalizeMachineKey(currentRow.kmlNumber);
-
-                if (currentRow.pzvID > 0)
-                {
-                    snap.DetailPzvId = currentRow.pzvID;
-                    if (detailView != null)
-                        snap.DetailTop = detailView.TopRowIndex;
-                }
-            }
-
-            return snap;
-        }
-
-        public int FindMasterHandleBySnap(PlanFocusSnap snap)
-        {
-            if (snap == null)
+            if (snap == null || !snap.HasMasterKey)
                 return GridControl.InvalidRowHandle;
 
-            for (int rowHandle = 0; rowHandle < _masterView.RowCount; rowHandle++)
-            {
-                if (!_masterView.IsDataRow(rowHandle))
-                    continue;
-
-                if (_masterView.GetRow(rowHandle) is not KnitterPZVModel row)
-                    continue;
-
-                if (KnitterPlanUtils.NormalizeTaskNum(row.pzvNomZad) == snap.TaskNum &&
-                    KnitterPlanUtils.NormalizeMachineKey(row.kmlNumber) == snap.Machine)
-                {
-                    return rowHandle;
-                }
-            }
-
-            return GridControl.InvalidRowHandle;
+            return GridStateHelper.FindDataRowHandleByKey(
+                _masterView,
+                MasterKeySelector,
+                snap.MasterKey);
         }
 
-        public void Restore(PlanFocusSnap snap, int? preferDetailId = null)
+        public void Restore(GridStateHelper.MasterDetailFocusState<(string TaskNum, string MachineKey), int> snap, int? preferDetailId = null)
         {
-            if (snap == null)
-                return;
-
-            int masterHandle = FindMasterHandleBySnap(snap);
-            if (masterHandle < 0)
-                return;
-
-            _masterView.FocusedRowHandle = masterHandle;
-            _masterView.MakeRowVisible(masterHandle, true);
-
-            int? targetDetailId = preferDetailId ?? snap.DetailPzvId;
-            if (!targetDetailId.HasValue || targetDetailId.Value <= 0)
-                return;
-
-            if (!_masterView.GetMasterRowExpanded(masterHandle))
-                _masterView.ExpandMasterRow(masterHandle);
-
-            _uiHost.BeginInvoke(new Action(() =>
-            {
-                var detailView = _masterView.GetDetailView(masterHandle, 0) as GridView;
-                if (detailView == null)
-                    return;
-
-                int detailRowHandle = detailView.LocateByValue("pzvID", targetDetailId.Value);
-                if (detailRowHandle < 0)
-                    return;
-
-                detailView.FocusedRowHandle = detailRowHandle;
-                detailView.MakeRowVisible(detailRowHandle, true);
-            }));
+            GridStateHelper.RestoreMasterDetailFocus<KnitterPZVModel, KnitterPZVModel, (string TaskNum, string MachineKey), int>(
+                _uiHost,
+                _masterView,
+                snap,
+                MasterKeySelector,
+                row => row.pzvID,
+                preferDetailId ?? 0,
+                preferDetailId.HasValue && preferDetailId.Value > 0);
         }
     }
 }
