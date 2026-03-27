@@ -436,11 +436,12 @@ namespace SewingProduction
             {
                 try
                 {
-                    await Task.Delay(TimeSpan.FromSeconds(5)).ConfigureAwait(false);
+                    await Task.Delay(GetRetryDelay(reason)).ConfigureAwait(false);
                     if (_brokerStopped || !_flagStartListening || string.IsNullOrWhiteSpace(_table))
                         return;
 
-                    Debug.WriteLine($"[ServiceBroker] Retry StartListening: owner={_ownerName}, table={_table}, reason={reason}");
+                    Debug.WriteLine(
+                        $"[ServiceBroker:{_brokerId}] Retry StartListening: owner={OwnerName}, table={_table}, reason={reason}");
                     StartListening(_fields, _table);
                 }
                 catch { }
@@ -503,17 +504,39 @@ namespace SewingProduction
         private static TimeSpan GetResubscribeDelay(SqlNotificationEventArgs e)
         {
             if (e.Type != SqlNotificationType.Change)
-                return TimeSpan.FromSeconds(2);
+                return TimeSpan.FromSeconds(4);
 
             if (e.Info == SqlNotificationInfo.Insert ||
                 e.Info == SqlNotificationInfo.Update ||
                 e.Info == SqlNotificationInfo.Delete ||
                 e.Info == SqlNotificationInfo.Merge)
             {
-                return TimeSpan.FromMilliseconds(350);
+                // SqlDependency notifications are one-shot, but SQL may still be finalizing
+                // the previous registration immediately after a data change.
+                return TimeSpan.FromSeconds(2);
             }
 
-            return TimeSpan.FromSeconds(2);
+            return TimeSpan.FromSeconds(4);
+        }
+
+        private static TimeSpan GetRetryDelay(string reason)
+        {
+            if (string.IsNullOrWhiteSpace(reason))
+                return TimeSpan.FromSeconds(8);
+
+            if (reason.Contains("restart-sql:2714", StringComparison.OrdinalIgnoreCase))
+                return TimeSpan.FromSeconds(20);
+
+            if (reason.Contains("restart-sql:-2", StringComparison.OrdinalIgnoreCase))
+                return TimeSpan.FromSeconds(15);
+
+            if (reason.Contains("restart-sql:0", StringComparison.OrdinalIgnoreCase))
+                return TimeSpan.FromSeconds(10);
+
+            if (reason.Contains("restart-error", StringComparison.OrdinalIgnoreCase))
+                return TimeSpan.FromSeconds(10);
+
+            return TimeSpan.FromSeconds(8);
         }
 
         private static bool IsInvalidSubscription(SqlNotificationEventArgs e)
