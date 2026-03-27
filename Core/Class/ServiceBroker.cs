@@ -384,11 +384,13 @@ namespace SewingProduction
 
                 if (IsInvalidSubscription(e))
                 {
-                    _flagStartListening = false;
-                    _brokerStopped = true;
                     Debug.WriteLine(
                         $"[ServiceBroker:{_brokerId}] Subscription invalid. owner={OwnerName}, table={_table}, " +
                         $"type={e.Type}, info={e.Info}, source={e.Source}");
+
+                    ScheduleRestart(
+                        reason: $"invalid-subscription:{e.Type}/{e.Info}/{e.Source}",
+                        delay: TimeSpan.FromSeconds(3));
                     return;
                 }
 
