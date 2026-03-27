@@ -285,7 +285,7 @@ namespace SewingProduction.Features.KnittingProduction.Services
             }
         }
 
-        public async Task<List<ZadanyListByMachine>> GetZadanyListByMachine(int kmlID)
+        public async Task<List<PZVZadanyList>> GetZadanyListByMachine(int kmlID)
         {
             try
             {
@@ -293,7 +293,7 @@ namespace SewingProduction.Features.KnittingProduction.Services
                 {
                     string query = $"exec GetZadanyListByMachine {kmlID}";
 
-                    var result = await connection.QueryAsync<ZadanyListByMachine>(query, new Dictionary<string, object> { });
+                    var result = await connection.QueryAsync<PZVZadanyList>(query, new Dictionary<string, object> { });
                     return result.ToList();
                 }
             }
@@ -460,13 +460,13 @@ namespace SewingProduction.Features.KnittingProduction.Services
             }
         }
 
-        public async Task<BindingSource> GetNaryadZadanyVyaz(int tab, int kmlID, CancellationToken cancellationToken)
+        public async Task<BindingSource> GetNaryadZadanyVyaz(int tab, int kmlID, int podrKod, CancellationToken cancellationToken)
         {
             try
             {
                 await using var connection = _dbHelper.GetConnection();
-                const string query = @"EXEC planZagrVyazTabKmlID_view @xPzvTab = @Tab, @xPzvKmlID = @KmlID";
-                var command = new CommandDefinition(query, new { Tab = tab, KmlID = kmlID }, cancellationToken: cancellationToken);
+                const string query = @"EXEC planZagrVyazTabKmlID_view @xPzvTab = @Tab, @xPzvKmlID = @KmlID, @xKodPodr = @PodrKod";
+                var command = new CommandDefinition(query, new { Tab = tab, KmlID = kmlID, PodrKod = podrKod }, cancellationToken: cancellationToken);
 
                 var list = (await connection
                     .QueryAsync<NaryadZadanyVyaz>(command))
@@ -494,7 +494,76 @@ namespace SewingProduction.Features.KnittingProduction.Services
                 };
             }
         }
+        
+        public async Task<BindingSource> GetPlanTotalQuantityByArticul(CancellationToken cancellationToken)
+        {
+            try
+            {
+                await using var connection = _dbHelper.GetConnection();
+                const string query = @"EXEC dbo.GetPlanTotalQuantityByArticul";
+                var command = new CommandDefinition(query, new { }, cancellationToken: cancellationToken);
 
+                var list = (await connection
+                    .QueryAsync<PlanTotalQuantityByArticul>(command))
+                    .AsList();
+
+                return new BindingSource
+                {
+                    DataSource = new BindingList<PlanTotalQuantityByArticul>(list)
+                };
+            }
+            catch (OperationCanceledException)
+            {
+                // отмена — НЕ ошибка
+                return new BindingSource
+                {
+                    DataSource = new BindingList<PlanTotalQuantityByArticul>()
+                };
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при получении данных GetPlanTotalQuantityByArticul");
+                return new BindingSource
+                {
+                    DataSource = new BindingList<PlanTotalQuantityByArticul>()
+                };
+            }
+        }
+        
+        public async Task<BindingSource> GetZadanyListByArticulKod(string _kod, CancellationToken cancellationToken)
+        {
+            try
+            {
+                await using var connection = _dbHelper.GetConnection();
+                const string query = @"EXEC dbo.GetZadanyListByArticulKod @xKod = @kod";
+                var command = new CommandDefinition(query, new { kod = _kod }, cancellationToken: cancellationToken);
+
+                var list = (await connection
+                    .QueryAsync<PZVZadanyList>(command))
+                    .AsList();
+
+                return new BindingSource
+                {
+                    DataSource = new BindingList<PZVZadanyList>(list)
+                };
+            }
+            catch (OperationCanceledException)
+            {
+                // отмена — НЕ ошибка
+                return new BindingSource
+                {
+                    DataSource = new BindingList<PZVZadanyList>()
+                };
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при получении данных GetZadanyListByArticulKod");
+                return new BindingSource
+                {
+                    DataSource = new BindingList<PZVZadanyList>()
+                };
+            }
+        }
         public async Task<BindingSource> GetPodrVyaz(CancellationToken cancellationToken)
         {
             try
