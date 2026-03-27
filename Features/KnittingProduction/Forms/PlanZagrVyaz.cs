@@ -315,7 +315,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         public async Task<List<ServiceBrokerModel.TableListenInfo>> LoadListenInfoByObjectNameAsync(
             string objectName, CancellationToken ct)
         {
-            return await _sbService.GetObjectListForServiceBroker(objectName, ct);
+            var list = await _sbService.GetObjectListForServiceBroker(objectName, ct);
+            return ServiceBrokerListenInfoNormalizer.Normalize(list);
         }
         private Task InvokeOnUiAsync(Func<Task> fn)
         {

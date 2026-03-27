@@ -2229,7 +2229,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _sbService = new ServiceBrokerService(dbHelper);
             }
 
-            return await _sbService.GetObjectListForServiceBroker(objectName, ct);
+            var list = await _sbService.GetObjectListForServiceBroker(objectName, ct);
+            return ServiceBrokerListenInfoNormalizer.Normalize(list);
         }
 
         /// <summary>
