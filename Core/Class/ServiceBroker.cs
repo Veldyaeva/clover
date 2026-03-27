@@ -25,7 +25,7 @@ namespace SewingProduction
         private Task RaiseChangedAsync(string table, string? changedFieldsCsv)
             => Changed?.Invoke(table, changedFieldsCsv) ?? Task.CompletedTask;
 
-        private readonly string _connectionString = SettingsManager.GetCurrentConnectionString();
+        private readonly string _connectionString = BuildListenerConnectionString();
         private readonly string _ownerName;
 
         private SqlConnection? _connection;
@@ -262,6 +262,13 @@ namespace SewingProduction
             try
             {
                 _command?.Dispose();
+            }
+            catch { }
+
+            try
+            {
+                if (_connection != null && _connection.State != ConnectionState.Closed)
+                    _connection.Close();
             }
             catch { }
 
@@ -562,6 +569,21 @@ namespace SewingProduction
 
             var t = incoming.Trim().Trim('[', ']');
             return $"[dbo].[{t}]";
+        }
+
+        private static string BuildListenerConnectionString()
+        {
+            var builder = new SqlConnectionStringBuilder(SettingsManager.GetCurrentConnectionString())
+            {
+                Pooling = false
+            };
+
+            if (string.IsNullOrWhiteSpace(builder.ApplicationName))
+                builder.ApplicationName = "SewingProduction.ServiceBroker";
+            else
+                builder.ApplicationName = builder.ApplicationName + ".ServiceBroker";
+
+            return builder.ConnectionString;
         }
     }
 }
