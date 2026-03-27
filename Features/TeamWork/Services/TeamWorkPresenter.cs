@@ -92,13 +92,21 @@ namespace SewingProduction.Features.TeamWork.Services
                 _raszSource,
                 _raszView,
                 () => TWGridHelper.sortGridView(_raszView),
-                (op, clear) => { try { _raszView.GridControl.BeginInvoke(new Action(() => { if (clear) _raszView.ClearSelection(); })); } catch { } }
+                (op, clear) =>
+                {
+                    try { _raszView.GridControl.BeginInvoke(new Action(() => { if (clear) _raszView.ClearSelection(); })); }
+                    catch (Exception ex) { _ = _logger.LogErrorAsync(ex, "TeamWorkPresenter.InitializeAsync: ApplyPostStructureUi.BeginInvoke"); }
+                }
             );
             _secondsAggregator = _secondsAggregator ?? new SecondsAggregator(
                 _rasz,
                 _annSource,
                 _logger,
-                (act) => { try { _view.AsControl.BeginInvoke((System.Windows.Forms.MethodInvoker)(() => act())); } catch { } }
+                (act) =>
+                {
+                    try { _view.AsControl.BeginInvoke((System.Windows.Forms.MethodInvoker)(() => act())); }
+                    catch (Exception ex) { _ = _logger.LogErrorAsync(ex, "TeamWorkPresenter.InitializeAsync: uiDispatch.BeginInvoke"); }
+                }
             );
             await Task.CompletedTask;
         }
@@ -114,7 +122,11 @@ namespace SewingProduction.Features.TeamWork.Services
                     _raszSource,
                     _logger,
                     () => TWGridHelper.sortGridView(_raszView),
-                    (op, clear) => { try { if (clear) _raszView.ClearSelection(); } catch { } }
+                    (op, clear) =>
+                    {
+                        try { if (clear) _raszView.ClearSelection(); }
+                        catch (Exception ex) { _ = _logger.LogErrorAsync(ex, "TeamWorkPresenter.Attach: ApplyPostStructureUi.ClearSelection"); }
+                    }
                 );
             }
             _ops.Attach();
@@ -122,7 +134,8 @@ namespace SewingProduction.Features.TeamWork.Services
 
         public void Detach()
         {
-            try { _ops?.Detach(); } catch { }
+            try { _ops?.Detach(); }
+            catch (Exception ex) { _ = _logger.LogErrorAsync(ex, "TeamWorkPresenter.Detach: _ops.Detach"); }
             DetachPopupMenus();
         }
 
@@ -140,13 +153,13 @@ namespace SewingProduction.Features.TeamWork.Services
                 if (_raszPopupHandler != null)
                     _raszView.PopupMenuShowing += _raszPopupHandler;
             }
-            catch { }
+            catch (Exception ex) { _ = _logger.LogErrorAsync(ex, "TeamWorkPresenter.AttachPopupMenus: rasz popup subscribe"); }
             try
             {
                 if (_kontView != null && _kontPopupHandler != null)
                     _kontView.PopupMenuShowing += _kontPopupHandler;
             }
-            catch { }
+            catch (Exception ex) { _ = _logger.LogErrorAsync(ex, "TeamWorkPresenter.AttachPopupMenus: kont popup subscribe"); }
         }
 
         public void DetachPopupMenus()
@@ -156,13 +169,13 @@ namespace SewingProduction.Features.TeamWork.Services
                 if (_raszPopupHandler != null)
                     _raszView.PopupMenuShowing -= _raszPopupHandler;
             }
-            catch { }
+            catch (Exception ex) { _ = _logger.LogErrorAsync(ex, "TeamWorkPresenter.DetachPopupMenus: rasz popup unsubscribe"); }
             try
             {
                 if (_kontView != null && _kontPopupHandler != null)
                     _kontView.PopupMenuShowing -= _kontPopupHandler;
             }
-            catch { }
+            catch (Exception ex) { _ = _logger.LogErrorAsync(ex, "TeamWorkPresenter.DetachPopupMenus: kont popup unsubscribe"); }
             _raszPopupHandler = null;
             _kontPopupHandler = null;
             _kontView = null;
@@ -177,7 +190,8 @@ namespace SewingProduction.Features.TeamWork.Services
             }
             // Fallback: Убедиться, что данные в таблицах согласованы
             // TODO: добавить логику сохранения данных остальных таблиц
-            try { TWGridHelper.sortGridView(_raszView); } catch { }
+            try { TWGridHelper.sortGridView(_raszView); }
+            catch (Exception ex) { _ = _logger.LogErrorAsync(ex, "TeamWorkPresenter.SaveAsync: TWGridHelper.sortGridView"); }
             await Task.CompletedTask;
         }
 

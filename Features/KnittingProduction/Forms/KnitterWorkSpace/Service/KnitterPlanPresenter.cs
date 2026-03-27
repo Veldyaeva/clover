@@ -1,6 +1,7 @@
 using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.BandedGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Core.helpers;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using System;
 using System.Collections.Generic;
@@ -22,8 +23,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         private Dictionary<string, List<KnitterPZVModel>> _machineArtNomMaster;
         private Dictionary<(string MachineKey, string ArtKey, int? Nom), List<KnitterPZVModel>> _machineArtNomGroups;
         private Dictionary<(string TaskNum, string MachineKey, string ArtKey, int? Nom, int? Pach), List<KnitterPZVModel>> _taskMachineArtNomPachGroups;
-        private readonly GridExpansionService _expansionService = new GridExpansionService();
-
         public IReadOnlyList<KnitterPZVModel> AllRows => _allRows as IReadOnlyList<KnitterPZVModel> ?? new List<KnitterPZVModel>();
 
         /// <summary>
@@ -41,7 +40,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
             List<KnitterPZVModel> rows,
             bool clearTabs = true)
         {
-            var expansionState = _expansionService.Capture(masterView3);
+            var expansionState = GridStateHelper.CaptureMasterDetailExpansion<KnitterPZVModel, (string TaskNum, string MachineKey), string>(
+                masterView3,
+                row => (
+                    KnitterPlanUtils.NormalizeTaskNum(row.pzvNomZad),
+                    KnitterPlanUtils.NormalizeMachineKey(row.kmlNumber)),
+                (detailView, groupRowHandle) => detailView.GetGroupRowValue(groupRowHandle)?.ToString() ?? string.Empty);
 
             _allRows = rows ?? new List<KnitterPZVModel>();
             if (clearTabs && _allRows != null)
@@ -129,7 +133,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 grid?.EndUpdate();
             }
 
-            _expansionService.Restore(masterView3, expansionState);
+            GridStateHelper.RestoreMasterDetailExpansion<KnitterPZVModel, (string TaskNum, string MachineKey), string>(
+                masterView3,
+                expansionState,
+                row => (
+                    KnitterPlanUtils.NormalizeTaskNum(row.pzvNomZad),
+                    KnitterPlanUtils.NormalizeMachineKey(row.kmlNumber)),
+                (detailView, groupRowHandle) => detailView.GetGroupRowValue(groupRowHandle)?.ToString() ?? string.Empty);
         }
 
         private static string MasterKey(KnitterPZVModel m) =>
@@ -312,6 +322,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 .OfType<KnitterPZVModel>();
         }
 
-        // Захват/восстановление развёрнутости вынесены в GridExpansionService
+        // Захват/восстановление развёрнутости вынесены в общий GridStateHelper
     }
 }

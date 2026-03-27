@@ -127,7 +127,8 @@ namespace SewingProduction.Features.TeamWork.Operations
                 }
                 finally
                 {
-                    try { _gridView.EndDataUpdate(); } catch { }
+                    try { _gridView.EndDataUpdate(); }
+                    catch (Exception ex) { await _logger.LogErrorAsync(ex, "BufferImportService: _gridView.EndDataUpdate"); }
                 }
 
                 return report;

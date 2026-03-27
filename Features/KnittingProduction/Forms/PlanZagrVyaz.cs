@@ -92,6 +92,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         //        private static BindingSourceHelper _bSHelper;
         private readonly ILogger _logger = new FileLogger();
         private readonly VyazService _vyazService;
+        private static readonly TimeSpan PlanBrokerSelfMute = TimeSpan.FromSeconds(2);
 
         string _xColumn = string.Empty;
         int _xPzvID = 0;
@@ -193,6 +194,27 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             _vyazService = new VyazService(_dbHelper);
             _mlService = new MlService(_dbHelper);
+            _ignoredServiceBrokerTables.UnionWith(new[]
+            {
+                // GetPlanZagrVyazByPachList / GetSmenZadanyVyaz pull these via views and reference joins,
+                // but they do not need to force live-refresh for this form.
+                "dbo.matrix_class",
+                "dbo.plan_sezon_zad",
+                "dbo.tab_n",
+                "dbo.norm_rasz",
+                "dbo.knitMachineArea",
+                "dbo.gr_rab_dn",
+                "dbo.tabel_sp",
+                "dbo.spOborudShv",
+                "dbo.podr_vyaz",
+                "dbo.v_nazn_akt",
+                "dbo.GradaciaStatus",
+                "dbo.proizv_modify_zc_history",
+                "dbo.knitMachineList",
+                "dbo.owenDeviceParam",
+                "dbo.knitMachineAreaEmp",
+                "dbo.fio"
+            });
 
             _smenZadanyVyazBindingSource = new BindingSource
             {
@@ -232,6 +254,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         public PlanZagrVyaz(UserClass User) : base(User)
         {
             InitializeComponent();
+        }
+
+        private void MutePlanBrokerNotifications()
+        {
+            _sbController.MuteTable("dbo.planZagrVyaz", PlanBrokerSelfMute);
         }
         public static class DxSkinFix
         {
@@ -336,29 +363,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         public async Task InitServiceBrokerAsync(CancellationToken ct)
         {
-            await _sbController.InitAsync(ct, startBrokers: false);
+            await _sbController.InitAsync(ct, _sbHub, _sbHubOwnerId, startBrokers: false);
 
-            var tableFields = _sbController.Helper?.GetUnionFieldsByTableSnapshot()
-                              ?? new Dictionary<string, IReadOnlyCollection<string>>();
-            await _sbHub.SubscribeAsync(
-                ownerId: _sbHubOwnerId,
-                ownerName: ServiceBrokerFormName,
-                tableFields: tableFields,
-                onTableChangedAsync: async (table, fields) =>
-                    await InvokeOnUiAsync(async () => await UpdateDataInFormAsync(table, fields)),
-                ct: ct);
-
-            var tables = tableFields.Keys;
+            var tables = _sbController.Helper?.GetListeningTables() ?? Array.Empty<string>();
             Debug.WriteLine($"[PlanZagrVyaz] Listening tables: {string.Join(", ", tables)}");
-
-            //------------------------
         }
 
         public async Task<List<ServiceBrokerModel.TableListenInfo>> LoadListenInfoByObjectNameAsync(
             string objectName, CancellationToken ct)
         {
-            return await _sbService.GetObjectListForServiceBroker(objectName, ct);
-            Debug.WriteLine($"[PlanZagrVyaz] LoadListenInfoByObjectNameAsync: objectName={objectName}");
+            var list = await _sbService.GetObjectListForServiceBroker(objectName, ct);
+            return ServiceBrokerListenInfoNormalizer.Normalize(list);
         }
         private Task InvokeOnUiAsync(Func<Task> fn)
         {
@@ -451,15 +466,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
-                Debug.WriteLine($"[PlanZagrVyaz] UpdateDataInFormAsync: table={table}, fields={changedFieldsCsv}");
                 await _sbController.HandleUpdateAsync(table, changedFieldsCsv ?? string.Empty);
-
-                if (_sbController.Coordinator != null)
-                {
-                    var stats = _sbController.Coordinator.GetStatistics();
-                    Debug.WriteLine($"[PlanZagrVyaz] RefreshCoordinator stats: Pending={stats.PendingCount}, InFlight={stats.InFlightCount}, TotalRequests={stats.TotalRequests}, TotalExecutions={stats.TotalExecutions}, CascadePreventions={stats.CascadePreventions}");
-                }
-                Debug.WriteLine($"[PlanZagrVyaz] UpdateDataInFormAsync completed for table: {table}");
             }
             catch (Exception ex)
             {
@@ -3106,6 +3113,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // Преобразуем в BindingList
                 if (filteredList.Count > 0)
                 {
+                    MutePlanBrokerNotifications();
                     using (SqlConnection connection = _dbHelper.GetConnection())
                     {
                         _bulkHelper.BulkAllDataUpdate<PZV>(connection, filteredList, "planZagrVyaz", new[] { "pzvID" });
@@ -3158,6 +3166,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // Преобразуем в BindingList
                 if (filteredList.Count > 0)
                 {
+                    MutePlanBrokerNotifications();
                     using (SqlConnection connection = _dbHelper.GetConnection())
                     {
                         _bulkHelper.BulkAllDataUpdate<PZV>(connection, filteredList, "planZagrVyaz", new[] { "pzvID" });
@@ -3209,6 +3218,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // Преобразуем в BindingList
                 if (filteredList.Count > 0)
                 {
+                    MutePlanBrokerNotifications();
                     using (SqlConnection connection = _dbHelper.GetConnection())
                     {
                         _bulkHelper.BulkAllDataUpdate<PZV>(connection, filteredList, "planZagrVyaz", new[] { "pzvID" });
@@ -3260,6 +3270,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // Преобразуем в BindingList
                 if (filteredList.Count > 0)
                 {
+                    MutePlanBrokerNotifications();
                     using (SqlConnection connection = _dbHelper.GetConnection())
                     {
                         _bulkHelper.BulkAllDataUpdate<PZV>(connection, filteredList, "planZagrVyaz", new[] { "pzvID" });
@@ -3817,6 +3828,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // Преобразуем в BindingList
                 if (filteredList.Count > 0)
                 {
+                    MutePlanBrokerNotifications();
                     using (SqlConnection connection = _dbHelper.GetConnection())
                     {
                         _bulkHelper.BulkAllDataUpdate<PZV>(connection, filteredList, "planZagrVyaz", new[] { "pzvID" });
@@ -4085,6 +4097,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // Преобразуем в BindingList
                 if (filteredList.Count > 0)
                 {
+                    MutePlanBrokerNotifications();
                     using (SqlConnection connection = _dbHelper.GetConnection())
                     {
                         _bulkHelper.BulkAllDataUpdate<PZV>(connection, filteredList, "planZagrVyaz", new[] { "pzvID" });

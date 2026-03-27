@@ -318,6 +318,8 @@ namespace SewingProduction.Core
             services.AddSingleton<IAppServiceBrokerHub, AppServiceBrokerHub>();
             services.AddTransient<ILogger, HybridLogger>();
             services.AddTransient<IKnitterRepository, KnitterRepository>();
+            services.AddTransient<IKnitterWorkSpaceUiGateway, KnitterRepository>();
+            services.AddTransient<IKnitterShiftGateway, KnitterRepository>();
             services.AddTransient<IKnitterOrchestrator, KnitterOrchestrator>();
             services.AddTransient<KnitterWorkSpace>();
         }
