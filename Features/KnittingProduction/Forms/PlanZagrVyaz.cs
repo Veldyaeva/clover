@@ -2169,10 +2169,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             try
             {
                 Debug.WriteLine($"LoadPlanZagrVyazByZadanySelection started TopRowIndex={gridViewPZVOperList.TopRowIndex}, TopRowIndexPZV={TopRowIndexPZV}");
-                var pzvFocusSnapshot = GridStateHelper.CaptureFlatFocus<PZVOperList, int>(
-                    gridViewPZVOperList,
-                    _pZVOperListByPachListBindingSource,
-                    x => x.olPzvID);
                 try { gridViewRzvPachListByNom.PostEditor(); }
                 catch (SqlException ex)
                 {
@@ -2284,16 +2280,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 }
                 //------------------------------------------------------
                 gridViewPZVOperList.ExpandAllGroups();
-                bool focusRestored = GridStateHelper.RestoreFlatFocus<PZVOperList, int>(
-                    gridViewPZVOperList,
-                    _pZVOperListByPachListBindingSource,
-                    pzvFocusSnapshot,
-                    x => x.olPzvID);
-
-                if (!focusRestored && pzvFocusSnapshot != null)
-                    gridViewPZVOperList.TopRowIndex = Math.Max(0, pzvFocusSnapshot.TopRowIndex);
-
-                TopRowIndexPZV = gridViewPZVOperList.TopRowIndex;
 
                 int _focusedRowHandle = gridViewPZVOperList.FocusedRowHandle;
                 gridViewPZVOperList.TopRowIndex = TopRowIndexPZV;
@@ -2305,7 +2291,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
             //----------------------------------------------------
         }
-
         private async void PlanZagrVyaz_Load(object sender, EventArgs e)
         {
             try
@@ -4525,7 +4510,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 if (vyazPodrKod == 1)
                 {
                     int xPzvID = currentItem.olPzvID;
-                    string _xColumn = gridViewPZVOperList.FocusedColumn?.FieldName ?? string.Empty;
+                    string _xColumn = gridViewPZVOperList.FocusedColumn.ToString();
                     if (currentItem.olPzvDateEnd != null && currentItem.olPzvDateMast == null)
                     {
                         string query = $"exec dbo.PZV_Split @pzvId = {currentItem.olPzvID}, @mode = 2, @qtyFact = {Convert.ToInt32(e.Value)} ";
@@ -5475,6 +5460,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 try { _loadCts?.Cancel(); } catch { }
                 try { _lifetimeCts?.Cancel(); } catch { }
+                try { await _sbHub.UnsubscribeAsync(_sbHubOwnerId); } catch { }
 
                 // Важно: дожидаемся корректного снятия SqlDependency/ServiceBroker диалогов.
                 await _sbController.DisposeAsync();
