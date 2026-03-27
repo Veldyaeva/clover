@@ -1,4 +1,4 @@
-using DevExpress.CodeParser;
+﻿using DevExpress.CodeParser;
 using DevExpress.Data;
 using DevExpress.Utils;
 using DevExpress.XtraBars.Docking2010;
@@ -58,6 +58,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private readonly IKnitterWorkSpaceService _workSpaceService;
         private readonly ILogger _logger = new FileLogger();
         private const string LoggerContext = "KnitterWorkSpace";
+        private static readonly TimeSpan PlanBrokerSelfMute = TimeSpan.FromSeconds(2);
 
         /// <summary>
         /// Сервис для работы с ServiceBroker.
@@ -84,6 +85,30 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         public bool UseSchemaInListenName => true;
 
         public IReadOnlyCollection<string> IgnoredTables => _ignoredServiceBrokerTables;
+        private void InitServiceBrokerIgnoredTables()
+        {
+            _ignoredServiceBrokerTables.UnionWith(new[]
+            {
+                // GetPlanZagrVyazNorm_ByTab3 traverses broad reference/view dependencies.
+                // Keep broker focused on operational plan/shift data and ignore static/reference sources.
+                "dbo.fio",
+                "dbo.gr_rab_dn",
+                "dbo.knitMachineArea",
+                "dbo.knitMachineAreaEmp",
+                "dbo.knitMachineList",
+                "dbo.matrix_class",
+                "dbo.norm_rasz",
+                "dbo.owenDeviceParam",
+                "dbo.plan_sezon_zad",
+                "dbo.podr_vyaz",
+                "dbo.proizv_modify_zc_history",
+                "dbo.raskr_zeh_vyaz",
+                "dbo.spOborudShv",
+                "dbo.tab_n",
+                "dbo.tabel_sp",
+                "dbo.v_nazn_akt"
+            });
+        }
         /// <summary>
         /// Источник данных, к которому привязан GridControl.
         /// </summary>
@@ -199,6 +224,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 IKnitterRepository repo = new KnitterRepository(dbHelper);
                 _orchestrator = new KnitterOrchestrator(repo);
                 _workSpaceService = new KnitterWorkSpaceService(repo, _logger);
+                InitServiceBrokerIgnoredTables();
                 _planFocusService = new KnitterPlanFocusService(this, PlanZagrVyazGridControl, bandedGridView3);
                 _gridVisualService = new KnitterGridVisualService(
                     bandedGridView3,
@@ -263,6 +289,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _sbHub = AppServices.Services.GetRequiredService<IAppServiceBrokerHub>();
                 _orchestrator = orchestrator ?? throw new ArgumentNullException(nameof(orchestrator));
                 _workSpaceService = new KnitterWorkSpaceService(shiftWorkflowGateway ?? throw new ArgumentNullException(nameof(shiftWorkflowGateway)), _logger);
+                InitServiceBrokerIgnoredTables();
                 _planFocusService = new KnitterPlanFocusService(this, PlanZagrVyazGridControl, bandedGridView3);
                 _gridVisualService = new KnitterGridVisualService(
                     bandedGridView3,
@@ -1165,6 +1192,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         try
                         {
                             // Факт меньше или равен запланированному — mode = 1 c qtyFact
+                            _sbController.MuteTable("dbo.planZagrVyaz", PlanBrokerSelfMute);
                             newIds = await _orchestrator.SplitPzvByFactAsync(currentRow.pzvID, qty);
                             Debug.WriteLine(string.Join(", ", newIds.Select(x => $"{x.Kind}:{x.NewPzvId}")));
                         }
@@ -1282,6 +1310,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             try
             {
+                _sbController.MuteTable("dbo.planZagrVyaz", PlanBrokerSelfMute);
                 var updated = await updateFunc(row.pzvID);
                 var newValue = getDate(updated) ?? getDate(row);
                 var oldValue = getDate(row);
@@ -1394,7 +1423,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             // 1) Сначала отменяем слушание/лупы
             try { _sbCts?.Cancel(); } catch { }
-            try { await _sbHub.UnsubscribeAsync(_sbHubOwnerId); } catch { }
 
             // 2) И гарантированно дожидаемся корректной отписки/END CONVERSATION
             try
@@ -2201,9 +2229,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _sbService = new ServiceBrokerService(dbHelper);
             }
 
-            var list = await _sbService.GetObjectListForServiceBroker(objectName, ct);
-            LogSuccess($"Загружена listen-информация: object={objectName}, rows={list?.Count ?? 0}.", nameof(LoadListenInfoByObjectNameAsync));
-            return list;
+            return await _sbService.GetObjectListForServiceBroker(objectName, ct);
         }
 
         /// <summary>
@@ -2212,19 +2238,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         public async Task InitServiceBrokerAsync(CancellationToken ct)
         {
             LogSuccess($"Инициализация ServiceBroker: objects={string.Join(", ", ServiceBrokerObjects)}.", nameof(InitServiceBrokerAsync));
-            await _sbController.InitAsync(ct, startBrokers: false);
+            await _sbController.InitAsync(ct, _sbHub, _sbHubOwnerId, startBrokers: false);
 
-            var tableFields = _sbController.Helper?.GetUnionFieldsByTableSnapshot()
-                              ?? new Dictionary<string, IReadOnlyCollection<string>>();
-            await _sbHub.SubscribeAsync(
-                ownerId: _sbHubOwnerId,
-                ownerName: ServiceBrokerFormName,
-                tableFields: tableFields,
-                onTableChangedAsync: async (table, fields) =>
-                    await InvokeOnUiAsync(async () => await UpdateDataInFormAsync(table, fields)),
-                ct: ct);
-
-            var tables = tableFields.Keys;
+            var tables = _sbController.Helper?.GetListeningTables() ?? Array.Empty<string>();
             LogSuccess($"ServiceBroker подписан на таблицы: {string.Join(", ", tables)}.", nameof(InitServiceBrokerAsync));
         }
 
@@ -2235,15 +2251,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
-                LogSuccess($"Обновление формы по уведомлению: table={tableName}, fields={fieldsChangedCsv}.", nameof(UpdateDataInFormAsync));
-
                 await _sbController.HandleUpdateAsync(tableName, fieldsChangedCsv ?? string.Empty);
-
-                if (_sbController.Coordinator != null)
-                {
-                    var stats = _sbController.Coordinator.GetStatistics();
-                    LogSuccess($"Статистика координатора обновлений: Pending={stats.PendingCount}, InFlight={stats.InFlightCount}, TotalRequests={stats.TotalRequests}, TotalExecutions={stats.TotalExecutions}, CascadePreventions={stats.CascadePreventions}.", nameof(UpdateDataInFormAsync));
-                }
             }
             catch (Exception ex)
             {
