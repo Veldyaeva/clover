@@ -682,13 +682,13 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customLabel1
             // 
-            customLabel1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            customLabel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             customLabel1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabel1.Appearance.Options.UseFont = true;
             customLabel1.Appearance.Options.UseTextOptions = true;
             customLabel1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            customLabel1.Location = new System.Drawing.Point(99, 9);
+            customLabel1.Location = new System.Drawing.Point(99, 0);
             customLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel1.Name = "customLabel1";
             customLabel1.Size = new System.Drawing.Size(90, 16);
@@ -698,13 +698,13 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customLabel2
             // 
-            customLabel2.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            customLabel2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             customLabel2.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabel2.Appearance.Options.UseFont = true;
             customLabel2.Appearance.Options.UseTextOptions = true;
             customLabel2.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel2.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            customLabel2.Location = new System.Drawing.Point(104, 44);
+            customLabel2.Location = new System.Drawing.Point(104, 35);
             customLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new System.Drawing.Size(85, 16);
@@ -728,13 +728,13 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customLabel3
             // 
-            customLabel3.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            customLabel3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             customLabel3.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabel3.Appearance.Options.UseFont = true;
             customLabel3.Appearance.Options.UseTextOptions = true;
             customLabel3.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel3.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            customLabel3.Location = new System.Drawing.Point(82, 79);
+            customLabel3.Location = new System.Drawing.Point(82, 70);
             customLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel3.Name = "customLabel3";
             customLabel3.Size = new System.Drawing.Size(107, 16);
@@ -823,13 +823,13 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customLabelNewLogin
             // 
-            customLabelNewLogin.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            customLabelNewLogin.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             customLabelNewLogin.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabelNewLogin.Appearance.Options.UseFont = true;
             customLabelNewLogin.Appearance.Options.UseTextOptions = true;
             customLabelNewLogin.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelNewLogin.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            customLabelNewLogin.Location = new System.Drawing.Point(113, 9);
+            customLabelNewLogin.Location = new System.Drawing.Point(113, 0);
             customLabelNewLogin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelNewLogin.Name = "customLabelNewLogin";
             customLabelNewLogin.Size = new System.Drawing.Size(76, 16);
@@ -839,13 +839,13 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customLabelPassword
             // 
-            customLabelPassword.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            customLabelPassword.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             customLabelPassword.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabelPassword.Appearance.Options.UseFont = true;
             customLabelPassword.Appearance.Options.UseTextOptions = true;
             customLabelPassword.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelPassword.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            customLabelPassword.Location = new System.Drawing.Point(145, 44);
+            customLabelPassword.Location = new System.Drawing.Point(145, 35);
             customLabelPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelPassword.Name = "customLabelPassword";
             customLabelPassword.Size = new System.Drawing.Size(44, 16);
