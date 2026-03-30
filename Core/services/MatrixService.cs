@@ -205,5 +205,20 @@ namespace SewingProduction.Core.Services
         //}
         #endregion
 
+        public async Task<string> GetFileEskizNN(string nn)
+        {
+            try
+            {
+                return @"h:\proizv\eskiz\"+nn+".jpg";
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetFileEskizNN");
+                return null;
+            }
+
+        }
+
+
     }
 }

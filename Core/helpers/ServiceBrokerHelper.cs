@@ -124,7 +124,7 @@ namespace SewingProduction.Core.helpers
         /// - построит индекс
         /// - запустит брокеры на общий (объединенный) список таблиц/полей
         /// </summary>
-        public async Task InitAndStartAsync(IEnumerable<string> objectNames, CancellationToken ct)
+        public async Task InitAndStartAsync(IEnumerable<string> objectNames, CancellationToken ct, bool startBrokers = true)
         {
             if (objectNames == null) throw new ArgumentNullException(nameof(objectNames));
 
@@ -171,11 +171,20 @@ namespace SewingProduction.Core.helpers
             RebuildIndex();
             Debug.WriteLine(
                 $"[ServiceBrokerHelper] Rebuild completed: tables={_unionFieldsByTable.Count}, deps={_depsByTable.Count}, objects={_sourcesByObject.Count}");
-            StartAllBrokers();
+            if (startBrokers)
+            {
+                StartAllBrokers();
+                // Регистрируем остановку всех брокеров при отмене токена
+                _stopReg = ct.Register(() => StopAllBrokers());
+            }
+        }
 
-            // Регистрируем остановку всех брокеров при отмене токена
-            // ct.Register(() => StopAllBrokers());
-            _stopReg = ct.Register(() => StopAllBrokers());
+        public IReadOnlyDictionary<string, IReadOnlyCollection<string>> GetUnionFieldsByTableSnapshot()
+        {
+            return _unionFieldsByTable.ToDictionary(
+                kv => kv.Key,
+                kv => (IReadOnlyCollection<string>)kv.Value.ToArray(),
+                _cmp);
         }
         private Task Broker_Changed(string table, string? fieldsCsv)
         {

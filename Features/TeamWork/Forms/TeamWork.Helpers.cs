@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -436,25 +436,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                int rowHandle = ANNgridView.LocateByValue("AnnID", annId);
-
-                if (rowHandle >= 0)
+                if (TryFocusAndRefreshRowByAnnId(ANNgridView, annId))
                 {
-                    ANNgridView.BeginUpdate();
-                    try
-                    {
-                        ANNgridView.FocusedRowHandle = rowHandle;
-                        ANNgridView.MakeRowVisible(rowHandle);
-                        ANNgridView.RefreshRow(rowHandle);
-                    }
-                    finally
-                    {
-                        ANNgridView.EndUpdate();
-                    }
-
                     // Загружаем связанные данные для восстановленной записи
                     await LoadRelatedData(annId);
-                    await _logger.LogEventAsync($"Фокус восстановлен на AnnID: {annId}, RowHandle: {rowHandle}", "RestoreFocus");
+                    await _logger.LogEventAsync($"Фокус восстановлен на AnnID: {annId}", "RestoreFocus");
                     return true;
                 }
                 else
@@ -515,7 +501,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         #region Загрузка данных LoadGridControlData
 
-        private async void LoadGridImage(PictureBox pictureBox, int? annId = null, int? kod = null)
+        private async Task LoadGridImage(PictureBox pictureBox, int? annId = null, int? kod = null)
         {
             string imagePath = null;
             try
@@ -542,7 +528,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// <param name="grid">GridControl, в котором нужно применить фильтр</param>
         /// <param name="source">источник данных</param>
         /// <param name="_annId">Идентификатор разделения труда</param>
-        private async void LoadGridControlData(GridControl grid, BindingSource source, int _annId)
+        private async Task LoadGridControlData(GridControl grid, BindingSource source, int _annId)
         {
             try
             {
@@ -832,7 +818,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                         _openAdvanceForms.RemoveAll(form => form == null || form.IsDisposed);
                     }
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    _ = _logger?.LogErrorAsync(ex, "OpenAdvanceFormNonModal: ошибка при очистке списка форм после ObjectDisposedException");
+                }
             }
             catch (InvalidOperationException ioe)
             {
@@ -997,7 +986,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
                 // Если расширенная скрыта — не трогаем состояние обычной, оно может управляться режимом
             }
-            catch { }
+            catch (Exception ex)
+            {
+                _ = _logger?.LogErrorAsync(ex, "EnforceEditButtonsExclusivity");
+            }
         }
 
     }

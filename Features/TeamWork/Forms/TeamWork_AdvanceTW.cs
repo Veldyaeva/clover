@@ -82,7 +82,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 gridControlRaskr?.RefreshDataSource();
                 gridControlKont?.RefreshDataSource();
             }
-            catch { }
+            catch (Exception ex)
+            {
+                LogSuppressedException("RefreshAllGridsForService", ex);
+            }
         }
         public async Task ShowStatusForService(string message, int delayMs)
         {
@@ -90,6 +93,10 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
         public void HighlightControlForService(Control control) => HighlightControl(control);
         public void UnhighlightControlForService(Control control) => UnhighlightControl(control);
+        private void LogSuppressedException(string context, Exception ex = null)
+        {
+            _ = _logger.LogErrorAsync(ex ?? new Exception("Suppressed exception"), $"Suppressed: {context}");
+        }
         private static List<FioModel> _cachedFioData;
         private bool _isCustomEditFormOpen = false;
         private bool _okPressed = false;
@@ -166,102 +173,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         public int? SourceAnnIdToCopyDetailsFrom => _sourceAnnIdToCopyDetailsFrom;
         public string CurrentArticul => (_currentAnnData?.Articul ?? CreatedAnn?.Articul) ?? string.Empty;
 
-        #region Утилиты: CloneUtils
-        public static class CloneUtils
-        {
-            private sealed class PropertyCache
-            {
-                public PropertyInfo Id { get; set; }
-                public PropertyInfo AnnId { get; set; }
-                public PropertyInfo IsNew { get; set; }
-                public PropertyInfo IsModified { get; set; }
-            }
-
-            private static readonly ConcurrentDictionary<(Type Type, string IdNameKey), PropertyCache> _propCache
-                = new ConcurrentDictionary<(Type, string), PropertyCache>();
-
-            private static PropertyCache ResolveProperties(Type type, string idFieldName)
-            {
-                var key = (type, idFieldName ?? string.Empty);
-                return _propCache.GetOrAdd(key, _ =>
-                {
-                    var flags = BindingFlags.Public | BindingFlags.Instance;
-                    var cache = new PropertyCache();
-
-                    // Id property (explicit name first, then alternatives)
-                    if (!string.IsNullOrEmpty(idFieldName))
-                    {
-                        cache.Id = type.GetProperty(idFieldName, flags);
-                    }
-                    if (cache.Id == null)
-                    {
-                        var alternativeNames = new[] { "nrID", "nrId", "id", "nkId", "NrID", "Id", "NkId" };
-                        foreach (var alt in alternativeNames)
-                        {
-                            var altProp = type.GetProperty(alt, flags);
-                            if (altProp != null)
-                            {
-                                cache.Id = altProp;
-                                break;
-                            }
-                        }
-                    }
-
-                    // Устанавливаем новый AnnId
-                    cache.AnnId = type.GetProperty("AnnId", flags) ?? type.GetProperty("annId", flags);
-
-                    // Устанавливаем флаги
-                    cache.IsNew = type.GetProperty("IsNew", flags);
-                    cache.IsModified = type.GetProperty("IsModified", flags);
-
-                    return cache;
-                });
-            }
-
-            public static List<T> CloneList<T>(IEnumerable<T> source, int newAnnId, string idFieldName, bool markAsNew = true)
-        where T : ICloneable
-            {
-                var list = new List<T>();
-                var props = ResolveProperties(typeof(T), idFieldName);
-                foreach (var item in source)
-                {
-                    var clone = (T)item.Clone();
-
-                    // Принудительно сбрасываем ID в 0
-                    props.Id?.SetValue(clone, 0);
-
-                    // Устанавливаем новый AnnId
-                    props.AnnId?.SetValue(clone, newAnnId);
-
-                    // Устанавливаем флаги
-                    props.IsNew?.SetValue(clone, markAsNew);
-                    props.IsModified?.SetValue(clone, markAsNew);
-
-                    list.Add(clone);
-                }
-                return list;
-            }
-
-            public static BindingList<T> DeepCloneBindingList<T>(IEnumerable<T> sourceList) where T : class, ICloneable
-            {
-                if (sourceList == null) return new BindingList<T>();
-                var newList = new BindingList<T>();
-                foreach (var item in sourceList)
-                {
-                    if (item is T clonedItem)
-                        newList.Add(clonedItem.Clone() as T);
-                }
-                return newList;
-            }
-        }
-        #endregion
-
-        #region Оригинальные снимки коллекций
-        private BindingList<NormRasz> _originalNormRaszList;
-        private BindingList<NormRask> _originalNormRaskList;
-        private BindingList<NormKont> _originalNormKontList;
-        #endregion
-
         #region Конструкторы и базовая настройка
         public TeamWork_AdvanceTW() { InitializeComponent(); }
         /// <summary>
@@ -326,7 +237,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (layoutControlGroup10 != null)
                     layoutControlGroup10.CustomButtonClick += LayoutControlGroup10_CustomButtonClick;
             }
-            catch { }
+            catch (Exception ex)
+            {
+                LogSuppressedException("Subscribe header button click handlers", ex);
+            }
         }
         #endregion
 
@@ -376,7 +290,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                LogSuppressedException("InitHeaderButtonTags", ex);
+            }
         }
 
         // Обработчик кликов по header-buttons: блок общих действий (undo/save/save-as)
@@ -1003,7 +920,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                         }
                         finally
                         {
-                            try { gridViewRasz.EndDataUpdate(); } catch { }
+                            try { gridViewRasz.EndDataUpdate(); }
+                            catch (Exception ex) { LogSuppressedException("AddNewRaszOperation: EndDataUpdate", ex); }
                         }
 
                         // Открываем форму редактирования через небольшую задержку
@@ -1134,7 +1052,17 @@ namespace SewingProduction.Features.TeamWork.Forms
                         _normRaszList,
                         bindingSource1,
                         _logger,
-                        (act) => { try { if (!this.IsDisposed && this.IsHandleCreated) this.BeginInvoke((MethodInvoker)(() => act())); } catch { } }
+                        (act) =>
+                        {
+                            try
+                            {
+                                if (!this.IsDisposed && this.IsHandleCreated) this.BeginInvoke((MethodInvoker)(() => act()));
+                            }
+                            catch (Exception ex)
+                            {
+                                LogSuppressedException("SecondsAggregator.BeginInvoke", ex);
+                            }
+                        }
                     );
                 }
 
@@ -1471,7 +1399,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                     finally
                     {
                         // SafeUpdate сам завершил обновление
-                        try { gridViewKont.EndDataUpdate(); } catch { }
+                        try { gridViewKont.EndDataUpdate(); }
+                        catch (Exception ex) { LogSuppressedException("TeamWork_AdvanceTW_Load: gridViewKont.EndDataUpdate", ex); }
                     }
                 }
                 _hasUnsavedChanges = false;
@@ -1487,7 +1416,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Отписываемся от событий при выходе из формы и очищаем ресурсы DnD
                 this.FormClosed += (s, args) =>
                 {
-                    try { TeamWorkBuffer.BufferChanged -= OnBufferChanged; } catch { }
+                    try { TeamWorkBuffer.BufferChanged -= OnBufferChanged; }
+                    catch (Exception ex) { LogSuppressedException("FormClosed: unsubscribe TeamWorkBuffer.BufferChanged", ex); }
                     try
                     {
                         if (_raszPopupHandler != null)
@@ -1521,10 +1451,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                             _listChangedHandlersAttached = false;
                         }
                     }
-                    catch { }
-                    try { _raszOpsController?.Detach(); } catch { }
+                    catch (Exception ex) { LogSuppressedException("FormClosed: detach handlers", ex); }
+                    try { _raszOpsController?.Detach(); }
+                    catch (Exception ex) { LogSuppressedException("FormClosed: _raszOpsController.Detach", ex); }
                     try { _presenter?.Detach(); }
-                    catch { }
+                    catch (Exception ex) { LogSuppressedException("FormClosed: _presenter.Detach", ex); }
                     finally
                     {
                         // Сброс внутренних флагов и состояния DnD/последнего выбора
@@ -1763,9 +1694,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                         if (gridViewRaskr != null && gridViewRaskr.OptionsBehavior.EditingMode == GridEditingMode.Inplace)
                             gridViewRaskr.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
 
-                        try { _gridHelper.SaveGridViewSettings(gridViewRaskr, "AdvanceTW_gridViewRaskrLayout.xml"); } catch { }
-                        try { _gridHelper.SaveGridViewSettings(gridViewKont, "AdvanceTW_gridViewKontLayout.xml"); } catch { }
-                        try { _gridHelper.SaveGridViewSettings(gridViewRasz, "AdvanceTW_gridViewRaszLayout.xml"); } catch { }
+                        try { _gridHelper.SaveGridViewSettings(gridViewRaskr, "AdvanceTW_gridViewRaskrLayout.xml"); }
+                        catch (Exception ex) { LogSuppressedException("FormClosing: save gridViewRaskr settings", ex); }
+                        try { _gridHelper.SaveGridViewSettings(gridViewKont, "AdvanceTW_gridViewKontLayout.xml"); }
+                        catch (Exception ex) { LogSuppressedException("FormClosing: save gridViewKont settings", ex); }
+                        try { _gridHelper.SaveGridViewSettings(gridViewRasz, "AdvanceTW_gridViewRaszLayout.xml"); }
+                        catch (Exception ex) { LogSuppressedException("FormClosing: save gridViewRasz settings", ex); }
                     });
                 }
                 catch (Exception ex)
@@ -1790,14 +1724,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
                     else
                     {
-                        PerformCleanupOnCancel();
+                        await PerformCleanupOnCancel();
                     }
                 }
                 else
                 {
                     if (IsDraftCreationMode())
                     {
-                        PerformCleanupOnCancel();
+                        await PerformCleanupOnCancel();
                     }
                 }
             }
@@ -1809,7 +1743,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             return _mode == (int)Mode.NewWorkDivision;
         }
 
-        private async void PerformCleanupOnCancel()
+        private async Task PerformCleanupOnCancel()
         {
             try
             {
@@ -1987,7 +1921,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Гарантируем разворот всех групп после настройки
                 ExpandAllRaszGroups();
             }
-            catch { }
+            catch (Exception ex)
+            {
+                LogSuppressedException("EnableRaszGroupingAndExpand", ex);
+            }
         }
 
         private void ExpandAllRaszGroups()
@@ -1999,7 +1936,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 try { gridViewRasz.ExpandAllGroups(); }
                 finally { gridViewRasz.EndUpdate(); }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                LogSuppressedException("ExpandAllRaszGroups", ex);
+            }
         }
 
         // Автопрокрутка — используем встроенную в DevExpress (удалён самописный таймер)
@@ -2054,7 +1994,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                         row.IsBeingAdded = false; // подтверждено сохранением
                     }
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    LogSuppressedException("gridViewRasz_EditFormHidden: Update branch", ex);
+                }
             }
             _originalNormRaszDataBeforeEdit = null; // Убедимся, что очищено после любого закрытия формы редактирования
         }
@@ -2500,7 +2443,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
                 finally { }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                LogSuppressedException("SaveChangesWithoutClose", ex);
+            }
         }
 
         // Сохранение данных без закрытия формы
@@ -2862,206 +2808,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
         #endregion
 
-        private async Task InvokeAsync(Action action)
-        {
-            if (this.InvokeRequired)
-            {
-                var tcs = new TaskCompletionSource<object>();
-                try
-                {
-                    this.BeginInvoke((MethodInvoker)(() =>
-                    {
-                        try
-                        {
-                            action();
-                            tcs.SetResult(null);
-                        }
-                        catch (Exception ex)
-                        {
-                            tcs.SetException(ex);
-                        }
-                    }));
-                }
-                catch (Exception ex)
-                {
-                    tcs.SetException(ex);
-                }
-                await tcs.Task.ConfigureAwait(true);
-            }
-            else
-            {
-                action();
-            }
-        }
-        #region Валидация формы и статусная строка
-        private bool ValidateForm()
-        {
-            bool isValid = true;
-            statusLabel.Text = ""; // Очищаем статус
-            errorProvider1.Clear(); // Очищаем все старые ошибки
-
-            // Проверка поля Артикул
-            if (string.IsNullOrWhiteSpace(nameTextBox.Text))
-            {
-                errorProvider1.SetError(nameTextBox, "Введите артикул.");
-                if (isValid)
-                    statusLabel.Text = "Ошибка: Поле 'Артикул' обязательно для заполнения.";
-                isValid = false;
-            }
-
-            return isValid;
-        }
-        private async Task ShowStatusMessage(string message, int delayMs = 3000, Color? color = null)
-        {
-            statusLabel.Text = message;
-
-            if (color.HasValue)
-            {
-                var originalColor = statusLabel.ForeColor;
-                statusLabel.ForeColor = color.Value;
-
-                await Task.Delay(delayMs);
-                statusLabel.Text = "";
-                statusLabel.ForeColor = originalColor;
-            }
-            else
-            {
-                await Task.Delay(delayMs);
-                statusLabel.Text = "";
-            }
-        }
-        #endregion
-
-        private void OnDataChanged(object sender, ListChangedEventArgs e)
-        {
-            // Помечаем изменения только если не идёт начальная загрузка
-            if (!_isInitialLoading && (e.ListChangedType != ListChangedType.Reset || _normRaszList.Count > 0 || _normRaskList.Count > 0 || _normKontList.Count > 0))
-            {
-                _hasUnsavedChanges = true;
-            }
-        }
-
-        /// <summary>
-        /// Обновляет отображение буфера на основе глобального или локального состояния
-        /// </summary>
-        #region Буфер: отображение и события
-        private void UpdateBufferDisplay()
-        {
-            try
-            {
-                if (TeamWorkBuffer.HasData)
-                {
-                    // Проверяем, является ли это комплектом (Kit режим)
-                    if (TeamWorkBuffer.BufferIds?.Count > 1)
-                    {
-                        // Форматируем отображение для комплекта
-                        var bufferText = TeamWorkBuffer.BufferText;
-                        if (!string.IsNullOrEmpty(bufferText))
-                        {
-                            // Разделяем части комплекта по разделителю
-                            var parts = bufferText.Split(new string[] { "----------------------------" }, StringSplitOptions.RemoveEmptyEntries);
-
-                            if (parts.Length >= 2)
-                            {
-                                var formattedText = new System.Text.StringBuilder();
-                                formattedText.AppendLine("📦 КОМПЛЕКТ (2 части):");
-                                formattedText.AppendLine();
-
-                                formattedText.AppendLine("🔸 Часть 1:");
-                                formattedText.AppendLine(parts[0].Trim());
-                                formattedText.AppendLine();
-
-                                formattedText.AppendLine("🔸 Часть 2:");
-                                formattedText.Append(parts[1].Trim());
-
-                                textBoxBuffer.Text = formattedText.ToString();
-                            }
-                            else
-                            {
-                                // Если разделитель не найден, показываем как есть
-                                textBoxBuffer.Text = "📦 КОМПЛЕКТ:\n\n" + bufferText;
-                            }
-                        }
-                        else
-                        {
-                            textBoxBuffer.Text = "📦 КОМПЛЕКТ (2 части)";
-                        }
-
-                        // Обновляем текст кнопки для комплекта
-                        buffer.Text = "Вставить комплект из буфера:";
-                    }
-                    else
-                    {
-                        // Обычный режим (одна запись)
-                        textBoxBuffer.Text = TeamWorkBuffer.BufferText;
-                        buffer.Text = "Вставить из буфера:";
-                    }
-                }
-                else if (_bufferWorkDivision > 0)
-                {
-                    // Оставляем существующую логику для обратной совместимости
-                    // Текст будет установлен в основном методе загрузки
-                    buffer.Text = "Вставить из буфера:";
-                }
-                else
-                {
-                    textBoxBuffer.Text = "Буфер пуст";
-                    buffer.Text = "Вставить из буфера:";
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogErrorAsync(ex, "Ошибка при обновлении отображения буфера");
-            }
-        }
-
-        /// <summary>
-        /// Обработчик события изменения глобального буфера
-        /// </summary>
-        private void OnBufferChanged(object sender, BufferChangedEventArgs e)
-        {
-            try
-            {
-                this.Invoke((MethodInvoker)(() =>
-                {
-                    UpdateBufferDisplay();
-                }));
-            }
-            catch (Exception ex)
-            {
-                _logger.LogErrorAsync(ex, "Ошибка при обработке изменения буфера");
-            }
-        }
-        #endregion
-
-        private void GridView_RowStyle(object sender, RowStyleEventArgs e)
-        {
-            GridView view = sender as GridView;
-            if (view == null || e.RowHandle < 0)
-                return;
-
-            object row = view.GetRow(e.RowHandle);
-
-            if (row is INewable newableRow && newableRow.IsNew)
-            {
-                e.Appearance.BackColor = Color.LightGreen;
-                e.HighPriority = true;
-                return;
-            }
-
-            try
-            {
-                if (row is IModifiable modifiable && modifiable.IsModified)
-                {
-                    e.Appearance.BackColor = Color.LightYellow;
-                    e.HighPriority = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogErrorAsync(ex, $"Ошибка в GridView_RowStyle при проверке IsModified для строки {e.RowHandle}").ConfigureAwait(false);
-            }
-        }
         private void btnCancel_Click(object sender, EventArgs e)
         {
             if (_originalAnnData != null)
@@ -3311,7 +3057,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
             finally
             {
-                try { gridViewRasz.EndDataUpdate(); } catch { }
+                try { gridViewRasz.EndDataUpdate(); }
+                catch (Exception ex) { LogSuppressedException("ImportFromBufferPresenterAsync: gridViewRasz.EndDataUpdate", ex); }
             }
             await ShowStatusMessage("Операции из буфера добавлены для комплекта");
         }
@@ -3531,8 +3278,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                     try
                     {
                         // Обновляем и раскрываем группы, чтобы строка стала видимой
-                        try { gridViewRasz.RefreshData(); } catch { }
-                        try { ExpandAllRaszGroups(); } catch { }
+                        try { gridViewRasz.RefreshData(); }
+                        catch (Exception ex) { LogSuppressedException("SetFocusToOperation: gridViewRasz.RefreshData", ex); }
+                        try { ExpandAllRaszGroups(); }
+                        catch (Exception ex) { LogSuppressedException("SetFocusToOperation: ExpandAllRaszGroups", ex); }
 
                         int rowHandle = DevExpress.XtraGrid.GridControl.InvalidRowHandle;
 
@@ -3544,16 +3293,18 @@ namespace SewingProduction.Features.TeamWork.Forms
                                 rowHandle = gridViewRasz.LocateByValue(nameof(NormRasz.nrID), operation.nrID);
                             }
                         }
-                        catch { }
+                        catch (Exception ex) { LogSuppressedException("SetFocusToOperation: LocateByValue nrID", ex); }
 
                         // 2) Иначе используем индекс из BindingSource (ListSource для GridView)
                         if (!gridViewRasz.IsValidRowHandle(rowHandle))
                         {
                             int listSourceIndex = -1;
-                            try { listSourceIndex = _normRaszBindingSource != null ? _normRaszBindingSource.IndexOf(operation) : -1; } catch { }
+                            try { listSourceIndex = _normRaszBindingSource != null ? _normRaszBindingSource.IndexOf(operation) : -1; }
+                            catch (Exception ex) { LogSuppressedException("SetFocusToOperation: BindingSource.IndexOf", ex); }
                             if (listSourceIndex >= 0)
                             {
-                                try { rowHandle = gridViewRasz.GetRowHandle(listSourceIndex); } catch { }
+                                try { rowHandle = gridViewRasz.GetRowHandle(listSourceIndex); }
+                                catch (Exception ex) { LogSuppressedException("SetFocusToOperation: GetRowHandle", ex); }
                             }
                         }
 
@@ -3573,7 +3324,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                                     }
                                 }
                             }
-                            catch { }
+                            catch (Exception ex) { LogSuppressedException("SetFocusToOperation: fallback scan", ex); }
                         }
 
                         if (gridViewRasz.IsValidRowHandle(rowHandle))
@@ -3581,7 +3332,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                             _uiService?.RestoreFocusRow(gridViewRasz, rowHandle);
                         }
                     }
-                    catch { }
+                    catch (Exception ex) { LogSuppressedException("SetFocusToOperation: BeginInvoke body", ex); }
                 }));
             }
             catch (Exception ex)
@@ -3607,7 +3358,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                     SetFocusToOperation(focusOperation);
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                LogSuppressedException("ApplyPostStructureUi", ex);
+            }
         }
         private void FinalizeRaszBatch(NormRasz focusOperation = null, bool clearSelection = false)
         {
@@ -3617,7 +3371,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 TWGridHelper.sortGridView(gridViewRasz);
                 ApplyPostStructureUi(focusOperation, clearSelection);
             }
-            catch { }
+            catch (Exception ex)
+            {
+                LogSuppressedException("FinalizeRaszBatch", ex);
+            }
         }
 
         /// <summary>
@@ -3760,7 +3517,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                             }
                             finally
                             {
-                                try { gridViewRasz.EndDataUpdate(); } catch { }
+                                try { gridViewRasz.EndDataUpdate(); }
+                                catch (Exception ex) { LogSuppressedException("AddSuboperation: EndDataUpdate", ex); }
                             }
 
                             gridViewRasz.GridControl.BeginInvoke(new Action(() =>
@@ -3777,57 +3535,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             };
         }
         #endregion
-
-        private ITeamWorkPresenter _presenter;
-
-        System.Windows.Forms.Control ITeamWorkView.AsControl => this;
-        void ITeamWorkView.BindRasz(BindingList<NormRasz> rasz, BindingSource raszBindingSource) { gridControlRasz.DataSource = raszBindingSource; }
-        void ITeamWorkView.BindRask(BindingList<NormRask> rask, BindingSource raskBindingSource) { gridControlRaskr.DataSource = raskBindingSource; }
-        void ITeamWorkView.BindKont(BindingList<NormKont> kont, BindingSource kontBindingSource) { gridControlKont.DataSource = kontBindingSource; }
-        void ITeamWorkView.BindAnn(ArtNormN ann, BindingSource annBindingSource) { bindingSource1.DataSource = ann; }
-        void ITeamWorkView.RefreshAll() { try { gridControlRasz.RefreshDataSource(); gridControlRaskr.RefreshDataSource(); gridControlKont.RefreshDataSource(); } catch { } }
-        void ITeamWorkView.ShowInfo(string message) { try { _uiService?.ShowStatus(message); } catch { } }
-        void ITeamWorkView.ShowError(string message) { try { MessageBox.Show(message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); } catch { } }
-
-        // Local adapters to satisfy interfaces until real DI services are provided
-        private sealed class TeamWorkDataServiceAdapter : ITeamWorkDataService
-        {
-            private readonly ArtNormRepository _art;
-            private readonly DbService _db;
-            public TeamWorkDataServiceAdapter(ArtNormRepository art, DbService db) { _art = art; _db = db; }
-            public async Task<ArtNormN> LoadAnnDataAsync(int annId)
-            {
-                return await _art.GetArtNormDataById(annId);
-            }
-            public async Task SaveAnnDataAsync(ArtNormN data)
-            {
-                await _db.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, data);
-            }
-        }
-        private sealed class TeamWorkUIServiceAdapter : ITeamWorkUIService
-        {
-            private readonly TeamWork_AdvanceTW _form;
-            public TeamWorkUIServiceAdapter(TeamWork_AdvanceTW form) { _form = form; }
-            public void RefreshAllGrids() { _form.RefreshAllGridsForService(); }
-            public void HighlightChangedControls() { }
-            public void UpdateFormTitle(string title) { try { _form.Text = title; } catch { } }
-            public void ShowStatus(string message, int delayMs = 3000) { _ = _form.ShowStatusForService(message, delayMs); }
-            public void HighlightControl(Control control, bool on) { if (on) _form.HighlightControlForService(control); else _form.UnhighlightControlForService(control); }
-            public void RestoreFocusRow(GridView view, int rowHandle) { try { if (view.IsValidRowHandle(rowHandle)) { view.FocusedRowHandle = rowHandle; view.MakeRowVisible(rowHandle); } } catch { } }
-        }
-        private sealed class TeamWorkValidationServiceAdapter : ITeamWorkValidationService
-        {
-            public ValidationResult ValidateOperationNumbers(List<NormRasz> operations)
-            {
-                var errors = TeamWorkValidationServiceEx.GetOperationNumberErrors(operations);
-                return (errors == null || errors.Count == 0) ? ValidationResult.Success : new ValidationResult(string.Join("; ", errors));
-            }
-            public bool HasDuplicateNumbers(int n, int n1)
-            {
-                // Basic helper not using context; callers usually pass collection separately
-                return false;
-            }
-        }
 
     }
 }

@@ -75,10 +75,11 @@ namespace SewingProduction
 
             int seasonIndex = GetSeasonIndex(DateTime.Now.Month);
             string seasonFolder = Path.Combine(settingsFolder, $"Season_{seasonIndex}");
-            string eventsFolder = Path.Combine(settingsFolder, "Events", "8.03");
 
-            var imageFiles = IsMarch8EventPeriod(DateTime.Now)
-                ? GetImageFiles(eventsFolder)
+            string eventFolder = GetEventFolder(DateTime.Now, settingsFolder);
+
+            var imageFiles = !string.IsNullOrEmpty(eventFolder)
+                ? GetImageFiles(eventFolder)
                 : new System.Collections.Generic.List<string>();
 
             if (imageFiles.Count == 0)
@@ -108,11 +109,40 @@ namespace SewingProduction
                 }
             }
         }
+        private static string GetEventFolder(DateTime date, string settingsFolder)
+        {
+            if (IsMarch8EventPeriod(date))
+            {
+                return Path.Combine(settingsFolder, "Events", "8.03");
+            }
 
+            if (IsApril1EventPeriod(date))
+            {
+                return Path.Combine(settingsFolder, "Events", "1.04");
+            }
+
+            return null;
+        }
+
+        private static bool IsNewYearEventPeriod(DateTime date)
+        {
+            DateTime eventDate = new DateTime(date.Year, 1, 1);
+            return date.Date >= eventDate.AddDays(-7) && date.Date <= eventDate.AddDays(14);
+        }
+        private static bool IsFeb23EventPeriod(DateTime date)
+        {
+            DateTime eventDate = new DateTime(date.Year, 2, 23);
+            return date.Date >= eventDate.AddDays(-4) && date.Date <= eventDate.AddDays(4);
+        }
         private static bool IsMarch8EventPeriod(DateTime date)
         {
             DateTime eventDate = new DateTime(date.Year, 3, 8);
             return date.Date >= eventDate.AddDays(-4) && date.Date <= eventDate.AddDays(4);
+        }
+        private static bool IsApril1EventPeriod(DateTime date)
+        {
+            DateTime eventDate = new DateTime(date.Year, 4, 1);
+            return date.Date == eventDate.Date;
         }
 
         private static int GetSeasonIndex(int month)

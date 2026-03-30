@@ -17,6 +17,7 @@ namespace SewingProduction.Core.Services
     public class GridSettingsManager : IGridSettingsManager
     {
         private readonly Dictionary<GridView, string> _registeredGrids = new Dictionary<GridView, string>();
+        private readonly Dictionary<Form, HashSet<string>> _loadedSettingsPerForm = new Dictionary<Form, HashSet<string>>();
         private readonly ILogger _logger = new FileLogger();
         private readonly object _lockObject = new object();
         private static GridSettingsManager _instance;
@@ -66,8 +67,12 @@ namespace SewingProduction.Core.Services
                     // Подписываемся на события для автоматического сохранения
                     SubscribeToEvents(gridView);
 
-                    // Загружаем существующие настройки
-                    LoadSettings(gridView, settingsKey);
+                    // Загружаем существующие настройки только один раз для пары (Form, settingsKey).
+                    if (ShouldLoadSettingsForForm(gridView, settingsKey))
+                    {
+                        LoadSettings(gridView, settingsKey);
+                        MarkSettingsLoadedForForm(gridView, settingsKey);
+                    }
 
                     _logger.LogEventAsync($"GridSettingsManager: Включено автоматическое сохранение для '{settingsKey}'", "EnableAutoSettings");
                 }
@@ -389,7 +394,39 @@ namespace SewingProduction.Core.Services
                 {
                     SaveSettings(kvp.Key, kvp.Value);
                 }
+
+                lock (_lockObject)
+                {
+                    _loadedSettingsPerForm.Remove(form);
+                }
             }
+        }
+
+        private bool ShouldLoadSettingsForForm(GridView gridView, string settingsKey)
+        {
+            var form = gridView.GridControl?.FindForm();
+            if (form == null || string.IsNullOrEmpty(settingsKey))
+                return true;
+
+            if (!_loadedSettingsPerForm.TryGetValue(form, out var loadedKeys))
+                return true;
+
+            return !loadedKeys.Contains(settingsKey);
+        }
+
+        private void MarkSettingsLoadedForForm(GridView gridView, string settingsKey)
+        {
+            var form = gridView.GridControl?.FindForm();
+            if (form == null || string.IsNullOrEmpty(settingsKey))
+                return;
+
+            if (!_loadedSettingsPerForm.TryGetValue(form, out var loadedKeys))
+            {
+                loadedKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                _loadedSettingsPerForm[form] = loadedKeys;
+            }
+
+            loadedKeys.Add(settingsKey);
         }
     }
 }

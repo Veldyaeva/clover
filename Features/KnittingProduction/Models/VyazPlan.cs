@@ -1,3 +1,4 @@
+using DevExpress.CodeParser;
 using DevExpress.DataAccess.ConnectionParameters;
 using DevExpress.Spreadsheet.Export;
 using Org.BouncyCastle.Asn1.X509;
@@ -8,6 +9,7 @@ using SewingProduction.Interfaces;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 using System.Security.Cryptography;
 
 namespace SewingProduction.Features.KnittingProduction.Models
@@ -161,7 +163,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public int knitClass { get; set; }
     }
 
-    public class ZadanyListByMachine
+    public class PZVZadanyList
     {
         [NotMapped] public string pszNom { get; set; }
         [NotMapped] public int nom { get; set; }
@@ -176,6 +178,10 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public int SyncSelection { get; set; } = 0;
         [NotMapped] public int Gradacia { get; set; }
         [NotMapped] public int yearPlan { get; set; }
+        [NotMapped] public string kod { get; set; }
+        [NotMapped] public int minNPach { get; set; }
+        [NotMapped] public int maxNPach { get; set; }
+        [NotMapped] public string brig { get; set; }
     }
     public class RzvPachListByNom
     {
@@ -302,6 +308,9 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public int olKodProizv { get; set; }
         [NotMapped] public int olPzvKwsID { get; set; }
         [NotMapped] public int olIdVyazClass { get; set; }
+        [NotMapped] public int olDefect { get; set; }
+        [NotMapped] public string olTextObS { get; set; }
+        [NotMapped] public string olDolgn { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
@@ -455,6 +464,18 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public bool IsModified { get; set; } = false;
         [NotMapped] public bool IsNew { get; set; } = false;
         [NotMapped] public bool IsDeleted { get; set; } = false;
+
+        [NotMapped] public int szTab { get; set; }
+        [NotMapped] public string szFio { get; set; }
+        [NotMapped] public string szDolgn { get; set; }
+        [NotMapped] public decimal szKoefVNV { get; set; }
+        [NotMapped] public decimal szPlanHours { get; set; }
+        [NotMapped] public decimal szNaznHours { get; set; }
+        [NotMapped] public decimal szPlanNaznPercent { get; set; }
+        [NotMapped] public decimal szHoursToDo { get; set; }
+        [NotMapped] public decimal szHoursDone { get; set; }
+        [NotMapped] public decimal szShiftVNV { get; set; }
+        [NotMapped] public string szDTab { get; set; }
     }
     public class KnitWorkingShiftSmen
     {
@@ -648,4 +669,13 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public int problChas { get; set; }
         [NotMapped] public string problChasStr { get; set; }
     }
+
+    public class PlanTotalQuantityByArticul
+    {
+        [NotMapped] public string Kod { get; set; }
+        [NotMapped] public string Articul { get; set; }
+        [NotMapped] public int Kol { get; set; }
+        [NotMapped] public DateTime? DataPlan { get; set; }
+    }
+    
 }

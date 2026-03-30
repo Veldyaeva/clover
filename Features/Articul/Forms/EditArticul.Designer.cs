@@ -195,7 +195,6 @@ namespace SewingProduction.Features.Articul
             customTextBoxKod.ErrorMessage = "Код должен состоять из 8 символов";
             customTextBoxKod.ErrorShape = CustomTextBox.ErrorIconShape.Triangle;
             customTextBoxKod.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxKod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxKod.Location = new System.Drawing.Point(240, 71);
             customTextBoxKod.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxKod.MaxLength = 8;
@@ -211,7 +210,6 @@ namespace SewingProduction.Features.Articul
             customTextBoxPo.ErrorColor = System.Drawing.Color.Red;
             customTextBoxPo.ErrorMessage = null;
             customTextBoxPo.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxPo.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxPo.Location = new System.Drawing.Point(476, 71);
             customTextBoxPo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxPo.MaxLength = 1;
@@ -227,7 +225,6 @@ namespace SewingProduction.Features.Articul
             customTextBoxKodFurn.ErrorColor = System.Drawing.Color.Red;
             customTextBoxKodFurn.ErrorMessage = null;
             customTextBoxKodFurn.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxKodFurn.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxKodFurn.Location = new System.Drawing.Point(240, 309);
             customTextBoxKodFurn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxKodFurn.Name = "customTextBoxKodFurn";
@@ -243,7 +240,6 @@ namespace SewingProduction.Features.Articul
             customTextBoxNameFurn.ErrorColor = System.Drawing.Color.Red;
             customTextBoxNameFurn.ErrorMessage = null;
             customTextBoxNameFurn.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxNameFurn.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxNameFurn.Location = new System.Drawing.Point(240, 343);
             customTextBoxNameFurn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxNameFurn.Name = "customTextBoxNameFurn";
@@ -259,7 +255,6 @@ namespace SewingProduction.Features.Articul
             customTextBoxDlin.ErrorColor = System.Drawing.Color.Red;
             customTextBoxDlin.ErrorMessage = null;
             customTextBoxDlin.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxDlin.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxDlin.Location = new System.Drawing.Point(240, 377);
             customTextBoxDlin.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxDlin.Name = "customTextBoxDlin";
@@ -274,7 +269,6 @@ namespace SewingProduction.Features.Articul
             customTextBoxTimePlet.ErrorColor = System.Drawing.Color.Red;
             customTextBoxTimePlet.ErrorMessage = null;
             customTextBoxTimePlet.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxTimePlet.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxTimePlet.Location = new System.Drawing.Point(240, 411);
             customTextBoxTimePlet.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxTimePlet.Name = "customTextBoxTimePlet";
@@ -289,7 +283,6 @@ namespace SewingProduction.Features.Articul
             customTextBoxNormP.ErrorColor = System.Drawing.Color.Red;
             customTextBoxNormP.ErrorMessage = null;
             customTextBoxNormP.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxNormP.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxNormP.Location = new System.Drawing.Point(240, 445);
             customTextBoxNormP.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxNormP.Name = "customTextBoxNormP";
@@ -298,91 +291,109 @@ namespace SewingProduction.Features.Articul
             // 
             // customLabelKodFurn
             // 
-            customLabelKodFurn.AutoSize = true;
-            customLabelKodFurn.BackColor = System.Drawing.Color.Transparent;
+            customLabelKodFurn.Appearance.BackColor = System.Drawing.Color.Transparent;
+            customLabelKodFurn.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelKodFurn.Appearance.Options.UseBackColor = true;
+            customLabelKodFurn.Appearance.Options.UseFont = true;
+            customLabelKodFurn.Appearance.Options.UseTextOptions = true;
+            customLabelKodFurn.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelKodFurn.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelKodFurn, 2);
             customLabelKodFurn.Dock = System.Windows.Forms.DockStyle.Right;
-            customLabelKodFurn.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelKodFurn.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelKodFurn.Location = new System.Drawing.Point(97, 306);
+            customLabelKodFurn.Location = new System.Drawing.Point(115, 306);
             customLabelKodFurn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelKodFurn.Name = "customLabelKodFurn";
-            customLabelKodFurn.Size = new System.Drawing.Size(135, 34);
+            customLabelKodFurn.Size = new System.Drawing.Size(117, 16);
             customLabelKodFurn.TabIndex = 18;
             customLabelKodFurn.Text = "Код фурн. длинный";
-            customLabelKodFurn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelKodFurn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabel1
             // 
-            customLabel1.AutoSize = true;
-            customLabel1.BackColor = System.Drawing.Color.Transparent;
+            customLabel1.Appearance.BackColor = System.Drawing.Color.Transparent;
+            customLabel1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel1.Appearance.Options.UseBackColor = true;
+            customLabel1.Appearance.Options.UseFont = true;
+            customLabel1.Appearance.Options.UseTextOptions = true;
+            customLabel1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabel1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabel1, 2);
             customLabel1.Dock = System.Windows.Forms.DockStyle.Right;
-            customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabel1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel1.Location = new System.Drawing.Point(221, 340);
+            customLabel1.Location = new System.Drawing.Point(228, 340);
             customLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel1.Name = "customLabel1";
-            customLabel1.Size = new System.Drawing.Size(11, 34);
+            customLabel1.Size = new System.Drawing.Size(4, 16);
             customLabel1.TabIndex = 20;
             customLabel1.Text = " ";
-            customLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabelDlin
             // 
-            customLabelDlin.AutoSize = true;
-            customLabelDlin.BackColor = System.Drawing.Color.Transparent;
+            customLabelDlin.Appearance.BackColor = System.Drawing.Color.Transparent;
+            customLabelDlin.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelDlin.Appearance.Options.UseBackColor = true;
+            customLabelDlin.Appearance.Options.UseFont = true;
+            customLabelDlin.Appearance.Options.UseTextOptions = true;
+            customLabelDlin.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelDlin.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelDlin, 2);
             customLabelDlin.Dock = System.Windows.Forms.DockStyle.Right;
-            customLabelDlin.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelDlin.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelDlin.Location = new System.Drawing.Point(184, 374);
+            customLabelDlin.Location = new System.Drawing.Point(195, 374);
             customLabelDlin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelDlin.Name = "customLabelDlin";
-            customLabelDlin.Size = new System.Drawing.Size(48, 34);
+            customLabelDlin.Size = new System.Drawing.Size(37, 16);
             customLabelDlin.TabIndex = 22;
             customLabelDlin.Text = "Длина";
-            customLabelDlin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelDlin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabelTimePlet
             // 
-            customLabelTimePlet.AutoSize = true;
-            customLabelTimePlet.BackColor = System.Drawing.Color.Transparent;
+            customLabelTimePlet.Appearance.BackColor = System.Drawing.Color.Transparent;
+            customLabelTimePlet.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelTimePlet.Appearance.Options.UseBackColor = true;
+            customLabelTimePlet.Appearance.Options.UseFont = true;
+            customLabelTimePlet.Appearance.Options.UseTextOptions = true;
+            customLabelTimePlet.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelTimePlet.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelTimePlet, 2);
             customLabelTimePlet.Dock = System.Windows.Forms.DockStyle.Right;
-            customLabelTimePlet.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelTimePlet.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelTimePlet.Location = new System.Drawing.Point(86, 408);
+            customLabelTimePlet.Location = new System.Drawing.Point(107, 408);
             customLabelTimePlet.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelTimePlet.Name = "customLabelTimePlet";
-            customLabelTimePlet.Size = new System.Drawing.Size(146, 34);
+            customLabelTimePlet.Size = new System.Drawing.Size(125, 16);
             customLabelTimePlet.TabIndex = 24;
             customLabelTimePlet.Text = "Время плетения, сек";
-            customLabelTimePlet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelTimePlet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabelNormP
             // 
-            customLabelNormP.AutoSize = true;
-            customLabelNormP.BackColor = System.Drawing.Color.Transparent;
+            customLabelNormP.Appearance.BackColor = System.Drawing.Color.Transparent;
+            customLabelNormP.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelNormP.Appearance.Options.UseBackColor = true;
+            customLabelNormP.Appearance.Options.UseFont = true;
+            customLabelNormP.Appearance.Options.UseTextOptions = true;
+            customLabelNormP.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelNormP.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelNormP, 2);
             customLabelNormP.Dock = System.Windows.Forms.DockStyle.Right;
-            customLabelNormP.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelNormP.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelNormP.Location = new System.Drawing.Point(118, 442);
+            customLabelNormP.Location = new System.Drawing.Point(133, 442);
             customLabelNormP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelNormP.Name = "customLabelNormP";
-            customLabelNormP.Size = new System.Drawing.Size(114, 34);
+            customLabelNormP.Size = new System.Drawing.Size(99, 16);
             customLabelNormP.TabIndex = 26;
             customLabelNormP.Text = "Норма пряжи, кг";
-            customLabelNormP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelNormP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabelM
             // 
-            customLabelM.AutoSize = true;
-            customLabelM.BackColor = System.Drawing.Color.Transparent;
+            customLabelM.Appearance.BackColor = System.Drawing.Color.Transparent;
+            customLabelM.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelM.Appearance.Options.UseBackColor = true;
+            customLabelM.Appearance.Options.UseFont = true;
+            customLabelM.Appearance.Options.UseTextOptions = true;
+            customLabelM.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabelM.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelM.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelM.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelM.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelM.Location = new System.Drawing.Point(476, 374);
             customLabelM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelM.Name = "customLabelM";
@@ -393,11 +404,14 @@ namespace SewingProduction.Features.Articul
             // 
             // customLabelM1
             // 
-            customLabelM1.AutoSize = true;
-            customLabelM1.BackColor = System.Drawing.Color.Transparent;
+            customLabelM1.Appearance.BackColor = System.Drawing.Color.Transparent;
+            customLabelM1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelM1.Appearance.Options.UseBackColor = true;
+            customLabelM1.Appearance.Options.UseFont = true;
+            customLabelM1.Appearance.Options.UseTextOptions = true;
+            customLabelM1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabelM1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelM1.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelM1.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelM1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelM1.Location = new System.Drawing.Point(476, 408);
             customLabelM1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelM1.Name = "customLabelM1";
@@ -408,11 +422,14 @@ namespace SewingProduction.Features.Articul
             // 
             // customLabelM2
             // 
-            customLabelM2.AutoSize = true;
-            customLabelM2.BackColor = System.Drawing.Color.Transparent;
+            customLabelM2.Appearance.BackColor = System.Drawing.Color.Transparent;
+            customLabelM2.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelM2.Appearance.Options.UseBackColor = true;
+            customLabelM2.Appearance.Options.UseFont = true;
+            customLabelM2.Appearance.Options.UseTextOptions = true;
+            customLabelM2.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabelM2.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelM2.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelM2.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelM2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelM2.Location = new System.Drawing.Point(476, 442);
             customLabelM2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelM2.Name = "customLabelM2";
@@ -445,10 +462,8 @@ namespace SewingProduction.Features.Articul
             // 
             // customButtonSave
             // 
-            // customButtonSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonSave.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonSave.Font = new System.Drawing.Font("Arial", 10F);
-            // customButtonSave.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonSave.Location = new System.Drawing.Point(122, 513);
             customButtonSave.Name = "customButtonSave";
             customButtonSave.Size = new System.Drawing.Size(111, 39);
@@ -459,10 +474,8 @@ namespace SewingProduction.Features.Articul
             // 
             // customButtonCancel
             // 
-            // customButtonCancel.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonCancel.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonCancel.Font = new System.Drawing.Font("Arial", 10F);
-            // customButtonCancel.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonCancel.Location = new System.Drawing.Point(475, 513);
             customButtonCancel.Name = "customButtonCancel";
             customButtonCancel.Size = new System.Drawing.Size(112, 39);
@@ -473,35 +486,41 @@ namespace SewingProduction.Features.Articul
             // 
             // customLabelPrizn
             // 
-            customLabelPrizn.AutoSize = true;
-            customLabelPrizn.BackColor = System.Drawing.Color.Transparent;
+            customLabelPrizn.Appearance.BackColor = System.Drawing.Color.Transparent;
+            customLabelPrizn.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelPrizn.Appearance.Options.UseBackColor = true;
+            customLabelPrizn.Appearance.Options.UseFont = true;
+            customLabelPrizn.Appearance.Options.UseTextOptions = true;
+            customLabelPrizn.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelPrizn.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelPrizn, 2);
             customLabelPrizn.Dock = System.Windows.Forms.DockStyle.Right;
-            customLabelPrizn.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelPrizn.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelPrizn.Location = new System.Drawing.Point(172, 476);
+            customLabelPrizn.Location = new System.Drawing.Point(183, 476);
             customLabelPrizn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelPrizn.Name = "customLabelPrizn";
-            customLabelPrizn.Size = new System.Drawing.Size(60, 34);
+            customLabelPrizn.Size = new System.Drawing.Size(49, 16);
             customLabelPrizn.TabIndex = 28;
             customLabelPrizn.Text = "Признак";
-            customLabelPrizn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelPrizn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabelTM
             // 
-            customLabelTM.AutoSize = true;
-            customLabelTM.BackColor = System.Drawing.Color.Transparent;
+            customLabelTM.Appearance.BackColor = System.Drawing.Color.Transparent;
+            customLabelTM.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelTM.Appearance.Options.UseBackColor = true;
+            customLabelTM.Appearance.Options.UseFont = true;
+            customLabelTM.Appearance.Options.UseTextOptions = true;
+            customLabelTM.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelTM.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelTM, 2);
             customLabelTM.Dock = System.Windows.Forms.DockStyle.Right;
-            customLabelTM.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelTM.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelTM.Location = new System.Drawing.Point(205, 170);
+            customLabelTM.Location = new System.Drawing.Point(214, 170);
             customLabelTM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelTM.Name = "customLabelTM";
-            customLabelTM.Size = new System.Drawing.Size(27, 34);
+            customLabelTM.Size = new System.Drawing.Size(18, 16);
             customLabelTM.TabIndex = 23;
             customLabelTM.Text = "ТМ";
-            customLabelTM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelTM.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // searchLookUpEditGost
             // 
@@ -559,7 +578,6 @@ namespace SewingProduction.Features.Articul
             customTextBoxArt.ErrorColor = System.Drawing.Color.Red;
             customTextBoxArt.ErrorMessage = null;
             customTextBoxArt.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxArt.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxArt.Location = new System.Drawing.Point(240, 105);
             customTextBoxArt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxArt.Name = "customTextBoxArt";
@@ -574,7 +592,6 @@ namespace SewingProduction.Features.Articul
             customTextBoxModel.ErrorColor = System.Drawing.Color.Red;
             customTextBoxModel.ErrorMessage = null;
             customTextBoxModel.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxModel.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxModel.Location = new System.Drawing.Point(240, 139);
             customTextBoxModel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxModel.Name = "customTextBoxModel";
@@ -655,83 +672,98 @@ namespace SewingProduction.Features.Articul
             // 
             // customLabelArt
             // 
-            customLabelArt.AutoSize = true;
-            customLabelArt.BackColor = System.Drawing.Color.Transparent;
+            customLabelArt.Appearance.BackColor = System.Drawing.Color.Transparent;
+            customLabelArt.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelArt.Appearance.Options.UseBackColor = true;
+            customLabelArt.Appearance.Options.UseFont = true;
+            customLabelArt.Appearance.Options.UseTextOptions = true;
+            customLabelArt.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelArt.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelArt, 2);
             customLabelArt.Dock = System.Windows.Forms.DockStyle.Right;
-            customLabelArt.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelArt.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelArt.Location = new System.Drawing.Point(172, 102);
+            customLabelArt.Location = new System.Drawing.Point(184, 102);
             customLabelArt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelArt.Name = "customLabelArt";
-            customLabelArt.Size = new System.Drawing.Size(60, 34);
+            customLabelArt.Size = new System.Drawing.Size(48, 16);
             customLabelArt.TabIndex = 25;
             customLabelArt.Text = "Артикул";
-            customLabelArt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelArt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabelGOST
             // 
-            customLabelGOST.AutoSize = true;
-            customLabelGOST.BackColor = System.Drawing.Color.Transparent;
+            customLabelGOST.Appearance.BackColor = System.Drawing.Color.Transparent;
+            customLabelGOST.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelGOST.Appearance.Options.UseBackColor = true;
+            customLabelGOST.Appearance.Options.UseFont = true;
+            customLabelGOST.Appearance.Options.UseTextOptions = true;
+            customLabelGOST.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelGOST.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelGOST, 2);
             customLabelGOST.Dock = System.Windows.Forms.DockStyle.Right;
-            customLabelGOST.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelGOST.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelGOST.Location = new System.Drawing.Point(188, 204);
+            customLabelGOST.Location = new System.Drawing.Point(198, 204);
             customLabelGOST.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelGOST.Name = "customLabelGOST";
-            customLabelGOST.Size = new System.Drawing.Size(44, 34);
+            customLabelGOST.Size = new System.Drawing.Size(34, 16);
             customLabelGOST.TabIndex = 19;
             customLabelGOST.Text = "ГОСТ";
-            customLabelGOST.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelGOST.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabelModel
             // 
-            customLabelModel.AutoSize = true;
-            customLabelModel.BackColor = System.Drawing.Color.Transparent;
+            customLabelModel.Appearance.BackColor = System.Drawing.Color.Transparent;
+            customLabelModel.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelModel.Appearance.Options.UseBackColor = true;
+            customLabelModel.Appearance.Options.UseFont = true;
+            customLabelModel.Appearance.Options.UseTextOptions = true;
+            customLabelModel.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelModel.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelModel, 2);
             customLabelModel.Dock = System.Windows.Forms.DockStyle.Right;
-            customLabelModel.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelModel.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelModel.Location = new System.Drawing.Point(174, 136);
+            customLabelModel.Location = new System.Drawing.Point(185, 136);
             customLabelModel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelModel.Name = "customLabelModel";
-            customLabelModel.Size = new System.Drawing.Size(58, 34);
+            customLabelModel.Size = new System.Drawing.Size(47, 16);
             customLabelModel.TabIndex = 29;
             customLabelModel.Text = "Модель";
-            customLabelModel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelModel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabelGroup
             // 
-            customLabelGroup.AutoSize = true;
-            customLabelGroup.BackColor = System.Drawing.Color.Transparent;
+            customLabelGroup.Appearance.BackColor = System.Drawing.Color.Transparent;
+            customLabelGroup.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelGroup.Appearance.Options.UseBackColor = true;
+            customLabelGroup.Appearance.Options.UseFont = true;
+            customLabelGroup.Appearance.Options.UseTextOptions = true;
+            customLabelGroup.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelGroup.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelGroup, 2);
             customLabelGroup.Dock = System.Windows.Forms.DockStyle.Right;
-            customLabelGroup.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelGroup.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelGroup.Location = new System.Drawing.Point(179, 238);
+            customLabelGroup.Location = new System.Drawing.Point(190, 238);
             customLabelGroup.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelGroup.Name = "customLabelGroup";
-            customLabelGroup.Size = new System.Drawing.Size(53, 34);
+            customLabelGroup.Size = new System.Drawing.Size(42, 16);
             customLabelGroup.TabIndex = 21;
             customLabelGroup.Text = "Группа";
-            customLabelGroup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelGroup.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabelRazm
             // 
-            customLabelRazm.AutoSize = true;
-            customLabelRazm.BackColor = System.Drawing.Color.Transparent;
+            customLabelRazm.Appearance.BackColor = System.Drawing.Color.Transparent;
+            customLabelRazm.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelRazm.Appearance.Options.UseBackColor = true;
+            customLabelRazm.Appearance.Options.UseFont = true;
+            customLabelRazm.Appearance.Options.UseTextOptions = true;
+            customLabelRazm.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelRazm.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelRazm, 2);
             customLabelRazm.Dock = System.Windows.Forms.DockStyle.Right;
-            customLabelRazm.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelRazm.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelRazm.Location = new System.Drawing.Point(176, 272);
+            customLabelRazm.Location = new System.Drawing.Point(187, 272);
             customLabelRazm.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelRazm.Name = "customLabelRazm";
-            customLabelRazm.Size = new System.Drawing.Size(56, 34);
+            customLabelRazm.Size = new System.Drawing.Size(45, 16);
             customLabelRazm.TabIndex = 27;
             customLabelRazm.Text = "Размер";
-            customLabelRazm.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelRazm.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // searchLookUpEditTm1
             // 
@@ -793,25 +825,26 @@ namespace SewingProduction.Features.Articul
             // 
             // customLabelKod
             // 
-            customLabelKod.AutoSize = true;
-            customLabelKod.BackColor = System.Drawing.Color.Transparent;
+            customLabelKod.Appearance.BackColor = System.Drawing.Color.Transparent;
+            customLabelKod.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelKod.Appearance.Options.UseBackColor = true;
+            customLabelKod.Appearance.Options.UseFont = true;
+            customLabelKod.Appearance.Options.UseTextOptions = true;
+            customLabelKod.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelKod.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelKod.Dock = System.Windows.Forms.DockStyle.Right;
-            customLabelKod.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabelKod.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelKod.Location = new System.Drawing.Point(201, 68);
+            customLabelKod.Location = new System.Drawing.Point(209, 68);
             customLabelKod.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelKod.Name = "customLabelKod";
-            customLabelKod.Size = new System.Drawing.Size(31, 34);
+            customLabelKod.Size = new System.Drawing.Size(23, 16);
             customLabelKod.TabIndex = 1;
             customLabelKod.Text = "Код";
-            customLabelKod.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelKod.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customButtonKod
             // 
-            // customButtonKod.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonKod.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonKod.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            // customButtonKod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonKod.Location = new System.Drawing.Point(3, 71);
             customButtonKod.Name = "customButtonKod";
             customButtonKod.Size = new System.Drawing.Size(113, 28);

@@ -1,21 +1,16 @@
 using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Controls;
-using SewingProduction.Features.Articul;
+using DevExpress.XtraEditors.DXErrorProvider;
 using SewingProduction.Features.Articul.Models;
-using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Features.Articul.Service;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.XtraEditors.DXErrorProvider;
-using System.Globalization;
 
 namespace SewingProduction.Features.Articul.Forms
 {
@@ -24,12 +19,192 @@ namespace SewingProduction.Features.Articul.Forms
         private readonly DatabaseHelper _dbHelperAce;
         private bool _isInitialized;
         private readonly ILogger _logger = new FileLogger();
+        private const string LoggerContext = "ArticulControl";
         private readonly DbService _dbService;
+        private readonly ArticulDataService _articulDataService = new ArticulDataService();
         private readonly Dictionary<Control, System.Reflection.PropertyInfo> _controlToArtNormProperty = new Dictionary<Control, System.Reflection.PropertyInfo>();
         //private readonly BindingSource _bs = new BindingSource();
         private readonly DXErrorProvider _dx = new DXErrorProvider();
 
         private bool _isReadOnly = true;
+        private readonly Dictionary<string, Control> _propertyToControl =
+    new(StringComparer.OrdinalIgnoreCase);
+
+        private readonly Dictionary<Control, Color> _originalBackColors = new();
+        private readonly Dictionary<Control, Color> _originalForeColors = new();
+        private readonly Dictionary<Control, bool> _originalUseForeColors = new();
+        private readonly FieldComparisonService _comparisonService = new();
+        private bool _comparisonMapBuilt;
+        /// <summary>
+        /// Построить маппинг между именами свойств модели и контролами для сравнения.
+        /// </summary>
+        private void BuildComparisonMap()
+        {
+            _propertyToControl.Clear();
+
+            foreach (var kv in _controlToArtNormProperty)
+            {
+                if (kv.Key != null && kv.Value != null)
+                    _propertyToControl[kv.Value.Name] = kv.Key;
+            }
+
+            RegisterSeries("txbNorm_t", "Norm_t");
+            RegisterSeries("txbTkanSeb_t", "Seb_t");
+            RegisterSeries("txbBrak", "Brak_t");
+            RegisterSeries("txtBrakPercent", "Brak_percent");
+            RegisterSeries("txbKfKach", "Kf_tkan_kach");
+            RegisterSeries("txbOpis_t", "Opis_t");
+            RegisterSeries("tkb", "Tkb");
+        }
+
+        private void RegisterSeries(string controlPrefix, string propertyPrefix)
+        {
+            foreach (var c in GetAllControls(this))
+            {
+                if (string.IsNullOrWhiteSpace(c.Name)) continue;
+                if (!c.Name.StartsWith(controlPrefix, StringComparison.Ordinal)) continue;
+
+                var suffix = GetNumericSuffix(c.Name);
+                if (suffix == null) continue;
+
+                _propertyToControl[propertyPrefix + suffix] = c;
+            }
+        }
+
+        private static string? GetNumericSuffix(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name)) return null;
+            var i = name.Length - 1;
+            while (i >= 0 && char.IsDigit(name[i])) i--;
+            var start = i + 1;
+            return start < name.Length ? name.Substring(start) : null;
+        }
+
+        public ComparisonResult CompareAndHighlight(IEnumerable<FieldComparisonItem> items)
+        {
+            var result = new ComparisonResult();
+            try
+            {
+                ClearComparisonHighlight();
+                //BuildComparisonMap();
+                EnsureComparisonMap();
+                result = _comparisonService.Compare(Model, items);
+
+                foreach (var mismatch in result.Mismatches)
+                {
+                    if (_propertyToControl.TryGetValue(mismatch.PropertyName, out var control))
+                        MarkMismatch(control);
+                }
+            }
+            catch (Exception ex)
+            {
+                _=SafeLogAsync(() => _logger.LogErrorAsync(ex, $"{LoggerContext}.CompareAndHighlight"));
+                return result;
+            }
+            return result;
+        }
+        private void EnsureComparisonMap()
+        {
+            if (_comparisonMapBuilt) return;
+            BuildComparisonMap();
+            _comparisonMapBuilt = true;
+        }
+        public void ClearComparisonHighlight()
+        {
+            foreach (var kv in _originalBackColors.ToList())
+                ClearMark(kv.Key);
+
+            _dx.ClearErrors();
+        }
+
+        private void MarkMismatch(Control c)
+        {
+            if (!_originalBackColors.ContainsKey(c))
+                _originalBackColors[c] = c.BackColor;
+
+            if (c is DevExpress.XtraEditors.CheckEdit ce)
+            {
+                if (!_originalForeColors.ContainsKey(c))
+                {
+                    _originalForeColors[c] = ce.Properties.Appearance.ForeColor;
+                    _originalUseForeColors[c] = ce.Properties.Appearance.Options.UseForeColor;
+                }
+
+                ce.Properties.Appearance.ForeColor = Color.Red;
+                ce.ForeColor = Color.Red;
+                ce.Properties.Appearance.Options.UseForeColor = true;
+                _dx.SetError(ce, "Значение отличается");
+            }
+            else if (c is BaseEdit be)
+            {
+                be.Properties.Appearance.BackColor = Color.MistyRose;
+                _dx.SetError(be, "Значение отличается");
+            }
+            else
+            {
+                c.BackColor = Color.MistyRose;
+                _dx.SetError(c, "Значение отличается");
+            }
+        }
+
+        private void ClearMark(Control c)
+        {
+            if (c is DevExpress.XtraEditors.CheckEdit ce)
+            {
+                if (_originalForeColors.TryGetValue(c, out var fore))
+                {
+                    ce.Properties.Appearance.ForeColor = fore;
+                    _originalForeColors.Remove(c);
+                }
+
+                if (_originalUseForeColors.TryGetValue(c, out var use))
+                {
+                    ce.Properties.Appearance.Options.UseForeColor = use;
+                    _originalUseForeColors.Remove(c);
+                }
+            }
+            else
+            {
+                if (!_originalBackColors.TryGetValue(c, out var color))
+                    return;
+
+                if (c is BaseEdit be)
+                    be.Properties.Appearance.BackColor = color;
+                else
+                    c.BackColor = color;
+            }
+
+            _originalBackColors.Remove(c);
+            _dx.SetError(c, "");
+        }
+
+        private void LogSuccess(string message, string scope)
+        {
+            _ = SafeLogAsync(() => _logger.LogEventAsync(message, $"{LoggerContext}.{scope}"));
+        }
+
+        private void LogWarning(string message, string scope)
+        {
+            _ = SafeLogAsync(() => _logger.LogWarningAsync(message, $"{LoggerContext}.{scope}"));
+        }
+
+        private void LogError(Exception ex, string scope)
+        {
+            _ = SafeLogAsync(() => _logger.LogErrorAsync(ex, $"{LoggerContext}.{scope}"));
+        }
+
+        private static async Task SafeLogAsync(Func<Task> writeLog)
+        {
+            try
+            {
+                await writeLog().ConfigureAwait(false);
+            }
+            catch
+            {
+                // Логирование не должно ломать UI.
+            }
+        }
+
         public bool IsReadOnly
         {
             get => _isReadOnly;
@@ -66,19 +241,26 @@ namespace SewingProduction.Features.Articul.Forms
 
             InitializeBindings();
             ApplyReadOnlyState();
+            LogSuccess("BindingSource успешно привязан к карточке артикула.", nameof(BindTo));
         }
 
-        public void BindModel(SpArticulPreviewModel model)
+        public async Task LoadImageAsync(string kodd)
         {
-            if (_bs == null) throw new InvalidOperationException("Сначала вызови BindTo(bindingSource)");
-            _bs.DataSource = model;
-            _bs.ResetBindings(false);
+            if (string.IsNullOrWhiteSpace(kodd))
+            {
+                ClearImage();
+                LogWarning("Пустой Kodd при загрузке эскиза, изображение очищено.", nameof(LoadImageAsync));
+                return;
+            }
+
+            var imagePath = await _articulDataService.GetFileEskizForKod(kodd);
+            pictureBoxArticul.ImageLocation = string.IsNullOrWhiteSpace(imagePath) ? null : imagePath;
         }
 
-        public void SetKod(string kod)
+        public void ClearImage()
         {
-            if (string.IsNullOrWhiteSpace(kod)) return;
-            txbKod.Text = kod;
+            pictureBoxArticul.ImageLocation = null;
+            pictureBoxArticul.Image = null;
         }
 
         private async void ArticulControl_Load(object sender, EventArgs e)
@@ -94,10 +276,11 @@ namespace SewingProduction.Features.Articul.Forms
 
                 ApplyReadOnlyState();      // учитываем начальный режим
                 _isInitialized = true;
+                LogSuccess("Контрол артикула успешно инициализирован.", nameof(ArticulControl_Load));
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка при загрузке формы Articul");
+                LogError(ex, nameof(ArticulControl_Load));
             }
         }
 
@@ -171,10 +354,10 @@ namespace SewingProduction.Features.Articul.Forms
 
         private (string ControlPropertyName, DataSourceUpdateMode UpdateMode) GetBindingTarget(Control control)
         {
-            // В read-only режиме не пишем обратно в модель.
+            // В read-only режиме не пишем обратно в модель
             var mode = _isReadOnly ? DataSourceUpdateMode.Never : DataSourceUpdateMode.OnPropertyChanged;
 
-            // твои поля — CustomTextBox => TextBoxBase
+            // CustomTextBox => TextBoxBase
             if (control is TextBoxBase)
                 return ("Text", mode);
 
@@ -228,6 +411,7 @@ namespace SewingProduction.Features.Articul.Forms
             _controlToArtNormProperty.Clear();
             var artType = typeof(SpArticulPreviewModel);
             _controlToArtNormProperty[txbKod] = artType.GetProperty(nameof(SpArticulPreviewModel.Kod));
+            _controlToArtNormProperty[txbTkb] = artType.GetProperty(nameof(SpArticulPreviewModel.Tkb));
             _controlToArtNormProperty[txbArticul] = artType.GetProperty(nameof(SpArticulPreviewModel.Articul));
             _controlToArtNormProperty[txbPo] = artType.GetProperty(nameof(SpArticulPreviewModel.Po));
             _controlToArtNormProperty[txbMod] = artType.GetProperty(nameof(SpArticulPreviewModel.Mod));
@@ -256,8 +440,9 @@ namespace SewingProduction.Features.Articul.Forms
             //галки вяз отделки
             _controlToArtNormProperty[chbKombIzd] = artType.GetProperty(nameof(SpArticulPreviewModel.KombIzdFlag));
             _controlToArtNormProperty[chbKombDet] = artType.GetProperty(nameof(SpArticulPreviewModel.KombDetFlag));
+            _controlToArtNormProperty[chbKruj] = artType.GetProperty(nameof(SpArticulPreviewModel.KrujFlag));
             //архив
-            _controlToArtNormProperty[chbArh] = artType.GetProperty(nameof(SpArticulPreviewModel.ArhFlag));
+            //  _controlToArtNormProperty[chbArh] = artType.GetProperty(nameof(SpArticulPreviewModel.ArhFlag));
 
             #endregion
 
