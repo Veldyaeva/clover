@@ -1,31 +1,15 @@
-using DevExpress.Data.Internal;
-using DevExpress.Office.Utils;
-using DevExpress.Utils.Extensions;
-using DevExpress.Xpo;
-using DevExpress.Xpo.DB.Helpers;
 using DevExpress.XtraEditors.ButtonsPanelControl;
-using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
 using DevExpress.XtraReports.UI;
-using DevExpress.XtraRichEdit.Model;
-using DevExpress.XtraVerticalGrid;
-using DevExpress.XtraWaitForm;
 using SewingProduction.Core.Class;
-using SewingProduction.Core.interfaces;
-using SewingProduction.Core.Models;
-using SewingProduction.Extensions;
-using SewingProduction.Features.Articul;
+using SewingProduction.Core.helpers;
 using SewingProduction.Features.Articul.Forms;
 using SewingProduction.Features.Articul.Helpers;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
-using SewingProduction.Features.Sprav;
 using SewingProduction.Features.UserDistribution.Class;
-using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.Help.Form;
 using SewingProduction.Helpers;
 using SewingProduction.Report;
 using SewingProduction.Services;
@@ -38,8 +22,6 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static DevExpress.Office.PInvoke.Win32;
-using static DevExpress.Xpo.DB.DataStoreLongrunnersWatch;
 using BindingSource = System.Windows.Forms.BindingSource;
 using DataTable = System.Data.DataTable;
 
@@ -63,7 +45,7 @@ namespace SewingProduction.Features.Articul
 
         private readonly BindingSource bsPreview = new(); // для грида
         private readonly BindingSource bsDetails = new(); // для карточки/деталей
-        private readonly BindingList<SpArtPreviewModel> _previewList = new(); // если хочешь BindingList
+        private readonly BindingList<SpArtPreviewModel> _previewList = new();
         private int _loadVersion = 0;
 
         ArticulDataService _articulDataService = new ArticulDataService();
@@ -100,6 +82,7 @@ namespace SewingProduction.Features.Articul
             _dbHelperAce = new DatabaseHelper();
             _dbService = new DbService(_dbHelperAce);
             InitializeComponent();
+            InitialiseEmptyZero();
             _currentUser = user;
             InitHeaderButtonTags();
         }
@@ -162,6 +145,7 @@ namespace SewingProduction.Features.Articul
 
                 //привязываем правую панель
                 InitializeBindings();
+                AttachGridCopyContextMenus();
 
                 //обновляем состояние кнопки архива при загрузке
                 SyncArchiveButtonCaption();
@@ -175,6 +159,111 @@ namespace SewingProduction.Features.Articul
                 LogError(ex, nameof(Articul_Load));
             }
         }
+
+        private void AttachGridCopyContextMenus()
+        {
+            // Унифицированное ПКМ-меню "Копировать значение ячейки" для гридов.
+            gridControl1.PopupMenuShowing -= GridCopyPopupMenuShowing;
+            gridControl1.PopupMenuShowing += GridCopyPopupMenuShowing;
+
+            gridView1.PopupMenuShowing -= GridCopyPopupMenuShowing;
+            gridView1.PopupMenuShowing += GridCopyPopupMenuShowing;
+
+            // gridArt has 2 views (gridControl1 and gridView3)
+            gridView3.PopupMenuShowing -= GridCopyPopupMenuShowing;
+            gridView3.PopupMenuShowing += GridCopyPopupMenuShowing;
+
+            gridViewKomplSost.PopupMenuShowing -= GridCopyPopupMenuShowing;
+            gridViewKomplSost.PopupMenuShowing += GridCopyPopupMenuShowing;
+
+            // cGridKomplSost has 2 views (gridViewKomplSost and gridView2)
+            gridView2.PopupMenuShowing -= GridCopyPopupMenuShowing;
+            gridView2.PopupMenuShowing += GridCopyPopupMenuShowing;
+
+            gridViewNaborSost.PopupMenuShowing -= GridCopyPopupMenuShowing;
+            gridViewNaborSost.PopupMenuShowing += GridCopyPopupMenuShowing;
+        }
+
+        private void GridCopyPopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            GridContextMenuHelper.AddCopyCellMenuItem(sender, e);
+        }
+
+        private void InitialiseEmptyZero()
+        {
+            try
+            {
+
+                #region Затраты на изготовление
+                txbNormt.ShowEmptyWhenZero();
+
+
+                // нормы/себестоимость/брак и назначение полотна
+                EmptyZeroByRange("txbNorm_t");
+                EmptyZeroByRange("txbTkanSeb_t");
+                EmptyZeroByRange("txbBrak");
+                EmptyZeroByRange("txtBrakPercent");
+                EmptyZeroByRange("txbKfKach");
+                //void EmptyZeroByPrefix(string prefix)
+                //{
+                //    var edits = this.Controls
+                //        .Find("", true)
+                //        .OfType<DevExpress.XtraEditors.TextEdit>()
+                //        .Where(c => c.Name.StartsWith(prefix));
+
+                //    foreach (var edit in edits)
+                //        edit.ShowEmptyWhenZero();
+                //}
+                void EmptyZeroByRange(string prefix, int from = 1, int to = 7)
+                {
+                    for (int i = from; i <= to; i++)
+                    {
+                        string controlName = $"{prefix}{i}";
+
+                        var edit = this.Controls.Find(controlName, true).FirstOrDefault() as DevExpress.XtraEditors.TextEdit;
+                        edit?.ShowEmptyWhenZero();
+                    }
+                }              
+                #endregion
+
+                #region брак
+                txbBrakAll.ShowEmptyWhenZero();
+                txbSeb.ShowEmptyWhenZero();
+
+                #endregion
+                #region Норма/сек + зарплата 
+
+                txbSek.ShowEmptyWhenZero();
+                txbSekVyaz.ShowEmptyWhenZero();
+                txbSekShv.ShowEmptyWhenZero();
+                txbSekKr.ShowEmptyWhenZero();
+                //зарплатаShowEmptyWhenZero();
+                txbSumZarpl.ShowEmptyWhenZero();
+                txbSumDopOpl.ShowEmptyWhenZero();
+                txbSumStrVznos.ShowEmptyWhenZero();
+                txbSumSebRaskr.ShowEmptyWhenZero();
+                txbSumKomplNum.ShowEmptyWhenZero();
+                txbSebRecom.ShowEmptyWhenZero();
+                txbCalcSebRecom.ShowEmptyWhenZero();
+                #endregion
+
+                #region коэфициенты
+
+                txbSebDop.ShowEmptyWhenZero();
+                txbKoefPr.ShowEmptyWhenZero();
+                txbKoefVedDG.ShowEmptyWhenZero();
+                txbSebProizv.ShowEmptyWhenZero();
+                txbKoef.ShowEmptyWhenZero();
+                #endregion
+
+            }
+            catch (Exception ex)
+            {
+                LogError(ex, nameof(InitializeBindings));
+                throw;
+            }
+        }
+
         private async Task ReloadPreviewAsync()
         {
             gridControl1.ShowLoadingPanel();
@@ -206,9 +295,7 @@ namespace SewingProduction.Features.Articul
                 // включить редактирование (если нужно)
                 // articulControl1.IsReadOnly = false;
 
-                #region галки с отделками
-                //галки вяз отделки
-                //архив
+
                 // (желательно) чтобы при повторном вызове не плодились биндинги
                 chbIsUpak.DataBindings.Clear();
                 chbIsFurnit.DataBindings.Clear();
@@ -232,7 +319,11 @@ namespace SewingProduction.Features.Articul
                 txbKoefVedDG.DataBindings.Clear();
                 txbSebProizv.DataBindings.Clear();
                 txbKoef.DataBindings.Clear();
+                txbBrakAll.DataBindings.Clear();
 
+                #region галки с отделками
+                //галки вяз отделки
+                //архив
                 //отделка
                 chbIsUpak.DataBindings.Add("Checked", bsDetails, nameof(SpArticulPreviewModel.Is_upak), true);
                 //chbIsUpak.DataBindings.Add("Checked", bsDetails, nameof(SpArticulPreviewModel.Is_upak), true, DataSourceUpdateMode.OnPropertyChanged);
@@ -249,18 +340,24 @@ namespace SewingProduction.Features.Articul
                 txbNormt.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Norm_t), true, DataSourceUpdateMode.Never);
 
                 // TODO: добавить расчет полной с\ст на изделие по коду 
-                //txbSeb.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Seb), true, DataSourceUpdateMode.Never);
+                //   txbSeb.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Seb), true, DataSourceUpdateMode.Never);
 
                 // нормы/себестоимость/брак и назначение полотна
                 BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbNorm_t", "Norm_t", "F2", true);
                 BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbTkanSeb_t", "Seb_t");
-                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbBrak", "Brak_t");
-                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txtBrakPercent", "Brak_percent", "F2");
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbBrak", "Brak_t", "F2", true);
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txtBrakPercent", "Brak_percent");
                 BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbKfKach", "Kf_tkan_kach", "F2");
                 BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbOpis_t", "Opis_t");
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "tkb", "Tkb");
 
                 #endregion
 
+                #region брак
+                txbBrakAll.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Brak_avg), true, DataSourceUpdateMode.Never);
+                txbSeb.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Cena_prdc), true, DataSourceUpdateMode.Never);
+
+                #endregion
                 #region Норма/сек + зарплата 
 
                 txbSek.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Sek), true, DataSourceUpdateMode.Never);
@@ -273,8 +370,9 @@ namespace SewingProduction.Features.Articul
                 txbSumStrVznos.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Sum_strvznos), true, DataSourceUpdateMode.Never);
                 txbSumSebRaskr.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Sum_sebraskr), true, DataSourceUpdateMode.Never);
                 txbSumKomplNum.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Sum_komplnum), true, DataSourceUpdateMode.Never);
-
-
+                txbSebRecom.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Seb_rekom), true, DataSourceUpdateMode.Never);
+                txbCalcSebRecom.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Calc_seb_rekom), true, DataSourceUpdateMode.Never);
+                txbSebz.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Seb_z), true, DataSourceUpdateMode.Never);
                 #endregion
 
                 #region коэфициенты
@@ -351,7 +449,12 @@ namespace SewingProduction.Features.Articul
                     null,
                     format);
 
-                if (formatCurrentText && control is CustomTextBox tb &&
+                //if (formatCurrentText && control is TextEdit tb &&// || ( formatCurrentText && control is TextEdit tb )&&
+                //    decimal.TryParse(tb.Text, out var value))
+                //{
+                //    tb.Text = value.ToString("F2");
+                //}
+                if (formatCurrentText && control is CustomTextBox tb &&// || ( formatCurrentText && control is TextEdit tb )&&
                     decimal.TryParse(tb.Text, out var value))
                 {
                     tb.Text = value.ToString("F2");
@@ -872,5 +975,17 @@ namespace SewingProduction.Features.Articul
             }
         }
         #endregion
+
+        private void btnPublishedArticles_Click(object sender, EventArgs e)
+        {
+        
+        if (this.MdiParent is SpMainForm mainForm)
+        {
+            mainForm.OpenForm(new CreateArticulMatrForm(CurrentUser.User));
+            /*using (CreateArticulMatrForm f = new CreateArticulMatrForm(_user))
+            { }*/
+        }
+
+    }
     }
 }

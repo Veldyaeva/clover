@@ -112,57 +112,73 @@ namespace SewingProduction.Core.services
 
             if (subscribers.Count == 0)
             {
-                if (_listeners.TryGetValue(tableKey, out var stale))
+                var staleKeys = _listeners.Keys
+                    .Where(k => IsListenerKeyForTable(k, tableKey))
+                    .ToList();
+
+                foreach (var staleKey in staleKeys)
                 {
+                    var stale = _listeners[staleKey];
                     try { stale.Broker.Changed -= stale.Handler; } catch { }
                     try { stale.Broker.StopBroker(); } catch { }
-                    _listeners.Remove(tableKey);
-                    System.Diagnostics.Debug.WriteLine($"[AppServiceBrokerHub] Listener stopped: table={tableKey}");
+                    _listeners.Remove(staleKey);
+                    System.Diagnostics.Debug.WriteLine($"[AppServiceBrokerHub] Listener stopped: table={tableKey}, fields={stale.FieldsCsv}");
                 }
                 return;
             }
 
-            var mergedFields = subscribers
-                .SelectMany(s => s.TableFields[tableKey])
-                .Where(f => !string.IsNullOrWhiteSpace(f))
-                .Select(f => f.Trim())
-                .Distinct(StringComparer.OrdinalIgnoreCase)
-                .OrderBy(f => f, StringComparer.OrdinalIgnoreCase)
-                .ToArray();
+            var requiredGroups = subscribers
+                .GroupBy(s => s.TableFieldKeys[tableKey], StringComparer.OrdinalIgnoreCase)
+                .ToDictionary(
+                    g => g.Key,
+                    g => g.First().TableFields[tableKey],
+                    StringComparer.OrdinalIgnoreCase);
 
-            var fieldsCsv = mergedFields.Length > 0 ? string.Join(",", mergedFields) : "*";
-            if (_listeners.TryGetValue(tableKey, out var existing) &&
-                string.Equals(existing.FieldsCsv, fieldsCsv, StringComparison.OrdinalIgnoreCase))
+            var existingKeys = _listeners.Keys
+                .Where(k => IsListenerKeyForTable(k, tableKey))
+                .ToList();
+
+            foreach (var existingKey in existingKeys)
             {
-                return;
+                if (requiredGroups.ContainsKey(ExtractFieldsKey(existingKey)))
+                    continue;
+
+                var stale = _listeners[existingKey];
+                try { stale.Broker.Changed -= stale.Handler; } catch { }
+                try { stale.Broker.StopBroker(); } catch { }
+                _listeners.Remove(existingKey);
+                System.Diagnostics.Debug.WriteLine($"[AppServiceBrokerHub] Listener stopped: table={tableKey}, fields={stale.FieldsCsv}");
             }
 
-            if (existing != null)
+            foreach (var group in requiredGroups)
             {
-                try { existing.Broker.Changed -= existing.Handler; } catch { }
-                try { existing.Broker.StopBroker(); } catch { }
+                var fieldsKey = group.Key;
+                var listenerKey = BuildListenerKey(tableKey, fieldsKey);
+                if (_listeners.ContainsKey(listenerKey))
+                    continue;
+
+                var broker = new ServiceBroker(this);
+                Func<string, string?, Task> handler = (tableFromBroker, fieldsCsvFromBroker) =>
+                    OnTableChangedAsync(tableKey, fieldsKey, tableFromBroker, fieldsCsvFromBroker);
+
+                broker.Changed += handler;
+                broker.StartListening(fieldsKey, tableKey);
+
+                _listeners[listenerKey] = new TableListenerState(broker, handler, fieldsKey);
+                System.Diagnostics.Debug.WriteLine(
+                    $"[AppServiceBrokerHub] Listener started: table={tableKey}, fields={fieldsKey}, subscribers={subscribers.Count(s => s.TableFieldKeys[tableKey] == fieldsKey)}");
             }
-
-            var broker = new ServiceBroker(this);
-            Func<string, string?, Task> handler = (tableFromBroker, fieldsCsvFromBroker) =>
-                OnTableChangedAsync(tableKey, tableFromBroker, fieldsCsvFromBroker);
-
-            broker.Changed += handler;
-            broker.StartListening(fieldsCsv, tableKey);
-
-            _listeners[tableKey] = new TableListenerState(broker, handler, fieldsCsv);
-            System.Diagnostics.Debug.WriteLine(
-                $"[AppServiceBrokerHub] Listener started: table={tableKey}, fields={fieldsCsv}, subscribers={subscribers.Count}");
         }
 
-        private async Task OnTableChangedAsync(string tableKey, string tableFromBroker, string? fieldsChangedCsv)
+        private async Task OnTableChangedAsync(string tableKey, string fieldsKey, string tableFromBroker, string? fieldsChangedCsv)
         {
             List<OwnerSubscription> targets;
             await _gate.WaitAsync().ConfigureAwait(false);
             try
             {
                 targets = _owners.Values
-                    .Where(s => s.TableFields.ContainsKey(tableKey))
+                    .Where(s => s.TableFieldKeys.TryGetValue(tableKey, out var ownerFieldsKey) &&
+                                string.Equals(ownerFieldsKey, fieldsKey, StringComparison.OrdinalIgnoreCase))
                     .ToList();
             }
             finally
@@ -204,6 +220,7 @@ namespace SewingProduction.Core.services
                     .Where(f => !string.IsNullOrWhiteSpace(f))
                     .Select(f => f.Trim())
                     .Distinct(StringComparer.OrdinalIgnoreCase)
+                    .OrderBy(f => f, StringComparer.OrdinalIgnoreCase)
                     .ToArray();
 
                 result[tableKey] = fields;
@@ -228,6 +245,25 @@ namespace SewingProduction.Core.services
             return $"dbo.{s}";
         }
 
+        private static string BuildFieldsKey(IReadOnlyCollection<string> fields)
+        {
+            if (fields == null || fields.Count == 0)
+                return "*";
+
+            return string.Join(",", fields);
+        }
+
+        private static string BuildListenerKey(string tableKey, string fieldsKey) => $"{tableKey}|{fieldsKey}";
+
+        private static bool IsListenerKeyForTable(string listenerKey, string tableKey) =>
+            listenerKey.StartsWith(tableKey + "|", StringComparison.OrdinalIgnoreCase);
+
+        private static string ExtractFieldsKey(string listenerKey)
+        {
+            var idx = listenerKey.IndexOf('|');
+            return idx >= 0 && idx + 1 < listenerKey.Length ? listenerKey[(idx + 1)..] : "*";
+        }
+
         private sealed class OwnerSubscription
         {
             public OwnerSubscription(
@@ -240,6 +276,10 @@ namespace SewingProduction.Core.services
                 OwnerId = ownerId;
                 OwnerName = ownerName;
                 TableFields = tableFields;
+                TableFieldKeys = tableFields.ToDictionary(
+                    kv => kv.Key,
+                    kv => BuildFieldsKey(kv.Value),
+                    StringComparer.OrdinalIgnoreCase);
                 OnTableChangedAsync = onTableChangedAsync;
                 CancelRegistration = cancelRegistration;
             }
@@ -247,6 +287,7 @@ namespace SewingProduction.Core.services
             public string OwnerId { get; }
             public string OwnerName { get; }
             public IReadOnlyDictionary<string, IReadOnlyCollection<string>> TableFields { get; }
+            public IReadOnlyDictionary<string, string> TableFieldKeys { get; }
             public Func<string, string?, Task> OnTableChangedAsync { get; }
             public CancellationTokenRegistration CancelRegistration { get; }
         }

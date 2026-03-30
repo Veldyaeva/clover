@@ -1,4 +1,4 @@
-﻿using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.helpers;
 using SewingProduction.Helpers;
@@ -362,7 +362,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 //1.Сначала загружаем изображение(быстрая операция)
-                LoadGridImage(pictureBox2, annId: annId);
+                await LoadGridImage(pictureBox2, annId: annId);
 
                 // 2. Затем загружаем основные данные
                 token.ThrowIfCancellationRequested();
@@ -894,7 +894,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Загружаем или очищаем изображение
                 if (kodInt > 0)
                 {
-                    await Task.Run(() => LoadGridImage(pictureBox3, kod: kodInt));
+                    await LoadGridImage(pictureBox3, kod: kodInt);
                 }
                 else
                 {
@@ -1160,46 +1160,33 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (result != DialogResult.Yes)
                     return;
 
-                // Обновляем статус для каждой выбранной записи
                 int successCount = 0;
                 var errors = new List<string>();
 
                 archiveGridView.BeginUpdate();
                 try
                 {
+                    var candidates = selectedItems.Where(i => i.Status == (int)Status.Archive).ToList();
+                    foreach (var skipped in selectedItems.Where(i => i.Status != (int)Status.Archive))
+                    {
+                        await _logger.LogEventAsync($"Запись AnnID: {skipped.AnnID} не находится в архиве (статус: {skipped.Status})", "RestoreFromArchive");
+                    }
+
+                    var batch = await _teamWorkService.RestoreWorkDivisionsFromArchiveAsync(candidates.Select(x => x.AnnID));
+                    errors.AddRange(batch.Errors);
+                    successCount = batch.UpdatedAnnIds.Count;
+
                     foreach (var item in selectedItems)
                     {
-                        try
+                        if (batch.UpdatedAnnIds.Contains(item.AnnID))
                         {
-                            // Проверяем, что запись можно восстановить
-                            if (item.Status != (int)Status.Archive)
-                            {
-                                await _logger.LogEventAsync($"Запись AnnID: {item.AnnID} не находится в архиве (статус: {item.Status})", "RestoreFromArchive");
-                                continue;
-                            }
-
-                            // Обновляем статус в базе данных с 3 (архив) на 2 (актуальное)
-                            await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", (int)Status.Preliminary, TableNames.AnnId, item.AnnID);
-
-                            // Обновляем объект в памяти
                             item.Status = (int)Status.Preliminary;
                             item.StatusText = StatusHelper.GetStatusText((int)Status.Preliminary);
 
                             // Обновляем строку в гриде
-                            int rowHandle = archiveGridView.LocateByValue("AnnID", item.AnnID);
-                            if (rowHandle >= 0)
-                            {
-                                archiveGridView.RefreshRow(rowHandle);
-                            }
+                            TryRefreshRowByAnnId(archiveGridView, item.AnnID);
 
-                            successCount++;
                             await _logger.LogEventAsync($"Статус записи AnnID: {item.AnnID} изменен с 'Архивное' на 'Актуальное'", "RestoreFromArchive");
-                        }
-                        catch (Exception ex)
-                        {
-                            string errorMsg = $"AnnID: {item.AnnID} - {ex.Message}";
-                            errors.Add(errorMsg);
-                            await _logger.LogErrorAsync(ex, $"Ошибка при восстановлении записи из архива AnnID: {item.AnnID}");
                         }
                     }
                 }

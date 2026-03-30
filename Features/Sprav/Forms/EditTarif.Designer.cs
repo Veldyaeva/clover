@@ -436,7 +436,7 @@ namespace SewingProduction.Features.Sprav.Forms
             customLabelPriznByh.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabelPriznByh.Appearance.Options.UseFont = true;
             customLabelPriznByh.Appearance.Options.UseTextOptions = true;
-            customLabelPriznByh.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelPriznByh.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelPriznByh.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelPriznByh.Dock = System.Windows.Forms.DockStyle.Left;
             customLabelPriznByh.Location = new System.Drawing.Point(3, 292);
@@ -462,7 +462,7 @@ namespace SewingProduction.Features.Sprav.Forms
             customLabelPriznEco.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabelPriznEco.Appearance.Options.UseFont = true;
             customLabelPriznEco.Appearance.Options.UseTextOptions = true;
-            customLabelPriznEco.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelPriznEco.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelPriznEco.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelPriznEco.Dock = System.Windows.Forms.DockStyle.Left;
             customLabelPriznEco.Location = new System.Drawing.Point(3, 262);
@@ -500,7 +500,7 @@ namespace SewingProduction.Features.Sprav.Forms
             customLabelNull.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabelNull.Appearance.Options.UseFont = true;
             customLabelNull.Appearance.Options.UseTextOptions = true;
-            customLabelNull.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelNull.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelNull.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelNull.Dock = System.Windows.Forms.DockStyle.Left;
             customLabelNull.Location = new System.Drawing.Point(3, 61);
@@ -514,7 +514,7 @@ namespace SewingProduction.Features.Sprav.Forms
             customLabelOrg.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabelOrg.Appearance.Options.UseFont = true;
             customLabelOrg.Appearance.Options.UseTextOptions = true;
-            customLabelOrg.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelOrg.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelOrg.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelOrg.Dock = System.Windows.Forms.DockStyle.Left;
             customLabelOrg.Location = new System.Drawing.Point(3, 232);
@@ -529,7 +529,7 @@ namespace SewingProduction.Features.Sprav.Forms
             customLabelZnach.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabelZnach.Appearance.Options.UseFont = true;
             customLabelZnach.Appearance.Options.UseTextOptions = true;
-            customLabelZnach.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelZnach.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelZnach.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelZnach.Dock = System.Windows.Forms.DockStyle.Left;
             customLabelZnach.Location = new System.Drawing.Point(3, 203);
@@ -543,6 +543,9 @@ namespace SewingProduction.Features.Sprav.Forms
             // 
             customLabelDate.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabelDate.Appearance.Options.UseFont = true;
+            customLabelDate.Appearance.Options.UseTextOptions = true;
+            customLabelDate.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabelDate.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelDate.Dock = System.Windows.Forms.DockStyle.Left;
             customLabelDate.Location = new System.Drawing.Point(3, 174);
             customLabelDate.Name = "customLabelDate";
@@ -556,7 +559,7 @@ namespace SewingProduction.Features.Sprav.Forms
             customLabelType.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabelType.Appearance.Options.UseFont = true;
             customLabelType.Appearance.Options.UseTextOptions = true;
-            customLabelType.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelType.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelType.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelType.Dock = System.Windows.Forms.DockStyle.Left;
             customLabelType.Location = new System.Drawing.Point(3, 144);
@@ -571,7 +574,7 @@ namespace SewingProduction.Features.Sprav.Forms
             customLabelOpis.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabelOpis.Appearance.Options.UseFont = true;
             customLabelOpis.Appearance.Options.UseTextOptions = true;
-            customLabelOpis.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelOpis.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelOpis.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelOpis.Dock = System.Windows.Forms.DockStyle.Left;
             customLabelOpis.Location = new System.Drawing.Point(3, 87);
@@ -586,7 +589,7 @@ namespace SewingProduction.Features.Sprav.Forms
             customLabelRazm.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabelRazm.Appearance.Options.UseFont = true;
             customLabelRazm.Appearance.Options.UseTextOptions = true;
-            customLabelRazm.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelRazm.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelRazm.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelRazm.Dock = System.Windows.Forms.DockStyle.Left;
             customLabelRazm.Location = new System.Drawing.Point(3, 32);
@@ -613,7 +616,7 @@ namespace SewingProduction.Features.Sprav.Forms
             customLabelName.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabelName.Appearance.Options.UseFont = true;
             customLabelName.Appearance.Options.UseTextOptions = true;
-            customLabelName.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelName.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelName.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelName.Dock = System.Windows.Forms.DockStyle.Left;
             customLabelName.Location = new System.Drawing.Point(3, 3);
@@ -726,7 +729,7 @@ namespace SewingProduction.Features.Sprav.Forms
             customLabelWhereUses.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabelWhereUses.Appearance.Options.UseFont = true;
             customLabelWhereUses.Appearance.Options.UseTextOptions = true;
-            customLabelWhereUses.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelWhereUses.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelWhereUses.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelWhereUses.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelWhereUses.Location = new System.Drawing.Point(3, 322);

@@ -133,7 +133,7 @@
     <value>Arial, 10pt</value>
   </data>
   <data name="gridBrig.Location" type="System.Drawing.Point, System.Drawing">
-    <value>407, 22</value>
+    <value>407, 32</value>
   </data>
   <data name="gridBrig.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -145,7 +145,7 @@
     <value>163, 346</value>
   </data>
   <data name="gridBrig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 555</value>
+    <value>260, 545</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="gridBrig.TabIndex" type="System.Int32, mscorlib">
@@ -161,7 +161,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;gridBrig.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <metadata name="bindingZeh.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>154, 17</value>
@@ -176,7 +176,7 @@
     <value>Arial, 10pt</value>
   </data>
   <data name="gridZeh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+    <value>4, 32</value>
   </data>
   <data name="gridZeh.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -188,7 +188,7 @@
     <value>222, 346</value>
   </data>
   <data name="gridZeh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>395, 555</value>
+    <value>395, 545</value>
   </data>
   <data name="gridZeh.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -203,85 +203,10 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;gridZeh.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <metadata name="bindingOborud.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>291, 17</value>
-  </metadata>
-  <data name="gridOborud.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="gridOborud.EmbeddedNavigator.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 3, 4, 3</value>
-  </data>
-  <data name="gridOborud.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 10pt</value>
-  </data>
-  <data name="gridOborud.Location" type="System.Drawing.Point, System.Drawing">
-    <value>675, 22</value>
-  </data>
-  <data name="gridOborud.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 3, 4, 3</value>
-  </data>
-  <data name="gridOborud.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1097, 1049</value>
-  </data>
-  <data name="gridOborud.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>362, 346</value>
-  </data>
-  <data name="gridOborud.Size" type="System.Drawing.Size, System.Drawing">
-    <value>665, 555</value>
-  </data>
-  <data name="gridOborud.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;gridOborud.Name" xml:space="preserve">
-    <value>gridOborud</value>
-  </data>
-  <data name="&gt;&gt;gridOborud.Type" xml:space="preserve">
-    <value>SewingProduction.Core.Class.CustomGridControl, SewingProduction, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;gridOborud.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;gridOborud.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Times New Roman, 12pt, style=Bold</value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>675, 0</value>
-  </data>
-  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 19</value>
-  </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Кол-во оборудования в цехе:                 🖱 Двойной щелчок для редактирования </value>
-  </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
-  </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="linkLabelBrig.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
@@ -293,7 +218,7 @@
     <value>Times New Roman, 12pt, style=Bold</value>
   </data>
   <data name="linkLabelBrig.Location" type="System.Drawing.Point, System.Drawing">
-    <value>407, 0</value>
+    <value>407, 5</value>
   </data>
   <data name="linkLabelBrig.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -329,7 +254,7 @@
     <value>Times New Roman, 12pt, style=Bold</value>
   </data>
   <data name="linkLabelZeh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 0</value>
+    <value>4, 5</value>
   </data>
   <data name="linkLabelZeh.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -353,10 +278,73 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;linkLabelZeh.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
-  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 12pt, style=Bold</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>675, 0</value>
+  </data>
+  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>434, 29</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Кол-во оборудования в цехе:           🖱 Двойной щелчок для редактирования </value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="customButtonExcel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="customButtonExcel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10pt</value>
+  </data>
+  <data name="customButtonExcel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1211, 3</value>
+  </data>
+  <data name="customButtonExcel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 23</value>
+  </data>
+  <data name="customButtonExcel.TabIndex" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="customButtonExcel.Text" xml:space="preserve">
+    <value>Excel</value>
+  </data>
+  <data name="&gt;&gt;customButtonExcel.Name" xml:space="preserve">
+    <value>customButtonExcel</value>
+  </data>
+  <data name="&gt;&gt;customButtonExcel.Type" xml:space="preserve">
+    <value>SewingProduction.Core.Class.CustomButton, SewingProduction, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;customButtonExcel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;customButtonExcel.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -389,7 +377,49 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="linkLabelBrig" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="gridZeh" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="linkLabelZeh" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="gridOborud" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="gridBrig" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,30,Percent,20,Percent,50" /&gt;&lt;Rows Styles="Percent,3,275862,Percent,96,72414" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="linkLabelBrig" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="gridZeh" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="linkLabelZeh" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="gridOborud" Row="1" RowSpan="1" Column="2" ColumnSpan="2" /&gt;&lt;Control Name="gridBrig" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="customButtonExcel" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,30,Percent,20,Percent,40,Percent,10" /&gt;&lt;Rows Styles="Percent,5,Percent,95" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <metadata name="bindingOborud.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>291, 17</value>
+  </metadata>
+  <data name="gridOborud.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="gridOborud.EmbeddedNavigator.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 3, 4, 3</value>
+  </data>
+  <data name="gridOborud.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10pt</value>
+  </data>
+  <data name="gridOborud.Location" type="System.Drawing.Point, System.Drawing">
+    <value>675, 32</value>
+  </data>
+  <data name="gridOborud.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 3, 4, 3</value>
+  </data>
+  <data name="gridOborud.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>1097, 1049</value>
+  </data>
+  <data name="gridOborud.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>362, 346</value>
+  </data>
+  <data name="gridOborud.Size" type="System.Drawing.Size, System.Drawing">
+    <value>665, 545</value>
+  </data>
+  <data name="gridOborud.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;gridOborud.Name" xml:space="preserve">
+    <value>gridOborud</value>
+  </data>
+  <data name="&gt;&gt;gridOborud.Type" xml:space="preserve">
+    <value>SewingProduction.Core.Class.CustomGridControl, SewingProduction, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;gridOborud.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;gridOborud.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

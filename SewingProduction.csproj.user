@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_LastSelectedProfileId>D:\project\sewingproduction-9.0.net\Properties\PublishProfiles\ver.x32.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>D:\Work\sewingproduction\Properties\PublishProfiles\anyCPU.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="Core\Class\CustomControlsThemeable.cs">
@@ -64,6 +64,9 @@
     <Compile Update="Features\Articul\Forms\AddNewKopml.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\Articul\Forms\AppendArticul.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\Articul\Forms\Articul.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,9 +119,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyazCheck.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Features\KnittingProduction\Forms\TSDAccessManagement.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\SockProduction\Forms\ReportByNomZad.cs">
@@ -175,6 +175,12 @@
     <Compile Update="Features\Furnit\UserControl\FurnitZayavView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Features\Sprav\Reports\OborudBrigReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Features\Sprav\Reports\OborudBrigReportTotal.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Features\Tabel\Forms\CalculatorDay.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,7 +220,16 @@
     <Compile Update="Features\TeamWork\Forms\TeamWork.Articles.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.Bootstrap.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.Diagnostics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.EventBridge.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork.Events.cs">
@@ -223,10 +238,31 @@
     <Compile Update="Features\TeamWork\Forms\TeamWork.Helpers.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.Lifecycle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.UiState.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.Unbinding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.WorkDivisionActions.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork.WorkDivisions.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.CloneUtils.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.Contracts.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.UiState.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\UserDistribution\Forms\AboutBox.cs">
@@ -418,4 +454,5 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
 </Project>

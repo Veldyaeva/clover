@@ -25,7 +25,7 @@ namespace SewingProduction
         private Task RaiseChangedAsync(string table, string? changedFieldsCsv)
             => Changed?.Invoke(table, changedFieldsCsv) ?? Task.CompletedTask;
 
-        private readonly string _connectionString = SettingsManager.GetCurrentConnectionString();
+        private readonly string _connectionString = BuildListenerConnectionString();
         private readonly string _ownerName;
 
         private SqlConnection? _connection;
@@ -39,6 +39,7 @@ namespace SewingProduction
         private string _table = "";
         private DateTime _lastStartAttemptUtc = DateTime.MinValue;
         private int _startRetryScheduled;
+        private int _restartScheduled;
 
         private int _onChangeGate = 0;
 
@@ -266,6 +267,13 @@ namespace SewingProduction
 
             try
             {
+                if (_connection != null && _connection.State != ConnectionState.Closed)
+                    _connection.Close();
+            }
+            catch { }
+
+            try
+            {
                 _connection?.Dispose();
             }
             catch { }
@@ -374,40 +382,21 @@ namespace SewingProduction
                 if (_brokerStopped)
                     return;
 
-                //// Если подписка невалидна (SQL options/query restrictions),
-                //// не запускаем бесконечный цикл мгновенных переподписок.
-                //if (IsInvalidSubscription(e))
-                //{
-                //    _flagStartListening = false;
-                //    _brokerStopped = true;
-                //    Debug.WriteLine(
-                //        $"[ServiceBroker] Subscription invalid. Listening stopped for table={_table}. " +
-                //        $"type={e.Type}, info={e.Info}, source={e.Source}. " +
-                //        "Fix SELECT/query notification prerequisites before restarting listening.");
-                //    return;
-                //}
-
-                //// ВСЕГДА переподписываемся, если слушание активно и подписка валидна
-                //if (_flagStartListening)
-                //    StartListening(_fields, _table);
-                var shouldResubscribe = _flagStartListening;
-                if (shouldResubscribe)
+                if (IsInvalidSubscription(e))
                 {
-                    try
-                    {
-                        await StartListeningAsync(_fields, _table).ConfigureAwait(false);
-                    }
-                    catch (SqlException ex) when (ex.Number == -2 || ex.Number == 2714)
-                    {
-                        Debug.WriteLine(
-                            $"[ServiceBroker:{_brokerId}] Resubscribe delayed after SQL error: owner={OwnerName}, table={_table}, number={ex.Number}");
+                    Debug.WriteLine(
+                        $"[ServiceBroker:{_brokerId}] Subscription invalid. owner={OwnerName}, table={_table}, " +
+                        $"type={e.Type}, info={e.Info}, source={e.Source}");
 
-                        await Task.Delay(2000).ConfigureAwait(false);
-
-                        if (!_brokerStopped && _flagStartListening)
-                            await StartListeningAsync(_fields, _table).ConfigureAwait(false);
-                    }
+                    ScheduleRestart(
+                        reason: $"invalid-subscription:{e.Type}/{e.Info}/{e.Source}",
+                        delay: TimeSpan.FromSeconds(3));
+                    return;
                 }
+
+                ScheduleRestart(
+                    reason: $"notification:{e.Type}/{e.Info}/{e.Source}",
+                    delay: GetResubscribeDelay(e));
 
                 // UI/обновление — только если это реальное изменение данных
                 if (e.Type != SqlNotificationType.Change)
@@ -456,11 +445,12 @@ namespace SewingProduction
             {
                 try
                 {
-                    await Task.Delay(TimeSpan.FromSeconds(5)).ConfigureAwait(false);
+                    await Task.Delay(GetRetryDelay(reason)).ConfigureAwait(false);
                     if (_brokerStopped || !_flagStartListening || string.IsNullOrWhiteSpace(_table))
                         return;
 
-                    Debug.WriteLine($"[ServiceBroker] Retry StartListening: owner={_ownerName}, table={_table}, reason={reason}");
+                    Debug.WriteLine(
+                        $"[ServiceBroker:{_brokerId}] Retry StartListening: owner={OwnerName}, table={_table}, reason={reason}");
                     StartListening(_fields, _table);
                 }
                 catch { }
@@ -469,6 +459,93 @@ namespace SewingProduction
                     Interlocked.Exchange(ref _startRetryScheduled, 0);
                 }
             });
+        }
+
+        private void ScheduleRestart(string reason, TimeSpan delay)
+        {
+            if (_brokerStopped || !_flagStartListening || string.IsNullOrWhiteSpace(_table))
+                return;
+
+            if (Interlocked.Exchange(ref _restartScheduled, 1) == 1)
+                return;
+
+            Task.Run(async () =>
+            {
+                try
+                {
+                    if (delay > TimeSpan.Zero)
+                        await Task.Delay(delay).ConfigureAwait(false);
+
+                    if (_brokerStopped || !_flagStartListening || string.IsNullOrWhiteSpace(_table))
+                        return;
+
+                    try
+                    {
+                        await StartListeningAsync(_fields, _table).ConfigureAwait(false);
+                    }
+                    catch (SqlException ex) when (ex.Number == -2 || ex.Number == 2714 || ex.Number == 0)
+                    {
+                        Debug.WriteLine(
+                            $"[ServiceBroker:{_brokerId}] Restart deferred after SQL error: owner={OwnerName}, table={_table}, " +
+                            $"number={ex.Number}, reason={reason}");
+
+                        Interlocked.Exchange(ref _restartScheduled, 0);
+                        ScheduleStartRetry($"restart-sql:{ex.Number}");
+                        return;
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(
+                            $"[ServiceBroker:{_brokerId}] Restart failed: owner={OwnerName}, table={_table}, reason={reason}, error={ex.Message}");
+
+                        Interlocked.Exchange(ref _restartScheduled, 0);
+                        ScheduleStartRetry("restart-error");
+                        return;
+                    }
+                }
+                finally
+                {
+                    Interlocked.Exchange(ref _restartScheduled, 0);
+                }
+            });
+        }
+
+        private static TimeSpan GetResubscribeDelay(SqlNotificationEventArgs e)
+        {
+            if (e.Type != SqlNotificationType.Change)
+                return TimeSpan.FromSeconds(4);
+
+            if (e.Info == SqlNotificationInfo.Insert ||
+                e.Info == SqlNotificationInfo.Update ||
+                e.Info == SqlNotificationInfo.Delete ||
+                e.Info == SqlNotificationInfo.Merge)
+            {
+                // SqlDependency notifications are one-shot, but SQL may still be finalizing
+                // the previous registration immediately after a data change.
+                return TimeSpan.FromSeconds(2);
+            }
+
+            return TimeSpan.FromSeconds(4);
+        }
+
+        private static TimeSpan GetRetryDelay(string reason)
+        {
+            if (string.IsNullOrWhiteSpace(reason))
+                return TimeSpan.FromSeconds(8);
+
+            if (reason.Contains("restart-sql:2714", StringComparison.OrdinalIgnoreCase))
+                return TimeSpan.FromSeconds(20);
+
+            if (reason.Contains("restart-sql:-2", StringComparison.OrdinalIgnoreCase))
+                return TimeSpan.FromSeconds(15);
+
+            if (reason.Contains("restart-sql:0", StringComparison.OrdinalIgnoreCase))
+                return TimeSpan.FromSeconds(10);
+
+            if (reason.Contains("restart-error", StringComparison.OrdinalIgnoreCase))
+                return TimeSpan.FromSeconds(10);
+
+            return TimeSpan.FromSeconds(8);
         }
 
         private static bool IsInvalidSubscription(SqlNotificationEventArgs e)
@@ -494,6 +571,21 @@ namespace SewingProduction
 
             var t = incoming.Trim().Trim('[', ']');
             return $"[dbo].[{t}]";
+        }
+
+        private static string BuildListenerConnectionString()
+        {
+            var builder = new SqlConnectionStringBuilder(SettingsManager.GetCurrentConnectionString())
+            {
+                Pooling = false
+            };
+
+            if (string.IsNullOrWhiteSpace(builder.ApplicationName))
+                builder.ApplicationName = "SewingProduction.ServiceBroker";
+            else
+                builder.ApplicationName = builder.ApplicationName + ".ServiceBroker";
+
+            return builder.ConnectionString;
         }
     }
 }

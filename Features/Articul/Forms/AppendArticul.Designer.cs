@@ -1,6 +1,6 @@
-﻿namespace SewingProduction.Features.KnittingProduction.Forms
+﻿namespace SewingProduction.Features.Articul.Forms
 {
-    partial class TSDAccessManagement
+    partial class AppendArticul
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.Text = "AppendArticul";
         }
 
         #endregion

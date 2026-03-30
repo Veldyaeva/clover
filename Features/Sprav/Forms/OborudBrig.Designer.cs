@@ -45,6 +45,7 @@ namespace SewingProduction.form
             linkLabelBrig = new System.Windows.Forms.LinkLabel();
             linkLabelZeh = new System.Windows.Forms.LinkLabel();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            customButtonExcel = new CustomButton();
             ((System.ComponentModel.ISupportInitialize)gridBrig).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingBrig).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewBrig).BeginInit();
@@ -104,6 +105,7 @@ namespace SewingProduction.form
             // 
             // gridOborud
             // 
+            tableLayoutPanel1.SetColumnSpan(gridOborud, 2);
             gridOborud.DataSource = bindingOborud;
             resources.ApplyResources(gridOborud, "gridOborud");
             gridOborud.EmbeddedNavigator.Margin = (System.Windows.Forms.Padding)resources.GetObject("gridOborud.EmbeddedNavigator.Margin");
@@ -131,7 +133,6 @@ namespace SewingProduction.form
             // linkLabelBrig
             // 
             resources.ApplyResources(linkLabelBrig, "linkLabelBrig");
-            // linkLabelBrig.LinkColor = System.Drawing.Color.Black;
             linkLabelBrig.Name = "linkLabelBrig";
             linkLabelBrig.TabStop = true;
             linkLabelBrig.LinkClicked += linkLabelBrig_LinkClicked;
@@ -139,7 +140,6 @@ namespace SewingProduction.form
             // linkLabelZeh
             // 
             resources.ApplyResources(linkLabelZeh, "linkLabelZeh");
-            // linkLabelZeh.LinkColor = System.Drawing.Color.Black;
             linkLabelZeh.Name = "linkLabelZeh";
             linkLabelZeh.TabStop = true;
             linkLabelZeh.LinkClicked += labelZeh_LinkClicked;
@@ -149,12 +149,20 @@ namespace SewingProduction.form
             tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(tableLayoutPanel1, "tableLayoutPanel1");
             tableLayoutPanel1.Controls.Add(linkLabelBrig, 1, 0);
-            tableLayoutPanel1.Controls.Add(label2, 2, 0);
             tableLayoutPanel1.Controls.Add(gridZeh, 0, 1);
             tableLayoutPanel1.Controls.Add(linkLabelZeh, 0, 0);
             tableLayoutPanel1.Controls.Add(gridOborud, 2, 1);
             tableLayoutPanel1.Controls.Add(gridBrig, 1, 1);
+            tableLayoutPanel1.Controls.Add(label2, 2, 0);
+            tableLayoutPanel1.Controls.Add(customButtonExcel, 3, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // customButtonExcel
+            // 
+            resources.ApplyResources(customButtonExcel, "customButtonExcel");
+            customButtonExcel.Name = "customButtonExcel";
+            customButtonExcel.UseVisualStyleBackColor = true;
+            customButtonExcel.Click += customButtonExcel_Click;
             // 
             // OborudBrig
             // 
@@ -194,5 +202,6 @@ namespace SewingProduction.form
         private System.Windows.Forms.LinkLabel linkLabelZeh;
         private System.Windows.Forms.LinkLabel linkLabelBrig;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private CustomButton customButtonExcel;
     }
 }

@@ -125,10 +125,10 @@ namespace SewingProduction.Core
 
                     if (!ValidateSystemDate(out var dateError))
                     {
-                        //MessageBox.Show(dateError,
-                        //    "SewingProduction — Ошибка",
-                        //    MessageBoxButtons.OK,
-                        //    MessageBoxIcon.Error);
+                        MessageBox.Show(dateError,
+                            "SewingProduction — Ошибка",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
                         try { splashScreen.Close(); } catch { }
                         return;
                     }
@@ -318,6 +318,8 @@ namespace SewingProduction.Core
             services.AddSingleton<IAppServiceBrokerHub, AppServiceBrokerHub>();
             services.AddTransient<ILogger, HybridLogger>();
             services.AddTransient<IKnitterRepository, KnitterRepository>();
+            services.AddTransient<IKnitterWorkSpaceUiGateway, KnitterRepository>();
+            services.AddTransient<IKnitterShiftGateway, KnitterRepository>();
             services.AddTransient<IKnitterOrchestrator, KnitterOrchestrator>();
             services.AddTransient<KnitterWorkSpace>();
         }
