@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors.Repository;
@@ -22,6 +23,7 @@ namespace SewingProduction.form
         private readonly SpravOborudDataService _spravOborudDataService;
         private readonly IAppServiceBrokerHub _sbHub;
         private readonly string _sbHubOwnerId = $"SpravOborud:{Guid.NewGuid():N}";
+        private CancellationTokenSource? _sbLifetimeCts;
         int currentRowIndex = 0;//текущий индекс
         int topRowIndex = 0;//верхний индекс 
         //если добавили поле в таблицу:
@@ -116,7 +118,7 @@ namespace SewingProduction.form
                         UpdateDataInForm(table);
                         await Task.CompletedTask;
                     },
-                    ct: default);
+                    ct: GetServiceBrokerLifetimeToken());
                 flagStartListening = true;
             }
         }
@@ -303,7 +305,34 @@ namespace SewingProduction.form
         }
         private void SpravOborud_FormClosing(object sender, FormClosingEventArgs e)
         {
+            ShutdownServiceBroker();
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            try
+            {
+                ShutdownServiceBroker();
+            }
+            finally
+            {
+                base.OnFormClosed(e);
+            }
+        }
+
+        private void ShutdownServiceBroker()
+        {
+            try { _sbLifetimeCts?.Cancel(); } catch { }
             try { _sbHub.UnsubscribeAsync(_sbHubOwnerId).GetAwaiter().GetResult(); } catch { }
+            try { _sbLifetimeCts?.Dispose(); } catch { }
+            _sbLifetimeCts = null;
+            flagStartListening = false;
+        }
+
+        private CancellationToken GetServiceBrokerLifetimeToken()
+        {
+            _sbLifetimeCts ??= new CancellationTokenSource();
+            return _sbLifetimeCts.Token;
         }
 
     }

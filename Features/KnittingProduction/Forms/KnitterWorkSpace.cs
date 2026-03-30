@@ -207,7 +207,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         /// <summary>
-        /// Инициализирует форму рабочего места вязальщика.
+        /// Инициализирует форму рабочего места вязальщицы
         /// Настраивает источники данных, колонки гридов, оркестратор и подписки.
         /// </summary>
         public KnitterWorkSpace(UserClass user) : base(user)
@@ -1389,6 +1389,18 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             await ShutdownServiceBrokerAsync();
         }
 
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            try
+            {
+                EnsureServiceBrokerShutdownOnClosed();
+            }
+            finally
+            {
+                base.OnFormClosed(e);
+            }
+        }
+
         private async Task ShutdownServiceBrokerAsync()
         {
             if (Interlocked.Exchange(ref _serviceBrokerShutdownStarted, 1) != 0)
@@ -1419,6 +1431,21 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _sbService = null;
                 try { _sbCts?.Dispose(); } catch { }
                 _sbCts = null;
+            }
+        }
+
+        private void EnsureServiceBrokerShutdownOnClosed()
+        {
+            if (Interlocked.CompareExchange(ref _serviceBrokerShutdownStarted, 1, 1) == 1)
+                return;
+
+            try
+            {
+                Task.Run(() => ShutdownServiceBrokerAsync()).GetAwaiter().GetResult();
+            }
+            catch
+            {
+                LogWarning("Ошибка при fallback-завершении ServiceBroker после закрытия формы.", nameof(EnsureServiceBrokerShutdownOnClosed));
             }
         }
 
