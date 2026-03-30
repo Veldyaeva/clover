@@ -121,9 +121,6 @@
     <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyazCheck.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\KnittingProduction\Forms\TSDAccessManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Features\SockProduction\Forms\ReportByNomZad.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -274,28 +271,40 @@
     <Compile Update="Features\UserDistribution\Forms\ActionHistory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\AdminForm.cs">
+    <Compile Update="Features\UserDistribution\Forms\MasterRight\MrChoiceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\Role\AdminForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\UserDistribution\Forms\AllDistribution.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\AllRole.cs">
+    <Compile Update="Features\UserDistribution\Forms\Role\AllRole.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\AllUser.cs">
+    <Compile Update="Features\UserDistribution\Forms\Role\RoleFormObject.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\Dictionary.cs">
+    <Compile Update="Features\UserDistribution\Forms\User\AllUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\RolePodr.cs">
+    <Compile Update="Features\UserDistribution\Forms\Table\Dictionary.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\ShareUser.cs">
+    <Compile Update="Features\UserDistribution\Forms\MasterRight\MrMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\UserPodr.cs">
+    <Compile Update="Features\UserDistribution\Forms\Podr\RolePodr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\User\ShareUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\Podr\UserPodr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\User\UserRole.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Help\Form\HelpForm.cs">
@@ -307,13 +316,13 @@
     <Compile Update="Core\Forms\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\RoleColumn.cs">
+    <Compile Update="Features\UserDistribution\Forms\Table\RoleColumn.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\UserProfile.cs">
+    <Compile Update="Features\UserDistribution\Forms\User\UserProfile.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\UserHierarchy.cs">
+    <Compile Update="Features\UserDistribution\Forms\User\UserHierarchy.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Help\Form\HelpFormAdmin.cs">
@@ -441,8 +450,9 @@
     <EmbeddedResource Update="Features\UserDistribution\Forms\AllDistribution.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="Features\UserDistribution\Forms\AllRole.resx">
+    <EmbeddedResource Update="Features\UserDistribution\Forms\Role\AllRole.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
 </Project>

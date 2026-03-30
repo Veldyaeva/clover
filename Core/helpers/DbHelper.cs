@@ -363,6 +363,42 @@ namespace SewingProduction.Helpers
             }
             return res;
         }
+        public T ExecuteScalar<T>(string query, Dictionary<string, object> parameters = null)
+        {
+            object result;
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (var command = new SqlCommand(query, connection))
+                {
+                    if (parameters != null)
+                    {
+                        foreach (var param in parameters)
+                        {
+                            command.Parameters.AddWithValue(param.Key, param.Value ?? DBNull.Value);
+                        }
+                    }
+
+                    result = command.ExecuteScalar();
+                }
+            }
+
+            if (result == null || result == DBNull.Value)
+                return default;
+
+            if (result is T t)
+                return t;
+
+            try
+            {
+                return (T)System.Convert.ChangeType(result, typeof(T));
+            }
+            catch
+            {
+                return default;
+            }
+        }
         /// <summary>
         /// Проверяет, возвращает ли запрос хотя бы одну строку.
         /// </summary>

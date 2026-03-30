@@ -10,7 +10,7 @@ using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 
-namespace SewingProduction.Features.Sprav
+namespace SewingProduction.Features.Sprav.Forms
 {
     public partial class EditTarif : CustomForm
     {

@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.CodeParser;
@@ -30,6 +31,7 @@ namespace SewingProduction.form
         private readonly OborudBrigDataService _oborudBrigDataService;
         private readonly IAppServiceBrokerHub _sbHub;
         private readonly string _sbHubOwnerId = $"OborudBrig:{Guid.NewGuid():N}";
+        private CancellationTokenSource? _sbLifetimeCts;
         private SqlDependency sqlDependency;
         private SqlConnection connection;
         bool flagStartListening = false; //вкл прослушки
@@ -68,7 +70,7 @@ namespace SewingProduction.form
                         UpdateDataInForm(table);
                         await Task.CompletedTask;
                     },
-                    ct: default);
+                    ct: GetServiceBrokerLifetimeToken());
                 flagStartListening = true;
             }
             gridOborud_Load(null, EventArgs.Empty);
@@ -218,7 +220,34 @@ namespace SewingProduction.form
         }
         private void OborudBrig_FormClosing(object sender, FormClosingEventArgs e)
         {
+            ShutdownServiceBroker();
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            try
+            {
+                ShutdownServiceBroker();
+            }
+            finally
+            {
+                base.OnFormClosed(e);
+            }
+        }
+
+        private void ShutdownServiceBroker()
+        {
+            try { _sbLifetimeCts?.Cancel(); } catch { }
             try { _sbHub.UnsubscribeAsync(_sbHubOwnerId).GetAwaiter().GetResult(); } catch { }
+            try { _sbLifetimeCts?.Dispose(); } catch { }
+            _sbLifetimeCts = null;
+            flagStartListening = false;
+        }
+
+        private CancellationToken GetServiceBrokerLifetimeToken()
+        {
+            _sbLifetimeCts ??= new CancellationTokenSource();
+            return _sbLifetimeCts.Token;
         }
         private void customButtonExcel_Click(object sender, EventArgs e)
         {
