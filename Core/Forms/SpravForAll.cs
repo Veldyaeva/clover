@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid;
@@ -21,6 +22,7 @@ namespace SewingProduction.form
         private readonly SpravAllDataService _spravAllDataService;
         private readonly IAppServiceBrokerHub _sbHub;
         private readonly string _sbHubOwnerId = $"SpravForAll:{Guid.NewGuid():N}";
+        private CancellationTokenSource? _sbLifetimeCts;
         int strForAdd;
         string columns;
         string whereSQL;
@@ -45,7 +47,7 @@ namespace SewingProduction.form
         Dictionary<string, int> rus_read = new Dictionary<string, int>();
         Dictionary<string, object> columnDefaults = new Dictionary<string, object>();
         //Таймер для уведомления о сохранении:
-        private Timer timer;
+        private System.Windows.Forms.Timer timer;
         bool _servBrok = false;
 
         public SpravForAll(
@@ -67,7 +69,7 @@ namespace SewingProduction.form
             // Пользователь:
             _user = user;
             // Таймер
-            timer = new Timer { Interval = 2000 };
+            timer = new System.Windows.Forms.Timer { Interval = 2000 };
             timer.Tick += Timer_Tick;
 
             // Таблица
@@ -97,7 +99,7 @@ namespace SewingProduction.form
             fieldsQueryListSQL = new List<string>();
             labels = new[] { labelKod, label1, label2, label3, label4, label5, label6, label7, label8, label9, label10 };
             textBoxs = new[] { textBoxKod, textBox1, textBox2, textBox3, textBox4, textBox5, textBox6, textBox7, textBox8, textBox9, textBox10 };
-            timer = new Timer { Interval = 2000 };
+            timer = new System.Windows.Forms.Timer { Interval = 2000 };
             timer.Tick += Timer_Tick;
         }
 
@@ -202,7 +204,7 @@ namespace SewingProduction.form
                         UpdateDataInForm(table);
                         await Task.CompletedTask;
                     },
-                    ct: default);
+                    ct: GetServiceBrokerLifetimeToken());
                 flagStartListening = true;
             }
         }
@@ -430,6 +432,7 @@ namespace SewingProduction.form
         //закрытие формы:
         private void SpravForAll_FormClosing(object sender, FormClosingEventArgs e)
         {
+            try { _sbLifetimeCts?.Cancel(); } catch { }
             try { _sbHub.UnsubscribeAsync(_sbHubOwnerId).GetAwaiter().GetResult(); } catch { }
             if (_servBrok)
                 flagStartListening = false;
@@ -437,7 +440,17 @@ namespace SewingProduction.form
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             try { _sbHub.UnsubscribeAsync(_sbHubOwnerId).GetAwaiter().GetResult(); } catch { }
+            try { _sbLifetimeCts?.Dispose(); } catch { }
+            _sbLifetimeCts = null;
+            if (_servBrok)
+                flagStartListening = false;
             base.OnFormClosed(e);
+        }
+
+        private CancellationToken GetServiceBrokerLifetimeToken()
+        {
+            _sbLifetimeCts ??= new CancellationTokenSource();
+            return _sbLifetimeCts.Token;
         }
     }
 

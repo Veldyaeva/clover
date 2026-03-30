@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid;
@@ -20,13 +21,14 @@ namespace SewingProduction.form
         private readonly SpravZehDataService _spravZehDataService;
         private readonly IAppServiceBrokerHub _sbHub;
         private readonly string _sbHubOwnerId = $"SpravZeh:{Guid.NewGuid():N}";
+        private CancellationTokenSource? _sbLifetimeCts;
         //чтобы перейти к нужной строке в таблице:
         int currentRowIndex = 0;//текущий индекс
         int topRowIndex = 0;//верхний индекс 
         bool flagAddDown = false; //если добавили поле в таблицу
         bool flagStartListening = false; //вкл прослушки
         //Таймер для уведомления о сохранении:
-        private Timer timer;
+        private System.Windows.Forms.Timer timer;
         string _tableSQL;
 
         public SpravZeh(UserClass user, string tableSQL, string rusNameTableSQL) : base(user)
@@ -37,7 +39,7 @@ namespace SewingProduction.form
             _sbHub = AppServices.Services?.GetService<IAppServiceBrokerHub>() ?? new AppServiceBrokerHub();
           //  ThemeManager.UpdateTheme(this);
             //Таймер
-            timer = new Timer();
+            timer = new System.Windows.Forms.Timer();
             timer.Interval = 2000;
             timer.Tick += Timer_Tick;
             _tableSQL = tableSQL;
@@ -105,7 +107,7 @@ namespace SewingProduction.form
                         UpdateDataInForm(table);
                         await Task.CompletedTask;
                     },
-                    ct: default);
+                    ct: GetServiceBrokerLifetimeToken());
                 flagStartListening = true;
             }
         }
@@ -269,7 +271,34 @@ namespace SewingProduction.form
         // Закрытие формы:
         private void SpravForAll_FormClosing(object sender, FormClosingEventArgs e)
         {
+            ShutdownServiceBroker();
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            try
+            {
+                ShutdownServiceBroker();
+            }
+            finally
+            {
+                base.OnFormClosed(e);
+            }
+        }
+
+        private void ShutdownServiceBroker()
+        {
+            try { _sbLifetimeCts?.Cancel(); } catch { }
             try { _sbHub.UnsubscribeAsync(_sbHubOwnerId).GetAwaiter().GetResult(); } catch { }
+            try { _sbLifetimeCts?.Dispose(); } catch { }
+            _sbLifetimeCts = null;
+            flagStartListening = false;
+        }
+
+        private CancellationToken GetServiceBrokerLifetimeToken()
+        {
+            _sbLifetimeCts ??= new CancellationTokenSource();
+            return _sbLifetimeCts.Token;
         }
 
     }
