@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using DevExpress.Charts.Native;
 using DevExpress.XtraEditors;
 using SewingProduction.Features.UserDistribution.Class;
 using SewingProduction.Features.UserDistribution.Forms;
@@ -119,57 +120,94 @@ namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
 
         private void BuildHelpFromContext()
         {
-            _help = "";
-
-            if (_context.NeedCreateUser)
+            if (_currentStepIndex < 0 || _currentStepIndex >= _steps.Count)
             {
-                _help += "Форма пользователей, ";
-
-                if (_context.UserMode == MrUserMode.New)
-                {
-                    _help += "введите данные и нажмите 'Сохранить', ";
-                }
-
-                if (_context.UserMode == MrUserMode.Copy)
-                {
-                    _help += "выберите пользователя и нажмите кнопку 'Копировать пользователя', ";
-                }
+                customTextBoxHelp.Text = string.Empty;
+                return;
             }
 
-            if (_context.NeedCreateRole)
+            MrStepItem currentStep = _steps[_currentStepIndex];
+            List<string> lines = new List<string>();
+
+            switch (currentStep.StepType)
             {
-                _help += "Форма роли, ";
+                case MrStepType.Choice:
+                    lines.Add("Отметьте галочками нужные действия мастера.");
+                    break;
 
-                if (_context.RoleMode == MrRoleMode.New)
-                {
-                    _help += "введите данные и нажмите 'Сохранить', ";
-                }
+                case MrStepType.CreateUser:
+                    if (_context.UserMode == MrUserMode.New)
+                    {
+                        lines.Add("Шаг создания пользователя.");
+                        lines.Add("Заполните данные пользователя и сохраните запись.");
+                    }
+                    else if (_context.UserMode == MrUserMode.Copy)
+                    {
+                        lines.Add("Шаг копирования пользователя.");
+                        lines.Add("Выберите пользователя, нажмите 'Копировать пользователя', затем при необходимости исправьте данные и сохраните запись.");
+                    }
+                    else
+                    {
+                        lines.Add("Шаг работы с пользователями.");
+                    }
+                    break;
 
-                if (_context.RoleMode == MrRoleMode.Copy)
-                {
-                    _help += "выберите роль и нажмите кнопку 'Копировать пользователя', ";
-                }
+                case MrStepType.CreateRole:
+                    if (_context.RoleMode == MrRoleMode.New)
+                    {
+                        lines.Add("Шаг создания роли.");
+                        lines.Add("Заполните данные роли и сохраните запись.");
+                    }
+                    else if (_context.RoleMode == MrRoleMode.Copy)
+                    {
+                        lines.Add("Шаг копирования роли.");
+                        lines.Add("Выберите роль, нажмите 'Копировать роль', затем при необходимости исправьте данные и сохраните запись.");
+                    }
+                    else
+                    {
+                        lines.Add("Шаг работы с ролями.");
+                    }
+                    break;
+
+                case MrStepType.AdminForm:
+                    string skan = "";
+                    if (_context.AdminNeedAddMenu)
+                    {
+                        skan += "Меню отсканировано, ";
+                    }
+                    if (_context.AdminNeedAddForms)
+                    {
+                        skan += "Формы отсканированы";
+                    }
+                    lines.Add(skan);
+                    if (_context.AdminNeedAddElements)
+                    {
+                        lines.Add("Добавьте в базу формы проекта, элементы управления и пункты меню.");
+                    }
+                    break;
+
+                case MrStepType.AssignRoleObject:
+                    lines.Add("Шаг добавления элементов в роль.");
+                    lines.Add("Выберите роль и свяжите с ней нужные формы, элементы или пункты меню.");
+                    break;
+
+                case MrStepType.AssignUserRole:
+                    lines.Add("Шаг назначения роли пользователю.");
+                    lines.Add("Выберите пользователя и назначьте ему нужную роль.");
+                    break;
+
+                default:
+                    lines.Add("Текущий шаг мастера.");
+                    break;
             }
 
-            if (_context.NeedAdminForm)
-            {
-                _help += "";
-            }
+            if (_currentStepIndex < _steps.Count - 1)
+                lines.Add("Для перехода дальше нажмите 'Далее'.");
 
-            if (_context.NeedAssignRoleObject)
-            {
-                _help += "";
-            }
+            if (_steps.Count > 1 && _currentStepIndex == _steps.Count - 1)
+                lines.Add("Для завершения мастера нажмите 'Завершить'.");
 
-            if (_context.NeedAssignUserRole)
-            {
-                _help += "";
-            }
-
-            _help += (_currentStepIndex >= 0 && _currentStepIndex < _steps.Count) ? "\n Нажмите 'Далее'" : "";
-            _help += (_steps.Count > 1 && _currentStepIndex == _steps.Count - 1) ? "\n Нажмите 'Завершить'" : "";
-
-            customTextBoxHelp.Text = _help;
+            customTextBoxHelp.Text = string.Join(Environment.NewLine, lines);
         }
         private void RefreshStepList()
         {
@@ -352,11 +390,6 @@ namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
             Close();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-            Close();
-        }
 
         #endregion
 
