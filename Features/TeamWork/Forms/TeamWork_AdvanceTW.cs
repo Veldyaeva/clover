@@ -185,17 +185,8 @@ namespace SewingProduction.Features.TeamWork.Forms
         public TeamWork_AdvanceTW(int bufferWorkDivision, int mode, int? newId = null, int? oldId = null, int? sourceAnnIdToCopyDetailsFrom = null, MyDataART initialArtData = null, ArtNormN duplicateAnnData = null)
         {
             InitializeComponent();
-            gridViewRasz.OptionsView.ShowIndicator = true;
-            gridViewRasz.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDown;
-            gridViewRasz.Appearance.Row.ForeColor = Color.Black;
-            gridViewRasz.Appearance.FocusedRow.ForeColor = Color.Black;
-            gridViewRasz.Appearance.FocusedCell.ForeColor = Color.Black;
-            gridViewRasz.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
 
             // Настройка мультиселекта с галочками
-            gridViewRasz.OptionsSelection.MultiSelect = true;
-            gridViewRasz.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
-            gridViewRasz.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
 
             // DnD подписки для Rasz перенесены в RaszOperationsController
 
@@ -205,6 +196,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
             _artNormService = new ArtNormRepository(_dbHelper);
+            _baseNodeLibraryService = new BaseNodeLibraryService(_dbHelper, _logger);
             // Инициализируем сервисы декомпозиции (пока без DI контейнера)
             // Адаптеры для интерфейсов до внедрения DI
             _dataService = new TeamWorkDataServiceAdapter(_artNormService, _dbService);
@@ -228,7 +220,6 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             // Проставляем теги для customHeaderButtons (используются в общих обработчиках кликов)
             InitHeaderButtonTags();
-            InitializeBaseNodeActions();
 
             // Подписка на клики по кнопкам заголовков
             try
@@ -288,6 +279,21 @@ namespace SewingProduction.Features.TeamWork.Forms
                     {
                         var b2 = layoutControlGroup10.CustomHeaderButtons[2] as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton;
                         if (b2 != null) b2.Tag = "op:convert";
+                    }
+                    if (layoutControlGroup10.CustomHeaderButtons.Count > 3)
+                    {
+                        var b3 = layoutControlGroup10.CustomHeaderButtons[3] as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton;
+                        if (b3 != null) b3.Tag = "op:add-operation";
+                    }
+                    if (layoutControlGroup10.CustomHeaderButtons.Count > 4)
+                    {
+                        var b4 = layoutControlGroup10.CustomHeaderButtons[4] as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton;
+                        if (b4 != null) b4.Tag = "op:add-base-node";
+                    }
+                    if (layoutControlGroup10.CustomHeaderButtons.Count > 5)
+                    {
+                        var b5 = layoutControlGroup10.CustomHeaderButtons[5] as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton;
+                        if (b5 != null) b5.Tag = "op:save-base-node";
                     }
                 }
             }
