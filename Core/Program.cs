@@ -87,7 +87,8 @@ namespace SewingProduction.Core
                 }
 
                 SetIEFeatureMode();
-                GridLocalizer.Active = new CustomLocalizer();
+                GridLocalizer.Active = new global::RussianGridLocalizer();
+                DevExpress.XtraEditors.Controls.Localizer.Active = new SewingProduction.CustomControls.RuEditorsLocalizer();
 
                 Application.EnableVisualStyles();
                 EnsureSeasonImagesInRoaming();
@@ -322,28 +323,6 @@ namespace SewingProduction.Core
             services.AddTransient<IKnitterShiftGateway, KnitterRepository>();
             services.AddTransient<IKnitterOrchestrator, KnitterOrchestrator>();
             services.AddTransient<KnitterWorkSpace>();
-        }
-        public class CustomLocalizer : GridLocalizer
-        {
-            public override string GetLocalizedString(GridStringId id)
-            {
-                switch (id)
-                {
-                    case GridStringId.EditFormUpdateButton:
-                        return "Сохранить";
-                    case GridStringId.EditFormCancelButton:
-                        return "Отмена";
-                    case GridStringId.FindControlFindButton:
-                        return "Найти";
-                    case GridStringId.CustomFilterDialogCancelButton:
-                        return "Отмена";
-                    case GridStringId.CustomFilterDialogCaption:
-                        return "Настройка фильтра";
-                    case GridStringId.FilterPanelCustomizeButton: return "Настроить";
-                    default:
-                        return base.GetLocalizedString(id);
-                }
-            }
         }
         private static void SetIEFeatureMode()
         {

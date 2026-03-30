@@ -46,6 +46,35 @@ namespace SewingProduction.CustomControls
         {
             if (id == StringId.DateEditToday) return "Сегодня";
             if (id == StringId.DateEditClear) return "Очистить";
+            if (id == StringId.FilterClauseAnyOf) return "Любой из";
+            if (id == StringId.FilterClauseBeginsWith) return "Начинается с";
+            if (id == StringId.FilterClauseBetween) return "Между";
+            if (id == StringId.FilterClauseBetweenAnd) return "и";
+            if (id == StringId.FilterClauseContains) return "Содержит";
+            if (id == StringId.FilterClauseEndsWith) return "Заканчивается на";
+            if (id == StringId.FilterClauseEquals) return "Равно";
+            if (id == StringId.FilterClauseGreater) return "Больше";
+            if (id == StringId.FilterClauseGreaterOrEqual) return "Больше или равно";
+            if (id == StringId.FilterClauseInRange) return "В диапазоне";
+            if (id == StringId.FilterClauseNotInRange) return "Вне диапазона";
+            if (id == StringId.FilterClauseInRangeFrom) return "от";
+            if (id == StringId.FilterClauseInRangeTo) return "до";
+            if (id == StringId.FilterClauseIsNotNull) return "Не пусто";
+            if (id == StringId.FilterClauseIsNull) return "Пусто";
+            if (id == StringId.FilterClauseIsNotNullOrEmpty) return "Не пусто";
+            if (id == StringId.FilterClauseIsNullOrEmpty) return "Пусто";
+            if (id == StringId.FilterClauseLess) return "Меньше";
+            if (id == StringId.FilterClauseLessOrEqual) return "Меньше или равно";
+            if (id == StringId.FilterClauseLike) return "Похоже на";
+            if (id == StringId.FilterClauseNoneOf) return "Ни один из";
+            if (id == StringId.FilterClauseNotBetween) return "Не между";
+            if (id == StringId.FilterClauseDoesNotContain) return "Не содержит";
+            if (id == StringId.FilterClauseDoesNotEqual) return "Не равно";
+            if (id == StringId.FilterClauseNotLike) return "Не похоже на";
+            if (id == StringId.FilterClauseInDateRange) return "В диапазоне дат";
+            if (id == StringId.FilterClauseNotInDateRange) return "Вне диапазона дат";
+            if (id == StringId.FilterClauseInTimeRange) return "В диапазоне времени";
+            if (id == StringId.FilterClauseOutOfTimeRange) return "Вне диапазона времени";
             return base.GetLocalizedString(id);
         }
     }
