@@ -604,7 +604,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewRasz.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
             gridViewRasz.OptionsBehavior.AutoExpandAllGroups = true;
             gridViewRasz.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
-            gridViewRasz.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDownFocused;
+            gridViewRasz.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDown;
             gridViewRasz.OptionsClipboard.PasteMode = DevExpress.Export.PasteMode.Append;
             gridViewRasz.OptionsEditForm.EditFormColumnCount = 1;
             gridViewRasz.OptionsEditForm.PopupEditFormWidth = 600;

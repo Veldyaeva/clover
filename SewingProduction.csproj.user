@@ -211,6 +211,12 @@
     <Compile Update="Features\TeamWork\Forms\AnnLog.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\TeamWork\Forms\BaseNodeInsertForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\BaseNodeSaveForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\TeamWork\Forms\NormOperNew.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -251,6 +257,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork.WorkDivisions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.BaseNodes.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.CloneUtils.cs">

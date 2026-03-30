@@ -186,7 +186,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             InitializeComponent();
             gridViewRasz.OptionsView.ShowIndicator = true;
-            gridViewRasz.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDownFocused;
+            gridViewRasz.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDown;
             gridViewRasz.Appearance.Row.ForeColor = Color.Black;
             gridViewRasz.Appearance.FocusedRow.ForeColor = Color.Black;
             gridViewRasz.Appearance.FocusedCell.ForeColor = Color.Black;
@@ -228,6 +228,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             // Проставляем теги для customHeaderButtons (используются в общих обработчиках кликов)
             InitHeaderButtonTags();
+            InitializeBaseNodeActions();
 
             // Подписка на клики по кнопкам заголовков
             try
@@ -342,6 +343,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                         //ValidateAndFixOperationNumbers();
                         RecalculateAllOperationNumbers();
                         //RecalculateNumbers();
+                        break;
+                    case "op:add-operation":
+                        _ = AddOperationPresenterAsync();
+                        break;
+                    case "op:add-base-node":
+                        AddBaseNodeFromLibrary();
+                        break;
+                    case "op:save-base-node":
+                        SaveSelectionAsBaseNode();
                         break;
                 }
             }
