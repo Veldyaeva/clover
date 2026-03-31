@@ -573,9 +573,10 @@ namespace SewingProduction.form
             // 
             // customTextBox1
             // 
-            // customTextBox1.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            customTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            customTextBox1.ErrorColor = System.Drawing.Color.Red;
+            customTextBox1.ErrorMessage = null;
             customTextBox1.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBox1.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             customTextBox1.Location = new System.Drawing.Point(96, 3);
             customTextBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBox1.Name = "customTextBox1";
@@ -584,9 +585,10 @@ namespace SewingProduction.form
             // 
             // customTextBox2
             // 
-            // customTextBox2.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            customTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            customTextBox2.ErrorColor = System.Drawing.Color.Red;
+            customTextBox2.ErrorMessage = null;
             customTextBox2.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBox2.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             customTextBox2.Location = new System.Drawing.Point(96, 31);
             customTextBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBox2.Name = "customTextBox2";
@@ -595,9 +597,10 @@ namespace SewingProduction.form
             // 
             // customTextBox3
             // 
-            // customTextBox3.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            customTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            customTextBox3.ErrorColor = System.Drawing.Color.Red;
+            customTextBox3.ErrorMessage = null;
             customTextBox3.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBox3.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             customTextBox3.Location = new System.Drawing.Point(96, 59);
             customTextBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBox3.Name = "customTextBox3";
@@ -606,9 +609,10 @@ namespace SewingProduction.form
             // 
             // customTextBox4
             // 
-            // customTextBox4.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            customTextBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            customTextBox4.ErrorColor = System.Drawing.Color.Red;
+            customTextBox4.ErrorMessage = null;
             customTextBox4.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBox4.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             customTextBox4.Location = new System.Drawing.Point(272, 3);
             customTextBox4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBox4.Name = "customTextBox4";
@@ -617,9 +621,10 @@ namespace SewingProduction.form
             // 
             // customTextBox5
             // 
-            // customTextBox5.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            customTextBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            customTextBox5.ErrorColor = System.Drawing.Color.Red;
+            customTextBox5.ErrorMessage = null;
             customTextBox5.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBox5.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             customTextBox5.Location = new System.Drawing.Point(272, 31);
             customTextBox5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBox5.Name = "customTextBox5";
@@ -628,9 +633,10 @@ namespace SewingProduction.form
             // 
             // customTextBox6
             // 
-            // customTextBox6.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            customTextBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            customTextBox6.ErrorColor = System.Drawing.Color.Red;
+            customTextBox6.ErrorMessage = null;
             customTextBox6.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBox6.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             customTextBox6.Location = new System.Drawing.Point(272, 59);
             customTextBox6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBox6.Name = "customTextBox6";
@@ -675,10 +681,11 @@ namespace SewingProduction.form
             // 
             // ctbMlDateBlock
             // 
-            ctbMlDateBlock.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            ctbMlDateBlock.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             ctbMlDateBlock.Dock = System.Windows.Forms.DockStyle.Fill;
+            ctbMlDateBlock.ErrorColor = System.Drawing.Color.Red;
+            ctbMlDateBlock.ErrorMessage = null;
             ctbMlDateBlock.Font = new System.Drawing.Font("Arial", 10F);
-            // ctbMlDateBlock.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             ctbMlDateBlock.Location = new System.Drawing.Point(429, 33);
             ctbMlDateBlock.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ctbMlDateBlock.Name = "ctbMlDateBlock";
@@ -698,11 +705,12 @@ namespace SewingProduction.form
             // 
             // ctbOlNameFull
             // 
-            ctbOlNameFull.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            ctbOlNameFull.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tableLayoutPanel3.SetColumnSpan(ctbOlNameFull, 2);
             ctbOlNameFull.Dock = System.Windows.Forms.DockStyle.Fill;
+            ctbOlNameFull.ErrorColor = System.Drawing.Color.Red;
+            ctbOlNameFull.ErrorMessage = null;
             ctbOlNameFull.Font = new System.Drawing.Font("Arial", 10F);
-            // ctbOlNameFull.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             ctbOlNameFull.Location = new System.Drawing.Point(4, 3);
             ctbOlNameFull.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ctbOlNameFull.Name = "ctbOlNameFull";
@@ -786,9 +794,10 @@ namespace SewingProduction.form
             // 
             // tbNlNom
             // 
-            // tbNlNom.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            tbNlNom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            tbNlNom.ErrorColor = System.Drawing.Color.Red;
+            tbNlNom.ErrorMessage = null;
             tbNlNom.Font = new System.Drawing.Font("Arial", 10F);
-            // tbNlNom.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             tbNlNom.Location = new System.Drawing.Point(33, 3);
             tbNlNom.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tbNlNom.Name = "tbNlNom";
@@ -808,9 +817,10 @@ namespace SewingProduction.form
             // 
             // tbPachNumber
             // 
-            // tbPachNumber.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            tbPachNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            tbPachNumber.ErrorColor = System.Drawing.Color.Red;
+            tbPachNumber.ErrorMessage = null;
             tbPachNumber.Font = new System.Drawing.Font("Arial", 10F);
-            // tbPachNumber.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             tbPachNumber.Location = new System.Drawing.Point(245, 3);
             tbPachNumber.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tbPachNumber.Name = "tbPachNumber";
@@ -820,9 +830,10 @@ namespace SewingProduction.form
             // 
             // tbPachYear
             // 
-            // tbPachYear.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            tbPachYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            tbPachYear.ErrorColor = System.Drawing.Color.Red;
+            tbPachYear.ErrorMessage = null;
             tbPachYear.Font = new System.Drawing.Font("Arial", 10F);
-            // tbPachYear.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             tbPachYear.Location = new System.Drawing.Point(142, 3);
             tbPachYear.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tbPachYear.Name = "tbPachYear";
@@ -861,7 +872,6 @@ namespace SewingProduction.form
             // 
             radioButton6.AutoSize = true;
             radioButton6.Font = new System.Drawing.Font("Arial", 10F);
-            // radioButton6.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             radioButton6.Location = new System.Drawing.Point(2, -1);
             radioButton6.Margin = new System.Windows.Forms.Padding(4, 1, 4, 1);
             radioButton6.Name = "radioButton6";
@@ -877,7 +887,6 @@ namespace SewingProduction.form
             // 
             radioButton5.AutoSize = true;
             radioButton5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
-            // radioButton5.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             radioButton5.Location = new System.Drawing.Point(279, -1);
             radioButton5.Margin = new System.Windows.Forms.Padding(4, 1, 4, 1);
             radioButton5.Name = "radioButton5";
@@ -893,7 +902,6 @@ namespace SewingProduction.form
             // 
             radioButton8.AutoSize = true;
             radioButton8.Font = new System.Drawing.Font("Arial", 10F);
-            // radioButton8.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             radioButton8.Location = new System.Drawing.Point(2, 18);
             radioButton8.Margin = new System.Windows.Forms.Padding(4, 1, 4, 1);
             radioButton8.Name = "radioButton8";
@@ -909,7 +917,6 @@ namespace SewingProduction.form
             // 
             radioButton7.AutoSize = true;
             radioButton7.Font = new System.Drawing.Font("Arial", 10F);
-            // radioButton7.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             radioButton7.Location = new System.Drawing.Point(134, -1);
             radioButton7.Margin = new System.Windows.Forms.Padding(4, 1, 4, 1);
             radioButton7.Name = "radioButton7";
@@ -925,7 +932,6 @@ namespace SewingProduction.form
             // 
             radioButton9.AutoSize = true;
             radioButton9.Font = new System.Drawing.Font("Arial", 10F);
-            // radioButton9.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             radioButton9.Location = new System.Drawing.Point(134, 18);
             radioButton9.Margin = new System.Windows.Forms.Padding(4, 1, 4, 1);
             radioButton9.Name = "radioButton9";
@@ -964,11 +970,9 @@ namespace SewingProduction.form
             // 
             // cbMonthList
             // 
-            // cbMonthList.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             cbMonthList.DataSource = bsMonthList;
             cbMonthList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbMonthList.Font = new System.Drawing.Font("Arial", 10F);
-            // cbMonthList.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             cbMonthList.FormattingEnabled = true;
             cbMonthList.Location = new System.Drawing.Point(56, 18);
             cbMonthList.Margin = new System.Windows.Forms.Padding(4, 1, 4, 1);
@@ -979,9 +983,10 @@ namespace SewingProduction.form
             // 
             // tbYearPlan
             // 
-            // tbYearPlan.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            tbYearPlan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            tbYearPlan.ErrorColor = System.Drawing.Color.Red;
+            tbYearPlan.ErrorMessage = null;
             tbYearPlan.Font = new System.Drawing.Font("Arial", 10F);
-            // tbYearPlan.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             tbYearPlan.Location = new System.Drawing.Point(56, 42);
             tbYearPlan.Margin = new System.Windows.Forms.Padding(4, 1, 4, 1);
             tbYearPlan.Name = "tbYearPlan";
@@ -1016,7 +1021,6 @@ namespace SewingProduction.form
             // 
             radioButton1.AutoSize = true;
             radioButton1.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            // radioButton1.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             radioButton1.Location = new System.Drawing.Point(2, 1);
             radioButton1.Margin = new System.Windows.Forms.Padding(4, 1, 4, 1);
             radioButton1.Name = "radioButton1";
@@ -1032,7 +1036,6 @@ namespace SewingProduction.form
             // 
             radioButton2.AutoSize = true;
             radioButton2.Font = new System.Drawing.Font("Arial", 10F);
-            // radioButton2.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             radioButton2.Location = new System.Drawing.Point(134, 1);
             radioButton2.Margin = new System.Windows.Forms.Padding(4, 1, 4, 1);
             radioButton2.Name = "radioButton2";
@@ -1048,7 +1051,6 @@ namespace SewingProduction.form
             // 
             radioButton3.AutoSize = true;
             radioButton3.Font = new System.Drawing.Font("Arial", 10F);
-            // radioButton3.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             radioButton3.Location = new System.Drawing.Point(279, 1);
             radioButton3.Margin = new System.Windows.Forms.Padding(4, 1, 4, 1);
             radioButton3.Name = "radioButton3";
@@ -1122,12 +1124,10 @@ namespace SewingProduction.form
             // 
             // cbOborudList
             // 
-            // cbOborudList.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             cbOborudList.DataSource = bsOborudList;
             cbOborudList.Dock = System.Windows.Forms.DockStyle.Fill;
             cbOborudList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbOborudList.Font = new System.Drawing.Font("Arial", 10F);
-            // cbOborudList.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             cbOborudList.FormattingEnabled = true;
             cbOborudList.Location = new System.Drawing.Point(669, 37);
             cbOborudList.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -1150,12 +1150,10 @@ namespace SewingProduction.form
             // 
             // cbGroupOborudList
             // 
-            // cbGroupOborudList.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             cbGroupOborudList.DataSource = bsGroupOborudList;
             cbGroupOborudList.Dock = System.Windows.Forms.DockStyle.Fill;
             cbGroupOborudList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbGroupOborudList.Font = new System.Drawing.Font("Arial", 10F);
-            // cbGroupOborudList.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             cbGroupOborudList.FormattingEnabled = true;
             cbGroupOborudList.Location = new System.Drawing.Point(669, 3);
             cbGroupOborudList.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -1178,12 +1176,10 @@ namespace SewingProduction.form
             // 
             // cbPlanZagrTwoStatusList
             // 
-            // cbPlanZagrTwoStatusList.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             cbPlanZagrTwoStatusList.DataSource = bsPlanZagrTwoStatusList;
             cbPlanZagrTwoStatusList.Dock = System.Windows.Forms.DockStyle.Fill;
             cbPlanZagrTwoStatusList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbPlanZagrTwoStatusList.Font = new System.Drawing.Font("Arial", 10F);
-            // cbPlanZagrTwoStatusList.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             cbPlanZagrTwoStatusList.FormattingEnabled = true;
             cbPlanZagrTwoStatusList.Location = new System.Drawing.Point(175, 3);
             cbPlanZagrTwoStatusList.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -1194,12 +1190,10 @@ namespace SewingProduction.form
             // 
             // cbWorkersList
             // 
-            // cbWorkersList.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             cbWorkersList.DataSource = bsWorkersList;
             cbWorkersList.Dock = System.Windows.Forms.DockStyle.Fill;
             cbWorkersList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbWorkersList.Font = new System.Drawing.Font("Arial", 10F);
-            // cbWorkersList.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             cbWorkersList.FormattingEnabled = true;
             cbWorkersList.Location = new System.Drawing.Point(175, 37);
             cbWorkersList.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -1296,11 +1290,12 @@ namespace SewingProduction.form
             // 
             // textBox7
             // 
-            // textBox7.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            textBox7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             textBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             textBox7.Enabled = false;
+            textBox7.ErrorColor = System.Drawing.Color.Red;
+            textBox7.ErrorMessage = null;
             textBox7.Font = new System.Drawing.Font("Arial", 10F);
-            // textBox7.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             textBox7.Location = new System.Drawing.Point(483, 3);
             textBox7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             textBox7.Name = "textBox7";
@@ -1309,11 +1304,12 @@ namespace SewingProduction.form
             // 
             // textBox6
             // 
-            // textBox6.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            textBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             textBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             textBox6.Enabled = false;
+            textBox6.ErrorColor = System.Drawing.Color.Red;
+            textBox6.ErrorMessage = null;
             textBox6.Font = new System.Drawing.Font("Arial", 10F);
-            // textBox6.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             textBox6.Location = new System.Drawing.Point(174, 3);
             textBox6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             textBox6.Name = "textBox6";
@@ -1711,10 +1707,11 @@ namespace SewingProduction.form
             // 
             // tbPList
             // 
-            // tbPList.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            tbPList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tbPList.Dock = System.Windows.Forms.DockStyle.Fill;
+            tbPList.ErrorColor = System.Drawing.Color.Red;
+            tbPList.ErrorMessage = null;
             tbPList.Font = new System.Drawing.Font("Arial", 10F);
-            // tbPList.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             tbPList.Location = new System.Drawing.Point(838, 3);
             tbPList.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tbPList.Multiline = true;
@@ -1752,7 +1749,7 @@ namespace SewingProduction.form
             gridViewPzArticulList.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             gridViewPzArticulList.FocusedRowChanged += gcPzArticulList_FocusedRowChanged;
             // 
-            // gridColumn1
+            // gcCertGrupmen_name1
             // 
             gridColumn1.Caption = "V";
             gridColumn1.ColumnEdit = repositoryItemCheckEdit1;
@@ -1774,7 +1771,7 @@ namespace SewingProduction.form
             repositoryItemCheckEdit1.ValueUnchecked = 0;
             repositoryItemCheckEdit1.CheckedChanged += repositoryItemCheckEdit1_CheckedChanged;
             // 
-            // gridColumn2
+            // gcCertTsn_name1
             // 
             gridColumn2.Caption = "План. дата сдачи (MIN)";
             gridColumn2.FieldName = "alDataCdPl";
@@ -1789,7 +1786,7 @@ namespace SewingProduction.form
             gridColumn2.VisibleIndex = 5;
             gridColumn2.Width = 82;
             // 
-            // gridColumn3
+            // gcCertTb_id1
             // 
             gridColumn3.Caption = "Модель комплекта";
             gridColumn3.FieldName = "alModK";
@@ -1802,7 +1799,7 @@ namespace SewingProduction.form
             gridColumn3.VisibleIndex = 4;
             gridColumn3.Width = 140;
             // 
-            // gridColumn4
+            // gcCertArticul1
             // 
             gridColumn4.Caption = "Артикул комплекта";
             gridColumn4.FieldName = "alArticulK";
@@ -1816,7 +1813,7 @@ namespace SewingProduction.form
             gridColumn4.VisibleIndex = 3;
             gridColumn4.Width = 93;
             // 
-            // gridColumn5
+            // gcCertMod1
             // 
             gridColumn5.Caption = "Кол-во шт";
             gridColumn5.FieldName = "alKol";
@@ -1830,7 +1827,7 @@ namespace SewingProduction.form
             gridColumn5.VisibleIndex = 2;
             gridColumn5.Width = 52;
             // 
-            // gridColumn7
+            // gcCertGrup1
             // 
             gridColumn7.Caption = "Артикул";
             gridColumn7.FieldName = "alArticul";
@@ -1844,7 +1841,7 @@ namespace SewingProduction.form
             gridColumn7.VisibleIndex = 0;
             gridColumn7.Width = 93;
             // 
-            // gridColumn6
+            // gcCertTm_name1
             // 
             gridColumn6.Caption = "Модель";
             gridColumn6.FieldName = "alMod";
@@ -1890,7 +1887,7 @@ namespace SewingProduction.form
             gridViewPzNomList.FocusedRowChanged += gcPzNomList_FocusedRowChanged;
             gridViewPzNomList.CellValueChanged += gridView2_CellValueChanged;
             // 
-            // gridColumn8
+            // gcCertText_mo1
             // 
             gridColumn8.Caption = "V";
             gridColumn8.ColumnEdit = repositoryItemCheckEdit3;

@@ -1,4 +1,4 @@
-using SewingProduction.Core.Class.Settings;
+﻿using SewingProduction.Core.Class.Settings;
 using SewingProduction.Core.interfaces;
 using System;
 using System.Collections.Generic;
@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SewingProduction.Core.helpers
 {
@@ -18,6 +19,8 @@ namespace SewingProduction.Core.helpers
         private readonly IServiceBrokerHost _host;
         private readonly object _initLock = new();
         private bool _initialized;
+        private IAppServiceBrokerHub? _hub;
+        private string? _hubOwnerId;
 
         public ServiceBrokerHelper Helper { get; private set; }
         public EnhancedRefreshCoordinator Coordinator { get; private set; }
@@ -27,20 +30,36 @@ namespace SewingProduction.Core.helpers
             _host = host ?? throw new ArgumentNullException(nameof(host));
         }
 
-        public async Task InitAsync(CancellationToken ct)
+        public Task InitAsync(CancellationToken ct, bool startBrokers = true)
+        {
+            return InitCoreAsync(ct, startBrokers, hub: null, ownerId: null);
+        }
+
+        public Task InitAsync(CancellationToken ct, IAppServiceBrokerHub hub, string ownerId, bool startBrokers = false)
+        {
+            if (hub == null)
+                throw new ArgumentNullException(nameof(hub));
+            if (string.IsNullOrWhiteSpace(ownerId))
+                throw new ArgumentException("ownerId is required", nameof(ownerId));
+
+            return InitCoreAsync(ct, startBrokers, hub, ownerId);
+        }
+
+        private async Task InitCoreAsync(CancellationToken ct, bool startBrokers, IAppServiceBrokerHub? hub, string? ownerId)
         {
             lock (_initLock)
             {
                 if (_initialized)
                     return;
-                _initialized = true;
             }
 
             if (!ServiceBrokerSettings.Enabled)
                 return;
+
             try
             {
                 var sbSettings = SettingsManager.GetServiceBrokerSettings();
+
                 Coordinator = new EnhancedRefreshCoordinator(
                     reloadByObjectNameAsync: async (obj) => await _host.RestartDataByObjectNameAsync(obj, ct).ConfigureAwait(false),
                     debounce: TimeSpan.FromMilliseconds(sbSettings.DebounceMs),
@@ -82,7 +101,26 @@ namespace SewingProduction.Core.helpers
                     return;
                 }
 
-                await Helper.InitAndStartAsync(objects, ct).ConfigureAwait(false);
+                await Helper.InitAndStartAsync(objects, ct, startBrokers).ConfigureAwait(false);
+
+                if (!startBrokers && hub != null)
+                {
+                    _hub = hub;
+                    _hubOwnerId = ownerId;
+
+                    var tableFields = Helper.GetUnionFieldsByTableSnapshot();
+                    await _hub.SubscribeAsync(
+                        ownerId: _hubOwnerId,
+                        ownerName: _host.ServiceBrokerFormName,
+                        tableFields: tableFields,
+                        onTableChangedAsync: DispatchHubUpdateAsync,
+                        ct: ct).ConfigureAwait(false);
+                }
+
+                lock (_initLock)
+                {
+                    _initialized = true;
+                }
             }
             catch
             {
@@ -103,29 +141,66 @@ namespace SewingProduction.Core.helpers
             if (Helper == null || Coordinator == null)
                 return;
 
-            await Helper.HandleBrokerUpdateAsync(tableName, fieldsChangedCsv);
+            await Helper.HandleBrokerUpdateAsync(tableName, fieldsChangedCsv).ConfigureAwait(false);
             var affected = Helper.GetAffectedObjectsByTable(tableName);
             if (affected == null || affected.Count == 0)
                 return;
 
             Coordinator.RequestBatch(affected);
-            return;
+        }
+
+        public void MuteTable(string tableName, TimeSpan duration)
+        {
+            if (Helper == null || string.IsNullOrWhiteSpace(tableName) || duration <= TimeSpan.Zero)
+                return;
+
+            Helper.MuteTable(tableName, duration);
         }
 
         public async ValueTask DisposeAsync()
         {
             try
             {
+                if (_hub != null && !string.IsNullOrWhiteSpace(_hubOwnerId))
+                    await _hub.UnsubscribeAsync(_hubOwnerId).ConfigureAwait(false);
+            }
+            catch { }
+
+            try
+            {
                 if (Helper != null)
                     await Helper.DisposeAsync();
             }
-            catch { /* ignore */ }
+            catch { }
 
             try
             {
                 Coordinator?.Dispose();
             }
-            catch { /* ignore */ }
+            catch { }
+        }
+
+        private Task DispatchHubUpdateAsync(string tableName, string? fieldsChangedCsv)
+        {
+            if (_host is Control control && control.IsHandleCreated && control.InvokeRequired)
+            {
+                var tcs = new TaskCompletionSource<object?>();
+                control.BeginInvoke(new Action(async () =>
+                {
+                    try
+                    {
+                        await _host.UpdateDataInFormAsync(tableName, fieldsChangedCsv).ConfigureAwait(false);
+                        tcs.TrySetResult(null);
+                    }
+                    catch (Exception ex)
+                    {
+                        tcs.TrySetException(ex);
+                    }
+                }));
+                return tcs.Task;
+            }
+
+            return _host.UpdateDataInFormAsync(tableName, fieldsChangedCsv);
         }
     }
 }

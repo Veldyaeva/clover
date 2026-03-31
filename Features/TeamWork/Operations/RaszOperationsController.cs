@@ -60,12 +60,12 @@ namespace SewingProduction.Features.TeamWork.Operations
         public void Detach()
         {
             if (_gridControl == null || _gridView == null) return;
-            try { _gridView.MouseDown -= GridView_MouseDown; } catch { }
-            try { _gridView.MouseMove -= GridView_MouseMove; } catch { }
-            try { _gridControl.DragOver -= GridControl_DragOver; } catch { }
-            try { _gridControl.DragDrop -= GridControl_DragDrop; } catch { }
-            try { _gridControl.DragLeave -= GridControl_DragLeave; } catch { }
-            try { _gridControl.QueryContinueDrag -= GridControl_QueryContinueDrag; } catch { }
+            try { _gridView.MouseDown -= GridView_MouseDown; } catch (Exception ex) { _ = _logger.LogErrorAsync(ex, "RaszOperationsController.Detach: MouseDown"); }
+            try { _gridView.MouseMove -= GridView_MouseMove; } catch (Exception ex) { _ = _logger.LogErrorAsync(ex, "RaszOperationsController.Detach: MouseMove"); }
+            try { _gridControl.DragOver -= GridControl_DragOver; } catch (Exception ex) { _ = _logger.LogErrorAsync(ex, "RaszOperationsController.Detach: DragOver"); }
+            try { _gridControl.DragDrop -= GridControl_DragDrop; } catch (Exception ex) { _ = _logger.LogErrorAsync(ex, "RaszOperationsController.Detach: DragDrop"); }
+            try { _gridControl.DragLeave -= GridControl_DragLeave; } catch (Exception ex) { _ = _logger.LogErrorAsync(ex, "RaszOperationsController.Detach: DragLeave"); }
+            try { _gridControl.QueryContinueDrag -= GridControl_QueryContinueDrag; } catch (Exception ex) { _ = _logger.LogErrorAsync(ex, "RaszOperationsController.Detach: QueryContinueDrag"); }
             _dragging = false;
             _dragSourceHandle = -1;
         }
@@ -79,7 +79,10 @@ namespace SewingProduction.Features.TeamWork.Operations
                 _dragSourceHandle = hit.RowHandle;
                 _dragging = false;
             }
-            catch { }
+            catch (Exception ex)
+            {
+                _ = _logger.LogErrorAsync(ex, "RaszOperationsController.GridView_MouseDown");
+            }
         }
 
         private void GridView_MouseMove(object sender, MouseEventArgs e)
@@ -106,7 +109,10 @@ namespace SewingProduction.Features.TeamWork.Operations
                     _gridControl.DoDragDrop(data, DragDropEffects.Move);
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                _ = _logger.LogErrorAsync(ex, "RaszOperationsController.GridView_MouseMove");
+            }
         }
 
         private void GridControl_DragOver(object sender, DragEventArgs e)
@@ -174,7 +180,11 @@ namespace SewingProduction.Features.TeamWork.Operations
                     _gridView.TopRowIndex = _gridView.TopRowIndex + 1;
                 }
             }
-            catch { e.Effect = DragDropEffects.None; }
+            catch (Exception ex)
+            {
+                e.Effect = DragDropEffects.None;
+                _ = _logger.LogErrorAsync(ex, "RaszOperationsController.GridControl_DragOver");
+            }
         }
 
         private void GridControl_DragDrop(object sender, DragEventArgs e)
@@ -328,8 +338,15 @@ namespace SewingProduction.Features.TeamWork.Operations
                     _applyPostStructureUi(draggedList.FirstOrDefault(), draggedList.Count > 1);
                 }
             }
-            catch { }
-            finally { try { _gridView.EndDataUpdate(); } catch { } }
+            catch (Exception ex)
+            {
+                _ = _logger.LogErrorAsync(ex, "RaszOperationsController.GridControl_DragDrop");
+            }
+            finally
+            {
+                try { _gridView.EndDataUpdate(); }
+                catch (Exception ex) { _ = _logger.LogErrorAsync(ex, "RaszOperationsController.GridControl_DragDrop: EndDataUpdate"); }
+            }
         }
 
         private void GridControl_DragLeave(object sender, EventArgs e) { }

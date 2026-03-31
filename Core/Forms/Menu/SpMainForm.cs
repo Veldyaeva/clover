@@ -12,17 +12,22 @@ using SewingProduction.Features.Articul;
 using SewingProduction.Features.CuttingProduction.Forms;
 using SewingProduction.Features.KnittingProduction.Forms;
 using SewingProduction.Features.Sprav;
+using SewingProduction.Features.Sprav.Forms;
 using SewingProduction.Features.Tabel.Forms;
 using SewingProduction.Features.TeamWork.Forms;
 using SewingProduction.Features.UserDistribution.Class;
 using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Features.Sprav.Forms;
+using SewingProduction.Helpers;
 using SewingProduction.form;
 
 namespace SewingProduction
 {
     public partial class SpMainForm : Form
     {
+        private readonly string _baseFormTitle;
+        private readonly string _buildVersion;
         public UserClass _user = new UserClass();
         private readonly IPasswordHasher _passwordHasher;
         private ToolStripMenuItem[] toolStripMenuItems;
@@ -33,6 +38,8 @@ namespace SewingProduction
         public SpMainForm()
         {
             InitializeComponent();
+            _baseFormTitle = Text;
+            _buildVersion = AppVersionHelper.GetDisplayVersion();
             UserLookAndFeel.Default.StyleChanged += (_, __) =>
             {
                 Properties.Settings.Default.AppSkin = UserLookAndFeel.Default.SkinName;
@@ -52,6 +59,7 @@ namespace SewingProduction
 
                 _formManager = new FormManager(this, barManager1, _user);
                 await _user.LoadUserData();
+                UpdateFormTitle();
                 CurrentUser.SetUser(_user);
                 await _user.LoadObjectForm(this.Name);
 
@@ -203,6 +211,20 @@ namespace SewingProduction
             if (barManager1 != null)
                 barManager1.ApplyPermissions(_user);
         }
+
+        private void UpdateFormTitle()
+        {
+            var title = $"{_baseFormTitle}  v{_buildVersion} ({GetAppBitness()})";
+            Text = string.IsNullOrWhiteSpace(_user?.UserName)
+                ? title
+                : $"{title}  - {_user.UserName}";
+        }
+
+        private static string GetAppBitness()
+        {
+            return Environment.Is64BitProcess ? "x64" : "x86";
+        }
+
         private void XtraTabbedMdiManager1_PageAdded(object sender, DevExpress.XtraTabbedMdi.MdiTabPageEventArgs e)
         {
             if (e.Page != null && e.Page.MdiChild != null)
@@ -262,9 +284,9 @@ namespace SewingProduction
         {
             OpenForm(new CuttingForm(), e.Item);
         }
-        private void рабочийСтолМастераToolStripMenuItem1_Click(object sender, ItemClickEventArgs e)
+        private void рабочийСтолМастераВязЦехаToolStripMenuItem1_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new PlanZagrVyaz(CurrentUser.User), e.Item);
+            OpenForm(new PlanZagrVyaz(CurrentUser.User, 1), e.Item);
         }
 
         private void рабочийСтолВязальщицыToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
@@ -287,9 +309,19 @@ namespace SewingProduction
 
         }
 
-        private void barButtonTSDAdmin_ItemClick(object sender, ItemClickEventArgs e)
+        //private void barButtonTSDAdmin_ItemClick(object sender, ItemClickEventArgs e)
+        //{
+        //    OpenForm(new TSDAccessManagement(CurrentUser.User), e.Item);
+        //}
+
+        private void barButtonItemSteamMasterWorkTable_ItemClick(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new TSDAccessManagement (CurrentUser.User), e.Item);
+            OpenForm(new PlanZagrVyaz(CurrentUser.User, 2), e.Item);
+        }
+
+        private void barButtonItemCutMasterWorkTable_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenForm(new PlanZagrVyaz(CurrentUser.User, 3), e.Item);
         }
     }
 }

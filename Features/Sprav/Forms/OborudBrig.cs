@@ -2,14 +2,25 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.CodeParser;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraReports.UI;
+using Microsoft.Extensions.DependencyInjection;
+using SewingProduction.Core;
 using SewingProduction.Core.interfaces;
+using SewingProduction.Core.services;
 using SewingProduction.Features.Sprav.DataService;
+using SewingProduction.Features.Sprav.Reports;
+using SewingProduction.Features.Tabel.Reports;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
-
 namespace SewingProduction.form
 {
     /// <summary>
@@ -18,7 +29,9 @@ namespace SewingProduction.form
     public partial class OborudBrig : CustomForm, IDataUpdatableForm
     {
         private readonly OborudBrigDataService _oborudBrigDataService;
-        private readonly ServiceBroker _serviceBroker;
+        private readonly IAppServiceBrokerHub _sbHub;
+        private readonly string _sbHubOwnerId = $"OborudBrig:{Guid.NewGuid():N}";
+        private CancellationTokenSource? _sbLifetimeCts;
         private SqlDependency sqlDependency;
         private SqlConnection connection;
         bool flagStartListening = false; //вкл прослушки
@@ -29,16 +42,35 @@ namespace SewingProduction.form
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper();
             _oborudBrigDataService = new OborudBrigDataService(dbHelper);
-            _serviceBroker = new ServiceBroker(this);
-            _serviceBroker.Changed += ServiceBrokerChangedAsync;
-          //  ThemeManager.UpdateTheme(this);
+            _sbHub = AppServices.Services?.GetService<IAppServiceBrokerHub>() ?? new AppServiceBrokerHub();
+            //  ThemeManager.UpdateTheme(this);
         }
         #region service broker
-        private void OborudBrig_Load_1(object sender, EventArgs e)
+        private async void OborudBrig_Load_1(object sender, EventArgs e)
         {
             if (!flagStartListening)
             {
-                _serviceBroker.StartListening("idOB,idZeh,kod_ob,count", "OborudBrig");
+                var tableFields = new Dictionary<string, IReadOnlyCollection<string>>(StringComparer.OrdinalIgnoreCase)
+                {
+                    ["dbo.OborudBrig"] = new[] { "idOB", "idZeh", "kod_ob", "count" }
+                };
+                await _sbHub.SubscribeAsync(
+                    ownerId: _sbHubOwnerId,
+                    ownerName: GetType().Name,
+                    tableFields: tableFields,
+                    onTableChangedAsync: async (table, changed) =>
+                    {
+                        if (IsDisposed || Disposing)
+                            return;
+                        if (InvokeRequired)
+                        {
+                            BeginInvoke(new Action(() => UpdateDataInForm(table)));
+                            return;
+                        }
+                        UpdateDataInForm(table);
+                        await Task.CompletedTask;
+                    },
+                    ct: GetServiceBrokerLifetimeToken());
                 flagStartListening = true;
             }
             gridOborud_Load(null, EventArgs.Empty);
@@ -54,20 +86,6 @@ namespace SewingProduction.form
             gridOborud_Load(null, EventArgs.Empty);
         }
 
-        private Task ServiceBrokerChangedAsync(string table, string? changedFieldsCsv)
-        {
-            if (IsDisposed || Disposing)
-                return Task.CompletedTask;
-
-            if (InvokeRequired)
-            {
-                BeginInvoke(new Action(() => UpdateDataInForm(table)));
-                return Task.CompletedTask;
-            }
-
-            UpdateDataInForm(table);
-            return Task.CompletedTask;
-        }
         #endregion
 
         // Обнолвение таблиц при активации вкладки:
@@ -161,11 +179,6 @@ namespace SewingProduction.form
                     gridView.FocusedRowHandle = rowHandle;
                     gridView.MakeRowVisible(rowHandle);
                 }
-                if (!flagStartListening)
-                {
-                    _serviceBroker.StartListening("idOB,idZeh,kod_ob,count", "OborudBrig");
-                    flagStartListening = true;
-                }
             }
         }
         //Редактирование кол-ва оборудования
@@ -207,8 +220,74 @@ namespace SewingProduction.form
         }
         private void OborudBrig_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _serviceBroker.Changed -= ServiceBrokerChangedAsync;
-            try { _serviceBroker?.StopBroker(); } catch { }
+            ShutdownServiceBroker();
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            try
+            {
+                ShutdownServiceBroker();
+            }
+            finally
+            {
+                base.OnFormClosed(e);
+            }
+        }
+
+        private void ShutdownServiceBroker()
+        {
+            try { _sbLifetimeCts?.Cancel(); } catch { }
+            try { _sbHub.UnsubscribeAsync(_sbHubOwnerId).GetAwaiter().GetResult(); } catch { }
+            try { _sbLifetimeCts?.Dispose(); } catch { }
+            _sbLifetimeCts = null;
+            flagStartListening = false;
+        }
+
+        private CancellationToken GetServiceBrokerLifetimeToken()
+        {
+            _sbLifetimeCts ??= new CancellationTokenSource();
+            return _sbLifetimeCts.Token;
+        }
+        private void customButtonExcel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OborudBrigReport reportFull = new OborudBrigReport();
+                reportFull.CreateDocument();
+
+                OborudBrigReportTotal reportTotal = new OborudBrigReportTotal();
+                reportTotal.CreateDocument();
+
+                reportFull.PrintingSystem.Pages.AddRange(reportTotal.PrintingSystem.Pages);
+
+                using (SaveFileDialog sfd = new SaveFileDialog())
+                {
+                    sfd.Filter = "Excel (*.xlsx)|*.xlsx";
+                    sfd.FileName = "Оборудование.xlsx";
+
+                    if (sfd.ShowDialog() != DialogResult.OK)
+                        return;
+
+                    DevExpress.XtraPrinting.XlsxExportOptions options =
+                        new DevExpress.XtraPrinting.XlsxExportOptions();
+
+                    options.ExportMode = DevExpress.XtraPrinting.XlsxExportMode.SingleFilePageByPage;
+                    options.ShowGridLines = true;
+                    options.SheetName = "Отчет";
+
+                    reportFull.PrintingSystem.ExportToXlsx(sfd.FileName, options);
+
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(sfd.FileName)
+                    {
+                        UseShellExecute = true
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 

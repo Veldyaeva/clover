@@ -6,6 +6,7 @@ using SewingProduction.Helpers;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Linq;
@@ -18,6 +19,15 @@ namespace SewingProduction.Core.services
 {
     public class ServiceBrokerService: IDisposable, IAsyncDisposable
     {
+        private sealed class ListenInfoCacheEntry
+        {
+            public required List<ServiceBrokerModel.TableListenInfo> Value { get; init; }
+            public required DateTime CachedAtUtc { get; init; }
+        }
+
+        private static readonly ConcurrentDictionary<string, ListenInfoCacheEntry> _listenInfoCache =
+            new(StringComparer.OrdinalIgnoreCase);
+        private static readonly TimeSpan ListenInfoCacheLifetime = TimeSpan.FromMinutes(15);
         private readonly DatabaseHelper _dbHelper;
         private readonly DbService _dbService;
         //    private readonly HybridLogger _logger = new HybridLogger();
@@ -78,6 +88,13 @@ namespace SewingProduction.Core.services
         {
             try
             {
+                var cacheKey = $"{DatabaseHelper.GetGlobalConnectionString()}|{_objectName}";
+                if (_listenInfoCache.TryGetValue(cacheKey, out var cached) &&
+                    (DateTime.UtcNow - cached.CachedAtUtc) <= ListenInfoCacheLifetime)
+                {
+                    return cached.Value.Select(CloneListenInfo).ToList();
+                }
+
                 await using var connection = _dbHelper.GetConnection();
                 const string query = @"exec dbo.getSQLObjectSource @xObjectName = @objName";
                 var command = new CommandDefinition(
@@ -86,6 +103,11 @@ namespace SewingProduction.Core.services
                     cancellationToken: cancellationToken);
 
                 var list = (await connection.QueryAsync<ServiceBrokerModel.TableListenInfo>(command)).AsList();
+                _listenInfoCache[cacheKey] = new ListenInfoCacheEntry
+                {
+                    Value = list.Select(CloneListenInfo).ToList(),
+                    CachedAtUtc = DateTime.UtcNow
+                };
 
                 return list;
             }
@@ -112,6 +134,17 @@ namespace SewingProduction.Core.services
                 await _logger.LogErrorAsync(ex, $"Ошибка при получении данных getSQLObjectSource: obj={_objectName}");
                 return new List<TableListenInfo>();
             }
+        }
+
+        private static ServiceBrokerModel.TableListenInfo CloneListenInfo(ServiceBrokerModel.TableListenInfo item)
+        {
+            return new ServiceBrokerModel.TableListenInfo
+            {
+                ObjectName = item.ObjectName,
+                TableSchema = item.TableSchema,
+                TableName = item.TableName,
+                TableFieldList = item.TableFieldList
+            };
         }
     }
 }

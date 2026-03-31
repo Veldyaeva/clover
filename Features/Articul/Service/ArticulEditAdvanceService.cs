@@ -26,11 +26,10 @@ namespace SewingProduction.Features.Articul.Service
         {
             try
             {
-                string query = "select * from dbo.view_art WHERE kodd = @kodd";
-                var bb = await _dbService.GetListAsync<ArticulModel>(query, new { kodd });
-                var ret = new BindingList<ArticulModel>(bb);
-                bb = null;
-                return ret;
+                string query = "select kod, trim(razm) razm , po from dbo.view_art WHERE kodd = @kodd";
+
+                return new BindingList<ArticulModel>(await _dbService.GetListAsync<ArticulModel>(query, new { kodd }));
+
             }
             catch (Exception ex)
             {
@@ -43,10 +42,11 @@ namespace SewingProduction.Features.Articul.Service
             try
             {
                 string query = "select top 1 * from dbo.view_sp_articul_all WHERE kodd = @kodd";
-                var bb = await _dbService.GetListAsync<ArticulModel>(query, new { kodd });
-                var ret = new BindingList<ArticulModel>(bb);
-                bb = null;
-                return ret;
+                //var bb = await _dbService.GetListAsync<ArticulModel>(query, new { kodd });
+                //var ret = new BindingList<ArticulModel>(bb);
+                //bb = null;
+                //return ret;
+                return new BindingList<ArticulModel>(await _dbService.GetListAsync<ArticulModel>(query, new { kodd }));
             }
             catch (Exception ex)
             {
@@ -59,10 +59,11 @@ namespace SewingProduction.Features.Articul.Service
             try
             {
                 string query = "select id_gost,id_razmer, trim(razm) as razm from gost_sv_razmer sv inner join gost_razmer gr on sv.id_razmer = gr.id_rost WHERE id_gost = @idgost";
-                var bb = await _dbService.GetListAsync<GostRazmerNabViewModel>(query, new { idgost });
-                var ret = new BindingList<GostRazmerNabViewModel>(bb);
-                bb = null;
-                return ret;
+                //var bb = await _dbService.GetListAsync<GostRazmerNabViewModel>(query, new { idgost });
+                //var ret = new BindingList<GostRazmerNabViewModel>(bb);
+                //bb = null;
+                //return ret;
+                return new BindingList<GostRazmerNabViewModel>(await _dbService.GetListAsync<GostRazmerNabViewModel>(query, new { idgost }));
 
             }
             catch (Exception ex)
@@ -72,6 +73,6 @@ namespace SewingProduction.Features.Articul.Service
             }
         }
 
-
+        
     }
 }

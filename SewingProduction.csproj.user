@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_LastSelectedProfileId>D:\project\sewingproduction-9.0.net\Properties\PublishProfiles\ver.x32.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>D:\SewingProduction\Properties\PublishProfiles\ver.x32.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="Core\Class\CustomControlsThemeable.cs">
@@ -64,6 +64,9 @@
     <Compile Update="Features\Articul\Forms\AddNewKopml.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\Articul\Forms\AppendArticul.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\Articul\Forms\Articul.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +74,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Features\Articul\Forms\ArticulEditAdvance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Articul\Forms\CreateArticulMatrForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Articul\Forms\EditArticul.cs">
@@ -113,9 +119,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyazCheck.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Features\KnittingProduction\Forms\TSDAccessManagement.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\SockProduction\Forms\ReportByNomZad.cs">
@@ -172,6 +175,12 @@
     <Compile Update="Features\Furnit\UserControl\FurnitZayavView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Features\Sprav\Reports\OborudBrigReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Features\Sprav\Reports\OborudBrigReportTotal.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Features\Tabel\Forms\CalculatorDay.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -199,6 +208,9 @@
     <Compile Update="Features\Tabel\Forms\TabelMain.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\Tabel\Reports\Blank.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Features\TeamWork\Forms\AnnLog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,7 +223,16 @@
     <Compile Update="Features\TeamWork\Forms\TeamWork.Articles.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.Bootstrap.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.Diagnostics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.EventBridge.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork.Events.cs">
@@ -220,10 +241,31 @@
     <Compile Update="Features\TeamWork\Forms\TeamWork.Helpers.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.Lifecycle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.UiState.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.Unbinding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.WorkDivisionActions.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork.WorkDivisions.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.CloneUtils.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.Contracts.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.UiState.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\UserDistribution\Forms\AboutBox.cs">
@@ -232,28 +274,40 @@
     <Compile Update="Features\UserDistribution\Forms\ActionHistory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\AdminForm.cs">
+    <Compile Update="Features\UserDistribution\Forms\MasterRight\MrChoiceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\Role\AdminForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\UserDistribution\Forms\AllDistribution.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\AllRole.cs">
+    <Compile Update="Features\UserDistribution\Forms\Role\AllRole.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\AllUser.cs">
+    <Compile Update="Features\UserDistribution\Forms\Role\RoleFormObject.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\Dictionary.cs">
+    <Compile Update="Features\UserDistribution\Forms\User\AllUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\RolePodr.cs">
+    <Compile Update="Features\UserDistribution\Forms\Table\Dictionary.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\ShareUser.cs">
+    <Compile Update="Features\UserDistribution\Forms\MasterRight\MrMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\UserPodr.cs">
+    <Compile Update="Features\UserDistribution\Forms\Podr\RolePodr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\User\ShareUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\Podr\UserPodr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\User\UserRole.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Help\Form\HelpForm.cs">
@@ -265,13 +319,13 @@
     <Compile Update="Core\Forms\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\RoleColumn.cs">
+    <Compile Update="Features\UserDistribution\Forms\Table\RoleColumn.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\UserProfile.cs">
+    <Compile Update="Features\UserDistribution\Forms\User\UserProfile.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\UserHierarchy.cs">
+    <Compile Update="Features\UserDistribution\Forms\User\UserHierarchy.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Help\Form\HelpFormAdmin.cs">
@@ -399,8 +453,9 @@
     <EmbeddedResource Update="Features\UserDistribution\Forms\AllDistribution.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="Features\UserDistribution\Forms\AllRole.resx">
+    <EmbeddedResource Update="Features\UserDistribution\Forms\Role\AllRole.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
 </Project>

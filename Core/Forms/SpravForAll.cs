@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid;
+using Microsoft.Extensions.DependencyInjection;
 //using DevExpress.XtraGrid.Localization;
+using SewingProduction.Core;
 using SewingProduction.Core.interfaces;
+using SewingProduction.Core.services;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 
@@ -16,7 +20,9 @@ namespace SewingProduction.form
     public partial class SpravForAll : CustomForm, IDataUpdatableForm
     {
         private readonly SpravAllDataService _spravAllDataService;
-        private readonly ServiceBroker _serviceBroker;
+        private readonly IAppServiceBrokerHub _sbHub;
+        private readonly string _sbHubOwnerId = $"SpravForAll:{Guid.NewGuid():N}";
+        private CancellationTokenSource? _sbLifetimeCts;
         int strForAdd;
         string columns;
         string whereSQL;
@@ -41,7 +47,7 @@ namespace SewingProduction.form
         Dictionary<string, int> rus_read = new Dictionary<string, int>();
         Dictionary<string, object> columnDefaults = new Dictionary<string, object>();
         //Таймер для уведомления о сохранении:
-        private Timer timer;
+        private System.Windows.Forms.Timer timer;
         bool _servBrok = false;
 
         public SpravForAll(
@@ -57,15 +63,13 @@ namespace SewingProduction.form
             InitializeComponent();
             var dbHelper = new DatabaseHelper();
             _spravAllDataService = new SpravAllDataService(dbHelper);
+            _sbHub = AppServices.Services.GetRequiredService<IAppServiceBrokerHub>();
             _servBrok = servBrok;
-            _serviceBroker = _servBrok == true ? new ServiceBroker(this) : null;
-            if (_serviceBroker != null)
-                _serviceBroker.Changed += ServiceBrokerChangedAsync;
           //  ThemeManager.UpdateTheme(this);
             // Пользователь:
             _user = user;
             // Таймер
-            timer = new Timer { Interval = 2000 };
+            timer = new System.Windows.Forms.Timer { Interval = 2000 };
             timer.Tick += Timer_Tick;
 
             // Таблица
@@ -89,6 +93,14 @@ namespace SewingProduction.form
         public SpravForAll()
         {
             InitializeComponent();
+            var dbHelper = new DatabaseHelper();
+            _spravAllDataService = new SpravAllDataService(dbHelper);
+            _sbHub = AppServices.Services?.GetService<IAppServiceBrokerHub>() ?? new AppServiceBrokerHub();
+            fieldsQueryListSQL = new List<string>();
+            labels = new[] { labelKod, label1, label2, label3, label4, label5, label6, label7, label8, label9, label10 };
+            textBoxs = new[] { textBoxKod, textBox1, textBox2, textBox3, textBox4, textBox5, textBox6, textBox7, textBox8, textBox9, textBox10 };
+            timer = new System.Windows.Forms.Timer { Interval = 2000 };
+            timer.Tick += Timer_Tick;
         }
 
         #region service broker
@@ -103,20 +115,6 @@ namespace SewingProduction.form
             LoadData();
         }
 
-        private Task ServiceBrokerChangedAsync(string table, string? changedFieldsCsv)
-        {
-            if (IsDisposed || Disposing)
-                return Task.CompletedTask;
-
-            if (InvokeRequired)
-            {
-                BeginInvoke(new Action(() => UpdateDataInForm(table)));
-                return Task.CompletedTask;
-            }
-
-            UpdateDataInForm(table);
-            return Task.CompletedTask;
-        }
         #endregion
         private void SpravForAll_Load(object sender, EventArgs e)
         {
@@ -176,8 +174,37 @@ namespace SewingProduction.form
             LoadData();
             if (_servBrok && !flagStartListening)
             {
-                string columnsStr = string.Join(", ", fieldsQueryListSQL);
-                _serviceBroker.StartListening(columnsStr, tableString);
+                var tableKey = tableString.Contains(".")
+                    ? tableString
+                    : $"dbo.{tableString}";
+                var fields = fieldsQueryListSQL
+                    .Where(x => !string.IsNullOrWhiteSpace(x))
+                    .Select(x => x.Trim())
+                    .Distinct(StringComparer.OrdinalIgnoreCase)
+                    .ToArray();
+
+                var tableFields = new Dictionary<string, IReadOnlyCollection<string>>(StringComparer.OrdinalIgnoreCase)
+                {
+                    [tableKey] = fields
+                };
+
+                await _sbHub.SubscribeAsync(
+                    ownerId: _sbHubOwnerId,
+                    ownerName: GetType().Name,
+                    tableFields: tableFields,
+                    onTableChangedAsync: async (table, changed) =>
+                    {
+                        if (IsDisposed || Disposing)
+                            return;
+                        if (InvokeRequired)
+                        {
+                            BeginInvoke(new Action(() => UpdateDataInForm(table)));
+                            return;
+                        }
+                        UpdateDataInForm(table);
+                        await Task.CompletedTask;
+                    },
+                    ct: GetServiceBrokerLifetimeToken());
                 flagStartListening = true;
             }
         }
@@ -405,15 +432,25 @@ namespace SewingProduction.form
         //закрытие формы:
         private void SpravForAll_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _serviceBroker?.Changed -= ServiceBrokerChangedAsync;
+            try { _sbLifetimeCts?.Cancel(); } catch { }
+            try { _sbHub.UnsubscribeAsync(_sbHubOwnerId).GetAwaiter().GetResult(); } catch { }
             if (_servBrok)
-                _serviceBroker?.StopBroker();
+                flagStartListening = false;
         }
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
-            try { _serviceBroker?.Changed -= ServiceBrokerChangedAsync; } catch { }
-            try { _serviceBroker?.StopBroker(); } catch { }
+            try { _sbHub.UnsubscribeAsync(_sbHubOwnerId).GetAwaiter().GetResult(); } catch { }
+            try { _sbLifetimeCts?.Dispose(); } catch { }
+            _sbLifetimeCts = null;
+            if (_servBrok)
+                flagStartListening = false;
             base.OnFormClosed(e);
+        }
+
+        private CancellationToken GetServiceBrokerLifetimeToken()
+        {
+            _sbLifetimeCts ??= new CancellationTokenSource();
+            return _sbLifetimeCts.Token;
         }
     }
 

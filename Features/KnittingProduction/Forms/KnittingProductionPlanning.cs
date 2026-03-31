@@ -1080,8 +1080,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 			{
 				xIDVyazClass = -1;
 			}
-			OpenForm(new KnittingMachinesLoading(xIDVyazClass), sender);
-		}
+            //OpenForm(new KnittingMachinesLoading(xIDVyazClass), sender);
+            if (this.MdiParent is SpMainForm mainForm)
+            {
+                mainForm.OpenForm(new KnittingMachinesLoading(xIDVyazClass));
+            }
+        }
 
 		private void customSimpleButton2_Click(object sender, EventArgs e)
 		{
@@ -1099,8 +1103,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 			//    // Действия при отмене или другом результате
 			//    //MessageBox.Show("Cancel");
 			//}
-			OpenForm(new KnittingProductionPlanningReportParameters(), sender);
-		}
+			//OpenForm(new KnittingProductionPlanningReportParameters(), sender);
+            if (this.MdiParent is SpMainForm mainForm)
+            {
+                mainForm.OpenForm(new KnittingProductionPlanningReportParameters());
+            }
+        }
 
 		private void repositoryItemCheckEdit2_EditValueChanged(object sender, EventArgs e)
 		{
