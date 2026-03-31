@@ -115,10 +115,25 @@
     <Compile Update="Features\KnittingProduction\Forms\KnittingProductionPlanningReportParameters.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz.cs">
+    <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz\NotUsed\PlanZagrVyaz.ServiceBroker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz\PlanZagrVyaz.Events.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz\PlanZagrVyaz.SelectionSync.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz\PlanZagrVyaz.Bindings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz\PlanZagrVyaz.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyazCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz\PlanZagrVyaz.Loaders.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\SockProduction\Forms\ReportByNomZad.cs">

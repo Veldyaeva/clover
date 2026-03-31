@@ -43,6 +43,16 @@ namespace SewingProduction.Helpers
                 btn.Properties.Visible = _visible;
             }
         }
+        //Устанавливает видимость кнопок в заголовке LayoutControlGroup по их тегам.
+//        пример вызова:
+//_lcgHelper.SetButtonsVisible(
+//   layoutControlGroup7,
+//   false,
+//   "lcg3HideAll",
+//   "lcg3HideAllSeparator",
+//   "lcg3ShowAll"
+//);
+
         /// <summary>
         /// Устанавливает доступность кнопок в заголовке LayoutControlGroup по их тегам.
         /// </summary>

@@ -373,7 +373,49 @@ namespace SewingProduction.Core.helpers
 
             return result;
         }
+        public static ChangesResult<T> GetChanges<T, TKey>(
+            IEnumerable<T> oldItems,
+            IEnumerable<T> newItems,
+            Func<T, TKey> keySelector,
+            HashMode hashMode = HashMode.ExcludeOnly,
+            params string[] hashProperties)
+        {
+            if (oldItems == null) throw new ArgumentNullException(nameof(oldItems));
+            if (newItems == null) throw new ArgumentNullException(nameof(newItems));
+            if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
 
+            var oldDict = oldItems.ToDictionary(keySelector, x => x);
+            var newDict = newItems.ToDictionary(keySelector, x => x);
+
+            var result = new ChangesResult<T>();
+
+            foreach (var kv in newDict)
+            {
+                var key = kv.Key;
+                var newRow = kv.Value;
+
+                if (!oldDict.TryGetValue(key, out var oldRow))
+                {
+                    result.Added.Add(newRow);
+                }
+                else
+                {
+                    var oldHash = ComputeHash(oldRow, hashMode, hashProperties);
+                    var newHash = ComputeHash(newRow, hashMode, hashProperties);
+
+                    if (oldHash != newHash)
+                        result.Modified.Add(newRow);
+                }
+            }
+
+            foreach (var kv in oldDict)
+            {
+                if (!newDict.ContainsKey(kv.Key))
+                    result.Removed.Add(kv.Value);
+            }
+
+            return result;
+        }
         // ---------------------------
         // 5. Apply modified + added
         // ---------------------------
@@ -930,6 +972,35 @@ namespace SewingProduction.Core.helpers
                 DevExpress.XtraGrid.Views.Grid.GridView gw = (DevExpress.XtraGrid.Views.Grid.GridView)grid?.MainView;
                 gw.TopRowIndex = topRowIndex;
             }
+        }
+        public static RemoveMetrics RemoveMissingSmart<T, TKey>(
+            BindingSource oldSource,
+            IEnumerable<TKey> actualKeys,
+            Func<T, TKey> keySelector,
+            DevExpress.XtraGrid.GridControl grid = null,
+            double rebuildThresholdPercent = 30.0,
+            double removeAtThresholdPercent = 10.0)
+        {
+            if (oldSource == null)
+                throw new ArgumentNullException(nameof(oldSource));
+            if (actualKeys == null)
+                throw new ArgumentNullException(nameof(actualKeys));
+            if (keySelector == null)
+                throw new ArgumentNullException(nameof(keySelector));
+
+            var keySet = actualKeys.ToHashSet();
+
+            var removed = oldSource.List
+                .Cast<T>()
+                .Where(x => !keySet.Contains(keySelector(x)))
+                .ToList();
+
+            return RemoveMissingSmart(
+                oldSource,
+                removed,
+                grid,
+                rebuildThresholdPercent,
+                removeAtThresholdPercent);
         }
 
         //        var changes = BindingSourceHelper.GetChanges<PZVOperList>(
