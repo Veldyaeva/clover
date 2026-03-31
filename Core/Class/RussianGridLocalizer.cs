@@ -6,12 +6,16 @@ public class RussianGridLocalizer : GridLocalizer
     public override string Language { get { return "Russian"; } }
     public override string GetLocalizedString(GridStringId id)
     {
-        string retGridLocal = String.Empty;
         switch (id)
         {
-
+            case GridStringId.EditFormUpdateButton: return "Сохранить";
+            case GridStringId.EditFormCancelButton: return "Отмена";
+            case GridStringId.EditFormCancelMessage: return "Отменить редактирование?";
+            case GridStringId.EditFormSaveMessage: return "Данные изменены. Сохранить изменения?";
 
             case GridStringId.FindControlFindButton: return "Поиск";
+            case GridStringId.FindControlNextButton: return "Далее";
+            case GridStringId.FindControlPrevButton: return "Назад";
             case GridStringId.FindNullPrompt: return "Введите текст для поиска...";
             case GridStringId.FileIsNotFoundError: return "Файл {0} не найден";
             case GridStringId.ColumnViewExceptionMessage: return " Хотите исправить значение?";
@@ -30,18 +34,6 @@ public class RussianGridLocalizer : GridLocalizer
             case GridStringId.CustomFilterDialogClearFilter: return "Очистить фильтр";
             case GridStringId.CustomFilterDialogCancelButton: return "Отмена";
             case GridStringId.CustomFilterDialog2FieldCheck: return "Колонка";
-            /*
-             * case GridStringId.CustomFilterDialogConditionEQU: return "равно";
-            case GridStringId.CustomFilterDialogConditionNEQ: return "не равно";
-            case GridStringId.CustomFilterDialogConditionGT: return "больше";
-            case GridStringId.CustomFilterDialogConditionGTE: return "больше или равно";
-            case GridStringId.CustomFilterDialogConditionLT: return "меньше";
-            case GridStringId.CustomFilterDialogConditionLTE: return "меньше или равно";
-            case GridStringId.CustomFilterDialogConditionBlanks: return "пустые";
-            case GridStringId.CustomFilterDialogConditionNonBlanks: return "непустые";
-            case GridStringId.CustomFilterDialogConditionLike: return "соответствует маске";
-            case GridStringId.CustomFilterDialogConditionNotLike: return "не соответствует маске";
-            */
             case GridStringId.CustomFilterDialogEmptyValue: return "(Введите значение)";
             case GridStringId.CustomFilterDialogEmptyOperator: return "(Выберите оператор)";
             case GridStringId.CustomFilterDialogHint: return "Используйте _ для представления любого одиночного символа#Используйте % для представления любой последовательности символов";
@@ -69,6 +61,7 @@ public class RussianGridLocalizer : GridLocalizer
             case GridStringId.MenuColumnColumnCustomization: return "Выбор колонок";
             case GridStringId.MenuColumnBestFit: return "Подбор ширины";
             case GridStringId.MenuColumnFilter: return "Фильтр";
+            case GridStringId.MenuColumnShowAutoFilter: return "Показать фильтр колонки";
             case GridStringId.MenuColumnFilterEditor: return "Конструктор фильтра...";
             case GridStringId.MenuColumnClearFilter: return "Очистить фильтр";
             case GridStringId.MenuColumnBestFitAllColumns: return "Подбор ширины (все колонки)";
@@ -81,8 +74,12 @@ public class RussianGridLocalizer : GridLocalizer
             case GridStringId.MenuColumnGroupIntervalMonth: return "Месяц";
             case GridStringId.MenuColumnGroupIntervalYear: return "Год";
             case GridStringId.MenuColumnGroupIntervalSmart: return "Умный";
-            case GridStringId.MenuColumnGroupSummaryEditor: return "Редатор итога группы...";
+            case GridStringId.MenuColumnGroupSummaryEditor: return "Редактор итога группы...";
             case GridStringId.MenuColumnExpressionEditor: return "Редактор выражения...";
+            case GridStringId.MenuColumnConditionalFormatting: return "Условное форматирование";
+            case GridStringId.MenuColumnConditionalFiltering: return "Условная фильтрация";
+            case GridStringId.MenuGroupRowExpand: return "Раскрыть";
+            case GridStringId.MenuGroupRowCollapse: return "Свернуть";
             case GridStringId.MenuGroupPanelFullExpand: return "Раскрыть группы";
             case GridStringId.MenuGroupPanelFullCollapse: return "Свернуть группы";
             case GridStringId.MenuGroupPanelClearGrouping: return "Разгруппировать";
@@ -192,17 +189,24 @@ public class RussianGridLocalizer : GridLocalizer
             case GridStringId.MenuColumnFindFilterShow: return "Показать панель поиска";
             case GridStringId.MenuColumnAutoFilterRowShow: return "Показать строку авто-фильтра";
             case GridStringId.MenuColumnFilterMode: return "Режим фильтра";
+            case GridStringId.MenuColumnClearAllSorting: return "Очистить всю сортировку";
             case GridStringId.FindControlClearButton: return "Очистить";
             case GridStringId.SearchLookUpAddNewButton: return "Добавить новый";
             case GridStringId.MenuColumnBandCustomization: return "Выбор колонок и категорий";
             case GridStringId.MenuColumnCustomSummaryTypeDescription: return "Пользовательское";
             case GridStringId.MenuFooterAddSummaryItem: return "Добавить новую сумму";
             case GridStringId.MenuFooterClearSummaryItems: return "Очистить элементы";
+            case GridStringId.MenuShowSplitItem: return "Разделить";
+            case GridStringId.MenuHideSplitItem: return "Убрать разделение";
+            case GridStringId.MenuFooterShow: return "Показать футер";
+            case GridStringId.MenuFooterHide: return "Скрыть футер";
+            case GridStringId.MenuFooterMode: return "Режим";
+            case GridStringId.MenuFooterAllRows: return "Все строки";
+            case GridStringId.MenuFooterSelection: return "Выделение";
+            case GridStringId.MenuFooterMixed: return "Смешанный";
             default:
-                retGridLocal = String.Empty;
-                break;
+                return base.GetLocalizedString(id);
         }
-        return retGridLocal;
     }
 }
 

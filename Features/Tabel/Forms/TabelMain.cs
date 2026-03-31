@@ -4,6 +4,7 @@ using DevExpress.DataAccess.Sql;
 using DevExpress.LookAndFeel.Design;
 using DevExpress.Utils;
 using DevExpress.Utils.DPI;
+using DevExpress.Xpf.Editors;
 using DevExpress.XtraDiagram.Bars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
@@ -128,6 +129,17 @@ namespace SewingProduction.Features.Tabel.Forms
                 gridView1.Columns.Add(dayColumn);
 
             }
+            for (int day = 1; day <= daysInMonth; day++)
+            {
+                GridColumn dayColumn = new GridColumn();
+                string fieldName = $"dop{day.ToString("00")}";
+                dayColumn.FieldName = fieldName;
+                dayColumn.Caption = fieldName;
+                dayColumn.Visible = false;
+                dayColumn.OptionsColumn.AllowEdit = false;
+                gridView1.Columns.Add(dayColumn);
+
+            }
             GridColumn itogColumnD = new GridColumn();
             itogColumnD.FieldName = "tItogD";
             itogColumnD.Caption = "Ит(Д)";
@@ -167,7 +179,7 @@ namespace SewingProduction.Features.Tabel.Forms
             CheckUserAccess(idUser);
             if (idUser == 170 || idUser == 3)
             {
-                layoutControlItem19.ContentVisible  = true;
+                layoutControlItem19.ContentVisible = true;
             }
             else
             {
@@ -378,7 +390,7 @@ namespace SewingProduction.Features.Tabel.Forms
                     }
                     else
                     {
-                       
+
                         foreach (GridColumn column in gridView1.Columns)
                         {
                             // Проверяем, что FieldName не пустой и начинается на "d" (без учета регистра)
@@ -396,7 +408,7 @@ namespace SewingProduction.Features.Tabel.Forms
                         gridColumnTsplPart.OptionsColumn.ReadOnly = false;
                         gridColumnTsplPartOf.OptionsColumn.ReadOnly = false;
                         gridColumnCheckIncludePlan.OptionsColumn.ReadOnly = false;
-                   
+
                     }
                     else
                     {
@@ -613,7 +625,6 @@ namespace SewingProduction.Features.Tabel.Forms
                 string newState = allStates[currentIndex].ToString();
                 // Устанавливаем новое значение
                 gridView1.SetRowCellValue(rowHandle, column, newState);
-
                 // Сохраняем текущий индекс для этой ячейки
                 cellStateIndices[cellKey] = currentIndex;
 
@@ -718,6 +729,7 @@ namespace SewingProduction.Features.Tabel.Forms
             if (int.TryParse(newText, out int value) && value <= 23)
             {
                 view.SetRowCellValue(rowHandle, column, newText);
+                view.SetRowCellValue(rowHandle, "", newText);
 
                 // Автоматически переходим к следующей ячейке при вводе двух цифр
                 if (newText.Length == 2)
@@ -746,7 +758,7 @@ namespace SewingProduction.Features.Tabel.Forms
                 view.SetRowCellValue(rowHandle, column, "");
             }
         }
-       
+
         private void MoveToNextCell(GridView view)
         {
             // Переходим к следующей ячейке справа
@@ -767,7 +779,7 @@ namespace SewingProduction.Features.Tabel.Forms
         private void gridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
 
-            if (IsDayColumn(e.Column) || e.Column.FieldName.StartsWith("dd"))
+            if (IsDayColumn(e.Column) || e.Column.FieldName.StartsWith("dd") || e.Column.FieldName.StartsWith("dop"))
             {
                 int rowHandle = e.RowHandle;
                 int recordId = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "id"));
@@ -1108,9 +1120,10 @@ namespace SewingProduction.Features.Tabel.Forms
             string markColumnNameDop = $"dop{dayNumber.ToString("00")}";
             string currentDd = gridView1.GetRowCellValue(rowHandle, markColumnNameDD).ToString();
             string currentD = gridView1.GetRowCellValue(rowHandle, markColumnNameD).ToString();
+            string currentDop = gridView1.GetRowCellValue(rowHandle, markColumnNameDop).ToString();
             int dl_d = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "dl_d"));
             int grId = Convert.ToInt32(lookUpEditGroup.EditValue);
-            using (var calculator = new CalculatorDay(grId, currentDd, currentD, markColumnNameDop,dl_d))
+            using (var calculator = new CalculatorDay(grId, currentDd, currentD, currentDop, dl_d))
             {
                 //Point mousePosition = Control.MousePosition;
                 //calculator.StartPosition = FormStartPosition.Manual;
@@ -1133,6 +1146,7 @@ namespace SewingProduction.Features.Tabel.Forms
                     if (grId == 19)
                     {
                         gridView1.SetRowCellValue(rowHandle, markColumnNameDD, calculator.ddResult);
+                        gridView1.SetRowCellValue(rowHandle, markColumnNameDop, calculator.dopResult);
                     }
                 }
             }
@@ -1321,7 +1335,6 @@ namespace SewingProduction.Features.Tabel.Forms
         {
             int grId = Convert.ToInt32(lookUpEditGr.EditValue);
             TimeSheetReportSkladi report1 = new TimeSheetReportSkladi();
-
             report1.RequestParameters = true;
             report1.Parameters["groupString"].Value = "zl";
             report1.Parameters["groupString"].Visible = false;
@@ -1370,6 +1383,54 @@ namespace SewingProduction.Features.Tabel.Forms
                     e.Valid = false;
                     e.ErrorText = "Допустимый диапазон 0.00 – 2.00";
                 }
+            }
+        }
+
+        private void customSimpleButton3_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                int grId = Convert.ToInt32(lookUpEditGroup.EditValue);
+                using (var otchetTabel = new ChoosePodrOtchet(grId, currentMG))
+                {
+
+                    Point cursorPos = Cursor.Position;
+                    Point safePosition = CalculateSafePosition(
+                        cursorPos,
+                        otchetTabel.Size);
+
+                    otchetTabel.StartPosition = FormStartPosition.Manual;
+                    otchetTabel.Location = safePosition;
+                    if (otchetTabel.ShowDialog() == DialogResult.OK)
+                    {
+
+                    }
+
+
+                }
+            }
+        }
+
+        private void gridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        {
+            if (e.ListSourceRowIndex < 0 || string.IsNullOrEmpty(e.Column.FieldName))
+                return;
+
+            string fieldName = e.Column.FieldName;
+
+            if (fieldName.StartsWith("d") && fieldName.Length == 3)
+            {
+                string suffix = fieldName.Substring(1);   // 01, 02, ..., 31
+                string dopField = "dop" + suffix;         // dop01, dop02, ...
+
+                var view = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
+
+                var dValue = Convert.ToString(view.GetListSourceRowCellValue(e.ListSourceRowIndex, fieldName));
+                var dopValue = Convert.ToString(view.GetListSourceRowCellValue(e.ListSourceRowIndex, dopField));
+
+                e.DisplayText = string.IsNullOrWhiteSpace(dopValue)
+                    ? dValue
+                    : $"{dValue.Trim()}{dopValue.Trim()}";
             }
         }
     }
