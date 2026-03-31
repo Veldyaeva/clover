@@ -161,7 +161,39 @@ namespace SewingProduction.Features.Articul.Forms
         private async Task SetupPictursBox()
         {
             //customPictureBoxNabor.ImagePath = await _articulDataService.GetFileEskizForKod(articulNabor_old.Kod);
-            customPictureBoxNabor.Image = Image.FromFile(await _articulDataService.GetFileEskizForKod(articulNabor_old.Kod)); //проверку на существует ли картинка
+
+            try
+            {
+                string imagePath = await _articulDataService.GetFileEskizForKod(articulNabor_old.Kod);
+
+                if (string.IsNullOrWhiteSpace(imagePath))
+                {
+                    customPictureBoxNabor.Image = null;
+                    return;
+                }
+
+                if (!System.IO.File.Exists(imagePath))
+                {
+                    customPictureBoxNabor.Image = null;
+                    return;
+                }
+
+                using (var fs = new System.IO.FileStream(
+                    imagePath,
+                    System.IO.FileMode.Open,
+                    System.IO.FileAccess.Read,
+                    System.IO.FileShare.ReadWrite))
+                using (var tempImage = Image.FromStream(fs))
+                {
+                    customPictureBoxNabor.Image = (Image)tempImage.Clone();
+                }
+            }
+            catch (Exception ex)
+            {
+                customPictureBoxNabor.Image = null;
+                Debug.WriteLine("Ошибка загрузки картинки набора: " + ex.Message);
+            }
+
         }
         private async Task ArticulNaborColumnsOld(int? Id_gost)
         {

@@ -1,4 +1,4 @@
-﻿namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
+﻿namespace SewingProduction.Features.UserDistribution.Forms
 {
     partial class MrChoiceForm
     {
