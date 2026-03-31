@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CalculatorDay));
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            customTextBoxDop = new SewingProduction.Core.Class.CustomTextBox();
             customRadioGroup2 = new SewingProduction.Core.Class.CustomRadioGroup();
             customRadioGroup1 = new SewingProduction.Core.Class.CustomRadioGroup();
             btnC = new SewingProduction.Core.Class.CustomButton();
@@ -75,6 +76,7 @@
             layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             customLabel1 = new SewingProduction.Core.Class.CustomLabel();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
@@ -105,10 +107,12 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem19).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem22).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
             SuspendLayout();
             // 
             // layoutControl1
             // 
+            layoutControl1.Controls.Add(customTextBoxDop);
             layoutControl1.Controls.Add(customRadioGroup2);
             layoutControl1.Controls.Add(customRadioGroup1);
             layoutControl1.Controls.Add(btnC);
@@ -138,9 +142,21 @@
             layoutControl1.TabIndex = 24;
             layoutControl1.Text = "layoutControl1";
             // 
+            // customTextBoxDop
+            // 
+            customTextBoxDop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            customTextBoxDop.ErrorColor = System.Drawing.Color.Red;
+            customTextBoxDop.ErrorMessage = null;
+            customTextBoxDop.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxDop.Location = new System.Drawing.Point(182, 162);
+            customTextBoxDop.Name = "customTextBoxDop";
+            customTextBoxDop.ReadOnly = true;
+            customTextBoxDop.Size = new System.Drawing.Size(31, 20);
+            customTextBoxDop.TabIndex = 26;
+            // 
             // customRadioGroup2
             // 
-            customRadioGroup2.Location = new System.Drawing.Point(12, 54);
+            customRadioGroup2.Location = new System.Drawing.Point(12, 52);
             customRadioGroup2.Name = "customRadioGroup2";
             customRadioGroup2.ObjectName = null;
             customRadioGroup2.Properties.Appearance.BackColor = System.Drawing.SystemColors.Control;
@@ -169,7 +185,7 @@
             customRadioGroup1.Properties.Appearance.Options.UseForeColor = true;
             customRadioGroup1.Properties.Columns = 2;
             customRadioGroup1.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Рабочий"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Выходной") });
-            customRadioGroup1.Size = new System.Drawing.Size(201, 38);
+            customRadioGroup1.Size = new System.Drawing.Size(201, 36);
             customRadioGroup1.StyleController = layoutControl1;
             customRadioGroup1.TabIndex = 24;
             customRadioGroup1.SelectedIndexChanged += radioGroup1_SelectedIndexChanged;
@@ -177,9 +193,9 @@
             // btnC
             // 
             btnC.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btnC.Location = new System.Drawing.Point(148, 295);
+            btnC.Location = new System.Drawing.Point(148, 294);
             btnC.Name = "btnC";
-            btnC.Size = new System.Drawing.Size(65, 33);
+            btnC.Size = new System.Drawing.Size(65, 34);
             btnC.TabIndex = 14;
             btnC.Text = "C";
             btnC.UseVisualStyleBackColor = false;
@@ -187,18 +203,19 @@
             // 
             // workTypesCheckedListBox
             // 
-            workTypesCheckedListBox.Location = new System.Drawing.Point(217, 54);
+            workTypesCheckedListBox.Location = new System.Drawing.Point(217, 52);
             workTypesCheckedListBox.Name = "workTypesCheckedListBox";
-            workTypesCheckedListBox.Size = new System.Drawing.Size(269, 274);
+            workTypesCheckedListBox.Size = new System.Drawing.Size(269, 276);
             workTypesCheckedListBox.StyleController = layoutControl1;
             workTypesCheckedListBox.TabIndex = 23;
             workTypesCheckedListBox.ItemChecking += workTypesCheckedListBox_ItemChecking;
             workTypesCheckedListBox.ItemCheck += workTypesCheckedListBox_ItemCheck;
+            workTypesCheckedListBox.SelectedIndexChanged += workTypesCheckedListBox_SelectedIndexChanged;
             // 
             // btn9
             // 
             btn9.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btn9.Location = new System.Drawing.Point(148, 259);
+            btn9.Location = new System.Drawing.Point(148, 258);
             btn9.Name = "btn9";
             btn9.Size = new System.Drawing.Size(65, 32);
             btn9.TabIndex = 11;
@@ -209,9 +226,9 @@
             // btnPoint
             // 
             btnPoint.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btnPoint.Location = new System.Drawing.Point(80, 295);
+            btnPoint.Location = new System.Drawing.Point(80, 294);
             btnPoint.Name = "btnPoint";
-            btnPoint.Size = new System.Drawing.Size(64, 33);
+            btnPoint.Size = new System.Drawing.Size(64, 34);
             btnPoint.TabIndex = 13;
             btnPoint.Text = ".";
             btnPoint.UseVisualStyleBackColor = false;
@@ -220,7 +237,7 @@
             // btn6
             // 
             btn6.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btn6.Location = new System.Drawing.Point(148, 223);
+            btn6.Location = new System.Drawing.Point(148, 222);
             btn6.Name = "btn6";
             btn6.Size = new System.Drawing.Size(65, 32);
             btn6.TabIndex = 8;
@@ -234,17 +251,17 @@
             customTextBoxString.ErrorColor = System.Drawing.Color.Red;
             customTextBoxString.ErrorMessage = null;
             customTextBoxString.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxString.Location = new System.Drawing.Point(148, 163);
+            customTextBoxString.Location = new System.Drawing.Point(148, 162);
             customTextBoxString.Name = "customTextBoxString";
             customTextBoxString.ReadOnly = true;
-            customTextBoxString.Size = new System.Drawing.Size(65, 20);
+            customTextBoxString.Size = new System.Drawing.Size(30, 20);
             customTextBoxString.TabIndex = 22;
             customTextBoxString.TextChanged += customTextBoxString_TextChanged;
             // 
             // btn3
             // 
             btn3.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btn3.Location = new System.Drawing.Point(148, 187);
+            btn3.Location = new System.Drawing.Point(148, 186);
             btn3.Name = "btn3";
             btn3.Size = new System.Drawing.Size(65, 32);
             btn3.TabIndex = 5;
@@ -255,9 +272,9 @@
             // btn0
             // 
             btn0.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btn0.Location = new System.Drawing.Point(12, 295);
+            btn0.Location = new System.Drawing.Point(12, 294);
             btn0.Name = "btn0";
-            btn0.Size = new System.Drawing.Size(64, 33);
+            btn0.Size = new System.Drawing.Size(64, 34);
             btn0.TabIndex = 12;
             btn0.Text = "0";
             btn0.UseVisualStyleBackColor = false;
@@ -266,7 +283,7 @@
             // btn8
             // 
             btn8.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btn8.Location = new System.Drawing.Point(80, 259);
+            btn8.Location = new System.Drawing.Point(80, 258);
             btn8.Name = "btn8";
             btn8.Size = new System.Drawing.Size(64, 32);
             btn8.TabIndex = 10;
@@ -280,7 +297,7 @@
             customTextBoxValueDigit.ErrorColor = System.Drawing.Color.Red;
             customTextBoxValueDigit.ErrorMessage = null;
             customTextBoxValueDigit.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxValueDigit.Location = new System.Drawing.Point(80, 163);
+            customTextBoxValueDigit.Location = new System.Drawing.Point(80, 162);
             customTextBoxValueDigit.Name = "customTextBoxValueDigit";
             customTextBoxValueDigit.ReadOnly = true;
             customTextBoxValueDigit.Size = new System.Drawing.Size(64, 20);
@@ -290,7 +307,7 @@
             // btn5
             // 
             btn5.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btn5.Location = new System.Drawing.Point(80, 223);
+            btn5.Location = new System.Drawing.Point(80, 222);
             btn5.Name = "btn5";
             btn5.Size = new System.Drawing.Size(64, 32);
             btn5.TabIndex = 7;
@@ -301,7 +318,7 @@
             // btn7
             // 
             btn7.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btn7.Location = new System.Drawing.Point(12, 259);
+            btn7.Location = new System.Drawing.Point(12, 258);
             btn7.Name = "btn7";
             btn7.Size = new System.Drawing.Size(64, 32);
             btn7.TabIndex = 9;
@@ -312,7 +329,7 @@
             // btn2
             // 
             btn2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btn2.Location = new System.Drawing.Point(80, 187);
+            btn2.Location = new System.Drawing.Point(80, 186);
             btn2.Name = "btn2";
             btn2.Size = new System.Drawing.Size(64, 32);
             btn2.TabIndex = 4;
@@ -326,7 +343,7 @@
             customTextBoxValue.ErrorColor = System.Drawing.Color.Red;
             customTextBoxValue.ErrorMessage = null;
             customTextBoxValue.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxValue.Location = new System.Drawing.Point(12, 163);
+            customTextBoxValue.Location = new System.Drawing.Point(12, 162);
             customTextBoxValue.Name = "customTextBoxValue";
             customTextBoxValue.ReadOnly = true;
             customTextBoxValue.Size = new System.Drawing.Size(64, 20);
@@ -358,7 +375,7 @@
             customSimpleButton1.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customSimpleButton1.ImageOptions.Image");
             customSimpleButton1.Location = new System.Drawing.Point(421, 12);
             customSimpleButton1.Name = "customSimpleButton1";
-            customSimpleButton1.Size = new System.Drawing.Size(65, 38);
+            customSimpleButton1.Size = new System.Drawing.Size(65, 36);
             customSimpleButton1.StyleController = layoutControl1;
             customSimpleButton1.TabIndex = 17;
             customSimpleButton1.Click += customSimpleButton1_Click;
@@ -366,7 +383,7 @@
             // btn4
             // 
             btn4.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btn4.Location = new System.Drawing.Point(12, 223);
+            btn4.Location = new System.Drawing.Point(12, 222);
             btn4.Name = "btn4";
             btn4.Size = new System.Drawing.Size(64, 32);
             btn4.TabIndex = 6;
@@ -387,7 +404,7 @@
             customSimpleButton2.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customSimpleButton2.ImageOptions.Image");
             customSimpleButton2.Location = new System.Drawing.Point(353, 12);
             customSimpleButton2.Name = "customSimpleButton2";
-            customSimpleButton2.Size = new System.Drawing.Size(64, 38);
+            customSimpleButton2.Size = new System.Drawing.Size(64, 36);
             customSimpleButton2.StyleController = layoutControl1;
             customSimpleButton2.TabIndex = 18;
             customSimpleButton2.Click += customSimpleButton2_Click;
@@ -395,7 +412,7 @@
             // btn1
             // 
             btn1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btn1.Location = new System.Drawing.Point(12, 187);
+            btn1.Location = new System.Drawing.Point(12, 186);
             btn1.Name = "btn1";
             btn1.Size = new System.Drawing.Size(64, 32);
             btn1.TabIndex = 3;
@@ -407,7 +424,7 @@
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem4, layoutControlItem5, layoutControlItem6, layoutControlItem7, emptySpaceItem1, layoutControlItem2, emptySpaceItem2, layoutControlItem9, layoutControlItem10, layoutControlItem11, layoutControlItem12, layoutControlItem13, layoutControlItem15, layoutControlItem16, layoutControlItem17, layoutControlItem14, layoutControlItem8, layoutControlItem18, layoutControlItem21, layoutControlItem20, layoutControlItem19, layoutControlItem22, layoutControlItem1 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem4, layoutControlItem5, layoutControlItem6, layoutControlItem7, emptySpaceItem1, layoutControlItem2, emptySpaceItem2, layoutControlItem9, layoutControlItem10, layoutControlItem11, layoutControlItem12, layoutControlItem13, layoutControlItem15, layoutControlItem16, layoutControlItem17, layoutControlItem14, layoutControlItem8, layoutControlItem18, layoutControlItem21, layoutControlItem20, layoutControlItem19, layoutControlItem22, layoutControlItem1, layoutControlItem3 });
             Root.Name = "Root";
             Root.Size = new System.Drawing.Size(498, 340);
             Root.TextVisible = false;
@@ -417,7 +434,7 @@
             layoutControlItem4.Control = customSimpleButton2;
             layoutControlItem4.Location = new System.Drawing.Point(341, 0);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new System.Drawing.Size(68, 42);
+            layoutControlItem4.Size = new System.Drawing.Size(68, 40);
             layoutControlItem4.TextVisible = false;
             // 
             // layoutControlItem5
@@ -425,13 +442,13 @@
             layoutControlItem5.Control = customSimpleButton1;
             layoutControlItem5.Location = new System.Drawing.Point(409, 0);
             layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new System.Drawing.Size(69, 42);
+            layoutControlItem5.Size = new System.Drawing.Size(69, 40);
             layoutControlItem5.TextVisible = false;
             // 
             // layoutControlItem6
             // 
             layoutControlItem6.Control = customTextBoxValue;
-            layoutControlItem6.Location = new System.Drawing.Point(0, 151);
+            layoutControlItem6.Location = new System.Drawing.Point(0, 150);
             layoutControlItem6.Name = "layoutControlItem6";
             layoutControlItem6.Size = new System.Drawing.Size(68, 24);
             layoutControlItem6.TextVisible = false;
@@ -439,43 +456,43 @@
             // layoutControlItem7
             // 
             layoutControlItem7.Control = customTextBoxValueDigit;
-            layoutControlItem7.Location = new System.Drawing.Point(68, 151);
+            layoutControlItem7.Location = new System.Drawing.Point(68, 150);
             layoutControlItem7.Name = "layoutControlItem7";
             layoutControlItem7.Size = new System.Drawing.Size(68, 24);
             layoutControlItem7.TextVisible = false;
             // 
             // emptySpaceItem1
             // 
-            emptySpaceItem1.Location = new System.Drawing.Point(0, 88);
+            emptySpaceItem1.Location = new System.Drawing.Point(0, 86);
             emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new System.Drawing.Size(205, 63);
+            emptySpaceItem1.Size = new System.Drawing.Size(205, 64);
             // 
             // layoutControlItem2
             // 
             layoutControlItem2.Control = customTextBoxDd;
             layoutControlItem2.Location = new System.Drawing.Point(205, 0);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new System.Drawing.Size(68, 42);
+            layoutControlItem2.Size = new System.Drawing.Size(68, 40);
             layoutControlItem2.TextVisible = false;
             // 
             // emptySpaceItem2
             // 
             emptySpaceItem2.Location = new System.Drawing.Point(273, 0);
             emptySpaceItem2.Name = "emptySpaceItem2";
-            emptySpaceItem2.Size = new System.Drawing.Size(68, 42);
+            emptySpaceItem2.Size = new System.Drawing.Size(68, 40);
             // 
             // layoutControlItem9
             // 
             layoutControlItem9.Control = workTypesCheckedListBox;
-            layoutControlItem9.Location = new System.Drawing.Point(205, 42);
+            layoutControlItem9.Location = new System.Drawing.Point(205, 40);
             layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new System.Drawing.Size(273, 278);
+            layoutControlItem9.Size = new System.Drawing.Size(273, 280);
             layoutControlItem9.TextVisible = false;
             // 
             // layoutControlItem10
             // 
             layoutControlItem10.Control = btn1;
-            layoutControlItem10.Location = new System.Drawing.Point(0, 175);
+            layoutControlItem10.Location = new System.Drawing.Point(0, 174);
             layoutControlItem10.Name = "layoutControlItem10";
             layoutControlItem10.Size = new System.Drawing.Size(68, 36);
             layoutControlItem10.TextVisible = false;
@@ -483,7 +500,7 @@
             // layoutControlItem11
             // 
             layoutControlItem11.Control = btn4;
-            layoutControlItem11.Location = new System.Drawing.Point(0, 211);
+            layoutControlItem11.Location = new System.Drawing.Point(0, 210);
             layoutControlItem11.Name = "layoutControlItem11";
             layoutControlItem11.Size = new System.Drawing.Size(68, 36);
             layoutControlItem11.TextVisible = false;
@@ -491,7 +508,7 @@
             // layoutControlItem12
             // 
             layoutControlItem12.Control = btn7;
-            layoutControlItem12.Location = new System.Drawing.Point(0, 247);
+            layoutControlItem12.Location = new System.Drawing.Point(0, 246);
             layoutControlItem12.Name = "layoutControlItem12";
             layoutControlItem12.Size = new System.Drawing.Size(68, 36);
             layoutControlItem12.TextVisible = false;
@@ -499,15 +516,15 @@
             // layoutControlItem13
             // 
             layoutControlItem13.Control = btn0;
-            layoutControlItem13.Location = new System.Drawing.Point(0, 283);
+            layoutControlItem13.Location = new System.Drawing.Point(0, 282);
             layoutControlItem13.Name = "layoutControlItem13";
-            layoutControlItem13.Size = new System.Drawing.Size(68, 37);
+            layoutControlItem13.Size = new System.Drawing.Size(68, 38);
             layoutControlItem13.TextVisible = false;
             // 
             // layoutControlItem15
             // 
             layoutControlItem15.Control = btn5;
-            layoutControlItem15.Location = new System.Drawing.Point(68, 211);
+            layoutControlItem15.Location = new System.Drawing.Point(68, 210);
             layoutControlItem15.Name = "layoutControlItem15";
             layoutControlItem15.Size = new System.Drawing.Size(68, 36);
             layoutControlItem15.TextVisible = false;
@@ -515,7 +532,7 @@
             // layoutControlItem16
             // 
             layoutControlItem16.Control = btn8;
-            layoutControlItem16.Location = new System.Drawing.Point(68, 247);
+            layoutControlItem16.Location = new System.Drawing.Point(68, 246);
             layoutControlItem16.Name = "layoutControlItem16";
             layoutControlItem16.Size = new System.Drawing.Size(68, 36);
             layoutControlItem16.TextVisible = false;
@@ -523,15 +540,15 @@
             // layoutControlItem17
             // 
             layoutControlItem17.Control = btnPoint;
-            layoutControlItem17.Location = new System.Drawing.Point(68, 283);
+            layoutControlItem17.Location = new System.Drawing.Point(68, 282);
             layoutControlItem17.Name = "layoutControlItem17";
-            layoutControlItem17.Size = new System.Drawing.Size(68, 37);
+            layoutControlItem17.Size = new System.Drawing.Size(68, 38);
             layoutControlItem17.TextVisible = false;
             // 
             // layoutControlItem14
             // 
             layoutControlItem14.Control = btn2;
-            layoutControlItem14.Location = new System.Drawing.Point(68, 175);
+            layoutControlItem14.Location = new System.Drawing.Point(68, 174);
             layoutControlItem14.Name = "layoutControlItem14";
             layoutControlItem14.Size = new System.Drawing.Size(68, 36);
             layoutControlItem14.TextVisible = false;
@@ -539,15 +556,15 @@
             // layoutControlItem8
             // 
             layoutControlItem8.Control = customTextBoxString;
-            layoutControlItem8.Location = new System.Drawing.Point(136, 151);
+            layoutControlItem8.Location = new System.Drawing.Point(136, 150);
             layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new System.Drawing.Size(69, 24);
+            layoutControlItem8.Size = new System.Drawing.Size(34, 24);
             layoutControlItem8.TextVisible = false;
             // 
             // layoutControlItem18
             // 
             layoutControlItem18.Control = btn3;
-            layoutControlItem18.Location = new System.Drawing.Point(136, 175);
+            layoutControlItem18.Location = new System.Drawing.Point(136, 174);
             layoutControlItem18.Name = "layoutControlItem18";
             layoutControlItem18.Size = new System.Drawing.Size(69, 36);
             layoutControlItem18.TextVisible = false;
@@ -555,15 +572,15 @@
             // layoutControlItem21
             // 
             layoutControlItem21.Control = btnC;
-            layoutControlItem21.Location = new System.Drawing.Point(136, 283);
+            layoutControlItem21.Location = new System.Drawing.Point(136, 282);
             layoutControlItem21.Name = "layoutControlItem21";
-            layoutControlItem21.Size = new System.Drawing.Size(69, 37);
+            layoutControlItem21.Size = new System.Drawing.Size(69, 38);
             layoutControlItem21.TextVisible = false;
             // 
             // layoutControlItem20
             // 
             layoutControlItem20.Control = btn9;
-            layoutControlItem20.Location = new System.Drawing.Point(136, 247);
+            layoutControlItem20.Location = new System.Drawing.Point(136, 246);
             layoutControlItem20.Name = "layoutControlItem20";
             layoutControlItem20.Size = new System.Drawing.Size(69, 36);
             layoutControlItem20.TextVisible = false;
@@ -571,7 +588,7 @@
             // layoutControlItem19
             // 
             layoutControlItem19.Control = btn6;
-            layoutControlItem19.Location = new System.Drawing.Point(136, 211);
+            layoutControlItem19.Location = new System.Drawing.Point(136, 210);
             layoutControlItem19.Name = "layoutControlItem19";
             layoutControlItem19.Size = new System.Drawing.Size(69, 36);
             layoutControlItem19.TextVisible = false;
@@ -581,16 +598,24 @@
             layoutControlItem22.Control = customRadioGroup1;
             layoutControlItem22.Location = new System.Drawing.Point(0, 0);
             layoutControlItem22.Name = "layoutControlItem22";
-            layoutControlItem22.Size = new System.Drawing.Size(205, 42);
+            layoutControlItem22.Size = new System.Drawing.Size(205, 40);
             layoutControlItem22.TextVisible = false;
             // 
             // layoutControlItem1
             // 
             layoutControlItem1.Control = customRadioGroup2;
-            layoutControlItem1.Location = new System.Drawing.Point(0, 42);
+            layoutControlItem1.Location = new System.Drawing.Point(0, 40);
             layoutControlItem1.Name = "layoutControlItem1";
             layoutControlItem1.Size = new System.Drawing.Size(205, 46);
             layoutControlItem1.TextVisible = false;
+            // 
+            // layoutControlItem3
+            // 
+            layoutControlItem3.Control = customTextBoxDop;
+            layoutControlItem3.Location = new System.Drawing.Point(170, 150);
+            layoutControlItem3.Name = "layoutControlItem3";
+            layoutControlItem3.Size = new System.Drawing.Size(35, 24);
+            layoutControlItem3.TextVisible = false;
             // 
             // customLabel1
             // 
@@ -644,6 +669,7 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem19).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem22).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -696,5 +722,7 @@
         private Core.Class.CustomRadioGroup customRadioGroup1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem22;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private Core.Class.CustomTextBox customTextBoxDop;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
     }
 }

@@ -24,11 +24,12 @@ namespace SewingProduction.Features.Tabel.Forms
     public partial class CalculatorDay : CustomForm
     {
         public string CalculatorResult { get; private set; }
-        public string ddResult { get ; private set; }
-        public string dopResult { get ; private set; }
+        public string ddResult { get; private set; }
+        public string dopResult { get; private set; }
         private readonly int _grId;
         private readonly string _dd;
         private readonly int _dl_d;
+        private string _dop;
         private readonly string _dLetters;
         private readonly string _dNumber;
         private static DatabaseHelper _dbHelper;
@@ -36,7 +37,7 @@ namespace SewingProduction.Features.Tabel.Forms
         private readonly ILogger _logger = new FileLogger();
         private static TabelDataService _tabelDataService;
         private List<WorkTypes> _WorkTypesList = new List<WorkTypes>();
-        public CalculatorDay(int idGr, string dd, string d,string dop, int dl_d)
+        public CalculatorDay(int idGr, string dd, string d, string dop, int dl_d)
         {
             this.FormBorderStyle = FormBorderStyle.None;
             this.StartPosition = FormStartPosition.Manual;
@@ -49,6 +50,7 @@ namespace SewingProduction.Features.Tabel.Forms
             _grId = idGr;
             _dd = dd;
             _dl_d = dl_d;
+            _dop = dop.Trim();
             _dLetters = ExtractLettersRegex(d);
             _dNumber = ExtractNumber(d);
             InitializeComponent();
@@ -98,7 +100,7 @@ namespace SewingProduction.Features.Tabel.Forms
             }
             FillCheckedList(_WorkTypesList);
             customTextBoxDd.Text = _dd;
-            SetCheckedSaveItemsText(_dLetters);
+            SetCheckedSaveItemsText(_dLetters, _dop);
             SetNumberSave(_dNumber);
             SetMarkDay(_dd);
         }
@@ -172,20 +174,38 @@ namespace SewingProduction.Features.Tabel.Forms
             StringBuilder ItemsText = new StringBuilder();
             foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in workTypesCheckedListBox.Items)
             {
-                if (item.CheckState == CheckState.Checked)
+                if (item.CheckState == CheckState.Checked  && ExtractCode(item.Description) != "ОВ")
                 {
 
                     ItemsText.Append(ExtractCode(item.Description));
+
                 }
+                if(ExtractCode(item.Description) == "ОВ")
+                {
+                    if (item.CheckState == CheckState.Checked)
+                    {
+                        _dop = ExtractCode(item.Description).Trim();
+                    }
+                    else
+                    {
+                        _dop = "";
+                    }
+
+                }    
             }
             return ItemsText.ToString();
         }
-        public void SetCheckedSaveItemsText(string d)
+        public void SetCheckedSaveItemsText(string d, string dop)
         {
             foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in workTypesCheckedListBox.Items)
             {
+                bool containsOB = dop.Equals(ExtractCode(item.Description));
                 bool contains = d.Equals(ExtractCode(item.Description));
                 if (contains)
+                {
+                    item.CheckState = CheckState.Checked;
+                }
+                if(containsOB)
                 {
                     item.CheckState = CheckState.Checked;
                 }
@@ -194,6 +214,7 @@ namespace SewingProduction.Features.Tabel.Forms
         public void SetNumberSave(string d)
         {
             customTextBoxValueDigit.Text = d;
+            customTextBoxDop.Text = _dop;
         }
 
 
@@ -205,7 +226,8 @@ namespace SewingProduction.Features.Tabel.Forms
         private void workTypesCheckedListBox_ItemCheck(object sender, DevExpress.XtraEditors.Controls.ItemCheckEventArgs e)
         {
             customTextBoxString.Text = GetCheckedItemsText();
-
+            customTextBoxDop.Text = _dop;
+            customTextBoxDop.Refresh();
             customTextBoxString.Refresh();
         }
 
@@ -307,12 +329,12 @@ namespace SewingProduction.Features.Tabel.Forms
             if (IsWorkingDay)
             {
                 customRadioGroup1.SelectedIndex = 0;
-              //  customRadioGroup1.Properties.Items[1].Value = true;
+                //  customRadioGroup1.Properties.Items[1].Value = true;
             }
             else
             {
                 customRadioGroup1.SelectedIndex = 1;
-              //  customRadioGroup1.Properties.Items[0].Value = true;
+                //  customRadioGroup1.Properties.Items[0].Value = true;
             }
             if (IsOrderBasedLeave)
             {
@@ -322,15 +344,15 @@ namespace SewingProduction.Features.Tabel.Forms
             if (IsHoliday)
             {
                 customRadioGroup2.SelectedIndex = 0;
-               // customRadioGroup2.Properties.Items[1].Value = true;
+                // customRadioGroup2.Properties.Items[1].Value = true;
             }
             if (!IsOrderBasedLeave && !IsHoliday)
             {
                 customRadioGroup2.SelectedIndex = 2;
-               // customRadioGroup2.Properties.Items[0].Value = false;
-               // customRadioGroup2.Properties.Items[1].Value = false;
+                // customRadioGroup2.Properties.Items[0].Value = false;
+                // customRadioGroup2.Properties.Items[1].Value = false;
             }
-            
+
         }
 
         private void btnC_Click(object sender, EventArgs e)
@@ -343,6 +365,7 @@ namespace SewingProduction.Features.Tabel.Forms
         {
             this.CalculatorResult = customTextBoxValue.Text;
             this.ddResult = customTextBoxDd.Text.Trim();
+            this.dopResult = customTextBoxDop.Text.Trim();
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -369,9 +392,9 @@ namespace SewingProduction.Features.Tabel.Forms
                 {
                     valueDd.Append("11");
                 }
-                    
+
             }
-            else if(customRadioGroup1.SelectedIndex == 1)
+            else if (customRadioGroup1.SelectedIndex == 1)
             {
                 valueDd.Append("2");
             }
@@ -385,6 +408,11 @@ namespace SewingProduction.Features.Tabel.Forms
             }
             customTextBoxDd.Text = valueDd.ToString().Trim();
             customTextBoxDd.Refresh();
+        }
+
+        private void workTypesCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

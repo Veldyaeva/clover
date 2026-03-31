@@ -190,6 +190,7 @@
             gridView1.ShownEditor += gridView1_ShownEditor;
             gridView1.CellValueChanged += gridView1_CellValueChanged;
             gridView1.CellValueChanging += gridView1_CellValueChanging;
+            gridView1.CustomColumnDisplayText += gridView1_CustomColumnDisplayText;
             gridView1.KeyDown += gridView1_KeyDown;
             gridView1.KeyPress += gridView1_KeyPress;
             gridView1.DoubleClick += gridView1_DoubleClick;
@@ -570,6 +571,7 @@
             customSimpleButton3.TabIndex = 26;
             customSimpleButton3.Text = "Отчет по рабочему времени";
             customSimpleButton3.Click += customSimpleButton1_Click_1;
+            customSimpleButton3.MouseUp += customSimpleButton3_MouseUp;
             // 
             // customSimpleButtonNextMonth
             // 
