@@ -217,6 +217,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             });
 
             // Если есть group6 (создать из артикула) — можно пометить и её
+            TagByCaption(layoutControlGroupPreArch, new[] {
+                ("Р’ Р°СЂС…РёРІ",                   "prearch:archive")
+            });
+
             if (layoutControlGroup6 != null)
                 AutoTagAllButtons(layoutControlGroup6, "g6");
         }
@@ -833,7 +837,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
 
 
-            var advanceForm = new TeamWork_AdvanceTW(bufferWorkDivision, mode, newId, oldId, sourceAnnIdToCopyDetailsFrom, initialArtData, duplicateAnnData);
+            var advanceForm = new TeamWork_AdvanceTW(_user, bufferWorkDivision, mode, newId, oldId, sourceAnnIdToCopyDetailsFrom, initialArtData, duplicateAnnData);
 
             // Добавляем в список открытых форм
             AddOpenAdvanceForm(advanceForm);

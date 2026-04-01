@@ -29,6 +29,16 @@ using static SewingProduction.Helpers.LayoutControlGroupHelper;
 
 namespace SewingProduction.Helpers
 {
+    /// <summary>
+    /// Описывает связь между header-button, ее командным тегом и объектом прав в БД.
+    /// </summary>
+    public sealed class HeaderButtonPermissionBinding
+    {
+        public LayoutControlGroup Group { get; init; }
+        public string ButtonTag { get; init; }
+        public string PermissionObjectName { get; init; }
+    }
+
     public class LayoutControlGroupHelper
     {
         private static readonly ConditionalWeakTable<LayoutControlGroup, Dictionary<string, HeaderButtonPermissionState>> _permissionStates =
