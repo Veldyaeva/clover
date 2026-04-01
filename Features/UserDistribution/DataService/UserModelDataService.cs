@@ -79,7 +79,7 @@ namespace SewingProduction.Features.UserDistribution.DataService
         }
         public async Task<List<FioDto>> LoadFioList()
         {
-            string query = "SELECT f_id AS FioID, Fio FROM fio";
+            string query = "SELECT f_id AS FioID, Fio , Rab FROM fio WHERE datau IS NULL AND (tab_sovm = 0 OR tab_sovm = tab OR tab_sovm IS NULL)";
             return await _dbService.GetListAsync<FioDto>(query, new Dictionary<string, object>());
         }
         public async void SetPravaForAddUser(int newId)
