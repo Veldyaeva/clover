@@ -8,6 +8,8 @@ using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Features.TeamWork.Interfaces;
 using SewingProduction.Features.TeamWork.Operations;
 using SewingProduction.Features.TeamWork.Services;
+using SewingProduction.Features.UserDistribution.Class;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form.TeamWork.Forms;
 using SewingProduction.Helpers;
 using SewingProduction.Interfaces;
@@ -44,6 +46,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private int _bufferWorkDivision;
         private readonly DatabaseHelper _dbHelper;
         private readonly TWGridHelper _gridHelper = new TWGridHelper();
+        private readonly LayoutControlGroupHelper _layoutControlGroupHelper = new LayoutControlGroupHelper();
         private int _newAnnId = -1;
         private int _selectedAnnId = -1;
         private readonly ILogger _logger = new FileLogger();
@@ -174,7 +177,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         public string CurrentArticul => (_currentAnnData?.Articul ?? CreatedAnn?.Articul) ?? string.Empty;
 
         #region Конструкторы и базовая настройка
-        public TeamWork_AdvanceTW() { InitializeComponent(); }
+        public TeamWork_AdvanceTW()
+        {
+            InitializeComponent();
+            InitializeHeaderButtonPermissionSupport();
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -185,6 +192,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         public TeamWork_AdvanceTW(int bufferWorkDivision, int mode, int? newId = null, int? oldId = null, int? sourceAnnIdToCopyDetailsFrom = null, MyDataART initialArtData = null, ArtNormN duplicateAnnData = null)
         {
             InitializeComponent();
+            InitializeHeaderButtonPermissionSupport();
 
             // Настройка мультиселекта с галочками
 
@@ -220,6 +228,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             // Проставляем теги для customHeaderButtons (используются в общих обработчиках кликов)
             InitHeaderButtonTags();
+            RegisterBaseNodeHeaderPermissions();
 
             // Подписка на клики по кнопкам заголовков
             try
@@ -238,6 +247,52 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         #region Кнопки заголовков (инициализация и обработчики)
         // Устанавливает Tag для кастомных кнопок заголовков групп лейаута
+        private void InitializeHeaderButtonPermissionSupport()
+        {
+            if (DesignMode)
+            {
+                return;
+            }
+
+            Load += TeamWork_AdvanceTW_LoadHeaderButtonPermissions;
+        }
+
+        private async void TeamWork_AdvanceTW_LoadHeaderButtonPermissions(object sender, EventArgs e)
+        {
+            Load -= TeamWork_AdvanceTW_LoadHeaderButtonPermissions;
+            await ApplyBaseNodeHeaderPermissionsAsync();
+        }
+
+        private void RegisterBaseNodeHeaderPermissions()
+        {
+            _layoutControlGroupHelper.RegisterButtonPermission(layoutControlGroup10, "op:add-base-node", "btnAddBaseNode");
+            _layoutControlGroupHelper.RegisterButtonPermission(layoutControlGroup10, "op:save-base-node", "btnSaveBaseNode");
+        }
+
+        private async Task ApplyBaseNodeHeaderPermissionsAsync()
+        {
+            try
+            {
+                if (layoutControlGroup10 == null || CurrentUser.User?.UserId <= 0)
+                {
+                    return;
+                }
+
+                // Для advance-формы читаем отдельный snapshot прав, чтобы не перетирать права уже открытых форм.
+                var permissionUser = new UserClass
+                {
+                    UserId = CurrentUser.User.UserId
+                };
+
+                await permissionUser.LoadObjectForm(nameof(TeamWork_AdvanceTW));
+                _layoutControlGroupHelper.ApplyButtonPermissions(layoutControlGroup10, permissionUser);
+            }
+            catch (Exception ex)
+            {
+                LogSuppressedException("ApplyBaseNodeHeaderPermissionsAsync", ex);
+            }
+        }
+
         private void InitHeaderButtonTags()
         {
             try
