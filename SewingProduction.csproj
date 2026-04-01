@@ -29,12 +29,39 @@
     </Content>
   </ItemGroup>
 
+	<ItemGroup>
+		<Content Include="Help\**\*.html">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Help\**\*.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Help\Features\Articul\Form\**" />
+	  <Content Remove="Help\Features\Articul\Form\**" />
+	  <EmbeddedResource Remove="Help\Features\Articul\Form\**" />
+	  <None Remove="Help\Features\Articul\Form\**" />
+	</ItemGroup>
+	
   <ItemGroup>
     <None Remove="Help\Features\Sprav\Forms\EditTarif.html" />
     <None Remove="Help\Features\Sprav\Forms\img\EditTarif.png" />
     <None Remove="Help\Features\Sprav\Forms\img\EditTarif1.png" />
     <None Remove="Help\Features\Sprav\Forms\img\EditTarif2.png" />
     <None Remove="Help\Features\Tabel\Forms\OtvlRab.html" />
+    <None Remove="Help\Features\UserDistribution\Forms\Img\MrChoiceForm.png" />
+    <None Remove="Help\Features\UserDistribution\Forms\Img\RoleFormObject.png" />
+    <None Remove="Help\Features\UserDistribution\Forms\Img\UserRole.png" />
+    <None Remove="Help\Features\UserDistribution\Forms\MrChoiceForm.html" />
+    <None Remove="Help\Features\UserDistribution\Forms\RoleFormObject.html" />
+    <None Remove="Help\Features\UserDistribution\Forms\UserRole.html" />
   </ItemGroup>
 
 
@@ -141,12 +168,14 @@
     <Content Include="Help\Features\UserDistribution\Forms\Img\Dictionary.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Img\MrChoiceForm.png" />
     <Content Include="Help\Features\UserDistribution\Forms\Img\RoleColumn.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Help\Features\UserDistribution\Forms\Img\RoleColumnY.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Img\RoleFormObject.png" />
     <Content Include="Help\Features\UserDistribution\Forms\Img\Settings.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -156,9 +185,12 @@
     <Content Include="Help\Features\UserDistribution\Forms\Img\UserProfile.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Img\UserRole.png" />
+    <Content Include="Help\Features\UserDistribution\Forms\MrChoiceForm.html" />
     <Content Include="Help\Features\UserDistribution\Forms\RoleColumn.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\RoleFormObject.html" />
     <Content Include="Help\Features\UserDistribution\Forms\Settings.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -168,6 +200,7 @@
     <Content Include="Help\Features\UserDistribution\Forms\UserProfile.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\UserRole.html" />
     <Content Include="Help\Help.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

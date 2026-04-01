@@ -39,32 +39,16 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customGridControl3 = new CustomGridControl();
             gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            customButtonShareUser = new CustomSimpleButton();
-            customButtonAllRpofile = new CustomSimpleButton();
-            customButtonUserHierarchy = new CustomSimpleButton();
             tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            customLabelCompName = new CustomLabel();
+            customLabelComp = new CustomLabel();
+            customLabelProfileName = new CustomLabel();
             customButtonChangeUser = new CustomSimpleButton();
             customButtonHistory = new CustomSimpleButton();
-            customActionButtonNon = new CustomActionButton();
-            customButtonMr = new CustomSimpleButton();
-            tableLayoutPanelButton = new System.Windows.Forms.TableLayoutPanel();
-            customButtonAdminSprav = new CustomSimpleButton();
-            customButtonSpravTable = new CustomSimpleButton();
-            customButtonAllRole = new CustomSimpleButton();
-            customButtonUserRole = new CustomSimpleButton();
-            customButtonAllDistribution = new CustomSimpleButton();
-            customButtonUserPodr = new CustomSimpleButton();
-            customButtonAdminForm = new CustomSimpleButton();
-            customButtonRolePodr = new CustomSimpleButton();
-            customButtonRoleFormObject = new CustomSimpleButton();
-            tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            customLabelProfileName = new CustomLabel();
-            customLabelComp = new CustomLabel();
             customLabelProfile = new CustomLabel();
-            customLabelCompName = new CustomLabel();
+            customActionButtonNon = new CustomActionButton();
             customGroupBoxMyRole = new CustomGroupBox();
-            listBoxRole = new System.Windows.Forms.ListBox();
+            listBoxRole = new CustomListBox();
             customGroupBoxEditPassword = new CustomGroupBox();
             tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             customLabel1 = new CustomLabel();
@@ -81,21 +65,57 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customTextBoxPassword = new CustomTextBox();
             customTextBoxNewLogin = new CustomTextBox();
             customActionButtonEditLogin = new CustomActionButton();
+            customGroupBoxFast = new CustomGroupBox();
+            listBoxFast = new CustomListBox();
+            customGroupBoxRole = new CustomGroupBox();
+            tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            customButtonRolePodr = new CustomSimpleButton();
+            customButtonUserRole2 = new CustomSimpleButton();
+            customButtonAllRole = new CustomSimpleButton();
+            customButtonRoleFormObject = new CustomSimpleButton();
+            customGroupBoxUser = new CustomGroupBox();
+            tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            customButtonUserRole = new CustomSimpleButton();
+            customButtonShareUser = new CustomSimpleButton();
+            customButtonAllRpofile = new CustomSimpleButton();
+            customButtonUserHierarchy = new CustomSimpleButton();
+            customGroupBoxMaster = new CustomGroupBox();
+            tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            customButtonMr = new CustomSimpleButton();
+            customButtonAllDistribution = new CustomSimpleButton();
+            customGroupBox2 = new CustomGroupBox();
+            tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            customButtonRoleFormObject2 = new CustomSimpleButton();
+            customButtonAdminForm = new CustomSimpleButton();
+            customButtonAdminSprav = new CustomSimpleButton();
+            customButtonSpravTable = new CustomSimpleButton();
+            customGroupBox1 = new CustomGroupBox();
+            tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            customButtonRolePodr2 = new CustomSimpleButton();
+            customButtonUserPodr = new CustomSimpleButton();
             ((System.ComponentModel.ISupportInitialize)gridViewRole).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControl1).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customGridControl3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView3).BeginInit();
             tableLayoutPanel2.SuspendLayout();
-            tableLayoutPanel7.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
-            tableLayoutPanelButton.SuspendLayout();
-            tableLayoutPanel3.SuspendLayout();
             customGroupBoxMyRole.SuspendLayout();
             customGroupBoxEditPassword.SuspendLayout();
             tableLayoutPanel5.SuspendLayout();
             customGroupBoxEditLogin.SuspendLayout();
             tableLayoutPanel6.SuspendLayout();
+            customGroupBoxFast.SuspendLayout();
+            customGroupBoxRole.SuspendLayout();
+            tableLayoutPanel3.SuspendLayout();
+            customGroupBoxUser.SuspendLayout();
+            tableLayoutPanel7.SuspendLayout();
+            customGroupBoxMaster.SuspendLayout();
+            tableLayoutPanel8.SuspendLayout();
+            customGroupBox2.SuspendLayout();
+            tableLayoutPanel9.SuspendLayout();
+            customGroupBox1.SuspendLayout();
+            tableLayoutPanel10.SuspendLayout();
             SuspendLayout();
             // 
             // gridViewRole
@@ -186,13 +206,16 @@ namespace SewingProduction.Features.UserDistribution.Forms
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            tableLayoutPanel2.Controls.Add(tableLayoutPanel7, 2, 0);
             tableLayoutPanel2.Controls.Add(tableLayoutPanel4, 0, 0);
-            tableLayoutPanel2.Controls.Add(tableLayoutPanelButton, 3, 0);
-            tableLayoutPanel2.Controls.Add(tableLayoutPanel3, 1, 0);
             tableLayoutPanel2.Controls.Add(customGroupBoxMyRole, 1, 1);
             tableLayoutPanel2.Controls.Add(customGroupBoxEditPassword, 1, 3);
             tableLayoutPanel2.Controls.Add(customGroupBoxEditLogin, 2, 3);
+            tableLayoutPanel2.Controls.Add(customGroupBoxFast, 2, 1);
+            tableLayoutPanel2.Controls.Add(customGroupBoxRole, 2, 0);
+            tableLayoutPanel2.Controls.Add(customGroupBoxUser, 1, 0);
+            tableLayoutPanel2.Controls.Add(customGroupBoxMaster, 3, 0);
+            tableLayoutPanel2.Controls.Add(customGroupBox2, 3, 2);
+            tableLayoutPanel2.Controls.Add(customGroupBox1, 3, 3);
             tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -202,82 +225,23 @@ namespace SewingProduction.Features.UserDistribution.Forms
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.5301F));
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34.9486F));
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.43172F));
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             tableLayoutPanel2.Size = new System.Drawing.Size(1150, 634);
             tableLayoutPanel2.TabIndex = 1;
-            // 
-            // tableLayoutPanel7
-            // 
-            tableLayoutPanel7.ColumnCount = 2;
-            tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel7.Controls.Add(customButtonShareUser, 0, 2);
-            tableLayoutPanel7.Controls.Add(customButtonAllRpofile, 0, 0);
-            tableLayoutPanel7.Controls.Add(customButtonUserHierarchy, 0, 1);
-            tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel7.Location = new System.Drawing.Point(578, 3);
-            tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tableLayoutPanel7.Name = "tableLayoutPanel7";
-            tableLayoutPanel7.RowCount = 3;
-            tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel7.Size = new System.Drawing.Size(394, 115);
-            tableLayoutPanel7.TabIndex = 12;
-            // 
-            // customButtonShareUser
-            // 
-            customButtonShareUser.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            customButtonShareUser.Appearance.Options.UseFont = true;
-            customButtonShareUser.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonShareUser.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonShareUser.ImageOptions.Image");
-            customButtonShareUser.Location = new System.Drawing.Point(4, 79);
-            customButtonShareUser.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonShareUser.MinimumSize = new System.Drawing.Size(160, 20);
-            customButtonShareUser.Name = "customButtonShareUser";
-            customButtonShareUser.Size = new System.Drawing.Size(189, 33);
-            customButtonShareUser.TabIndex = 15;
-            customButtonShareUser.Text = "Поделиться пользователем";
-            customButtonShareUser.Click += customButtonShareUser_Click;
-            // 
-            // customButtonAllRpofile
-            // 
-            customButtonAllRpofile.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            customButtonAllRpofile.Appearance.Options.UseFont = true;
-            customButtonAllRpofile.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonAllRpofile.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonAllRpofile.ImageOptions.Image");
-            customButtonAllRpofile.Location = new System.Drawing.Point(4, 3);
-            customButtonAllRpofile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonAllRpofile.MinimumSize = new System.Drawing.Size(160, 20);
-            customButtonAllRpofile.Name = "customButtonAllRpofile";
-            customButtonAllRpofile.Size = new System.Drawing.Size(189, 32);
-            customButtonAllRpofile.TabIndex = 0;
-            customButtonAllRpofile.Text = "Список пользователей";
-            customButtonAllRpofile.Click += customButtonAllRpofile_Click;
-            // 
-            // customButtonUserHierarchy
-            // 
-            customButtonUserHierarchy.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            customButtonUserHierarchy.Appearance.Options.UseFont = true;
-            customButtonUserHierarchy.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonUserHierarchy.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonUserHierarchy.ImageOptions.Image");
-            customButtonUserHierarchy.Location = new System.Drawing.Point(4, 41);
-            customButtonUserHierarchy.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonUserHierarchy.MinimumSize = new System.Drawing.Size(160, 20);
-            customButtonUserHierarchy.Name = "customButtonUserHierarchy";
-            customButtonUserHierarchy.Size = new System.Drawing.Size(189, 32);
-            customButtonUserHierarchy.TabIndex = 9;
-            customButtonUserHierarchy.Text = "Иерархия пользователей";
-            customButtonUserHierarchy.Click += customButtonUserHierarchy_Click;
             // 
             // tableLayoutPanel4
             // 
             tableLayoutPanel4.ColumnCount = 1;
             tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel4.Controls.Add(customLabelCompName, 0, 4);
+            tableLayoutPanel4.Controls.Add(customLabelComp, 0, 3);
+            tableLayoutPanel4.Controls.Add(customLabelProfileName, 0, 2);
             tableLayoutPanel4.Controls.Add(customButtonChangeUser, 0, 0);
             tableLayoutPanel4.Controls.Add(customButtonHistory, 0, 8);
+            tableLayoutPanel4.Controls.Add(customLabelProfile, 0, 1);
             tableLayoutPanel4.Controls.Add(customActionButtonNon, 0, 9);
-            tableLayoutPanel4.Controls.Add(customButtonMr, 0, 7);
             tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel4.Location = new System.Drawing.Point(4, 3);
             tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -296,6 +260,54 @@ namespace SewingProduction.Features.UserDistribution.Forms
             tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             tableLayoutPanel4.Size = new System.Drawing.Size(164, 459);
             tableLayoutPanel4.TabIndex = 10;
+            // 
+            // customLabelCompName
+            // 
+            customLabelCompName.Anchor = System.Windows.Forms.AnchorStyles.None;
+            customLabelCompName.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelCompName.Appearance.Options.UseFont = true;
+            customLabelCompName.Appearance.Options.UseTextOptions = true;
+            customLabelCompName.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabelCompName.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabelCompName.Location = new System.Drawing.Point(48, 194);
+            customLabelCompName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelCompName.Name = "customLabelCompName";
+            customLabelCompName.Size = new System.Drawing.Size(67, 16);
+            customLabelCompName.TabIndex = 3;
+            customLabelCompName.Text = "Компьютер";
+            customLabelCompName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // customLabelComp
+            // 
+            customLabelComp.Anchor = System.Windows.Forms.AnchorStyles.None;
+            customLabelComp.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelComp.Appearance.Options.UseFont = true;
+            customLabelComp.Appearance.Options.UseTextOptions = true;
+            customLabelComp.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabelComp.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabelComp.Location = new System.Drawing.Point(48, 149);
+            customLabelComp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelComp.Name = "customLabelComp";
+            customLabelComp.Size = new System.Drawing.Size(67, 16);
+            customLabelComp.TabIndex = 5;
+            customLabelComp.Text = "Компьютер";
+            customLabelComp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // customLabelProfileName
+            // 
+            customLabelProfileName.Anchor = System.Windows.Forms.AnchorStyles.None;
+            customLabelProfileName.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelProfileName.Appearance.Options.UseFont = true;
+            customLabelProfileName.Appearance.Options.UseTextOptions = true;
+            customLabelProfileName.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabelProfileName.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabelProfileName.Location = new System.Drawing.Point(55, 104);
+            customLabelProfileName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelProfileName.Name = "customLabelProfileName";
+            customLabelProfileName.Size = new System.Drawing.Size(53, 16);
+            customLabelProfileName.TabIndex = 6;
+            customLabelProfileName.Text = "Профиль";
+            customLabelProfileName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customButtonChangeUser
             // 
@@ -327,6 +339,22 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customButtonHistory.Text = "История действий";
             customButtonHistory.Click += customButtonHistory_Click;
             // 
+            // customLabelProfile
+            // 
+            customLabelProfile.Anchor = System.Windows.Forms.AnchorStyles.None;
+            customLabelProfile.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelProfile.Appearance.Options.UseFont = true;
+            customLabelProfile.Appearance.Options.UseTextOptions = true;
+            customLabelProfile.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabelProfile.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabelProfile.Location = new System.Drawing.Point(55, 59);
+            customLabelProfile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelProfile.Name = "customLabelProfile";
+            customLabelProfile.Size = new System.Drawing.Size(53, 16);
+            customLabelProfile.TabIndex = 4;
+            customLabelProfile.Text = "Профиль";
+            customLabelProfile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // customActionButtonNon
             // 
             customActionButtonNon.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -340,277 +368,6 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customActionButtonNon.Text = "Не нажимать";
             customActionButtonNon.UseVisualStyleBackColor = false;
             customActionButtonNon.Click += customActionButtonNon_Click;
-            // 
-            // customButtonMr
-            // 
-            customButtonMr.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            customButtonMr.Appearance.Options.UseFont = true;
-            customButtonMr.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonMr.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonMr.ImageOptions.Image");
-            customButtonMr.Location = new System.Drawing.Point(4, 318);
-            customButtonMr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonMr.MinimumSize = new System.Drawing.Size(160, 20);
-            customButtonMr.Name = "customButtonMr";
-            customButtonMr.Size = new System.Drawing.Size(160, 39);
-            customButtonMr.TabIndex = 13;
-            customButtonMr.Text = "Мастер добавления";
-            customButtonMr.Click += customButtonMr_Click;
-            // 
-            // tableLayoutPanelButton
-            // 
-            tableLayoutPanelButton.ColumnCount = 1;
-            tableLayoutPanelButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanelButton.Controls.Add(customButtonAdminSprav, 0, 11);
-            tableLayoutPanelButton.Controls.Add(customButtonSpravTable, 0, 10);
-            tableLayoutPanelButton.Controls.Add(customButtonAllRole, 0, 0);
-            tableLayoutPanelButton.Controls.Add(customButtonUserRole, 0, 1);
-            tableLayoutPanelButton.Controls.Add(customButtonAllDistribution, 0, 6);
-            tableLayoutPanelButton.Controls.Add(customButtonUserPodr, 0, 5);
-            tableLayoutPanelButton.Controls.Add(customButtonAdminForm, 0, 8);
-            tableLayoutPanelButton.Controls.Add(customButtonRolePodr, 0, 3);
-            tableLayoutPanelButton.Controls.Add(customButtonRoleFormObject, 0, 2);
-            tableLayoutPanelButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanelButton.Location = new System.Drawing.Point(980, 3);
-            tableLayoutPanelButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tableLayoutPanelButton.Name = "tableLayoutPanelButton";
-            tableLayoutPanelButton.RowCount = 12;
-            tableLayoutPanel2.SetRowSpan(tableLayoutPanelButton, 4);
-            tableLayoutPanelButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.69201946F));
-            tableLayoutPanelButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.69201946F));
-            tableLayoutPanelButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.69201946F));
-            tableLayoutPanelButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.69201946F));
-            tableLayoutPanelButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.69201946F));
-            tableLayoutPanelButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.69201946F));
-            tableLayoutPanelButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.69201946F));
-            tableLayoutPanelButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.69433069F));
-            tableLayoutPanelButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.69230747F));
-            tableLayoutPanelButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.69230747F));
-            tableLayoutPanelButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.69230747F));
-            tableLayoutPanelButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.69230747F));
-            tableLayoutPanelButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.69230747F));
-            tableLayoutPanelButton.Size = new System.Drawing.Size(166, 628);
-            tableLayoutPanelButton.TabIndex = 7;
-            // 
-            // customButtonAdminSprav
-            // 
-            customButtonAdminSprav.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            customButtonAdminSprav.Appearance.Options.UseFont = true;
-            customButtonAdminSprav.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonAdminSprav.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonAdminSprav.ImageOptions.Image");
-            customButtonAdminSprav.Location = new System.Drawing.Point(4, 575);
-            customButtonAdminSprav.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonAdminSprav.MinimumSize = new System.Drawing.Size(160, 20);
-            customButtonAdminSprav.Name = "customButtonAdminSprav";
-            customButtonAdminSprav.Size = new System.Drawing.Size(160, 50);
-            customButtonAdminSprav.TabIndex = 10;
-            customButtonAdminSprav.Text = "Администрирование колонок";
-            customButtonAdminSprav.Click += customButtonAdminSprav_Click;
-            // 
-            // customButtonSpravTable
-            // 
-            customButtonSpravTable.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            customButtonSpravTable.Appearance.Options.UseFont = true;
-            customButtonSpravTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonSpravTable.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonSpravTable.ImageOptions.Image");
-            customButtonSpravTable.Location = new System.Drawing.Point(4, 523);
-            customButtonSpravTable.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonSpravTable.MinimumSize = new System.Drawing.Size(160, 20);
-            customButtonSpravTable.Name = "customButtonSpravTable";
-            customButtonSpravTable.Size = new System.Drawing.Size(160, 46);
-            customButtonSpravTable.TabIndex = 12;
-            customButtonSpravTable.Text = "Администрирование таблиц";
-            customButtonSpravTable.Click += customButtonSpravTable_Click;
-            // 
-            // customButtonAllRole
-            // 
-            customButtonAllRole.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            customButtonAllRole.Appearance.Options.UseFont = true;
-            customButtonAllRole.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonAllRole.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonAllRole.ImageOptions.Image");
-            customButtonAllRole.ImageOptions.ImageUri.Uri = "Add";
-            customButtonAllRole.Location = new System.Drawing.Point(4, 3);
-            customButtonAllRole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonAllRole.MinimumSize = new System.Drawing.Size(160, 20);
-            customButtonAllRole.Name = "customButtonAllRole";
-            customButtonAllRole.Size = new System.Drawing.Size(160, 46);
-            customButtonAllRole.TabIndex = 7;
-            customButtonAllRole.Text = "Список ролей";
-            customButtonAllRole.Click += customButtonAllRole_Click;
-            // 
-            // customButtonUserRole
-            // 
-            customButtonUserRole.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            customButtonUserRole.Appearance.Options.UseFont = true;
-            customButtonUserRole.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonUserRole.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonUserRole.ImageOptions.Image");
-            customButtonUserRole.Location = new System.Drawing.Point(4, 55);
-            customButtonUserRole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonUserRole.MinimumSize = new System.Drawing.Size(160, 20);
-            customButtonUserRole.Name = "customButtonUserRole";
-            customButtonUserRole.Size = new System.Drawing.Size(160, 46);
-            customButtonUserRole.TabIndex = 16;
-            customButtonUserRole.Text = "Пользователи - роли";
-            customButtonUserRole.Click += customButtonUserRole_Click;
-            // 
-            // customButtonAllDistribution
-            // 
-            customButtonAllDistribution.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            customButtonAllDistribution.Appearance.Options.UseFont = true;
-            customButtonAllDistribution.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonAllDistribution.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonAllDistribution.ImageOptions.Image");
-            customButtonAllDistribution.Location = new System.Drawing.Point(4, 315);
-            customButtonAllDistribution.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonAllDistribution.MinimumSize = new System.Drawing.Size(160, 20);
-            customButtonAllDistribution.Name = "customButtonAllDistribution";
-            customButtonAllDistribution.Size = new System.Drawing.Size(160, 46);
-            customButtonAllDistribution.TabIndex = 13;
-            customButtonAllDistribution.Text = "Распределение прав";
-            customButtonAllDistribution.Click += customButtonAllDistribution_Click;
-            // 
-            // customButtonUserPodr
-            // 
-            customButtonUserPodr.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            customButtonUserPodr.Appearance.Options.UseFont = true;
-            customButtonUserPodr.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonUserPodr.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonUserPodr.ImageOptions.Image");
-            customButtonUserPodr.Location = new System.Drawing.Point(4, 263);
-            customButtonUserPodr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonUserPodr.MinimumSize = new System.Drawing.Size(160, 20);
-            customButtonUserPodr.Name = "customButtonUserPodr";
-            customButtonUserPodr.Size = new System.Drawing.Size(160, 46);
-            customButtonUserPodr.TabIndex = 13;
-            customButtonUserPodr.Text = "Администрирование табеля";
-            customButtonUserPodr.Click += customButtonUserPodr_Click;
-            // 
-            // customButtonAdminForm
-            // 
-            customButtonAdminForm.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            customButtonAdminForm.Appearance.Options.UseFont = true;
-            customButtonAdminForm.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonAdminForm.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonAdminForm.ImageOptions.Image");
-            customButtonAdminForm.Location = new System.Drawing.Point(4, 419);
-            customButtonAdminForm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonAdminForm.MinimumSize = new System.Drawing.Size(160, 20);
-            customButtonAdminForm.Name = "customButtonAdminForm";
-            customButtonAdminForm.Size = new System.Drawing.Size(160, 46);
-            customButtonAdminForm.TabIndex = 8;
-            customButtonAdminForm.Text = "Формы / Объекты";
-            customButtonAdminForm.Click += customButtonAdminForm_Click;
-            // 
-            // customButtonRolePodr
-            // 
-            customButtonRolePodr.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            customButtonRolePodr.Appearance.Options.UseFont = true;
-            customButtonRolePodr.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonRolePodr.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonRolePodr.ImageOptions.Image");
-            customButtonRolePodr.Location = new System.Drawing.Point(4, 159);
-            customButtonRolePodr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonRolePodr.MinimumSize = new System.Drawing.Size(160, 20);
-            customButtonRolePodr.Name = "customButtonRolePodr";
-            customButtonRolePodr.Size = new System.Drawing.Size(160, 46);
-            customButtonRolePodr.TabIndex = 14;
-            customButtonRolePodr.Text = "Роли - Подразделения";
-            customButtonRolePodr.Click += customButton3_Click;
-            // 
-            // customButtonRoleFormObject
-            // 
-            customButtonRoleFormObject.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            customButtonRoleFormObject.Appearance.Options.UseFont = true;
-            customButtonRoleFormObject.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonRoleFormObject.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonRoleFormObject.ImageOptions.Image");
-            customButtonRoleFormObject.Location = new System.Drawing.Point(4, 107);
-            customButtonRoleFormObject.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonRoleFormObject.MinimumSize = new System.Drawing.Size(160, 20);
-            customButtonRoleFormObject.Name = "customButtonRoleFormObject";
-            customButtonRoleFormObject.Size = new System.Drawing.Size(160, 46);
-            customButtonRoleFormObject.TabIndex = 17;
-            customButtonRoleFormObject.Text = "Роли - объекты";
-            customButtonRoleFormObject.Click += customButtonRoleFormObject_Click;
-            // 
-            // tableLayoutPanel3
-            // 
-            tableLayoutPanel3.ColumnCount = 2;
-            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel3.Controls.Add(customLabelProfileName, 1, 0);
-            tableLayoutPanel3.Controls.Add(customLabelComp, 0, 1);
-            tableLayoutPanel3.Controls.Add(customLabelProfile, 0, 0);
-            tableLayoutPanel3.Controls.Add(customLabelCompName, 1, 1);
-            tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel3.Location = new System.Drawing.Point(176, 3);
-            tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tableLayoutPanel3.Name = "tableLayoutPanel3";
-            tableLayoutPanel3.RowCount = 3;
-            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel3.Size = new System.Drawing.Size(394, 115);
-            tableLayoutPanel3.TabIndex = 9;
-            // 
-            // customLabelProfileName
-            // 
-            customLabelProfileName.Anchor = System.Windows.Forms.AnchorStyles.None;
-            customLabelProfileName.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelProfileName.Appearance.Options.UseFont = true;
-            customLabelProfileName.Appearance.Options.UseTextOptions = true;
-            customLabelProfileName.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            customLabelProfileName.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            customLabelProfileName.Location = new System.Drawing.Point(269, 11);
-            customLabelProfileName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabelProfileName.Name = "customLabelProfileName";
-            customLabelProfileName.Size = new System.Drawing.Size(53, 16);
-            customLabelProfileName.TabIndex = 6;
-            customLabelProfileName.Text = "Профиль";
-            customLabelProfileName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // customLabelComp
-            // 
-            customLabelComp.Anchor = System.Windows.Forms.AnchorStyles.None;
-            customLabelComp.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelComp.Appearance.Options.UseFont = true;
-            customLabelComp.Appearance.Options.UseTextOptions = true;
-            customLabelComp.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            customLabelComp.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            customLabelComp.Location = new System.Drawing.Point(65, 49);
-            customLabelComp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabelComp.Name = "customLabelComp";
-            customLabelComp.Size = new System.Drawing.Size(67, 16);
-            customLabelComp.TabIndex = 5;
-            customLabelComp.Text = "Компьютер";
-            customLabelComp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // customLabelProfile
-            // 
-            customLabelProfile.Anchor = System.Windows.Forms.AnchorStyles.None;
-            customLabelProfile.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelProfile.Appearance.Options.UseFont = true;
-            customLabelProfile.Appearance.Options.UseTextOptions = true;
-            customLabelProfile.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            customLabelProfile.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            customLabelProfile.Location = new System.Drawing.Point(72, 11);
-            customLabelProfile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabelProfile.Name = "customLabelProfile";
-            customLabelProfile.Size = new System.Drawing.Size(53, 16);
-            customLabelProfile.TabIndex = 4;
-            customLabelProfile.Text = "Профиль";
-            customLabelProfile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // customLabelCompName
-            // 
-            customLabelCompName.Anchor = System.Windows.Forms.AnchorStyles.None;
-            customLabelCompName.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelCompName.Appearance.Options.UseFont = true;
-            customLabelCompName.Appearance.Options.UseTextOptions = true;
-            customLabelCompName.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            customLabelCompName.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            customLabelCompName.Location = new System.Drawing.Point(262, 49);
-            customLabelCompName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabelCompName.Name = "customLabelCompName";
-            customLabelCompName.Size = new System.Drawing.Size(67, 16);
-            customLabelCompName.TabIndex = 3;
-            customLabelCompName.Text = "Компьютер";
-            customLabelCompName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customGroupBoxMyRole
             // 
@@ -630,14 +387,16 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // listBoxRole
             // 
-            listBoxRole.BackColor = System.Drawing.SystemColors.Info;
+            listBoxRole.BackColor = System.Drawing.SystemColors.Window;
             listBoxRole.Dock = System.Windows.Forms.DockStyle.Fill;
             listBoxRole.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            listBoxRole.ForeColor = System.Drawing.SystemColors.WindowText;
             listBoxRole.FormattingEnabled = true;
             listBoxRole.ItemHeight = 20;
             listBoxRole.Location = new System.Drawing.Point(4, 19);
             listBoxRole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             listBoxRole.Name = "listBoxRole";
+            listBoxRole.ObjectName = null;
             listBoxRole.Size = new System.Drawing.Size(386, 316);
             listBoxRole.TabIndex = 4;
             // 
@@ -895,6 +654,435 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customActionButtonEditLogin.UseVisualStyleBackColor = false;
             customActionButtonEditLogin.Click += customActionButtonEditLogin_Click;
             // 
+            // customGroupBoxFast
+            // 
+            customGroupBoxFast.BackColor = System.Drawing.Color.Transparent;
+            customGroupBoxFast.Controls.Add(listBoxFast);
+            customGroupBoxFast.Dock = System.Windows.Forms.DockStyle.Fill;
+            customGroupBoxFast.Font = new System.Drawing.Font("Arial", 10F);
+            customGroupBoxFast.Location = new System.Drawing.Point(577, 124);
+            customGroupBoxFast.Name = "customGroupBoxFast";
+            tableLayoutPanel2.SetRowSpan(customGroupBoxFast, 2);
+            customGroupBoxFast.Size = new System.Drawing.Size(396, 338);
+            customGroupBoxFast.TabIndex = 14;
+            customGroupBoxFast.TabStop = false;
+            customGroupBoxFast.Text = "Панель быстрого доступа";
+            // 
+            // listBoxFast
+            // 
+            listBoxFast.BackColor = System.Drawing.SystemColors.Window;
+            listBoxFast.Dock = System.Windows.Forms.DockStyle.Fill;
+            listBoxFast.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            listBoxFast.ForeColor = System.Drawing.SystemColors.WindowText;
+            listBoxFast.FormattingEnabled = true;
+            listBoxFast.ItemHeight = 20;
+            listBoxFast.Location = new System.Drawing.Point(3, 19);
+            listBoxFast.Name = "listBoxFast";
+            listBoxFast.ObjectName = null;
+            listBoxFast.Size = new System.Drawing.Size(390, 316);
+            listBoxFast.TabIndex = 13;
+            // 
+            // customGroupBoxRole
+            // 
+            customGroupBoxRole.BackColor = System.Drawing.Color.Transparent;
+            customGroupBoxRole.Controls.Add(tableLayoutPanel3);
+            customGroupBoxRole.Dock = System.Windows.Forms.DockStyle.Fill;
+            customGroupBoxRole.Font = new System.Drawing.Font("Arial", 10F);
+            customGroupBoxRole.Location = new System.Drawing.Point(577, 3);
+            customGroupBoxRole.Name = "customGroupBoxRole";
+            customGroupBoxRole.Size = new System.Drawing.Size(396, 115);
+            customGroupBoxRole.TabIndex = 15;
+            customGroupBoxRole.TabStop = false;
+            customGroupBoxRole.Text = "Роли";
+            // 
+            // tableLayoutPanel3
+            // 
+            tableLayoutPanel3.ColumnCount = 4;
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanel3.Controls.Add(customButtonRolePodr, 2, 1);
+            tableLayoutPanel3.Controls.Add(customButtonUserRole2, 2, 0);
+            tableLayoutPanel3.Controls.Add(customButtonAllRole, 1, 0);
+            tableLayoutPanel3.Controls.Add(customButtonRoleFormObject, 1, 1);
+            tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel3.Location = new System.Drawing.Point(3, 19);
+            tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.RowCount = 2;
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel3.Size = new System.Drawing.Size(390, 93);
+            tableLayoutPanel3.TabIndex = 9;
+            // 
+            // customButtonRolePodr
+            // 
+            customButtonRolePodr.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            customButtonRolePodr.Appearance.Options.UseFont = true;
+            customButtonRolePodr.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonRolePodr.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonRolePodr.ImageOptions.Image");
+            customButtonRolePodr.Location = new System.Drawing.Point(199, 49);
+            customButtonRolePodr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonRolePodr.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonRolePodr.Name = "customButtonRolePodr";
+            customButtonRolePodr.Size = new System.Drawing.Size(167, 41);
+            customButtonRolePodr.TabIndex = 14;
+            customButtonRolePodr.Text = "Роли - Подразделения";
+            customButtonRolePodr.Click += customButton3_Click;
+            // 
+            // customButtonUserRole2
+            // 
+            customButtonUserRole2.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            customButtonUserRole2.Appearance.Options.UseFont = true;
+            customButtonUserRole2.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonUserRole2.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonUserRole2.ImageOptions.Image");
+            customButtonUserRole2.Location = new System.Drawing.Point(199, 3);
+            customButtonUserRole2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonUserRole2.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonUserRole2.Name = "customButtonUserRole2";
+            customButtonUserRole2.Size = new System.Drawing.Size(167, 40);
+            customButtonUserRole2.TabIndex = 18;
+            customButtonUserRole2.Text = "Пользователи - роли";
+            customButtonUserRole2.Click += customButtonUserRole_Click;
+            // 
+            // customButtonAllRole
+            // 
+            customButtonAllRole.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            customButtonAllRole.Appearance.Options.UseFont = true;
+            customButtonAllRole.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonAllRole.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonAllRole.ImageOptions.Image");
+            customButtonAllRole.ImageOptions.ImageUri.Uri = "Add";
+            customButtonAllRole.Location = new System.Drawing.Point(24, 3);
+            customButtonAllRole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonAllRole.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonAllRole.Name = "customButtonAllRole";
+            customButtonAllRole.Size = new System.Drawing.Size(167, 40);
+            customButtonAllRole.TabIndex = 7;
+            customButtonAllRole.Text = "Список ролей";
+            customButtonAllRole.Click += customButtonAllRole_Click;
+            // 
+            // customButtonRoleFormObject
+            // 
+            customButtonRoleFormObject.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            customButtonRoleFormObject.Appearance.Options.UseFont = true;
+            customButtonRoleFormObject.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonRoleFormObject.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonRoleFormObject.ImageOptions.Image");
+            customButtonRoleFormObject.Location = new System.Drawing.Point(24, 49);
+            customButtonRoleFormObject.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonRoleFormObject.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonRoleFormObject.Name = "customButtonRoleFormObject";
+            customButtonRoleFormObject.Size = new System.Drawing.Size(167, 41);
+            customButtonRoleFormObject.TabIndex = 17;
+            customButtonRoleFormObject.Text = "Роли - объекты";
+            customButtonRoleFormObject.Click += customButtonRoleFormObject_Click;
+            // 
+            // customGroupBoxUser
+            // 
+            customGroupBoxUser.BackColor = System.Drawing.Color.Transparent;
+            customGroupBoxUser.Controls.Add(tableLayoutPanel7);
+            customGroupBoxUser.Dock = System.Windows.Forms.DockStyle.Fill;
+            customGroupBoxUser.Font = new System.Drawing.Font("Arial", 10F);
+            customGroupBoxUser.Location = new System.Drawing.Point(175, 3);
+            customGroupBoxUser.Name = "customGroupBoxUser";
+            customGroupBoxUser.Size = new System.Drawing.Size(396, 115);
+            customGroupBoxUser.TabIndex = 16;
+            customGroupBoxUser.TabStop = false;
+            customGroupBoxUser.Text = "Пользователи";
+            // 
+            // tableLayoutPanel7
+            // 
+            tableLayoutPanel7.ColumnCount = 4;
+            tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanel7.Controls.Add(customButtonUserRole, 2, 0);
+            tableLayoutPanel7.Controls.Add(customButtonShareUser, 2, 1);
+            tableLayoutPanel7.Controls.Add(customButtonAllRpofile, 1, 0);
+            tableLayoutPanel7.Controls.Add(customButtonUserHierarchy, 1, 1);
+            tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel7.Location = new System.Drawing.Point(3, 19);
+            tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel7.Name = "tableLayoutPanel7";
+            tableLayoutPanel7.RowCount = 2;
+            tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel7.Size = new System.Drawing.Size(390, 93);
+            tableLayoutPanel7.TabIndex = 12;
+            // 
+            // customButtonUserRole
+            // 
+            customButtonUserRole.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            customButtonUserRole.Appearance.Options.UseFont = true;
+            customButtonUserRole.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonUserRole.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonUserRole.ImageOptions.Image");
+            customButtonUserRole.Location = new System.Drawing.Point(199, 3);
+            customButtonUserRole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonUserRole.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonUserRole.Name = "customButtonUserRole";
+            customButtonUserRole.Size = new System.Drawing.Size(167, 40);
+            customButtonUserRole.TabIndex = 16;
+            customButtonUserRole.Text = "Пользователи - роли";
+            customButtonUserRole.Click += customButtonUserRole_Click;
+            // 
+            // customButtonShareUser
+            // 
+            customButtonShareUser.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            customButtonShareUser.Appearance.Options.UseFont = true;
+            customButtonShareUser.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonShareUser.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonShareUser.ImageOptions.Image");
+            customButtonShareUser.Location = new System.Drawing.Point(199, 49);
+            customButtonShareUser.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonShareUser.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonShareUser.Name = "customButtonShareUser";
+            customButtonShareUser.Size = new System.Drawing.Size(167, 41);
+            customButtonShareUser.TabIndex = 15;
+            customButtonShareUser.Text = "Поделиться пользователем";
+            customButtonShareUser.Click += customButtonShareUser_Click;
+            // 
+            // customButtonAllRpofile
+            // 
+            customButtonAllRpofile.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            customButtonAllRpofile.Appearance.Options.UseFont = true;
+            customButtonAllRpofile.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonAllRpofile.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonAllRpofile.ImageOptions.Image");
+            customButtonAllRpofile.Location = new System.Drawing.Point(24, 3);
+            customButtonAllRpofile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonAllRpofile.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonAllRpofile.Name = "customButtonAllRpofile";
+            customButtonAllRpofile.Size = new System.Drawing.Size(167, 40);
+            customButtonAllRpofile.TabIndex = 0;
+            customButtonAllRpofile.Text = "Список пользователей";
+            customButtonAllRpofile.Click += customButtonAllRpofile_Click;
+            // 
+            // customButtonUserHierarchy
+            // 
+            customButtonUserHierarchy.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            customButtonUserHierarchy.Appearance.Options.UseFont = true;
+            customButtonUserHierarchy.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonUserHierarchy.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonUserHierarchy.ImageOptions.Image");
+            customButtonUserHierarchy.Location = new System.Drawing.Point(24, 49);
+            customButtonUserHierarchy.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonUserHierarchy.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonUserHierarchy.Name = "customButtonUserHierarchy";
+            customButtonUserHierarchy.Size = new System.Drawing.Size(167, 41);
+            customButtonUserHierarchy.TabIndex = 9;
+            customButtonUserHierarchy.Text = "Иерархия пользователей";
+            customButtonUserHierarchy.Click += customButtonUserHierarchy_Click;
+            // 
+            // customGroupBoxMaster
+            // 
+            customGroupBoxMaster.BackColor = System.Drawing.Color.Transparent;
+            customGroupBoxMaster.Controls.Add(tableLayoutPanel8);
+            customGroupBoxMaster.Dock = System.Windows.Forms.DockStyle.Fill;
+            customGroupBoxMaster.Font = new System.Drawing.Font("Arial", 10F);
+            customGroupBoxMaster.Location = new System.Drawing.Point(979, 3);
+            customGroupBoxMaster.Name = "customGroupBoxMaster";
+            customGroupBoxMaster.Size = new System.Drawing.Size(168, 115);
+            customGroupBoxMaster.TabIndex = 17;
+            customGroupBoxMaster.TabStop = false;
+            customGroupBoxMaster.Text = "Мастер прав";
+            // 
+            // tableLayoutPanel8
+            // 
+            tableLayoutPanel8.ColumnCount = 1;
+            tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanel8.Controls.Add(customButtonMr, 0, 0);
+            tableLayoutPanel8.Controls.Add(customButtonAllDistribution, 0, 1);
+            tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel8.Location = new System.Drawing.Point(3, 19);
+            tableLayoutPanel8.Name = "tableLayoutPanel8";
+            tableLayoutPanel8.RowCount = 2;
+            tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel8.Size = new System.Drawing.Size(162, 93);
+            tableLayoutPanel8.TabIndex = 0;
+            // 
+            // customButtonMr
+            // 
+            customButtonMr.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            customButtonMr.Appearance.Options.UseFont = true;
+            customButtonMr.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonMr.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonMr.ImageOptions.Image");
+            customButtonMr.Location = new System.Drawing.Point(4, 3);
+            customButtonMr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonMr.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonMr.Name = "customButtonMr";
+            customButtonMr.Size = new System.Drawing.Size(160, 40);
+            customButtonMr.TabIndex = 13;
+            customButtonMr.Text = "Мастер добавления";
+            customButtonMr.Click += customButtonMr_Click;
+            // 
+            // customButtonAllDistribution
+            // 
+            customButtonAllDistribution.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            customButtonAllDistribution.Appearance.Options.UseFont = true;
+            customButtonAllDistribution.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonAllDistribution.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonAllDistribution.ImageOptions.Image");
+            customButtonAllDistribution.Location = new System.Drawing.Point(4, 49);
+            customButtonAllDistribution.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonAllDistribution.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonAllDistribution.Name = "customButtonAllDistribution";
+            customButtonAllDistribution.Size = new System.Drawing.Size(160, 41);
+            customButtonAllDistribution.TabIndex = 13;
+            customButtonAllDistribution.Text = "Распределение прав";
+            customButtonAllDistribution.Click += customButtonAllDistribution_Click;
+            // 
+            // customGroupBox2
+            // 
+            customGroupBox2.BackColor = System.Drawing.Color.Transparent;
+            customGroupBox2.Controls.Add(tableLayoutPanel9);
+            customGroupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            customGroupBox2.Font = new System.Drawing.Font("Arial", 10F);
+            customGroupBox2.Location = new System.Drawing.Point(979, 247);
+            customGroupBox2.Name = "customGroupBox2";
+            customGroupBox2.Size = new System.Drawing.Size(168, 215);
+            customGroupBox2.TabIndex = 18;
+            customGroupBox2.TabStop = false;
+            customGroupBox2.Text = "Формы и объекты";
+            // 
+            // tableLayoutPanel9
+            // 
+            tableLayoutPanel9.ColumnCount = 1;
+            tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanel9.Controls.Add(customButtonRoleFormObject2, 0, 1);
+            tableLayoutPanel9.Controls.Add(customButtonAdminForm, 0, 0);
+            tableLayoutPanel9.Controls.Add(customButtonAdminSprav, 0, 3);
+            tableLayoutPanel9.Controls.Add(customButtonSpravTable, 0, 2);
+            tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel9.Location = new System.Drawing.Point(3, 19);
+            tableLayoutPanel9.Name = "tableLayoutPanel9";
+            tableLayoutPanel9.RowCount = 4;
+            tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            tableLayoutPanel9.Size = new System.Drawing.Size(162, 193);
+            tableLayoutPanel9.TabIndex = 19;
+            // 
+            // customButtonRoleFormObject2
+            // 
+            customButtonRoleFormObject2.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            customButtonRoleFormObject2.Appearance.Options.UseFont = true;
+            customButtonRoleFormObject2.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonRoleFormObject2.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonRoleFormObject2.ImageOptions.Image");
+            customButtonRoleFormObject2.Location = new System.Drawing.Point(4, 51);
+            customButtonRoleFormObject2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonRoleFormObject2.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonRoleFormObject2.Name = "customButtonRoleFormObject2";
+            customButtonRoleFormObject2.Size = new System.Drawing.Size(160, 42);
+            customButtonRoleFormObject2.TabIndex = 18;
+            customButtonRoleFormObject2.Text = "Роли - объекты";
+            customButtonRoleFormObject2.Click += customButtonRoleFormObject_Click;
+            // 
+            // customButtonAdminForm
+            // 
+            customButtonAdminForm.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            customButtonAdminForm.Appearance.Options.UseFont = true;
+            customButtonAdminForm.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonAdminForm.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonAdminForm.ImageOptions.Image");
+            customButtonAdminForm.Location = new System.Drawing.Point(4, 3);
+            customButtonAdminForm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonAdminForm.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonAdminForm.Name = "customButtonAdminForm";
+            customButtonAdminForm.Size = new System.Drawing.Size(160, 42);
+            customButtonAdminForm.TabIndex = 8;
+            customButtonAdminForm.Text = "Формы / Объекты";
+            customButtonAdminForm.Click += customButtonAdminForm_Click;
+            // 
+            // customButtonAdminSprav
+            // 
+            customButtonAdminSprav.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            customButtonAdminSprav.Appearance.Options.UseFont = true;
+            customButtonAdminSprav.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonAdminSprav.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonAdminSprav.ImageOptions.Image");
+            customButtonAdminSprav.Location = new System.Drawing.Point(4, 147);
+            customButtonAdminSprav.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonAdminSprav.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonAdminSprav.Name = "customButtonAdminSprav";
+            customButtonAdminSprav.Size = new System.Drawing.Size(160, 43);
+            customButtonAdminSprav.TabIndex = 10;
+            customButtonAdminSprav.Text = "Администрирование колонок";
+            customButtonAdminSprav.Click += customButtonAdminSprav_Click;
+            // 
+            // customButtonSpravTable
+            // 
+            customButtonSpravTable.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            customButtonSpravTable.Appearance.Options.UseFont = true;
+            customButtonSpravTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonSpravTable.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonSpravTable.ImageOptions.Image");
+            customButtonSpravTable.Location = new System.Drawing.Point(4, 99);
+            customButtonSpravTable.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonSpravTable.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonSpravTable.Name = "customButtonSpravTable";
+            customButtonSpravTable.Size = new System.Drawing.Size(160, 42);
+            customButtonSpravTable.TabIndex = 12;
+            customButtonSpravTable.Text = "Администрирование таблиц";
+            customButtonSpravTable.Click += customButtonSpravTable_Click;
+            // 
+            // customGroupBox1
+            // 
+            customGroupBox1.BackColor = System.Drawing.Color.Transparent;
+            customGroupBox1.Controls.Add(tableLayoutPanel10);
+            customGroupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            customGroupBox1.Font = new System.Drawing.Font("Arial", 10F);
+            customGroupBox1.Location = new System.Drawing.Point(979, 468);
+            customGroupBox1.Name = "customGroupBox1";
+            customGroupBox1.Size = new System.Drawing.Size(168, 163);
+            customGroupBox1.TabIndex = 18;
+            customGroupBox1.TabStop = false;
+            customGroupBox1.Text = "Табель";
+            // 
+            // tableLayoutPanel10
+            // 
+            tableLayoutPanel10.ColumnCount = 1;
+            tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanel10.Controls.Add(customButtonRolePodr2, 0, 1);
+            tableLayoutPanel10.Controls.Add(customButtonUserPodr, 0, 0);
+            tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel10.Location = new System.Drawing.Point(3, 19);
+            tableLayoutPanel10.Name = "tableLayoutPanel10";
+            tableLayoutPanel10.RowCount = 3;
+            tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3333321F));
+            tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3333321F));
+            tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3333321F));
+            tableLayoutPanel10.Size = new System.Drawing.Size(162, 141);
+            tableLayoutPanel10.TabIndex = 0;
+            // 
+            // customButtonRolePodr2
+            // 
+            customButtonRolePodr2.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            customButtonRolePodr2.Appearance.Options.UseFont = true;
+            customButtonRolePodr2.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonRolePodr2.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonRolePodr2.ImageOptions.Image");
+            customButtonRolePodr2.Location = new System.Drawing.Point(4, 50);
+            customButtonRolePodr2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonRolePodr2.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonRolePodr2.Name = "customButtonRolePodr2";
+            customButtonRolePodr2.Size = new System.Drawing.Size(160, 41);
+            customButtonRolePodr2.TabIndex = 15;
+            customButtonRolePodr2.Text = "Роли - Подразделения";
+            customButtonRolePodr2.Click += customButton3_Click;
+            // 
+            // customButtonUserPodr
+            // 
+            customButtonUserPodr.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            customButtonUserPodr.Appearance.Options.UseFont = true;
+            customButtonUserPodr.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonUserPodr.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customButtonUserPodr.ImageOptions.Image");
+            customButtonUserPodr.Location = new System.Drawing.Point(4, 3);
+            customButtonUserPodr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonUserPodr.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonUserPodr.Name = "customButtonUserPodr";
+            customButtonUserPodr.Size = new System.Drawing.Size(160, 41);
+            customButtonUserPodr.TabIndex = 13;
+            customButtonUserPodr.Text = "Администрирование табеля";
+            customButtonUserPodr.Click += customButtonUserPodr_Click;
+            // 
             // UserProfile
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -911,11 +1099,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
             ((System.ComponentModel.ISupportInitialize)customGridControl3).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView3).EndInit();
             tableLayoutPanel2.ResumeLayout(false);
-            tableLayoutPanel7.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);
-            tableLayoutPanelButton.ResumeLayout(false);
-            tableLayoutPanel3.ResumeLayout(false);
-            tableLayoutPanel3.PerformLayout();
+            tableLayoutPanel4.PerformLayout();
             customGroupBoxMyRole.ResumeLayout(false);
             customGroupBoxEditPassword.ResumeLayout(false);
             tableLayoutPanel5.ResumeLayout(false);
@@ -923,6 +1108,17 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customGroupBoxEditLogin.ResumeLayout(false);
             tableLayoutPanel6.ResumeLayout(false);
             tableLayoutPanel6.PerformLayout();
+            customGroupBoxFast.ResumeLayout(false);
+            customGroupBoxRole.ResumeLayout(false);
+            tableLayoutPanel3.ResumeLayout(false);
+            customGroupBoxUser.ResumeLayout(false);
+            tableLayoutPanel7.ResumeLayout(false);
+            customGroupBoxMaster.ResumeLayout(false);
+            tableLayoutPanel8.ResumeLayout(false);
+            customGroupBox2.ResumeLayout(false);
+            tableLayoutPanel9.ResumeLayout(false);
+            customGroupBox1.ResumeLayout(false);
+            tableLayoutPanel10.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -936,7 +1132,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private CustomSimpleButton customButton1;
         private CustomSimpleButton customButton2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.ListBox listBoxRole;
+        private CustomListBox listBoxRole;
         private CustomGroupBox customGroupBoxEditPassword;
         private CustomLabel customLabel3;
         private CustomTextBox customTextBoxNewPassword2;
@@ -945,7 +1141,6 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private CustomLabel customLabel1;
         private CustomTextBox customTextBoxOldPassword;
         private CustomLabel customLabelCompName;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelButton;
         private CustomSimpleButton customButtonChangeUser;
         private CustomSimpleButton customButtonAllRpofile;
         private CustomSimpleButton customButtonAdminForm;
@@ -960,10 +1155,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private CustomLabel customLabelProfileName;
         private CustomSimpleButton customButtonUserHierarchy;
         private CustomSimpleButton customButtonHistory;
-        private CustomSimpleButton customButtonAdminSprav;
         private CustomActionButton customActionButtonNon;
         private CustomActionButton customActionButtonEditPassword;
-        private CustomSimpleButton customButtonSpravTable;
         private CustomGroupBox customGroupBoxEditLogin;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private CustomLabel customLabelNewLogin;
@@ -972,12 +1165,27 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private CustomTextBox customTextBoxNewLogin;
         private CustomActionButton customActionButtonEditLogin;
         private CustomSimpleButton customButtonAllDistribution;
-        private CustomSimpleButton customButtonUserPodr;
         private CustomSimpleButton customButtonRolePodr;
         private CustomSimpleButton customButtonShareUser;
         private CustomSimpleButton customButtonUserRole;
         private CustomSimpleButton customButtonRoleFormObject;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private CustomSimpleButton customButtonMr;
+        private CustomListBox listBoxFast;
+        private CustomGroupBox customGroupBoxFast;
+        private CustomGroupBox customGroupBoxRole;
+        private CustomGroupBox customGroupBoxUser;
+        private CustomSimpleButton customButtonUserRole2;
+        private CustomGroupBox customGroupBoxMaster;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
+        private CustomGroupBox customGroupBox2;
+        private CustomSimpleButton customButtonAdminSprav;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
+        private CustomSimpleButton customButtonSpravTable;
+        private CustomGroupBox customGroupBox1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
+        private CustomSimpleButton customButtonRolePodr2;
+        private CustomSimpleButton customButtonUserPodr;
+        private CustomSimpleButton customButtonRoleFormObject2;
     }
 }
