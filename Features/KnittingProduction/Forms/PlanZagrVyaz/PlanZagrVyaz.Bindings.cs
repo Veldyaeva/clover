@@ -16,7 +16,7 @@ using static SewingProduction.Helpers.GridHelper;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
-     partial class PlanZagrVyaz
+     public partial class PlanZagrVyaz
     {
         private async Task InitializeBindingsAsync()
         {
