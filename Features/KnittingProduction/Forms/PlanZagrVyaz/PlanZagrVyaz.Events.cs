@@ -44,7 +44,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             await ExecutePzvActionAsync(PzvActionType.CancelTab);
         }
-
+        private async void buttonTab999WorkAssignment_Click(object sender, EventArgs e)
+        {
+            await ExecutePzvActionAsync(PzvActionType.AssignTab999);
+        }
         private async void buttonWorkStartExecution_Click(object sender, EventArgs e)
         {
             await ExecutePzvActionAsync(PzvActionType.StartWork);

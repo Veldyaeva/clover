@@ -22,8 +22,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application
         public async Task<OperationResult> ExecuteAsync(PzvSelectionContext context, CancellationToken ct = default)
         {
             var shift = context.CurrentShiftAssignment;
-            if (shift?.kwsmlTab == null || shift.kwsmlTab == 0)
-                return OperationResult.Fail("Не выбран табельный номер.");
+            //if (shift?.kwsmlTab == null || shift.kwsmlTab == 0)
+            if ((shift?.kwsTabStart == null || shift.kwsTabStart == 0) && (shift?.szTab == null || shift.szTab == 0))
+                    return OperationResult.Fail("Не выбран табельный номер.");
 
             var validIds = new List<int>();
 
@@ -46,7 +47,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application
 
             await _bulkUpdateService.UpdateAsync(validIds, row =>
             {
-                row.olPzvTab = shift.kwsmlTab.Value;
+                //row.olPzvTab = shift.kwsmlTab.Value;
+                row.olPzvTab = shift.kwsTabStart == 0 ? shift.szTab : shift.kwsTabStart;
                 row.olPzvDateNaznTab = System.DateTime.Now;
             }, ct);
 

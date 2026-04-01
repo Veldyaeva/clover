@@ -567,5 +567,29 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             });
             Debug.WriteLine($"LoadNormRaszDataAsync completed for nrId={nrId}");
         }
+        private async Task LoadKnitWorkingShiftSmenToMoveDataAsync(int _kmaID)
+        {
+            try
+            {
+                var sql = @$"
+                            SELECT * 
+                            FROM knitWorkingShiftNewCurrentSmen_view
+                            WHERE kmaID <> {_kmaID}
+                              AND dateShiftStart IS NOT NULL
+                              AND dateShiftEnd IS NULL";
+
+                var data = await _dbService.GetListAsync<KnitWorkingShiftSmen>(sql, null);
+
+                _zonesCache = data ?? new List<KnitWorkingShiftSmen>();
+                await _logger.LogEventAsync($"Данные KnitWorkingShiftSmenToMove успешно загружены", "LoadKnitWorkingShiftSmenToMoveDataAsync");
+                Debug.WriteLine($"LoadKnitWorkingShiftSmenToMoveDataAsync completed with {_zonesCache.Count} records");
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка загрузки зон");
+                await _logger.LogEventAsync($"Не удалось найти данные KnitWorkingShiftSmenToMove", "LoadKnitWorkingShiftSmenToMoveDataAsync");
+                _zonesCache = new();
+            }
+        }
     }
 }

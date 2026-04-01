@@ -206,7 +206,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         //private BindingList<RzvPachListByNom> _rzvPachListByNomBindingList;
         //private BindingSource _rzvPachListByNomBindingSource;
 
-        private List<RzvPachListByNom> _currentRzvPachListByNomNewData = new List<RzvPachListByNom>();
+        //private List<RzvPachListByNom> _currentRzvPachListByNomNewData = new List<RzvPachListByNom>();
         private List<RzvPachListByNom> rzvPachListByNomNewData = new List<RzvPachListByNom>();
         private BindingList<RzvPachListByNom> _rzvPachListByNomNewBindingList;
         private BindingSource _rzvPachListByNomNewBindingSource;
@@ -216,23 +216,23 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         //private BindingList<PZVOperList> _pZVOperListByPachListBindingList;
         //private BindingSource _pZVOperListByPachListBindingSource;
 
-        private List<PZVOperList> _currentPZVOperListByPachListNewData = new List<PZVOperList>();
+        //private List<PZVOperList> _currentPZVOperListByPachListNewData = new List<PZVOperList>();
         private List<PZVOperList> pZVOperListByPachListNewData = new List<PZVOperList>();
         private BindingList<PZVOperList> _pZVOperListByPachListNewBindingList;
         private BindingSource _pZVOperListByPachListNewBindingSource;
 
-        private List<ArtNormN> _currentArtNormNData = new List<ArtNormN>();
-        private List<ArtNormN> artNormNData = new List<ArtNormN>();
+        //private List<ArtNormN> _currentArtNormNData = new List<ArtNormN>();
+        //private List<ArtNormN> artNormNData = new List<ArtNormN>();
         private BindingList<ArtNormN> _artNormNBindingList;
         private BindingSource _artNormNBindingSource;
 
-        private List<NormRasz> _currentNormRaszData = new List<NormRasz>();
-        private List<NormRasz> normRaszData = new List<NormRasz>();
+        //private List<NormRasz> _currentNormRaszData = new List<NormRasz>();
+        //private List<NormRasz> normRaszData = new List<NormRasz>();
         private BindingList<NormRasz> _normRaszBindingList;
         private BindingSource _normRaszBindingSource;
 
-        private List<MlOp> _currentMlOpData = new List<MlOp>();
-        private List<MlOp> mlOpData = new List<MlOp>();
+        //private List<MlOp> _currentMlOpData = new List<MlOp>();
+        //private List<MlOp> mlOpData = new List<MlOp>();
         private BindingList<MlOp> _mlOpBindingList;
         private BindingSource _mlOpBindingSource;
 
@@ -2257,30 +2257,30 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         //    Debug.WriteLine($"LoadNormRaszDataAsync completed for nrId={nrId}");
         //}
 
-        private async Task LoadKnitWorkingShiftSmenToMoveDataAsync(int _kmaID)
-        {
-            try
-            {
-                var sql = @$"
-                            SELECT * 
-                            FROM knitWorkingShiftNewCurrentSmen_view
-                            WHERE kmaID <> {_kmaID}
-                              AND dateShiftStart IS NOT NULL
-                              AND dateShiftEnd IS NULL";
+        //private async Task LoadKnitWorkingShiftSmenToMoveDataAsync(int _kmaID)
+        //{
+        //    try
+        //    {
+        //        var sql = @$"
+        //                    SELECT * 
+        //                    FROM knitWorkingShiftNewCurrentSmen_view
+        //                    WHERE kmaID <> {_kmaID}
+        //                      AND dateShiftStart IS NOT NULL
+        //                      AND dateShiftEnd IS NULL";
 
-                var data = await _dbService.GetListAsync<KnitWorkingShiftSmen>(sql, null);
+        //        var data = await _dbService.GetListAsync<KnitWorkingShiftSmen>(sql, null);
 
-                _zonesCache = data ?? new List<KnitWorkingShiftSmen>();
-                await _logger.LogEventAsync($"Данные KnitWorkingShiftSmenToMove успешно загружены", "LoadKnitWorkingShiftSmenToMoveDataAsync");
-                Debug.WriteLine($"LoadKnitWorkingShiftSmenToMoveDataAsync completed with {_zonesCache.Count} records");
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка загрузки зон");
-                await _logger.LogEventAsync($"Не удалось найти данные KnitWorkingShiftSmenToMove", "LoadKnitWorkingShiftSmenToMoveDataAsync");
-                _zonesCache = new();
-            }
-        }
+        //        _zonesCache = data ?? new List<KnitWorkingShiftSmen>();
+        //        await _logger.LogEventAsync($"Данные KnitWorkingShiftSmenToMove успешно загружены", "LoadKnitWorkingShiftSmenToMoveDataAsync");
+        //        Debug.WriteLine($"LoadKnitWorkingShiftSmenToMoveDataAsync completed with {_zonesCache.Count} records");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await _logger.LogErrorAsync(ex, "Ошибка загрузки зон");
+        //        await _logger.LogEventAsync($"Не удалось найти данные KnitWorkingShiftSmenToMove", "LoadKnitWorkingShiftSmenToMoveDataAsync");
+        //        _zonesCache = new();
+        //    }
+        //}
         //private async void layoutControlGroup6_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
         //{
         //    try
@@ -2757,9 +2757,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 .Replace('\u00A0', ' ')
                 .Trim();
         }
-        private async void gridViewRzvPachListByNom_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
-        {
-        }
 
         private async void gridViewZadanyList_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
@@ -3032,11 +3029,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 MessageBox.Show($"Ошибка в customSimpleButton8_Click: {ex.Message}");
             }
         }
-
-        private async void customTabControl1_CustomHeaderButtonClick(object sender, DevExpress.XtraTab.ViewInfo.CustomHeaderButtonEventArgs e)
-        {
-        }
-
         /// <summary>
         /// Проверка заполненности дат
         /// </summary>
@@ -3044,49 +3036,49 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// <param name="_dateValue"></param>
         /// <param name="_xMessage"></param>
         /// <returns></returns>
-        private bool CheckPZVDate(string _dateName, DateTime _dateValue, string _xMessage)
-        {
-            try
-            {
-                string _detailMessage = string.Empty;
-                switch (_dateName)
-                {
-                    case "OlPvDateNaznKm":  // дата назначения машины
-                        _detailMessage = "Операция уже назначена на машину";
-                        break;
-                    case "OlPvDateNaznTab": // дата назначения работника
-                        _detailMessage = "Операция уже назначена работнику";
-                        break;
-                    case "OlPvDateStart":   // дата начала работы
-                        _detailMessage = "Работник уже начал выполнять операцию";
-                        break;
-                    case "OlPvDateEnd":     // дата окончания работы
-                        _detailMessage = "Работник уже выполнил операцию";
-                        break;
-                    case "OlPvDateMast":    // дата подтверждения мастером
-                        _detailMessage = "Операция уже подтверждена мастером";
-                        break;
-                    default:
-                        MessageBox.Show("Неизвестная дата");
-                        return false;
-                }
-                if (_dateValue != null && _dateValue != DateTime.MinValue)
-                {
-                    MessageBox.Show($"{_detailMessage}, {_xMessage}!");
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка в CheckPZVDate: {ex.Message}");
-                return false;
+        //private bool CheckPZVDate(string _dateName, DateTime _dateValue, string _xMessage)
+        //{
+        //    try
+        //    {
+        //        string _detailMessage = string.Empty;
+        //        switch (_dateName)
+        //        {
+        //            case "OlPvDateNaznKm":  // дата назначения машины
+        //                _detailMessage = "Операция уже назначена на машину";
+        //                break;
+        //            case "OlPvDateNaznTab": // дата назначения работника
+        //                _detailMessage = "Операция уже назначена работнику";
+        //                break;
+        //            case "OlPvDateStart":   // дата начала работы
+        //                _detailMessage = "Работник уже начал выполнять операцию";
+        //                break;
+        //            case "OlPvDateEnd":     // дата окончания работы
+        //                _detailMessage = "Работник уже выполнил операцию";
+        //                break;
+        //            case "OlPvDateMast":    // дата подтверждения мастером
+        //                _detailMessage = "Операция уже подтверждена мастером";
+        //                break;
+        //            default:
+        //                MessageBox.Show("Неизвестная дата");
+        //                return false;
+        //        }
+        //        if (_dateValue != null && _dateValue != DateTime.MinValue)
+        //        {
+        //            MessageBox.Show($"{_detailMessage}, {_xMessage}!");
+        //            return false;
+        //        }
+        //        else
+        //        {
+        //            return true;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Ошибка в CheckPZVDate: {ex.Message}");
+        //        return false;
 
-            }
-        }
+        //    }
+        //}
         /// <summary>
         /// Проверка пустых дат
         /// </summary>
@@ -3094,49 +3086,49 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// <param name="_dateValue"></param>
         /// <param name="_xMessage"></param>
         /// <returns></returns>
-        private bool CheckPZVEmptyDate(string _dateName, DateTime _dateValue, string _xMessage)
-        {
-            try
-            {
-                string _detailMessage = string.Empty;
-                switch (_dateName)
-                {
-                    case "OlPvDateNaznKm":  // дата назначения машины
-                        _detailMessage = "Операция еще не назначена на машину";
-                        break;
-                    case "OlPvDateNaznTab": // дата назначения работника
-                        _detailMessage = "Операция еще не назначена работнику";
-                        break;
-                    case "OlPvDateStart":   // дата начала работы
-                        _detailMessage = "Работник еще не начал выполнять операцию";
-                        break;
-                    case "OlPvDateEnd":     // дата окончания работы
-                        _detailMessage = "Работник еще выполнил операцию";
-                        break;
-                    case "OlPvDateMast":    // дата подтверждения мастером
-                        _detailMessage = "Операция уже подтверждена мастером";
-                        break;
-                    default:
-                        MessageBox.Show("Неизвестная дата");
-                        return false;
-                }
-                if (_dateValue == null || _dateValue == DateTime.MinValue)
-                {
-                    MessageBox.Show($"{_detailMessage}, {_xMessage}!");
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка в CheckPZVEmptyDate: {ex.Message}");
-                return false;
+        //private bool CheckPZVEmptyDate(string _dateName, DateTime _dateValue, string _xMessage)
+        //{
+        //    try
+        //    {
+        //        string _detailMessage = string.Empty;
+        //        switch (_dateName)
+        //        {
+        //            case "OlPvDateNaznKm":  // дата назначения машины
+        //                _detailMessage = "Операция еще не назначена на машину";
+        //                break;
+        //            case "OlPvDateNaznTab": // дата назначения работника
+        //                _detailMessage = "Операция еще не назначена работнику";
+        //                break;
+        //            case "OlPvDateStart":   // дата начала работы
+        //                _detailMessage = "Работник еще не начал выполнять операцию";
+        //                break;
+        //            case "OlPvDateEnd":     // дата окончания работы
+        //                _detailMessage = "Работник еще выполнил операцию";
+        //                break;
+        //            case "OlPvDateMast":    // дата подтверждения мастером
+        //                _detailMessage = "Операция уже подтверждена мастером";
+        //                break;
+        //            default:
+        //                MessageBox.Show("Неизвестная дата");
+        //                return false;
+        //        }
+        //        if (_dateValue == null || _dateValue == DateTime.MinValue)
+        //        {
+        //            MessageBox.Show($"{_detailMessage}, {_xMessage}!");
+        //            return false;
+        //        }
+        //        else
+        //        {
+        //            return true;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Ошибка в CheckPZVEmptyDate: {ex.Message}");
+        //        return false;
 
-            }
-        }
+        //    }
+        //}
         private PzvActionType? ResolveDoubleClickAction(GridColumn column, PZVOperList row)
         {
             if (column == gridPZVOperListColumnOlKmlNumber || column == gridPZVOperListColumnOlPvDateNaznKm)
@@ -3568,266 +3560,262 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         //}
 
-        private void gridViewPZVOperList_RowCellClick(object sender, RowCellClickEventArgs e)
-        {
-        }
-
         /// <summary>
         /// Назначить на В/М по V для выбранных операций
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void KnittingMachineWorkAssignment()
-        {
-            try
-            {
-                Debug.WriteLine($"KnittingMachineWorkAssignment started for pzvID={_xPzvID}, column={_xColumn}");
-                //SmenZadanyVyaz curr = _smenZadanyVyazBindingSource.Current as SmenZadanyVyaz;
-                SmenZadanyVyaz curr = advBandedGridViewSmenZadany.GetRow(advBandedGridViewSmenZadany.FocusedRowHandle) as SmenZadanyVyaz;
-                if (curr == null || curr.kwsmlKmlID == null || curr.kwsmlKmlID == 0)
-                {
-                    MessageBox.Show("Не выбрана машина для назначения");
-                    return;
-                }
-                var checkList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.SyncSelection == 1)
-                    .ToList();
-                if (checkList.Count != 0)
-                {
-                    foreach (var record in checkList)
-                    {
-                        if (record.olKodPodr != 1)
-                        {
-                            MessageBox.Show("Операция не относится к вязальному подразделению, нельзя изменять В/М!");
-                            return;
-                        }
-                        string query = @"SELECT pszm.pszkmKmlID, mlv.kmlNumber, mlv.name_class " +
-                            @"FROM plan_sezon_zad_knitMachine pszm " +
-                            @"  LEFT JOIN knitMachineList_view mlv ON pszm.pszkmKmlID = mlv.kmlID " +
-                            @"WHERE pszm.pszkmPszNom = @PszNom and pszkmKnitClass = @KnitClass";
-                        DataTable machineInfo = _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@PszNom", record.olNomZad }, { "@KnitClass", record.olIdVyazClass } });
+        //private async void KnittingMachineWorkAssignment()
+        //{
+        //    try
+        //    {
+        //        Debug.WriteLine($"KnittingMachineWorkAssignment started for pzvID={_xPzvID}, column={_xColumn}");
+        //        //SmenZadanyVyaz curr = _smenZadanyVyazBindingSource.Current as SmenZadanyVyaz;
+        //        SmenZadanyVyaz curr = advBandedGridViewSmenZadany.GetRow(advBandedGridViewSmenZadany.FocusedRowHandle) as SmenZadanyVyaz;
+        //        if (curr == null || curr.kwsmlKmlID == null || curr.kwsmlKmlID == 0)
+        //        {
+        //            MessageBox.Show("Не выбрана машина для назначения");
+        //            return;
+        //        }
+        //        var checkList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.SyncSelection == 1)
+        //            .ToList();
+        //        if (checkList.Count != 0)
+        //        {
+        //            foreach (var record in checkList)
+        //            {
+        //                if (record.olKodPodr != 1)
+        //                {
+        //                    MessageBox.Show("Операция не относится к вязальному подразделению, нельзя изменять В/М!");
+        //                    return;
+        //                }
+        //                string query = @"SELECT pszm.pszkmKmlID, mlv.kmlNumber, mlv.name_class " +
+        //                    @"FROM plan_sezon_zad_knitMachine pszm " +
+        //                    @"  LEFT JOIN knitMachineList_view mlv ON pszm.pszkmKmlID = mlv.kmlID " +
+        //                    @"WHERE pszm.pszkmPszNom = @PszNom and pszkmKnitClass = @KnitClass";
+        //                DataTable machineInfo = _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@PszNom", record.olNomZad }, { "@KnitClass", record.olIdVyazClass } });
 
-                        int _kmlID = 0;
-                        string _kmlNumber = string.Empty;
-                        int _vyazClass = 0;
-                        if (machineInfo.Rows.Count == 0)
-                        {
-                            _kmlID = 0;
-                            _kmlNumber = string.Empty;
-                            _vyazClass = 0;
-                        }
-                        else
-                        {
-                            _kmlID = Convert.ToInt32(machineInfo.Rows[0]["pszkmKmlID"]);
-                            _kmlNumber = Convert.ToString(machineInfo.Rows[0]["kmlNumber"]);
-                            _vyazClass = Convert.ToInt32(machineInfo.Rows[0]["name_class"]);
-                        }
+        //                int _kmlID = 0;
+        //                string _kmlNumber = string.Empty;
+        //                int _vyazClass = 0;
+        //                if (machineInfo.Rows.Count == 0)
+        //                {
+        //                    _kmlID = 0;
+        //                    _kmlNumber = string.Empty;
+        //                    _vyazClass = 0;
+        //                }
+        //                else
+        //                {
+        //                    _kmlID = Convert.ToInt32(machineInfo.Rows[0]["pszkmKmlID"]);
+        //                    _kmlNumber = Convert.ToString(machineInfo.Rows[0]["kmlNumber"]);
+        //                    _vyazClass = Convert.ToInt32(machineInfo.Rows[0]["name_class"]);
+        //                }
 
-                        if (_kmlID != curr.kwsmlKmlID && record.olPzvKmlID == 0)
-                        {
-                            string button1Text = $"Продолжить: назначить В/М \n оп. {record.olNomOper} {record.olOperName}";
-                            string button2Text = $"Пропустить: НЕ назначать В/М \n оп. {record.olNomOper} {record.olOperName}";
-                            string button3Text = checkList.Count == 1 ? "" : "Прервать назначение В/М на выбранные операции";
-                            var ButtonsList = new Dictionary<string, DialogResult>();
-                            if (checkList.Count == 1)
-                            {
-                                ButtonsList = new Dictionary<string, DialogResult>
-                                {
-                                    { button1Text, DialogResult.Yes },
-                                    { button2Text, DialogResult.No }
-                                };
-                            }
-                            else if (checkList.Count > 1)
-                            {
-                                ButtonsList = new Dictionary<string, DialogResult>
-                                {
-                                    { button1Text, DialogResult.Yes },
-                                    { button2Text, DialogResult.No },
-                                    { button3Text, DialogResult.Abort }
-                                };
-                            }
+        //                if (_kmlID != curr.kwsmlKmlID && record.olPzvKmlID == 0)
+        //                {
+        //                    string button1Text = $"Продолжить: назначить В/М \n оп. {record.olNomOper} {record.olOperName}";
+        //                    string button2Text = $"Пропустить: НЕ назначать В/М \n оп. {record.olNomOper} {record.olOperName}";
+        //                    string button3Text = checkList.Count == 1 ? "" : "Прервать назначение В/М на выбранные операции";
+        //                    var ButtonsList = new Dictionary<string, DialogResult>();
+        //                    if (checkList.Count == 1)
+        //                    {
+        //                        ButtonsList = new Dictionary<string, DialogResult>
+        //                        {
+        //                            { button1Text, DialogResult.Yes },
+        //                            { button2Text, DialogResult.No }
+        //                        };
+        //                    }
+        //                    else if (checkList.Count > 1)
+        //                    {
+        //                        ButtonsList = new Dictionary<string, DialogResult>
+        //                        {
+        //                            { button1Text, DialogResult.Yes },
+        //                            { button2Text, DialogResult.No },
+        //                            { button3Text, DialogResult.Abort }
+        //                        };
+        //                    }
 
-                            // Создаем опции с полным контролем
-                            var options = new MessageBoxOptions
-                            {
-                                Text = $"Внимание!\nОперация: 1/5\nОписание: Вязание воротник\n\n" +
-                                       $"Назначаемая машина не совпадает с плановой:" +
-                                       $"\n плановая В/М№ {_kmlNumber} - класс {_vyazClass}" +
-                                       $"\n назначаемая В/М№ {curr.kmlNumber} - класс {curr.nameVyazClass}",
-                                Caption = "Назначение В/М на операцию",
-                                Buttons = ButtonsList,
-                                Icon = MessageBoxIcon.Warning,
-                                ButtonLayout = ButtonLayout.Vertical, // Вертикальное расположение
-                                StretchVerticalButtons = true, // Растянуть кнопки по ширине
-                                VerticalButtonSpacing = 15, // Больше расстояние между кнопками
-                                ButtonHeight = 45, // Высота кнопок для многострочного текста
-                                ButtonPadding = 20 // Отступы внутри кнопок
-                            };
-                            var _result = AdvancedMessageBox.Show(options);
+        //                    // Создаем опции с полным контролем
+        //                    var options = new MessageBoxOptions
+        //                    {
+        //                        Text = $"Внимание!\nОперация: 1/5\nОписание: Вязание воротник\n\n" +
+        //                               $"Назначаемая машина не совпадает с плановой:" +
+        //                               $"\n плановая В/М№ {_kmlNumber} - класс {_vyazClass}" +
+        //                               $"\n назначаемая В/М№ {curr.kmlNumber} - класс {curr.nameVyazClass}",
+        //                        Caption = "Назначение В/М на операцию",
+        //                        Buttons = ButtonsList,
+        //                        Icon = MessageBoxIcon.Warning,
+        //                        ButtonLayout = ButtonLayout.Vertical, // Вертикальное расположение
+        //                        StretchVerticalButtons = true, // Растянуть кнопки по ширине
+        //                        VerticalButtonSpacing = 15, // Больше расстояние между кнопками
+        //                        ButtonHeight = 45, // Высота кнопок для многострочного текста
+        //                        ButtonPadding = 20 // Отступы внутри кнопок
+        //                    };
+        //                    var _result = AdvancedMessageBox.Show(options);
 
-                            //// Вызов с явным указанием вертикального расположения
-                            //var _result = AdvancedMessageBox.Show(
-                            //    message: $"Внимание!\nОперация: 1/5\nОписание: Вязание воротник\n\n" +
-                            //             $"Назначаемая машина (в2193) не совпадает с плановой (в1615)",
-                            //    caption: "Назначение В/М на операцию",
-                            //    buttons: ButtonsList,
-                            //    icon: MessageBoxIcon.Warning,
-                            //    layout: ButtonLayout.Vertical // Явно указываем вертикальное расположение
-                            //);
+        //                    //// Вызов с явным указанием вертикального расположения
+        //                    //var _result = AdvancedMessageBox.Show(
+        //                    //    message: $"Внимание!\nОперация: 1/5\nОписание: Вязание воротник\n\n" +
+        //                    //             $"Назначаемая машина (в2193) не совпадает с плановой (в1615)",
+        //                    //    caption: "Назначение В/М на операцию",
+        //                    //    buttons: ButtonsList,
+        //                    //    icon: MessageBoxIcon.Warning,
+        //                    //    layout: ButtonLayout.Vertical // Явно указываем вертикальное расположение
+        //                    //);
 
 
 
-                            //var _result = AdvancedMessageBox.Show(
-                            //    $"Внимание!\n" +
-                            //    $"Операция: 1/5\n" +
-                            //    $"Описание: Вязание воротник\n\n" +
-                            //    $"Назначаемая машина (в2193) не совпадает с плановой (в1615)",
-                            //    "Назначение В/М на операцию",
-                            //    new Dictionary<string, DialogResult>
-                            //    {
-                            //        { "Продолжить: назначить В/М для оп. 1/5 Вязание воротник", DialogResult.Yes },
-                            //        { "Пропустить: НЕ назначать В/М для оп. 1/5 Вязание воротник", DialogResult.No },
-                            //        { "Отмена", DialogResult.Cancel }
-                            //    }
-                            //);
+        //                    //var _result = AdvancedMessageBox.Show(
+        //                    //    $"Внимание!\n" +
+        //                    //    $"Операция: 1/5\n" +
+        //                    //    $"Описание: Вязание воротник\n\n" +
+        //                    //    $"Назначаемая машина (в2193) не совпадает с плановой (в1615)",
+        //                    //    "Назначение В/М на операцию",
+        //                    //    new Dictionary<string, DialogResult>
+        //                    //    {
+        //                    //        { "Продолжить: назначить В/М для оп. 1/5 Вязание воротник", DialogResult.Yes },
+        //                    //        { "Пропустить: НЕ назначать В/М для оп. 1/5 Вязание воротник", DialogResult.No },
+        //                    //        { "Отмена", DialogResult.Cancel }
+        //                    //    }
+        //                    //);
 
-                            //// Или используйте специализированный метод
-                            //var _result2 = AdvancedMessageBox.ShowMachineAssignment(
-                            //    "1/5",
-                            //    "Вязание воротник",
-                            //    "в2193",
-                            //    "в1615"
-                            //);
+        //                    //// Или используйте специализированный метод
+        //                    //var _result2 = AdvancedMessageBox.ShowMachineAssignment(
+        //                    //    "1/5",
+        //                    //    "Вязание воротник",
+        //                    //    "в2193",
+        //                    //    "в1615"
+        //                    //);
 
-                            //// Или даже проще
-                            //var _result3 = AdvancedMessageBox.ShowConfirmation("Вы уверены?");
-                            //var _result4 = AdvancedMessageBox.ShowWarning("Что-то пошло не так!");
+        //                    //// Или даже проще
+        //                    //var _result3 = AdvancedMessageBox.ShowConfirmation("Вы уверены?");
+        //                    //var _result4 = AdvancedMessageBox.ShowWarning("Что-то пошло не так!");
 
-                            //var _result = AdvancedMessageBox.ShowMachineAssignmentWarning(
-                            //    $"Внимание!\n" +
-                            //    $"Операция: 1/5\n" +
-                            //    $"Описание: Вязание воротник\n\n" +
-                            //    $"Назначаемая машина (в2193) не совпадает с плановой (в1615)",
-                            //    "Назначение В/М на операцию",
-                            //    ButtonsList
-                            //);
+        //                    //var _result = AdvancedMessageBox.ShowMachineAssignmentWarning(
+        //                    //    $"Внимание!\n" +
+        //                    //    $"Операция: 1/5\n" +
+        //                    //    $"Описание: Вязание воротник\n\n" +
+        //                    //    $"Назначаемая машина (в2193) не совпадает с плановой (в1615)",
+        //                    //    "Назначение В/М на операцию",
+        //                    //    ButtonsList
+        //                    //);
 
-                            //var _result = AdvancedMessageBox.ShowWithMultilineButtons(new MessageBoxOptions
-                            //{
-                            //    Text = $"Внимание! " +
-                            //        $"\n Операция: {record.olNomOper} " +
-                            //        $"\n Описание: {record.olOperName} " +
-                            //        $"\n\n Назначаемая машина ({curr.kmlNumber}) не совпадает с плановой ({_kmlNumber}) ",
-                            //    Caption = "Назначение В/М на операцию",
-                            //    Buttons = ButtonsList,
-                            //    Icon = MessageBoxIcon.Warning,
-                            //    Width = 600,
-                            //    //TextFont = new Font("Segoe UI", 10f),
-                            //    TextFont = ThemeManager.SharedSettings.DefaultFont,
-                            //    BackColor = this.BackColor
-                            //});
+        //                    //var _result = AdvancedMessageBox.ShowWithMultilineButtons(new MessageBoxOptions
+        //                    //{
+        //                    //    Text = $"Внимание! " +
+        //                    //        $"\n Операция: {record.olNomOper} " +
+        //                    //        $"\n Описание: {record.olOperName} " +
+        //                    //        $"\n\n Назначаемая машина ({curr.kmlNumber}) не совпадает с плановой ({_kmlNumber}) ",
+        //                    //    Caption = "Назначение В/М на операцию",
+        //                    //    Buttons = ButtonsList,
+        //                    //    Icon = MessageBoxIcon.Warning,
+        //                    //    Width = 600,
+        //                    //    //TextFont = new Font("Segoe UI", 10f),
+        //                    //    TextFont = ThemeManager.SharedSettings.DefaultFont,
+        //                    //    BackColor = this.BackColor
+        //                    //});
 
-                            //var _result = AdvancedMessageBox.ShowWithOptimalButtons(new MessageBoxOptions
-                            //{
-                            //    Text = $"Внимание! " +
-                            //        $"\n Операция: {record.olNomOper} " +
-                            //        $"\n Описание: {record.olOperName} " +
-                            //        $"\n\n Назначаемая машина ({curr.kmlNumber}) не совпадает с плановой ({_kmlNumber}) ",
-                            //    Caption = "Назначение В/М на операцию",
-                            //    Buttons = ButtonsList
-                            //});
-                            ////var _result = AdvancedMessageBox.ShowWithOptimalButtons(
-                            ////    text: $"Внимание! " +
-                            ////          $"\nОперация: {record.olNomOper} " +
-                            ////          $"\nОписание: {record.olOperName} " +
-                            ////          $"\n\nНазначаемая машина ({curr.kmlNumber}) не совпадает с плановой ({_kmlNumber})",
-                            ////    caption: "Назначение В/М на операцию",
-                            ////    buttons: buttons
-                            ////);
-                            switch (_result)
-                            {
-                                case DialogResult.No:
-                                    record.ErrorSelection = 1;
-                                    record.SyncSelection = 0;
-                                    break;
-                                case DialogResult.Abort:
-                                    return;
-                                //break;
-                                case DialogResult.Cancel:
-                                    return;
-                                    //break;
-                            }
-                            //if (_result == DialogResult.No)
-                            //{
-                            //    return;
-                            //}
-                        }
-                        if (!CheckPZVDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить В/М (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя назначить В/М (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя назначить В/М (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя назначить В/М (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя назначить В/М (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                    }
-                }
+        //                    //var _result = AdvancedMessageBox.ShowWithOptimalButtons(new MessageBoxOptions
+        //                    //{
+        //                    //    Text = $"Внимание! " +
+        //                    //        $"\n Операция: {record.olNomOper} " +
+        //                    //        $"\n Описание: {record.olOperName} " +
+        //                    //        $"\n\n Назначаемая машина ({curr.kmlNumber}) не совпадает с плановой ({_kmlNumber}) ",
+        //                    //    Caption = "Назначение В/М на операцию",
+        //                    //    Buttons = ButtonsList
+        //                    //});
+        //                    ////var _result = AdvancedMessageBox.ShowWithOptimalButtons(
+        //                    ////    text: $"Внимание! " +
+        //                    ////          $"\nОперация: {record.olNomOper} " +
+        //                    ////          $"\nОписание: {record.olOperName} " +
+        //                    ////          $"\n\nНазначаемая машина ({curr.kmlNumber}) не совпадает с плановой ({_kmlNumber})",
+        //                    ////    caption: "Назначение В/М на операцию",
+        //                    ////    buttons: buttons
+        //                    ////);
+        //                    switch (_result)
+        //                    {
+        //                        case DialogResult.No:
+        //                            record.ErrorSelection = 1;
+        //                            record.SyncSelection = 0;
+        //                            break;
+        //                        case DialogResult.Abort:
+        //                            return;
+        //                        //break;
+        //                        case DialogResult.Cancel:
+        //                            return;
+        //                            //break;
+        //                    }
+        //                    //if (_result == DialogResult.No)
+        //                    //{
+        //                    //    return;
+        //                    //}
+        //                }
+        //                if (!CheckPZVDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить В/М (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя назначить В/М (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя назначить В/М (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя назначить В/М (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя назначить В/М (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //            }
+        //        }
 
-                PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
+        //        PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
 
-                List<int> filteredList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.SyncSelection == 1)
-                    .Select(x => x.olPzvID)   // новый маппер
-                    .ToList();
-                //SetKnitMachineToPzvID(filteredList, curr.kwsmlKmlID);
-                await ExecutePzvActionAsync(PzvActionType.AssignKnittingMachine);
+        //        List<int> filteredList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.SyncSelection == 1)
+        //            .Select(x => x.olPzvID)   // новый маппер
+        //            .ToList();
+        //        //SetKnitMachineToPzvID(filteredList, curr.kwsmlKmlID);
+        //        await ExecutePzvActionAsync(PzvActionType.AssignKnittingMachine);
 
-                var errList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.ErrorSelection == 1)
-                    .ToList();
-                if (errList.Count != 0)
-                {
-                    foreach (var record in errList)
-                    {
-                        if (record.ErrorSelection == 1 && record.SyncSelection == 0)
-                        {
-                            record.ErrorSelection = 0;
-                            record.SyncSelection = 1;
-                        }
-                    }
-                }
-                Debug.WriteLine($"KnittingMachineWorkAssignment completed for pzvIDs={string.Join(",", filteredList)}, kmlID={curr.kwsmlKmlID}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка в KnittingMachineWorkAssignment: {ex.Message}");
-            }
-        }
+        //        var errList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.ErrorSelection == 1)
+        //            .ToList();
+        //        if (errList.Count != 0)
+        //        {
+        //            foreach (var record in errList)
+        //            {
+        //                if (record.ErrorSelection == 1 && record.SyncSelection == 0)
+        //                {
+        //                    record.ErrorSelection = 0;
+        //                    record.SyncSelection = 1;
+        //                }
+        //            }
+        //        }
+        //        Debug.WriteLine($"KnittingMachineWorkAssignment completed for pzvIDs={string.Join(",", filteredList)}, kmlID={curr.kwsmlKmlID}");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Ошибка в KnittingMachineWorkAssignment: {ex.Message}");
+        //    }
+        //}
 
         //private async void buttonKnittingMachineWorkAssignment_Click(object sender, EventArgs e)
         //{
@@ -3850,74 +3838,74 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void KnittingMachineCancelWorkAssignment()
-        {
-            try
-            {
-                Debug.WriteLine($"KnittingMachineCancelWorkAssignment started for pzvID={_xPzvID}, column={_xColumn}");
-                var checkList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.SyncSelection == 1)
-                    .ToList();
-                if (checkList.Count != 0)
-                {
-                    foreach (var record in checkList)
-                    {
-                        if (record.olKodPodr != 1)
-                        {
-                            MessageBox.Show("Операция не относится к вязальному подразделению, нельзя изменять В/М!");
-                            return;
-                        }
-                        if (!CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя отменить назначение В/М (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя отменить назначение В/М (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя отменить назначение В/М (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя отменить назначение В/М (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя отменить назначение В/М (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
+        //private async void KnittingMachineCancelWorkAssignment()
+        //{
+        //    try
+        //    {
+        //        Debug.WriteLine($"KnittingMachineCancelWorkAssignment started for pzvID={_xPzvID}, column={_xColumn}");
+        //        var checkList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.SyncSelection == 1)
+        //            .ToList();
+        //        if (checkList.Count != 0)
+        //        {
+        //            foreach (var record in checkList)
+        //            {
+        //                if (record.olKodPodr != 1)
+        //                {
+        //                    MessageBox.Show("Операция не относится к вязальному подразделению, нельзя изменять В/М!");
+        //                    return;
+        //                }
+        //                if (!CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя отменить назначение В/М (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя отменить назначение В/М (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя отменить назначение В/М (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя отменить назначение В/М (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя отменить назначение В/М (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
 
-                    }
-                }
+        //            }
+        //        }
 
-                List<int> filteredList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.SyncSelection == 1)
-                    .Select(x => x.olPzvID)   // новый маппер
-                    .ToList();
+        //        List<int> filteredList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.SyncSelection == 1)
+        //            .Select(x => x.olPzvID)   // новый маппер
+        //            .ToList();
 
-                //SetKnitMachineToPzvID(filteredList, 0);
-                await ExecutePzvActionAsync(PzvActionType.CancelKnittingMachine);
+        //        //SetKnitMachineToPzvID(filteredList, 0);
+        //        await ExecutePzvActionAsync(PzvActionType.CancelKnittingMachine);
 
-                Debug.WriteLine($"KnittingMachineCancelWorkAssignment completed for pzvIDs={string.Join(",", filteredList)}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка в KnittingMachineCancelWorkAssignment: {ex.Message}");
-            }
-        }
+        //        Debug.WriteLine($"KnittingMachineCancelWorkAssignment completed for pzvIDs={string.Join(",", filteredList)}");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Ошибка в KnittingMachineCancelWorkAssignment: {ex.Message}");
+        //    }
+        //}
 
         //private async void buttonKnittingMachineCancelWorkAssignment_Click(object sender, EventArgs e)
         //{
@@ -3941,129 +3929,129 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void buttonTab999WorkAssignment_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Debug.WriteLine($"Starting Tab999WorkAssignment for pzvID={_xPzvID}, column={_xColumn}");
-                await GridOverlayLoader.RunTaskWithOverlayAsync(
-                    gridControlPZVOperList,
-                    Tab999WorkAssignment,              // обычный void-метод
-                    CancellationToken.None);
-                //GoToPzvID(_xPzvID, _xColumn);
-                _gridHelper.GoToRowById<PZVOperList, int>(gridViewPZVOperList, _pZVOperListByPachListBindingSource, x => x.olPzvID, _xPzvID, _xColumn);
-                Debug.WriteLine($"Finished Tab999WorkAssignment, now going to row with pzvID={_xPzvID}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка в buttonTab999WorkAssignment_Click: {ex.Message}");
-            }
-        }
-        private async void Tab999WorkAssignment()
-        {
-            try
-            {
-                Debug.WriteLine($"Starting Tab999WorkAssignment for pzvID={_xPzvID}, column={_xColumn}");
-                var checkList = _pZVOperListByPachListBindingSource.List
-                        .OfType<PZVOperList>()
-                        .Where(x => x.SyncSelection == 1)
-                        .ToList();
-                //if (checkList.Count != 0)
-                //{
-                //    foreach (var record in checkList)
-                //    {
-                //        if (!CheckPZVDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя проставить таб№ 999 (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                //        {
-                //            record.ErrorSelection = 1;
-                //            record.SyncSelection = 0;
-                //            continue;
-                //        }
-                //        if (!CheckPZVDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя проставить таб№ 999 (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                //        {
-                //            record.ErrorSelection = 1;
-                //            record.SyncSelection = 0;
-                //            continue;
-                //        }
-                //        if (!CheckPZVDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя проставить таб№ 999 (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                //        {
-                //            record.ErrorSelection = 1;
-                //            record.SyncSelection = 0;
-                //            continue;
-                //        }
-                //        if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя проставить таб№ 999 (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                //        {
-                //            record.ErrorSelection = 1;
-                //            record.SyncSelection = 0;
-                //            continue;
-                //        }
+        //private async void buttonTab999WorkAssignment_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        Debug.WriteLine($"Starting Tab999WorkAssignment for pzvID={_xPzvID}, column={_xColumn}");
+        //        await GridOverlayLoader.RunTaskWithOverlayAsync(
+        //            gridControlPZVOperList,
+        //            Tab999WorkAssignment,              // обычный void-метод
+        //            CancellationToken.None);
+        //        //GoToPzvID(_xPzvID, _xColumn);
+        //        _gridHelper.GoToRowById<PZVOperList, int>(gridViewPZVOperList, _pZVOperListByPachListBindingSource, x => x.olPzvID, _xPzvID, _xColumn);
+        //        Debug.WriteLine($"Finished Tab999WorkAssignment, now going to row with pzvID={_xPzvID}");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Ошибка в buttonTab999WorkAssignment_Click: {ex.Message}");
+        //    }
+        //}
+        //private async void Tab999WorkAssignment()
+        //{
+        //    try
+        //    {
+        //        Debug.WriteLine($"Starting Tab999WorkAssignment for pzvID={_xPzvID}, column={_xColumn}");
+        //        var checkList = _pZVOperListByPachListBindingSource.List
+        //                .OfType<PZVOperList>()
+        //                .Where(x => x.SyncSelection == 1)
+        //                .ToList();
+        //        //if (checkList.Count != 0)
+        //        //{
+        //        //    foreach (var record in checkList)
+        //        //    {
+        //        //        if (!CheckPZVDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя проставить таб№ 999 (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //        //        {
+        //        //            record.ErrorSelection = 1;
+        //        //            record.SyncSelection = 0;
+        //        //            continue;
+        //        //        }
+        //        //        if (!CheckPZVDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя проставить таб№ 999 (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //        //        {
+        //        //            record.ErrorSelection = 1;
+        //        //            record.SyncSelection = 0;
+        //        //            continue;
+        //        //        }
+        //        //        if (!CheckPZVDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя проставить таб№ 999 (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //        //        {
+        //        //            record.ErrorSelection = 1;
+        //        //            record.SyncSelection = 0;
+        //        //            continue;
+        //        //        }
+        //        //        if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя проставить таб№ 999 (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //        //        {
+        //        //            record.ErrorSelection = 1;
+        //        //            record.SyncSelection = 0;
+        //        //            continue;
+        //        //        }
 
-                //    }
-                //}
+        //        //    }
+        //        //}
 
-                PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
+        //        PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
 
-                //List<int> filteredList = _pZVOperListByPachListBindingSource.List
-                //    .OfType<PZVOperList>()
-                //    .Where(x => x.SyncSelection == 1)
-                //    .Select(x => x.olPzvID)   // новый маппер
-                //    .ToList();
-                if (checkList.Count != 0)
-                {
-                    foreach (var record in checkList)
-                    {
-                        if (record.olKodPodr != 1 || record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя проставить таб№ 999 (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя проставить таб№ 999 (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя проставить таб№ 999 (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя проставить таб№ 999 (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
+        //        //List<int> filteredList = _pZVOperListByPachListBindingSource.List
+        //        //    .OfType<PZVOperList>()
+        //        //    .Where(x => x.SyncSelection == 1)
+        //        //    .Select(x => x.olPzvID)   // новый маппер
+        //        //    .ToList();
+        //        if (checkList.Count != 0)
+        //        {
+        //            foreach (var record in checkList)
+        //            {
+        //                if (record.olKodPodr != 1 || record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя проставить таб№ 999 (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя проставить таб№ 999 (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя проставить таб№ 999 (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя проставить таб№ 999 (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
 
-                    }
-                }
+        //            }
+        //        }
 
-                //PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
+        //        //PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
 
-                List<int> filteredList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.SyncSelection == 1)
-                    .Select(x => x.olPzvID)   // новый маппер
-                    .ToList();
-                //await 
-                //SetTabToPzvID(filteredList, 999, 0);
-                await ExecutePzvActionAsync(PzvActionType.AssignTab999);
-                //gridViewPZVOperList.RefreshData();
-                //GoToPzvID(pzvCurrent.olPzvID, _xColumn);
-                Debug.WriteLine($"Finished Tab999WorkAssignment, now going to row with pzvID={_xPzvID}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка Tab999WorkAssignment: {ex.Message}");
-            }
-        }
+        //        List<int> filteredList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.SyncSelection == 1)
+        //            .Select(x => x.olPzvID)   // новый маппер
+        //            .ToList();
+        //        //await 
+        //        //SetTabToPzvID(filteredList, 999, 0);
+        //        await ExecutePzvActionAsync(PzvActionType.AssignTab999);
+        //        //gridViewPZVOperList.RefreshData();
+        //        //GoToPzvID(pzvCurrent.olPzvID, _xColumn);
+        //        Debug.WriteLine($"Finished Tab999WorkAssignment, now going to row with pzvID={_xPzvID}");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Ошибка Tab999WorkAssignment: {ex.Message}");
+        //    }
+        //}
         //private async Task SetTabToPzvID(List<int> _pzvId, int _tab, int _kwsID)
         //{
         //    //MessageBox.Show($"Двойной клик по операции. В/М {curr.kmlNumber} ({curr.kmlInvNum}) - Зона {curr.kmaNumber}");
@@ -4145,86 +4133,86 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void MasterConfirmation()
-        {
-            try
-            {
-                Debug.WriteLine($"Starting MasterConfirmation for pzvID={_xPzvID}, column={_xColumn}");
-                _pZVOperListByPachListBindingSource.ResetBindings(false);
-                var checkList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.SyncSelection == 1)
-                    .ToList();
-                if (checkList.Count != 0)
-                {
-                    foreach (var record in checkList)
-                    {
-                        if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVEmptyDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVEmptyDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVEmptyDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
+        //private async void MasterConfirmation()
+        //{
+        //    try
+        //    {
+        //        Debug.WriteLine($"Starting MasterConfirmation for pzvID={_xPzvID}, column={_xColumn}");
+        //        _pZVOperListByPachListBindingSource.ResetBindings(false);
+        //        var checkList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.SyncSelection == 1)
+        //            .ToList();
+        //        if (checkList.Count != 0)
+        //        {
+        //            foreach (var record in checkList)
+        //            {
+        //                if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVEmptyDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVEmptyDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVEmptyDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
 
-                    }
-                }
+        //            }
+        //        }
 
-                PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
+        //        PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
 
-                List<int> filteredList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.SyncSelection == 1)
-                    .Select(x => x.olPzvID)   // новый маппер
-                    .ToList();
-                //SetDateMastToPzvID(filteredList, DateTime.Now);
-                await ExecutePzvActionAsync(PzvActionType.ConfirmMaster);
+        //        List<int> filteredList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.SyncSelection == 1)
+        //            .Select(x => x.olPzvID)   // новый маппер
+        //            .ToList();
+        //        //SetDateMastToPzvID(filteredList, DateTime.Now);
+        //        await ExecutePzvActionAsync(PzvActionType.ConfirmMaster);
 
-                var errList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.ErrorSelection == 1)
-                    .ToList();
-                if (errList.Count != 0)
-                {
-                    foreach (var record in errList)
-                    {
-                        if (record.ErrorSelection == 1 && record.SyncSelection == 0)
-                        {
-                            record.ErrorSelection = 0;
-                            record.SyncSelection = 1;
-                        }
-                    }
-                }
-                Debug.WriteLine($"MasterConfirmation completed for pzvIDs={string.Join(",", filteredList)}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка в MasterConfirmation: {ex.Message}");
-            }
-        }
+        //        var errList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.ErrorSelection == 1)
+        //            .ToList();
+        //        if (errList.Count != 0)
+        //        {
+        //            foreach (var record in errList)
+        //            {
+        //                if (record.ErrorSelection == 1 && record.SyncSelection == 0)
+        //                {
+        //                    record.ErrorSelection = 0;
+        //                    record.SyncSelection = 1;
+        //                }
+        //            }
+        //        }
+        //        Debug.WriteLine($"MasterConfirmation completed for pzvIDs={string.Join(",", filteredList)}");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Ошибка в MasterConfirmation: {ex.Message}");
+        //    }
+        //}
         //private async void buttonMasterConfirmation_Click(object sender, EventArgs e)
         //{
         //    try
@@ -4248,85 +4236,85 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void MasterCancelConfirmation()
-        {
-            try
-            {
-                Debug.WriteLine($"Starting MasterCancelConfirmation for pzvID={_xPzvID}, column={_xColumn}");
-                _pZVOperListByPachListBindingSource.ResetBindings(false);
-                var checkList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.SyncSelection == 1)
-                    .ToList();
-                if (checkList.Count != 0)
-                {
-                    foreach (var record in checkList)
-                    {
-                        if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                        }
-                        if (!CheckPZVEmptyDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVEmptyDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVEmptyDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVEmptyDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
+        //private async void MasterCancelConfirmation()
+        //{
+        //    try
+        //    {
+        //        Debug.WriteLine($"Starting MasterCancelConfirmation for pzvID={_xPzvID}, column={_xColumn}");
+        //        _pZVOperListByPachListBindingSource.ResetBindings(false);
+        //        var checkList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.SyncSelection == 1)
+        //            .ToList();
+        //        if (checkList.Count != 0)
+        //        {
+        //            foreach (var record in checkList)
+        //            {
+        //                if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                }
+        //                if (!CheckPZVEmptyDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVEmptyDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVEmptyDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVEmptyDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
 
-                    }
-                }
+        //            }
+        //        }
 
-                PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
+        //        PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
 
-                List<int> filteredList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.SyncSelection == 1)
-                    .Select(x => x.olPzvID)   // новый маппер
-                    .ToList();
-                //SetDateMastToPzvID(filteredList, null);
-                await ExecutePzvActionAsync(PzvActionType.CancelMasterConfirmation);
+        //        List<int> filteredList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.SyncSelection == 1)
+        //            .Select(x => x.olPzvID)   // новый маппер
+        //            .ToList();
+        //        //SetDateMastToPzvID(filteredList, null);
+        //        await ExecutePzvActionAsync(PzvActionType.CancelMasterConfirmation);
 
-                var errList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.ErrorSelection == 1)
-                    .ToList();
-                if (errList.Count != 0)
-                {
-                    foreach (var record in errList)
-                    {
-                        if (record.ErrorSelection == 1 && record.SyncSelection == 0)
-                        {
-                            record.ErrorSelection = 0;
-                            record.SyncSelection = 1;
-                        }
-                    }
-                }
-                Debug.WriteLine($"MasterCancelConfirmation completed for pzvIDs={string.Join(",", filteredList)}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка в MasterCancelConfirmation: {ex.Message}");
-            }
-        }
+        //        var errList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.ErrorSelection == 1)
+        //            .ToList();
+        //        if (errList.Count != 0)
+        //        {
+        //            foreach (var record in errList)
+        //            {
+        //                if (record.ErrorSelection == 1 && record.SyncSelection == 0)
+        //                {
+        //                    record.ErrorSelection = 0;
+        //                    record.SyncSelection = 1;
+        //                }
+        //            }
+        //        }
+        //        Debug.WriteLine($"MasterCancelConfirmation completed for pzvIDs={string.Join(",", filteredList)}");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Ошибка в MasterCancelConfirmation: {ex.Message}");
+        //    }
+        //}
         //private async void buttonMasterCancelConfirmation_Click(object sender, EventArgs e)
         //{
         //    try
@@ -4344,12 +4332,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         //        MessageBox.Show($"Ошибка в buttonMasterCancelConfirmation_Click: {ex.Message}");
         //    }
         //}
-
-        private void customSimpleButton7_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void customSimpleButton5_Click(object sender, EventArgs e)
         {
             try
@@ -4401,132 +4383,132 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void TabWorkAssignment()
-        {
-            try
-            {
-                Debug.WriteLine($"Starting TabWorkAssignment for pzvID={_xPzvID}, column={_xColumn}");
-                //SmenZadanyVyaz curr = _smenZadanyVyazBindingSource.Current as SmenZadanyVyaz;
-                GridView _gridView = (GridView)gridControlSmenZadany.MainView;
-                var currentSmenZadanyVyaz = _gridView.GetRow(_gridView.FocusedRowHandle) as SmenZadanyVyaz;
-                if (currentSmenZadanyVyaz == null)
-                    return;
+        //private async void TabWorkAssignment()
+        //{
+        //    try
+        //    {
+        //        Debug.WriteLine($"Starting TabWorkAssignment for pzvID={_xPzvID}, column={_xColumn}");
+        //        //SmenZadanyVyaz curr = _smenZadanyVyazBindingSource.Current as SmenZadanyVyaz;
+        //        GridView _gridView = (GridView)gridControlSmenZadany.MainView;
+        //        var currentSmenZadanyVyaz = _gridView.GetRow(_gridView.FocusedRowHandle) as SmenZadanyVyaz;
+        //        if (currentSmenZadanyVyaz == null)
+        //            return;
 
-                int xKwsTabStart = vyazPodrKod == 1 ? currentSmenZadanyVyaz.kwsTabStart : currentSmenZadanyVyaz.szTab;
+        //        int xKwsTabStart = vyazPodrKod == 1 ? currentSmenZadanyVyaz.kwsTabStart : currentSmenZadanyVyaz.szTab;
 
-                _pZVOperListByPachListBindingSource.ResetBindings(false);
-                var checkList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.SyncSelection == 1)
-                    .ToList();
-                if (checkList.Count != 0)
-                {
-                    if (currentSmenZadanyVyaz == null || xKwsTabStart == null || xKwsTabStart == 0)
-                    {
-                        MessageBox.Show("Не выбранн работниик для назначения");
-                        return;
-                    }
-                    foreach (var record in checkList)
-                    {
-                        if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (record.olKodPodr == 1 && !CompareTabAndMachineArea(record.olPzvKmlID, xKwsTabStart))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                    }
-                }
+        //        _pZVOperListByPachListBindingSource.ResetBindings(false);
+        //        var checkList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.SyncSelection == 1)
+        //            .ToList();
+        //        if (checkList.Count != 0)
+        //        {
+        //            if (currentSmenZadanyVyaz == null || xKwsTabStart == null || xKwsTabStart == 0)
+        //            {
+        //                MessageBox.Show("Не выбранн работниик для назначения");
+        //                return;
+        //            }
+        //            foreach (var record in checkList)
+        //            {
+        //                if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (record.olKodPodr == 1 && !CompareTabAndMachineArea(record.olPzvKmlID, xKwsTabStart))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //            }
+        //        }
 
-                PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
-                List<int> filteredList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.SyncSelection == 1)
-                    .Select(x => x.olPzvID)   // новый маппер
-                    .ToList();
-                ///await SetTabToPzvID(filteredList, xKwsTabStart, currentSmenZadanyVyaz.kwsID);
-                await ExecutePzvActionAsync(PzvActionType.AssignTab);
+        //        PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
+        //        List<int> filteredList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.SyncSelection == 1)
+        //            .Select(x => x.olPzvID)   // новый маппер
+        //            .ToList();
+        //        ///await SetTabToPzvID(filteredList, xKwsTabStart, currentSmenZadanyVyaz.kwsID);
+        //        await ExecutePzvActionAsync(PzvActionType.AssignTab);
 
-                var errList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.ErrorSelection == 1)
-                    .ToList();
-                if (errList.Count != 0)
-                {
-                    foreach (var record in errList)
-                    {
-                        if (record.ErrorSelection == 1 && record.SyncSelection == 0)
-                        {
-                            record.ErrorSelection = 0;
-                            record.SyncSelection = 1;
-                        }
-                    }
-                }
-                Debug.WriteLine($"Finished TabWorkAssignment, now going to row with pzvID={_xPzvID}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка в TabWorkAssignment: {ex.Message}");
-            }
-        }
-        private bool CompareTabAndMachineArea(int _kmlID, int _tab)
-        {
-            // проверка наличия сочетания табельного № и В/М к одной зоне
-            try
-            {
-                Debug.WriteLine($"Starting CompareTabAndMachineArea for kmlID={_kmlID}, tab={_tab}");
-                string query = $"SELECT * " +
-                                $"  FROM knitWorkingShiftNewCurrentSmen_view wsncsv " +
-                                $"      LEFT JOIN knitWorkingShiftMachineListNew wsmln ON wsncsv.kwsID = wsmln.kwsmlKwsID" +
-                                $"   WHERE wsncsv.shiftStatusID in (0,2) " +
-                                $"      AND wsncsv.tabShiftStart = {_tab} " +
-                                $"      AND wsmln.kwsmlKmlID = {_kmlID} ";
-                _isCountTabKM = _dbHelper.Exists(query, new Dictionary<string, object> { });
-                Debug.WriteLine($"CompareTabAndMachineArea result for kmlID={_kmlID}, tab={_tab} is {_isCountTabKM}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка CompareTabAndMachineArea: {ex.Message}");
-            }
-            if (!_isCountTabKM)
-            {
-                MessageBox.Show($"Внимание! Табельный номер и В/М находятся в разных зонах!");
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
+        //        var errList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.ErrorSelection == 1)
+        //            .ToList();
+        //        if (errList.Count != 0)
+        //        {
+        //            foreach (var record in errList)
+        //            {
+        //                if (record.ErrorSelection == 1 && record.SyncSelection == 0)
+        //                {
+        //                    record.ErrorSelection = 0;
+        //                    record.SyncSelection = 1;
+        //                }
+        //            }
+        //        }
+        //        Debug.WriteLine($"Finished TabWorkAssignment, now going to row with pzvID={_xPzvID}");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Ошибка в TabWorkAssignment: {ex.Message}");
+        //    }
+        //}
+        //private bool CompareTabAndMachineArea(int _kmlID, int _tab)
+        //{
+        //    // проверка наличия сочетания табельного № и В/М к одной зоне
+        //    try
+        //    {
+        //        Debug.WriteLine($"Starting CompareTabAndMachineArea for kmlID={_kmlID}, tab={_tab}");
+        //        string query = $"SELECT * " +
+        //                        $"  FROM knitWorkingShiftNewCurrentSmen_view wsncsv " +
+        //                        $"      LEFT JOIN knitWorkingShiftMachineListNew wsmln ON wsncsv.kwsID = wsmln.kwsmlKwsID" +
+        //                        $"   WHERE wsncsv.shiftStatusID in (0,2) " +
+        //                        $"      AND wsncsv.tabShiftStart = {_tab} " +
+        //                        $"      AND wsmln.kwsmlKmlID = {_kmlID} ";
+        //        _isCountTabKM = _dbHelper.Exists(query, new Dictionary<string, object> { });
+        //        Debug.WriteLine($"CompareTabAndMachineArea result for kmlID={_kmlID}, tab={_tab} is {_isCountTabKM}");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Ошибка CompareTabAndMachineArea: {ex.Message}");
+        //    }
+        //    if (!_isCountTabKM)
+        //    {
+        //        MessageBox.Show($"Внимание! Табельный номер и В/М находятся в разных зонах!");
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        return true;
+        //    }
+        //}
         //private async void buttonTabWorkAssignment_Click(object sender, EventArgs e)
         //{
         //    try
@@ -4550,85 +4532,85 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void TabCancelWorkAssignment()
-        {
-            try
-            {
-                Debug.WriteLine($"Starting TabCancelWorkAssignment for pzvID={_xPzvID}, column={_xColumn}");
-                _pZVOperListByPachListBindingSource.ResetBindings(false);
-                var checkList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.SyncSelection == 1)
-                    .ToList();
-                if (checkList.Count != 0)
-                {
-                    foreach (var record in checkList)
-                    {
-                        if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя отменить назначение работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVEmptyDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя отменить назначение работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя отменить назначение работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя отменить назначение работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя отменить назначение работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                    }
-                }
+        //private async void TabCancelWorkAssignment()
+        //{
+        //    try
+        //    {
+        //        Debug.WriteLine($"Starting TabCancelWorkAssignment for pzvID={_xPzvID}, column={_xColumn}");
+        //        _pZVOperListByPachListBindingSource.ResetBindings(false);
+        //        var checkList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.SyncSelection == 1)
+        //            .ToList();
+        //        if (checkList.Count != 0)
+        //        {
+        //            foreach (var record in checkList)
+        //            {
+        //                if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя отменить назначение работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVEmptyDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя отменить назначение работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя отменить назначение работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя отменить назначение работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя отменить назначение работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //            }
+        //        }
 
-                PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
+        //        PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
 
-                List<int> filteredList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.SyncSelection == 1)
-                    .Select(x => x.olPzvID)   // новый маппер
-                    .ToList();
-                //SetTabToPzvID(filteredList, 0, 0);
-                await ExecutePzvActionAsync(PzvActionType.CancelTab);
+        //        List<int> filteredList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.SyncSelection == 1)
+        //            .Select(x => x.olPzvID)   // новый маппер
+        //            .ToList();
+        //        //SetTabToPzvID(filteredList, 0, 0);
+        //        await ExecutePzvActionAsync(PzvActionType.CancelTab);
 
-                var errList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.ErrorSelection == 1)
-                    .ToList();
-                if (errList.Count != 0)
-                {
-                    foreach (var record in errList)
-                    {
-                        if (record.ErrorSelection == 1 && record.SyncSelection == 0)
-                        {
-                            record.ErrorSelection = 0;
-                            record.SyncSelection = 1;
-                        }
-                    }
-                }
-                Debug.WriteLine($"Finished TabCancelWorkAssignment, now going to row with pzvID={_xPzvID}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка в TabCancelWorkAssignment: {ex.Message}");
-            }
-        }
+        //        var errList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.ErrorSelection == 1)
+        //            .ToList();
+        //        if (errList.Count != 0)
+        //        {
+        //            foreach (var record in errList)
+        //            {
+        //                if (record.ErrorSelection == 1 && record.SyncSelection == 0)
+        //                {
+        //                    record.ErrorSelection = 0;
+        //                    record.SyncSelection = 1;
+        //                }
+        //            }
+        //        }
+        //        Debug.WriteLine($"Finished TabCancelWorkAssignment, now going to row with pzvID={_xPzvID}");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Ошибка в TabCancelWorkAssignment: {ex.Message}");
+        //    }
+        //}
         //private async void buttonTabCancelWorkAssignment_Click(object sender, EventArgs e)
         //{
         //    try
@@ -4740,11 +4722,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         //    { //MessageBox.Show(ex.ToString());
         //    }
         //}
-
-        private async void layoutControlGroup1_CustomButtonChecked(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
-        {
-
-        }
 
         //private async void gridViewPZVOperList_CellValueChanged(object sender, CellValueChangedEventArgs e)
         //{
@@ -4883,99 +4860,100 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// <summary>
         /// Начать выполнение по V для выбранных операций
         /// </summary>
-        private async void WorkStartExecution()
-        {
-            try
-            {
-                Debug.WriteLine($"Starting WorkStartExecution for pzvID={_xPzvID}, column={_xColumn}");
-                var checkList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.SyncSelection == 1)
-                    .ToList();
-                if (checkList.Count != 0)
-                {
-                    foreach (var record in checkList)
-                    {
-                        if (record.olKodPodr == 1 && record.olPzvKwsID == 0)
-                        {
-                            MessageBox.Show($"Операция не назначена на смену, нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})");
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (record.olKodPodr == 1 && !(CheckPZVShiftOpened(record.olPzvKwsID, $"нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")
-                            && !CheckPZVShiftClosed(record.olPzvKwsID, $"нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVEmptyDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
+        //private async void WorkStartExecution()
+        //{
+        //    try
+        //    {
+        //        Debug.WriteLine($"Starting WorkStartExecution for pzvID={_xPzvID}, column={_xColumn}");
+        //        var checkList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.SyncSelection == 1)
+        //            .ToList();
+        //        if (checkList.Count != 0)
+        //        {
+        //            foreach (var record in checkList)
+        //            {
+        //                if (record.olKodPodr == 1 && record.olPzvKwsID == 0)
+        //                {
+        //                    MessageBox.Show($"Операция не назначена на смену, нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})");
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (record.olKodPodr == 1 && !(CheckPZVShiftOpened(record.olPzvKwsID, $"нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")
+        //                    && !CheckPZVShiftClosed(record.olPzvKwsID, $"нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVEmptyDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
 
-                    }
-                }
+        //            }
+        //        }
 
-                PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
+        //        PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
 
-                List<int> filteredList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.SyncSelection == 1)
-                    .Select(x => x.olPzvID)   // новый маппер
-                    .ToList();
-                //SetDateStartToPzvID(filteredList, DateTime.Now);
-                await ExecutePzvActionAsync(PzvActionType.StartWork);
+        //        List<int> filteredList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.SyncSelection == 1)
+        //            .Select(x => x.olPzvID)   // новый маппер
+        //            .ToList();
+        //        //SetDateStartToPzvID(filteredList, DateTime.Now);
+        //        await ExecutePzvActionAsync(PzvActionType.StartWork);
 
-                var errList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.ErrorSelection == 1)
-                    .ToList();
-                if (errList.Count != 0)
-                {
-                    foreach (var record in errList)
-                    {
-                        if (record.ErrorSelection == 1 && record.SyncSelection == 0)
-                        {
-                            record.ErrorSelection = 0;
-                            record.SyncSelection = 1;
-                        }
-                    }
-                }
-                Debug.WriteLine($"Finished WorkStartExecution, now going to row with pzvID={_xPzvID}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка в WorkStartExecution: {ex.Message}");
-            }
-        }
+        //        var errList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.ErrorSelection == 1)
+        //            .ToList();
+        //        if (errList.Count != 0)
+        //        {
+        //            foreach (var record in errList)
+        //            {
+        //                if (record.ErrorSelection == 1 && record.SyncSelection == 0)
+        //                {
+        //                    record.ErrorSelection = 0;
+        //                    record.SyncSelection = 1;
+        //                }
+        //            }
+        //        }
+        //        Debug.WriteLine($"Finished WorkStartExecution, now going to row with pzvID={_xPzvID}");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Ошибка в WorkStartExecution: {ex.Message}");
+        //    }
+        //}
+
         //private async void buttonWorkStartExecution_Click(object sender, EventArgs e)
         //{
         //    try
@@ -4996,294 +4974,294 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// <summary>
         /// Отменить начало выполнения по V для выбранных операций
         /// </summary>
-        private async void CancelWorkStartExecution()
-        {
-            try
-            {
-                Debug.WriteLine($"Starting CancelWorkStartExecution for pzvID={_xPzvID}, column={_xColumn}");
-                var checkList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.SyncSelection == 1)
-                    .ToList();
-                if (checkList.Count != 0)
-                {
-                    foreach (var record in checkList)
-                    {
-                        if (record.olKodPodr == 1 && record.olPzvKwsID == 0)
-                        {
-                            MessageBox.Show($"Операция не назначена на смену, нельзя отменить начало выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})");
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (record.olKodPodr == 1 && !(CheckPZVShiftOpened(record.olPzvKwsID, $"нельзя отменить начало выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")
-                            && !CheckPZVShiftClosed(record.olPzvKwsID, $"нельзя отменить начало выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVEmptyDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVEmptyDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                    }
-                }
+        //private async void CancelWorkStartExecution()
+        //{
+        //    try
+        //    {
+        //        Debug.WriteLine($"Starting CancelWorkStartExecution for pzvID={_xPzvID}, column={_xColumn}");
+        //        var checkList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.SyncSelection == 1)
+        //            .ToList();
+        //        if (checkList.Count != 0)
+        //        {
+        //            foreach (var record in checkList)
+        //            {
+        //                if (record.olKodPodr == 1 && record.olPzvKwsID == 0)
+        //                {
+        //                    MessageBox.Show($"Операция не назначена на смену, нельзя отменить начало выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})");
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (record.olKodPodr == 1 && !(CheckPZVShiftOpened(record.olPzvKwsID, $"нельзя отменить начало выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")
+        //                    && !CheckPZVShiftClosed(record.olPzvKwsID, $"нельзя отменить начало выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVEmptyDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVEmptyDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя начать выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //            }
+        //        }
 
-                PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
+        //        PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
 
-                List<int> filteredList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.SyncSelection == 1)
-                    .Select(x => x.olPzvID)   // новый маппер
-                    .ToList();
-                DateTime? date = null;
-                //SetDateStartToPzvID(filteredList, date);
-                await ExecutePzvActionAsync(PzvActionType.StartWork);
+        //        List<int> filteredList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.SyncSelection == 1)
+        //            .Select(x => x.olPzvID)   // новый маппер
+        //            .ToList();
+        //        DateTime? date = null;
+        //        //SetDateStartToPzvID(filteredList, date);
+        //        await ExecutePzvActionAsync(PzvActionType.StartWork);
 
-                var errList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.ErrorSelection == 1)
-                    .ToList();
-                if (errList.Count != 0)
-                {
-                    foreach (var record in errList)
-                    {
-                        if (record.ErrorSelection == 1 && record.SyncSelection == 0)
-                        {
-                            record.ErrorSelection = 0;
-                            record.SyncSelection = 1;
-                        }
-                    }
-                }
-                Debug.WriteLine($"Finished CancelWorkStartExecution, now going to row with pzvID={_xPzvID}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка в CancelWorkStartExecution: {ex.Message}");
-            }
-        }
+        //        var errList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.ErrorSelection == 1)
+        //            .ToList();
+        //        if (errList.Count != 0)
+        //        {
+        //            foreach (var record in errList)
+        //            {
+        //                if (record.ErrorSelection == 1 && record.SyncSelection == 0)
+        //                {
+        //                    record.ErrorSelection = 0;
+        //                    record.SyncSelection = 1;
+        //                }
+        //            }
+        //        }
+        //        Debug.WriteLine($"Finished CancelWorkStartExecution, now going to row with pzvID={_xPzvID}");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Ошибка в CancelWorkStartExecution: {ex.Message}");
+        //    }
+        //}
 
         /// <summary>
         /// Окончить выполнение по V для выбранных операций
         /// </summary>
-        private async void WorkStopExecution()
-        {
-            try
-            {
-                Debug.WriteLine($"Starting WorkStopExecution for pzvID={_xPzvID}, column={_xColumn}");
-                _pZVOperListByPachListBindingSource.ResetBindings(false);
-                var checkList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.SyncSelection == 1)
-                    .ToList();
-                if (checkList.Count != 0)
-                {
-                    foreach (var record in checkList)
-                    {
-                        if (record.olKodPodr == 1 && record.olPzvKwsID == 0)
-                        {
-                            MessageBox.Show($"Операция не назначена на смену, нельзя завершить выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})");
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (record.olKodPodr == 1 && !(CheckPZVShiftOpened(record.olPzvKwsID, $"нельзя завершить выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")
-                            && !CheckPZVShiftClosed(record.olPzvKwsID, $"нельзя завершить выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVEmptyDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVEmptyDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
+        //private async void WorkStopExecution()
+        //{
+        //    try
+        //    {
+        //        Debug.WriteLine($"Starting WorkStopExecution for pzvID={_xPzvID}, column={_xColumn}");
+        //        _pZVOperListByPachListBindingSource.ResetBindings(false);
+        //        var checkList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.SyncSelection == 1)
+        //            .ToList();
+        //        if (checkList.Count != 0)
+        //        {
+        //            foreach (var record in checkList)
+        //            {
+        //                if (record.olKodPodr == 1 && record.olPzvKwsID == 0)
+        //                {
+        //                    MessageBox.Show($"Операция не назначена на смену, нельзя завершить выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})");
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (record.olKodPodr == 1 && !(CheckPZVShiftOpened(record.olPzvKwsID, $"нельзя завершить выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")
+        //                    && !CheckPZVShiftClosed(record.olPzvKwsID, $"нельзя завершить выполнение (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVEmptyDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVEmptyDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
 
-                    }
-                }
+        //            }
+        //        }
 
-                PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
+        //        PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
 
-                List<int> filteredList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.SyncSelection == 1)
-                    .Select(x => x.olPzvID)   // новый маппер
-                    .ToList();
-                //SetDateEndToPzvID(filteredList, DateTime.Now);
-                await ExecutePzvActionAsync(PzvActionType.StopWork);
+        //        List<int> filteredList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.SyncSelection == 1)
+        //            .Select(x => x.olPzvID)   // новый маппер
+        //            .ToList();
+        //        //SetDateEndToPzvID(filteredList, DateTime.Now);
+        //        await ExecutePzvActionAsync(PzvActionType.StopWork);
 
-                var errList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.ErrorSelection == 1)
-                    .ToList();
-                if (errList.Count != 0)
-                {
-                    foreach (var record in errList)
-                    {
-                        if (record.ErrorSelection == 1 && record.SyncSelection == 0)
-                        {
-                            record.ErrorSelection = 0;
-                            record.SyncSelection = 1;
-                        }
-                    }
-                }
-                Debug.WriteLine($"Finished WorkStopExecution, now going to row with pzvID={_xPzvID}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка в WorkStopExecution: {ex.Message}");
-            }
-        }
+        //        var errList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.ErrorSelection == 1)
+        //            .ToList();
+        //        if (errList.Count != 0)
+        //        {
+        //            foreach (var record in errList)
+        //            {
+        //                if (record.ErrorSelection == 1 && record.SyncSelection == 0)
+        //                {
+        //                    record.ErrorSelection = 0;
+        //                    record.SyncSelection = 1;
+        //                }
+        //            }
+        //        }
+        //        Debug.WriteLine($"Finished WorkStopExecution, now going to row with pzvID={_xPzvID}");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Ошибка в WorkStopExecution: {ex.Message}");
+        //    }
+        //}
         /// <summary>
         ///  Отменить окончание выполнения по V для выбранных операций
         /// </summary>
-        private async void CancelWorkStopExecution()
-        {
-            try
-            {
-                Debug.WriteLine($"Starting CancelWorkStopExecution for pzvID={_xPzvID}, column={_xColumn}");
-                _pZVOperListByPachListBindingSource.ResetBindings(false);
-                var checkList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.SyncSelection == 1)
-                    .ToList();
-                if (checkList.Count != 0)
-                {
-                    foreach (var record in checkList)
-                    {
-                        if (record.olKodPodr == 1 && record.olPzvKwsID == 0)
-                        {
-                            MessageBox.Show($"Операция не назначена на смену, нельзя отменить окончание выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})");
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (record.olKodPodr == 1 && !(CheckPZVShiftOpened(record.olPzvKwsID, $"нельзя отменить окончание выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")
-                            && !CheckPZVShiftClosed(record.olPzvKwsID, $"нельзя отменить окончание выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVEmptyDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVEmptyDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVEmptyDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                        if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
-                        {
-                            record.ErrorSelection = 1;
-                            record.SyncSelection = 0;
-                            continue;
-                        }
-                    }
-                }
+        //private async void CancelWorkStopExecution()
+        //{
+        //    try
+        //    {
+        //        Debug.WriteLine($"Starting CancelWorkStopExecution for pzvID={_xPzvID}, column={_xColumn}");
+        //        _pZVOperListByPachListBindingSource.ResetBindings(false);
+        //        var checkList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.SyncSelection == 1)
+        //            .ToList();
+        //        if (checkList.Count != 0)
+        //        {
+        //            foreach (var record in checkList)
+        //            {
+        //                if (record.olKodPodr == 1 && record.olPzvKwsID == 0)
+        //                {
+        //                    MessageBox.Show($"Операция не назначена на смену, нельзя отменить окончание выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})");
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (record.olKodPodr == 1 && !(CheckPZVShiftOpened(record.olPzvKwsID, $"нельзя отменить окончание выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")
+        //                    && !CheckPZVShiftClosed(record.olPzvKwsID, $"нельзя отменить окончание выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (record.olKodPodr == 1 && !CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVEmptyDate("OlPvDateNaznTab", Convert.ToDateTime(record.olPzvDateNaznTab), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVEmptyDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVEmptyDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //                if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+        //                {
+        //                    record.ErrorSelection = 1;
+        //                    record.SyncSelection = 0;
+        //                    continue;
+        //                }
+        //            }
+        //        }
 
-                PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
+        //        PZVOperList pzvCurrent = _pZVOperListByPachListBindingSource.Current as PZVOperList;
 
-                List<int> filteredList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.SyncSelection == 1)
-                    .Select(x => x.olPzvID)   // новый маппер
-                    .ToList();
-                DateTime? date = null;
-                //SetDateEndToPzvID(filteredList, date);
-                await ExecutePzvActionAsync(PzvActionType.StopWork);
+        //        List<int> filteredList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.SyncSelection == 1)
+        //            .Select(x => x.olPzvID)   // новый маппер
+        //            .ToList();
+        //        DateTime? date = null;
+        //        //SetDateEndToPzvID(filteredList, date);
+        //        await ExecutePzvActionAsync(PzvActionType.StopWork);
 
-                var errList = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()
-                    .Where(x => x.ErrorSelection == 1)
-                    .ToList();
-                if (errList.Count != 0)
-                {
-                    foreach (var record in errList)
-                    {
-                        if (record.ErrorSelection == 1 && record.SyncSelection == 0)
-                        {
-                            record.ErrorSelection = 0;
-                            record.SyncSelection = 1;
-                        }
-                    }
-                }
-                Debug.WriteLine($"Finished CancelWorkStopExecution, now going to row with pzvID={_xPzvID}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка в CancelWorkStopExecution: {ex.Message}");
-            }
-        }
+        //        var errList = _pZVOperListByPachListBindingSource.List
+        //            .OfType<PZVOperList>()
+        //            .Where(x => x.ErrorSelection == 1)
+        //            .ToList();
+        //        if (errList.Count != 0)
+        //        {
+        //            foreach (var record in errList)
+        //            {
+        //                if (record.ErrorSelection == 1 && record.SyncSelection == 0)
+        //                {
+        //                    record.ErrorSelection = 0;
+        //                    record.SyncSelection = 1;
+        //                }
+        //            }
+        //        }
+        //        Debug.WriteLine($"Finished CancelWorkStopExecution, now going to row with pzvID={_xPzvID}");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Ошибка в CancelWorkStopExecution: {ex.Message}");
+        //    }
+        //}
 
         private bool CheckPZVShiftClosed(int _olPzvKwsID, string _xMessage)
         {
@@ -5323,7 +5301,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private bool CheckPZVShiftOpened(int _olPzvKwsID, string _xMessage)
         {
-
             try
             {
                 Debug.WriteLine($"Checking if shift is opened for kwsID={_olPzvKwsID}");
@@ -5431,16 +5408,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 MessageBox.Show($"Ошибка в gridViewRzvPachListByNom_ShowingEditor: {ex.Message}");
             }
         }
-
-        private void gridViewRzvPachListByNom_CellValueChanging(object sender, CellValueChangedEventArgs e)
-        {
-        }
-
-        //private void repositoryItemCheckEdit1_EditValueChanged(object sender, EventArgs e)
-        //{
-        //    BeginInvoke(new Action(() => SyncSelectionUpdate()));
-        //}
-
         private async void layoutControlGroup2_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
         {
             try
@@ -5480,12 +5447,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 MessageBox.Show($"Ошибка в customTabControl1_CustomHeaderButtonClick: {ex.Message}");
             }
         }
-
-        private void перенестиВДругуюЗонуToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //MessageBox.Show("111");
-        }
-
         private void advBandedGridViewSmenZadany_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
             try
@@ -5620,7 +5581,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
 
         }
-
         private async void advBandedGridViewSmenZadany_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             try
@@ -5680,14 +5640,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             MessageBox.Show($"{advBandedGridViewSmenZadany.FocusedRowHandle}");
             MessageBox.Show($"{advBandedGridViewSmenZadany.IsGroupRow(advBandedGridViewSmenZadany.FocusedRowHandle)}");
         }
-
         private void customSimpleButton2_Click(object sender, EventArgs e)
         {
             MessageBox.Show($"{advBandedGridViewSmenZadany.RowCount}");
             MessageBox.Show($"{advBandedGridViewSmenZadany.GetRowLevel(advBandedGridViewSmenZadany.FocusedRowHandle)}");
             MessageBox.Show($"{advBandedGridViewSmenZadany.GetGroupRowValue(advBandedGridViewSmenZadany.FocusedRowHandle)}");
         }
-
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             try
@@ -5705,7 +5663,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 base.OnFormClosed(e);
             }
         }
-
         protected async void OnFormClosing(object sender, FormClosingEventArgs e)
         {
             try
@@ -5716,11 +5673,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridViewPlanTotalHoursByKnitMachine.FocusedRowChanged -= gridViewPlanTotalHoursByKnitMachine_FocusedRowChanged;
                 gridViewPlanTotalQuantityByArticul.FocusedRowChanged -= gridViewPlanTotalQuantityByArticul_FocusedRowChanged;
                 gridViewZadanyList.FocusedRowChanged -= gridViewZadanyList_FocusedRowChanged;
-                gridViewRzvPachListByNom.FocusedRowChanged -= gridViewRzvPachListByNom_FocusedRowChanged;
+                //gridViewRzvPachListByNom.FocusedRowChanged -= gridViewRzvPachListByNom_FocusedRowChanged;
                 gridViewPZVOperList.FocusedRowChanged -= gridViewPZVOperList_FocusedRowChanged;
                 advBandedGridViewSmenZadany.FocusedRowChanged -= advBandedGridViewSmenZadany_FocusedRowChanged;
                 gridViewSmenZadanyOtp.FocusedRowChanged -= gridViewSmenZadanyOtp_FocusedRowChanged;
-                gridViewNaryadZadany.PopupMenuShowing -= gridViewNaryadZadany_PopupMenuShowing;
+                //gridViewNaryadZadany.PopupMenuShowing -= gridViewNaryadZadany_PopupMenuShowing;
             }
             catch (Exception ex)
             {
@@ -5732,7 +5689,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 await ShutdownServiceBrokerAsync();
             }
         }
-
         private async Task ShutdownServiceBrokerAsync()
         {
             Debug.WriteLine($"[PlanZagrVyaz] ShutdownServiceBrokerAsync started. ServiceBrokerShutdownStarted={_serviceBrokerShutdownStarted}");
@@ -5763,7 +5719,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
             Debug.WriteLine($"[PlanZagrVyaz] ShutdownServiceBrokerAsync completed.");
         }
-
         private void EnsureServiceBrokerShutdownOnClosed()
         {
             Debug.WriteLine($"[PlanZagrVyaz] EnsureServiceBrokerShutdownOnClosed called. ServiceBrokerShutdownStarted={_serviceBrokerShutdownStarted}");
@@ -5780,7 +5735,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
             Debug.WriteLine($"[PlanZagrVyaz] EnsureServiceBrokerShutdownOnClosed completed.");
         }
-
         private void layoutControlGroup7_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
         {
             try
@@ -5801,7 +5755,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 MessageBox.Show($"Ошибка layoutControlGroup7_CustomButtonClick: {ex.Message}");
             }
         }
-
         private void layoutControlGroup9_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
         {
             try
@@ -5822,7 +5775,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 MessageBox.Show($"Ошибка layoutControlGroup9_CustomButtonClick: {ex.Message}");
             }
         }
-
         private void layoutControlGroup10_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
         {
             try
@@ -5843,7 +5795,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 MessageBox.Show($"Ошибка layoutControlGroup10_CustomButtonClick: {ex.Message}");
             }
         }
-
         private void layoutControlGroup15_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
         {
             try
@@ -5869,7 +5820,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 MessageBox.Show($"Ошибка layoutControlGroup15_CustomButtonClick: {ex.Message}");
             }
         }
-
         private void layoutControlGroup3_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
         {
             try
@@ -5890,16 +5840,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 MessageBox.Show($"Ошибка layoutControlGroup3_CustomButtonClick: {ex.Message}");
             }
         }
-
-        private void layoutControlGroup2_CustomButtonChecked(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
-        {
-
-        }
-
-        private void gridViewNaryadZadany_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
-        {
-        }
-
         private void textBoxPzvNomZadSearch_KeyDown(object sender, KeyEventArgs e)
         {
             Debug.WriteLine($"textBoxPzvNomZadSearch_KeyDown triggered for key {e.KeyCode}");
@@ -5909,7 +5849,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
             Debug.WriteLine($"Finished textBoxPzvNomZadSearch_KeyDown for key {e.KeyCode}");
         }
-
         private async void FindPzvNomZadInNzp()
         //{
         //    Debug.WriteLine($"FindPzvNomZadInNzp started with search text: {textBoxPzvNomZadSearch.Text}");
@@ -6163,37 +6102,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             Debug.WriteLine($"gridViewPZVOperList_BeforeLeaveRow triggered for row handle {e.RowHandle}, TopRowIndex={gridViewPZVOperList.TopRowIndex}, TopRowIndexPZV={TopRowIndexPZV}");
         }
-
-        private void gridViewZadanyList_DoubleClick(object sender, EventArgs e)
-        {
-            //try
-            //{
-            //    var view = sender as GridView;
-            //    if (view == null) return;
-
-            //    Point pt = view.GridControl.PointToClient(Control.MousePosition);
-            //    GridHitInfo hit = view.CalcHitInfo(pt);
-
-            //    //Debug.WriteLine($"DoubleClick started at row {hit.RowHandle}, column {hit.Column.FieldName}, pzvID={_xPzvID}, tab={tab}, OlPvDateNaznKm={_OlPvDateNaznKm}, OlPvDateNaznTab={_OlPvDateNaznTab}, OlPvDateStart={_OlPvDateStart}, OlPvDateEnd={_OlPvDateEnd}, OlPvDateMast={_OlPvDateMast}, olNpach={_olNpach}, olNomOper={_olNomOper}, olOperName={_olOperName}, TopRowIndex={view.TopRowIndex}, TopRowIndexPZV={TopRowIndexPZV}");
-
-            //    if (hit.InColumnPanel && hit.Column == gridColumnZadanyListByMachineSyncSelection)
-            //    {
-            //        int xSelected = Convert.ToInt32(gridViewZadanyListByMachine.GetRowCellValue(0, gridColumnZadanyListByMachineSyncSelection));
-            //        int newValue = (xSelected == 0) ? 1 : 0;
-
-            //        _gridHelper.SetValueForFilteredRecordsInGrid(gridViewZadanyListByMachine, gridColumnZadanyListByMachineSyncSelection, newValue);
-
-            //    }
-
-            //    // значение берём у текущей строки
-            //    //Debug.WriteLine($"DoubleClick finished at row {hit.RowHandle}, column {hit.Column.FieldName}, pzvID={_xPzvID}, tab={tab}, OlPvDateNaznKm={_OlPvDateNaznKm}, OlPvDateNaznTab={_OlPvDateNaznTab}, OlPvDateStart={_OlPvDateStart}, OlPvDateEnd={_OlPvDateEnd}, OlPvDateMast={_OlPvDateMast}, olNpach={_olNpach}, olNomOper={_olNomOper}, olOperName={_olOperName}, TopRowIndex={view.TopRowIndex}, TopRowIndexPZV={TopRowIndexPZV}");
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show($"Ошибка в gridViewPZVOperList_DoubleClick: {ex.Message}");
-            //}
-        }
-
         private async void gridViewPlanTotalQuantityByArticul_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             try
@@ -6284,65 +6192,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 });
             }
         }
-
-        private void gridViewZadanyList_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //var view = sender as GridView;
-                //if (view == null) return;
-
-                //Point pt = view.GridControl.PointToClient(Control.MousePosition);
-                //GridHitInfo hit = view.CalcHitInfo(pt);
-
-                //if (hit.InRowCell && hit.Column == gridZadanyListColumnSyncSelection && hit.RowHandle >= 0)
-                //{
-                //}
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка в gridViewZadanyList_Click: {ex.Message}");
-            }
-        }
-
-        private void gridViewZadanyList_CellValueChanging(object sender, CellValueChangedEventArgs e)
-        {
-            //if (e.Column == gridZadanyListColumnSyncSelection)
-            //{
-            //    BeginInvoke(new Action(() => SyncSelectionUpdate()));
-            //}
-        }
-
-        private void gridViewZadanyList_CellValueChanged(object sender, CellValueChangedEventArgs e)
-        {
-            //if (e.Column == gridZadanyListColumnSyncSelection)
-            //{
-            //    SyncSelectionUpdate();
-            //}
-        }
-
-        private void repositoryItemCheckEdit1_MouseUp(object sender, MouseEventArgs e)
-        {
-            //BeginInvoke(new Action(() => SyncSelectionUpdate()));
-        }
-
-        private void repositoryItemCheckEdit1_DoubleClick(object sender, EventArgs e)
-        {
-            //BeginInvoke(new Action(() => SyncSelectionUpdate()));
-        }
-
-        private void PlanZagrVyaz_Click(object sender, EventArgs e)
-        {
-            //BeginInvoke(new Action(() => SyncSelectionUpdate()));
-        }
-
         private void gridViewRzvPachListByNom_CustomUnboundColumnData(object sender, CustomColumnDataEventArgs e)
         {
             if (e.IsGetData) e.Value = e.ListSourceRowIndex + 1;
         }
-
-        private void gridViewSmenZadanyOtp_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+       private void gridViewSmenZadanyOtp_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             try
             {
@@ -6361,7 +6215,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 }
 
 
-namespace SewingProduction.Features.KnittingProduction.Forms.PlanZagrVyaz.Forms
+namespace SewingProduction.Features.KnittingProduction.Forms //.PlanZagrVyaz
 {
     // (оставляем namespace как в файле, чтобы класс был доступен)
     /// <summary>
