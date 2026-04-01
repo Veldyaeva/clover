@@ -1433,5 +1433,14 @@ namespace SewingProduction.Features.Tabel.Forms
                     : $"{dValue.Trim()}{dopValue.Trim()}";
             }
         }
+
+        private void customSimpleButtonTabelLock_Click(object sender, EventArgs e)
+        {
+            if (this.MdiParent is SpMainForm mainForm)
+            {
+                mainForm.OpenForm(new TabelLock(CurrentUser.User));
+            }
+
+        }
     }
 }

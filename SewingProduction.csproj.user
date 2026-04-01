@@ -205,6 +205,9 @@
     <Compile Update="Features\Tabel\Forms\SpisokConnect.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\Tabel\Forms\TabelLock.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\Tabel\Forms\TabelMain.cs">
       <SubType>Form</SubType>
     </Compile>
