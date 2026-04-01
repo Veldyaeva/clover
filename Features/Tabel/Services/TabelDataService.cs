@@ -398,14 +398,14 @@ namespace SewingProduction.Features.Tabel.Services
                     if (idGroup == 19)
                     {
 
-                        string query = $"select tnid,t_n, naimen from tab_n order by tnid";
+                        string query = $"select tnid,t_n, naimen from tab_n order by naimen";
 
                         var result = await connection.QueryAsync<SpPodr>(query, new Dictionary<string, object> { });
                         return result.ToList();
                     }
                     if (idGroup == 20)
                     {
-                        string query = $"select gr as tnid, naimen from zlgr  order by gr";
+                        string query = $"select gr as tnid, naimen from zlgr  order by naimen";
 
                         var result = await connection.QueryAsync<SpPodr>(query, new Dictionary<string, object> { });
                         return result.ToList();
