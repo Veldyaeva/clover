@@ -10,12 +10,13 @@ namespace SewingProduction.Features.TeamWork.Helpers
         public static BaseNodeDefinition CreateDefinition(string name, string description, IEnumerable<NormRasz> operations)
         {
             var ordered = OrderOperations(operations).ToList();
+            var normalizedOperations = NormalizeChapterNumbers(ordered.Select(MapOperation).ToList());
 
             return new BaseNodeDefinition
             {
                 Name = name?.Trim() ?? string.Empty,
                 Description = description?.Trim() ?? string.Empty,
-                Operations = DeduplicateOperations(ordered.Select(MapOperation)).ToList()
+                Operations = DeduplicateOperations(normalizedOperations).ToList()
             };
         }
 
@@ -155,6 +156,31 @@ namespace SewingProduction.Features.TeamWork.Helpers
                 TextVyaz = operation.TextVyaz ?? string.Empty,
                 TextProizv = operation.TextProizv ?? string.Empty
             };
+        }
+
+        private static IReadOnlyList<BaseNodeOperationDefinition> NormalizeChapterNumbers(IReadOnlyList<BaseNodeOperationDefinition> operations)
+        {
+            if (operations == null || operations.Count == 0)
+            {
+                return new List<BaseNodeOperationDefinition>();
+            }
+
+            var chapterMap = new Dictionary<int, int>();
+            int nextChapter = 1;
+
+            foreach (var operation in operations)
+            {
+                int sourceChapter = operation.SourceN <= 0 ? 1 : operation.SourceN;
+                if (!chapterMap.TryGetValue(sourceChapter, out int normalizedChapter))
+                {
+                    normalizedChapter = nextChapter++;
+                    chapterMap[sourceChapter] = normalizedChapter;
+                }
+
+                operation.SourceN = normalizedChapter;
+            }
+
+            return operations;
         }
 
         public static IReadOnlyList<BaseNodeOperationDefinition> DeduplicateOperations(IEnumerable<BaseNodeOperationDefinition> operations)

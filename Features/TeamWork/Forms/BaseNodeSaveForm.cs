@@ -19,10 +19,22 @@ namespace SewingProduction.Features.TeamWork.Forms
             _operations = operations ?? Array.Empty<NormRasz>();
 
             InitializeComponent();
+            InitializeSelectors();
 
             summaryLabel.Text = BuildSummary();
             nameTextBox.Text = defaultName ?? string.Empty;
             previewGrid.DataSource = BaseNodeMapper.CreatePreviewRows(_operations.ToList());
+        }
+
+        private void InitializeSelectors()
+        {
+            nodeGroupComboBox.Items.AddRange(BaseNodeMetadataOptions.NodeGroups);
+            productKindComboBox.Items.AddRange(BaseNodeMetadataOptions.ProductKinds);
+            productCategoryComboBox.Items.AddRange(BaseNodeMetadataOptions.ProductCategories);
+
+            nodeGroupComboBox.SelectedIndex = 0;
+            productKindComboBox.SelectedItem = "Универсальный";
+            productCategoryComboBox.SelectedItem = "Универсально";
         }
 
         private void OkButton_Click(object sender, EventArgs e)
@@ -41,6 +53,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
 
             ResultNode = BaseNodeMapper.CreateDefinition(nameTextBox.Text, descriptionTextBox.Text, _operations);
+            ResultNode.NodeGroup = nodeGroupComboBox.SelectedItem?.ToString() ?? string.Empty;
+            ResultNode.ProductKind = productKindComboBox.SelectedItem?.ToString() ?? string.Empty;
+            ResultNode.ProductCategory = productCategoryComboBox.SelectedItem?.ToString() ?? string.Empty;
+
             DialogResult = DialogResult.OK;
             Close();
         }

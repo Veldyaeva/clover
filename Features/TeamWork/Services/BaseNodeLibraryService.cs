@@ -280,6 +280,61 @@ VALUES
             }
         }
 
+        public async Task DeleteAsync(int baseNodeId)
+        {
+            if (baseNodeId <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(baseNodeId));
+            }
+
+            using var connection = _dbHelper.GetConnection();
+            using var transaction = connection.BeginTransaction();
+
+            try
+            {
+                var auditUser = BuildAuditUser();
+
+                const string deactivateOperationsSql = @"
+UPDATE dbo.BaseNodeOperation
+SET IsActive = 0,
+    UpdatedAt = SYSDATETIME(),
+    UpdatedBy = @AuditUser
+WHERE BaseNodeId = @BaseNodeId;";
+
+                const string deactivateNodeSql = @"
+UPDATE dbo.BaseNode
+SET IsActive = 0,
+    UpdatedAt = SYSDATETIME(),
+    UpdatedBy = @AuditUser
+WHERE BaseNodeId = @BaseNodeId;";
+
+                await connection.ExecuteAsync(deactivateOperationsSql, new
+                {
+                    BaseNodeId = baseNodeId,
+                    AuditUser = auditUser
+                }, transaction);
+
+                int affected = await connection.ExecuteAsync(deactivateNodeSql, new
+                {
+                    BaseNodeId = baseNodeId,
+                    AuditUser = auditUser
+                }, transaction);
+
+                if (affected == 0)
+                {
+                    throw new InvalidOperationException($"Узел BaseNodeId={baseNodeId} не найден.");
+                }
+
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                try { transaction.Rollback(); } catch { }
+                await _logger.LogErrorAsync(ex, $"Ошибка при удалении базового узла BaseNodeId={baseNodeId}");
+                throw;
+            }
+        }
+
         private async Task<BaseNodeHeaderRow> FindExistingNodeAsync(SqlConnection connection, SqlTransaction transaction, BaseNodeDefinition node)
         {
             const string byIdSql = @"
@@ -327,6 +382,7 @@ INSERT INTO dbo.BaseNodeOperationRef
     OperationCode,
     OperationName,
     OperationClass,
+    OperationObject,
     DefaultRazryd,
     DefaultSek,
     DefaultObor,
@@ -344,7 +400,8 @@ VALUES
 (
     NULLIF(@OperationCode, N''),
     @OperationName,
-    NULL,
+    NULLIF(@OperationClass, N''),
+    NULLIF(@OperationObject, N''),
     @DefaultRazryd,
     @DefaultSek,
     NULLIF(@DefaultObor, N''),
@@ -360,10 +417,15 @@ VALUES
 );
 SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
+            var operationClass = OperationSemanticClassifier.DetectClass(operation.Text, operation.Obor, operation.KodOb);
+            var operationObject = OperationSemanticClassifier.DetectObject(operation.Text);
+
             return await connection.ExecuteScalarAsync<int>(insertSql, new
             {
                 OperationCode = operation.KodO?.Trim(),
                 OperationName = operation.Text?.Trim(),
+                OperationClass = operationClass,
+                OperationObject = operationObject,
                 DefaultRazryd = NullableFromZero(operation.Razryd),
                 DefaultSek = DecimalFromZero(operation.Sek),
                 DefaultObor = operation.Obor?.Trim(),
