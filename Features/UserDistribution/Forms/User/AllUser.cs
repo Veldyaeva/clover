@@ -6,7 +6,7 @@ using DevExpress.XtraDialogs.FileExplorerExtensions;
 using DevExpress.XtraGrid.Views.Grid;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Features.UserDistribution.DataService;
-using SewingProduction.Features.UserDistribution.Forms.MasterRight;
+using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Helpers;

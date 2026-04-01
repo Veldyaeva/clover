@@ -35,7 +35,7 @@
             UserID = new DevExpress.XtraGrid.Columns.GridColumn();
             UserNameUsers = new DevExpress.XtraGrid.Columns.GridColumn();
             HasRole = new DevExpress.XtraGrid.Columns.GridColumn();
-            customGridControlRoles = new Core.Class.CustomGridControl();
+            customGridControlRoles = new SewingProduction.Core.Class.CustomGridControl();
             gridViewRoles = new DevExpress.XtraGrid.Views.Grid.GridView();
             RoleID = new DevExpress.XtraGrid.Columns.GridColumn();
             RoleName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -49,7 +49,7 @@
             ObjectName = new DevExpress.XtraGrid.Columns.GridColumn();
             ObjectNameRus = new DevExpress.XtraGrid.Columns.GridColumn();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            customGridControlObject = new Core.Class.CustomGridControl();
+            customGridControlObject = new SewingProduction.Core.Class.CustomGridControl();
             gridViewObject = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -59,7 +59,7 @@
             repositoryItemComboBoxObject = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            customGridControlForms = new Core.Class.CustomGridControl();
+            customGridControlForms = new SewingProduction.Core.Class.CustomGridControl();
             gridViewForms = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -75,6 +75,18 @@
             bindingSourceForms = new System.Windows.Forms.BindingSource(components);
             bindingSourceObjects = new System.Windows.Forms.BindingSource(components);
             bindingSourceRoles = new System.Windows.Forms.BindingSource(components);
+            repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            repositoryItemLookUpEditBrig = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            repositoryItemLookUpEditFio = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            gridViewUser = new DevExpress.XtraGrid.Views.Grid.GridView();
+            gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
+            BrigID = new DevExpress.XtraGrid.Columns.GridColumn();
+            Brig = new DevExpress.XtraGrid.Columns.GridColumn();
+            FioID = new DevExpress.XtraGrid.Columns.GridColumn();
+            Fio = new DevExpress.XtraGrid.Columns.GridColumn();
+            Password = new DevExpress.XtraGrid.Columns.GridColumn();
+            customGridControlUser = new SewingProduction.Core.Class.CustomGridControl();
             ((System.ComponentModel.ISupportInitialize)gridViewUsers).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlRoles).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewRoles).BeginInit();
@@ -97,6 +109,11 @@
             ((System.ComponentModel.ISupportInitialize)bindingSourceForms).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceObjects).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceRoles).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEditBrig).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEditFio).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewUser).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customGridControlUser).BeginInit();
             SuspendLayout();
             // 
             // gridViewUsers
@@ -164,17 +181,12 @@
             // 
             // gridViewRoles
             // 
-            // gridViewRoles.Appearance.Row.BackColor = System.Drawing.Color.White;
             gridViewRoles.Appearance.Row.Options.UseBackColor = true;
-            // gridViewRoles.AppearancePrint.EvenRow.BackColor = System.Drawing.Color.White;
-            // gridViewRoles.AppearancePrint.EvenRow.BorderColor = System.Drawing.Color.White;
             gridViewRoles.AppearancePrint.EvenRow.Options.UseBackColor = true;
             gridViewRoles.AppearancePrint.EvenRow.Options.UseBorderColor = true;
-            // gridViewRoles.AppearancePrint.GroupRow.BackColor = System.Drawing.Color.White;
             gridViewRoles.AppearancePrint.GroupRow.Options.UseBackColor = true;
             gridViewRoles.AppearancePrint.OddRow.BackColor = System.Drawing.Color.FromArgb(255, 224, 192);
             gridViewRoles.AppearancePrint.OddRow.Options.UseBackColor = true;
-            // gridViewRoles.AppearancePrint.Row.BackColor = System.Drawing.Color.White;
             gridViewRoles.AppearancePrint.Row.Options.UseBackColor = true;
             gridViewRoles.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { RoleID, RoleName, Description });
             gridViewRoles.DetailHeight = 4038;
@@ -298,6 +310,7 @@
             tableLayoutPanel1.Controls.Add(customGridControlForms, 1, 1);
             tableLayoutPanel1.Controls.Add(customGridControlRoles, 0, 1);
             tableLayoutPanel1.Controls.Add(panelControl1, 2, 2);
+            tableLayoutPanel1.Controls.Add(customGridControlUser, 0, 2);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -335,7 +348,7 @@
             gridViewObject.OptionsEditForm.EditFormColumnCount = 1;
             gridViewObject.OptionsEditForm.PopupEditFormWidth = 933;
             // 
-            // gcCertMod1
+            // gridColumn5
             // 
             gridColumn5.Caption = "Ид обьекта";
             gridColumn5.FieldName = "ObjectID";
@@ -346,7 +359,7 @@
             gridColumn5.VisibleIndex = 0;
             gridColumn5.Width = 99;
             // 
-            // gcCertTm_name1
+            // gridColumn6
             // 
             gridColumn6.Caption = "Имя объекта";
             gridColumn6.FieldName = "ObjectName";
@@ -356,7 +369,7 @@
             gridColumn6.VisibleIndex = 1;
             gridColumn6.Width = 255;
             // 
-            // gcCertGrup1
+            // gridColumn7
             // 
             gridColumn7.Caption = "Русское имя";
             gridColumn7.FieldName = "ObjectNameRus";
@@ -431,43 +444,45 @@
             gridViewForms.OptionsEditForm.EditFormColumnCount = 1;
             gridViewForms.OptionsEditForm.PopupEditFormWidth = 933;
             // 
-            // gcCertGrupmen_name1
+            // gridColumn1
             // 
             gridColumn1.Caption = "Ид формы";
             gridColumn1.FieldName = "ProjectFormsID";
             gridColumn1.MinWidth = 23;
             gridColumn1.Name = "gridColumn1";
             gridColumn1.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            gridColumn1.Visible = true;
+            gridColumn1.VisibleIndex = 0;
             gridColumn1.Width = 84;
             // 
-            // gcCertTsn_name1
+            // gridColumn2
             // 
             gridColumn2.Caption = "Имя формы";
             gridColumn2.FieldName = "NameForm";
             gridColumn2.MinWidth = 23;
             gridColumn2.Name = "gridColumn2";
             gridColumn2.Visible = true;
-            gridColumn2.VisibleIndex = 0;
+            gridColumn2.VisibleIndex = 1;
             gridColumn2.Width = 250;
             // 
-            // gcCertTb_id1
+            // gridColumn3
             // 
             gridColumn3.Caption = "Русское имя";
             gridColumn3.FieldName = "NameFormRus";
             gridColumn3.MinWidth = 23;
             gridColumn3.Name = "gridColumn3";
             gridColumn3.Visible = true;
-            gridColumn3.VisibleIndex = 1;
+            gridColumn3.VisibleIndex = 2;
             gridColumn3.Width = 241;
             // 
-            // gcCertText_mo1
+            // gridColumn8
             // 
             gridColumn8.Caption = "Доступ";
             gridColumn8.ColumnEdit = repositoryItemComboBoxForms;
             gridColumn8.FieldName = "HasAccess";
             gridColumn8.Name = "gridColumn8";
             gridColumn8.Visible = true;
-            gridColumn8.VisibleIndex = 2;
+            gridColumn8.VisibleIndex = 3;
             // 
             // repositoryItemComboBoxForms
             // 
@@ -520,6 +535,144 @@
             gridView4.Name = "gridView4";
             gridView4.OptionsEditForm.PopupEditFormWidth = 933;
             // 
+            // repositoryItemCheckEdit1
+            // 
+            repositoryItemCheckEdit1.AutoHeight = false;
+            repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
+            repositoryItemCheckEdit1.ValueGrayed = false;
+            // 
+            // repositoryItemLookUpEditBrig
+            // 
+            repositoryItemLookUpEditBrig.AutoHeight = false;
+            repositoryItemLookUpEditBrig.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFit;
+            repositoryItemLookUpEditBrig.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemLookUpEditBrig.DisplayMember = "Brig";
+            repositoryItemLookUpEditBrig.Name = "repositoryItemLookUpEditBrig";
+            repositoryItemLookUpEditBrig.NullText = "-";
+            repositoryItemLookUpEditBrig.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoComplete;
+            repositoryItemLookUpEditBrig.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            repositoryItemLookUpEditBrig.ValueMember = "BrigID";
+            // 
+            // repositoryItemLookUpEditFio
+            // 
+            repositoryItemLookUpEditFio.AutoHeight = false;
+            repositoryItemLookUpEditFio.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemLookUpEditFio.DisplayMember = "Fio";
+            repositoryItemLookUpEditFio.Name = "repositoryItemLookUpEditFio";
+            repositoryItemLookUpEditFio.NullText = "-";
+            repositoryItemLookUpEditFio.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoComplete;
+            repositoryItemLookUpEditFio.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            repositoryItemLookUpEditFio.ValueMember = "FioID";
+            // 
+            // gridViewUser
+            // 
+            gridViewUser.Appearance.EvenRow.Options.UseBackColor = true;
+            gridViewUser.Appearance.Row.BackColor = System.Drawing.Color.FromArgb(250, 250, 200);
+            gridViewUser.Appearance.Row.Options.UseBackColor = true;
+            gridViewUser.AppearancePrint.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 192, 255);
+            gridViewUser.AppearancePrint.EvenRow.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            gridViewUser.AppearancePrint.EvenRow.Options.UseBackColor = true;
+            gridViewUser.AppearancePrint.EvenRow.Options.UseFont = true;
+            gridViewUser.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn11, gridColumn12, BrigID, Brig, FioID, Fio, Password });
+            gridViewUser.DetailHeight = 4038;
+            gridViewUser.GridControl = customGridControlUser;
+            gridViewUser.Name = "gridViewUser";
+            gridViewUser.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
+            gridViewUser.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
+            gridViewUser.OptionsDetail.AllowExpandEmptyDetails = true;
+            gridViewUser.OptionsEditForm.EditFormColumnCount = 1;
+            gridViewUser.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewUser.OptionsEditForm.ShowOnDoubleClick = DevExpress.Utils.DefaultBoolean.True;
+            gridViewUser.OptionsEditForm.ShowOnEnterKey = DevExpress.Utils.DefaultBoolean.True;
+            gridViewUser.OptionsEditForm.ShowOnF2Key = DevExpress.Utils.DefaultBoolean.True;
+            gridViewUser.OptionsFind.AlwaysVisible = true;
+            gridViewUser.OptionsFind.FindNullPrompt = "Поиск...";
+            gridViewUser.OptionsFind.FindPanelLocation = DevExpress.XtraGrid.Views.Grid.GridFindPanelLocation.Panel;
+            gridViewUser.OptionsPrint.EnableAppearanceEvenRow = true;
+            gridViewUser.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewUser.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn11
+            // 
+            gridColumn11.Caption = "Ид";
+            gridColumn11.FieldName = "UserID";
+            gridColumn11.MinWidth = 23;
+            gridColumn11.Name = "gridColumn11";
+            gridColumn11.OptionsColumn.ReadOnly = true;
+            gridColumn11.Width = 168;
+            // 
+            // gridColumn12
+            // 
+            gridColumn12.Caption = "Пользователь";
+            gridColumn12.FieldName = "UserName";
+            gridColumn12.MinWidth = 23;
+            gridColumn12.Name = "gridColumn12";
+            gridColumn12.Visible = true;
+            gridColumn12.VisibleIndex = 0;
+            gridColumn12.Width = 335;
+            // 
+            // BrigID
+            // 
+            BrigID.Caption = "BrigID";
+            BrigID.FieldName = "BrigID";
+            BrigID.MinWidth = 23;
+            BrigID.Name = "BrigID";
+            BrigID.OptionsColumn.AllowEdit = false;
+            BrigID.Width = 87;
+            // 
+            // Brig
+            // 
+            Brig.Caption = "Бригада";
+            Brig.ColumnEdit = repositoryItemLookUpEditBrig;
+            Brig.FieldName = "BrigID";
+            Brig.MinWidth = 23;
+            Brig.Name = "Brig";
+            Brig.Visible = true;
+            Brig.VisibleIndex = 1;
+            Brig.Width = 87;
+            // 
+            // FioID
+            // 
+            FioID.Caption = "FioID";
+            FioID.FieldName = "FioID";
+            FioID.MinWidth = 23;
+            FioID.Name = "FioID";
+            FioID.Width = 87;
+            // 
+            // Fio
+            // 
+            Fio.Caption = "ФИО";
+            Fio.ColumnEdit = repositoryItemLookUpEditFio;
+            Fio.FieldName = "FioID";
+            Fio.MinWidth = 23;
+            Fio.Name = "Fio";
+            Fio.Visible = true;
+            Fio.VisibleIndex = 2;
+            Fio.Width = 87;
+            // 
+            // Password
+            // 
+            Password.Caption = "Пароль";
+            Password.FieldName = "Password";
+            Password.MinWidth = 23;
+            Password.Name = "Password";
+            Password.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
+            Password.Width = 87;
+            // 
+            // customGridControlUser
+            // 
+            customGridControlUser.Dock = System.Windows.Forms.DockStyle.Fill;
+            customGridControlUser.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customGridControlUser.Font = new System.Drawing.Font("Arial", 10F);
+            customGridControlUser.Location = new System.Drawing.Point(4, 324);
+            customGridControlUser.MainView = gridViewUser;
+            customGridControlUser.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customGridControlUser.Name = "customGridControlUser";
+            customGridControlUser.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit1, repositoryItemLookUpEditBrig, repositoryItemLookUpEditFio });
+            customGridControlUser.Size = new System.Drawing.Size(291, 324);
+            customGridControlUser.TabIndex = 9;
+            customGridControlUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewUser });
+            // 
             // AllDistribution
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -551,6 +704,11 @@
             ((System.ComponentModel.ISupportInitialize)bindingSourceForms).EndInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceObjects).EndInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceRoles).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEditBrig).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEditFio).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewUser).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customGridControlUser).EndInit();
             ResumeLayout(false);
         }
 
@@ -600,5 +758,17 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEditCreator;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBoxForms;
+        private Core.Class.CustomGridControl customGridControlUser;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewUser;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
+        private DevExpress.XtraGrid.Columns.GridColumn BrigID;
+        private DevExpress.XtraGrid.Columns.GridColumn Brig;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEditBrig;
+        private DevExpress.XtraGrid.Columns.GridColumn FioID;
+        private DevExpress.XtraGrid.Columns.GridColumn Fio;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEditFio;
+        private DevExpress.XtraGrid.Columns.GridColumn Password;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
     }
 }

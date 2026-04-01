@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using DevExpress.XtraTreeList.Nodes;
 
-namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
+namespace SewingProduction.Features.UserDistribution.Forms
 {
     public partial class MrChoiceForm : CustomForm
     {

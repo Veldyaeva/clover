@@ -179,7 +179,7 @@ namespace SewingProduction.Features.Tabel.Services
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = $"select COUNT(*) from (select podrtableid from userPodr where UserId = {idUser} group by podrtableid) s ";
+                    string query = $"select COUNT(*) from (select podrtableid from userPodr where UserId = {idUser} and podrtableid in (19,20) group by podrtableid) s ";
 
                     _isCountGroupGr = _dbHelper.ExecuteScalar(query, new Dictionary<string, object> { });
                     return _isCountGroupGr;
@@ -267,7 +267,7 @@ namespace SewingProduction.Features.Tabel.Services
                 using (var connection = _dbHelper.GetConnection())
                 {
 
-                    string query = $"select uin,tab1c,LastName,FirstName,MiddleName,bDay,orgName,podrName,date_p,date_u from spisok1c where trim(LastName) = trim('{lastName}') and trim(FirstName) =  trim('{firstName}') and trim(middleName) = trim('{middleName}') and sovm =0 ";
+                    string query = $"select uin,tab1c,LastName,FirstName,MiddleName,bDay,orgName,podrName,date_p,date_u from spisok1c where trim(LastName) = trim('{lastName}') and trim(FirstName) =  trim('{firstName}') and trim(middleName) = trim('{middleName}') ";
 
                     var result = await connection.QueryAsync<Spisok1c>(query, new Dictionary<string, object> { });
                     return result.ToList();
@@ -386,6 +386,41 @@ namespace SewingProduction.Features.Tabel.Services
             catch (Exception ex)
             {
                 _logger.LogErrorAsync(ex, $"Ошибка при получении данных zlPodr");
+                return null;
+            }
+        }
+        public async Task<List<SpPodr>> GetSpPodrNotRuleAsync(int idGroup)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    if (idGroup == 19)
+                    {
+
+                        string query = $"select tnid,t_n, naimen from tab_n order by naimen";
+
+                        var result = await connection.QueryAsync<SpPodr>(query, new Dictionary<string, object> { });
+                        return result.ToList();
+                    }
+                    if (idGroup == 20)
+                    {
+                        string query = $"select gr as tnid, naimen from zlgr  order by naimen";
+
+                        var result = await connection.QueryAsync<SpPodr>(query, new Dictionary<string, object> { });
+                        return result.ToList();
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, $"Ошибка при получении данных spPodr");
                 return null;
             }
         }
