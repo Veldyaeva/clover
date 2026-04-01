@@ -75,7 +75,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 var insertionPoints = BuildBaseNodeInsertionPoints();
-                using var form = new BaseNodeInsertForm(nodes, insertionPoints, _lastFocusedRaszOperation?.N);
+                using var form = new BaseNodeInsertForm(nodes, insertionPoints, _lastFocusedRaszOperation?.N, _baseNodeLibraryService);
                 if (form.ShowDialog(this) != DialogResult.OK || form.SelectedNode == null || form.SelectedInsertionPoint == null)
                 {
                     return;

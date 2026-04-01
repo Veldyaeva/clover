@@ -214,6 +214,9 @@
     <Compile Update="Features\TeamWork\Forms\BaseNodeInsertForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\TeamWork\Forms\BaseNodeLibraryEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\TeamWork\Forms\BaseNodeSaveForm.cs">
       <SubType>Form</SubType>
     </Compile>
