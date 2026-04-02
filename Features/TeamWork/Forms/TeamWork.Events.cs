@@ -1547,10 +1547,10 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// <param name="e"></param>
         private void layoutControlGroupPreArch_CustomButtonClick(object sender, BaseButtonEventArgs e)
         {
-            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
-            switch (buttonIndex)
+            var tag = (e.Button as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton)?.Tag as string;
+            switch (tag)
             {
-                case 0:
+                case "prearch:archive":
                     {
                         Arch(sender, e);
                         break;
