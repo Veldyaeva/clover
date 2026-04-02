@@ -1,4 +1,5 @@
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.DXErrorProvider;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
@@ -33,6 +34,7 @@ namespace SewingProduction.Features.Articul.Forms
         private readonly Dictionary<Control, Color> _originalBackColors = new();
         private readonly Dictionary<Control, Color> _originalForeColors = new();
         private readonly Dictionary<Control, bool> _originalUseForeColors = new();
+        private readonly Dictionary<Control, (CheckBoxStyle Style, Color Checked, Color Unchecked, Color Grayed)> _originalCheckBoxStyles = new();
         private readonly FieldComparisonService _comparisonService = new();
         private bool _comparisonMapBuilt;
         /// <summary>
@@ -55,6 +57,7 @@ namespace SewingProduction.Features.Articul.Forms
             RegisterSeries("txbKfKach", "Kf_tkan_kach");
             RegisterSeries("txbOpis_t", "Opis_t");
             RegisterSeries("tkb", "Tkb");
+            _propertyToControl[nameof(SpArticulPreviewModel.Ag_id)] = txbGrup;
         }
 
         private void RegisterSeries(string controlPrefix, string propertyPrefix)
@@ -93,7 +96,7 @@ namespace SewingProduction.Features.Articul.Forms
                 foreach (var mismatch in result.Mismatches)
                 {
                     if (_propertyToControl.TryGetValue(mismatch.PropertyName, out var control))
-                        MarkMismatch(control);
+                        MarkMismatch(control, mismatch);
                 }
             }
             catch (Exception ex)
@@ -117,8 +120,10 @@ namespace SewingProduction.Features.Articul.Forms
             _dx.ClearErrors();
         }
 
-        private void MarkMismatch(Control c)
+        private void MarkMismatch(Control c, FieldMismatch mismatch)
         {
+            var tooltipText = BuildMismatchTooltipText(mismatch);
+
             if (!_originalBackColors.ContainsKey(c))
                 _originalBackColors[c] = c.BackColor;
 
@@ -130,21 +135,55 @@ namespace SewingProduction.Features.Articul.Forms
                     _originalUseForeColors[c] = ce.Properties.Appearance.Options.UseForeColor;
                 }
 
+                if (!_originalCheckBoxStyles.ContainsKey(c))
+                {
+                    _originalCheckBoxStyles[c] = (
+                        ce.Properties.CheckBoxOptions.Style,
+                        ce.Properties.CheckBoxOptions.SvgColorChecked,
+                        ce.Properties.CheckBoxOptions.SvgColorUnchecked,
+                        ce.Properties.CheckBoxOptions.SvgColorGrayed);
+                }
+
                 ce.Properties.Appearance.ForeColor = Color.Red;
                 ce.ForeColor = Color.Red;
                 ce.Properties.Appearance.Options.UseForeColor = true;
-                _dx.SetError(ce, "Значение отличается");
+                ce.Properties.CheckBoxOptions.Style = CheckBoxStyle.SvgCheckBox1;
+                ce.Properties.CheckBoxOptions.SvgColorChecked = Color.Red;
+                ce.Properties.CheckBoxOptions.SvgColorUnchecked = Color.Red;
+                ce.Properties.CheckBoxOptions.SvgColorGrayed = Color.Red;
+                _dx.SetError(ce, tooltipText);
             }
             else if (c is BaseEdit be)
             {
                 be.Properties.Appearance.BackColor = Color.MistyRose;
-                _dx.SetError(be, "Значение отличается");
+                _dx.SetError(be, tooltipText);
             }
             else
             {
                 c.BackColor = Color.MistyRose;
-                _dx.SetError(c, "Значение отличается");
+                _dx.SetError(c, tooltipText);
             }
+        }
+
+        private static string BuildMismatchTooltipText(FieldMismatch mismatch)
+        {
+            return $"Значение отличается.{Environment.NewLine}Ожидаемое значение: {FormatComparisonValue(mismatch.ExpectedDisplayValue ?? mismatch.ExpectedValue)}";
+        }
+
+        private static string FormatComparisonValue(object? value)
+        {
+            if (value == null)
+                return "(пусто)";
+
+            return value switch
+            {
+                string s => string.IsNullOrWhiteSpace(s) ? "(пусто)" : s.Trim(),
+                bool b => b ? "Да" : "Нет",
+                DateTime dt => dt.ToString("dd.MM.yyyy", CultureInfo.CurrentCulture),
+                DateTimeOffset dto => dto.ToString("dd.MM.yyyy", CultureInfo.CurrentCulture),
+                IFormattable formattable => formattable.ToString(null, CultureInfo.CurrentCulture) ?? "(пусто)",
+                _ => value.ToString() ?? "(пусто)"
+            };
         }
 
         private void ClearMark(Control c)
@@ -161,6 +200,15 @@ namespace SewingProduction.Features.Articul.Forms
                 {
                     ce.Properties.Appearance.Options.UseForeColor = use;
                     _originalUseForeColors.Remove(c);
+                }
+
+                if (_originalCheckBoxStyles.TryGetValue(c, out var originalStyle))
+                {
+                    ce.Properties.CheckBoxOptions.Style = originalStyle.Style;
+                    ce.Properties.CheckBoxOptions.SvgColorChecked = originalStyle.Checked;
+                    ce.Properties.CheckBoxOptions.SvgColorUnchecked = originalStyle.Unchecked;
+                    ce.Properties.CheckBoxOptions.SvgColorGrayed = originalStyle.Grayed;
+                    _originalCheckBoxStyles.Remove(c);
                 }
             }
             else
