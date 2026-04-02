@@ -1,13 +1,15 @@
 ﻿using System.ComponentModel;
 
+using SewingProduction.Report;
 
 namespace SewingProduction.report
 {
-    public partial class ConfectionCardReport : DevExpress.XtraReports.UI.XtraReport
+    public partial class ConfectionCardReport : ConnectedXtraReport
     {
         public ConfectionCardReport()
         {
             InitializeComponent();
+            UseCurrentConnection();
         }
 
         private void PrintKKReport_BeforePrint(object sender, CancelEventArgs e)

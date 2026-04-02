@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 
@@ -20,8 +21,7 @@ namespace SewingProduction.Features.UserDistribution.Models
             _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
         }
-
-        public async Task<List<RoleModel>> GetListRolesAsync(int userId)
+        public async Task<List<RoleModel>> GetListRolesAsync(UserClass user)
         {
             string query = @"
             SELECT r.RoleID, r.RoleName, r.Description, u.UserName
@@ -44,7 +44,7 @@ namespace SewingProduction.Features.UserDistribution.Models
                 )
             )";
 
-            return await _dbService.GetListAsync<RoleModel>(query, new { UserID = userId });
+            return await _dbService.GetListAsync<RoleModel>(query, new { UserID = user.UserId });
         }
 
         public async Task<int> SaveAsync(RoleModel role)
@@ -132,7 +132,7 @@ namespace SewingProduction.Features.UserDistribution.Models
             string query = $@"SELECT RoleID FROM Roles WHERE RoleName = 'Базовая'";
             DataTable dt = await _dbHelper.ExecuteQueryAsync(query);
             int roleId = dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["RoleID"]) : -1;
-            UserRoleDataService userRoleDataService = new UserRoleDataService(_dbHelper);
+            UserRoleDataService userRoleDataService = new UserRoleDataService();
             await userRoleDataService.AssignRoleAsync(newId, roleId);
             Console.WriteLine($"Назначены базовые ({roleId}) права, профиль:" + newId.ToString());
         }

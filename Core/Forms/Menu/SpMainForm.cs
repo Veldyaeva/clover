@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Windows.Forms;
 using DevExpress.LookAndFeel;
 using DevExpress.XtraBars;
@@ -12,14 +15,15 @@ using SewingProduction.Features.Articul;
 using SewingProduction.Features.CuttingProduction.Forms;
 using SewingProduction.Features.KnittingProduction.Forms;
 using SewingProduction.Features.Sprav;
+using SewingProduction.Features.Sprav.Forms;
+using SewingProduction.Features.Sprav.Forms;
 using SewingProduction.Features.Tabel.Forms;
 using SewingProduction.Features.TeamWork.Forms;
 using SewingProduction.Features.UserDistribution.Class;
 using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.Features.Sprav.Forms;
-using SewingProduction.Helpers;
 using SewingProduction.form;
+using SewingProduction.Helpers;
 
 namespace SewingProduction
 {
@@ -143,9 +147,9 @@ namespace SewingProduction
         {
             OpenForm(new EditTarif(_user), e.Item);
         }
-        private void изделияToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
+        private void наценкиToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new Articul(_user), e.Item);
+            OpenForm(new SpravForAll("grup_men", "men,name,koef", "", "справочник коэффициентов наценки", _user,false,false,false), e.Item);
         }
         private void моделиСПризнакомМаркировкToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
@@ -159,27 +163,69 @@ namespace SewingProduction
         #endregion
         #endregion
         #region Производство
+        #region Вязальное производство
         private void оперативноеПланированиеToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
             OpenForm(new KnittingProductionPlanning(_user), e.Item);
         }
+        private void рабочийСтолМастераВязЦехаToolStripMenuItem1_Click(object sender, ItemClickEventArgs e)
+        {
+            OpenForm(new PlanZagrVyaz(CurrentUser.User, 1), e.Item);
+        }
+        private void рабочийСтолВязальщицыToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
+        {
+            var form = AppServices.Services.GetRequiredService<KnitterWorkSpace>();
+            OpenForm(form, e.Item);
+        }
+        private void аналитикаToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
+        {
+            OpenForm(new KnittingProductionAnalytics(), e.Item);
+        }
+        private void barButtonItemSteamMasterWorkTable_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenForm(new PlanZagrVyaz(CurrentUser.User, 2), e.Item);
+        }
+        private void barButtonItemCutMasterWorkTable_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenForm(new PlanZagrVyaz(CurrentUser.User, 3), e.Item);
+        }
+        #endregion
+        #region Швейное производство
         private void рабочийСтолМастераToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
             OpenForm(new PlanZagrBrig(), e.Item);
         }
+        private void раскройныйЦехToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
+        {
+            OpenForm(new CuttingForm(), e.Item);
+        }
         #endregion
+        #endregion
+        #region Технологическая схема
         private void TeamWorktoolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
             OpenForm(new TeamWork(_user), e.Item);
         }
+        #endregion
+        #region Артикул
         private void артикулToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
             OpenForm(new Articul(_user), e.Item);
         }
+        #endregion
+        #region Карточка расчета
         private void карточкаРасчетаToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
             OpenForm(new CardByNom(_user), e.Item);
         }
+        #endregion
+        #region Табель
+        private void табельToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
+        {
+            OpenForm(new TabelMain(_user), e.Item);
+        }
+        #endregion
+
         #region процедуры
         /// <summary>
         /// Универсальное открытие формы, если форма открыта, сделает активной
@@ -279,29 +325,65 @@ namespace SewingProduction
             f.Show();
         }
         #endregion
-        private void раскройныйЦехToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
+        #region скриншот окна 
+        private void barButtonItemScreen_ItemClick(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new CuttingForm(), e.Item);
-        }
-        private void рабочийСтолМастераВязЦехаToolStripMenuItem1_Click(object sender, ItemClickEventArgs e)
-        {
-            OpenForm(new PlanZagrVyaz(CurrentUser.User, 1), e.Item);
+            try
+            {
+                string screenshotPath = SaveWindowScreenshot(this);
+
+                MessageBox.Show(
+                    $"Скриншот окна сохранен:\n{screenshotPath}",
+                    "Скриншот",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = screenshotPath,
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Ошибка при создании скриншота:\n{ex.Message}",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
-        private void рабочийСтолВязальщицыToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
+        private string SaveWindowScreenshot(Form form)
         {
-            var form = AppServices.Services.GetRequiredService<KnitterWorkSpace>();
-            OpenForm(form, e.Item);
-        }
+            Rectangle bounds = form.Bounds;
 
-        private void табельToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
-        {
-            OpenForm(new TabelMain(_user), e.Item);
+            using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
+            {
+                using (Graphics g = Graphics.FromImage(bitmap))
+                {
+                    g.CopyFromScreen(
+                        new Point(bounds.Left, bounds.Top),
+                        Point.Empty,
+                        bounds.Size);
+                }
+
+                string folderPath = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
+                    "SewingProductionScreenshots");
+
+                if (!Directory.Exists(folderPath))
+                    Directory.CreateDirectory(folderPath);
+
+                string fileName = $"WindowScreenshot_{DateTime.Now:yyyyMMdd_HHmmss}.png";
+                string fullPath = Path.Combine(folderPath, fileName);
+
+                bitmap.Save(fullPath, ImageFormat.Png);
+
+                return fullPath;
+            }
         }
-        private void аналитикаToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
-        {
-            OpenForm(new KnittingProductionAnalytics(), e.Item);
-        }
+        #endregion 
 
         private void МенюToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -313,14 +395,5 @@ namespace SewingProduction
         //    OpenForm(new TSDAccessManagement(CurrentUser.User), e.Item);
         //}
 
-        private void barButtonItemSteamMasterWorkTable_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            OpenForm(new PlanZagrVyaz(CurrentUser.User, 2), e.Item);
-        }
-
-        private void barButtonItemCutMasterWorkTable_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            OpenForm(new PlanZagrVyaz(CurrentUser.User, 3), e.Item);
-        }
     }
 }

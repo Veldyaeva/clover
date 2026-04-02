@@ -2,11 +2,12 @@
 
 namespace SewingProduction
 {
-    public partial class MlRtReport : DevExpress.XtraReports.UI.XtraReport
+    public partial class MlRtReport : SewingProduction.Report.ConnectedXtraReport
     {
         public MlRtReport()
         {
             InitializeComponent();
+            UseCurrentConnection();
         }
 
         private void GroupHeader3_BeforePrint(object sender, CancelEventArgs e)

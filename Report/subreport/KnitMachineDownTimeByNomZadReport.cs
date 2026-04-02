@@ -1,10 +1,11 @@
 ﻿namespace SewingProduction.Report.subreport
 {
-    public partial class KnitMachineDownTimeByNomZadReport : DevExpress.XtraReports.UI.XtraReport
+    public partial class KnitMachineDownTimeByNomZadReport : SewingProduction.Report.ConnectedXtraReport
     {
         public KnitMachineDownTimeByNomZadReport()
         {
             InitializeComponent();
+            UseCurrentConnection();
         }
     }
 }

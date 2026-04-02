@@ -1,16 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel; // EventHandlerList
 using System.Data;
+using System.Drawing;
+using System.Reflection;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Features.UserDistribution.DataService;
 using SewingProduction.Features.UserDistribution.Forms; // AllRoleDataService
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
-using System.Drawing;
-using System.Collections.Generic;
-using System.Reflection;
-using System.ComponentModel; // EventHandlerList
-using System.Reflection;
 
 namespace SewingProduction.Features.UserDistribution
 {
@@ -19,6 +20,7 @@ namespace SewingProduction.Features.UserDistribution
         private readonly AllRoleDataService _data;   // готовый сервис из AllRole.cs
         private readonly DatabaseHelper _db = new DatabaseHelper();
         private readonly UserClass _user;
+        private readonly UserModelDataService _userModelDataService;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox _repoMode;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox _repoFormMode;
 
@@ -29,7 +31,7 @@ namespace SewingProduction.Features.UserDistribution
         {
             InitializeComponent();
             _user = user;
-            _data = new AllRoleDataService(_db);
+            _data = new AllRoleDataService();
             SetupUiBehavior();
         }
         public AllDistribution()

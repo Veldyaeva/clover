@@ -1,10 +1,11 @@
 ﻿namespace SewingProduction.Report.subreport
 {
-    public partial class SpisPryzDefectReport : DevExpress.XtraReports.UI.XtraReport
+    public partial class SpisPryzDefectReport : SewingProduction.Report.ConnectedXtraReport
     {
         public SpisPryzDefectReport()
         {
             InitializeComponent();
+            UseCurrentConnection();
         }
     }
 }

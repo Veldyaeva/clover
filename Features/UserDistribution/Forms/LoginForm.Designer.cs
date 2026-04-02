@@ -143,6 +143,7 @@
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.SystemColors.Menu;
+            BackgroundImage = (System.Drawing.Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new System.Drawing.Size(499, 211);
             Controls.Add(_gifBackground);
             Controls.Add(labelGlaz);

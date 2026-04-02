@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -112,6 +113,30 @@ namespace SewingProduction.Core.Class.Settings
             }
 
             return null;
+        }
+        public string GetHelpFilePath(Form form = null)
+        {
+            string projectRoot = AppContext.BaseDirectory;
+
+            Form targetForm = form ?? GetActiveForm();
+
+            if (targetForm == null)
+                return Path.Combine(projectRoot, "Help", "Help.html");
+
+            var type = targetForm.GetType();
+            var ns = type.Namespace ?? string.Empty;
+            var className = type.Name;
+
+            string relativeNamespace = ns.StartsWith("SewingProduction.")
+                ? ns.Substring("SewingProduction.".Length)
+                : ns;
+
+            string relativePath = Path.Combine(
+                relativeNamespace.Replace('.', Path.DirectorySeparatorChar),
+                className + ".html"
+            );
+
+            return Path.Combine(projectRoot, "Help", relativePath);
         }
     }
 }

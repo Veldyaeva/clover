@@ -79,7 +79,7 @@ namespace SewingProduction.Features.UserDistribution.DataService
         }
         public async Task<List<FioDto>> LoadFioList()
         {
-            string query = "SELECT f_id AS FioID, Fio FROM fio";
+            string query = "SELECT f_id AS FioID, Fio , Rab FROM fio WHERE datau IS NULL AND (tab_sovm = 0 OR tab_sovm = tab OR tab_sovm IS NULL)";
             return await _dbService.GetListAsync<FioDto>(query, new Dictionary<string, object>());
         }
         public async void SetPravaForAddUser(int newId)
@@ -87,7 +87,7 @@ namespace SewingProduction.Features.UserDistribution.DataService
             string query = $@"SELECT RoleID FROM Roles WHERE RoleName = 'Базовая'";
             DataTable dt = await _dbHelper.ExecuteQueryAsync(query);
             int roleId = dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["RoleID"]) : -1;
-            UserRoleDataService userRoleDataService = new UserRoleDataService(_dbHelper);
+            UserRoleDataService userRoleDataService = new UserRoleDataService();
             await userRoleDataService.AssignRoleAsync(newId, roleId);
             Console.WriteLine($"Назначены базовые ({roleId}) права, профиль:" + newId.ToString());
         }

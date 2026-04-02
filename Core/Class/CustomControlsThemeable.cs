@@ -2,11 +2,14 @@
 using SewingProduction.Features.UserDistribution.Class;
 using SewingProduction.Core.Extensions;
 using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Helpers;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.Drawing;
 using System.Diagnostics;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SewingProduction
 {
@@ -20,6 +23,14 @@ namespace SewingProduction
         bool VisiblePermission { get; set; }
         bool VisibleLogic { get; set; }
         void ApplyPermission(UserClass user);
+    }
+
+    /// <summary>
+    /// Формы реализуют этот интерфейс, если хотят централизованно описывать права для header-button.
+    /// </summary>
+    public interface IHeaderButtonPermissionHost
+    {
+        IEnumerable<HeaderButtonPermissionBinding> GetHeaderButtonPermissionBindings();
     }
 
     public class CustomCheckBox : CheckBox, IThemeable, IThemeableControl
@@ -639,6 +650,8 @@ namespace SewingProduction
         public UserClass User => _user;
         public bool IsPreview { get; set; }
         private string _appliedFontSignature;
+        private readonly LayoutControlGroupHelper _headerButtonPermissionHelper = new LayoutControlGroupHelper();
+        private bool _runtimeInitialized;
 
         private static string GetFontSignature(Font font)
         {
@@ -699,9 +712,18 @@ namespace SewingProduction
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
             {
                 _user = new UserClass();
+                InitializeFontTracking();
+                return;
             }
 
-            InitializeFontTracking();
+            if (CurrentUser.User != null)
+            {
+                InitializeRuntime(CurrentUser.User);
+            }
+            else
+            {
+                InitializeFontTracking();
+            }
         }
         public CustomForm(UserClass user)
         {
@@ -710,9 +732,8 @@ namespace SewingProduction
                 return;
             }
             // сохраняем пользователя
-            _user = user ?? throw new ArgumentNullException(nameof(user));
-            InitializeFontTracking();
-
+            InitializeRuntime(user ?? throw new ArgumentNullException(nameof(user)));
+            return;
             // подписка на загрузку формы (для логирования и прав доступа - существующий код)
             this.Load += async (s, e) =>
             {
@@ -740,6 +761,43 @@ namespace SewingProduction
                     ClearBindings(c);
                 }
                 
+            };
+        }
+        private void InitializeRuntime(UserClass user)
+        {
+            if (_runtimeInitialized)
+                return;
+
+            _runtimeInitialized = true;
+            _user = user;
+            InitializeFontTracking();
+
+            // Общий runtime-pipeline формы: логирование, grid-settings и права доступа.
+            this.Load += async (s, e) =>
+            {
+                if (IsPreview) return;
+                await ActionLogger.Log(_user.UserId, "РћС‚РєСЂС‹С‚РёРµ С„РѕСЂРјС‹", NameForm: this.GetType().Name);
+
+                // Включаем автоматическое сохранение настроек для всех CustomGridControl.
+                InitializeAutoGridSettings();
+
+                CustomForm_Load(s, e);
+            };
+
+            // Сохраняем настройки при закрытии формы.
+            this.FormClosing += (s, e) =>
+            {
+                if (IsPreview) return;
+                this.SaveAllGridSettings();
+            };
+
+            this.FormClosed += async (s, e) =>
+            {
+                if (IsPreview) return;
+                foreach (Control c in this.Controls)
+                {
+                    ClearBindings(c);
+                }
             };
         }
         /// <summary>
@@ -810,7 +868,7 @@ namespace SewingProduction
 
         private async void CustomForm_Load(object sender, EventArgs e)
         {
-            if (IsPreview)
+            if (IsPreview || _user == null)
                 return;
 
             string formName = this.GetType().Name;
@@ -832,12 +890,45 @@ namespace SewingProduction
             // если только просмотр — отключаем все контролы
             if (_user.HasPermission(formName, "Просмотр") && !_user.HasPermission(formName, "Редактор"))
             {
+                // Header-buttons не входят в дерево Control, поэтому применяем их права отдельно.
+                ApplyHeaderButtonPermissions(_user);
                 DisableAllControls(this);
                 return;
             }
 
             // если редактор — применяем доступ к каждому элементу
+            ApplyHeaderButtonPermissions(_user);
             ApplyPermissionsToControls(this, _user);
+        }
+        private void ApplyHeaderButtonPermissions(UserClass user)
+        {
+            if (user == null || this is not IHeaderButtonPermissionHost host)
+                return;
+
+            var bindings = host.GetHeaderButtonPermissionBindings()?
+                .Where(binding =>
+                    binding != null &&
+                    binding.Group != null &&
+                    !string.IsNullOrWhiteSpace(binding.ButtonTag) &&
+                    !string.IsNullOrWhiteSpace(binding.PermissionObjectName))
+                .ToList();
+
+            if (bindings == null || bindings.Count == 0)
+                return;
+
+            // Сначала регистрируем все привязки, затем применяем права по каждой группе.
+            foreach (var binding in bindings)
+            {
+                _headerButtonPermissionHelper.RegisterButtonPermission(
+                    binding.Group,
+                    binding.ButtonTag,
+                    binding.PermissionObjectName);
+            }
+
+            foreach (var group in bindings.Select(binding => binding.Group).Distinct())
+            {
+                _headerButtonPermissionHelper.ApplyButtonPermissions(group, user);
+            }
         }
         private void ApplyPermissionsToControls(Control parent, UserClass user)
         {
