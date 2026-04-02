@@ -147,9 +147,9 @@ namespace SewingProduction
         {
             OpenForm(new EditTarif(_user), e.Item);
         }
-        private void изделияToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
+        private void наценкиToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new Articul(_user), e.Item);
+            OpenForm(new SpravForAll("grup_men", "men,name,koef", "", "справочник коэффициентов наценки", _user,false,false,false), e.Item);
         }
         private void моделиСПризнакомМаркировкToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {

@@ -55,7 +55,7 @@ namespace SewingProduction
             barBtnCalcCard1 = new BarButtonItem();
             barBtnWorkers = new BarButtonItem();
             barBtnTariffs = new BarButtonItem();
-            barBtnProducts = new BarButtonItem();
+            barBtnNacenki = new BarButtonItem();
             barBtnModelsMark = new BarButtonItem();
             barSubDefects = new BarSubItem();
             barBtnSockDefects = new BarButtonItem();
@@ -108,7 +108,7 @@ namespace SewingProduction
             barManager1.DockControls.Add(barDockControlRight);
             barManager1.Form = this;
             barManager1.HideIfNoRight = true;
-            barManager1.Items.AddRange(new BarItem[] { skinBarSubItem1, skinDropDownButtonItem1, skinPaletteDropDownButtonItem1, skinBarSubItem2, skinDropDownButtonItem2, skinPaletteDropDownButtonItem2, barSubMenu, barBtnProfile, barBtnSettings, barBtnAbout, barBtnHelp, barSubSpr, barSubEquipment, barBtnEqInTeams, barBtnEqDirectory, barBtnEqTypes, barBtnClassMatrix, barBtnOperationTypes, barSubTeamsShop, barBtnTeams, barBtnShops, barBtnProdTypes, barBtnCalcCard1, barBtnWorkers, barBtnTariffs, barBtnProducts, barBtnModelsMark, barSubDefects, barBtnSockDefects, barSubProduction, barSubKnitting, barBtnOperPlan, barBtnMasterDesk1, barBtnKnitterDesk, barBtnAnalytics, barSubSewing, barBtnMasterDesk, barBtnCutShop, barBtnTeamWork, barBtnArticle, barBtnCalcCard, barBtnTimesheet, barBtnQuestion, barBtnAt, barButtonItemSteamMasterWorkTable, barButtonItemCutMasterWorkTable, barButtonItemScreen });
+            barManager1.Items.AddRange(new BarItem[] { skinBarSubItem1, skinDropDownButtonItem1, skinPaletteDropDownButtonItem1, skinBarSubItem2, skinDropDownButtonItem2, skinPaletteDropDownButtonItem2, barSubMenu, barBtnProfile, barBtnSettings, barBtnAbout, barBtnHelp, barSubSpr, barSubEquipment, barBtnEqInTeams, barBtnEqDirectory, barBtnEqTypes, barBtnClassMatrix, barBtnOperationTypes, barSubTeamsShop, barBtnTeams, barBtnShops, barBtnProdTypes, barBtnCalcCard1, barBtnWorkers, barBtnTariffs, barBtnNacenki, barBtnModelsMark, barSubDefects, barBtnSockDefects, barSubProduction, barSubKnitting, barBtnOperPlan, barBtnMasterDesk1, barBtnKnitterDesk, barBtnAnalytics, barSubSewing, barBtnMasterDesk, barBtnCutShop, barBtnTeamWork, barBtnArticle, barBtnCalcCard, barBtnTimesheet, barBtnQuestion, barBtnAt, barButtonItemSteamMasterWorkTable, barButtonItemCutMasterWorkTable, barButtonItemScreen });
             barManager1.MaxItemId = 48;
             barManager1.SkipDevExpressSkinItems = true;
             // 
@@ -174,7 +174,7 @@ namespace SewingProduction
             // 
             barSubSpr.Caption = "Справочники";
             barSubSpr.Id = 11;
-            barSubSpr.LinksPersistInfo.AddRange(new LinkPersistInfo[] { new LinkPersistInfo(barSubEquipment), new LinkPersistInfo(barSubTeamsShop), new LinkPersistInfo(barBtnCalcCard1), new LinkPersistInfo(barBtnWorkers), new LinkPersistInfo(barBtnTariffs), new LinkPersistInfo(barBtnProducts), new LinkPersistInfo(barBtnModelsMark), new LinkPersistInfo(barSubDefects) });
+            barSubSpr.LinksPersistInfo.AddRange(new LinkPersistInfo[] { new LinkPersistInfo(barSubEquipment), new LinkPersistInfo(barSubTeamsShop), new LinkPersistInfo(barBtnCalcCard1), new LinkPersistInfo(barBtnWorkers), new LinkPersistInfo(barBtnTariffs), new LinkPersistInfo(barBtnNacenki), new LinkPersistInfo(barBtnModelsMark), new LinkPersistInfo(barSubDefects) });
             barSubSpr.Name = "barSubSpr";
             barSubSpr.Tag = "справочникиToolStripMenuItem";
             // 
@@ -282,13 +282,13 @@ namespace SewingProduction
             barBtnTariffs.Tag = "тарифыToolStripMenuItem";
             barBtnTariffs.ItemClick += тарифыToolStripMenuItem_Click;
             // 
-            // barBtnProducts
+            // barBtnNacenki
             // 
-            barBtnProducts.Caption = "Изделия";
-            barBtnProducts.Id = 25;
-            barBtnProducts.Name = "barBtnProducts";
-            barBtnProducts.Tag = "изделияToolStripMenuItem";
-            barBtnProducts.ItemClick += изделияToolStripMenuItem_Click;
+            barBtnNacenki.Caption = "Коэф. наценки";
+            barBtnNacenki.Id = 25;
+            barBtnNacenki.Name = "barBtnNacenki";
+            barBtnNacenki.Tag = "наценкиToolStripMenuItem";
+            barBtnNacenki.ItemClick += наценкиToolStripMenuItem_Click;
             // 
             // barBtnModelsMark
             // 
@@ -640,7 +640,7 @@ namespace SewingProduction
         private DevExpress.XtraBars.BarButtonItem barBtnCalcCard1;
         private DevExpress.XtraBars.BarButtonItem barBtnWorkers;
         private DevExpress.XtraBars.BarButtonItem barBtnTariffs;
-        private DevExpress.XtraBars.BarButtonItem barBtnProducts;
+        private DevExpress.XtraBars.BarButtonItem barBtnNacenki;
         private DevExpress.XtraBars.BarButtonItem barBtnModelsMark;
         private DevExpress.XtraBars.BarSubItem barSubDefects;
         private DevExpress.XtraBars.BarButtonItem barBtnSockDefects;
