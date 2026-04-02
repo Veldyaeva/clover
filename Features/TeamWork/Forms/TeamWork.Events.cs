@@ -24,6 +24,7 @@ using SewingProduction.Models;
 using SewingProduction.Report;
 using SewingProduction.Services;
 using SewingProduction.Features.TeamWork.Models;
+using SewingProduction.Features.TeamWork.Services;
 using SewingProduction.Core.helpers;
 
 namespace SewingProduction.Features.TeamWork.Forms
@@ -1580,12 +1581,12 @@ namespace SewingProduction.Features.TeamWork.Forms
         private void PrintWorkDivisionScheme_Click(object sender, EventArgs e)
         {
             int rowNumber = ANNgridView.FocusedRowHandle;
-
-            NormRaszTest report1 = new NormRaszTest();
-            //report1.RequestParameters = false;
             var selectedAnn = ANNgridView.GetRow(rowNumber) as ArtNormN;
+            if (selectedAnn == null)
+                return;
 
-            report1.Parameters["_annId"].Value = selectedAnn.AnnID;
+            var preparedData = new NormRaszReportDataService().Load(selectedAnn.AnnID);
+            NormRaszTest report1 = new NormRaszTest(preparedData);
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
         }
