@@ -676,11 +676,13 @@ namespace SewingProduction.Features.UserDistribution.Forms
             listBoxFast.ForeColor = System.Drawing.SystemColors.WindowText;
             listBoxFast.FormattingEnabled = true;
             listBoxFast.ItemHeight = 20;
+            listBoxFast.Items.AddRange(new object[] { "Администрирование форм", "Список ролей", "Список пользователей", "Распределение прав" });
             listBoxFast.Location = new System.Drawing.Point(3, 19);
             listBoxFast.Name = "listBoxFast";
             listBoxFast.ObjectName = null;
             listBoxFast.Size = new System.Drawing.Size(390, 316);
             listBoxFast.TabIndex = 13;
+            listBoxFast.DoubleClick += listBoxFast_DoubleClick;
             // 
             // customGroupBoxRole
             // 
