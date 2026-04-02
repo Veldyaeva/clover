@@ -16,12 +16,13 @@ using System.Windows.Forms;
 
 namespace SewingProduction.Report
 {
-    public partial class TimeSheetReportSkladi : DevExpress.XtraReports.UI.XtraReport
+    public partial class TimeSheetReportSkladi : ConnectedXtraReport
     {
 
         public TimeSheetReportSkladi()
         {
             InitializeComponent();
+            UseCurrentConnection();
 
         }
        

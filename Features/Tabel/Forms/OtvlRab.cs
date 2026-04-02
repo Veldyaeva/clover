@@ -569,6 +569,7 @@ namespace SewingProduction.Features.Tabel.Forms
 
         #endregion
 
+        #region Reports
         private void customButton4_Click(object sender, EventArgs e)
         {
             try
@@ -586,5 +587,6 @@ namespace SewingProduction.Features.Tabel.Forms
             }
 
         }
+        #endregion
     }
 }

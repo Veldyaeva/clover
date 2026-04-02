@@ -1,4 +1,4 @@
-﻿namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
+﻿namespace SewingProduction.Features.UserDistribution.Forms
 {
     partial class MrMainForm
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MrMainForm));
             customTextBoxHelp = new SewingProduction.Core.Class.CustomTextBox();
             btnFinish = new SewingProduction.Core.Class.CustomButton();
@@ -37,10 +38,18 @@
             listBoxControlSteps = new DevExpress.XtraEditors.ListBoxControl();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            barManager1 = new DevExpress.XtraBars.BarManager(components);
+            bar2 = new DevExpress.XtraBars.Bar();
+            barBtnQuestion = new DevExpress.XtraBars.BarButtonItem();
+            barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
+            barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
+            barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            barDockControl1 = new DevExpress.XtraBars.BarDockControl();
             ((System.ComponentModel.ISupportInitialize)panelContent).BeginInit();
             ((System.ComponentModel.ISupportInitialize)listBoxControlSteps).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
             SuspendLayout();
             // 
             // customTextBoxHelp
@@ -98,7 +107,7 @@
             panelContent.Location = new System.Drawing.Point(184, 3);
             panelContent.Name = "panelContent";
             tableLayoutPanel1.SetRowSpan(panelContent, 2);
-            panelContent.Size = new System.Drawing.Size(1025, 556);
+            panelContent.Size = new System.Drawing.Size(1025, 532);
             panelContent.TabIndex = 0;
             // 
             // listBoxControlSteps
@@ -120,13 +129,13 @@
             tableLayoutPanel1.Controls.Add(panelContent, 1, 0);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 2);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            tableLayoutPanel1.Location = new System.Drawing.Point(0, 24);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 3;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 300F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanel1.Size = new System.Drawing.Size(1212, 639);
+            tableLayoutPanel1.Size = new System.Drawing.Size(1212, 615);
             tableLayoutPanel1.TabIndex = 2;
             // 
             // tableLayoutPanel2
@@ -142,12 +151,75 @@
             tableLayoutPanel2.Controls.Add(btnFinish, 1, 0);
             tableLayoutPanel2.Controls.Add(customTextBoxHelp, 0, 0);
             tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            tableLayoutPanel2.Location = new System.Drawing.Point(3, 565);
+            tableLayoutPanel2.Location = new System.Drawing.Point(3, 541);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel2.Size = new System.Drawing.Size(1206, 71);
             tableLayoutPanel2.TabIndex = 3;
+            // 
+            // barManager1
+            // 
+            barManager1.Bars.AddRange(new DevExpress.XtraBars.Bar[] { bar2 });
+            barManager1.DockControls.Add(barDockControlBottom);
+            barManager1.DockControls.Add(barDockControlLeft);
+            barManager1.DockControls.Add(barDockControlRight);
+            barManager1.DockControls.Add(barDockControl1);
+            barManager1.Form = this;
+            barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] { barBtnQuestion });
+            barManager1.MaxItemId = 2;
+            // 
+            // bar2
+            // 
+            bar2.BarName = "Main menu";
+            bar2.DockCol = 0;
+            bar2.DockRow = 0;
+            bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(barBtnQuestion) });
+            bar2.OptionsBar.UseWholeRow = true;
+            bar2.Text = "Main menu";
+            // 
+            // barBtnQuestion
+            // 
+            barBtnQuestion.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
+            barBtnQuestion.Caption = "❓";
+            barBtnQuestion.Id = 0;
+            barBtnQuestion.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("barBtnQuestion.ImageOptions.Image");
+            barBtnQuestion.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("barBtnQuestion.ImageOptions.LargeImage");
+            barBtnQuestion.Name = "barBtnQuestion";
+            barBtnQuestion.ItemClick += barBtnQuestion_ItemClick;
+            // 
+            // barDockControlBottom
+            // 
+            barDockControlBottom.CausesValidation = false;
+            barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Top;
+            barDockControlBottom.Location = new System.Drawing.Point(0, 0);
+            barDockControlBottom.Manager = barManager1;
+            barDockControlBottom.Size = new System.Drawing.Size(1212, 24);
+            // 
+            // barDockControlLeft
+            // 
+            barDockControlLeft.CausesValidation = false;
+            barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Bottom;
+            barDockControlLeft.Location = new System.Drawing.Point(0, 639);
+            barDockControlLeft.Manager = barManager1;
+            barDockControlLeft.Size = new System.Drawing.Size(1212, 0);
+            // 
+            // barDockControlRight
+            // 
+            barDockControlRight.CausesValidation = false;
+            barDockControlRight.Dock = System.Windows.Forms.DockStyle.Left;
+            barDockControlRight.Location = new System.Drawing.Point(0, 24);
+            barDockControlRight.Manager = barManager1;
+            barDockControlRight.Size = new System.Drawing.Size(0, 615);
+            // 
+            // barDockControl1
+            // 
+            barDockControl1.CausesValidation = false;
+            barDockControl1.Dock = System.Windows.Forms.DockStyle.Right;
+            barDockControl1.Location = new System.Drawing.Point(1212, 24);
+            barDockControl1.Manager = barManager1;
+            barDockControl1.Size = new System.Drawing.Size(0, 615);
             // 
             // MrMainForm
             // 
@@ -155,16 +227,23 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1212, 639);
             Controls.Add(tableLayoutPanel1);
+            Controls.Add(barDockControlRight);
+            Controls.Add(barDockControl1);
+            Controls.Add(barDockControlLeft);
+            Controls.Add(barDockControlBottom);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "MrMainForm";
             Text = "Мастер распределения прав";
             Load += MrMainForm_Load;
+            KeyDown += MrMainForm_KeyDown;
             ((System.ComponentModel.ISupportInitialize)panelContent).EndInit();
             ((System.ComponentModel.ISupportInitialize)listBoxControlSteps).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)barManager1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -176,5 +255,12 @@
         private Core.Class.CustomTextBox customTextBoxHelp;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private DevExpress.XtraBars.BarManager barManager1;
+        private DevExpress.XtraBars.Bar bar2;
+        private DevExpress.XtraBars.BarButtonItem barBtnQuestion;
+        private DevExpress.XtraBars.BarDockControl barDockControlBottom;
+        private DevExpress.XtraBars.BarDockControl barDockControlLeft;
+        private DevExpress.XtraBars.BarDockControl barDockControlRight;
+        private DevExpress.XtraBars.BarDockControl barDockControl1;
     }
 }

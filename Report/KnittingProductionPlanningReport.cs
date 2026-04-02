@@ -1,10 +1,11 @@
-﻿namespace SewingProduction.Report
+namespace SewingProduction.Report
 {
-    public partial class KnittingProductionPlanningReport : DevExpress.XtraReports.UI.XtraReport
+    public partial class KnittingProductionPlanningReport : ConnectedXtraReport
     {
         public KnittingProductionPlanningReport()
         {
             InitializeComponent();
+            UseCurrentConnection();
         }
     }
 }

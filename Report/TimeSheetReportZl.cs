@@ -6,11 +6,12 @@ using System.Drawing;
 
 namespace SewingProduction.Report
 {
-    public partial class TimeSheetReportZl : DevExpress.XtraReports.UI.XtraReport
+    public partial class TimeSheetReportZl : ConnectedXtraReport
     {
         public TimeSheetReportZl()
         {
             InitializeComponent();
+            UseCurrentConnection();
         }
     }
 }

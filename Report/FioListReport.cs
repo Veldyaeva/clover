@@ -1,10 +1,11 @@
 ﻿namespace SewingProduction
 {
-    public partial class FioListReport : DevExpress.XtraReports.UI.XtraReport
+    public partial class FioListReport : SewingProduction.Report.ConnectedXtraReport
     {
         public FioListReport()
         {
             InitializeComponent();
+            UseCurrentConnection();
         }
 
     }

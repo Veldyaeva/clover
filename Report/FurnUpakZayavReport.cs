@@ -2,11 +2,12 @@
 
 namespace SewingProduction.report
 {
-    public partial class FurnUpakZayavReport : DevExpress.XtraReports.UI.XtraReport
+    public partial class FurnUpakZayavReport : SewingProduction.Report.ConnectedXtraReport
     {
         public FurnUpakZayavReport()
         {
             InitializeComponent();
+            UseCurrentConnection();
         }
         //public int sumKolSkl;
 

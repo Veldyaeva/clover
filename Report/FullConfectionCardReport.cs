@@ -1,10 +1,11 @@
 ﻿namespace SewingProduction.report
 {
-    public partial class FullConfectionCardReport : DevExpress.XtraReports.UI.XtraReport
+    public partial class FullConfectionCardReport : SewingProduction.Report.ConnectedXtraReport
     {
         public FullConfectionCardReport()
         {
             InitializeComponent();
+            UseCurrentConnection();
         }
 
     }

@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Features.Articul;
-using SewingProduction.Features.UserDistribution.Forms.MasterRight;
+using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
 using SewingProduction.Helpers;
@@ -174,6 +174,39 @@ namespace SewingProduction.Features.UserDistribution.Forms
             MrMainForm form = new MrMainForm(_user);
             form.ShowDialog();
         }
+
+        private void listBoxFast_DoubleClick(object sender, EventArgs e)
+        {
+            if (listBoxFast == null) return;
+            if (listBoxFast.SelectedItem == null) return;
+
+            string selectedItem = listBoxFast.SelectedItem.ToString();
+
+            switch (selectedItem)
+            {
+                case "Администрирование форм":
+                    OpenForm(new AdminForm(_user));
+                    break;
+
+                case "Список ролей":
+                    OpenForm(new AllRole(_user));
+                    break;
+
+                case "Список пользователей":
+                    OpenForm(new AllUser(_user));
+                    break;
+
+                case "Распределение прав":
+                    OpenForm(new UserRole(_user));
+                    break;
+
+                default:
+                    MessageBox.Show("Неизвестный пункт");
+                    break;
+            }
+        }
+
+
     }
     public class UserProfileDataService
     {

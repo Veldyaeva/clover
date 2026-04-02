@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using DevExpress.Charts.Native;
 using DevExpress.XtraEditors;
+using SewingProduction.Core.Class.Settings;
 using SewingProduction.Features.UserDistribution.Class;
 using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 
-namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
+namespace SewingProduction.Features.UserDistribution.Forms
 {
     public partial class MrMainForm : CustomForm
     {
@@ -18,11 +19,12 @@ namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
         private string _help = null;
         private int _currentStepIndex = -1;
         private MrWizardContext _context = new MrWizardContext();
+        public FormManager _formManager;
 
         public MrMainForm(UserClass user) : base(user)
         {
             _user = user;
-
+            _formManager = new FormManager(this, barManager1, _user);
             InitializeComponent();
         }
 
@@ -396,6 +398,35 @@ namespace SewingProduction.Features.UserDistribution.Forms.MasterRight
         private void MrMainForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void barBtnQuestion_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            showHelpForm();
+        }
+        private void showHelpForm(string filePath = null)
+        {
+            string helpPath = filePath;
+
+            if (string.IsNullOrWhiteSpace(helpPath))
+            {
+                // Для мастера приоритет — текущая вложенная форма
+                if (_currentInnerForm != null)
+                    helpPath = _formManager.GetHelpFilePath(_currentInnerForm);
+                else
+                    helpPath = _formManager.GetHelpFilePath(this);
+            }
+
+            var helpForm = new HelpForm(this._formManager, helpPath);
+            helpForm.ShowDialog();
+        }
+
+        private void MrMainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+            {
+                showHelpForm();
+            }
         }
     }
 

@@ -2,11 +2,12 @@
 
 namespace SewingProduction.Report
 {
-    public partial class NormRaszForEconomist : XtraReport
+    public partial class NormRaszForEconomist : ConnectedXtraReport
     {
         public NormRaszForEconomist()
         {
             InitializeComponent();
+            UseCurrentConnection();
         }
 
     }
