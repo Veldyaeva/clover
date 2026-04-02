@@ -35,7 +35,7 @@ using MethodInvoker = System.Windows.Forms.MethodInvoker;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
-    public partial class TeamWork_AdvanceTW : CustomForm, ITeamWorkView
+    public partial class TeamWork_AdvanceTW : CustomForm, ITeamWorkView, IHeaderButtonPermissionHost
     {
         #region Поля и зависимости
         private readonly DbService _dbService;
@@ -180,7 +180,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         public TeamWork_AdvanceTW()
         {
             InitializeComponent();
-            InitializeHeaderButtonPermissionSupport();
         }
         /// <summary>
         /// 
@@ -189,10 +188,9 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// <param name="oldId">Id исходной записи</param>
         /// <param name="bufferWorkDivision">Id из буфера</param>
         /// <param name="mode">режим</param>
-        public TeamWork_AdvanceTW(int bufferWorkDivision, int mode, int? newId = null, int? oldId = null, int? sourceAnnIdToCopyDetailsFrom = null, MyDataART initialArtData = null, ArtNormN duplicateAnnData = null)
+        public TeamWork_AdvanceTW(UserClass user, int bufferWorkDivision, int mode, int? newId = null, int? oldId = null, int? sourceAnnIdToCopyDetailsFrom = null, MyDataART initialArtData = null, ArtNormN duplicateAnnData = null) : base(user)
         {
             InitializeComponent();
-            InitializeHeaderButtonPermissionSupport();
 
             // Настройка мультиселекта с галочками
 
@@ -228,7 +226,6 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             // Проставляем теги для customHeaderButtons (используются в общих обработчиках кликов)
             InitHeaderButtonTags();
-            RegisterBaseNodeHeaderPermissions();
 
             // Подписка на клики по кнопкам заголовков
             try
@@ -290,6 +287,27 @@ namespace SewingProduction.Features.TeamWork.Forms
             catch (Exception ex)
             {
                 LogSuppressedException("ApplyBaseNodeHeaderPermissionsAsync", ex);
+            }
+        }
+
+        public IEnumerable<HeaderButtonPermissionBinding> GetHeaderButtonPermissionBindings()
+        {
+            // Базовые узлы описываются декларативно, а их права применяет общий pipeline CustomForm.
+            if (layoutControlGroup10 != null)
+            {
+                yield return new HeaderButtonPermissionBinding
+                {
+                    Group = layoutControlGroup10,
+                    ButtonTag = "op:add-base-node",
+                    PermissionObjectName = "btnAddBaseNode"
+                };
+
+                yield return new HeaderButtonPermissionBinding
+                {
+                    Group = layoutControlGroup10,
+                    ButtonTag = "op:save-base-node",
+                    PermissionObjectName = "btnSaveBaseNode"
+                };
             }
         }
 
