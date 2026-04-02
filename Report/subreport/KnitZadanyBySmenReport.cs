@@ -1,10 +1,11 @@
 ﻿namespace SewingProduction.Report.subreport
 {
-    public partial class KnitZadanyBySmenReport : DevExpress.XtraReports.UI.XtraReport
+    public partial class KnitZadanyBySmenReport : SewingProduction.Report.ConnectedXtraReport
     {
         public KnitZadanyBySmenReport()
         {
             InitializeComponent();
+            UseCurrentConnection();
         }
     }
 }

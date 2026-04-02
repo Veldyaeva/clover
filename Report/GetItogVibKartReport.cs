@@ -1,10 +1,11 @@
 ﻿namespace SewingProduction.Report
 {
-    public partial class GetItogVibKartReport : DevExpress.XtraReports.UI.XtraReport
+    public partial class GetItogVibKartReport : ConnectedXtraReport
     {
         public GetItogVibKartReport()
         {
             InitializeComponent();
+            UseCurrentConnection();
         }
     }
 }

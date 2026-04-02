@@ -6,11 +6,12 @@ using System.Drawing;
 
 namespace SewingProduction.Report
 {
-    public partial class VshivkiReport : DevExpress.XtraReports.UI.XtraReport
+    public partial class VshivkiReport : ConnectedXtraReport
     {
         public VshivkiReport()
         {
             InitializeComponent();
+            UseCurrentConnection();
         }
     }
 }

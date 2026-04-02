@@ -6,11 +6,12 @@ using System.Drawing;
 
 namespace SewingProduction.Report
 {
-    public partial class TimeSheetParsecOrionPrint : DevExpress.XtraReports.UI.XtraReport
+    public partial class TimeSheetParsecOrionPrint : ConnectedXtraReport
     {
         public TimeSheetParsecOrionPrint()
         {
             InitializeComponent();
+            UseCurrentConnection();
         }
     }
 }

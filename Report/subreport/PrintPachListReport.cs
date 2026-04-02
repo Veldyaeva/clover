@@ -1,10 +1,11 @@
 ﻿namespace SewingProduction
 {
-    public partial class PrintPachListReport : DevExpress.XtraReports.UI.XtraReport
+    public partial class PrintPachListReport : SewingProduction.Report.ConnectedXtraReport
     {
         public PrintPachListReport()
         {
             InitializeComponent();
+            UseCurrentConnection();
         }
 
     }

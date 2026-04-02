@@ -1,10 +1,11 @@
 ﻿namespace SewingProduction.report
 {
-    public partial class ReestrListReport : DevExpress.XtraReports.UI.XtraReport
+    public partial class ReestrListReport : SewingProduction.Report.ConnectedXtraReport
     {
         public ReestrListReport()
         {
             InitializeComponent();
+            UseCurrentConnection();
         }
 
     }

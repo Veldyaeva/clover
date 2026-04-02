@@ -16,6 +16,7 @@ namespace SewingProduction.Report
         public NormRaszTest(NormRaszPreparedData preparedData)
         {
             InitializeComponent();
+            UseCurrentConnection();
             ApplyPreparedData(preparedData);
         }
 
