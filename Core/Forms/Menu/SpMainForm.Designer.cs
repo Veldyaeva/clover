@@ -74,6 +74,7 @@ namespace SewingProduction
             barBtnArticle = new BarButtonItem();
             barBtnCalcCard = new BarButtonItem();
             barBtnTimesheet = new BarButtonItem();
+            barButtonItemScreen = new BarButtonItem();
             barBtnAt = new BarButtonItem();
             barBtnQuestion = new BarButtonItem();
             skinBarSubItem2 = new SkinBarSubItem();
@@ -107,8 +108,8 @@ namespace SewingProduction
             barManager1.DockControls.Add(barDockControlRight);
             barManager1.Form = this;
             barManager1.HideIfNoRight = true;
-            barManager1.Items.AddRange(new BarItem[] { skinBarSubItem1, skinDropDownButtonItem1, skinPaletteDropDownButtonItem1, skinBarSubItem2, skinDropDownButtonItem2, skinPaletteDropDownButtonItem2, barSubMenu, barBtnProfile, barBtnSettings, barBtnAbout, barBtnHelp, barSubSpr, barSubEquipment, barBtnEqInTeams, barBtnEqDirectory, barBtnEqTypes, barBtnClassMatrix, barBtnOperationTypes, barSubTeamsShop, barBtnTeams, barBtnShops, barBtnProdTypes, barBtnCalcCard1, barBtnWorkers, barBtnTariffs, barBtnProducts, barBtnModelsMark, barSubDefects, barBtnSockDefects, barSubProduction, barSubKnitting, barBtnOperPlan, barBtnMasterDesk1, barBtnKnitterDesk, barBtnAnalytics, barSubSewing, barBtnMasterDesk, barBtnCutShop, barBtnTeamWork, barBtnArticle, barBtnCalcCard, barBtnTimesheet, barBtnQuestion, barBtnAt, barButtonItemSteamMasterWorkTable, barButtonItemCutMasterWorkTable });
-            barManager1.MaxItemId = 47;
+            barManager1.Items.AddRange(new BarItem[] { skinBarSubItem1, skinDropDownButtonItem1, skinPaletteDropDownButtonItem1, skinBarSubItem2, skinDropDownButtonItem2, skinPaletteDropDownButtonItem2, barSubMenu, barBtnProfile, barBtnSettings, barBtnAbout, barBtnHelp, barSubSpr, barSubEquipment, barBtnEqInTeams, barBtnEqDirectory, barBtnEqTypes, barBtnClassMatrix, barBtnOperationTypes, barSubTeamsShop, barBtnTeams, barBtnShops, barBtnProdTypes, barBtnCalcCard1, barBtnWorkers, barBtnTariffs, barBtnProducts, barBtnModelsMark, barSubDefects, barBtnSockDefects, barSubProduction, barSubKnitting, barBtnOperPlan, barBtnMasterDesk1, barBtnKnitterDesk, barBtnAnalytics, barSubSewing, barBtnMasterDesk, barBtnCutShop, barBtnTeamWork, barBtnArticle, barBtnCalcCard, barBtnTimesheet, barBtnQuestion, barBtnAt, barButtonItemSteamMasterWorkTable, barButtonItemCutMasterWorkTable, barButtonItemScreen });
+            barManager1.MaxItemId = 48;
             barManager1.SkipDevExpressSkinItems = true;
             // 
             // bar1
@@ -119,7 +120,7 @@ namespace SewingProduction
             bar1.DockStyle = BarDockStyle.Top;
             bar1.FloatLocation = new Point(834, 136);
             bar1.FloatSize = new Size(46, 100);
-            bar1.LinksPersistInfo.AddRange(new LinkPersistInfo[] { new LinkPersistInfo(barSubMenu), new LinkPersistInfo(barSubSpr), new LinkPersistInfo(barSubProduction), new LinkPersistInfo(barBtnTeamWork), new LinkPersistInfo(barBtnArticle), new LinkPersistInfo(barBtnCalcCard), new LinkPersistInfo(barBtnTimesheet), new LinkPersistInfo(barBtnAt), new LinkPersistInfo(barBtnQuestion), new LinkPersistInfo(skinBarSubItem2), new LinkPersistInfo(skinDropDownButtonItem2), new LinkPersistInfo(skinPaletteDropDownButtonItem2) });
+            bar1.LinksPersistInfo.AddRange(new LinkPersistInfo[] { new LinkPersistInfo(barSubMenu), new LinkPersistInfo(barSubSpr), new LinkPersistInfo(barSubProduction), new LinkPersistInfo(barBtnTeamWork), new LinkPersistInfo(barBtnArticle), new LinkPersistInfo(barBtnCalcCard), new LinkPersistInfo(barBtnTimesheet), new LinkPersistInfo(barButtonItemScreen), new LinkPersistInfo(barBtnAt), new LinkPersistInfo(barBtnQuestion), new LinkPersistInfo(skinBarSubItem2), new LinkPersistInfo(skinDropDownButtonItem2), new LinkPersistInfo(skinPaletteDropDownButtonItem2) });
             bar1.OptionsBar.AllowCollapse = true;
             bar1.OptionsBar.AllowQuickCustomization = false;
             bar1.OptionsBar.DisableClose = true;
@@ -433,10 +434,20 @@ namespace SewingProduction
             barBtnTimesheet.Tag = "табельToolStripMenuItem";
             barBtnTimesheet.ItemClick += табельToolStripMenuItem_Click;
             // 
+            // barButtonItemScreen
+            // 
+            barButtonItemScreen.Alignment = BarItemLinkAlignment.Right;
+            barButtonItemScreen.Caption = "Скриншот окна";
+            barButtonItemScreen.Id = 47;
+            barButtonItemScreen.ImageOptions.Image = (Image)resources.GetObject("barButtonItemScreen.ImageOptions.Image");
+            barButtonItemScreen.ImageOptions.LargeImage = (Image)resources.GetObject("barButtonItemScreen.ImageOptions.LargeImage");
+            barButtonItemScreen.Name = "barButtonItemScreen";
+            barButtonItemScreen.ItemClick += barButtonItemScreen_ItemClick;
+            // 
             // barBtnAt
             // 
             barBtnAt.Alignment = BarItemLinkAlignment.Right;
-            barBtnAt.Caption = "@";
+            barBtnAt.Caption = "Редактор справки";
             barBtnAt.Id = 43;
             barBtnAt.ImageOptions.Image = (Image)resources.GetObject("barBtnAt.ImageOptions.Image");
             barBtnAt.ImageOptions.LargeImage = (Image)resources.GetObject("barBtnAt.ImageOptions.LargeImage");
@@ -447,7 +458,7 @@ namespace SewingProduction
             // barBtnQuestion
             // 
             barBtnQuestion.Alignment = BarItemLinkAlignment.Right;
-            barBtnQuestion.Caption = "❓";
+            barBtnQuestion.Caption = "Справка";
             barBtnQuestion.Id = 42;
             barBtnQuestion.ImageOptions.Image = (Image)resources.GetObject("barBtnQuestion.ImageOptions.Image");
             barBtnQuestion.ImageOptions.LargeImage = (Image)resources.GetObject("barBtnQuestion.ImageOptions.LargeImage");
@@ -654,5 +665,6 @@ namespace SewingProduction
         private DevExpress.XtraBars.BarButtonItem barBtnAt;
         private BarButtonItem barButtonItemSteamMasterWorkTable;
         private BarButtonItem barButtonItemCutMasterWorkTable;
+        private BarButtonItem barButtonItemScreen;
     }
 }
