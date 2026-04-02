@@ -104,6 +104,7 @@ namespace SewingProduction.Features.UserDistribution.Models
     {
         public int FioID { get; set; }
         public string Fio { get; set; }
+        public string Rab { get; set; }
     }
     
 }
