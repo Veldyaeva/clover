@@ -89,18 +89,33 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Adapters
                     newRows.Select(x => x.olPzvID),
                     x => x.olPzvID,
                     _view.GridControl);
+                if (changes != null)
+                {
+                    changes.Added?.Clear();
+                    changes.Modified?.Clear();
+                    changes.Removed?.Clear();
+                    changes = null;
+                }
 
                 _bindingSource.ResetBindings(false);
+                
                 _view.RefreshData();
 
-                if (topRow >= 0)
-                    _view.TopRowIndex = topRow;
+                //_view.ExpandAllGroups();
 
-                _setTopRowIndex(_view.TopRowIndex);
+                //if (topRow >= 0)
+                //    _view.TopRowIndex = topRow;
+
+                //_setTopRowIndex(_view.TopRowIndex);
             }
             finally
             {
                 _view.EndDataUpdate();
+                _view.ExpandAllGroups();
+                if (topRow >= 0)
+                    _view.TopRowIndex = topRow;
+
+                _setTopRowIndex(_view.TopRowIndex);
             }
         }
     }

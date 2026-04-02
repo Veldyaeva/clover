@@ -135,8 +135,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private BindingSource _pZVOperListByPachListBindingSource;
 
         private BindingSource _smenZadanyVyazBindingSource;
+        private BindingSource _smenZadanyVyazNewBindingSource;
         private BindingSource _naryadZadanyVyazBindingSource;
-        private BindingSource _planTotalQuantityByArticul;
+        private BindingSource _planTotalQuantityByArticulBindingSource;
         //------------------------------------------
         //private int vyazPodrKod = 0;
 
@@ -238,7 +239,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         //private BindingSource _smenZadanyVyazBindingSource;
 
-        private BindingSource _smenZadanyVyazNewBindingSource;
+        //private BindingSource _smenZadanyVyazNewBindingSource;
 
         private List<KnitWorkingShiftSmen> KnitWorkingShiftSmenData = new List<KnitWorkingShiftSmen>();
         private BindingList<KnitWorkingShiftSmen> _knitWorkingShiftSmenBindingList;
@@ -256,7 +257,21 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             InitializeComponent();
 
             this.vyazPodrKod = _vyazPodrKod;
-
+            switch (vyazPodrKod)
+            {
+                case 1:
+                    //this.Text = "РС Мастера Вяз.Цеха";
+                    Text = "РС Мастера ВЦ";
+                    break;
+                case 2:
+                    //this.Text = "РС Мастера Цеха Отпарки";
+                    Text = "РС Мастера Отп";
+                    break;
+                case 3:
+                    //this.Text = "РС Мастера Раскр.Цеха";
+                    Text = "РС Мастера РЦ";
+                    break;
+            }
             _dbHelper = new DatabaseHelper("ace");
             _dbService = new DbService(_dbHelper);
             _anService = new ArtNormRepository(_dbHelper);
@@ -270,14 +285,23 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _mlService = new MlService(_dbHelper);
 
             _smenZadanyVyazBindingSource = new BindingSource();
+            _smenZadanyVyazNewBindingSource = new BindingSource();
             _naryadZadanyVyazBindingSource = new BindingSource();
-            _planTotalQuantityByArticul = new BindingSource();
+            _planTotalHoursByKnitMachineBindingSource = new BindingSource();
+            _planTotalQuantityByArticulBindingSource = new BindingSource();
             _zadanyListBindingSource = new BindingSource();
+            _zadanyListNewBindingSource = new BindingSource();
             _rzvPachListByNomBindingSource = new BindingSource();
+            _rzvPachListByNomNewBindingSource = new BindingSource();
             _pZVOperListByPachListBindingSource = new BindingSource();
+            _pZVOperListByPachListNewBindingSource = new BindingSource();
+            _artNormNBindingSource = new BindingSource();
+            _normRaszBindingSource = new BindingSource();
+            _mlOpBindingSource = new BindingSource();
+            _knitWorkingShiftSmenBindingSource = new BindingSource();
 
             _contextBuilder = new PlanZagrVyazContextBuilder(
-                vyazPodrKod,
+                this.vyazPodrKod,
                 _pZVOperListByPachListBindingSource,
                 _rzvPachListByNomBindingSource,
                 _smenZadanyVyazBindingSource,
@@ -300,7 +324,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             _pZVActionValidator = new PzvActionValidator();
 
-            var assignKnittingMachine = new AssignKnittingMachineUseCase(_pZVActionValidator, _pzvBulkUpdateService);
+            var assignKnittingMachine = new AssignKnittingMachineUseCase(
+    _pZVActionValidator,
+    _pzvBulkUpdateService,
+    _dbHelper);
             var cancelKnittingMachine = new CancelKnittingMachineUseCase(_pZVActionValidator, _pzvBulkUpdateService);
             var assignTab = new AssignTabUseCase(_pZVActionValidator, _pzvBulkUpdateService);
             var cancelTab = new CancelTabUseCase(_pZVActionValidator, _pzvBulkUpdateService);
@@ -538,6 +565,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         public async Task InitServiceBrokerAsync(CancellationToken ct)
         {
             await _sbController.InitAsync(ct, _sbHub, _sbHubOwnerId, startBrokers: false);
+            //await _sbController.InitAsync(ct, _sbHub, _sbHubOwnerId, startBrokers: true);
 
             var tables = _sbController.Helper?.GetListeningTables() ?? Array.Empty<string>();
             Debug.WriteLine($"[PlanZagrVyaz] Listening tables: {string.Join(", ", tables)}");
@@ -2350,7 +2378,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 CommitRzvSelectionEditor();
 
-                var context = _contextBuilder.Build();
+                //var context = _contextBuilder.Build();
+                var context = _contextBuilder.BuildForPachSelection();
                 var request = new LoadPzvOperationsRequest
                 {
                     VyazPodrKod = context.VyazPodrKod,
@@ -5603,16 +5632,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 Debug.WriteLine($"SmenZadanyFocusedRowChanged triggered for focused row handle {_focusedRowHandle}");
                 //var currentSmenZadanyVyaz = _smenZadanyVyazBindingSource.Current as SmenZadanyVyaz;
                 var currentSmenZadanyVyaz = _gridView.GetRow(_gridView.FocusedRowHandle) as SmenZadanyVyaz;
-                
+
                 if (currentSmenZadanyVyaz == null)
                     return;
-                
+
                 if (vyazPodrKod == 1)
                 {
                     await LoadKnitWorkingShiftSmenToMoveDataAsync(currentSmenZadanyVyaz.kwsKmaID);
                 }
-                
-                int _xTab = vyazPodrKod == 1? currentSmenZadanyVyaz.kwsTabStart : currentSmenZadanyVyaz.szTab;
+
+                int _xTab = vyazPodrKod == 1 ? currentSmenZadanyVyaz.kwsTabStart : currentSmenZadanyVyaz.szTab;
                 int _xKmlID = currentSmenZadanyVyaz.kwsmlKmlID;
                 int _groupLevel = gridViewNaryadZadany.GetRowLevel(_focusedRowHandle);
 
@@ -5954,7 +5983,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     //-----------------------------------
                     break;
             }
-            
+
             //var colNomZadany = gridViewZadanyList.Columns.FirstOrDefault(c => c.FieldName == "kmlID");
             var colNomZadany = gridViewZadanyList.Columns.FirstOrDefault(c => c.FieldName == "pszNom");
             if (colNomZadany == null) return;
@@ -6002,7 +6031,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (colKnitMachine == null) return;
 
             int rhKnitMachine = gridViewPlanTotalHoursByKnitMachine.LocateByValue(0, colKnitMachine, kmlId);
-            if (!gridViewPlanTotalHoursByKnitMachine.IsValidRowHandle(rhKnitMachine) 
+            if (!gridViewPlanTotalHoursByKnitMachine.IsValidRowHandle(rhKnitMachine)
                 || !gridViewPlanTotalHoursByKnitMachine.IsDataRow(rhKnitMachine)) return;
 
             gridViewPlanTotalHoursByKnitMachine.BeginUpdate();
@@ -6045,7 +6074,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (colArticulKod == null) return;
 
             int rhArticulKod = gridViewPlanTotalQuantityByArticul.LocateByValue(0, colArticulKod, _xKod);
-            if (!gridViewPlanTotalQuantityByArticul.IsValidRowHandle(rhArticulKod) 
+            if (!gridViewPlanTotalQuantityByArticul.IsValidRowHandle(rhArticulKod)
                 || !gridViewPlanTotalQuantityByArticul.IsDataRow(rhArticulKod)) return;
 
             gridViewPlanTotalQuantityByArticul.BeginUpdate();
@@ -6196,7 +6225,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             if (e.IsGetData) e.Value = e.ListSourceRowIndex + 1;
         }
-       private void gridViewSmenZadanyOtp_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        private void gridViewSmenZadanyOtp_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             try
             {

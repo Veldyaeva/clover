@@ -22,9 +22,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application
             || row.olPzvTab == 999;
 
         public bool CanStartWork(PZVOperList row) =>
-            row.olPzvDateNaznKm != null &&
-            row.olPzvDateNaznTab != null &&
-            row.olPzvDateStart == null;
+            ((row.olKodPodr == 2 || row.olKodPodr == 3) || row.olPzvDateNaznKm != null) &&
+            (row.olPzvDateNaznTab != null &&
+            row.olPzvDateStart == null);
 
         public bool CanCancelStartWork(PZVOperList row) =>
             row.olPzvDateStart != null &&

@@ -26,56 +26,67 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     _planTotalHoursByKnitMachineBindingList = new BindingList<PlanTotalHoursByKnitMachine>();
                     _planTotalHoursByKnitMachineBindingSource = new BindingSource { DataSource = _planTotalHoursByKnitMachineBindingList };
+                    //_planTotalHoursByKnitMachineBindingSource.DataSource = _planTotalHoursByKnitMachineBindingList;
                 });
                 var zadanyListTask = Task.Run(() =>
                 {
                     _zadanyListBindingList = new BindingList<PZVZadanyList>();
-                    _zadanyListBindingSource = new BindingSource { DataSource = _zadanyListBindingList };
+                    //_zadanyListBindingSource = new BindingSource { DataSource = _zadanyListBindingList };
+                    _zadanyListBindingSource.DataSource = _zadanyListBindingList;
                 });
                 var zadanyListNewTask = Task.Run(() =>
                 {
                     _zadanyListNewBindingList = new BindingList<PZVZadanyList>();
-                    _zadanyListNewBindingSource = new BindingSource { DataSource = _zadanyListNewBindingList };
+                    //_zadanyListNewBindingSource = new BindingSource { DataSource = _zadanyListNewBindingList };
+                    _zadanyListNewBindingSource.DataSource = _zadanyListNewBindingList;
                 });
                 var rzvPachListByNomTask = Task.Run(() =>
                 {
                     _rzvPachListByNomBindingList = new BindingList<RzvPachListByNom>();
-                    _rzvPachListByNomBindingSource = new BindingSource { DataSource = _rzvPachListByNomBindingList };
+                    //_rzvPachListByNomBindingSource = new BindingSource { DataSource = _rzvPachListByNomBindingList };
+                    _rzvPachListByNomBindingSource.DataSource = _rzvPachListByNomBindingList;
                 });
                 var rzvPachListByNomNewTask = Task.Run(() =>
                 {
                     _rzvPachListByNomNewBindingList = new BindingList<RzvPachListByNom>();
-                    _rzvPachListByNomNewBindingSource = new BindingSource { DataSource = _rzvPachListByNomNewBindingList };
+                    //_rzvPachListByNomNewBindingSource = new BindingSource { DataSource = _rzvPachListByNomNewBindingList };
+                    _rzvPachListByNomNewBindingSource.DataSource = _rzvPachListByNomNewBindingList;
                 });
                 var pZVOperListByPachListTask = Task.Run(() =>
                 {
                     _pZVOperListByPachListBindingList = new BindingList<PZVOperList>();
-                    _pZVOperListByPachListBindingSource = new BindingSource { DataSource = _pZVOperListByPachListBindingList };
+                    //_pZVOperListByPachListBindingSource = new BindingSource { DataSource = _pZVOperListByPachListBindingList };
+                    _pZVOperListByPachListBindingSource.DataSource = _pZVOperListByPachListBindingList;
                 });
                 var pZVOperListByPachListNewTask = Task.Run(() =>
                 {
                     _pZVOperListByPachListNewBindingList = new BindingList<PZVOperList>();
-                    _pZVOperListByPachListNewBindingSource = new BindingSource { DataSource = _pZVOperListByPachListNewBindingList };
+//                    _pZVOperListByPachListNewBindingSource = new BindingSource { DataSource = _pZVOperListByPachListNewBindingList };
+                    _pZVOperListByPachListNewBindingSource.DataSource = _pZVOperListByPachListNewBindingList;
                 });
                 var artNormNTask = Task.Run(() =>
                 {
                     _artNormNBindingList = new BindingList<ArtNormN>();
-                    _artNormNBindingSource = new BindingSource { DataSource = _artNormNBindingList };
+//                    _artNormNBindingSource = new BindingSource { DataSource = _artNormNBindingList };
+                    _artNormNBindingSource.DataSource = _artNormNBindingList;
                 });
                 var normRaszTask = Task.Run(() =>
                 {
                     _normRaszBindingList = new BindingList<NormRasz>();
-                    _normRaszBindingSource = new BindingSource { DataSource = _normRaszBindingList };
+//                    _normRaszBindingSource = new BindingSource { DataSource = _normRaszBindingList };
+                    _normRaszBindingSource.DataSource = _normRaszBindingList;
                 });
                 var mlOpTask = Task.Run(() =>
                 {
                     _mlOpBindingList = new BindingList<MlOp>();
-                    _mlOpBindingSource = new BindingSource { DataSource = _mlOpBindingList };
+//                    _mlOpBindingSource = new BindingSource { DataSource = _mlOpBindingList };
+                    _mlOpBindingSource.DataSource = _mlOpBindingList;
                 });
                 var knitWorkingShiftTask = Task.Run(() =>
                 {
                     _knitWorkingShiftSmenBindingList = new BindingList<KnitWorkingShiftSmen>();
-                    _knitWorkingShiftSmenBindingSource = new BindingSource { DataSource = _knitWorkingShiftSmenBindingList };
+                    //_knitWorkingShiftSmenBindingSource = new BindingSource { DataSource = _knitWorkingShiftSmenBindingList };
+                    _knitWorkingShiftSmenBindingSource.DataSource = _knitWorkingShiftSmenBindingList;
                 });
                 await Task.WhenAll(planTotalHoursByKnitMachineTask, zadanyListTask, zadanyListNewTask
                         , rzvPachListByNomTask, rzvPachListByNomNewTask
@@ -84,29 +95,24 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         , mlOpTask
                         , knitWorkingShiftTask);
 
-                _smenZadanyVyazBindingSource = new BindingSource
-                {
-                    DataSource = new BindingList<SmenZadanyVyaz>()
-                };
-                _smenZadanyVyazNewBindingSource = new BindingSource
-                {
-                    DataSource = new BindingList<SmenZadanyVyaz>()
-                };
+                //_smenZadanyVyazBindingSource = new BindingSource
+                //{
+                //    DataSource = new BindingList<SmenZadanyVyaz>()
+                //};
+                //_smenZadanyVyazNewBindingSource = new BindingSource
+                //{
+                //    DataSource = new BindingList<SmenZadanyVyaz>()
+                //};
+                _smenZadanyVyazBindingSource.DataSource = new BindingList<SmenZadanyVyaz>();
+                _smenZadanyVyazNewBindingSource.DataSource = new BindingList<SmenZadanyVyaz>();
 
-                _planTotalQuantityByArticul = new BindingSource { DataSource = new BindingList<PlanTotalQuantityByArticul>() };
+                _planTotalQuantityByArticulBindingSource = new BindingSource { DataSource = new BindingList<PlanTotalQuantityByArticul>() };
                 switch (vyazPodrKod)
                 {
                     case 1:
                         //layoutControlGroup7.CustomHeaderButtons[0].Properties.Visible = true;
                         //layoutControlGroup7.CustomHeaderButtons[1].Properties.Visible = true;
                         //layoutControlGroup7.CustomHeaderButtons[2].Properties.Visible = true;
-                        _lcgHelper.SetButtonsVisible(
-                            layoutControlGroup7,
-                            false,
-                            "lcg3HideAll",
-                            "lcg3HideAllSeparator",
-                            "lcg3ShowAll"
-                        );
                         #region описание gridControlPlanTotalHoursByKnitMachine "общие часы по вяз машинам/зонам"
                         layoutControlItemPlanTotalQuantityByArticul.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                         layoutControlItemPlanTotalHoursByKnitMachine.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
@@ -123,13 +129,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         break;
                     case 2:
                     case 3:
-                        layoutControlGroup7.CustomHeaderButtons[0].Properties.Visible = false;
-                        layoutControlGroup7.CustomHeaderButtons[1].Properties.Visible = false;
-                        layoutControlGroup7.CustomHeaderButtons[2].Properties.Visible = false;
+                        //layoutControlGroup7.CustomHeaderButtons[0].Properties.Visible = false;
+                        //layoutControlGroup7.CustomHeaderButtons[1].Properties.Visible = false;
+                        //layoutControlGroup7.CustomHeaderButtons[2].Properties.Visible = false;
+                        _lcgHelper.SetButtonsVisible(
+                            layoutControlGroup7,
+                            false,
+                            "lcg3HideAll",
+                            "lcg3HideAllSeparator",
+                            "lcg3ShowAll");
                         #region описание gridViewPlanTotalQuantityByArticul "общее количество по артикулам"
                         layoutControlItemPlanTotalHoursByKnitMachine.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                         layoutControlItemPlanTotalQuantityByArticul.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-                        gridControlPlanTotalQuantityByArticul.DataSource = _planTotalQuantityByArticul;
+                        gridControlPlanTotalQuantityByArticul.DataSource = _planTotalQuantityByArticulBindingSource;
                         gridPlanTotalQuantityByArticulColumnKod.FieldName = "Kod";
                         gridPlanTotalQuantityByArticulColumnArticul.FieldName = "Articul";
                         gridPlanTotalQuantityByArticulColumnKol.FieldName = "Kol";
@@ -321,14 +333,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 #endregion
 
-                _smenZadanyVyazBindingSource = new BindingSource
-                {
-                    DataSource = new BindingList<SmenZadanyVyaz>()
-                };
-                _smenZadanyVyazNewBindingSource = new BindingSource
-                {
-                    DataSource = new BindingList<SmenZadanyVyaz>()
-                };
+                //_smenZadanyVyazBindingSource = new BindingSource
+                //{
+                //    DataSource = new BindingList<SmenZadanyVyaz>()
+                //};
+                //_smenZadanyVyazNewBindingSource = new BindingSource
+                //{
+                //    DataSource = new BindingList<SmenZadanyVyaz>()
+                //};
                 #region gridControlSmenZadany "сменное задание"
                 gridControlSmenZadany.DataSource = _smenZadanyVyazBindingSource;
                 bandedGridSmenZadanyColumnKmaID.FieldName = "kmaID";
@@ -480,14 +492,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //advBandedGridViewSmenZadany.BandPanelRowHeight = 37;
                 //TODO : если понадобится, можно будет донастроить высоту строк заголовков колонок, но пока не нужно
                 #endregion
-
-                _lcgHelper.SetButtonsVisible(
+                
+                switch (vyazPodrKod)
+                {
+                    case 1:
+                        break;
+                    case 2:
+                    case 3:
+                        _lcgHelper.SetButtonsVisible(
                             layoutControlGroup3,
                             false,
                             "lcg3HideAll",
                             "lcg3HideAllSeparator",
                             "lcg3ShowAll"
                         );
+                        break;
+                }
                 _naryadZadanyVyazBindingSource = new BindingSource { DataSource = new BindingList<NaryadZadanyVyaz>() };
                 #region gridControlNaryadZadany "наряд-задание"
                 gridControlNaryadZadany.DataSource = _naryadZadanyVyazBindingSource;

@@ -1,6 +1,8 @@
 ﻿using SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application.Contexts;
 using SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application.Results;
 using SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application.UseCases.PzvActions;
+using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -51,6 +53,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application
 
         public Task<OperationResult> ExecuteAsync(PzvActionType action, PzvSelectionContext context, CancellationToken ct = default)
         {
+            Debug.WriteLine($"ROUTER ACTION = {action}");
+            Debug.WriteLine($"router context shift null = {context.CurrentShiftAssignment == null}");
+
             return action switch
             {
                 PzvActionType.AssignKnittingMachine => _assignKnittingMachine.ExecuteAsync(context, ct),

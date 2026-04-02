@@ -1,12 +1,15 @@
 ﻿using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using Newtonsoft.Json;
 using SewingProduction.Core.helpers;
+using SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application.Contexts;
 using SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application.Routing;
 using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -82,12 +85,27 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
-                var context = _contextBuilder.Build();
+                PzvSelectionContext context = action switch
+                {
+                    PzvActionType.AssignKnittingMachine => _contextBuilder.BuildForPzvActionsWithShift(),
+                    PzvActionType.AssignTab => _contextBuilder.BuildForPzvActionsWithShift(),
+                    PzvActionType.AssignTab999 => _contextBuilder.BuildForPzvActions(),
+                    PzvActionType.CancelKnittingMachine => _contextBuilder.BuildForPzvActions(),
+                    PzvActionType.CancelTab => _contextBuilder.BuildForPzvActions(),
+                    PzvActionType.CancelTab999 => _contextBuilder.BuildForPzvActions(),
+                    PzvActionType.StartWork => _contextBuilder.BuildForPzvActions(),
+                    PzvActionType.CancelStartWork => _contextBuilder.BuildForPzvActions(),
+                    PzvActionType.StopWork => _contextBuilder.BuildForPzvActions(),
+                    PzvActionType.CancelStopWork => _contextBuilder.BuildForPzvActions(),
+                    PzvActionType.ConfirmMaster => _contextBuilder.BuildForPzvActions(),
+                    PzvActionType.CancelMasterConfirmation => _contextBuilder.BuildForPzvActions(),
 
-                //var result = await GridOverlayLoader.RunTaskWithOverlayAsync(
-                //    gridControlPZVOperList,
-                //    () => _actionRouter.ExecuteAsync(action, context, CancellationToken.None),
-                //    CancellationToken.None);
+                    _ => _contextBuilder.BuildForPzvActions()
+                };
+
+                Debug.WriteLine($"ACTION = {action}");
+                Debug.WriteLine($"context.CurrentShiftAssignment null = {context.CurrentShiftAssignment == null}");
+                Debug.WriteLine($"context.CurrentShiftAssignment type = {context.CurrentShiftAssignment?.GetType().FullName}");
 
                 var result = await _actionRouter.ExecuteAsync(action, context, CancellationToken.None);
 
@@ -98,6 +116,24 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 MessageBox.Show(ex.Message);
             }
+            //try
+            //{
+            //    var context = _contextBuilder.Build();
+
+            //    //var result = await GridOverlayLoader.RunTaskWithOverlayAsync(
+            //    //    gridControlPZVOperList,
+            //    //    () => _actionRouter.ExecuteAsync(action, context, CancellationToken.None),
+            //    //    CancellationToken.None);
+
+            //    var result = await _actionRouter.ExecuteAsync(action, context, CancellationToken.None);
+
+            //    if (!result.Success && !string.IsNullOrWhiteSpace(result.ErrorMessage))
+            //        MessageBox.Show(result.ErrorMessage);
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
         private async void gridViewPZVOperList_CellValueChanged(object sender, CellValueChangedEventArgs e)
         {
@@ -180,35 +216,73 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 MessageBox.Show($"Ошибка в gridViewPZVOperList_CellValueChanged: {ex.Message}");
             }
         }
+        //private async void gridViewPZVOperList_DoubleClick(object sender, EventArgs e)
+        //{
+        //    var view = (GridView)sender;
+        //    var pt = view.GridControl.PointToClient(Control.MousePosition);
+        //    var hit = view.CalcHitInfo(pt);
+
+        //    if (!hit.InRowCell || hit.RowHandle < 0)
+        //        return;
+
+        //    var current = _pZVOperListByPachListBindingSource.Current as PZVOperList;
+        //    if (current == null)
+        //        return;
+
+        //    current.SyncSelection = 1;
+        //    _xPzvID = current.olPzvID;
+        //    _xColumn = hit.Column?.FieldName ?? string.Empty;
+
+        //    PzvActionType? action = ResolveDoubleClickAction(hit.Column?.FieldName, current);
+        //    if (action == null)
+        //        return;
+
+        //    await ExecutePzvActionAsync(action.Value);
+        //}
         private async void gridViewPZVOperList_DoubleClick(object sender, EventArgs e)
         {
             var view = (GridView)sender;
             var pt = view.GridControl.PointToClient(Control.MousePosition);
             var hit = view.CalcHitInfo(pt);
 
-            if (!hit.InRowCell || hit.RowHandle < 0)
-                return;
+            // 👇 1. Заголовок
+            if (hit.InColumn)
+            {
+                int xSelected = Convert.ToInt32(view.GetRowCellValue(0, gridPZVOperListColumnSyncSelection));
+                int newValue = xSelected == 0 ? 1 : 0;
 
-            var current = _pZVOperListByPachListBindingSource.Current as PZVOperList;
-            if (current == null)
-                return;
+                _gridHelper.SetValueForFilteredRecordsInGrid(view, gridPZVOperListColumnSyncSelection, newValue);
+            }
 
-            current.SyncSelection = 1;
-            _xPzvID = current.olPzvID;
-            _xColumn = hit.Column?.FieldName ?? string.Empty;
+            // 👇 2. Ячейка
+            if (hit.InRowCell)
+            {
+                var row = view.GetRow(hit.RowHandle) as PZVOperList;
+                if (row == null) return;
 
-            PzvActionType? action = ResolveDoubleClickAction(hit.Column?.FieldName, current);
-            if (action == null)
-                return;
+                foreach (var _row in _pZVOperListByPachListBindingSource.List.OfType<PZVOperList>())
+                {
+                    _row.SyncSelection = _row.olPzvID == row.olPzvID ? 1 : 0;
+                }
 
-            await ExecutePzvActionAsync(action.Value);
+                view.PostEditor();
+                _pZVOperListByPachListBindingSource.ResetBindings(false);
+                view.RefreshData();
+
+                _xPzvID = row.olPzvID;
+                _xColumn = hit.Column?.FieldName ?? string.Empty;
+
+                var action = ResolveDoubleClickAction(hit.Column?.FieldName, row);
+
+                if (action.HasValue)
+                    await ExecutePzvActionAsync(action.Value);
+            }
         }
-
         private PzvActionType? ResolveDoubleClickAction(string? fieldName, PZVOperList row)
         {
             return fieldName switch
             {
-                "olKmlNumber" or "olPvDateNaznKm" =>
+                "olKmlNumber" or "olPzvDateNaznKm" =>
                     row.olPzvDateNaznKm == null
                         ? PzvActionType.AssignKnittingMachine
                         : PzvActionType.CancelKnittingMachine,
@@ -236,7 +310,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _ => null
             };
         }
-
         private void gridViewPZVOperList_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             var current = _pZVOperListByPachListBindingSource.Current as PZVOperList;
@@ -248,9 +321,44 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             BeginInvoke(new Action(SyncSelectionUpdate));
         }
 
-        private void repositoryItemCheckEdit5_EditValueChanged(object sender, EventArgs e)
+        private async void repositoryItemCheckEdit5_EditValueChanged(object sender, EventArgs e)
         {
-            BeginInvoke(new Action(SyncSelectionUpdate));
+            //BeginInvoke(new Action(SyncSelectionUpdate));
+            try
+            {
+                Debug.WriteLine("repositoryItemCheckEdit5_EditValueChanged triggered");
+
+                gridViewRzvPachListByNom.PostEditor();
+                gridViewRzvPachListByNom.UpdateCurrentRow();
+                _rzvPachListByNomBindingSource.EndEdit();
+                _rzvPachListByNomBindingSource.CurrencyManager?.EndCurrentEdit();
+
+                var selectedRow = _rzvPachListByNomBindingSource.Current as RzvPachListByNom;
+                if (selectedRow != null)
+                {
+                    string jsonString = JsonConvert.SerializeObject(selectedRow, Formatting.Indented);
+
+                    string query =
+                        $"dbo.setGraduationRate @xNomListJson = '{jsonString}', @xGradationValue = {selectedRow.gradacia}, @xPodrKod = 1 ";
+
+                    Task updateRZV = _dbHelper.ExecuteNonQueryAsync(
+                        query,
+                        new Dictionary<string, object> { });
+
+                    await Task.WhenAll(updateRZV);
+
+                    await GridOverlayLoader.RunTaskWithOverlayAsync(
+                        gridControlPZVOperList,
+                        LoadPlanZagrVyazByZadanySelection,
+                        CancellationToken.None);
+                }
+
+                Debug.WriteLine("Finished repositoryItemCheckEdit5_EditValueChanged");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка repositoryItemCheckEdit5_EditValueChanged: {ex.Message}");
+            }
         }
         private async void layoutControlGroup6_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
         {
@@ -277,28 +385,38 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         //MessageBox.Show("Загрузить операции");
                         gridViewRzvPachListByNom.FocusedColumn = gridViewRzvPachListByNom.Columns["data_paln"];
                         gridViewRzvPachListByNom.FocusedColumn = gridViewRzvPachListByNom.Columns["SyncSelection"];
-                        await GridOverlayLoader.RunTaskWithOverlayAsync(
-                            gridControlPZVOperList,
-                            LoadPlanZagrVyazByZadanySelection
-                            , CancellationToken.None
-                            );
+                        gridViewPZVOperList.ShowLoadingPanel();
+                        await LoadPlanZagrVyazByZadanySelection();
+                        gridViewPZVOperList.HideLoadingPanel();
+                        //await GridOverlayLoader.RunTaskWithOverlayAsync(
+                        //    gridControlPZVOperList,
+                        //    LoadPlanZagrVyazByZadanySelection
+                        //    , CancellationToken.None
+                        //    );
                         break;
                     case 8:
-                        await GridOverlayLoader.RunTaskWithOverlayAsync(
-                            gridControlPZVOperList,
-                            ClearSelectedPachList
-                            , CancellationToken.None
-                            );
+                        gridViewPZVOperList.ShowLoadingPanel();
+                        ClearSelectedPachList();
+                        gridViewPZVOperList.HideLoadingPanel();
+                        //await GridOverlayLoader.RunTaskWithOverlayAsync(
+                        //    gridControlPZVOperList,
+                        //    ClearSelectedPachList
+                        //    , CancellationToken.None
+                        //    );
                         break;
                     case 10:
                         _pZVOperListByPachListBindingSource.Clear();
                         gridViewRzvPachListByNom.FocusedColumn = gridViewRzvPachListByNom.Columns["data_paln"];
                         gridViewRzvPachListByNom.FocusedColumn = gridViewRzvPachListByNom.Columns["SyncSelection"];
-                        await GridOverlayLoader.RunTaskWithOverlayAsync(
-                            gridControlPZVOperList,
-                            LoadPlanZagrVyazByZadanySelection
-                            , CancellationToken.None
-                            );
+                        
+                        gridViewPZVOperList.ShowLoadingPanel();
+                        await LoadPlanZagrVyazByZadanySelection();
+                        gridViewPZVOperList.HideLoadingPanel();
+                        //await GridOverlayLoader.RunTaskWithOverlayAsync(
+                        //    gridControlPZVOperList,
+                        //    LoadPlanZagrVyazByZadanySelection
+                        //    , CancellationToken.None
+                        //    );
                         break;
                 }
                 Debug.WriteLine($"layoutControlGroup6_CustomButtonClick completed for button index {buttonIndex}");

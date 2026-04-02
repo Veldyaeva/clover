@@ -1,4 +1,5 @@
-﻿using SewingProduction.Features.KnittingProduction.Models;
+﻿using SewingProduction.Core.Class;
+using SewingProduction.Features.KnittingProduction.Models;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -10,18 +11,27 @@ namespace SewingProduction.Features.KnittingProduction.Forms
     {
         private void SyncSelectionUpdate()
         {
+            gridViewZadanyList.PostEditor();
+            gridViewZadanyList.UpdateCurrentRow();
             var selectedZad = _zadanyListBindingSource?.Current as PZVZadanyList;
             if (selectedZad == null)
                 return;
 
-            bool isSelected = selectedZad.SyncSelection == 1;
+            //bool isSelected = selectedZad.SyncSelection == 1;
+            int isSelected = Convert.ToInt32(
+                    gridViewZadanyList.GetFocusedRowCellValue("SyncSelection"));
 
             foreach (var row in _rzvPachListByNomBindingSource.List.OfType<RzvPachListByNom>())
             {
                 if (row.nom == selectedZad.nom && row.nomZad == selectedZad.pszNom)
-                    row.SyncSelection = isSelected ? 1 : 0;
+                    //row.SyncSelection = isSelected ? 1 : 0;
+                    row.SyncSelection = isSelected;
             }
+            _zadanyListBindingSource.ResetBindings(false);
+            gridViewZadanyList.RefreshData();
 
+            _rzvPachListByNomBindingSource.ResetBindings(false);
+            //gridViewRzvPachListByNom.RefreshData();
             gridViewRzvPachListByNom.RefreshData();
         }
     }

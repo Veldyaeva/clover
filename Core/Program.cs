@@ -67,6 +67,11 @@ namespace SewingProduction.Core
 
             //CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("ru-RU");
             //CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("ru-RU");
+            var culture = new CultureInfo("ru-RU");
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
 
             // Уникальное имя Mutex
 

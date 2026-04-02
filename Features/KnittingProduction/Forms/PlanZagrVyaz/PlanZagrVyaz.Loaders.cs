@@ -486,7 +486,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     gridControlPlanTotalQuantityByArticul.BeginUpdate();
                     gridViewPlanTotalQuantityByArticul.ShowLoadingPanel();
 
-                    _planTotalQuantityByArticul.DataSource =
+                    _planTotalQuantityByArticulBindingSource.DataSource =
                         new BindingList<PlanTotalQuantityByArticul>();
                 });
 
@@ -500,7 +500,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // 4️ привязываем результат
                 await this.InvokeAsync(() =>
                 {
-                    _planTotalQuantityByArticul.DataSource = bs.DataSource;
+                    _planTotalQuantityByArticulBindingSource.DataSource = bs.DataSource;
                 });
 
                 if (bs.Count == 0)
