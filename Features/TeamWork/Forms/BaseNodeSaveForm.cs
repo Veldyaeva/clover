@@ -11,12 +11,14 @@ namespace SewingProduction.Features.TeamWork.Forms
     internal sealed partial class BaseNodeSaveForm : Form
     {
         private readonly IReadOnlyList<NormRasz> _operations;
+        private readonly BaseNodeSaveDefaults _defaults;
 
         public BaseNodeDefinition ResultNode { get; private set; }
 
-        public BaseNodeSaveForm(IReadOnlyList<NormRasz> operations, string defaultName = null)
+        public BaseNodeSaveForm(IReadOnlyList<NormRasz> operations, string defaultName = null, BaseNodeSaveDefaults defaults = null)
         {
             _operations = operations ?? Array.Empty<NormRasz>();
+            _defaults = defaults;
 
             InitializeComponent();
             InitializeSelectors();
@@ -32,9 +34,26 @@ namespace SewingProduction.Features.TeamWork.Forms
             productKindComboBox.Items.AddRange(BaseNodeMetadataOptions.ProductKinds);
             productCategoryComboBox.Items.AddRange(BaseNodeMetadataOptions.ProductCategories);
 
-            nodeGroupComboBox.SelectedIndex = 0;
-            productKindComboBox.SelectedItem = "Универсальный";
-            productCategoryComboBox.SelectedItem = "Универсально";
+            // Автоподстановка только подсказывает значения, но пользователь может их свободно изменить.
+            SelectComboValue(nodeGroupComboBox, _defaults?.NodeGroup, string.Empty);
+            SelectComboValue(productKindComboBox, _defaults?.ProductKind, "Универсальный");
+            SelectComboValue(productCategoryComboBox, _defaults?.ProductCategory, "Универсально");
+        }
+
+        private static void SelectComboValue(ComboBox comboBox, string preferredValue, string fallbackValue)
+        {
+            string valueToSelect = comboBox.Items.Contains(preferredValue)
+                ? preferredValue
+                : fallbackValue;
+
+            if (comboBox.Items.Contains(valueToSelect))
+            {
+                comboBox.SelectedItem = valueToSelect;
+            }
+            else if (comboBox.Items.Count > 0)
+            {
+                comboBox.SelectedIndex = 0;
+            }
         }
 
         private void OkButton_Click(object sender, EventArgs e)

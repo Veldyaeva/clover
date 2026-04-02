@@ -109,7 +109,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 string defaultName = BuildDefaultBaseNodeName(operations);
-                using var form = new BaseNodeSaveForm(operations, defaultName);
+                var defaults = BaseNodeMetadataSuggester.Suggest(_currentAnnData ?? CreatedAnn, operations);
+                using var form = new BaseNodeSaveForm(operations, defaultName, defaults);
                 if (form.ShowDialog(this) != DialogResult.OK || form.ResultNode == null)
                 {
                     return;
