@@ -8,6 +8,8 @@ using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Features.TeamWork.Interfaces;
 using SewingProduction.Features.TeamWork.Operations;
 using SewingProduction.Features.TeamWork.Services;
+using SewingProduction.Features.UserDistribution.Class;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form.TeamWork.Forms;
 using SewingProduction.Helpers;
 using SewingProduction.Interfaces;
@@ -33,7 +35,7 @@ using MethodInvoker = System.Windows.Forms.MethodInvoker;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
-    public partial class TeamWork_AdvanceTW : CustomForm, ITeamWorkView
+    public partial class TeamWork_AdvanceTW : CustomForm, ITeamWorkView, IHeaderButtonPermissionHost
     {
         #region Поля и зависимости
         private readonly DbService _dbService;
@@ -44,6 +46,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private int _bufferWorkDivision;
         private readonly DatabaseHelper _dbHelper;
         private readonly TWGridHelper _gridHelper = new TWGridHelper();
+        private readonly LayoutControlGroupHelper _layoutControlGroupHelper = new LayoutControlGroupHelper();
         private int _newAnnId = -1;
         private int _selectedAnnId = -1;
         private readonly ILogger _logger = new FileLogger();
@@ -174,7 +177,10 @@ namespace SewingProduction.Features.TeamWork.Forms
         public string CurrentArticul => (_currentAnnData?.Articul ?? CreatedAnn?.Articul) ?? string.Empty;
 
         #region Конструкторы и базовая настройка
-        public TeamWork_AdvanceTW() { InitializeComponent(); }
+        public TeamWork_AdvanceTW()
+        {
+            InitializeComponent();
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -182,20 +188,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// <param name="oldId">Id исходной записи</param>
         /// <param name="bufferWorkDivision">Id из буфера</param>
         /// <param name="mode">режим</param>
-        public TeamWork_AdvanceTW(int bufferWorkDivision, int mode, int? newId = null, int? oldId = null, int? sourceAnnIdToCopyDetailsFrom = null, MyDataART initialArtData = null, ArtNormN duplicateAnnData = null)
+        public TeamWork_AdvanceTW(UserClass user, int bufferWorkDivision, int mode, int? newId = null, int? oldId = null, int? sourceAnnIdToCopyDetailsFrom = null, MyDataART initialArtData = null, ArtNormN duplicateAnnData = null) : base(user)
         {
             InitializeComponent();
-            gridViewRasz.OptionsView.ShowIndicator = true;
-            gridViewRasz.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDownFocused;
-            gridViewRasz.Appearance.Row.ForeColor = Color.Black;
-            gridViewRasz.Appearance.FocusedRow.ForeColor = Color.Black;
-            gridViewRasz.Appearance.FocusedCell.ForeColor = Color.Black;
-            gridViewRasz.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
 
             // Настройка мультиселекта с галочками
-            gridViewRasz.OptionsSelection.MultiSelect = true;
-            gridViewRasz.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
-            gridViewRasz.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
 
             // DnD подписки для Rasz перенесены в RaszOperationsController
 
@@ -205,6 +202,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
             _artNormService = new ArtNormRepository(_dbHelper);
+            _baseNodeLibraryService = new BaseNodeLibraryService(_dbHelper, _logger);
             // Инициализируем сервисы декомпозиции (пока без DI контейнера)
             // Адаптеры для интерфейсов до внедрения DI
             _dataService = new TeamWorkDataServiceAdapter(_artNormService, _dbService);
@@ -246,6 +244,73 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         #region Кнопки заголовков (инициализация и обработчики)
         // Устанавливает Tag для кастомных кнопок заголовков групп лейаута
+        private void InitializeHeaderButtonPermissionSupport()
+        {
+            if (DesignMode)
+            {
+                return;
+            }
+
+            Load += TeamWork_AdvanceTW_LoadHeaderButtonPermissions;
+        }
+
+        private async void TeamWork_AdvanceTW_LoadHeaderButtonPermissions(object sender, EventArgs e)
+        {
+            Load -= TeamWork_AdvanceTW_LoadHeaderButtonPermissions;
+            await ApplyBaseNodeHeaderPermissionsAsync();
+        }
+
+        private void RegisterBaseNodeHeaderPermissions()
+        {
+            _layoutControlGroupHelper.RegisterButtonPermission(layoutControlGroup10, "op:add-base-node", "btnAddBaseNode");
+            _layoutControlGroupHelper.RegisterButtonPermission(layoutControlGroup10, "op:save-base-node", "btnSaveBaseNode");
+        }
+
+        private async Task ApplyBaseNodeHeaderPermissionsAsync()
+        {
+            try
+            {
+                if (layoutControlGroup10 == null || CurrentUser.User?.UserId <= 0)
+                {
+                    return;
+                }
+
+                // Для advance-формы читаем отдельный snapshot прав, чтобы не перетирать права уже открытых форм.
+                var permissionUser = new UserClass
+                {
+                    UserId = CurrentUser.User.UserId
+                };
+
+                await permissionUser.LoadObjectForm(nameof(TeamWork_AdvanceTW));
+                _layoutControlGroupHelper.ApplyButtonPermissions(layoutControlGroup10, permissionUser);
+            }
+            catch (Exception ex)
+            {
+                LogSuppressedException("ApplyBaseNodeHeaderPermissionsAsync", ex);
+            }
+        }
+
+        public IEnumerable<HeaderButtonPermissionBinding> GetHeaderButtonPermissionBindings()
+        {
+            // Базовые узлы описываются декларативно, а их права применяет общий pipeline CustomForm.
+            if (layoutControlGroup10 != null)
+            {
+                yield return new HeaderButtonPermissionBinding
+                {
+                    Group = layoutControlGroup10,
+                    ButtonTag = "op:add-base-node",
+                    PermissionObjectName = "btnAddBaseNode"
+                };
+
+                yield return new HeaderButtonPermissionBinding
+                {
+                    Group = layoutControlGroup10,
+                    ButtonTag = "op:save-base-node",
+                    PermissionObjectName = "btnSaveBaseNode"
+                };
+            }
+        }
+
         private void InitHeaderButtonTags()
         {
             try
@@ -287,6 +352,21 @@ namespace SewingProduction.Features.TeamWork.Forms
                     {
                         var b2 = layoutControlGroup10.CustomHeaderButtons[2] as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton;
                         if (b2 != null) b2.Tag = "op:convert";
+                    }
+                    if (layoutControlGroup10.CustomHeaderButtons.Count > 3)
+                    {
+                        var b3 = layoutControlGroup10.CustomHeaderButtons[3] as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton;
+                        if (b3 != null) b3.Tag = "op:add-operation";
+                    }
+                    if (layoutControlGroup10.CustomHeaderButtons.Count > 4)
+                    {
+                        var b4 = layoutControlGroup10.CustomHeaderButtons[4] as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton;
+                        if (b4 != null) b4.Tag = "op:add-base-node";
+                    }
+                    if (layoutControlGroup10.CustomHeaderButtons.Count > 5)
+                    {
+                        var b5 = layoutControlGroup10.CustomHeaderButtons[5] as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton;
+                        if (b5 != null) b5.Tag = "op:save-base-node";
                     }
                 }
             }
@@ -342,6 +422,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                         //ValidateAndFixOperationNumbers();
                         RecalculateAllOperationNumbers();
                         //RecalculateNumbers();
+                        break;
+                    case "op:add-operation":
+                        _ = AddOperationPresenterAsync();
+                        break;
+                    case "op:add-base-node":
+                        AddBaseNodeFromLibrary();
+                        break;
+                    case "op:save-base-node":
+                        SaveSelectionAsBaseNode();
                         break;
                 }
             }

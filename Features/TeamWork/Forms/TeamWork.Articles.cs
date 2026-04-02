@@ -760,11 +760,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                     showAllButton.Checked = false;
                     showAllWD = false;
                 }
-                if (layoutControlGroup14 != null)
-                {
-                    var btn = layoutControlGroup14.CustomHeaderButtons[6];
-                    btn.Properties.Checked = false;
-                }
 
                 // Получаем данные из текущей строки
                 string kod = CommonFunctions.GetRowCellValueOrDefault<string>(gv_unbound_Arts, e.FocusedRowHandle, "kodd_rt", "");

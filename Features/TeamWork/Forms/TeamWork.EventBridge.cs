@@ -246,17 +246,20 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private async void layoutControlGroup2_CustomButtonClick(object sender, BaseButtonEventArgs e)
         {
-            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+            var tag = (e.Button as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton)?.Tag as string;
 
-            switch (buttonIndex)
+            switch (tag)
             {
-                case 2:
+                case "btnAdd":
+                case "rt:add":
                     ButtonPreliminaryWd_Click_Internal(sender, e);
                     break;
-                case 4:
+                case "btnEdit":
+                case "rt:duplicate":
                     await DuplicateWorkDivision_Click_Internal(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, forMyDataAnnView: true);
                     break;
-                case 6:
+                case "btnArch":
+                case "rt:arch-and-copy":
                     await ArchAndCopy(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, true);
                     break;
             }
@@ -307,33 +310,33 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private async void layoutControlGroup8_CustomButtonClick(object sender, BaseButtonEventArgs e)
         {
-            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+            var tag = (e.Button as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton)?.Tag as string;
 
-            switch (buttonIndex)
+            switch (tag)
             {
-                case 0:
+                case "wd:add-prelim":
                     if (ButtonPreliminaryWd.Enabled && ButtonPreliminaryWd.Visible)
                         ButtonPreliminaryWd_Click_Internal(sender, e);
                     break;
-                case 2:
+                case "wd:edit":
                     if (ButtonEditOnlyAdv.Enabled && ButtonEditOnlyAdv.Visible)
                         await EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: true);
                     else if (ButtonEditWd.Enabled && ButtonEditWd.Visible)
                         await EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: false);
                     break;
-                case 4:
+                case "wd:clone":
                     if (ButtonDouble.Enabled && ButtonDouble.Visible)
                         await DuplicateWorkDivision_Click_Internal(ANNgridView, _bindingList, _bindingSource);
                     break;
-                case 6:
+                case "wd:archive":
                     if (ButtonArchAndCopyWd.Enabled && ButtonArchAndCopyWd.Visible)
                         await SetArchiveStatus_Internal(sender, e);
                     break;
-                case 9:
+                case "wd:print":
                     if (PrintButton.Enabled && PrintButton.Visible)
                         PrintWorkDivisionScheme_Click(null, null);
                     break;
-                case 11:
+                case "wd:print-plus":
                     if (printButtonPlus.Enabled && printButtonPlus.Visible)
                         printButtonPlus_Click(null, null);
                     break;
@@ -355,17 +358,17 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private async void layoutControlGroup14_CustomButtonClick(object sender, BaseButtonEventArgs e)
         {
-            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+            var tag = (e.Button as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton)?.Tag as string;
 
-            switch (buttonIndex)
+            switch (tag)
             {
-                case 0:
+                case "bind:link":
                     await BindButton_Click_Internal(sender, e);
                     break;
-                case 2:
+                case "bind:unlink":
                     await UnbindWD(sender, e);
                     break;
-                case 4:
+                case "bind:touch-update-date":
                     await SetUpdateDate_Internal(sender, e);
                     break;
             }
@@ -376,11 +379,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// </summary>
         private async void layoutControlGroup19_CustomButtonClick(object sender, BaseButtonEventArgs e)
         {
-            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+            var tag = (e.Button as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton)?.Tag as string;
 
-            switch (buttonIndex)
+            switch (tag)
             {
-                case 0:
+                case "arch:restore":
                     await RestoreFromArchive_Internal(sender, e);
                     break;
             }
