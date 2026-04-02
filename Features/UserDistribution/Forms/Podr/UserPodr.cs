@@ -28,11 +28,17 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private List<RolePodrModel> _selectedRolePodr;
         private List<UserPodrModel> _selectedUserPodr;
         private List<RolePodrModel> _currentUserRolePodr;
+        private static GridHelper _gridHelper;
+
         public UserPodr(UserClass user) : base(user)
         {
             InitializeComponent();
             _userPodrDataService = new UserPodrDataService();
             _userModelDataService = new UserModelDataService();
+            _podrSaveTimer = new System.Windows.Forms.Timer();
+            _podrSaveTimer.Interval = 400;
+            _podrSaveTimer.Tick += podrSaveTimer_Tick;
+            _gridHelper = new GridHelper();
         }
         #region Initialization
         protected override async void OnShown(EventArgs e)
@@ -67,7 +73,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
             {
                 var part = await _userPodrDataService.LoadPodrFromTableAsync(
                     table.PodrTableID,
-                    table.PodrTableName);
+                    table.PodrTableName
+                );
 
                 if (part != null && part.Count > 0)
                     result.AddRange(part);
@@ -181,10 +188,9 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 gridViewPodr.EndUpdate();
             }
         }
-
-        private async void gridViewPodr_CellValueChanged(
-        object sender,
-        DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        private void gridViewPodr_CellValueChanged(
+    object sender,
+    DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
             if (e.Column != IsSelectedPodr)
                 return;
@@ -195,49 +201,15 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 return;
             }
 
-            int oldFocusedHandle = gridViewPodr.FocusedRowHandle;
-            int oldTopRowIndex = gridViewPodr.TopRowIndex;
-
             var row = gridViewPodr.GetRow(e.RowHandle) as UserPodrModel;
-
             if (row == null)
                 return;
 
             bool isChecked = Convert.ToBoolean(e.Value);
-
             row.IsSelected = isChecked;
+            row.UserID = _selectedUser.UserID;
 
-            if (isChecked)
-            {
-                int newId = await _userPodrDataService.SaveAsync(new UserPodrModel
-                {
-                    UserID = _selectedUser.UserID,
-                    PodrID = row.PodrID,
-                    PodrTableID = row.PodrTableID,
-                    CreatorID = CurrentUser.User.UserId
-                });
-
-                row.UserPodrID = newId;
-
-                _selectedUserPodr.Add(new UserPodrModel
-                {
-                    UserPodrID = newId,
-                    UserID = _selectedUser.UserID,
-                    PodrID = row.PodrID,
-                    PodrTableID = row.PodrTableID
-                });
-            }
-            else
-            {
-                await _userPodrDataService.DeleteAsync(row);
-
-                _selectedUserPodr.RemoveAll(x => x.UserPodrID == row.UserPodrID);
-
-                row.UserPodrID = 0;
-            }
-
-            gridViewPodr.TopRowIndex = oldTopRowIndex;
-            gridViewPodr.FocusedRowHandle = oldFocusedHandle;
+            EnqueuePodrChange(row, isChecked);
         }
         private void repositoryItemCheckEditPodr_CheckedChanged(object sender, EventArgs e)
         {
@@ -427,7 +399,235 @@ namespace SewingProduction.Features.UserDistribution.Forms
         }
 
         #endregion
+        #region Массовое проставление
+        private readonly object _podrSyncLock = new object();
+        private readonly Dictionary<(int PodrTableID, int PodrID), bool> _pendingPodrChanges = new Dictionary<(int PodrTableID, int PodrID), bool>();
+        private System.Windows.Forms.Timer _podrSaveTimer;
+        private bool _isFlushingPodrChanges;
+        private bool _isApplyingMassCheck;
+        private void EnqueuePodrChange(UserPodrModel row, bool isSelected)
+        {
+            if (row == null)
+                return;
 
+            var key = (row.PodrTableID, row.PodrID);
+
+            lock (_podrSyncLock)
+            {
+                _pendingPodrChanges[key] = isSelected;
+            }
+
+            _podrSaveTimer.Stop();
+            _podrSaveTimer.Start();
+        }
+        private async void podrSaveTimer_Tick(object sender, EventArgs e)
+        {
+            _podrSaveTimer.Stop();
+            await FlushPendingPodrChangesAsync();
+        }
+        private async Task FlushPendingPodrChangesAsync()
+        {
+            if (_isFlushingPodrChanges)
+                return;
+
+            if (_selectedUser == null)
+                return;
+
+            _isFlushingPodrChanges = true;
+
+            try
+            {
+                Dictionary<(int PodrTableID, int PodrID), bool> changesToApply;
+
+                lock (_podrSyncLock)
+                {
+                    changesToApply = new Dictionary<(int PodrTableID, int PodrID), bool>(_pendingPodrChanges);
+                    _pendingPodrChanges.Clear();
+                }
+
+                if (changesToApply.Count == 0)
+                    return;
+
+                customGridControlPodr.Enabled = false;
+
+                foreach (var change in changesToApply)
+                {
+                    var key = change.Key;
+                    bool mustBeSelected = change.Value;
+
+                    var row = FindPodrRow(key.PodrTableID, key.PodrID);
+                    if (row == null)
+                        continue;
+
+                    var cached = _selectedUserPodr.FirstOrDefault(x =>
+                        x.UserID == _selectedUser.UserID &&
+                        x.PodrTableID == key.PodrTableID &&
+                        x.PodrID == key.PodrID);
+
+                    if (mustBeSelected)
+                    {
+                        if (cached == null)
+                        {
+                            int newId = await _userPodrDataService.SaveAsync(new UserPodrModel
+                            {
+                                UserID = _selectedUser.UserID,
+                                PodrID = row.PodrID,
+                                PodrTableID = row.PodrTableID,
+                                CreatorID = CurrentUser.User.UserId
+                            });
+
+                            row.UserPodrID = newId;
+                            row.UserID = _selectedUser.UserID;
+
+                            _selectedUserPodr.Add(new UserPodrModel
+                            {
+                                UserPodrID = newId,
+                                UserID = _selectedUser.UserID,
+                                PodrID = row.PodrID,
+                                PodrTableID = row.PodrTableID
+                            });
+                        }
+                        else
+                        {
+                            row.UserPodrID = cached.UserPodrID;
+                            row.UserID = _selectedUser.UserID;
+                        }
+                    }
+                    else
+                    {
+                        if (cached != null)
+                        {
+                            await _userPodrDataService.DeleteAsync(new UserPodrModel
+                            {
+                                UserPodrID = cached.UserPodrID
+                            });
+
+                            _selectedUserPodr.RemoveAll(x => x.UserPodrID == cached.UserPodrID);
+                        }
+
+                        row.UserPodrID = 0;
+                        row.UserID = _selectedUser.UserID;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Ошибка при сохранении подразделений: {ex.Message}",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            finally
+            {
+                customGridControlPodr.Enabled = true;
+                _isFlushingPodrChanges = false;
+            }
+        }
+        private UserPodrModel FindPodrRow(int podrTableId, int podrId)
+        {
+            for (int i = 0; i < gridViewPodr.RowCount; i++)
+            {
+                var row = gridViewPodr.GetRow(i) as UserPodrModel;
+                if (row == null)
+                    continue;
+
+                if (row.PodrTableID == podrTableId && row.PodrID == podrId)
+                    return row;
+            }
+
+            return null;
+        }
+        private async void gridViewPodr_DoubleClick(object sender, EventArgs e)
+        {
+            var view = (GridView)sender;
+            var pt = view.GridControl.PointToClient(Control.MousePosition);
+            var hit = view.CalcHitInfo(pt);
+
+            if (!hit.InColumn || hit.Column != IsSelectedPodr)
+                return;
+
+            if (_selectedUser == null)
+            {
+                MessageBox.Show("Сначала выберите пользователя.");
+                return;
+            }
+
+            if (_isApplyingMassCheck || _isFlushingPodrChanges)
+                return;
+
+            bool hasUncheckedRows = false;
+
+            for (int i = 0; i < gridViewPodr.RowCount; i++)
+            {
+                var row = gridViewPodr.GetRow(i) as UserPodrModel;
+                if (row == null)
+                    continue;
+
+                if (!row.IsSelected)
+                {
+                    hasUncheckedRows = true;
+                    break;
+                }
+            }
+
+            string question = hasUncheckedRows
+                ? "Хотите проставить все доступные подразделения?"
+                : "Все подразделения уже выбраны. Снять все выделения?";
+
+            var result = MessageBox.Show(
+                question,
+                "Массовое назначение",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            bool targetValue = hasUncheckedRows;
+
+            _isApplyingMassCheck = true;
+
+            try
+            {
+                gridViewPodr.BeginUpdate();
+                try
+                {
+                    for (int i = 0; i < gridViewPodr.RowCount; i++)
+                    {
+                        var row = gridViewPodr.GetRow(i) as UserPodrModel;
+                        if (row == null)
+                            continue;
+
+                        row.IsSelected = targetValue;
+                        row.UserID = _selectedUser.UserID;
+                    }
+
+                    gridViewPodr.RefreshData();
+                }
+                finally
+                {
+                    gridViewPodr.EndUpdate();
+                }
+
+                for (int i = 0; i < gridViewPodr.RowCount; i++)
+                {
+                    var row = gridViewPodr.GetRow(i) as UserPodrModel;
+                    if (row == null)
+                        continue;
+
+                    EnqueuePodrChange(row, targetValue);
+                }
+
+                await FlushPendingPodrChangesAsync();
+                ApplyPodrGroupingAndSorting();
+            }
+            finally
+            {
+                _isApplyingMassCheck = false;
+            }
+        }
+        #endregion
         private void customGridControlUser_Click(object sender, EventArgs e)
         {
 
