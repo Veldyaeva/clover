@@ -1,13 +1,4 @@
-﻿using DevExpress.CodeParser;
-using DevExpress.XtraEditors;
-using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraRichEdit.Layout;
-using SewingProduction.Features.Tabel.Models;
-using SewingProduction.Features.Tabel.Services;
-using SewingProduction.Helpers;
-using SewingProduction.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +9,16 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.CodeParser;
+using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraRichEdit.Layout;
+using SewingProduction.Features.Tabel.Models;
+using SewingProduction.Features.Tabel.Services;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Helpers;
+using SewingProduction.Services;
 
 namespace SewingProduction.Features.Tabel.Forms
 {
@@ -58,6 +59,10 @@ namespace SewingProduction.Features.Tabel.Forms
             _dbService = new DbService(_dbHelper);
             _tabelDataService = new TabelDataService(_dbHelper);
             _WorkTypesList = new List<WorkTypes>();
+        }
+        public CalculatorDay(UserClass user)
+        {
+            InitializeComponent();
         }
         private async Task GetWorkTypes(int idGr)
         {
