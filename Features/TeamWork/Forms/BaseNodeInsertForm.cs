@@ -103,7 +103,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             var node = SelectedNode;
             if (node == null)
             {
-                operationsListBox.Items.Clear();
                 previewGrid.DataSource = null;
                 detailsLabel.Text = "Выберите базовый узел.";
                 return;
@@ -111,20 +110,6 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             var previewRows = BaseNodeMapper.CreatePreviewRows(node);
             previewGrid.DataSource = previewRows;
-
-            operationsListBox.BeginUpdate();
-            try
-            {
-                operationsListBox.Items.Clear();
-                foreach (var row in previewRows)
-                {
-                    operationsListBox.Items.Add($"{row.Number}  {row.Operation}");
-                }
-            }
-            finally
-            {
-                operationsListBox.EndUpdate();
-            }
 
             int chapters = node.Operations.Select(x => x.SourceN).Distinct().Count();
             string description = string.IsNullOrWhiteSpace(node.Description) ? "Без описания" : node.Description.Trim();
