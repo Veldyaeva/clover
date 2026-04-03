@@ -978,11 +978,14 @@ namespace SewingProduction.Helpers
             {
                 FocusedColumnFieldName = view.FocusedColumn?.FieldName,
                 TopRowIndex = view.TopRowIndex,
-                ExpandedGroupKeys = CaptureExpandedGroups(view)
+                ExpandedGroupKeys = CaptureExpandedGroups(view),
+                FocusedRowKey = view.GetFocusedRow() is T focusedRow
+                    ? rowKeySelector(focusedRow)
+                    : null
             };
 
-            if (bindingSource.Current is T currentRow)
-                state.FocusedRowKey = rowKeySelector(currentRow);
+            //if (bindingSource.Current is T currentRow)
+            //    state.FocusedRowKey = rowKeySelector(currentRow);
 
             return state;
         }
@@ -1046,12 +1049,31 @@ namespace SewingProduction.Helpers
             }
         }
 
+        //public List<string> CaptureExpandedGroups(GridView view)
+        //{
+        //    var result = new List<string>();
+
+        //    for (int rowHandle = 0; rowHandle < view.RowCount; rowHandle++)
+        //    {
+        //        if (!view.IsGroupRow(rowHandle))
+        //            continue;
+
+        //        if (view.GetRowExpanded(rowHandle))
+        //            result.Add(BuildGroupPath(view, rowHandle));
+        //    }
+
+        //    return result;
+        //}
         public List<string> CaptureExpandedGroups(GridView view)
         {
+            if (view == null) throw new ArgumentNullException(nameof(view));
+
             var result = new List<string>();
 
-            for (int rowHandle = 0; rowHandle < view.RowCount; rowHandle++)
+            for (int visibleIndex = 0; visibleIndex < view.RowCount; visibleIndex++)
             {
+                int rowHandle = view.GetVisibleRowHandle(visibleIndex);
+
                 if (!view.IsGroupRow(rowHandle))
                     continue;
 
@@ -1061,25 +1083,51 @@ namespace SewingProduction.Helpers
 
             return result;
         }
+        //public void RestoreExpandedGroups(GridView view, List<string> expandedGroupKeys)
+        //{
+        //    if (view == null) throw new ArgumentNullException(nameof(view));
+        //    //view.CollapseAllGroups();
+        //    if (expandedGroupKeys == null || expandedGroupKeys.Count == 0)
+        //        return;
 
+        //    var expandedSet = expandedGroupKeys.ToHashSet();
+
+        //    for (int rowHandle = 0; rowHandle < view.RowCount; rowHandle++)
+        //    {
+        //        if (!view.IsGroupRow(rowHandle))
+        //            continue;
+
+        //        string path = BuildGroupPath(view, rowHandle);
+        //        //bool shouldExpand = expandedGroupKeys.Contains(path);
+
+        //        //view.SetRowExpanded(rowHandle, shouldExpand);
+        //        if (expandedSet.Contains(path))
+        //            view.SetRowExpanded(rowHandle, true);
+        //    }
+        //}
         public void RestoreExpandedGroups(GridView view, List<string> expandedGroupKeys)
         {
             if (view == null) throw new ArgumentNullException(nameof(view));
+
+            view.CollapseAllGroups();
+
             if (expandedGroupKeys == null || expandedGroupKeys.Count == 0)
                 return;
 
-            for (int rowHandle = 0; rowHandle < view.RowCount; rowHandle++)
+            var expandedSet = expandedGroupKeys.ToHashSet();
+
+            for (int visibleIndex = 0; visibleIndex < view.RowCount; visibleIndex++)
             {
+                int rowHandle = view.GetVisibleRowHandle(visibleIndex);
+
                 if (!view.IsGroupRow(rowHandle))
                     continue;
 
                 string path = BuildGroupPath(view, rowHandle);
-                bool shouldExpand = expandedGroupKeys.Contains(path);
-
-                view.SetRowExpanded(rowHandle, shouldExpand);
+                if (expandedSet.Contains(path))
+                    view.SetRowExpanded(rowHandle, true);
             }
         }
-
         public void RestoreExpandParentGroups(GridView view, int rowHandle)
         {
             int parent = view.GetParentRowHandle(rowHandle);
@@ -1096,15 +1144,29 @@ namespace SewingProduction.Helpers
             var parts = new Stack<string>();
             int current = groupRowHandle;
 
+            //while (current != GridControl.InvalidRowHandle && view.IsGroupRow(current))
+            //{
+            //    int level = view.GetRowLevel(current);
+            //    string groupText = Convert.ToString(view.GetGroupRowValue(current)) ?? string.Empty;
+            //    parts.Push($"{level}:{groupText}");
+
+            //    current = view.GetParentRowHandle(current);
+            //}
             while (current != GridControl.InvalidRowHandle && view.IsGroupRow(current))
             {
                 int level = view.GetRowLevel(current);
-                string groupText = Convert.ToString(view.GetGroupRowValue(current)) ?? string.Empty;
-                parts.Push($"{level}:{groupText}");
+
+                string fieldName = view.GroupedColumns.Count > level
+                    ? view.GroupedColumns[level].FieldName
+                    : $"Level{level}";
+
+                object groupValue = view.GetGroupRowValue(current);
+                string valueText = Convert.ToString(groupValue) ?? string.Empty;
+
+                parts.Push($"{level}:{fieldName}={valueText}");
 
                 current = view.GetParentRowHandle(current);
             }
-
             return string.Join("|", parts);
         }
     }

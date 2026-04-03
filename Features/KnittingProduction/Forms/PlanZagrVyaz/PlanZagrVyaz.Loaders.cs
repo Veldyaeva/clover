@@ -283,10 +283,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                             switch (vyazPodrKod)
                             {
                                 case 1:
-                                    state = _gridHelper.CaptureState<PZVOperList>(
+                                    state = _gridHelper.CaptureState<SmenZadanyVyaz>(
                                         advBandedGridViewSmenZadany,
                                         _smenZadanyVyazBindingSource,
-                                        x => x.olPzvID.ToString());
+                                        x => $"{x.kwsID}|{x.kwsmlKmlID}|{x.typeID}|{x.szTab}");
+                                    //MessageBox.Show($"state.TopRowIndex = {state.TopRowIndex}");
                                     advBandedGridViewSmenZadany.ShowLoadingPanel();
                                     break;
                                 case 2:
@@ -303,10 +304,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                             await this.UI(() =>
                             {
+                                bool needInitialExpand = string.IsNullOrWhiteSpace(state.FocusedRowKey);
                                 gridControlSmenZadany.BeginUpdate();
                                 _smenZadanyVyazNewBindingSource.DataSource = bs.DataSource;
-                                Application.Idle -= ExpandGroupsOnIdle;
-                                Application.Idle += ExpandGroupsOnIdle;
+                                //Application.Idle -= ExpandGroupsOnIdle;
+                                //Application.Idle += ExpandGroupsOnIdle;
                                 //----------------------
                                 var changes = GetChanges<SmenZadanyVyaz>(
                                     _smenZadanyVyazBindingSource,
@@ -338,11 +340,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                                     changes = null;
                                 }
                                 //------------------------------
-                                if (vyazPodrKod == 1)
-                                {
-                                    Application.Idle -= ExpandGroupsOnIdle;
-                                    Application.Idle += ExpandGroupsOnIdle;
-                                }
+                                //if (vyazPodrKod == 1)
+                                //{
+                                //    Application.Idle -= ExpandGroupsOnIdle;
+                                //    Application.Idle += ExpandGroupsOnIdle;
+                                //}
                                 gridControlSmenZadany.EndUpdate();
 
                                 //----------------------
@@ -355,11 +357,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                                         advBandedGridViewSmenZadany.SortInfo.Add(new GridColumnSortInfo(bandedGridSmenZadanyColumnKmlNumber, ColumnSortOrder.Ascending));
                                         advBandedGridViewSmenZadany.EndSort();
 
-                                        state = _gridHelper.CaptureState<PZVOperList>(
-                                            advBandedGridViewSmenZadany,
-                                            _smenZadanyVyazBindingSource,
-                                            x => x.olPzvID.ToString());
-
+                                        if (needInitialExpand)
+                                        {
+                                            //ExpandGroupsOnFirstLoad();
+                                            //ExpandGroupsOnIdle();
+                                            SetGroupExpandState_NoRecursion();
+                                        }
+                                        else
+                                        {
+                                            _gridHelper.RestoreState<SmenZadanyVyaz>(
+                                                advBandedGridViewSmenZadany,
+                                                _smenZadanyVyazBindingSource,
+                                                state,
+                                                x => $"{x.kwsID}|{x.kwsmlKmlID}|{x.typeID}|{x.szTab}");
+                                        }
                                         break;
                                     case 2:
                                     case 3:

@@ -490,8 +490,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     ["GetSmenZadanyVyaz"] = async () =>
                     {
-                        //int xTopRowIndex = gridViewSmenZadany.TopRowIndex;
-                        //int xFocusedRowHandle = gridViewSmenZadany.FocusedRowHandle;
+                        int xTopRowIndex = 0;
+                        int xFocusedRowHandle = 0;
+                        switch (vyazPodrKod)
+                        {
+                            case 1:
+                                xTopRowIndex = advBandedGridViewSmenZadany.TopRowIndex;
+                                xFocusedRowHandle = advBandedGridViewSmenZadany.FocusedRowHandle;
+                                break;
+                            case 2:
+                            case 3:
+                                xTopRowIndex = gridViewSmenZadanyOtp.TopRowIndex;
+                                xFocusedRowHandle = gridViewSmenZadanyOtp.FocusedRowHandle;
+                                break;
+                        }
                         //await LoadSmenZadanyVyazNewDataAsync(vyazPodrKod); // сменное задание
                         await LoadSmenZadanyVyazNewDataAsync(1); // сменное задание
                         //await InvokeOnUiAsync(async () =>
@@ -499,6 +511,18 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         //    gridViewSmenZadany.TopRowIndex = xTopRowIndex;
                         //    gridViewSmenZadany.TopRowIndex = xTopRowIndex;
                         //});
+                        switch (vyazPodrKod)
+                        {
+                            case 1:
+                                advBandedGridViewSmenZadany.TopRowIndex = xTopRowIndex;
+                                advBandedGridViewSmenZadany.FocusedRowHandle = xFocusedRowHandle;
+                                break;
+                            case 2:
+                            case 3:
+                                gridViewSmenZadanyOtp.TopRowIndex = xTopRowIndex;
+                                gridViewSmenZadanyOtp.FocusedRowHandle = xFocusedRowHandle;
+                                break;
+                        }
                     },
 
                     ["knitWorkingShiftNewCurrentSmen_view"] = async () =>
@@ -2398,12 +2422,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 textBoxJson.Text = result.JsonPayload ?? string.Empty;
                 _pzvOperationsGridUpdater.Apply(result.Rows);
 
-                _gridHelper.RestoreState<PZVOperList>(
-                    gridViewPZVOperList,
-                    _pZVOperListByPachListBindingSource,
-                    state,
-                    x => x.olPzvID.ToString());
+                bool needInitialExpand = string.IsNullOrWhiteSpace(state.FocusedRowKey);
 
+                if (!needInitialExpand)
+                {
+                    _gridHelper.RestoreState<PZVOperList>(
+                        gridViewPZVOperList,
+                        _pZVOperListByPachListBindingSource,
+                        state,
+                        x => x.olPzvID.ToString());
+                }
                 gridViewPZVOperList.TopRowIndex = _xTopRowIndex;
             }
             catch (Exception ex)
@@ -2592,6 +2620,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 }
 
                 await LoadSmenZadanyVyazDataAsync();
+                //ExpandGroupsOnIdle();
                 Debug.WriteLine($"PlanZagrVyaz_Load completed");
             }
             catch (OperationCanceledException ex)
