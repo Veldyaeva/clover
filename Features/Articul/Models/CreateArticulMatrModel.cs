@@ -49,6 +49,7 @@ namespace SewingProduction.Features.Articul.Models
         public string Sost3 { get; set; }
         public int Ag_id { get; set; }
         public int Id_gost { get; set; }
+        public string Tkb {  get; set; }
         public DateTime? DateCertificationApproval { get; set; }
 
 

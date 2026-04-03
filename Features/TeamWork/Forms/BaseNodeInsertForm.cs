@@ -108,7 +108,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 return;
             }
 
-            previewGrid.DataSource = BaseNodeMapper.CreatePreviewRows(node);
+            var previewRows = BaseNodeMapper.CreatePreviewRows(node);
+            previewGrid.DataSource = previewRows;
 
             int chapters = node.Operations.Select(x => x.SourceN).Distinct().Count();
             string description = string.IsNullOrWhiteSpace(node.Description) ? "Без описания" : node.Description.Trim();

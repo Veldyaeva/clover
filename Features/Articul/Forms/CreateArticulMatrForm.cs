@@ -3,6 +3,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using SewingProduction.Core.Models;
 using SewingProduction.Core.Services;
+using SewingProduction.Features.Articul.Helpers;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
 using SewingProduction.Features.UserDistribution.Helpers;
@@ -364,7 +365,8 @@ namespace SewingProduction.Features.Articul.Forms
                 //}
 
                 articulControl1.ClearComparisonHighlight();   //очищаем подсветку сравнения при смене артикула в матрице, чтобы не было "висячей" подсветки от предыдущего сравнения
-                _bsDetails.Clear();// очищаем детали от предыдущего сравнения
+                ArticulControlBindingHelper.ClearDetails(_bsDetails);// очищаем детали от предыдущего сравнения
+                articulControl1.ClearImage();
                 var currentRow = _bindingSourceArtMatr.Current as CreateArticulMatrModel;// получаем текущую выбранную строку из матрицы
                 if (currentRow == null)// если строка не выбрана, выходим из метода
                     return;
@@ -390,7 +392,8 @@ namespace SewingProduction.Features.Articul.Forms
             string kod = currentRow1?.Kod;// извлекаем код артикула для загрузки деталей, если строка выбрана, или null, если строка не выбрана
 
             gridViewArtCompare.ShowLoadingPanel();// показываем индикатор загрузки, так как загрузка деталей может занять некоторое время
-            _bsDetails?.Clear();// очищаем предыдущие детали, чтобы не было "висячих" данных от предыдущего сравнения, пока загружаются новые детали
+            ArticulControlBindingHelper.ClearDetails(_bsDetails);// очищаем предыдущие детали, чтобы не было "висячих" данных от предыдущего сравнения, пока загружаются новые детали
+            articulControl1.ClearImage();
             //          _bsDetails.DataSource = await _articulDataService.GetByKodAsync(kod);
             await CompareSelectedArticulAsync();// загружаем детали для выбранного артикула сравнения и выполняем сравнение с текущим артикулом матрицы, результат сравнения сохраняем в поле _lastCompareResult, чтобы при сохранении матрицы знать, нужно ли сохранять изменения или нет
             gridViewArtCompare.HideLoadingPanel();// скрываем индикатор загрузки после завершения загрузки деталей и сравнения
@@ -443,16 +446,21 @@ namespace SewingProduction.Features.Articul.Forms
 
                 if (matrixRow == null || compareRow == null || string.IsNullOrWhiteSpace(compareRow.Kod))// если не выбрана строка для сравнения или в выбранной строке нет кода артикула для сравнения, очищаем детали и выходим из метода, так как нечего сравнивать
                 {
-                    _bsDetails.Clear();// очищаем детали, чтобы не было "висячих" данных от предыдущего сравнения, так как нет артикула для сравнения
+                    ArticulControlBindingHelper.ClearDetails(_bsDetails);// очищаем детали, чтобы не было "висячих" данных от предыдущего сравнения, так как нет артикула для сравнения
+                    articulControl1.ClearImage();
                     _lastCompareResult = false;
                     return;
                 }
 
-                var details = await _articulDataService.GetByKodAsync(compareRow.Kod);// загружаем детали для выбранного артикула сравнения
-                _bsDetails.DataSource = details;// устанавливаем источник данных для деталей, которые отображаются в articulControl1, при этом articulControl1 должен автоматически обновить отображение деталей, так как он привязан к _bsDetails
-                _bsDetails.ResetBindings(false);// сбрасываем привязки, чтобы гарантировать обновление отображения деталей в articulControl1, так как мы изменили источник данных
+                var detailsTask = _articulDataService.GetByKodAsync(compareRow.Kod);// загружаем детали для выбранного артикула сравнения
+                var imageTask = articulControl1.LoadImageAsync(compareRow.Kodd);// загружаем изображение артикула так же, как в форме Articul
 
-                var compareItems = CreateArticulMatrComparisonBuilder.Build(matrixRow);// создаем список полей для сравнения на основе текущей строки матрицы, который будет использоваться в articulControl1 для сравнения и подсветки различий
+                await Task.WhenAll(detailsTask, imageTask);
+
+                var details = await detailsTask;
+                ArticulControlBindingHelper.SetDetails(_bsDetails, details);// устанавливаем источник данных для деталей, которые отображаются в articulControl1
+
+                var compareItems = BuildComparisonItems(matrixRow);// создаем список полей для сравнения на основе текущей строки матрицы, который будет использоваться в articulControl1 для сравнения и подсветки различий
                 var result = articulControl1.CompareAndHighlight(compareItems);// выполняем сравнение и подсветку различий в articulControl1, результат сравнения сохраняем в переменной result, которая содержит информацию о том, совпадают ли артикулы полностью (IsMatch) и какие поля отличаются (Mismatches)
                                                                                // тут можно сохранить флаг в поле формы
                 _lastCompareResult = result.IsMatch;// сохраняем результат сравнения в поле формы, чтобы при сохранении матрицы знать, нужно ли сохранять изменения или нет, так как если артикулы совпадают полностью, то сохранять изменения не нужно, так как они не изменились по сравнению с выбранным артикулом сравнения
@@ -463,6 +471,31 @@ namespace SewingProduction.Features.Articul.Forms
                 _lastCompareResult = false;
             }
 
+        }
+
+        private IReadOnlyList<FieldComparisonItem> BuildComparisonItems(CreateArticulMatrModel matrixRow)
+        {
+            var compareItems = CreateArticulMatrComparisonBuilder.Build(matrixRow);
+
+            if (compareItems.Count == 0)
+                return compareItems;
+
+            var expectedGostGroupName = _gostGroupAll?
+                .FirstOrDefault(x => x.Ag_id == matrixRow.Ag_id)?
+                .Ag_name_sokr;
+
+            return compareItems
+                .Select(item => string.Equals(item.PropertyName, nameof(SpArticulPreviewModel.Ag_id), StringComparison.OrdinalIgnoreCase)
+                    ? new FieldComparisonItem
+                    {
+                        PropertyName = item.PropertyName,
+                        ExpectedValue = item.ExpectedValue,
+                        ExpectedDisplayValue = string.IsNullOrWhiteSpace(expectedGostGroupName) ? item.ExpectedValue : expectedGostGroupName,
+                        DisplayName = item.DisplayName,
+                        FullMatch = item.FullMatch
+                    }
+                    : item)
+                .ToList();
         }
     }
 }

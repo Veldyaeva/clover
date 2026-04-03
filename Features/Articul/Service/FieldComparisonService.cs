@@ -46,6 +46,7 @@ namespace SewingProduction.Features.Articul.Service
                         PropertyName = item.PropertyName,
                         ActualValue = actual,
                         ExpectedValue = item.ExpectedValue,
+                        ExpectedDisplayValue = item.ExpectedDisplayValue ?? item.ExpectedValue,
                         Control = null // Здесь можно добавить логику для определения связанного UI-контрола, если необходимо
                     };
 
@@ -166,6 +167,7 @@ namespace SewingProduction.Features.Articul.Service
     {
         public string PropertyName { get; init; } = "";
         public object? ExpectedValue { get; init; }
+        public object? ExpectedDisplayValue { get; init; }
         public string? DisplayName { get; init; }
         public bool FullMatch { get; init; }
     }
@@ -174,6 +176,7 @@ namespace SewingProduction.Features.Articul.Service
     {
         public string PropertyName { get; init; } = "";
         public object? ExpectedValue { get; init; }
+        public object? ExpectedDisplayValue { get; init; }
         public object? ActualValue { get; init; }
         public Control? Control { get; init; }
     }
@@ -239,8 +242,8 @@ namespace SewingProduction.Features.Articul.Service
                 },
                 new()
                 {
-                    PropertyName = nameof(SpArticulPreviewModel.Grup),
-                    ExpectedValue = row.Grup,
+                    PropertyName = nameof(SpArticulPreviewModel.Grup),//Ag_id),
+                    ExpectedValue = row.Grup,//.Ag_id,
                     DisplayName = "Группа"
                 },
                 new()
