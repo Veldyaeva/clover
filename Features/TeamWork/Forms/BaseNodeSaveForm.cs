@@ -34,7 +34,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             productKindComboBox.Items.AddRange(BaseNodeMetadataOptions.ProductKinds);
             productCategoryComboBox.Items.AddRange(BaseNodeMetadataOptions.ProductCategories);
 
-            // Автоподстановка только подсказывает значения, но пользователь может их свободно изменить.
+            // Автоподстановка только подсказывает значения, пользователь может их изменить
             SelectComboValue(nodeGroupComboBox, _defaults?.NodeGroup, string.Empty);
             SelectComboValue(productKindComboBox, _defaults?.ProductKind, "Универсальный");
             SelectComboValue(productCategoryComboBox, _defaults?.ProductCategory, "Универсально");
@@ -83,7 +83,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private string BuildSummary()
         {
             int chapters = _operations.Select(x => x.N).Distinct().Count();
-            return $"Будут сохранены операций: {_operations.Count}. Глав: {chapters}.";
+            return $"Будут сохранены операций: {chapters}. Подопераций: {_operations.Count}.";
         }
     }
 }
