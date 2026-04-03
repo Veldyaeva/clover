@@ -1,4 +1,6 @@
-﻿using DevExpress.XtraGrid.Views.Grid;
+﻿using DevExpress.Data;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.helpers;
 using SewingProduction.Features.KnittingProduction.Models;
 using System;
@@ -114,6 +116,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Adapters
                 _view.ExpandAllGroups();
                 if (topRow >= 0)
                     _view.TopRowIndex = topRow;
+
+                _view.BeginSort();
+                _view.ClearSorting();
+                _view.SortInfo.Add(new GridColumnSortInfo(_view.Columns["olPzvArticul"], ColumnSortOrder.Ascending));
+                _view.SortInfo.Add(new GridColumnSortInfo(_view.Columns["olNPach"], ColumnSortOrder.Ascending));
+                _view.SortInfo.Add(new GridColumnSortInfo(_view.Columns["olNo"], ColumnSortOrder.Ascending));
+                _view.SortInfo.Add(new GridColumnSortInfo(_view.Columns["olNpo"], ColumnSortOrder.Ascending));
+                _view.SortInfo.Add(new GridColumnSortInfo(_view.Columns["olPzvIDParent"], ColumnSortOrder.Ascending));
+                _view.SortInfo.Add(new GridColumnSortInfo(_view.Columns["olPzvID"], ColumnSortOrder.Ascending));
+                _view.EndSort();
 
                 _setTopRowIndex(_view.TopRowIndex);
             }

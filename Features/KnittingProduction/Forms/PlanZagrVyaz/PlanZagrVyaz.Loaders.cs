@@ -271,6 +271,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
         private async Task LoadSmenZadanyVyazNewDataAsync(int _xKodProizv)
         {
+            GridHelper.GridViewState? state = null;
+
             try
             {
                 await _loader.RunAsync(
@@ -281,6 +283,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                             switch (vyazPodrKod)
                             {
                                 case 1:
+                                    state = _gridHelper.CaptureState<PZVOperList>(
+                                        advBandedGridViewSmenZadany,
+                                        _smenZadanyVyazBindingSource,
+                                        x => x.olPzvID.ToString());
                                     advBandedGridViewSmenZadany.ShowLoadingPanel();
                                     break;
                                 case 2:
@@ -348,6 +354,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                                         advBandedGridViewSmenZadany.SortInfo.Add(new GridColumnSortInfo(bandedGridSmenZadanyColumnKmaNumber, ColumnSortOrder.Ascending));
                                         advBandedGridViewSmenZadany.SortInfo.Add(new GridColumnSortInfo(bandedGridSmenZadanyColumnKmlNumber, ColumnSortOrder.Ascending));
                                         advBandedGridViewSmenZadany.EndSort();
+
+                                        state = _gridHelper.CaptureState<PZVOperList>(
+                                            advBandedGridViewSmenZadany,
+                                            _smenZadanyVyazBindingSource,
+                                            x => x.olPzvID.ToString());
+
                                         break;
                                     case 2:
                                     case 3:

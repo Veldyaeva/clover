@@ -2374,10 +2374,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
         public async Task LoadPlanZagrVyazByZadanySelection()
         {
+            GridHelper.GridViewState? state = null;
+
             try
             {
-                CommitRzvSelectionEditor();
+                state = _gridHelper.CaptureState<PZVOperList>(
+                    gridViewPZVOperList,
+                    _pZVOperListByPachListBindingSource,
+                    x => x.olPzvID.ToString());
 
+                CommitRzvSelectionEditor();
+                var _xTopRowIndex = gridViewPZVOperList.TopRowIndex;
                 //var context = _contextBuilder.Build();
                 var context = _contextBuilder.BuildForPachSelection();
                 var request = new LoadPzvOperationsRequest
@@ -2390,6 +2397,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 textBoxJson.Text = result.JsonPayload ?? string.Empty;
                 _pzvOperationsGridUpdater.Apply(result.Rows);
+
+                _gridHelper.RestoreState<PZVOperList>(
+                    gridViewPZVOperList,
+                    _pZVOperListByPachListBindingSource,
+                    state,
+                    x => x.olPzvID.ToString());
+
+                gridViewPZVOperList.TopRowIndex = _xTopRowIndex;
             }
             catch (Exception ex)
             {

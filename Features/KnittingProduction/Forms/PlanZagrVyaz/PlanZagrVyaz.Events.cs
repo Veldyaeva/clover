@@ -146,6 +146,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 var view = (GridView)sender;
                 var currentItem = view.GetRow(e.RowHandle) as PZVOperList;
                 if (currentItem == null) return;
+                var _xTopRowIndex = view.TopRowIndex;
+                var state = _gridHelper.CaptureState<PZVOperList>(
+                    gridViewPZVOperList,
+                    _pZVOperListByPachListBindingSource,
+                    x => x.olPzvID.ToString());
 
                 if (currentItem.olPzvDateNaznKm != null && currentItem.olPzvDateEnd == null)
                 {
@@ -178,7 +183,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 if (vyazPodrKod == 1)
                 {
                     int xPzvID = currentItem.olPzvID;
-                    string _xColumn = gridViewPZVOperList.FocusedColumn.ToString();
+                    string _xColumn = view.FocusedColumn.ToString();
                     if (currentItem.olPzvDateEnd != null && currentItem.olPzvDateMast == null)
                     {
                         string query = $"exec dbo.PZV_Split @pzvId = {currentItem.olPzvID}, @mode = 2, @qtyFact = {Convert.ToInt32(e.Value)} ";
@@ -207,7 +212,25 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                             , CancellationToken.None
                             );
                     }
-                    _gridHelper.GoToRowById<PZVOperList, int>(gridViewPZVOperList, _pZVOperListByPachListBindingSource, x => x.olPzvID, xPzvID, _xColumn);
+                    //_gridHelper.GoToRowById<PZVOperList, int>(gridViewPZVOperList, 
+                    //    _pZVOperListByPachListBindingSource, 
+                    //    x => x.olPzvID, 
+                    //    xPzvID, 
+                    //    _xColumn);
+
+                    _gridHelper.RestoreState<PZVOperList>(
+                        gridViewPZVOperList,
+                        _pZVOperListByPachListBindingSource,
+                        state,
+                        x => x.olPzvID.ToString());
+
+                    _gridHelper.GoToRowById<PZVOperList, int>(
+                        view,
+                        _pZVOperListByPachListBindingSource,
+                        x => x.olPzvID,
+                        _xPzvID,
+                        _xColumn);
+                    view.TopRowIndex = _xTopRowIndex;
                     Debug.WriteLine($"Finished processing CellValueChanged for olPzvID={currentItem.olPzvID}");
                 }
             }
@@ -248,10 +271,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 👇 1. Заголовок
             if (hit.InColumn)
             {
+                var _xTopRowIndex = view.TopRowIndex;
                 int xSelected = Convert.ToInt32(view.GetRowCellValue(0, gridPZVOperListColumnSyncSelection));
                 int newValue = xSelected == 0 ? 1 : 0;
 
                 _gridHelper.SetValueForFilteredRecordsInGrid(view, gridPZVOperListColumnSyncSelection, newValue);
+                view.TopRowIndex = _xTopRowIndex;
             }
 
             // 👇 2. Ячейка
@@ -259,6 +284,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 var row = view.GetRow(hit.RowHandle) as PZVOperList;
                 if (row == null) return;
+                var _xTopRowIndex = view.TopRowIndex;
 
                 foreach (var _row in _pZVOperListByPachListBindingSource.List.OfType<PZVOperList>())
                 {
@@ -276,6 +302,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 if (action.HasValue)
                     await ExecutePzvActionAsync(action.Value);
+                view.TopRowIndex = _xTopRowIndex;
             }
         }
         private PzvActionType? ResolveDoubleClickAction(string? fieldName, PZVOperList row)
@@ -312,6 +339,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
         private void gridViewPZVOperList_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
+            //var current = _pZVOperListByPachListBindingSource.Current as PZVOperList;
             var current = _pZVOperListByPachListBindingSource.Current as PZVOperList;
             _xPzvID = current?.olPzvID ?? 0;
         }
