@@ -767,11 +767,13 @@ namespace SewingProduction
                         mtbData_cd.ForeColor = Color.Black;
                     }
 
-                    furnitZayavViewFurnit.Text = (selectedRow.FKodFD.IsNullOrEmpty() ? " ".PadRight(12) : selectedRow.FKodFD).Substring(0, 12);
+                    //furnitZayavViewFurnit.Text = (selectedRow.FKodFD.IsNullOrEmpty() ? " ".PadRight(12) : selectedRow.FKodFD).Substring(0, 12);
+                    furnitZayavViewFurnit.Text = (string.IsNullOrEmpty(selectedRow.FKodFD) ? " ".PadRight(12) : selectedRow.FKodFD).Substring(0, 12);
                     furnitZayavViewFurnit.ViewType = "r";
                     furnitZayavViewFurnit.Refresh();
 
-                    furnitZayavViewUpak.Text = (selectedRow.UKodFD.IsNullOrEmpty() ? " ".PadRight(12) : selectedRow.UKodFD).Substring(0, 12);
+                    //furnitZayavViewUpak.Text = (selectedRow.UKodFD.IsNullOrEmpty() ? " ".PadRight(12) : selectedRow.UKodFD).Substring(0, 12);
+                    furnitZayavViewUpak.Text = (string.IsNullOrEmpty(selectedRow.UKodFD) ? " ".PadRight(12) : selectedRow.UKodFD).Substring(0, 12);
                     furnitZayavViewUpak.ViewType = "r";
                     furnitZayavViewUpak.Refresh();
 

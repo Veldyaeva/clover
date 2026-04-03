@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_LastSelectedProfileId>D:\Work\sewingproduction\Properties\PublishProfiles\ver.x32.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>D:\SharpProj\sewingproduction-9.0.net\Properties\PublishProfiles\ver.x32.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="Core\Class\CustomControlsThemeable.cs">
@@ -118,10 +118,22 @@
     <Compile Update="Features\KnittingProduction\Forms\KnittingProductionPlanningReportParameters.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz.cs">
+    <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz\PlanZagrVyaz.Events.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz\PlanZagrVyaz.SelectionSync.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz\PlanZagrVyaz.Bindings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz\PlanZagrVyaz.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyazCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz\PlanZagrVyaz.Loaders.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\SockProduction\Forms\ReportByNomZad.cs">

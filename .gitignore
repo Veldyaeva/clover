@@ -11,3 +11,4 @@
 *.csproj.Backup.tmp
 *.json
 *.log
+*.trn
