@@ -20,6 +20,7 @@
   <ItemGroup>
     <Compile Remove="Features\Articul\Forms\Articul_lena.cs" />
     <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace.patched.cs" />
+    <Compile Remove="Features\KnittingProduction\Forms\PlanZagrVyaz\PlanZagrVyaz.ServiceBroker.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -215,21 +216,21 @@
 
   <ItemGroup>
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.6.2" />
-    <PackageReference Include="Dapper" Version="2.1.66" />
-    <PackageReference Include="DevExpress.Win" Version="25.2.4" />
-    <PackageReference Include="DevExpress.Win.BonusSkins" Version="25.2.4" />
-    <PackageReference Include="DevExpress.Win.Design" Version="25.2.4" />
-    <PackageReference Include="DevExpress.Win.Printing" Version="25.2.4" />
-    <PackageReference Include="DevExpress.Win.Reporting" Version="25.2.4" />
-    <PackageReference Include="DevExpress.Wpf.Core" Version="25.2.4" />
+    <PackageReference Include="Dapper" Version="2.1.72" />
+    <PackageReference Include="DevExpress.Win" Version="25.2.5" />
+    <PackageReference Include="DevExpress.Win.BonusSkins" Version="25.2.5" />
+    <PackageReference Include="DevExpress.Win.Design" Version="25.2.5" />
+    <PackageReference Include="DevExpress.Win.Printing" Version="25.2.5" />
+    <PackageReference Include="DevExpress.Win.Reporting" Version="25.2.5" />
+    <PackageReference Include="DevExpress.Wpf.Core" Version="25.2.5" />
     <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.4" />
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.4" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="10.0.2" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="10.0.5" />
     <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.WebForms" Version="150.1652.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-    <PackageReference Include="NLog" Version="6.1.0" />
+    <PackageReference Include="NLog" Version="6.1.2" />
     <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.2" />
   </ItemGroup>
 
@@ -277,6 +278,7 @@
     <Folder Include="Core\Models\Prorabotki\" />
     <Folder Include="Core\Models\Raskr\" />
     <Folder Include="Core\Models\Vyaz\" />
+    <Folder Include="Features\KnittingProduction\Forms\PlanZagrVyaz\NotUsed\" />
     <Folder Include="Features\SockProduction\Models\" />
     <Folder Include="Features\SockProduction\Services\" />
     <Folder Include="Features\Sprav\Helpers\" />
