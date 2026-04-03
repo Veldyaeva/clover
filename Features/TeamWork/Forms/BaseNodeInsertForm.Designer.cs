@@ -56,6 +56,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             mainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             mainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             mainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            mainLayoutPanel.SetRowSpan(leftLayoutPanel, 3);
             mainLayoutPanel.Size = new System.Drawing.Size(1044, 621);
             mainLayoutPanel.TabIndex = 0;
             // 
