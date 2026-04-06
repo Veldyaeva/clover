@@ -10,22 +10,24 @@ namespace SewingProduction.Features.TeamWork.Forms
 {
     internal sealed partial class BaseNodeSaveForm : Form
     {
-        private readonly IReadOnlyList<NormRasz> _operations;
+        private readonly List<NormRasz> _operations;
         private readonly BaseNodeSaveDefaults _defaults;
 
         public BaseNodeDefinition ResultNode { get; private set; }
 
         public BaseNodeSaveForm(IReadOnlyList<NormRasz> operations, string defaultName = null, BaseNodeSaveDefaults defaults = null)
         {
-            _operations = operations ?? Array.Empty<NormRasz>();
+            _operations = (operations ?? Array.Empty<NormRasz>())
+                .Select(operation => operation?.Clone())
+                .OfType<NormRasz>()
+                .ToList();
             _defaults = defaults;
 
             InitializeComponent();
             InitializeSelectors();
 
-            summaryLabel.Text = BuildSummary();
             nameTextBox.Text = defaultName ?? string.Empty;
-            previewGrid.DataSource = BaseNodeMapper.CreatePreviewRows(_operations.ToList());
+            RefreshOperationsPreview();
         }
 
         private void InitializeSelectors()
@@ -34,7 +36,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             productKindComboBox.Items.AddRange(BaseNodeMetadataOptions.ProductKinds);
             productCategoryComboBox.Items.AddRange(BaseNodeMetadataOptions.ProductCategories);
 
-            // Автоподстановка только подсказывает значения, но пользователь может их свободно изменить.
+            // Автоподстановка только предлагает значения, но пользователь свободно может их поменять.
             SelectComboValue(nodeGroupComboBox, _defaults?.NodeGroup, string.Empty);
             SelectComboValue(productKindComboBox, _defaults?.ProductKind, "Универсальный");
             SelectComboValue(productCategoryComboBox, _defaults?.ProductCategory, "Универсально");
@@ -83,7 +85,103 @@ namespace SewingProduction.Features.TeamWork.Forms
         private string BuildSummary()
         {
             int chapters = _operations.Select(x => x.N).Distinct().Count();
-            return $"Будут сохранены операций: {_operations.Count}. Глав: {chapters}.";
+            return $"Будут сохранены глав: {chapters}. Операций: {_operations.Count}.";
+        }
+
+        private void RefreshOperationsPreview(int? selectedIndex = null)
+        {
+            summaryLabel.Text = BuildSummary();
+
+            previewGrid.DataSource = null;
+            previewGrid.DataSource = BaseNodeMapper.CreatePreviewRows(_operations);
+
+            SelectPreviewRow(selectedIndex);
+        }
+
+        private int GetSelectedOperationIndex()
+        {
+            if (previewGrid.CurrentCell != null)
+            {
+                return previewGrid.CurrentCell.RowIndex;
+            }
+
+            if (previewGrid.SelectedRows.Count > 0)
+            {
+                return previewGrid.SelectedRows[0].Index;
+            }
+
+            return -1;
+        }
+
+        private void SelectPreviewRow(int? selectedIndex)
+        {
+            if (!selectedIndex.HasValue || selectedIndex.Value < 0 || selectedIndex.Value >= previewGrid.Rows.Count)
+            {
+                return;
+            }
+
+            previewGrid.ClearSelection();
+            var row = previewGrid.Rows[selectedIndex.Value];
+            row.Selected = true;
+            if (row.Cells.Count > 0)
+            {
+                previewGrid.CurrentCell = row.Cells[0];
+            }
+        }
+
+        private bool EnsureCanMoveSelectedOperation(int delta, out int selectedIndex, out int targetIndex)
+        {
+            selectedIndex = GetSelectedOperationIndex();
+            targetIndex = selectedIndex + delta;
+
+            if (selectedIndex < 0)
+            {
+                MessageBox.Show(this, "Выберите операцию в списке.", "Проверка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+
+            if (!BaseNodeOperationEditingHelper.CanMove(_operations, selectedIndex, targetIndex))
+            {
+                MessageBox.Show(this, "Перемещение доступно только внутри текущей главы узла.", "Проверка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+
+            return true;
+        }
+
+        private void MoveUpButton_Click(object sender, EventArgs e)
+        {
+            if (!EnsureCanMoveSelectedOperation(-1, out int selectedIndex, out int targetIndex))
+            {
+                return;
+            }
+
+            BaseNodeOperationEditingHelper.Move(_operations, selectedIndex, targetIndex);
+            RefreshOperationsPreview(targetIndex);
+        }
+
+        private void MoveDownButton_Click(object sender, EventArgs e)
+        {
+            if (!EnsureCanMoveSelectedOperation(1, out int selectedIndex, out int targetIndex))
+            {
+                return;
+            }
+
+            BaseNodeOperationEditingHelper.Move(_operations, selectedIndex, targetIndex);
+            RefreshOperationsPreview(targetIndex);
+        }
+
+        private void DeleteOperationButton_Click(object sender, EventArgs e)
+        {
+            int selectedIndex = GetSelectedOperationIndex();
+            if (selectedIndex < 0)
+            {
+                MessageBox.Show(this, "Выберите операцию в списке.", "Проверка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            BaseNodeOperationEditingHelper.RemoveAt(_operations, selectedIndex);
+            RefreshOperationsPreview(Math.Min(selectedIndex, _operations.Count - 1));
         }
     }
 }

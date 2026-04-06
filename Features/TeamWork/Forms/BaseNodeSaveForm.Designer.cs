@@ -35,6 +35,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             productCategoryPanel = new System.Windows.Forms.TableLayoutPanel();
             productCategoryLabel = new System.Windows.Forms.Label();
             productCategoryComboBox = new System.Windows.Forms.ComboBox();
+            operationsButtonsPanel = new System.Windows.Forms.FlowLayoutPanel();
+            deleteOperationButton = new System.Windows.Forms.Button();
+            moveDownButton = new System.Windows.Forms.Button();
+            moveUpButton = new System.Windows.Forms.Button();
             previewGrid = new System.Windows.Forms.DataGridView();
             buttonsPanel = new System.Windows.Forms.FlowLayoutPanel();
             okButton = new System.Windows.Forms.Button();
@@ -44,6 +48,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             nodeGroupPanel.SuspendLayout();
             productKindPanel.SuspendLayout();
             productCategoryPanel.SuspendLayout();
+            operationsButtonsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)previewGrid).BeginInit();
             buttonsPanel.SuspendLayout();
             SuspendLayout();
@@ -58,13 +63,15 @@ namespace SewingProduction.Features.TeamWork.Forms
             mainLayoutPanel.Controls.Add(descriptionLabel, 0, 3);
             mainLayoutPanel.Controls.Add(descriptionTextBox, 0, 4);
             mainLayoutPanel.Controls.Add(metadataLayoutPanel, 0, 5);
-            mainLayoutPanel.Controls.Add(previewGrid, 0, 6);
-            mainLayoutPanel.Controls.Add(buttonsPanel, 0, 7);
+            mainLayoutPanel.Controls.Add(operationsButtonsPanel, 0, 6);
+            mainLayoutPanel.Controls.Add(previewGrid, 0, 7);
+            mainLayoutPanel.Controls.Add(buttonsPanel, 0, 8);
             mainLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             mainLayoutPanel.Location = new System.Drawing.Point(0, 0);
             mainLayoutPanel.Name = "mainLayoutPanel";
             mainLayoutPanel.Padding = new System.Windows.Forms.Padding(12);
-            mainLayoutPanel.RowCount = 8;
+            mainLayoutPanel.RowCount = 9;
+            mainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             mainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             mainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             mainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -253,6 +260,53 @@ namespace SewingProduction.Features.TeamWork.Forms
             productCategoryComboBox.Size = new System.Drawing.Size(314, 28);
             productCategoryComboBox.TabIndex = 1;
             // 
+            // operationsButtonsPanel
+            // 
+            operationsButtonsPanel.AutoSize = true;
+            operationsButtonsPanel.Controls.Add(deleteOperationButton);
+            operationsButtonsPanel.Controls.Add(moveDownButton);
+            operationsButtonsPanel.Controls.Add(moveUpButton);
+            operationsButtonsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            operationsButtonsPanel.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            operationsButtonsPanel.Location = new System.Drawing.Point(15, 306);
+            operationsButtonsPanel.Margin = new System.Windows.Forms.Padding(3, 12, 3, 0);
+            operationsButtonsPanel.Name = "operationsButtonsPanel";
+            operationsButtonsPanel.Size = new System.Drawing.Size(954, 18);
+            operationsButtonsPanel.TabIndex = 6;
+            // 
+            // deleteOperationButton
+            // 
+            deleteOperationButton.AutoSize = true;
+            deleteOperationButton.Location = new System.Drawing.Point(850, 3);
+            deleteOperationButton.Name = "deleteOperationButton";
+            deleteOperationButton.Size = new System.Drawing.Size(101, 30);
+            deleteOperationButton.TabIndex = 0;
+            deleteOperationButton.Text = "Удалить";
+            deleteOperationButton.UseVisualStyleBackColor = true;
+            deleteOperationButton.Click += DeleteOperationButton_Click;
+            // 
+            // moveDownButton
+            // 
+            moveDownButton.AutoSize = true;
+            moveDownButton.Location = new System.Drawing.Point(740, 3);
+            moveDownButton.Name = "moveDownButton";
+            moveDownButton.Size = new System.Drawing.Size(104, 30);
+            moveDownButton.TabIndex = 1;
+            moveDownButton.Text = "Вниз";
+            moveDownButton.UseVisualStyleBackColor = true;
+            moveDownButton.Click += MoveDownButton_Click;
+            // 
+            // moveUpButton
+            // 
+            moveUpButton.AutoSize = true;
+            moveUpButton.Location = new System.Drawing.Point(630, 3);
+            moveUpButton.Name = "moveUpButton";
+            moveUpButton.Size = new System.Drawing.Size(104, 30);
+            moveUpButton.TabIndex = 2;
+            moveUpButton.Text = "Вверх";
+            moveUpButton.UseVisualStyleBackColor = true;
+            moveUpButton.Click += MoveUpButton_Click;
+            // 
             // previewGrid
             // 
             previewGrid.AllowUserToAddRows = false;
@@ -261,15 +315,15 @@ namespace SewingProduction.Features.TeamWork.Forms
             previewGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             previewGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             previewGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            previewGrid.Location = new System.Drawing.Point(15, 306);
-            previewGrid.Margin = new System.Windows.Forms.Padding(3, 12, 3, 0);
+            previewGrid.Location = new System.Drawing.Point(15, 327);
+            previewGrid.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             previewGrid.MultiSelect = false;
             previewGrid.Name = "previewGrid";
             previewGrid.ReadOnly = true;
             previewGrid.RowHeadersWidth = 51;
             previewGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            previewGrid.Size = new System.Drawing.Size(954, 313);
-            previewGrid.TabIndex = 6;
+            previewGrid.Size = new System.Drawing.Size(954, 292);
+            previewGrid.TabIndex = 7;
             // 
             // buttonsPanel
             // 
@@ -282,7 +336,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             buttonsPanel.Margin = new System.Windows.Forms.Padding(3, 12, 3, 0);
             buttonsPanel.Name = "buttonsPanel";
             buttonsPanel.Size = new System.Drawing.Size(954, 18);
-            buttonsPanel.TabIndex = 7;
+            buttonsPanel.TabIndex = 8;
             // 
             // okButton
             // 
@@ -328,6 +382,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             productKindPanel.PerformLayout();
             productCategoryPanel.ResumeLayout(false);
             productCategoryPanel.PerformLayout();
+            operationsButtonsPanel.ResumeLayout(false);
+            operationsButtonsPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)previewGrid).EndInit();
             buttonsPanel.ResumeLayout(false);
             buttonsPanel.PerformLayout();
@@ -352,6 +408,10 @@ namespace SewingProduction.Features.TeamWork.Forms
         private System.Windows.Forms.TableLayoutPanel productCategoryPanel;
         private System.Windows.Forms.Label productCategoryLabel;
         private System.Windows.Forms.ComboBox productCategoryComboBox;
+        private System.Windows.Forms.FlowLayoutPanel operationsButtonsPanel;
+        private System.Windows.Forms.Button deleteOperationButton;
+        private System.Windows.Forms.Button moveDownButton;
+        private System.Windows.Forms.Button moveUpButton;
         private System.Windows.Forms.DataGridView previewGrid;
         private System.Windows.Forms.FlowLayoutPanel buttonsPanel;
         private System.Windows.Forms.Button okButton;
