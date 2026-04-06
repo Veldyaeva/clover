@@ -61,6 +61,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application
                 row.olPzvTab = shift.kwsTabStart == 0 ? shift.szTab : shift.kwsTabStart;
                 row.olPzvDateNaznTab = System.DateTime.Now;
                 row.olPzvKwsID = shift.kwsID;
+                row.olPzvKolNazn = row.olKol;
+                row.olPzvChasNazn = row.olPzvNChasi;
+                row.olPzvSekNazn = row.olSekEd;
             }, ct);
 
             return OperationResult.Ok();
