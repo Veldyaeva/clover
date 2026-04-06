@@ -1,4 +1,6 @@
 ﻿using DevExpress.Xpo.Logger.Transport;
+using SewingProduction.Features.Articul.Models;
+using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -619,9 +621,7 @@ namespace SewingProduction.Core.Models
         [NotMapped] public decimal? Sum_sebraskr { get; set; }
         [NotMapped] public decimal? Sum_komplnum { get; set; }
         //---->
-        
 
-        
 
         
 

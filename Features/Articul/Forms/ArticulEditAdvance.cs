@@ -41,6 +41,7 @@ namespace SewingProduction.Features.Articul.Forms
         private DatabaseHelper _dbHelper;
         private DbService _dbService;
         private static BulkHelper _bulkHelper;
+        
 
         //private ArticulDataService _articulDataService;
         private ArticulEditAdvanceService _articulEdAdvDataService;

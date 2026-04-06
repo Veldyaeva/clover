@@ -270,7 +270,9 @@ namespace SewingProduction.Features.Articul
             try
             {
                 var list = await _articulDataService.GetArtPreviewAsyncBindingList();
-                bsPreview.RaiseListChangedEvents = false;
+                bsPreview.DataSource = list;
+
+                /*bsPreview.RaiseListChangedEvents = false;
                 try
                 {
                     _previewList.Clear();
@@ -282,6 +284,7 @@ namespace SewingProduction.Features.Articul
                     bsPreview.RaiseListChangedEvents = true;
                     bsPreview.ResetBindings(false);
                 }
+                */
             }
             finally
             {

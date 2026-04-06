@@ -2,9 +2,13 @@
 using DevExpress.CodeParser;
 using DevExpress.Utils.Gesture;
 using DevExpress.Xpo.DB.Helpers;
+using DevExpress.Xpo.Logger.Transport;
+using DevExpress.XtraMap.Drawing.DirectD3D9;
 using DevExpress.XtraScheduler.Native;
 using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
+using Org.BouncyCastle.Crypto;
 using SewingProduction.Core.Models;
+using SewingProduction.Features.Articul;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
@@ -58,6 +62,54 @@ namespace SewingProduction.Features.Articul.Service
                 return null;
             }
         }
+        public async Task<List<CreateArticulMatrModel>> GetMatrForNNAsync(string nn)
+        {
+            try
+            {
+                using var connection = _dbHelper.GetConnection();
+                var result = await connection.QueryAsync<CreateArticulMatrModel>(
+                    "dbo.spCreateArticulMatr",
+                    param: new { nn = nn },
+                    transaction: null,
+                    commandType: CommandType.StoredProcedure,
+                    commandTimeout: 120 //в секундах
+                    );
+
+                return result.AsList();
+            }
+            catch (SqlException ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetMatrForNNAsync");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetMatrForNNAsync");
+                return null;
+            }
+        }
+
+        
+
+        public async Task<BindingList<SpArticulPreviewModel>> GetPreviewArticulAsync(string nn)
+        {
+            try
+            {
+                var listnn = await GetMatrForNNAsync(nn);
+
+                var result = listnn
+                    .Select(x => ArticulMapper.ToArticulModel(x))
+                    .ToList();
+
+                return new BindingList<SpArticulPreviewModel>(result);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetPreviewArticulAsync");
+                return null;
+            }
+        }
+
         public async Task<CreateArticulMatrModel> GetStatusForArticulAsync(string nn, int idgost, int agid )
         {
             try
@@ -141,4 +193,32 @@ namespace SewingProduction.Features.Articul.Service
         }
 
     }
+    public class ArticulMapper
+    {
+        public static SpArticulPreviewModel ToArticulModel(CreateArticulMatrModel x)
+        {
+            return new SpArticulPreviewModel
+            {
+                Articul = x.Articul,
+                Mod = x.Article,
+                Baza = x.Baza,// сезон
+                SeasonName = x.Tsn_name,
+                Grupp = x.Men_int,
+                GrupMenName = x.Grupmen_name,
+                TmName = x.Tm_name,
+                Kle = x.Kle,
+                Sost = x.Sost,
+                Sost2 = x.Sost2,
+                Sost3 = x.Sost3,
+                Kruj = x.Kruj,
+                Id_gost = x.Id_gost,
+                Gost = x.GostName,
+                Ag_id = x.Ag_id,
+                Grup = x.Grup,
+                Tkb = x.Tkb,
+                Kod_v = x.Kod_v
+            };
+        }
+    }
+
 }
