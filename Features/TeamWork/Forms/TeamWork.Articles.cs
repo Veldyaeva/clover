@@ -126,6 +126,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     await ClearUnboundArtsRelatedData();
                 }
+
+                _articlesTabInitialized = true;
             }
             finally
             {
@@ -350,9 +352,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                 var selectedItem = view.GetRow(e.FocusedRowHandle) as MyDataANN;
                 if (selectedItem != null)
                 {
-                    textEdit1.Text = selectedItem.mod?.TrimEnd(' ') ?? string.Empty;
-                    textEdit2.Text = selectedItem.Articul?.TrimEnd(' ') ?? string.Empty;
-                    textEdit3.Text = selectedItem.grup?.TrimEnd(' ') ?? string.Empty;
+                    textEdit1.Text = StringNormalizer.TrimEndOrEmpty(selectedItem.mod, ' ');
+                    textEdit2.Text = StringNormalizer.TrimEndOrEmpty(selectedItem.Articul, ' ');
+                    textEdit3.Text = StringNormalizer.TrimEndOrEmpty(selectedItem.grup, ' ');
                 }
                 // Если строка не выбрана или AnnID невалидный - очищаем данные
                 if (e.FocusedRowHandle < 0 || annId <= 0)
@@ -625,7 +627,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 var label = new Label()
                 {
-                    Text = $"Вы действительно хотите увязать артикул {selectedArtRow.Articul.TrimEnd()} с разделением труда {selectedAnnRow.Articul.TrimEnd()}?",
+                    Text = $"Вы действительно хотите увязать артикул {StringNormalizer.TrimEndOrEmpty(selectedArtRow.Articul)} с разделением труда {StringNormalizer.TrimEndOrEmpty(selectedAnnRow.Articul)}?",
                     Location = new Point(20, 20),
                     Size = new Size(400, 40),
                     TextAlign = ContentAlignment.TopLeft
@@ -763,7 +765,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // Получаем данные из текущей строки
                 string kod = CommonFunctions.GetRowCellValueOrDefault<string>(gv_unbound_Arts, e.FocusedRowHandle, "kodd_rt", "");
-                string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gv_unbound_Arts, e.FocusedRowHandle, "Articul", "").TrimEnd(' ');
+                string articul = StringNormalizer.TrimEndOrEmpty(CommonFunctions.GetRowCellValueOrDefault<string>(gv_unbound_Arts, e.FocusedRowHandle, "Articul", ""), ' ');
 
                 if (!int.TryParse(kod, out int kodInt))
                 {

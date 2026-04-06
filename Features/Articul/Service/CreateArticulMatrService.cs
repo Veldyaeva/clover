@@ -89,8 +89,6 @@ namespace SewingProduction.Features.Articul.Service
             }
         }
 
-        
-
         public async Task<BindingList<SpArticulPreviewModel>> GetPreviewArticulAsync(string nn)
         {
             try
@@ -193,7 +191,7 @@ namespace SewingProduction.Features.Articul.Service
         }
 
     }
-    public class ArticulMapper
+    public static class ArticulMapper
     {
         public static SpArticulPreviewModel ToArticulModel(CreateArticulMatrModel x)
         {
@@ -206,17 +204,19 @@ namespace SewingProduction.Features.Articul.Service
                 Grupp = x.Men_int,
                 GrupMenName = x.Grupmen_name,
                 TmName = x.Tm_name,
-                Kle = x.Kle,
+                Kle = x.Kle,//ТМ sp 
                 Sost = x.Sost,
                 Sost2 = x.Sost2,
                 Sost3 = x.Sost3,
                 Kruj = x.Kruj,
-                Id_gost = x.Id_gost,
+                Id_gost = x.Id_gost,//ГОСТ
                 Gost = x.GostName,
-                Ag_id = x.Ag_id,
+                Ag_id = x.Ag_id,// группа по ГОСТ
                 Grup = x.Grup,
                 Tkb = x.Tkb,
-                Kod_v = x.Kod_v
+                Kod_v = x.Kod_v,//код ассортимента
+                AssortName = x.AssortName
+
             };
         }
     }

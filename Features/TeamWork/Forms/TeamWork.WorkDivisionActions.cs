@@ -13,8 +13,20 @@ using BindingSource = System.Windows.Forms.BindingSource;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
+    /// <summary>
+    /// Дубль РТ
+    /// Отправка сообщений в бригаду
+    /// </summary>
     public partial class TeamWork
     {
+        /// <summary>
+        /// дубль РТ
+        /// </summary>
+        /// <param name="gridView"></param>
+        /// <param name="list"></param>
+        /// <param name="bindingSource"></param>
+        /// <param name="forMyDataAnnView"></param>
+        /// <returns></returns>
         private async Task DuplicateWorkDivision_Click_Internal(GridView gridView, IList list, BindingSource bindingSource, bool forMyDataAnnView = false)
         {
             if (gridView == null || gridView.FocusedRowHandle < 0)
@@ -85,6 +97,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             };
         }
 
+        /// <summary>
+        /// Отправка сообщений в бригаду
+        /// </summary>
+        /// <param name="annId"></param>
+        /// <param name="msg"></param>
+        /// <returns></returns>
         private async Task SendMsgToBrig(int annId, string msg)
         {
             try

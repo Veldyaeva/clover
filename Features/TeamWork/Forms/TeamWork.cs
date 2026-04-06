@@ -82,6 +82,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private BindingList<NormKont> _normKontListArticles;
         private BindingSource _normKontBindingSourceArticles;
+        private bool _articlesTabInitialized = false;
 
         private List<KodProizvModel> kodProizvList;
         private List<PodrVyazModel> podrVyazList;

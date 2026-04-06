@@ -161,13 +161,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             RecoRichTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Reco), false);
 
             textEditMod.DataBindings.Clear();
-            textEditMod.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Mod), true, DataSourceUpdateMode.OnPropertyChanged);
+            textEditMod.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Mod), true, DataSourceUpdateMode.Never);
             textEditArt.DataBindings.Clear();
-            textEditArt.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Articul), true, DataSourceUpdateMode.OnPropertyChanged);
+            textEditArt.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Articul), true, DataSourceUpdateMode.Never);
             textEditSec.DataBindings.Clear();
-            textEditSec.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Sek), true, DataSourceUpdateMode.OnPropertyChanged);
+            textEditSec.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Sek), true, DataSourceUpdateMode.Never);
             textEditCreate.DataBindings.Clear();
-            textEditCreate.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.dateCreate), true, DataSourceUpdateMode.OnPropertyChanged);
+            textEditCreate.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.dateCreate), true, DataSourceUpdateMode.Never);
         }
 
         /// <summary>
@@ -591,7 +591,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                         if (value == null || value == DBNull.Value)
                             return " ";
                         string stringValue = value.ToString();
-                        return string.IsNullOrEmpty(stringValue) ? " " : stringValue.TrimEnd(' ');
+                        string normalizedValue = StringNormalizer.TrimEndOrEmpty(stringValue, ' ');
+                        return string.IsNullOrEmpty(normalizedValue) ? " " : normalizedValue;
                     }
 
                     var grupVal = GetSafeValue("grup");

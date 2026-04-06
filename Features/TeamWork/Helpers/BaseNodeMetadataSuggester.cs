@@ -3,7 +3,6 @@ using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace SewingProduction.Features.TeamWork.Helpers
 {
@@ -125,12 +124,7 @@ namespace SewingProduction.Features.TeamWork.Helpers
 
         private static string Normalize(string value)
         {
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                return string.Empty;
-            }
-
-            return Regex.Replace(value.Trim().ToLowerInvariant(), @"\s+", " ");
+            return StringNormalizer.NormalizeWhitespaceLowerInvariant(value);
         }
     }
 }

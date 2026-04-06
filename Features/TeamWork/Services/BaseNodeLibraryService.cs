@@ -2,12 +2,12 @@ using Dapper;
 using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Features.TeamWork.Models;
 using SewingProduction.Helpers;
+using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SewingProduction.Features.TeamWork.Services
@@ -152,12 +152,12 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
                     baseNodeId = await connection.ExecuteScalarAsync<int>(insertNodeSql, new
                     {
                         NodeCode = nodeCode,
-                        NodeName = node.Name.Trim(),
-                        NodeGroup = node.NodeGroup?.Trim(),
-                        NodeType = node.NodeType?.Trim(),
-                        ProductKind = node.ProductKind?.Trim(),
-                        ProductCategory = node.ProductCategory?.Trim(),
-                        Comment = node.Description?.Trim(),
+                        NodeName = StringNormalizer.TrimOrEmpty(node.Name),
+                        NodeGroup = NullIfWhiteSpace(node.NodeGroup),
+                        NodeType = NullIfWhiteSpace(node.NodeType),
+                        ProductKind = NullIfWhiteSpace(node.ProductKind),
+                        ProductCategory = NullIfWhiteSpace(node.ProductCategory),
+                        Comment = NullIfWhiteSpace(node.Description),
                         AuditUser = auditUser
                     }, transaction);
                 }
@@ -181,12 +181,12 @@ WHERE BaseNodeId = @BaseNodeId;";
                     await connection.ExecuteAsync(updateNodeSql, new
                     {
                         BaseNodeId = baseNodeId,
-                        NodeName = node.Name.Trim(),
-                        NodeGroup = node.NodeGroup?.Trim(),
-                        NodeType = node.NodeType?.Trim(),
-                        ProductKind = node.ProductKind?.Trim(),
-                        ProductCategory = node.ProductCategory?.Trim(),
-                        Comment = node.Description?.Trim(),
+                        NodeName = StringNormalizer.TrimOrEmpty(node.Name),
+                        NodeGroup = NullIfWhiteSpace(node.NodeGroup),
+                        NodeType = NullIfWhiteSpace(node.NodeType),
+                        ProductKind = NullIfWhiteSpace(node.ProductKind),
+                        ProductCategory = NullIfWhiteSpace(node.ProductCategory),
+                        Comment = NullIfWhiteSpace(node.Description),
                         AuditUser = auditUser
                     }, transaction);
 
@@ -352,7 +352,7 @@ SELECT TOP (1) BaseNodeId, NodeCode, NodeName
 FROM dbo.BaseNode
 WHERE NodeName = @NodeName;";
 
-            return await connection.QueryFirstOrDefaultAsync<BaseNodeHeaderRow>(byNameSql, new { NodeName = node.Name.Trim() }, transaction);
+            return await connection.QueryFirstOrDefaultAsync<BaseNodeHeaderRow>(byNameSql, new { NodeName = StringNormalizer.TrimOrEmpty(node.Name) }, transaction);
         }
 
         private async Task<int> ResolveOperationRefIdAsync(SqlConnection connection, SqlTransaction transaction, BaseNodeOperationDefinition operation, string auditUser)
@@ -367,7 +367,7 @@ WHERE ISNULL(OperationCode, N'') = ISNULL(@OperationCode, N'')
             var existingId = await connection.QueryFirstOrDefaultAsync<int?>(findSql, new
             {
                 OperationCode = NullIfWhiteSpace(operation.KodO),
-                OperationName = operation.Text?.Trim(),
+                OperationName = StringNormalizer.TrimOrEmpty(operation.Text),
                 DefaultKodOb = NullableFromZero(operation.KodOb)
             }, transaction);
 
@@ -422,15 +422,15 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
             return await connection.ExecuteScalarAsync<int>(insertSql, new
             {
-                OperationCode = operation.KodO?.Trim(),
-                OperationName = operation.Text?.Trim(),
+                OperationCode = NullIfWhiteSpace(operation.KodO),
+                OperationName = StringNormalizer.TrimOrEmpty(operation.Text),
                 OperationClass = operationClass,
                 OperationObject = operationObject,
                 DefaultRazryd = NullableFromZero(operation.Razryd),
                 DefaultSek = DecimalFromZero(operation.Sek),
-                DefaultObor = operation.Obor?.Trim(),
+                DefaultObor = NullIfWhiteSpace(operation.Obor),
                 DefaultKodOb = NullableFromZero(operation.KodOb),
-                DefaultSpec = operation.Spec?.Trim(),
+                DefaultSpec = NullIfWhiteSpace(operation.Spec),
                 DefaultKodProizv = NullableFromZero(operation.KodProizv),
                 DefaultKodPodr = NullableFromZero(operation.KodPodr),
                 AuditUser = auditUser
@@ -505,19 +505,7 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
         private static string BuildBaseCode(string nodeName)
         {
-            var source = string.IsNullOrWhiteSpace(nodeName) ? "NODE" : nodeName.Trim().ToUpperInvariant();
-            string normalized = Regex.Replace(source, @"[^A-Z0-9]+", "_").Trim('_');
-            if (string.IsNullOrWhiteSpace(normalized))
-            {
-                normalized = "NODE";
-            }
-
-            if (normalized.Length > 42)
-            {
-                normalized = normalized.Substring(0, 42);
-            }
-
-            return $"BN_{normalized}";
+            return $"BN_{StringNormalizer.NormalizeCodeToken(nodeName, "NODE", 42)}";
         }
 
         private static int ToInt(decimal? value)
@@ -537,7 +525,7 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
         private static string NullIfWhiteSpace(string value)
         {
-            return string.IsNullOrWhiteSpace(value) ? null : value.Trim();
+            return StringNormalizer.TrimToNull(value);
         }
 
         private sealed class BaseNodeHeaderRow

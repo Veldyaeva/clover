@@ -35,7 +35,7 @@ namespace SewingProduction.Features.Articul.Models
         public string Kle {  get; set; }
         public string Text_mo { get; set; }
         public int Kod_v { get; set; }
-        public string Tat_name { get; set; }
+        public string AssortName { get; set; }
         public int Printer { get; set; }
         public int Bus { get; set; }
         public int Stra { get; set; }

@@ -4,6 +4,7 @@ using DevExpress.XtraEditors.DXErrorProvider;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
 using SewingProduction.Helpers;
+using SewingProduction.Models;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
@@ -49,7 +50,7 @@ namespace SewingProduction.Features.Articul.Forms
                 if (kv.Key != null && kv.Value != null)
                     _propertyToControl[kv.Value.Name] = kv.Key;
             }
-
+            /*
             RegisterSeries("txbNorm_t", "Norm_t");
             RegisterSeries("txbTkanSeb_t", "Seb_t");
             RegisterSeries("txbBrak", "Brak_t");
@@ -57,6 +58,7 @@ namespace SewingProduction.Features.Articul.Forms
             RegisterSeries("txbKfKach", "Kf_tkan_kach");
             RegisterSeries("txbOpis_t", "Opis_t");
             RegisterSeries("tkb", "Tkb");
+            */
             _propertyToControl[nameof(SpArticulPreviewModel.Ag_id)] = txbGrup;
         }
 
@@ -384,7 +386,7 @@ namespace SewingProduction.Features.Articul.Forms
                     };
                     binding.Parse += (_, e) =>
                     {
-                        var s = Convert.ToString(e.Value)?.Trim();
+                        var s = StringNormalizer.TrimOrNull(Convert.ToString(e.Value));
                         if (string.IsNullOrWhiteSpace(s)) { e.Value = null; return; }
                         if (DateTime.TryParse(s, out var dt)) e.Value = dt;
                     };

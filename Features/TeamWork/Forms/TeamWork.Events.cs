@@ -229,7 +229,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                         if (value == null || value == DBNull.Value)
                             return " ";
                         string stringValue = value.ToString();
-                        return string.IsNullOrEmpty(stringValue) ? " " : stringValue.TrimEnd(' ');
+                        string normalizedValue = StringNormalizer.TrimEndOrEmpty(stringValue, ' ');
+                        return string.IsNullOrEmpty(normalizedValue) ? " " : normalizedValue;
                     }
 
                     var grupVal = GetSafeValue("grup");
@@ -358,7 +359,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                string searchText = searchControl1.Text?.Trim();
+                string searchText = StringNormalizer.TrimOrEmpty(searchControl1.Text);
                 if (string.IsNullOrEmpty(searchText))
                 {
                     await _logger.LogWarningAsync("Пустой текст для поиска артикулов", "SearchArticulesByText");
@@ -474,10 +475,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                     bool disableButton = selectedItem.Status == (int)Status.Archive
                                       || selectedItem.Status == (int)Status.PreliminaryArchive;
                     ButtonArchAndCopyWd.Enabled = !disableButton;
-                    textEditMod.Text = selectedItem.Mod?.TrimEnd(' ') ?? string.Empty;
-                    textEditArt.Text = selectedItem.Articul?.TrimEnd(' ') ?? string.Empty;
-                    textEditSec.Text = selectedItem.Sek.ToString();
-                    textEditCreate.Text = selectedItem.dateCreate.HasValue ? selectedItem.dateCreate.Value.ToString("dd.MM.yyyy") : string.Empty;
                 }
                 else
                 {
@@ -971,9 +968,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                 string message = selectedItems.Count == 1
                     ? $"Пометить разделение труда на удаление:\n\n" +
                       $"AnnID: {selectedItems[0].AnnID}\n" +
-                      $"Группа: {selectedItems[0].grup?.TrimEnd(' ')}, " +
-                      $"Модель: {selectedItems[0].Mod?.TrimEnd(' ')}, " +
-                      $"Артикул: {selectedItems[0].Articul?.TrimEnd(' ')}\n\n" +
+                      $"Группа: {StringNormalizer.TrimEndOrEmpty(selectedItems[0].grup, ' ')}, " +
+                      $"Модель: {StringNormalizer.TrimEndOrEmpty(selectedItems[0].Mod, ' ')}, " +
+                      $"Артикул: {StringNormalizer.TrimEndOrEmpty(selectedItems[0].Articul, ' ')}\n\n" +
                       $"Будут установлены:\n" +
                       $"• annDateDel = {currentDate:dd.MM.yyyy HH:mm:ss}\n" +
                       $"• annCompDel = {computerName}\n\n" +
@@ -1016,7 +1013,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         // Обновляем строку в гриде
                         TryRefreshRowByAnnId(ANNgridView, item.AnnID);
 
-                        await _logger.LogEventAsync($"РТ помечено на удаление. AnnID: {item.AnnID}, Группа: {item.grup?.TrimEnd(' ')}, Модель: {item.Mod?.TrimEnd(' ')}, Артикул: {item.Articul?.TrimEnd(' ')}, Дата: {currentDate:dd.MM.yyyy HH:mm:ss}, Компьютер: {computerName}", "MarkForDeletion");
+                        await _logger.LogEventAsync($"РТ помечено на удаление. AnnID: {item.AnnID}, Группа: {StringNormalizer.TrimEndOrEmpty(item.grup, ' ')}, Модель: {StringNormalizer.TrimEndOrEmpty(item.Mod, ' ')}, Артикул: {StringNormalizer.TrimEndOrEmpty(item.Articul, ' ')}, Дата: {currentDate:dd.MM.yyyy HH:mm:ss}, Компьютер: {computerName}", "MarkForDeletion");
                     }
                 }
                 finally
@@ -1291,7 +1288,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
                 }
 
-                string articul = selectedNzp.articul.TrimEnd(' ');
+                string articul = StringNormalizer.TrimEndOrEmpty(selectedNzp.articul, ' ');
                 string kod = selectedNzp.kodd.ToString();
                 if (string.IsNullOrEmpty(articul))
                 {
@@ -1483,7 +1480,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         var selectedData = GetSafeUnboundArtData(gridView_unboundArts, gridView_unboundArts.FocusedRowHandle);
                         if (selectedData != null && !string.IsNullOrEmpty(selectedData.Articul))
                         {
-                            articul = selectedData.Articul.TrimEnd(' ');
+                            articul = StringNormalizer.TrimEndOrEmpty(selectedData.Articul, ' ');
                         }
                         else
                         {

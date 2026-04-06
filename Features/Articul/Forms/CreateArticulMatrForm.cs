@@ -7,6 +7,7 @@ using SewingProduction.Features.Articul.Helpers;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
 using SewingProduction.Features.UserDistribution.Class;
+using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
@@ -514,13 +515,10 @@ namespace SewingProduction.Features.Articul.Forms
 
             using (AppendArticul f = new AppendArticul(CurrentUser.User, curMatr.Nn))
             {
-                LoadOrRefreshData();
-
-                //if (f.ShowDialog() == DialogResult.OK)
-                //{
-                //    await RefreshArtPreviewAsync();
-                //    LogSuccess("Создан новый артикул через форму EditArticul.", nameof(csButtonNew_Click));
-                //}
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    LoadOrRefreshData();
+                }
             }
         }
 
@@ -536,7 +534,10 @@ namespace SewingProduction.Features.Articul.Forms
 
             using (AppendArticul f = new AppendArticul(CurrentUser.User, curMatr.Nn, currArt.Kod))
             {
-                LoadOrRefreshData();
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    LoadOrRefreshData();
+                }
 
                 //if (f.ShowDialog() == DialogResult.OK)
                 //{

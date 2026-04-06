@@ -30,18 +30,20 @@ namespace SewingProduction.Features.Articul.Forms
 
         public AppendArticul(UserClass user, string nn) : this(user)
         {
+           // InitializeComponent();
             // 0 - создание,1 - стыковка
             _typeCreate = 0;
             _nn = nn;
-            InitializeComponent();
+            
         }
         public AppendArticul(UserClass user, string nn, string kod) : this(user)
         {
+            //InitializeComponent();
             // 0 - создание,1 - стыковка
             _typeCreate = 1;
             _nn = nn;
             _kod = kod;
-            InitializeComponent();
+            
         }
 
         private async void AppendArticul_Load(object sender, EventArgs e)
@@ -65,7 +67,7 @@ namespace SewingProduction.Features.Articul.Forms
             txtGostName.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.Gost), true);
             txtGrup.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.Grup), true);
             txtTkb.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.Tkb), true);
-            txtAssort.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.Kod_v), true);
+            txtAssort.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.AssortName), true);
 
         }
     }
