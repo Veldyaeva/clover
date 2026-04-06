@@ -474,10 +474,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                     bool disableButton = selectedItem.Status == (int)Status.Archive
                                       || selectedItem.Status == (int)Status.PreliminaryArchive;
                     ButtonArchAndCopyWd.Enabled = !disableButton;
-                    textEditMod.Text = selectedItem.Mod?.TrimEnd(' ') ?? string.Empty;
-                    textEditArt.Text = selectedItem.Articul?.TrimEnd(' ') ?? string.Empty;
-                    textEditSec.Text = selectedItem.Sek.ToString();
-                    textEditCreate.Text = selectedItem.dateCreate.HasValue ? selectedItem.dateCreate.Value.ToString("dd.MM.yyyy") : string.Empty;
                 }
                 else
                 {

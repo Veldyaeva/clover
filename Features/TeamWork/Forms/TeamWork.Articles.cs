@@ -126,6 +126,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     await ClearUnboundArtsRelatedData();
                 }
+
+                _articlesTabInitialized = true;
             }
             finally
             {

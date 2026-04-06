@@ -1,4 +1,5 @@
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using System;
@@ -114,11 +115,75 @@ namespace SewingProduction.Features.TeamWork.Forms
                     e.HighPriority = true;
                     return;
                 }
+
+                // Во время поиска мягко подсвечиваем первую найденную строку,
+                // даже если пользователь еще не перевел на нее фокус.
+                if (HasAnnGridSearchText(view) && e.RowHandle == GetFirstVisibleDataRowHandle(view))
+                {
+                    e.Appearance.BackColor = Color.Moccasin;
+                    e.Appearance.BackColor2 = Color.Moccasin;
+                    e.HighPriority = true;
+                }
             }
             catch (Exception ex)
             {
                 _ = _logger.LogErrorAsync(ex, "ANNgridView_RowStyle");
             }
+        }
+
+        private bool HasAnnGridSearchText(GridView view = null)
+        {
+            var gridView = view ?? ANNgridView;
+            return gridView != null && !string.IsNullOrWhiteSpace(gridView.FindFilterText);
+        }
+
+        private int GetFirstVisibleDataRowHandle(GridView view)
+        {
+            if (view == null || view.DataRowCount <= 0)
+            {
+                return GridControl.InvalidRowHandle;
+            }
+
+            int firstHandle = view.GetVisibleRowHandle(0);
+            return view.IsValidRowHandle(firstHandle) ? firstHandle : GridControl.InvalidRowHandle;
+        }
+
+        private void RefreshAnnGridSearchVisualState()
+        {
+            if (ANNgridView == null || ANNgridControl == null || ANNgridControl.IsDisposed)
+            {
+                return;
+            }
+
+            ANNgridView.RefreshData();
+        }
+
+        private bool TryFocusFirstAnnGridSearchResult()
+        {
+            var view = ANNgridView;
+            if (view == null || !HasAnnGridSearchText(view))
+            {
+                return false;
+            }
+
+            int firstHandle = GetFirstVisibleDataRowHandle(view);
+            if (!view.IsValidRowHandle(firstHandle))
+            {
+                return false;
+            }
+
+            view.BeginUpdate();
+            try
+            {
+                view.FocusedRowHandle = firstHandle;
+                view.MakeRowVisible(firstHandle);
+            }
+            finally
+            {
+                view.EndUpdate();
+            }
+
+            return true;
         }
 
         private void FocusFirstResultAndLoadRelated()
@@ -166,6 +231,19 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 _logger?.LogErrorAsync(ex, "Ошибка в FocusFirstResultAndLoadRelated");
             }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter &&
+                xtraTabControl1?.SelectedTabPage?.Name == "TabPage1" &&
+                ANNgridControl?.ContainsFocus == true &&
+                TryFocusFirstAnnGridSearchResult())
+            {
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         /// <summary>
