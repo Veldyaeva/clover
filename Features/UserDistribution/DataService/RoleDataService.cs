@@ -73,15 +73,20 @@ namespace SewingProduction.Features.UserDistribution.Models
             object result = await _dbHelper.ExecuteScalarAsync(query, new Dictionary<string, object> { { "@RoleID", roleId } });
             return result != DBNull.Value ? Convert.ToInt32(result) : -1;
         }
-
         public async Task<int> CopyRole(int originalRoleId, int newCreatorId)
         {
             // 1. Создание новой пустой роли
             string insertQuery = @"
                 INSERT INTO Roles (RoleName, Description, CreatorID)
-                OUTPUT INSERTED.RoleID
-                VALUES ('', '', @CreatorID)";
-            object result = await _dbHelper.ExecuteScalarAsync(insertQuery, new Dictionary<string, object> { { "@CreatorID", newCreatorId } });
+                VALUES ('', '', @CreatorID);
+
+                SELECT CAST(SCOPE_IDENTITY() AS INT);";
+
+            object result = await _dbHelper.ExecuteScalarAsync(insertQuery, new Dictionary<string, object>
+            {
+                { "@CreatorID", newCreatorId }
+            });
+
             int newRoleId = Convert.ToInt32(result);
 
             // 2. Копирование объектов
@@ -90,6 +95,7 @@ namespace SewingProduction.Features.UserDistribution.Models
                 SELECT @NewRoleID, ObjectID, ModeID
                 FROM RoleObject
                 WHERE RoleID = @OriginalRoleID";
+
             await _dbHelper.ExecuteQueryAsync(copyObjectsQuery, new Dictionary<string, object>
             {
                 { "@NewRoleID", newRoleId },
@@ -98,6 +104,7 @@ namespace SewingProduction.Features.UserDistribution.Models
 
             return newRoleId;
         }
+
 
         public async Task<HashSet<int>> GetEditableCreatorIds(int userId)
         {

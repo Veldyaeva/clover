@@ -56,6 +56,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customButtonCopyUser = new CustomButton();
             customButtonAddUser = new CustomButton();
             customButtonDeleteUser = new CustomButton();
+            customButtonLoginUser = new CustomButton();
             ((System.ComponentModel.ISupportInitialize)gridViewRoles).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlUser).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceUsers).BeginInit();
@@ -293,6 +294,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 83.86327F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.1367245F));
+            tableLayoutPanel1.Controls.Add(customButtonLoginUser, 1, 4);
             tableLayoutPanel1.Controls.Add(customButtonUserPodr, 1, 3);
             tableLayoutPanel1.Controls.Add(customButtonShareUser, 1, 2);
             tableLayoutPanel1.Controls.Add(customButtonCopyUser, 1, 1);
@@ -383,6 +385,20 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customButtonDeleteUser.UseVisualStyleBackColor = false;
             customButtonDeleteUser.Click += customButtonDeleteUser_Click;
             // 
+            // customButtonLoginUser
+            // 
+            customButtonLoginUser.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonLoginUser.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonLoginUser.Location = new System.Drawing.Point(1059, 263);
+            customButtonLoginUser.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonLoginUser.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonLoginUser.Name = "customButtonLoginUser";
+            customButtonLoginUser.Size = new System.Drawing.Size(195, 59);
+            customButtonLoginUser.TabIndex = 15;
+            customButtonLoginUser.Text = "Зайти под данным пользователем";
+            customButtonLoginUser.UseVisualStyleBackColor = false;
+            customButtonLoginUser.Click += customButtonLoginUser_Click;
+            // 
             // AllUser
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -431,5 +447,6 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEditFio;
         private DevExpress.XtraGrid.Columns.GridColumn Password;
         private CustomButton customButtonUserPodr;
+        private CustomButton customButtonLoginUser;
     }
 }
