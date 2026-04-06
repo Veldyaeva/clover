@@ -39,6 +39,77 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewNZP_FocusedRowChanged_Internal(sender, e);
         }
 
+        private void ApplyAnnGridKitSearchFilter(GridView gridView)
+        {
+            if (gridView == null || _isUpdatingAnnGridKitFilter)
+            {
+                return;
+            }
+
+            string searchText = StringNormalizer.TrimOrEmpty(gridView.FindFilterText);
+            bool shouldUseKitFilter = toggleSwitchKit?.IsOn == true && !string.IsNullOrEmpty(searchText);
+
+            string targetFilter = string.Empty;
+            if (shouldUseKitFilter)
+            {
+                var parsedArticle = ParseKitArticle(searchText);
+                if (parsedArticle.HasValidComponents)
+                {
+                    targetFilter = BuildKitArticleFilter(parsedArticle.Component1, parsedArticle.Component2);
+                }
+            }
+
+            if (string.IsNullOrEmpty(targetFilter))
+            {
+                if (!_annGridKitFilterActive)
+                {
+                    return;
+                }
+
+                _isUpdatingAnnGridKitFilter = true;
+                try
+                {
+                    _annGridKitFilterActive = false;
+                    gridView.ActiveFilterString = string.Empty;
+                }
+                finally
+                {
+                    _isUpdatingAnnGridKitFilter = false;
+                }
+
+                return;
+            }
+
+            if (_annGridKitFilterActive && string.Equals(gridView.ActiveFilterString, targetFilter, StringComparison.Ordinal))
+            {
+                return;
+            }
+
+            _isUpdatingAnnGridKitFilter = true;
+            try
+            {
+                _annGridKitFilterActive = true;
+                gridView.ActiveFilterString = targetFilter;
+            }
+            finally
+            {
+                _isUpdatingAnnGridKitFilter = false;
+            }
+        }
+
+        private static string BuildKitArticleFilter(string component1, string component2)
+        {
+            string escapedComponent1 = EscapeGridFilterValue(component1);
+            string escapedComponent2 = EscapeGridFilterValue(component2);
+
+            return $"([Articul] LIKE '%{escapedComponent1}%') OR ([Articul] LIKE '%{escapedComponent2}%')";
+        }
+
+        private static string EscapeGridFilterValue(string value)
+        {
+            return StringNormalizer.TrimOrEmpty(value).Replace("'", "''");
+        }
+
         /// <summary>
         /// Обрабатывает смену строки в неувязанных артикулах
         /// </summary>
@@ -79,7 +150,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (gridView == null) return;
 
                 if (!IsHandleCreated) return;
-                BeginInvoke((MethodInvoker)RefreshAnnGridSearchVisualState);
+                BeginInvoke((MethodInvoker)(() =>
+                {
+                    ApplyAnnGridKitSearchFilter(gridView);
+                    RefreshAnnGridSearchVisualState();
+                }));
             }
             catch (Exception ex)
             {

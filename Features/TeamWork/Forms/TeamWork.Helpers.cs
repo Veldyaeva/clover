@@ -919,6 +919,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             // Очищаем буфер при переключении режима
             TeamWorkBuffer.ClearBuffer();
 
+            ApplyAnnGridKitSearchFilter(ANNgridView);
+            RefreshAnnGridSearchVisualState();
+
             // Взаимоисключаем кнопки редактирования: если доступна расширенная, скрываем обычную
             EnforceEditButtonsExclusivity();
         }
@@ -957,6 +960,9 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             // Очищаем буфер при переключении режима
             TeamWorkBuffer.ClearBuffer();
+
+            ApplyAnnGridKitSearchFilter(ANNgridView);
+            RefreshAnnGridSearchVisualState();
 
             // На всякий случай поддержим консистентность взаимной видимости
             EnforceEditButtonsExclusivity();

@@ -14,3 +14,6 @@
 *.trn
 *.0.102.toolpath.sentinel
 *.0.102.dotnetFirstUseSentinel
+*.0.102_IsDockerContainer.dotnetUserLevelCache
+*.0.102_MachineId.dotnetUserLevelCache
+*.v1.dotnetUserLevelCache

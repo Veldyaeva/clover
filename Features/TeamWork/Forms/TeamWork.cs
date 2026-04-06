@@ -83,6 +83,8 @@ namespace SewingProduction.Features.TeamWork.Forms
         private BindingList<NormKont> _normKontListArticles;
         private BindingSource _normKontBindingSourceArticles;
         private bool _articlesTabInitialized = false;
+        private bool _isUpdatingAnnGridKitFilter = false;
+        private bool _annGridKitFilterActive = false;
 
         private List<KodProizvModel> kodProizvList;
         private List<PodrVyazModel> podrVyazList;
