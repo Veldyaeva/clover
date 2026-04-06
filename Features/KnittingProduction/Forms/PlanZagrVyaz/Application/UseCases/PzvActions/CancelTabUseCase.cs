@@ -44,6 +44,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application
             {
                 row.olPzvTab = 0;
                 row.olPzvDateNaznTab = null;
+                row.olPzvKwsID = 0;
             }, ct);
 
             return OperationResult.Ok();
