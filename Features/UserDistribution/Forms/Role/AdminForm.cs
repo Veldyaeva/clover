@@ -496,8 +496,9 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             string query = $@"
                 INSERT INTO ProjectForms (NameForm,NameFormRus,CreatorID)
-                OUTPUT INSERTED.ProjectFormsID
-                VALUES (@eNameForm,@eNameFormRus,@CreatorID)";
+                VALUES (@eNameForm,@eNameFormRus,@CreatorID)
+
+                SELECT CAST(SCOPE_IDENTITY() AS INT);";
             var result = await _dbHelper.ExecuteScalarAsync(query, new Dictionary<string, object>
             {
                 { "@eNameForm", eNameForm },
@@ -539,8 +540,9 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             string query = @"
             INSERT INTO ObjectForm (ObjectName, ObjectNameRus, ObjectType, CreatorID, FormID)
-            OUTPUT INSERTED.ObjectID
-            VALUES (@ObjectName, @ObjectNameRus, @ObjectType, @CreatorID, @FormID)";
+            VALUES (@ObjectName, @ObjectNameRus, @ObjectType, @CreatorID, @FormID)
+
+            SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
             var result = await _dbHelper.ExecuteScalarAsync(query, new Dictionary<string, object>
             {

@@ -602,8 +602,8 @@ namespace SewingProduction
         }
 
         #endregion
-        private DevExpress.XtraBars.PopupMenu popupMenu1; 
-        private SewingProduction.Core.Class.CustomControls.CustomBarManager barManager1;
+        private DevExpress.XtraBars.PopupMenu popupMenu1;
+        public SewingProduction.Core.Class.CustomControls.CustomBarManager barManager1;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;

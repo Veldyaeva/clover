@@ -23,9 +23,17 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             InitializeComponent();
             InitGifBackground();
-            LoadLoginHistory();
 
-            _user = user ?? throw new ArgumentNullException(nameof(user));
+            _user = user;
+
+            if (_user.UserName == "")
+            {
+                LoadLoginHistory();
+            }
+            else
+            {
+                comboBoxEditLogin.Text = _user.UserName ?? string.Empty;
+            }
             _passwordHasher = new PasswordHasher();
 
             DatabaseHelper dbHelper = new DatabaseHelper("ace");

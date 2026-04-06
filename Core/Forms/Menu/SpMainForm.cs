@@ -251,13 +251,13 @@ namespace SewingProduction
         /// <summary>
         /// Видимость для обьектов (в меню)
         /// </summary>
-        private void LoadObjectForm()
+        public void LoadObjectForm()
         {
             if (barManager1 != null)
                 barManager1.ApplyPermissions(_user);
         }
 
-        private void UpdateFormTitle()
+        public void UpdateFormTitle()
         {
             var title = $"{_baseFormTitle}  v{_buildVersion} ({GetAppBitness()})";
             Text = string.IsNullOrWhiteSpace(_user?.UserName)

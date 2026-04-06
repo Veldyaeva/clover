@@ -1201,9 +1201,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                     {
                         this.Invoke((MethodInvoker)(() =>
                         {
-                            textBoxBuffer.Text = $"группа: {annData.grup.TrimEnd(' ') ?? ""}, \r" +
-                                                 $"модель: {annData.Mod.TrimEnd(' ') ?? ""}, \r" +
-                                                 $"артикул: {annData.Articul.TrimEnd(' ') ?? ""}";
+                            textBoxBuffer.Text = $"группа: {StringNormalizer.TrimEndOrEmpty(annData.grup, ' ')}, \r" +
+                                                 $"модель: {StringNormalizer.TrimEndOrEmpty(annData.Mod, ' ')}, \r" +
+                                                 $"артикул: {StringNormalizer.TrimEndOrEmpty(annData.Articul, ' ')}";
                         }));
                     }
                 }
@@ -3059,8 +3059,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 string choice2 = "Комплектация пачки";
 
                 // Проверяем, что строки еще не добавлены (нормализуем текст)
-                bool hasChoice1 = _normKontList.Any(nk => string.Equals((nk.text ?? string.Empty).Trim(), choice1, StringComparison.OrdinalIgnoreCase));
-                bool hasChoice2 = _normKontList.Any(nk => string.Equals((nk.text ?? string.Empty).Trim(), choice2, StringComparison.OrdinalIgnoreCase));
+                bool hasChoice1 = _normKontList.Any(nk => StringNormalizer.EqualsTrimmed(nk.text, choice1));
+                bool hasChoice2 = _normKontList.Any(nk => StringNormalizer.EqualsTrimmed(nk.text, choice2));
 
                 if (!hasChoice1)
                 {

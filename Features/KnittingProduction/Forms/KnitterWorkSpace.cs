@@ -1634,7 +1634,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             label = segment.Substring(0, separatorIndex + 1);
             value = separatorIndex + 1 < segment.Length
-                ? segment.Substring(separatorIndex + 1).TrimStart()
+                ? StringNormalizer.TrimStartOrEmpty(segment.Substring(separatorIndex + 1))
                 : string.Empty;
             return true;
         }

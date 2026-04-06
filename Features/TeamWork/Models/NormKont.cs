@@ -18,12 +18,36 @@ namespace SewingProduction.Models
         public int AnnId { get; set; }
         [Column("kod")]
         public int kod { get; set; }
-        public string kod_o { get; set; }
+
+        private string _kodO;
+        public string kod_o
+        {
+            get => _kodO;
+            set => _kodO = StringNormalizer.TrimOrNull(value);
+        }
+
+        private string _text;
         [Column("text")]
-        public string text { get; set; }
-        public string spec { get; set; }
+        public string text
+        {
+            get => _text;
+            set => _text = StringNormalizer.TrimOrNull(value);
+        }
+
+        private string _spec;
+        public string spec
+        {
+            get => _spec;
+            set => _spec = StringNormalizer.TrimOrNull(value);
+        }
         public decimal razryd { get; set; }
-        public string obor { get; set; }
+
+        private string _obor;
+        public string obor
+        {
+            get => _obor;
+            set => _obor = StringNormalizer.TrimOrNull(value);
+        }
         public int sek { get; set; }
         public decimal seb { get; set; }
         public int n { get; set; }

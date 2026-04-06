@@ -92,9 +92,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 // Подтверждение операции
-                string displayInfo = $"Группа: {selectedAnn.grup?.TrimEnd(' ')}, " +
-                                   $"Модель: {selectedAnn.Mod?.TrimEnd(' ')}, " +
-                                   $"Артикул: {selectedAnn.Articul?.TrimEnd(' ')}";
+                string displayInfo = $"Группа: {StringNormalizer.TrimEndOrEmpty(selectedAnn.grup, ' ')}, " +
+                                   $"Модель: {StringNormalizer.TrimEndOrEmpty(selectedAnn.Mod, ' ')}, " +
+                                   $"Артикул: {StringNormalizer.TrimEndOrEmpty(selectedAnn.Articul, ' ')}";
 
                 string message = $"Отвязать {itemsToUnbind.Count} артикул(ов) от разделения труда:\n\n" +
                                 $"AnnID: {selectedAnn.AnnID}\n" +

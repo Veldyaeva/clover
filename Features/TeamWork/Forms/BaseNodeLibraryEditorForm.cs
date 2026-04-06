@@ -1,6 +1,7 @@
 using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Features.TeamWork.Models;
 using SewingProduction.Features.TeamWork.Services;
+using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -139,7 +140,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private static void SelectComboValue(ComboBox comboBox, string value, string fallback)
         {
-            string targetValue = string.IsNullOrWhiteSpace(value) ? fallback : value.Trim();
+            string targetValue = string.IsNullOrWhiteSpace(value) ? fallback : StringNormalizer.TrimOrEmpty(value);
             if (comboBox.Items.Contains(targetValue))
             {
                 comboBox.SelectedItem = targetValue;
@@ -178,11 +179,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
 
             var updatedNode = CloneNode(_workingNode);
-            updatedNode.Name = nameTextBox.Text.Trim();
-            updatedNode.Description = descriptionTextBox.Text.Trim();
-            updatedNode.NodeGroup = nodeGroupComboBox.SelectedItem?.ToString() ?? string.Empty;
-            updatedNode.ProductKind = productKindComboBox.SelectedItem?.ToString() ?? string.Empty;
-            updatedNode.ProductCategory = productCategoryComboBox.SelectedItem?.ToString() ?? string.Empty;
+            updatedNode.Name = StringNormalizer.TrimOrEmpty(nameTextBox.Text);
+            updatedNode.Description = StringNormalizer.TrimOrEmpty(descriptionTextBox.Text);
+            updatedNode.NodeGroup = StringNormalizer.TrimOrEmpty(nodeGroupComboBox.SelectedItem?.ToString());
+            updatedNode.ProductKind = StringNormalizer.TrimOrEmpty(productKindComboBox.SelectedItem?.ToString());
+            updatedNode.ProductCategory = StringNormalizer.TrimOrEmpty(productCategoryComboBox.SelectedItem?.ToString());
 
             ToggleBusyState(true);
             try

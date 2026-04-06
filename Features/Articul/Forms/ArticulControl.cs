@@ -3,6 +3,7 @@ using DevExpress.XtraEditors.DXErrorProvider;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
 using SewingProduction.Helpers;
+using SewingProduction.Models;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
@@ -336,7 +337,7 @@ namespace SewingProduction.Features.Articul.Forms
                     };
                     binding.Parse += (_, e) =>
                     {
-                        var s = Convert.ToString(e.Value)?.Trim();
+                        var s = StringNormalizer.TrimOrNull(Convert.ToString(e.Value));
                         if (string.IsNullOrWhiteSpace(s)) { e.Value = null; return; }
                         if (DateTime.TryParse(s, out var dt)) e.Value = dt;
                     };

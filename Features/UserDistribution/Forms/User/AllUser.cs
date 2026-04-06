@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
+using System.ServiceModel.Channels;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraDialogs.FileExplorerExtensions;
 using DevExpress.XtraGrid.Views.Grid;
 using Microsoft.AspNet.Identity;
+using SewingProduction.Core.Class.Settings;
+using SewingProduction.Features.UserDistribution.Class;
 using SewingProduction.Features.UserDistribution.DataService;
 using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
@@ -31,7 +35,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private readonly AllRoleDataService _allRoleDataService;
         private readonly AllProfileDataService _allProfileDataService;
         private int selectedRoleId = -1;
-        private int selectedUserId = -1; 
+        private int selectedUserId = -1;
         public AllUser(UserClass user) : base(user)
         {
             InitializeComponent();
@@ -295,5 +299,34 @@ namespace SewingProduction.Features.UserDistribution.Forms
         }
         #endregion
 
+        private async void customButtonLoginUser_Click(object sender, EventArgs e)
+        {
+            string login = _user.UserName;
+            _user.UserName = gridViewUsers.GetFocusedRowCellValue("UserName").ToString();
+
+            if (this.MdiParent is SpMainForm mainForm)
+            {
+                LoginForm loginForm = new LoginForm(_user);
+                if (loginForm.ShowDialog() == DialogResult.OK)
+                {
+                    //mainForm.SaveOpenTabsSafe();
+                    //_user.ExitUser();
+                    //this.WindowState = FormWindowState.Maximized;
+
+                    mainForm._formManager = new FormManager(mainForm, mainForm.barManager1, _user);
+                    await _user.LoadUserData();
+                    mainForm.UpdateFormTitle();
+                    CurrentUser.SetUser(_user);
+                    await _user.LoadObjectForm(mainForm.Name);
+
+                    mainForm.LoadObjectForm();
+
+                    if (SettingsManager.GetSaveOpenTabs())
+                        await mainForm._formManager.RestoreOpenTabs();
+                    MessageBox.Show("Успешный вход!");
+                }
+                else _user.UserName = login;
+            }
+        }
     }
 }

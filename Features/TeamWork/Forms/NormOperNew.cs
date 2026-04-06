@@ -330,10 +330,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             var normRasz = new NormRasz();
 
             normRasz.kod_o = view.GetRowCellValue(rowHandle, "kod_o")?.ToString();
-            normRasz.Text = Convert.ToString(view.GetRowCellValue(rowHandle, "text"))?.TrimEnd(' ');
-            normRasz.Spec = Convert.ToString(view.GetRowCellValue(rowHandle, "spec"))?.TrimEnd(' ');
+            normRasz.Text = StringNormalizer.TrimEndOrNull(Convert.ToString(view.GetRowCellValue(rowHandle, "text")), ' ');
+            normRasz.Spec = StringNormalizer.TrimEndOrNull(Convert.ToString(view.GetRowCellValue(rowHandle, "spec")), ' ');
             // Объединяем источник: проставляем и код, и текст из одной строки norm_oper
-            var textOb = Convert.ToString(view.GetRowCellValue(rowHandle, "text_ob"))?.TrimEnd(' ');
+            var textOb = StringNormalizer.TrimEndOrNull(Convert.ToString(view.GetRowCellValue(rowHandle, "text_ob")), ' ');
             normRasz.Obor = textOb;
             normRasz.razryd = GetIntFromView(view, rowHandle, "razryd");
             normRasz.N1 = GetIntFromView(view, rowHandle, "n1");
@@ -341,9 +341,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             normRasz.KodOb = GetIntFromView(view, rowHandle, "kod_ob");
             normRasz.KodPodr = GetIntFromView(view, rowHandle, "kod_podr");
             normRasz.KodProizv = GetIntFromView(view, rowHandle, "kod_proizv");
-            normRasz.TextProizv = Convert.ToString(view.GetRowCellValue(rowHandle, "text_proizv"))?.TrimEnd(' ');
-            normRasz.TextVyaz = Convert.ToString(view.GetRowCellValue(rowHandle, "text_vyaz"))?.TrimEnd(' ');
-            normRasz.TextOb = Convert.ToString(view.GetRowCellValue(rowHandle, "text_ob"))?.TrimEnd(' ');
+            normRasz.TextProizv = StringNormalizer.TrimEndOrNull(Convert.ToString(view.GetRowCellValue(rowHandle, "text_proizv")), ' ');
+            normRasz.TextVyaz = StringNormalizer.TrimEndOrNull(Convert.ToString(view.GetRowCellValue(rowHandle, "text_vyaz")), ' ');
+            normRasz.TextOb = StringNormalizer.TrimEndOrNull(Convert.ToString(view.GetRowCellValue(rowHandle, "text_ob")), ' ');
 
             return normRasz;
         }
