@@ -194,7 +194,7 @@ namespace SewingProduction.Features.TeamWork.Services
                 {
                     string kod = nzpItem.kodd.ToString();
                     int annIdNzpRow = nzpItem.annId;
-                    string articul = nzpItem.articul?.TrimEnd(' ') ?? string.Empty;
+                    string articul = StringNormalizer.TrimEndOrEmpty(nzpItem.articul, ' ');
 
                     await _logger.LogEventAsync($"Отвязка артикула KOD: {kod}, articul: {articul}, AnnID: {annIdNzpRow}", "UnbindArticles");
 

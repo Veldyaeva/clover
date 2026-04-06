@@ -97,7 +97,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (string.IsNullOrWhiteSpace(articleText))
                     return (false, string.Empty, string.Empty);
 
-                string cleanText = articleText.Trim().ToUpperInvariant();
+                string cleanText = StringNormalizer.NormalizeUpperInvariant(articleText);
 
                 var patterns = new[]
                 {

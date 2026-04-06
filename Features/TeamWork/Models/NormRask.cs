@@ -25,14 +25,38 @@ namespace SewingProduction.Models
         }
         [Column("annId")]
         public int AnnId { get; set; }
+
+        private string _kodO;
         [Column("kod_o")]
-        public string Kod_o { get; set; }
+        public string Kod_o
+        {
+            get => _kodO;
+            set => _kodO = StringNormalizer.TrimOrNull(value);
+        }
+
+        private string _textRask;
         [Column("text")]
-        public string TextRask { get; set; }
+        public string TextRask
+        {
+            get => _textRask;
+            set => _textRask = StringNormalizer.TrimOrNull(value);
+        }
+
+        private string _spec;
         [Column("spec")]
-        public string Spec { get; set; }
+        public string Spec
+        {
+            get => _spec;
+            set => _spec = StringNormalizer.TrimOrNull(value);
+        }
         public int razryd { get; set; }
-        public string Obor { get; set; }
+
+        private string _obor;
+        public string Obor
+        {
+            get => _obor;
+            set => _obor = StringNormalizer.TrimOrNull(value);
+        }
         public int Kod { get; set; }
         public int N { get; set; }
         public int N1 { get; set; }

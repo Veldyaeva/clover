@@ -49,7 +49,7 @@ namespace SewingProduction.Services
                     if (prop != null && !System.Attribute.IsDefined(prop, typeof(System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute)))
                         return prop;
 
-                    columnName = columnName.ToLower();
+                    columnName = StringNormalizer.NormalizeLowerInvariant(columnName);
 
                     if (columnName == "grup") return type.GetProperty(nameof(ArtNormN.grup));
                     if (columnName == "sek_shv") return type.GetProperty(nameof(ArtNormN.SekShv));
@@ -374,7 +374,7 @@ namespace SewingProduction.Services
                 using (var connection = _dbHelper.GetConnection())
                 {
                     string query = @"SELECT 
- nr.AnnId, nr.N, nr.N1,nr.razryd, Trim(nr.Text) text,
+ nr.AnnId, nr.N, nr.N1,nr.razryd, nr.Text text,
     nr.Sek, nr.Seb, nr.Kod, 
     nr.kod_o AS Kod_o,       
     nr.kod_ob AS KodOb,   
@@ -433,7 +433,7 @@ WHERE nr.annId = @annId";
             using (var connection = _dbHelper.GetConnection())
             {
                 string query = @"SELECT 
- nr.AnnId, nr.N, nr.N1,nr.razryd, trim(nr.Text) text,
+ nr.AnnId, nr.N, nr.N1,nr.razryd, nr.Text text,
     nr.Sek, nr.Seb, nr.Kod, 
     nr.kod_o AS Kod_o,       
     nr.kod_ob AS KodOb,   
@@ -443,7 +443,7 @@ WHERE nr.annId = @annId";
     nr.nrDateAdd, nr.nrCompAdd, nr.nrDateDel, nr.nrCompDel,
     kp.text_proizv as TextProizv,
     pv.text_vyaz as TextVyaz,
-    trim(ob.text_ob) as TextOb
+    ob.text_ob as TextOb
 FROM dbo.normraszview nr
 LEFT JOIN kod_proizv kp ON nr.kod_proizv = kp.kod_proizv
 LEFT JOIN podr_vyaz pv ON nr.kod_podr = pv.kod_vyaz
@@ -491,7 +491,7 @@ WHERE nr.annId = @annId";
             try
             {
                 string query = @"SELECT 
-                            nr.AnnId, nr.N, nr.N1,nr.razryd, trim(nr.Text) text,
+                            nr.AnnId, nr.N, nr.N1,nr.razryd, nr.Text text,
                             nr.Sek, nr.Seb, nr.Kod, 
                             nr.kod_o AS Kod_o,       
                             nr.kod_ob AS KodOb,   
@@ -501,7 +501,7 @@ WHERE nr.annId = @annId";
                             nr.nrDateAdd, nr.nrCompAdd, nr.nrDateDel, nr.nrCompDel,
                             kp.text_proizv as TextProizv,
                             pv.text_vyaz as TextVyaz,
-                            trim(ob.text_ob) as TextOb
+                            ob.text_ob as TextOb
                         FROM dbo.normraszview nr
                         LEFT JOIN kod_proizv kp ON nr.kod_proizv = kp.kod_proizv
                         LEFT JOIN podr_vyaz pv ON nr.kod_podr = pv.kod_vyaz
@@ -530,7 +530,7 @@ WHERE nr.annId = @annId";
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = "SELECT id, AnnId, kod_o, Trim(Text) as TextRask, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, trim(Obor) Obor FROM norm_rask WHERE annId = @annId";
+                    string query = "SELECT id, AnnId, kod_o, Text as TextRask, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
                     //var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } }, cancellationToken: ct);
                     //return result.ToList();
                     var list = await connection.QueryAsync<NormRask>(
@@ -550,7 +550,7 @@ WHERE nr.annId = @annId";
             using (
                 var connection = _dbHelper.GetConnection())
             {
-                string query = "SELECT id, AnnId, kod_o, Trim(Text) as TextRask, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, trim(Obor) Obor, spec FROM norm_rask WHERE annId = @annId";
+                string query = "SELECT id, AnnId, kod_o, Text as TextRask, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor, spec FROM norm_rask WHERE annId = @annId";
                 //var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } }, cancellationToken: ct);
                 //return result.ToList();
                 var list = await connection.QueryAsync<NormRask>(
@@ -571,7 +571,7 @@ WHERE nr.annId = @annId";
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = "SELECT AnnId, kod_o, Trim(Text) text, razryd, Sek, nkId FROM norm_kont WHERE annId = @annId";
+                    string query = "SELECT AnnId, kod_o, Text text, razryd, Sek, nkId FROM norm_kont WHERE annId = @annId";
                     //return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
                     var result = await connection.QueryAsync<NormKont>(query, new Dictionary<string, object> { { "@annId", annId } });
                     return result.ToList();
@@ -582,7 +582,7 @@ WHERE nr.annId = @annId";
         {
             using (var connection = _dbHelper.GetConnection())
             {
-                string query = "SELECT AnnId, kod_o, Trim(Text) text, razryd, Sek, nkId FROM norm_kont WHERE annId = @annId";
+                string query = "SELECT AnnId, kod_o, Text text, razryd, Sek, nkId FROM norm_kont WHERE annId = @annId";
                 //return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
                 var result = await connection.QueryAsync<NormKont>(query, new Dictionary<string, object> { { "@annId", annId } });
                 return result.ToList();

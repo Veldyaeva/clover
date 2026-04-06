@@ -591,7 +591,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                         if (value == null || value == DBNull.Value)
                             return " ";
                         string stringValue = value.ToString();
-                        return string.IsNullOrEmpty(stringValue) ? " " : stringValue.TrimEnd(' ');
+                        string normalizedValue = StringNormalizer.TrimEndOrEmpty(stringValue, ' ');
+                        return string.IsNullOrEmpty(normalizedValue) ? " " : normalizedValue;
                     }
 
                     var grupVal = GetSafeValue("grup");

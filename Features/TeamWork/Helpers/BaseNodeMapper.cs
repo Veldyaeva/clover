@@ -14,8 +14,8 @@ namespace SewingProduction.Features.TeamWork.Helpers
 
             return new BaseNodeDefinition
             {
-                Name = name?.Trim() ?? string.Empty,
-                Description = description?.Trim() ?? string.Empty,
+                Name = StringNormalizer.TrimOrEmpty(name),
+                Description = StringNormalizer.TrimOrEmpty(description),
                 Operations = DeduplicateOperations(normalizedOperations).ToList()
             };
         }

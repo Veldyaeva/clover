@@ -258,14 +258,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
         private static string MakeSlug(string text)
         {
-            if (string.IsNullOrWhiteSpace(text)) return "";
-            var chars = text.Trim()
-                            .ToLowerInvariant()
-                            .Select(ch => char.IsLetterOrDigit(ch) ? ch : '-')
-                            .ToArray();
-            var raw = new string(chars);
-            while (raw.Contains("--")) raw = raw.Replace("--", "-");
-            return raw.Trim('-');
+            return StringNormalizer.NormalizeSlug(text);
         }
         /// <summary>
         /// Поиск кнопки по тегу
@@ -468,7 +461,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView.OptionsSelection.MultiSelectMode = GridMultiSelectMode.RowSelect;
 
             // Можно добавить специфические настройки для разных гридов
-            switch (gridName.ToLower())
+            switch (StringNormalizer.NormalizeLowerInvariant(gridName))
             {
                 case "unboundarts":
                 case "wdtobind":
@@ -689,7 +682,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (searchControl == null) return;
 
                 // Если текст очищен, возвращаем исходные данные
-                if (string.IsNullOrEmpty(searchControl.Text?.Trim()))
+                if (string.IsNullOrEmpty(StringNormalizer.TrimOrEmpty(searchControl.Text)))
                 {
                     await _logger.LogEventAsync("searchControl1: Текст очищен, восстанавливаем исходные данные", "searchControl1_TextChanged");
                     await RestoreOriginalData();
