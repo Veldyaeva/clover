@@ -1,6 +1,7 @@
 using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Features.TeamWork.Models;
 using SewingProduction.Features.TeamWork.Services;
+using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -111,7 +112,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             previewGrid.DataSource = BaseNodeMapper.CreatePreviewRows(node);
 
             int chapters = node.Operations.Select(x => x.SourceN).Distinct().Count();
-            string description = string.IsNullOrWhiteSpace(node.Description) ? "Без описания" : node.Description.Trim();
+            string description = string.IsNullOrWhiteSpace(node.Description) ? "Без описания" : StringNormalizer.TrimOrEmpty(node.Description);
             detailsLabel.Text = $"Операций: {node.Operations.Count}. Глав: {chapters}. {description}";
         }
 

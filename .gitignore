@@ -12,3 +12,5 @@
 *.json
 *.log
 *.trn
+*.0.102.toolpath.sentinel
+*.0.102.dotnetFirstUseSentinel

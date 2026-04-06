@@ -75,65 +75,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                var gv = sender as GridView;
-                if (gv == null) return;
-
                 var gridView = sender as GridView;
                 if (gridView == null) return;
 
-                // В режиме комплекта проверяем FindFilterText для комплектного поиска
-                if (toggleSwitchKit.IsOn && !string.IsNullOrEmpty(gridView.FindFilterText))
-                {
-                    string searchText = gridView.FindFilterText.Trim();
-                    var kitComponents = ParseKitArticle(searchText);
-
-                    if (kitComponents.HasValidComponents)
-                    {
-                        // Применяем комплектный поиск
-                        string filterExpression = $"[Articul] Like '%{kitComponents.Component1}%' OR [Articul] Like '%{kitComponents.Component2}%'";
-
-                        // Временно отключаем FindFilter и применяем кастомный фильтр
-                        gridView.GridControl.BeginInvoke(new Action(() =>
-                        {
-                            try
-                            {
-                                gridView.FindFilterText = string.Empty;
-                                gridView.ActiveFilterString = filterExpression;
-
-                                _logger?.LogEventAsync($"Комплектный поиск: '{searchText}' разобран на '{kitComponents.Component1}' и '{kitComponents.Component2}'", "ANNgridView_ActiveFilterChanged");
-                            }
-                            catch (Exception ex)
-                            {
-                                _logger?.LogErrorAsync(ex, "Ошибка при применении комплектного поиска");
-                            }
-                        }));
-                        return; // Выходим, чтобы не выполнять стандартную логику
-                    }
-                }
-
-                // Стандартная логика для обычного поиска
-                if (gridView.ActiveFilterCriteria != null)
-                {
-                    try
-                    {
-                        if (gridView.DataRowCount > 0)
-                        {
-                            int firstVisibleRow = gridView.GetVisibleRowHandle(0);
-                            if (gridView.IsValidRowHandle(firstVisibleRow))
-                            {
-                                gridView.FocusedRowHandle = firstVisibleRow;
-                                gridView.MakeRowVisible(firstVisibleRow);
-
-                                _logger?.LogEventAsync($"Автоматический переход на первую строку результатов поиска. Всего строк: {gridView.DataRowCount}", "ANNgridView_ActiveFilterChanged");
-                                ANNgridView_FocusedRowChanged_Internal(ANNgridView, new FocusedRowChangedEventArgs(-1, ANNgridView.FocusedRowHandle));
-                            }
-                        }
-                    }
-                    catch (Exception) { }
-                }
-
                 if (!IsHandleCreated) return;
-                BeginInvoke((MethodInvoker)(() => FocusFirstResultAndLoadRelated()));
+                BeginInvoke((MethodInvoker)RefreshAnnGridSearchVisualState);
             }
             catch (Exception ex)
             {
@@ -151,7 +97,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (string.IsNullOrWhiteSpace(articleText))
                     return (false, string.Empty, string.Empty);
 
-                string cleanText = articleText.Trim().ToUpperInvariant();
+                string cleanText = StringNormalizer.NormalizeUpperInvariant(articleText);
 
                 var patterns = new[]
                 {

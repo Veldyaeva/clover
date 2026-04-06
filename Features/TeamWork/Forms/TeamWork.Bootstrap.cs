@@ -100,23 +100,30 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             if (e.Page == null) return;
 
-            // Отменяем все активные загрузки на предыдущей вкладке
-            CancelAllLoads();
-            // для новой вкладки создаем НОВЫЙ токен
-            var token = StartNewLoadToken();
+            // При переключении вкладок не перезагружаем источники повторно:
+            // просто останавливаем незавершенные операции.
+            CancelCurrentLoad();
+
             switch (e.Page.Name)
             {
-                case "TabPage1":
-                    await LoadWorkDivisions(token);
-                    break;
-
                 case "xtraTabPageArticles":
-                    // Загружаем данные для вкладки артикулов с токеном отмены
-                    await CurrentWorks_Load(token);//_loadCts.Token);
+                    if (_articlesTabInitialized)
+                    {
+                        break;
+                    }
+
+                    var token = StartNewLoadToken();
+                    try
+                    {
+                        await CurrentWorks_Load(token);
+                    }
+                    catch (OperationCanceledException) when (token.IsCancellationRequested)
+                    {
+                        // Переключение вкладки отменило первичную загрузку — это штатно.
+                    }
                     break;
 
                 default:
-                    // При переходе на другие вкладки можно добавить дополнительную логику если необходимо
                     break;
             }
         }
@@ -124,49 +131,12 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// <summary>
         /// Обрабатывает смену вложенной вкладки в "Текущие работы"
         /// </summary>
-        private async void XtraTabControl2_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
+        private void XtraTabControl2_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
         {
             if (e.Page == null) return;
 
-            // Отменяем все активные загрузки на предыдущей вложенной вкладке
-            CancelAllLoads();
-
-            try
-            {
-                switch (e.Page.Name)
-                {
-                    case "xtraTabPageWorkDivisions":
-                        // Когда переходим на вкладку "Требуют увязки", обновляем данные для normRaskArt
-                        if (gridView_wdToBind?.RowCount > 0 && gridView_wdToBind.FocusedRowHandle >= 0)
-                        {
-                            int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, gridView_wdToBind.FocusedRowHandle, "AnnID", 0);
-                            if (annId > 0)
-                            {
-                                await _logger.LogEventAsync($"XtraTabControl2_SelectedPageChanged: Refreshing NormRask data for annId={annId} on xtraTabPageWorkDivisions", "XtraTabControl2_SelectedPageChanged");
-                                await RefreshNormRaskForArticlesTab(annId, _loadCts.Token);
-
-                                // Check the grid state after refresh
-                                await CheckNormRaskArtState();
-                            }
-                        }
-                        else
-                        {
-                            await _logger.LogWarningAsync("XtraTabControl2_SelectedPageChanged: No focused row in gridView_wdToBind", "XtraTabControl2_SelectedPageChanged");
-                        }
-                        break;
-
-                    case "xtraTabPage3":
-                        // Можно добавить логику для другой вложенной вкладки если необходимо
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Error in XtraTabControl2_SelectedPageChanged");
-            }
+            // Для вложенных вкладок также только останавливаем текущие загрузки.
+            CancelCurrentLoad();
         }
     }
 }

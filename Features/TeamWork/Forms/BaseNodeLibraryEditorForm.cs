@@ -1,6 +1,7 @@
 using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Features.TeamWork.Models;
 using SewingProduction.Features.TeamWork.Services;
+using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly BaseNodeLibraryService _libraryService;
         private readonly List<BaseNodeDefinition> _nodes = new List<BaseNodeDefinition>();
         private readonly int? _preferredNodeId;
+        private BaseNodeDefinition _workingNode;
 
         public BaseNodeDefinition SelectedNode => nodesListBox.SelectedItem as BaseNodeDefinition;
         public int? SelectedBaseNodeId => SelectedNode?.BaseNodeId;
@@ -111,6 +113,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             if (!hasNode)
             {
+                _workingNode = null;
                 nodeCodeValueLabel.Text = "-";
                 nameTextBox.Text = string.Empty;
                 descriptionTextBox.Text = string.Empty;
@@ -119,24 +122,25 @@ namespace SewingProduction.Features.TeamWork.Forms
                 productCategoryComboBox.SelectedItem = "Универсально";
                 detailsLabel.Text = "Выберите базовый узел для редактирования.";
                 previewGrid.DataSource = null;
+                UpdateOperationButtonsState();
                 return;
             }
 
-            nodeCodeValueLabel.Text = string.IsNullOrWhiteSpace(node.NodeCode) ? "-" : node.NodeCode;
-            nameTextBox.Text = node.Name ?? string.Empty;
-            descriptionTextBox.Text = node.Description ?? string.Empty;
-            SelectComboValue(nodeGroupComboBox, node.NodeGroup, string.Empty);
-            SelectComboValue(productKindComboBox, node.ProductKind, "Универсальный");
-            SelectComboValue(productCategoryComboBox, node.ProductCategory, "Универсально");
+            _workingNode = CloneNode(node);
 
-            int chapters = node.Operations.Select(x => x.SourceN).Distinct().Count();
-            detailsLabel.Text = $"Операций: {node.Operations.Count}. Глав: {chapters}.";
-            previewGrid.DataSource = BaseNodeMapper.CreatePreviewRows(node);
+            nodeCodeValueLabel.Text = string.IsNullOrWhiteSpace(_workingNode.NodeCode) ? "-" : _workingNode.NodeCode;
+            nameTextBox.Text = _workingNode.Name ?? string.Empty;
+            descriptionTextBox.Text = _workingNode.Description ?? string.Empty;
+            SelectComboValue(nodeGroupComboBox, _workingNode.NodeGroup, string.Empty);
+            SelectComboValue(productKindComboBox, _workingNode.ProductKind, "Универсальный");
+            SelectComboValue(productCategoryComboBox, _workingNode.ProductCategory, "Универсально");
+
+            RefreshOperationsPreview();
         }
 
         private static void SelectComboValue(ComboBox comboBox, string value, string fallback)
         {
-            string targetValue = string.IsNullOrWhiteSpace(value) ? fallback : value.Trim();
+            string targetValue = string.IsNullOrWhiteSpace(value) ? fallback : StringNormalizer.TrimOrEmpty(value);
             if (comboBox.Items.Contains(targetValue))
             {
                 comboBox.SelectedItem = targetValue;
@@ -156,7 +160,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private async void SaveButton_Click(object sender, EventArgs e)
         {
             var node = SelectedNode;
-            if (node == null)
+            if (node == null || _workingNode == null)
             {
                 return;
             }
@@ -168,12 +172,18 @@ namespace SewingProduction.Features.TeamWork.Forms
                 return;
             }
 
-            var updatedNode = CloneNode(node);
-            updatedNode.Name = nameTextBox.Text.Trim();
-            updatedNode.Description = descriptionTextBox.Text.Trim();
-            updatedNode.NodeGroup = nodeGroupComboBox.SelectedItem?.ToString() ?? string.Empty;
-            updatedNode.ProductKind = productKindComboBox.SelectedItem?.ToString() ?? string.Empty;
-            updatedNode.ProductCategory = productCategoryComboBox.SelectedItem?.ToString() ?? string.Empty;
+            if (_workingNode.Operations.Count == 0)
+            {
+                MessageBox.Show(this, "В узле должна остаться хотя бы одна операция.", "Проверка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var updatedNode = CloneNode(_workingNode);
+            updatedNode.Name = StringNormalizer.TrimOrEmpty(nameTextBox.Text);
+            updatedNode.Description = StringNormalizer.TrimOrEmpty(descriptionTextBox.Text);
+            updatedNode.NodeGroup = StringNormalizer.TrimOrEmpty(nodeGroupComboBox.SelectedItem?.ToString());
+            updatedNode.ProductKind = StringNormalizer.TrimOrEmpty(productKindComboBox.SelectedItem?.ToString());
+            updatedNode.ProductCategory = StringNormalizer.TrimOrEmpty(productCategoryComboBox.SelectedItem?.ToString());
 
             ToggleBusyState(true);
             try
@@ -242,6 +252,117 @@ namespace SewingProduction.Features.TeamWork.Forms
             saveButton.Enabled = !isBusy && SelectedNode != null;
             deleteButton.Enabled = !isBusy && SelectedNode != null;
             closeButton.Enabled = !isBusy;
+            UpdateOperationButtonsState(isBusy);
+        }
+
+        private void UpdateOperationButtonsState(bool isBusy = false)
+        {
+            bool hasOperations = _workingNode?.Operations?.Count > 0;
+            deleteOperationButton.Enabled = !isBusy && hasOperations;
+            moveUpButton.Enabled = !isBusy && (_workingNode?.Operations?.Count ?? 0) > 1;
+            moveDownButton.Enabled = !isBusy && (_workingNode?.Operations?.Count ?? 0) > 1;
+        }
+
+        private void RefreshOperationsPreview(int? selectedIndex = null)
+        {
+            int chapters = _workingNode?.Operations?.Select(x => x.SourceN).Distinct().Count() ?? 0;
+            detailsLabel.Text = _workingNode == null
+                ? "Выберите базовый узел для редактирования."
+                : $"Операций: {_workingNode.Operations.Count}. Глав: {chapters}.";
+
+            previewGrid.DataSource = null;
+            previewGrid.DataSource = _workingNode == null
+                ? null
+                : BaseNodeMapper.CreatePreviewRows(_workingNode);
+
+            SelectPreviewRow(selectedIndex);
+            UpdateOperationButtonsState();
+        }
+
+        private int GetSelectedOperationIndex()
+        {
+            if (previewGrid.CurrentCell != null)
+            {
+                return previewGrid.CurrentCell.RowIndex;
+            }
+
+            if (previewGrid.SelectedRows.Count > 0)
+            {
+                return previewGrid.SelectedRows[0].Index;
+            }
+
+            return -1;
+        }
+
+        private void SelectPreviewRow(int? selectedIndex)
+        {
+            if (!selectedIndex.HasValue || selectedIndex.Value < 0 || selectedIndex.Value >= previewGrid.Rows.Count)
+            {
+                return;
+            }
+
+            previewGrid.ClearSelection();
+            var row = previewGrid.Rows[selectedIndex.Value];
+            row.Selected = true;
+            if (row.Cells.Count > 0)
+            {
+                previewGrid.CurrentCell = row.Cells[0];
+            }
+        }
+
+        private bool EnsureCanMoveSelectedOperation(int delta, out int selectedIndex, out int targetIndex)
+        {
+            selectedIndex = GetSelectedOperationIndex();
+            targetIndex = selectedIndex + delta;
+
+            if (_workingNode == null || selectedIndex < 0)
+            {
+                MessageBox.Show(this, "Выберите операцию в списке.", "Проверка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+
+            if (!BaseNodeOperationEditingHelper.CanMove(_workingNode.Operations, selectedIndex, targetIndex))
+            {
+                MessageBox.Show(this, "Перемещение доступно только внутри текущей главы узла.", "Проверка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+
+            return true;
+        }
+
+        private void MoveUpButton_Click(object sender, EventArgs e)
+        {
+            if (!EnsureCanMoveSelectedOperation(-1, out int selectedIndex, out int targetIndex))
+            {
+                return;
+            }
+
+            BaseNodeOperationEditingHelper.Move(_workingNode.Operations, selectedIndex, targetIndex);
+            RefreshOperationsPreview(targetIndex);
+        }
+
+        private void MoveDownButton_Click(object sender, EventArgs e)
+        {
+            if (!EnsureCanMoveSelectedOperation(1, out int selectedIndex, out int targetIndex))
+            {
+                return;
+            }
+
+            BaseNodeOperationEditingHelper.Move(_workingNode.Operations, selectedIndex, targetIndex);
+            RefreshOperationsPreview(targetIndex);
+        }
+
+        private void DeleteOperationButton_Click(object sender, EventArgs e)
+        {
+            int selectedIndex = GetSelectedOperationIndex();
+            if (_workingNode == null || selectedIndex < 0)
+            {
+                MessageBox.Show(this, "Выберите операцию в списке.", "Проверка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            BaseNodeOperationEditingHelper.RemoveAt(_workingNode.Operations, selectedIndex);
+            RefreshOperationsPreview(Math.Min(selectedIndex, _workingNode.Operations.Count - 1));
         }
 
         private static BaseNodeDefinition CloneNode(BaseNodeDefinition source)

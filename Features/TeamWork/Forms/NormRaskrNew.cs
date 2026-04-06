@@ -251,7 +251,7 @@ namespace SewingProduction.form.TeamWork.Forms
         private List<NormRask> GenerateNormRaskList(BandData raskroyList, int _slogn)
         {
             int kol = raskroyList.gr;
-            string obor = raskroyList.Naimen?.TrimEnd();
+            string obor = StringNormalizer.TrimEndOrNull(raskroyList.Naimen);
             return new List<NormRask>
             {
                 new NormRask{IsNew = true, AnnId = -1, Kod_o = "301", TextRask = "Рассекание на куски диском", Sek = raskroyList.Dras, razryd =  5, N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0,Seb_s = 0, Spec = ""},
