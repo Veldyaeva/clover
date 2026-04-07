@@ -2,7 +2,7 @@ namespace SewingProduction.Features.TeamWork.Helpers
 {
     internal static class BaseNodeMetadataOptions
     {
-        public static readonly string[] ProductKinds =
+        public static readonly string[] NodeTypes =
         {
             "Заготовка",
             "Монтаж"

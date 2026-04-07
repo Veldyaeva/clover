@@ -19,12 +19,6 @@ namespace SewingProduction.Features.TeamWork.Helpers
             (new[] { "блуз", "рубаш", "сороч" }, "Блуза")
         };
 
-        private static readonly (string[] Keywords, string Value)[] ProductKindRules =
-        {
-            (new[] { "трикот", "кулир", "футер", "рибан", "кашкорсе", "интерлок", "лапша" }, "Трикотаж"),
-            (new[] { "текст", "ткан", "сороч", "костюм", "плательн", "джинс" }, "Текстиль")
-        };
-
         private static readonly (string[] Keywords, string Value)[] NodeGroupRules =
         {
             (new[] { "капюш" }, "Капюшон"),
@@ -47,15 +41,13 @@ namespace SewingProduction.Features.TeamWork.Helpers
 
             return new BaseNodeSaveDefaults
             {
+                SourceArticul = StringNormalizer.TrimOrEmpty(annData?.Articul),
                 ProductCategory = ResolveAllowedOption(
                     DetectValue(articleContext, ProductCategoryRules),
                     BaseNodeMetadataOptions.ProductCategories,
                     "Универсально"),
-                ProductKind = ResolveAllowedOption(
-                    DetectValue(articleContext, ProductKindRules),
-                    BaseNodeMetadataOptions.ProductKinds,
-                    "Универсальный"),
-                // NodeGroup теперь приходит из DB-справочника, поэтому здесь оставляем только подсказку.
+                NodeType = "Производственный",
+                // NodeGroup приходит из DB-справочника, поэтому здесь оставляем только подсказку.
                 NodeGroup = DetectValue(operationsContext, NodeGroupRules) ?? string.Empty
             };
         }

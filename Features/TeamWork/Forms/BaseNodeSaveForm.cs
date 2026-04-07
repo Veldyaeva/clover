@@ -43,12 +43,12 @@ namespace SewingProduction.Features.TeamWork.Forms
         private void InitializeSelectors()
         {
             nodeGroupComboBox.Items.Add(string.Empty);
-            productKindComboBox.Items.AddRange(BaseNodeMetadataOptions.ProductKinds);
+            productKindComboBox.Items.AddRange(BaseNodeMetadataOptions.NodeTypes);
             productCategoryComboBox.Items.AddRange(BaseNodeMetadataOptions.ProductCategories);
 
             // Автоподстановка только предлагает значения, но пользователь свободно может их поменять.
             SelectComboValue(nodeGroupComboBox, _defaults?.NodeGroup, string.Empty);
-            SelectComboValue(productKindComboBox, _defaults?.ProductKind, "Универсальный");
+            SelectComboValue(productKindComboBox, _defaults?.NodeType, "Производственный");
             SelectComboValue(productCategoryComboBox, _defaults?.ProductCategory, "Универсально");
         }
 
@@ -130,8 +130,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
 
             ResultNode = BaseNodeMapper.CreateDefinition(nameTextBox.Text, descriptionTextBox.Text, _operations);
+            ResultNode.NodeCode = StringNormalizer.TrimOrEmpty(_defaults?.SourceArticul);
             ResultNode.NodeGroup = nodeGroupComboBox.SelectedItem?.ToString() ?? string.Empty;
-            ResultNode.ProductKind = productKindComboBox.SelectedItem?.ToString() ?? string.Empty;
+            ResultNode.NodeType = productKindComboBox.SelectedItem?.ToString() ?? string.Empty;
+            ResultNode.ProductKind = string.Empty;
             ResultNode.ProductCategory = productCategoryComboBox.SelectedItem?.ToString() ?? string.Empty;
 
             DialogResult = DialogResult.OK;

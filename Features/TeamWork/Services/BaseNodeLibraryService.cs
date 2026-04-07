@@ -144,7 +144,7 @@ ORDER BY caption;";
 
                 if (existingNode == null)
                 {
-                    nodeCode = await GenerateNodeCodeAsync(connection, transaction, node.Name);
+                    nodeCode = await NormalizeNodeCodeAsync(connection, transaction, node.NodeCode, node.Name);
                     const string insertNodeSql = @"
 INSERT INTO dbo.BaseNode
 (
@@ -193,11 +193,12 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
                 else
                 {
                     baseNodeId = existingNode.BaseNodeId;
-                    nodeCode = existingNode.NodeCode;
+                    nodeCode = await NormalizeNodeCodeAsync(connection, transaction, node.NodeCode, node.Name);
 
                     const string updateNodeSql = @"
 UPDATE dbo.BaseNode
 SET NodeName = @NodeName,
+    NodeCode = @NodeCode,
     NodeGroup = NULLIF(@NodeGroup, N''),
     NodeType = NULLIF(@NodeType, N''),
     ProductKind = NULLIF(@ProductKind, N''),
@@ -210,6 +211,7 @@ WHERE BaseNodeId = @BaseNodeId;";
                     await connection.ExecuteAsync(updateNodeSql, new
                     {
                         BaseNodeId = baseNodeId,
+                        NodeCode = nodeCode,
                         NodeName = StringNormalizer.TrimOrEmpty(node.Name),
                         NodeGroup = NullIfWhiteSpace(node.NodeGroup),
                         NodeType = NullIfWhiteSpace(node.NodeType),
@@ -480,6 +482,17 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
             }
 
             return code;
+        }
+
+        private async Task<string> NormalizeNodeCodeAsync(SqlConnection connection, SqlTransaction transaction, string requestedNodeCode, string nodeName)
+        {
+            string normalizedNodeCode = StringNormalizer.TrimOrEmpty(requestedNodeCode);
+            if (string.IsNullOrWhiteSpace(normalizedNodeCode))
+            {
+                return await GenerateNodeCodeAsync(connection, transaction, nodeName);
+            }
+
+            return normalizedNodeCode;
         }
 
         private static BaseNodeDefinition MapNode(IGrouping<int, BaseNodeRow> group)

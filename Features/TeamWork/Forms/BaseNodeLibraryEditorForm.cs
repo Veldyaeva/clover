@@ -45,7 +45,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private void InitializeSelectors()
         {
             nodeGroupComboBox.Items.Add(string.Empty);
-            productKindComboBox.Items.AddRange(BaseNodeMetadataOptions.ProductKinds);
+            productKindComboBox.Items.AddRange(BaseNodeMetadataOptions.NodeTypes);
             productCategoryComboBox.Items.AddRange(BaseNodeMetadataOptions.ProductCategories);
         }
 

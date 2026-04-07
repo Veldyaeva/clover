@@ -142,8 +142,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             metadataLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             metadataLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             metadataLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            metadataLayoutPanel.Controls.Add(nodeGroupPanel, 0, 0);
-            metadataLayoutPanel.Controls.Add(productKindPanel, 1, 0);
+            metadataLayoutPanel.Controls.Add(nodeGroupPanel, 1, 0);
+            metadataLayoutPanel.Controls.Add(productKindPanel, 0, 0);
             metadataLayoutPanel.Controls.Add(productCategoryPanel, 2, 0);
             metadataLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
             metadataLayoutPanel.Location = new System.Drawing.Point(13, 180);
@@ -161,7 +161,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             nodeGroupPanel.Controls.Add(nodeGroupLabel, 0, 0);
             nodeGroupPanel.Controls.Add(nodeGroupComboBox, 0, 1);
             nodeGroupPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            nodeGroupPanel.Location = new System.Drawing.Point(0, 0);
+            nodeGroupPanel.Location = new System.Drawing.Point(278, 0);
             nodeGroupPanel.Margin = new System.Windows.Forms.Padding(0);
             nodeGroupPanel.Name = "nodeGroupPanel";
             nodeGroupPanel.RowCount = 2;
@@ -198,7 +198,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             productKindPanel.Controls.Add(productKindLabel, 0, 0);
             productKindPanel.Controls.Add(productKindComboBox, 0, 1);
             productKindPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            productKindPanel.Location = new System.Drawing.Point(278, 0);
+            productKindPanel.Location = new System.Drawing.Point(0, 0);
             productKindPanel.Margin = new System.Windows.Forms.Padding(0);
             productKindPanel.Name = "productKindPanel";
             productKindPanel.RowCount = 2;
@@ -215,7 +215,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             productKindLabel.Name = "productKindLabel";
             productKindLabel.Size = new System.Drawing.Size(272, 15);
             productKindLabel.TabIndex = 0;
-            productKindLabel.Text = "Класс изделия";
+            productKindLabel.Text = "Тип узла";
             // 
             // productKindComboBox
             // 

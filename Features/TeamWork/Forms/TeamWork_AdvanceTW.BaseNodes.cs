@@ -141,6 +141,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 var savedNode = await _baseNodeLibraryService.SaveAsync(form.ResultNode);
+                ClearBaseNodeSelection();
                 _ = _logger.LogEventAsync($"Сохранен базовый узел \"{savedNode.Name}\" ({savedNode.Operations.Count} операций)", "SaveSelectionAsBaseNode");
                 _ = ShowStatusMessage($"Базовый узел \"{savedNode.Name}\" сохранен", 3000, Color.DarkGreen);
             }
@@ -179,6 +180,26 @@ namespace SewingProduction.Features.TeamWork.Forms
                 .OrderBy(row => row.N)
                 .ThenBy(row => row.N1)
                 .ToList() ?? new List<NormRasz>();
+        }
+
+        private void ClearBaseNodeSelection()
+        {
+            if (gridViewRasz == null)
+            {
+                return;
+            }
+
+            try
+            {
+                // После создания базового узла очищаем checkbox-выделение,
+                // чтобы схема RT не оставалась помеченной уже сохраненными операциями.
+                gridViewRasz.ClearSelection();
+                gridViewRasz.RefreshData();
+            }
+            catch (Exception ex)
+            {
+                LogSuppressedException("ClearBaseNodeSelection", ex);
+            }
         }
 
         private List<BaseNodeInsertionPoint> BuildBaseNodeInsertionPoints()
