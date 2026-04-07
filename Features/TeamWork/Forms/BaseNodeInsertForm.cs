@@ -18,11 +18,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         public BaseNodeDefinition SelectedNode => nodesListBox.SelectedItem as BaseNodeDefinition;
         public BaseNodeInsertionPoint SelectedInsertionPoint => positionComboBox.SelectedItem as BaseNodeInsertionPoint;
 
-        public BaseNodeInsertForm(
+        public BaseNodeInsertForm( UserClass User,
             IReadOnlyList<BaseNodeDefinition> nodes,
             IReadOnlyList<BaseNodeInsertionPoint> insertionPoints,
             int? defaultAfterN = null,
-            BaseNodeLibraryService libraryService = null)
+            BaseNodeLibraryService libraryService = null): base(User)
         {
             _libraryService = libraryService;
             _nodes = (nodes ?? Array.Empty<BaseNodeDefinition>()).ToList();
@@ -126,7 +126,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             int? selectedNodeId = SelectedNode?.BaseNodeId;
 
-            using var form = new BaseNodeLibraryEditorForm(_libraryService, selectedNodeId);
+            using var form = new BaseNodeLibraryEditorForm(User, _libraryService, selectedNodeId);
             form.ShowDialog(this);
             selectedNodeId = form.SelectedBaseNodeId ?? selectedNodeId;
 

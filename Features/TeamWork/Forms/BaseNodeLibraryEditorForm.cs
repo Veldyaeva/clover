@@ -1,6 +1,8 @@
+using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Features.TeamWork.Models;
 using SewingProduction.Features.TeamWork.Services;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,7 @@ using System.Windows.Forms;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
-    internal sealed partial class BaseNodeLibraryEditorForm : Form
+    internal sealed partial class BaseNodeLibraryEditorForm : CustomForm
     {
         private readonly BaseNodeLibraryService _libraryService;
         private readonly List<BaseNodeDefinition> _nodes = new List<BaseNodeDefinition>();
@@ -20,7 +22,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         public BaseNodeDefinition SelectedNode => nodesListBox.SelectedItem as BaseNodeDefinition;
         public int? SelectedBaseNodeId => SelectedNode?.BaseNodeId;
 
-        public BaseNodeLibraryEditorForm(BaseNodeLibraryService libraryService, int? preferredNodeId = null)
+        public BaseNodeLibraryEditorForm(UserClass User, BaseNodeLibraryService libraryService, int? preferredNodeId = null):base(User)
         {
             _libraryService = libraryService ?? throw new ArgumentNullException(nameof(libraryService));
             _preferredNodeId = preferredNodeId;
@@ -36,14 +38,49 @@ namespace SewingProduction.Features.TeamWork.Forms
         private async void BaseNodeLibraryEditorForm_Shown(object sender, EventArgs e)
         {
             Shown -= BaseNodeLibraryEditorForm_Shown;
+            await LoadNodeGroupsAsync();
             await ReloadNodesAsync(_preferredNodeId);
         }
 
         private void InitializeSelectors()
         {
-            nodeGroupComboBox.Items.AddRange(BaseNodeMetadataOptions.NodeGroups);
+            nodeGroupComboBox.Items.Add(string.Empty);
             productKindComboBox.Items.AddRange(BaseNodeMetadataOptions.ProductKinds);
             productCategoryComboBox.Items.AddRange(BaseNodeMetadataOptions.ProductCategories);
+        }
+
+        private async Task LoadNodeGroupsAsync()
+        {
+            try
+            {
+                string selectedValue = _workingNode?.NodeGroup ?? string.Empty;
+                var nodeGroups = await _libraryService.GetNodeGroupsAsync();
+                ApplyNodeGroups(nodeGroups, selectedValue);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, $"Не удалось загрузить группы узлов: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void ApplyNodeGroups(IEnumerable<string> nodeGroups, string selectedValue)
+        {
+            nodeGroupComboBox.BeginUpdate();
+            try
+            {
+                nodeGroupComboBox.Items.Clear();
+
+                foreach (var nodeGroup in nodeGroups ?? new[] { string.Empty })
+                {
+                    nodeGroupComboBox.Items.Add(nodeGroup);
+                }
+            }
+            finally
+            {
+                nodeGroupComboBox.EndUpdate();
+            }
+
+            SelectComboValue(nodeGroupComboBox, selectedValue, string.Empty);
         }
 
         private async Task ReloadNodesAsync(int? preferredNodeId = null)
@@ -117,7 +154,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 nodeCodeValueLabel.Text = "-";
                 nameTextBox.Text = string.Empty;
                 descriptionTextBox.Text = string.Empty;
-                nodeGroupComboBox.SelectedIndex = 0;
+                nodeGroupComboBox.SelectedIndex = nodeGroupComboBox.Items.Count > 0 ? 0 : -1;
                 productKindComboBox.SelectedItem = "Универсальный";
                 productCategoryComboBox.SelectedItem = "Универсально";
                 detailsLabel.Text = "Выберите базовый узел для редактирования.";

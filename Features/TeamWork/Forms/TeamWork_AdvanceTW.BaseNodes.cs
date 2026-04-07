@@ -75,7 +75,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 var insertionPoints = BuildBaseNodeInsertionPoints();
-                using var form = new BaseNodeInsertForm(nodes, insertionPoints, _lastFocusedRaszOperation?.N, _baseNodeLibraryService);
+                using var form = new BaseNodeInsertForm(User, nodes, insertionPoints, _lastFocusedRaszOperation?.N, _baseNodeLibraryService);
                 if (form.ShowDialog(this) != DialogResult.OK || form.SelectedNode == null || form.SelectedInsertionPoint == null)
                 {
                     return;
@@ -104,13 +104,13 @@ namespace SewingProduction.Features.TeamWork.Forms
                 var operations = GetOperationsForBaseNodeSave();
                 if (operations.Count == 0)
                 {
-                    MessageBox.Show(this, "Выберите операции в NormRasz или установите фокус на главе, которую нужно сохранить как базовый узел.", "Базовые узлы", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, "Выберите операции в NormRasz или установите фокус на операции, которую нужно сохранить как базовый узел.", "Базовые узлы", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
                 string defaultName = BuildDefaultBaseNodeName(operations);
                 var defaults = BaseNodeMetadataSuggester.Suggest(_currentAnnData ?? CreatedAnn, operations);
-                using var form = new BaseNodeSaveForm(operations, defaultName, defaults);
+                using var form = new BaseNodeSaveForm(User, operations, defaultName, defaults, _baseNodeLibraryService);
                 if (form.ShowDialog(this) != DialogResult.OK || form.ResultNode == null)
                 {
                     return;

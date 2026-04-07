@@ -55,10 +55,8 @@ namespace SewingProduction.Features.TeamWork.Helpers
                     DetectValue(articleContext, ProductKindRules),
                     BaseNodeMetadataOptions.ProductKinds,
                     "Универсальный"),
-                NodeGroup = ResolveAllowedOption(
-                    DetectValue(operationsContext, NodeGroupRules),
-                    BaseNodeMetadataOptions.NodeGroups,
-                    string.Empty)
+                // NodeGroup теперь приходит из DB-справочника, поэтому здесь оставляем только подсказку.
+                NodeGroup = DetectValue(operationsContext, NodeGroupRules) ?? string.Empty
             };
         }
 

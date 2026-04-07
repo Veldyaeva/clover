@@ -1,22 +1,31 @@
 using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Features.TeamWork.Models;
+using SewingProduction.Features.TeamWork.Services;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
-    internal sealed partial class BaseNodeSaveForm : Form
+    internal sealed partial class BaseNodeSaveForm : CustomForm
     {
+        private readonly BaseNodeLibraryService _libraryService;
         private readonly List<NormRasz> _operations;
         private readonly BaseNodeSaveDefaults _defaults;
 
         public BaseNodeDefinition ResultNode { get; private set; }
 
-        public BaseNodeSaveForm(IReadOnlyList<NormRasz> operations, string defaultName = null, BaseNodeSaveDefaults defaults = null)
+        public BaseNodeSaveForm( UserClass User,
+            IReadOnlyList<NormRasz> operations,
+            string defaultName = null,
+            BaseNodeSaveDefaults defaults = null,
+            BaseNodeLibraryService libraryService = null): base(User)
         {
+            _libraryService = libraryService;
             _operations = (operations ?? Array.Empty<NormRasz>())
                 .Select(operation => operation?.Clone())
                 .OfType<NormRasz>()
@@ -25,6 +34,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             InitializeComponent();
             InitializeSelectors();
+            Shown += BaseNodeSaveForm_Shown;
 
             nameTextBox.Text = defaultName ?? string.Empty;
             RefreshOperationsPreview();
@@ -32,7 +42,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void InitializeSelectors()
         {
-            nodeGroupComboBox.Items.AddRange(BaseNodeMetadataOptions.NodeGroups);
+            nodeGroupComboBox.Items.Add(string.Empty);
             productKindComboBox.Items.AddRange(BaseNodeMetadataOptions.ProductKinds);
             productCategoryComboBox.Items.AddRange(BaseNodeMetadataOptions.ProductCategories);
 
@@ -40,6 +50,52 @@ namespace SewingProduction.Features.TeamWork.Forms
             SelectComboValue(nodeGroupComboBox, _defaults?.NodeGroup, string.Empty);
             SelectComboValue(productKindComboBox, _defaults?.ProductKind, "Универсальный");
             SelectComboValue(productCategoryComboBox, _defaults?.ProductCategory, "Универсально");
+        }
+
+        private async void BaseNodeSaveForm_Shown(object sender, EventArgs e)
+        {
+            Shown -= BaseNodeSaveForm_Shown;
+            await LoadNodeGroupsAsync();
+        }
+
+        private async Task LoadNodeGroupsAsync()
+        {
+            if (_libraryService == null)
+            {
+                return;
+            }
+
+            string selectedValue = nodeGroupComboBox.SelectedItem?.ToString() ?? _defaults?.NodeGroup ?? string.Empty;
+
+            try
+            {
+                var nodeGroups = await _libraryService.GetNodeGroupsAsync();
+                ApplyNodeGroups(nodeGroups, selectedValue);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, $"Не удалось загрузить группы узлов: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void ApplyNodeGroups(IEnumerable<string> nodeGroups, string selectedValue)
+        {
+            nodeGroupComboBox.BeginUpdate();
+            try
+            {
+                nodeGroupComboBox.Items.Clear();
+
+                foreach (var nodeGroup in nodeGroups ?? new[] { string.Empty })
+                {
+                    nodeGroupComboBox.Items.Add(nodeGroup);
+                }
+            }
+            finally
+            {
+                nodeGroupComboBox.EndUpdate();
+            }
+
+            SelectComboValue(nodeGroupComboBox, selectedValue, string.Empty);
         }
 
         private static void SelectComboValue(ComboBox comboBox, string preferredValue, string fallbackValue)
@@ -85,7 +141,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private string BuildSummary()
         {
             int chapters = _operations.Select(x => x.N).Distinct().Count();
-            return $"Будут сохранены глав: {chapters}. Операций: {_operations.Count}.";
+            return $"Будут сохранены операций: {chapters}. Подопераций: {_operations.Count}.";
         }
 
         private void RefreshOperationsPreview(int? selectedIndex = null)

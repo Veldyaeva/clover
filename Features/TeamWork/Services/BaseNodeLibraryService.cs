@@ -86,6 +86,35 @@ ORDER BY n.NodeName, bo.SortOrder, bo.BaseNodeOperationId;";
             }
         }
 
+        public async Task<IReadOnlyList<string>> GetNodeGroupsAsync()
+        {
+            const string query = @"
+SELECT caption AS Value
+FROM ACE.dbo.proizv_defect_details
+WHERE ISNULL(arh, 0) = 0
+  AND caption IS NOT NULL
+ORDER BY caption;";
+
+            try
+            {
+                using var connection = _dbHelper.GetConnection();
+                var values = await connection.QueryAsync<string>(query);
+
+                // Пустое значение оставляем первым, чтобы группу узла можно было не фиксировать жестко.
+                return new[] { string.Empty }
+                    .Concat(values
+                        .Where(value => !string.IsNullOrWhiteSpace(value))
+                        .Select(StringNormalizer.NormalizeWhitespace)
+                        .Distinct(StringComparer.CurrentCultureIgnoreCase))
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при загрузке списка групп базовых узлов");
+                throw;
+            }
+        }
+
         public async Task<BaseNodeDefinition> SaveAsync(BaseNodeDefinition node)
         {
             if (node == null)
