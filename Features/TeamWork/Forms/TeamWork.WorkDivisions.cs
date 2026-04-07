@@ -363,6 +363,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (selectedRow == null)
                 {
                     ButtonUnbindWd.Enabled = false;
+                    RefreshCurrentWorksUxState();
                     return;
                 }
 
@@ -370,6 +371,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 int pzt = selectedRow.PZTCount;
 
                 ButtonUnbindWd.Enabled = (nzp <= 0 || pzt <= 0);
+                RefreshCurrentWorksUxState();
             }
             catch (Exception ex)
             {
@@ -378,6 +380,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     await _logger.LogErrorAsync(ex, "Ошибка при обновлении статуса кнопки отвязки НЗП");
                 }
                 ButtonUnbindWd.Enabled = false;
+                RefreshCurrentWorksUxState();
             }
         }
         /// <summary>

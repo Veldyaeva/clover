@@ -47,6 +47,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // Инициализируем объект управления кнопкой "bind:unlink"
                 ButtonUnbindWd = new ButtonUnbindWd(layoutControlGroup14, "bind:unlink");
+                RefreshCurrentWorksUxState();
             }
             catch (Exception ex)
             {

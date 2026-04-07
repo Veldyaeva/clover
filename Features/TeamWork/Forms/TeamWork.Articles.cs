@@ -127,6 +127,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     await ClearUnboundArtsRelatedData();
                 }
 
+                RefreshCurrentWorksUxState();
                 _articlesTabInitialized = true;
             }
             finally
@@ -336,8 +337,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (view == null)
             {
                 await ClearWdToBindRelatedData();
+                RefreshCurrentWorksUxState();
                 return;
             }
+
+            RefreshCurrentWorksUxState();
 
             //// Отменяем предыдущие операции загрузки для Articles tab
             //var oldCts = Interlocked.Exchange(ref _loadCts, new CancellationTokenSource());
@@ -360,6 +364,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (e.FocusedRowHandle < 0 || annId <= 0)
                 {
                     await ClearWdToBindRelatedData();
+                    RefreshCurrentWorksUxState();
                     return;
                 }
 
@@ -381,6 +386,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // 3. Загрузка данных НЗП только для выбранной строки
                 token.ThrowIfCancellationRequested();
                 await LoadNZPForArticlesTab(annId, token);
+                RefreshCurrentWorksUxState();
             }
             catch (OperationCanceledException)
             {
@@ -391,6 +397,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 await _logger.LogErrorAsync(ex, $"Ошибка при смене выбранной строки в gridViewWdToBind (RowHandle: {e.FocusedRowHandle})");
                 // В случае ошибки очищаем данные
                 await ClearWdToBindRelatedData();
+                RefreshCurrentWorksUxState();
             }
         }
 
@@ -696,6 +703,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                     // 2. Удаляем артикул из списка доступных для gridView7
                     artDataSource.Remove(selectedArtRow);
+                    RefreshCurrentWorksUxState();
                 }
                 else
                 {
@@ -736,32 +744,30 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (gv_unbound_Arts == null)
             {
                 await ClearUnboundArtsRelatedData();
+                RefreshCurrentWorksUxState();
                 return;
             }
 
             // Если строка не выбрана - очищаем все связанные данные
+            RefreshCurrentWorksUxState();
+
             if (e.FocusedRowHandle < 0)
             {
                 await ClearUnboundArtsRelatedData();
+                RefreshCurrentWorksUxState();
                 return;
             }
 
             try
             {
                 // При смене строки очищаем фильтры gridView_wdToBind и снимаем галку showAllWD
-                if (gridView_wdToBind != null)
+                if (gridView_wdToBind != null && !showAllWD)
                 {
                     gridView_wdToBind.ActiveFilter.Clear();
                     gridView_wdToBind.ActiveFilterString = string.Empty;
                 }
 
                 // Обновляем состояние кнопки и переменной showAllWD
-                var showAllButton = FindButtonByTag(layoutControlGroup14, "bind:show-all");
-                if (showAllButton != null)
-                {
-                    showAllButton.Checked = false;
-                    showAllWD = false;
-                }
 
                 // Получаем данные из текущей строки
                 string kod = CommonFunctions.GetRowCellValueOrDefault<string>(gv_unbound_Arts, e.FocusedRowHandle, "kodd_rt", "");
@@ -781,7 +787,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 // Загружаем данные параллельно
-                var loadWorksTask = LoadWorksbyArt(articul);
+                var recommendedWorksTask = LoadWorksbyArt(articul);
+                var loadWorksTask = showAllWD ? LoadWorksbyArt("") : recommendedWorksTask;
                 var loadRaszTask = Task.Run(async () =>
                 {
                     if (gridView_wdToBind.FocusedRowHandle >= 0)
@@ -812,6 +819,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // Ждем загрузку данных
                 var list = await loadWorksTask;
+                SetRecommendedAnnIds(await recommendedWorksTask);
 
                 // Обновляем основной список данных
                 if (_myDataAnnBindingSource != null)
@@ -844,6 +852,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Обновляем UI один раз после всех изменений данных
                 gridView_wdToBind.RefreshData();
                 gridControl_wdToBind.RefreshDataSource();
+                FocusFirstRecommendedWorkDivision();
 
                 // Обновляем customGridControl3 using _normRaszListArticles and _normRaszBindingSourceArticles
                 var raszList = await loadRaszTask;
@@ -905,12 +914,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                         pictureBox3.Image = null;
                     }
                 }
+
+                RefreshCurrentWorksUxState();
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка в gridView_unboundArts_FocusedRowChanged_Internal");
                 // В случае ошибки очищаем данные
                 await ClearUnboundArtsRelatedData();
+                RefreshCurrentWorksUxState();
             }
         }
 
@@ -981,6 +993,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Обновляем UI
                 gridView_wdToBind?.RefreshData();
                 gridControl_wdToBind?.RefreshDataSource();
+                SetRecommendedAnnIds(Array.Empty<MyDataANN>());
 
                 // Очищаем норм расценки
                 if (_normRaszListArticles != null && _normRaszBindingSourceArticles != null)
@@ -1014,6 +1027,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                         pictureBox3.Image = null;
                     }
                 }
+
+                RefreshCurrentWorksUxState();
             }
             catch (Exception ex)
             {
@@ -1075,6 +1090,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // Обновляем UI
                 gridControlNZP?.RefreshDataSource();
+                RefreshCurrentWorksUxState();
                 await UpdateUnboundButtonStatusBasedOnNZP(); // Обновить состояние кнопки
             }
             catch (Exception ex)

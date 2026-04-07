@@ -44,6 +44,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (view == null || e.FocusedRowHandle < 0)
                 {
                     ButtonUnbindWd.Enabled = false;
+                    RefreshCurrentWorksUxState();
                     return;
                 }
 
@@ -52,6 +53,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (selectedRow == null)
                 {
                     ButtonUnbindWd.Enabled = false;
+                    RefreshCurrentWorksUxState();
                     await _logger.LogWarningAsync($"Не удалось получить объект NZPByKoddRt для строки {e.FocusedRowHandle}", "gridView5_FocusedRowChanged_Internal");
                     return;
                 }
@@ -61,10 +63,12 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // Кнопка активна, если либо нет НЗП, либо нет PZT операций
                 ButtonUnbindWd.Enabled = (nzp <= 0 || pzt <= 0);
+                RefreshCurrentWorksUxState();
             }
             catch (Exception ex)
             {
                 ButtonUnbindWd.Enabled = false;
+                RefreshCurrentWorksUxState();
                 await _logger.LogErrorAsync(ex, "Ошибка при обработке смены строки в GridView5");
             }
         }
@@ -76,7 +80,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// <typeparam name="T">Тип данных, реализующий `ICheckable`</typeparam>
         /// <param name="gridControl">GridControl, где произошло изменение</param>
         /// <param name="e">Аргумент события `CellValueChangedEventArgs`</param>
-        private async void GridView_CellValueChanged<T>(GridControl gridControl, CellValueChangedEventArgs e) where T : class, ICheckable
+        private void GridView_CellValueChanged<T>(GridControl gridControl, CellValueChangedEventArgs e) where T : class, ICheckable
         {
             if (e.Column.FieldName != nameof(ICheckable.IsChecked)) return;
 
@@ -93,6 +97,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             if (isChecked)
             {
+                view.FocusedRowHandle = e.RowHandle;
                 // Устанавливаем флаг перед изменением других строк
                 _isUnchecking = true;
                 try
@@ -129,6 +134,27 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
             }
             _hasUnsavedChanges = true;
+            RefreshCurrentWorksUxState();
+        }
+
+        private void gridViewNZP_CellValueChanged(object sender, CellValueChangedEventArgs e)
+        {
+            if (e.Column.FieldName != "IsChecked")
+            {
+                return;
+            }
+
+            if (sender is not GridView view)
+            {
+                return;
+            }
+
+            if (Convert.ToBoolean(e.Value))
+            {
+                view.FocusedRowHandle = e.RowHandle;
+            }
+
+            RefreshCurrentWorksUxState();
         }
         /// <summary>
         /// Обработчик изменения состояния customCheckBox6.  
@@ -1493,6 +1519,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
 
                     list = await LoadWorksbyArt(articul);
+                    SetRecommendedAnnIds(list);
                     await _logger.LogEventAsync($"showAllWD: Загружены РТ для артикула '{articul}'", "loadAllCheckBox_CheckedChanged");
                 }
                 // gridControl_wdToBind.DataSource = list;//loadAllCheckBox.Checked ? LoadWorksbyArt(0, "") : LoadWorksbyArt(kod, articul);
@@ -1518,6 +1545,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
                 _myDataAnnBindingSource.ResetBindings(false);
                 gridView_wdToBind.RefreshData();
+                FocusFirstRecommendedWorkDivision();
+                RefreshCurrentWorksUxState();
             }
             catch (Exception ex)
             {
@@ -1526,6 +1555,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _myDataAnnList.Clear();
                 _myDataAnnBindingSource.ResetBindings(false);
                 gridView_wdToBind.RefreshData();
+                RefreshCurrentWorksUxState();
             }
         }
 

@@ -1,6 +1,7 @@
 using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Features.TeamWork.Models;
 using SewingProduction.Features.TeamWork.Services;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Windows.Forms;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
-    internal sealed partial class BaseNodeInsertForm : Form
+    internal sealed partial class BaseNodeInsertForm : CustomForm
     {
         private readonly BaseNodeLibraryService _libraryService;
         private readonly List<BaseNodeDefinition> _nodes;
@@ -113,7 +114,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             int chapters = node.Operations.Select(x => x.SourceN).Distinct().Count();
             string description = string.IsNullOrWhiteSpace(node.Description) ? "Без описания" : StringNormalizer.TrimOrEmpty(node.Description);
-            detailsLabel.Text = $"Операций: {node.Operations.Count}. Глав: {chapters}. {description}";
+            detailsLabel.Text = $"Операций: {chapters}. Подопераций:  {node.Operations.Count}. {description}";
         }
 
         private async void EditNodesButton_Click(object sender, EventArgs e)

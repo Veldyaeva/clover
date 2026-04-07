@@ -34,6 +34,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (button != null)
             {
                 showAllWD = button.Checked;
+                RefreshCurrentWorksUxState();
                 loadAllCheckBox_CheckedChanged_Internal(sender, e, button.Checked);
             }
         }
@@ -44,6 +45,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (button != null)
             {
                 showAllWD = button.Checked;
+                RefreshCurrentWorksUxState();
                 loadAllCheckBox_CheckedChanged_Internal(sender, e, button.Checked);
             }
         }

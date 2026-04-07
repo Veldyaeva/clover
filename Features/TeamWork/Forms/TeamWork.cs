@@ -85,6 +85,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private bool _articlesTabInitialized = false;
         private bool _isUpdatingAnnGridKitFilter = false;
         private bool _annGridKitFilterActive = false;
+        private readonly HashSet<int> _recommendedAnnIds = new HashSet<int>();
 
         private List<KodProizvModel> kodProizvList;
         private List<PodrVyazModel> podrVyazList;

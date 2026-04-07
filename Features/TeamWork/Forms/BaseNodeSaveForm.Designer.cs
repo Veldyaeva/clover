@@ -18,7 +18,6 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             mainLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             summaryLabel = new System.Windows.Forms.Label();
             nameLabel = new System.Windows.Forms.Label();
@@ -68,8 +67,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             mainLayoutPanel.Controls.Add(buttonsPanel, 0, 8);
             mainLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             mainLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            mainLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             mainLayoutPanel.Name = "mainLayoutPanel";
-            mainLayoutPanel.Padding = new System.Windows.Forms.Padding(12);
+            mainLayoutPanel.Padding = new System.Windows.Forms.Padding(10, 9, 10, 9);
             mainLayoutPanel.RowCount = 9;
             mainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             mainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -80,16 +80,16 @@ namespace SewingProduction.Features.TeamWork.Forms
             mainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             mainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             mainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            mainLayoutPanel.Size = new System.Drawing.Size(984, 661);
+            mainLayoutPanel.Size = new System.Drawing.Size(861, 496);
             mainLayoutPanel.TabIndex = 0;
             // 
             // summaryLabel
             // 
             summaryLabel.AutoSize = true;
             summaryLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            summaryLabel.Location = new System.Drawing.Point(15, 12);
+            summaryLabel.Location = new System.Drawing.Point(13, 9);
             summaryLabel.Name = "summaryLabel";
-            summaryLabel.Size = new System.Drawing.Size(954, 20);
+            summaryLabel.Size = new System.Drawing.Size(835, 15);
             summaryLabel.TabIndex = 0;
             summaryLabel.Text = "summaryLabel";
             // 
@@ -97,41 +97,43 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             nameLabel.AutoSize = true;
             nameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            nameLabel.Location = new System.Drawing.Point(15, 44);
-            nameLabel.Margin = new System.Windows.Forms.Padding(3, 12, 3, 0);
+            nameLabel.Location = new System.Drawing.Point(13, 33);
+            nameLabel.Margin = new System.Windows.Forms.Padding(3, 9, 3, 0);
             nameLabel.Name = "nameLabel";
-            nameLabel.Size = new System.Drawing.Size(954, 20);
+            nameLabel.Size = new System.Drawing.Size(835, 15);
             nameLabel.TabIndex = 1;
             nameLabel.Text = "Название узла";
             // 
             // nameTextBox
             // 
             nameTextBox.Dock = System.Windows.Forms.DockStyle.Top;
-            nameTextBox.Location = new System.Drawing.Point(15, 67);
+            nameTextBox.Location = new System.Drawing.Point(13, 50);
+            nameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             nameTextBox.Name = "nameTextBox";
             nameTextBox.PlaceholderText = "Например: Обработка манжеты";
-            nameTextBox.Size = new System.Drawing.Size(954, 27);
+            nameTextBox.Size = new System.Drawing.Size(835, 23);
             nameTextBox.TabIndex = 2;
             // 
             // descriptionLabel
             // 
             descriptionLabel.AutoSize = true;
             descriptionLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            descriptionLabel.Location = new System.Drawing.Point(15, 106);
-            descriptionLabel.Margin = new System.Windows.Forms.Padding(3, 12, 3, 0);
+            descriptionLabel.Location = new System.Drawing.Point(13, 84);
+            descriptionLabel.Margin = new System.Windows.Forms.Padding(3, 9, 3, 0);
             descriptionLabel.Name = "descriptionLabel";
-            descriptionLabel.Size = new System.Drawing.Size(954, 20);
+            descriptionLabel.Size = new System.Drawing.Size(835, 15);
             descriptionLabel.TabIndex = 3;
             descriptionLabel.Text = "Описание";
             // 
             // descriptionTextBox
             // 
             descriptionTextBox.Dock = System.Windows.Forms.DockStyle.Top;
-            descriptionTextBox.Location = new System.Drawing.Point(15, 129);
+            descriptionTextBox.Location = new System.Drawing.Point(13, 101);
+            descriptionTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             descriptionTextBox.Multiline = true;
             descriptionTextBox.Name = "descriptionTextBox";
             descriptionTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            descriptionTextBox.Size = new System.Drawing.Size(954, 90);
+            descriptionTextBox.Size = new System.Drawing.Size(835, 68);
             descriptionTextBox.TabIndex = 4;
             // 
             // metadataLayoutPanel
@@ -144,12 +146,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             metadataLayoutPanel.Controls.Add(productKindPanel, 1, 0);
             metadataLayoutPanel.Controls.Add(productCategoryPanel, 2, 0);
             metadataLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            metadataLayoutPanel.Location = new System.Drawing.Point(15, 231);
-            metadataLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 12, 3, 0);
+            metadataLayoutPanel.Location = new System.Drawing.Point(13, 180);
+            metadataLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 9, 3, 0);
             metadataLayoutPanel.Name = "metadataLayoutPanel";
             metadataLayoutPanel.RowCount = 1;
             metadataLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            metadataLayoutPanel.Size = new System.Drawing.Size(954, 63);
+            metadataLayoutPanel.Size = new System.Drawing.Size(835, 47);
             metadataLayoutPanel.TabIndex = 5;
             // 
             // nodeGroupPanel
@@ -165,7 +167,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             nodeGroupPanel.RowCount = 2;
             nodeGroupPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             nodeGroupPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            nodeGroupPanel.Size = new System.Drawing.Size(317, 63);
+            nodeGroupPanel.Size = new System.Drawing.Size(278, 47);
             nodeGroupPanel.TabIndex = 0;
             // 
             // nodeGroupLabel
@@ -174,7 +176,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             nodeGroupLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             nodeGroupLabel.Location = new System.Drawing.Point(3, 0);
             nodeGroupLabel.Name = "nodeGroupLabel";
-            nodeGroupLabel.Size = new System.Drawing.Size(311, 20);
+            nodeGroupLabel.Size = new System.Drawing.Size(272, 15);
             nodeGroupLabel.TabIndex = 0;
             nodeGroupLabel.Text = "Группа узла";
             // 
@@ -183,9 +185,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             nodeGroupComboBox.Dock = System.Windows.Forms.DockStyle.Top;
             nodeGroupComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             nodeGroupComboBox.FormattingEnabled = true;
-            nodeGroupComboBox.Location = new System.Drawing.Point(3, 23);
+            nodeGroupComboBox.Location = new System.Drawing.Point(3, 17);
+            nodeGroupComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             nodeGroupComboBox.Name = "nodeGroupComboBox";
-            nodeGroupComboBox.Size = new System.Drawing.Size(311, 28);
+            nodeGroupComboBox.Size = new System.Drawing.Size(272, 23);
             nodeGroupComboBox.TabIndex = 1;
             // 
             // productKindPanel
@@ -195,13 +198,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             productKindPanel.Controls.Add(productKindLabel, 0, 0);
             productKindPanel.Controls.Add(productKindComboBox, 0, 1);
             productKindPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            productKindPanel.Location = new System.Drawing.Point(317, 0);
+            productKindPanel.Location = new System.Drawing.Point(278, 0);
             productKindPanel.Margin = new System.Windows.Forms.Padding(0);
             productKindPanel.Name = "productKindPanel";
             productKindPanel.RowCount = 2;
             productKindPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             productKindPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            productKindPanel.Size = new System.Drawing.Size(317, 63);
+            productKindPanel.Size = new System.Drawing.Size(278, 47);
             productKindPanel.TabIndex = 1;
             // 
             // productKindLabel
@@ -210,7 +213,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             productKindLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             productKindLabel.Location = new System.Drawing.Point(3, 0);
             productKindLabel.Name = "productKindLabel";
-            productKindLabel.Size = new System.Drawing.Size(311, 20);
+            productKindLabel.Size = new System.Drawing.Size(272, 15);
             productKindLabel.TabIndex = 0;
             productKindLabel.Text = "Класс изделия";
             // 
@@ -219,9 +222,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             productKindComboBox.Dock = System.Windows.Forms.DockStyle.Top;
             productKindComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             productKindComboBox.FormattingEnabled = true;
-            productKindComboBox.Location = new System.Drawing.Point(3, 23);
+            productKindComboBox.Location = new System.Drawing.Point(3, 17);
+            productKindComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             productKindComboBox.Name = "productKindComboBox";
-            productKindComboBox.Size = new System.Drawing.Size(311, 28);
+            productKindComboBox.Size = new System.Drawing.Size(272, 23);
             productKindComboBox.TabIndex = 1;
             // 
             // productCategoryPanel
@@ -231,13 +235,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             productCategoryPanel.Controls.Add(productCategoryLabel, 0, 0);
             productCategoryPanel.Controls.Add(productCategoryComboBox, 0, 1);
             productCategoryPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            productCategoryPanel.Location = new System.Drawing.Point(634, 0);
+            productCategoryPanel.Location = new System.Drawing.Point(556, 0);
             productCategoryPanel.Margin = new System.Windows.Forms.Padding(0);
             productCategoryPanel.Name = "productCategoryPanel";
             productCategoryPanel.RowCount = 2;
             productCategoryPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             productCategoryPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            productCategoryPanel.Size = new System.Drawing.Size(320, 63);
+            productCategoryPanel.Size = new System.Drawing.Size(279, 47);
             productCategoryPanel.TabIndex = 2;
             // 
             // productCategoryLabel
@@ -246,7 +250,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             productCategoryLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             productCategoryLabel.Location = new System.Drawing.Point(3, 0);
             productCategoryLabel.Name = "productCategoryLabel";
-            productCategoryLabel.Size = new System.Drawing.Size(314, 20);
+            productCategoryLabel.Size = new System.Drawing.Size(273, 15);
             productCategoryLabel.TabIndex = 0;
             productCategoryLabel.Text = "Категория изделия";
             // 
@@ -255,9 +259,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             productCategoryComboBox.Dock = System.Windows.Forms.DockStyle.Top;
             productCategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             productCategoryComboBox.FormattingEnabled = true;
-            productCategoryComboBox.Location = new System.Drawing.Point(3, 23);
+            productCategoryComboBox.Location = new System.Drawing.Point(3, 17);
+            productCategoryComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             productCategoryComboBox.Name = "productCategoryComboBox";
-            productCategoryComboBox.Size = new System.Drawing.Size(314, 28);
+            productCategoryComboBox.Size = new System.Drawing.Size(273, 23);
             productCategoryComboBox.TabIndex = 1;
             // 
             // operationsButtonsPanel
@@ -268,18 +273,19 @@ namespace SewingProduction.Features.TeamWork.Forms
             operationsButtonsPanel.Controls.Add(moveUpButton);
             operationsButtonsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             operationsButtonsPanel.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            operationsButtonsPanel.Location = new System.Drawing.Point(15, 306);
-            operationsButtonsPanel.Margin = new System.Windows.Forms.Padding(3, 12, 3, 0);
+            operationsButtonsPanel.Location = new System.Drawing.Point(13, 236);
+            operationsButtonsPanel.Margin = new System.Windows.Forms.Padding(3, 9, 3, 0);
             operationsButtonsPanel.Name = "operationsButtonsPanel";
-            operationsButtonsPanel.Size = new System.Drawing.Size(954, 18);
+            operationsButtonsPanel.Size = new System.Drawing.Size(835, 29);
             operationsButtonsPanel.TabIndex = 6;
             // 
             // deleteOperationButton
             // 
             deleteOperationButton.AutoSize = true;
-            deleteOperationButton.Location = new System.Drawing.Point(850, 3);
+            deleteOperationButton.Location = new System.Drawing.Point(744, 2);
+            deleteOperationButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             deleteOperationButton.Name = "deleteOperationButton";
-            deleteOperationButton.Size = new System.Drawing.Size(101, 30);
+            deleteOperationButton.Size = new System.Drawing.Size(88, 25);
             deleteOperationButton.TabIndex = 0;
             deleteOperationButton.Text = "Удалить";
             deleteOperationButton.UseVisualStyleBackColor = true;
@@ -288,9 +294,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             // moveDownButton
             // 
             moveDownButton.AutoSize = true;
-            moveDownButton.Location = new System.Drawing.Point(740, 3);
+            moveDownButton.Location = new System.Drawing.Point(647, 2);
+            moveDownButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             moveDownButton.Name = "moveDownButton";
-            moveDownButton.Size = new System.Drawing.Size(104, 30);
+            moveDownButton.Size = new System.Drawing.Size(91, 25);
             moveDownButton.TabIndex = 1;
             moveDownButton.Text = "Вниз";
             moveDownButton.UseVisualStyleBackColor = true;
@@ -299,9 +306,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             // moveUpButton
             // 
             moveUpButton.AutoSize = true;
-            moveUpButton.Location = new System.Drawing.Point(630, 3);
+            moveUpButton.Location = new System.Drawing.Point(550, 2);
+            moveUpButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             moveUpButton.Name = "moveUpButton";
-            moveUpButton.Size = new System.Drawing.Size(104, 30);
+            moveUpButton.Size = new System.Drawing.Size(91, 25);
             moveUpButton.TabIndex = 2;
             moveUpButton.Text = "Вверх";
             moveUpButton.UseVisualStyleBackColor = true;
@@ -315,14 +323,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             previewGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             previewGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             previewGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            previewGrid.Location = new System.Drawing.Point(15, 327);
-            previewGrid.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            previewGrid.Location = new System.Drawing.Point(13, 267);
+            previewGrid.Margin = new System.Windows.Forms.Padding(3, 2, 3, 0);
             previewGrid.MultiSelect = false;
             previewGrid.Name = "previewGrid";
             previewGrid.ReadOnly = true;
             previewGrid.RowHeadersWidth = 51;
             previewGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            previewGrid.Size = new System.Drawing.Size(954, 292);
+            previewGrid.Size = new System.Drawing.Size(835, 182);
             previewGrid.TabIndex = 7;
             // 
             // buttonsPanel
@@ -332,18 +340,19 @@ namespace SewingProduction.Features.TeamWork.Forms
             buttonsPanel.Controls.Add(cancelButton);
             buttonsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             buttonsPanel.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            buttonsPanel.Location = new System.Drawing.Point(15, 631);
-            buttonsPanel.Margin = new System.Windows.Forms.Padding(3, 12, 3, 0);
+            buttonsPanel.Location = new System.Drawing.Point(13, 458);
+            buttonsPanel.Margin = new System.Windows.Forms.Padding(3, 9, 3, 0);
             buttonsPanel.Name = "buttonsPanel";
-            buttonsPanel.Size = new System.Drawing.Size(954, 18);
+            buttonsPanel.Size = new System.Drawing.Size(835, 29);
             buttonsPanel.TabIndex = 8;
             // 
             // okButton
             // 
             okButton.AutoSize = true;
-            okButton.Location = new System.Drawing.Point(856, 3);
+            okButton.Location = new System.Drawing.Point(749, 2);
+            okButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             okButton.Name = "okButton";
-            okButton.Size = new System.Drawing.Size(95, 30);
+            okButton.Size = new System.Drawing.Size(83, 25);
             okButton.TabIndex = 0;
             okButton.Text = "Сохранить";
             okButton.UseVisualStyleBackColor = true;
@@ -353,9 +362,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             cancelButton.AutoSize = true;
             cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            cancelButton.Location = new System.Drawing.Point(762, 3);
+            cancelButton.Location = new System.Drawing.Point(666, 2);
+            cancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             cancelButton.Name = "cancelButton";
-            cancelButton.Size = new System.Drawing.Size(88, 30);
+            cancelButton.Size = new System.Drawing.Size(77, 25);
             cancelButton.TabIndex = 1;
             cancelButton.Text = "Отмена";
             cancelButton.UseVisualStyleBackColor = true;
@@ -363,13 +373,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             // BaseNodeSaveForm
             // 
             AcceptButton = okButton;
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             CancelButton = cancelButton;
-            ClientSize = new System.Drawing.Size(984, 661);
+            ClientSize = new System.Drawing.Size(861, 496);
             Controls.Add(mainLayoutPanel);
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            MinimumSize = new System.Drawing.Size(900, 620);
+            Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            MinimumSize = new System.Drawing.Size(790, 475);
             Name = "BaseNodeSaveForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             Text = "Сохранить как базовый узел";
