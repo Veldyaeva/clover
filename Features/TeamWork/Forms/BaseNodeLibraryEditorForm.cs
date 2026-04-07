@@ -305,7 +305,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             int chapters = _workingNode?.Operations?.Select(x => x.SourceN).Distinct().Count() ?? 0;
             detailsLabel.Text = _workingNode == null
                 ? "Выберите базовый узел для редактирования."
-                : $"Операций: {_workingNode.Operations.Count}. Глав: {chapters}.";
+                : $"Операций: {chapters}. Подопераций: {_workingNode.Operations.Count}.";
 
             previewGrid.DataSource = null;
             previewGrid.DataSource = _workingNode == null
@@ -360,7 +360,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             if (!BaseNodeOperationEditingHelper.CanMove(_workingNode.Operations, selectedIndex, targetIndex))
             {
-                MessageBox.Show(this, "Перемещение доступно только внутри текущей главы узла.", "Проверка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, "Перемещение доступно только внутри текущей операции узла.", "Проверка", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
 

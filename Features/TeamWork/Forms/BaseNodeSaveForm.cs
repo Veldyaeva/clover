@@ -198,7 +198,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             if (!BaseNodeOperationEditingHelper.CanMove(_operations, selectedIndex, targetIndex))
             {
-                MessageBox.Show(this, "Перемещение доступно только внутри текущей главы узла.", "Проверка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, "Перемещение доступно только внутри текущей операции узла.", "Проверка", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
 

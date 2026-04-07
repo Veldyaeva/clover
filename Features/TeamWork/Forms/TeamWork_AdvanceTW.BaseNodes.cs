@@ -208,7 +208,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     {
                         Key = $"after:{group.Key}",
                         AfterN = group.Key,
-                        Label = string.IsNullOrWhiteSpace(text) ? $"После главы №{group.Key}" : $"После главы №{group.Key} - {text}"
+                        Label = string.IsNullOrWhiteSpace(text) ? $"После операции №{group.Key}" : $"После операции №{group.Key} - {text}"
                     };
                 });
 
