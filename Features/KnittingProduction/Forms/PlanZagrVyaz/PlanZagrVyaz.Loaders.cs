@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SewingProduction.Core.helpers.BindingSourceHelper;
 using System.ComponentModel;
+using DevExpress.Data.Mask.Internal;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
@@ -304,7 +305,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                             await this.UI(() =>
                             {
-                                bool needInitialExpand = string.IsNullOrWhiteSpace(state.FocusedRowKey);
+                                //bool needInitialExpand = string.IsNullOrWhiteSpace(state.FocusedRowKey);
+                                bool needInitialExpand =
+                                    state == null ||
+                                    string.IsNullOrWhiteSpace(state.FocusedRowKey);
                                 gridControlSmenZadany.BeginUpdate();
                                 _smenZadanyVyazNewBindingSource.DataSource = bs.DataSource;
                                 //Application.Idle -= ExpandGroupsOnIdle;
@@ -365,11 +369,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                                         }
                                         else
                                         {
-                                            _gridHelper.RestoreState<SmenZadanyVyaz>(
+                                            if (state != null)
+                                            {
+                                                _gridHelper.RestoreState<SmenZadanyVyaz>(
                                                 advBandedGridViewSmenZadany,
                                                 _smenZadanyVyazBindingSource,
                                                 state,
                                                 x => $"{x.kwsID}|{x.kwsmlKmlID}|{x.typeID}|{x.szTab}");
+                                            }
                                         }
                                         break;
                                     case 2:
