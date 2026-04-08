@@ -199,9 +199,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             // Группировка по основному номеру операции (N)
             ConfigureRaszGrouping();
 
-            _dbHelper = new DatabaseHelper();
-            _dbService = new DbService(_dbHelper);
-            _artNormService = new ArtNormRepository(_dbHelper);
+            var databaseServices = TeamWorkDependencyFactory.CreateDatabaseServices();
+            _dbHelper = databaseServices.DbHelper;
+            _dbService = databaseServices.DbService;
+            _artNormService = databaseServices.ArtNormRepository;
             _baseNodeLibraryService = new BaseNodeLibraryService(_dbHelper, _logger);
             // Инициализируем сервисы декомпозиции (пока без DI контейнера)
             // Адаптеры для интерфейсов до внедрения DI

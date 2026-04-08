@@ -102,12 +102,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             ANNgridView.OptionsView.ShowPreview = false;
             ANNgridView.PreviewLineCount = 0;
             DapperMappings.Configure();
-            _dbHelper = new DatabaseHelper();
-            _dbService = new DbService(_dbHelper);
-            _artNormService = new ArtNormRepository(_dbHelper);
-            _jabberSender = new JabberSender(_dbHelper);
+            var coreServices = TeamWorkDependencyFactory.CreateCoreServices(_logger);
+            _dbHelper = coreServices.DbHelper;
+            _dbService = coreServices.DbService;
+            _artNormService = coreServices.ArtNormRepository;
+            _jabberSender = (JabberSender)coreServices.JabberSender;
             _secondsUpdateManager = new SecondsUpdateManager(_artNormService, _logger);
-            _teamWorkService = new TeamWorkOrchestrator(_artNormService, _dbService, _dbHelper, _jabberSender, _logger);
+            _teamWorkService = coreServices.Orchestrator;
             _uiHelper = new UIHelper(_logger);
 
             // Инициализация основных BindingList и BindingSource

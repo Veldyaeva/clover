@@ -4,6 +4,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Features.TeamWork.Services;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
@@ -37,9 +38,10 @@ namespace SewingProduction.Features.TeamWork.Forms
         public NormOperNew(int annId)
         {
             InitializeComponent();
-            _dbHelper = new DatabaseHelper();
-            _dbService = new DbService(_dbHelper);
-            _artNormService = new ArtNormRepository(_dbHelper);
+            var databaseServices = TeamWorkDependencyFactory.CreateDatabaseServices();
+            _dbHelper = databaseServices.DbHelper;
+            _dbService = databaseServices.DbService;
+            _artNormService = databaseServices.ArtNormRepository;
 
             _annId = annId;
            // ThemeManager.UpdateTheme(this);

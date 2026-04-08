@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.BandedGrid;
+using SewingProduction.Features.TeamWork.Services;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
@@ -46,8 +47,10 @@ namespace SewingProduction.form.TeamWork.Forms
             InitializeComponent();
             _annId = annId;
 
-            _dbService = new DbService(new DatabaseHelper());
-            _artNormService = new ArtNormRepository(new DatabaseHelper());
+            var databaseServices = TeamWorkDependencyFactory.CreateDatabaseServices();
+            _dbHelper = databaseServices.DbHelper;
+            _dbService = databaseServices.DbService;
+            _artNormService = databaseServices.ArtNormRepository;
             //ThemeManager.UpdateTheme(this);
             // Загружаем настройки грида перед загрузкой данных
             ConfigureGrid();
