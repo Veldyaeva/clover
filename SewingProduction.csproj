@@ -301,6 +301,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="DevExpress.CodeParser.v25.2">
+      <HintPath>DevExpress.CodeParser.v25.2, Version=25.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.DataAccess.v25.2">
+      <HintPath>DevExpress.DataAccess.v25.2, Version=25.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpo.v25.2">
+      <HintPath>DevExpress.Xpo.v25.2, Version=25.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

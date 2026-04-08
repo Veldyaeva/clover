@@ -2,6 +2,7 @@
 using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using DevExpress.XtraReports.UI;
 
 namespace SewingProduction.Features.Articul.Reports
