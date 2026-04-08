@@ -29,6 +29,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private List<UserPodrModel> _selectedUserPodr;
         private List<RolePodrModel> _currentUserRolePodr;
         private static GridHelper _gridHelper;
+        int _podrLastTopRowIndex;
+        int _podrLastVisibleIndex;
 
         public UserPodr(UserClass user) : base(user)
         {
@@ -188,9 +190,16 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 gridViewPodr.EndUpdate();
             }
         }
+
+
+        private void gridViewPodr_CellValueChanging(object sender, CellValueChangedEventArgs e)
+        {
+            _podrLastVisibleIndex = gridViewPodr.GetVisibleIndex(e.RowHandle);
+            _podrLastTopRowIndex = gridViewPodr.TopRowIndex;
+        }
         private void gridViewPodr_CellValueChanged(
-    object sender,
-    DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        object sender,
+        DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
             if (e.Column != IsSelectedPodr)
                 return;
@@ -209,7 +218,18 @@ namespace SewingProduction.Features.UserDistribution.Forms
             row.IsSelected = isChecked;
             row.UserID = _selectedUser.UserID;
 
-            EnqueuePodrChange(row, isChecked);
+            EnqueuePodrChange(row, isChecked); 
+            
+            BeginInvoke(new Action(() =>
+            {
+                if (_podrLastTopRowIndex >= 0)
+                    gridViewPodr.TopRowIndex = _podrLastTopRowIndex;
+
+                int targetHandle = gridViewPodr.GetVisibleRowHandle(_podrLastVisibleIndex);
+
+                if (targetHandle >= 0)
+                    gridViewPodr.FocusedRowHandle = targetHandle;
+            }));
         }
         private void repositoryItemCheckEditPodr_CheckedChanged(object sender, EventArgs e)
         {

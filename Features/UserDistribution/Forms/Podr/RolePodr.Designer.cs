@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RolePodr));
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            customGridControlRole = new Core.Class.CustomGridControl();
+            customGridControlRole = new SewingProduction.Core.Class.CustomGridControl();
             gridViewRole = new DevExpress.XtraGrid.Views.Grid.GridView();
             RoleID = new DevExpress.XtraGrid.Columns.GridColumn();
             RoleName = new DevExpress.XtraGrid.Columns.GridColumn();
             Description = new DevExpress.XtraGrid.Columns.GridColumn();
             IsSelected = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            customGridControlTable = new Core.Class.CustomGridControl();
+            customGridControlTable = new SewingProduction.Core.Class.CustomGridControl();
             gridViewTable = new DevExpress.XtraGrid.Views.Grid.GridView();
             IdAtn = new DevExpress.XtraGrid.Columns.GridColumn();
             TableName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -87,7 +88,6 @@
             // 
             // gridViewRole
             // 
-            // gridViewRole.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewRole.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewRole.Appearance.FocusedRow.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             gridViewRole.Appearance.FocusedRow.Options.UseFont = true;
@@ -103,6 +103,7 @@
             gridViewRole.OptionsBehavior.Editable = false;
             gridViewRole.OptionsView.EnableAppearanceEvenRow = true;
             gridViewRole.CellValueChanged += gridViewRole_CellValueChanged;
+            gridViewRole.CellValueChanging += gridViewRole_CellValueChanging;
             // 
             // RoleID
             // 
@@ -160,7 +161,6 @@
             // 
             // gridViewTable
             // 
-            // gridViewTable.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewTable.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewTable.Appearance.FocusedRow.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             gridViewTable.Appearance.FocusedRow.Options.UseFont = true;
@@ -211,7 +211,6 @@
             // 
             customCheckBoxPodr.AutoSize = true;
             customCheckBoxPodr.Font = new System.Drawing.Font("Arial", 10F);
-            // customCheckBoxPodr.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customCheckBoxPodr.Location = new System.Drawing.Point(3, 590);
             customCheckBoxPodr.Name = "customCheckBoxPodr";
             customCheckBoxPodr.Size = new System.Drawing.Size(129, 20);
@@ -226,6 +225,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(893, 623);
             Controls.Add(tableLayoutPanel1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "RolePodr";
             Text = "Роли - Подразделения";
             tableLayoutPanel1.ResumeLayout(false);
