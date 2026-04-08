@@ -1,4 +1,4 @@
-using DevExpress.CodeParser;
+п»їusing DevExpress.CodeParser;
 using DevExpress.DataAccess.ConnectionParameters;
 using DevExpress.Spreadsheet.Export;
 using Org.BouncyCastle.Asn1.X509;
@@ -273,7 +273,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
                 {
                     if (!_olKolCopyInitialized)
                     {
-                        olKolCopy = value;          // зафиксировали «исходное» значение
+                        olKolCopy = value;          // Р·Р°С„РёРєСЃРёСЂРѕРІР°Р»Рё В«РёСЃС…РѕРґРЅРѕРµВ» Р·РЅР°С‡РµРЅРёРµ
                         _olKolCopyInitialized = true;
                     }
                     _olKol = value;
@@ -319,7 +319,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         }
 
         /// <summary>
-        /// При необходимости можно «перебазировать» копию вручную.
+        /// РџСЂРё РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё РјРѕР¶РЅРѕ В«РїРµСЂРµР±Р°Р·РёСЂРѕРІР°С‚СЊВ» РєРѕРїРёСЋ РІСЂСѓС‡РЅСѓСЋ.
         /// </summary>
         public void RebaselineOlKolCopy()
         {
@@ -328,7 +328,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         }
 
         /// <summary>
-        /// Сброс копии (если хочешь, чтобы следующее присвоение olKol снова зафиксировало копию).
+        /// РЎР±СЂРѕСЃ РєРѕРїРёРё (РµСЃР»Рё С…РѕС‡РµС€СЊ, С‡С‚РѕР±С‹ СЃР»РµРґСѓСЋС‰РµРµ РїСЂРёСЃРІРѕРµРЅРёРµ olKol СЃРЅРѕРІР° Р·Р°С„РёРєСЃРёСЂРѕРІР°Р»Рѕ РєРѕРїРёСЋ).
         /// </summary>
         public void ResetOlKolCopy()
         {

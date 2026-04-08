@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -16,7 +16,7 @@ namespace SewingProduction.Core.helpers
     public static class GridOverlayLoader
     {
         /// <summary>
-        /// Загружает данные в BindingList с отображением оверлея на GridControl.
+        /// Р—Р°РіСЂСѓР¶Р°РµС‚ РґР°РЅРЅС‹Рµ РІ BindingList СЃ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµРј РѕРІРµСЂР»РµСЏ РЅР° GridControl.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="targetGrid"></param>
@@ -42,9 +42,9 @@ namespace SewingProduction.Core.helpers
 
                     var options = new OverlayWindowOptions
                     {
-                        // Размер спиннера/индикатора
+                        // Р Р°Р·РјРµСЂ СЃРїРёРЅРЅРµСЂР°/РёРЅРґРёРєР°С‚РѕСЂР°
                         ImageSize = new Size(diameter, diameter),
-                        // BackColor = Color.FromArgb(…),
+                        // BackColor = Color.FromArgb(вЂ¦),
                         // Opacity = 0.8,
                         FadeIn = true,
                         FadeOut = true,
@@ -158,8 +158,8 @@ namespace SewingProduction.Core.helpers
                 grid,
                 () =>
                 {
-                    action();                   // вызываем синхронный метод
-                    return Task.CompletedTask;  // возвращаем уже завершённый Task
+                    action();                   // РІС‹Р·С‹РІР°РµРј СЃРёРЅС…СЂРѕРЅРЅС‹Р№ РјРµС‚РѕРґ
+                    return Task.CompletedTask;  // РІРѕР·РІСЂР°С‰Р°РµРј СѓР¶Рµ Р·Р°РІРµСЂС€С‘РЅРЅС‹Р№ Task
                 },
                 ct);
         }
