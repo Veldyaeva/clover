@@ -107,7 +107,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             var node = SelectedNode;
             bool hasNode = node != null;
 
-            editorPanel.Enabled = hasNode;
+     //       editorPanel.Enabled = hasNode;
             saveButton.Enabled = hasNode;
             deleteButton.Enabled = hasNode;
 
@@ -115,7 +115,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 _workingNode = null;
                 nodeCodeValueLabel.Text = "-";
-                nodeCodeLabel.Visible = true;
                 nodeCodeValueLabel.Visible = true;
                 nameTextBox.Text = string.Empty;
                 descriptionTextBox.Text = string.Empty;
@@ -132,7 +131,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             _workingNode = CloneNode(node);
 
             nodeCodeValueLabel.Text = string.IsNullOrWhiteSpace(_workingNode.NodeCode) ? "-" : _workingNode.NodeCode;
-            nodeCodeLabel.Visible = true;
+      //     nodeCodeLabel.Visible = true;
             nodeCodeValueLabel.Visible = true;
             nameTextBox.Text = _workingNode.Name ?? string.Empty;
             descriptionTextBox.Text = _workingNode.Description ?? string.Empty;
@@ -376,7 +375,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             UseWaitCursor = isBusy;
             nodesListBox.Enabled = !isBusy;
-            editorPanel.Enabled = !isBusy && SelectedNode != null;
+            //editorPanel.Enabled = !isBusy && SelectedNode != null;
             saveButton.Enabled = !isBusy && SelectedNode != null;
             deleteButton.Enabled = !isBusy && SelectedNode != null;
             closeButton.Enabled = !isBusy;
