@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using DevExpress.Data.Filtering;
-using DevExpress.XtraBars.Customization;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
@@ -14,18 +12,14 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
-using DevExpress.XtraScheduler.Commands;
-using DevExpress.XtraScheduler.Reporting;
-using DevExpress.XtraVerticalGrid;
-using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Interfaces;
 using SewingProduction.Models;
-using SewingProduction.Report;
-using SewingProduction.Services;
 using SewingProduction.Features.TeamWork.Models;
 using SewingProduction.Features.TeamWork.Services;
 using SewingProduction.Core.helpers;
+using SewingProduction.Report;
+using SewingProduction.Services;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -155,6 +149,41 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
 
             RefreshCurrentWorksUxState();
+        }
+
+        private void ApplySearchResultsToUnboundArts(IReadOnlyCollection<MyDataART> results)
+        {
+            _myDataArtList.Clear();
+            if (results == null || results.Count == 0)
+            {
+                return;
+            }
+
+            _myDataArtList.BulkLoad(results);
+            if (gridView_unboundArts.DataRowCount > 0)
+            {
+                gridView_unboundArts.FocusedRowHandle = 0;
+            }
+        }
+
+        private void ApplySearchResultsToWorkDivisions(IReadOnlyCollection<MyDataANN> results)
+        {
+            _myDataAnnList.Clear();
+            if (results == null || results.Count == 0)
+            {
+                return;
+            }
+
+            foreach (var item in results)
+            {
+                item.Stat = StatusHelper.GetStatusText(item.Status);
+            }
+
+            _myDataAnnList.BulkLoad(results);
+            if (gridView_wdToBind.DataRowCount > 0)
+            {
+                gridView_wdToBind.FocusedRowHandle = 0;
+            }
         }
         /// <summary>
         /// Обработчик изменения состояния customCheckBox6.  
@@ -394,28 +423,6 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 await _logger.LogEventAsync($"Начало поиска артикулов по тексту: '{searchText}' в таблицах WDtoBind и unboundArts", "SearchArticulesByText");
 
-                // Запрос для gridView_wdToBind (модель MyDataANN)
-                string queryWdToBind = @"SELECT ann.annId as AnnID, ann.kod as Kod, ann.articul as Articul, 
-                                       ann.status as Status, ann.grup, ann.mod, ann.size_label, ann.data_obn as dateUpdate
-                                       FROM art_norm_n ann 
-                                       WHERE ann.annId IN (
-                                           SELECT sa.annId 
-                                           FROM sp_articul sa 
-                                           WHERE sa.articul LIKE @searchPattern)
-                                       ORDER BY ann.annId DESC";
-
-                // Запрос для gridView_unboundArts (модель MyDataART)
-                string queryUnboundArts = @"SELECT * FROM articulListGroupBySizeLabel 
-                                          WHERE  (annId is null or annId = 0) and
-                                          articul LIKE @searchPattern 
-                                          ORDER BY articul, row_num";
-
-                var parameters = new Dictionary<string, object>
-                {
-                    { "@searchPattern", $"%{searchText}%" }
-                };
-
-                // Выполняем оба запроса параллельно
                 var wdToBindTask = _articlesQueryService.SearchCurrentWorkDivisionsAsync(searchText);
                 var unboundArtsTask = _articlesQueryService.SearchUnboundArticlesAsync(searchText);
 
@@ -423,48 +430,10 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 var wdToBindResults = await wdToBindTask;
                 var unboundArtsResults = await unboundArtsTask;
-                // Обновляем данные в gridView_unboundArts
-                if (unboundArtsResults != null && unboundArtsResults.Any())
-                {
-                    _myDataArtList.Clear();
-                    _myDataArtList.BulkLoad(unboundArtsResults);
 
-                    // Устанавливаем фокус на первую строку в gridView_unboundArts
-                    if (gridView_unboundArts.DataRowCount > 0)
-                    {
-                        gridView_unboundArts.FocusedRowHandle = 0;
-                    }
-                }
-                else
-                {
-                    _myDataArtList.Clear();
-                }
+                ApplySearchResultsToUnboundArts(unboundArtsResults);
+                ApplySearchResultsToWorkDivisions(wdToBindResults);
 
-
-                // Обновляем данные в gridView_wdToBind
-                if (wdToBindResults != null && wdToBindResults.Any())
-                {
-                    // Заполняем текстовый статус для каждой записи
-                    foreach (var item in wdToBindResults)
-                    {
-                        item.Stat = StatusHelper.GetStatusText(item.Status);
-                    }
-
-                    _myDataAnnList.Clear();
-                    _myDataAnnList.BulkLoad(wdToBindResults);
-
-                    // Устанавливаем фокус на первую строку в gridView_wdToBind
-                    if (gridView_wdToBind.DataRowCount > 0)
-                    {
-                        gridView_wdToBind.FocusedRowHandle = 0;
-                    }
-                }
-                else
-                {
-                    _myDataAnnList.Clear();
-                }
-
-                // Логируем результаты
                 int totalResults = (wdToBindResults?.Count ?? 0) + (unboundArtsResults?.Count ?? 0);
                 if (totalResults > 0)
                 {
@@ -1616,3 +1585,5 @@ namespace SewingProduction.Features.TeamWork.Forms
         #endregion
     }
 }
+
+

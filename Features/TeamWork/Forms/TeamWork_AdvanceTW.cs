@@ -62,6 +62,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private bool _listChangedHandlersAttached = false;
         private bool _rowStyleHandlersAttached = false;
         private bool _focusedRowHandlersAttached = false;
+        private bool _updatingEmployeeBindings = false;
 
 
         private BindingList<NormRasz> _normRaszList;
@@ -1636,11 +1637,19 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Обновляем данные в существующих источниках привязки
                 await this.InvokeAsync(() =>
                 {
-                    designerBindingSource.DataSource = new List<FioModel>(_cachedFioData);
-                    constructorBindingSource.DataSource = new List<FioModel>(_cachedFioData);
+                    _updatingEmployeeBindings = true;
+                    try
+                    {
+                        designerBindingSource.DataSource = new List<FioModel>(_cachedFioData);
+                        constructorBindingSource.DataSource = new List<FioModel>(_cachedFioData);
 
-                    _gridHelper.ConfigureComboBox(designerComboBox, designerBindingSource);
-                    _gridHelper.ConfigureComboBox(constructorComboBox, constructorBindingSource);
+                        _gridHelper.ConfigureComboBox(designerComboBox, designerBindingSource);
+                        _gridHelper.ConfigureComboBox(constructorComboBox, constructorBindingSource);
+                    }
+                    finally
+                    {
+                        _updatingEmployeeBindings = false;
+                    }
                 });
             }
             catch (Exception ex)
@@ -2757,6 +2766,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// </summary>
         private async void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (_updatingEmployeeBindings)
+            {
+                return;
+            }
+
             if (sender is DevExpress.XtraEditors.LookUpEdit lookUpEdit && lookUpEdit.EditValue != null && lookUpEdit.EditValue != DBNull.Value)
             {
                 try

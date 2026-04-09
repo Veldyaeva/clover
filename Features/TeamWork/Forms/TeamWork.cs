@@ -1,4 +1,4 @@
-using DevExpress.XtraBars.Docking2010;
+﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
@@ -84,6 +84,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private BindingList<NormKont> _normKontListArticles;
         private BindingSource _normKontBindingSourceArticles;
         private bool _articlesTabInitialized = false;
+        private bool _isRestoringGridState = false;
         private bool _isUpdatingAnnGridKitFilter = false;
         private bool _annGridKitFilterActive = false;
         private readonly HashSet<int> _recommendedAnnIds = new HashSet<int>();
@@ -187,6 +188,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             // Взаимоисключаем видимость кнопок редактирования по событию изменения видимости
             if (ButtonEditOnlyAdv != null)
                 ButtonEditOnlyAdv.VisibleChanged += ButtonEditOnlyAdv_VisibleChanged;
+
+            if (xtraTabControl2 != null)
+            {
+                xtraTabControl2.SelectedPageChanged -= XtraTabControl2_SelectedPageChanged;
+                xtraTabControl2.SelectedPageChanged += XtraTabControl2_SelectedPageChanged;
+            }
         }
 
         ///// <summary>

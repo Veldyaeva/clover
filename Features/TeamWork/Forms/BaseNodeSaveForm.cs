@@ -40,7 +40,42 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             nameTextBox.Text = BuildInitialName(defaultName);
             BaseNodePreviewHelper.Update(_previewPanel, _defaults);
+            UpdateRtCodeCopyState(_defaults?.SourceRtCode);
             RefreshOperationsPreview();
+        }
+
+        private void PreviewSourceLabel_Click(object sender, EventArgs e)
+        {
+            CopyRtCodeToClipboard();
+        }
+
+        private void CopyRtCodeToClipboard()
+        {
+            string sourceCode = StringNormalizer.TrimOrEmpty(_defaults?.SourceRtCode);
+            if (string.IsNullOrWhiteSpace(sourceCode))
+                return;
+
+            try
+            {
+                Clipboard.SetText(sourceCode);
+                previewToolTip.Show("RT-код скопирован", this, PointToClient(Cursor.Position), 1500);
+            }
+            catch
+            {
+            }
+        }
+
+        private void UpdateRtCodeCopyState(string sourceRtCode)
+        {
+            string sourceArticul = StringNormalizer.TrimOrEmpty(_defaults?.SourceArticul);
+            string tooltip = string.IsNullOrWhiteSpace(sourceRtCode)
+                ? (string.IsNullOrWhiteSpace(sourceArticul)
+                    ? "Источник не задан"
+                    : $"Артикул: {sourceArticul}")
+                : string.IsNullOrWhiteSpace(sourceArticul)
+                    ? $"RT-код: {sourceRtCode}. Кликните, чтобы скопировать"
+                    : $"Артикул: {sourceArticul}. RT-код: {sourceRtCode}. Кликните, чтобы скопировать RT-код";
+            previewToolTip.SetToolTip(previewSourceLabel, tooltip);
         }
 
         private string BuildInitialName(string defaultName)
@@ -154,6 +189,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ResultNode = BaseNodeMapper.CreateDefinition(nameTextBox.Text, descriptionTextBox.Text, _operations);
             ResultNode.NodeCode = StringNormalizer.TrimOrEmpty(_defaults?.SourceRtCode);
             ResultNode.SourceAnnId = _defaults?.SourceAnnId;
+            ResultNode.SourceArticul = StringNormalizer.TrimOrEmpty(_defaults?.SourceArticul);
             ResultNode.SourceRtCode = StringNormalizer.TrimOrEmpty(_defaults?.SourceRtCode);
             ResultNode.SourceImagePath = StringNormalizer.TrimOrEmpty(_defaults?.SourceImagePath);
             ResultNode.NodeGroup = nodeGroupComboBox.SelectedItem?.ToString() ?? string.Empty;

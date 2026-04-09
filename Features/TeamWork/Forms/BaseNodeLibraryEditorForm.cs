@@ -6,6 +6,8 @@ using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,8 +21,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly int? _preferredNodeId;
         private readonly BaseNodePreviewPanel _previewPanel;
         private BaseNodeDefinition _workingNode;
+        private bool _updatingFilters;
 
-        public BaseNodeDefinition SelectedNode => nodesListBox.SelectedItem as BaseNodeDefinition;
+        public BaseNodeDefinition SelectedNode => nodeCardsListView.SelectedItems.Count > 0
+            ? nodeCardsListView.SelectedItems[0].Tag as BaseNodeDefinition
+            : null;
         public int? SelectedBaseNodeId => SelectedNode?.BaseNodeId;
 
         public BaseNodeLibraryEditorForm(UserClass User, BaseNodeLibraryService libraryService, int? preferredNodeId = null):base(User)
@@ -30,10 +35,12 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             InitializeComponent();
             _previewPanel = BaseNodePreviewHelper.Create(previewPanel, previewSourceLabel, previewImageStatusLabel, previewPictureBox);
+            searchTextBox.PlaceholderText = "Поиск";
+            searchTextBoxitem.Text = "Поиск по названию";
+            libraryProductKindFilterComboBoxitem.Text = "Класс изделия";
+            libraryProductCategoryFilterComboBoxitem.Text = "Категория изделия";
+            libraryNodeGroupFilterComboBoxitem.Text = "Группа узла";
             InitializeSelectors();
-
-            nodesListBox.DisplayMember = nameof(BaseNodeDefinition.Name);
-            nodesListBox.SelectedIndexChanged += (_, __) => BindSelectedNode();
             Shown += BaseNodeLibraryEditorForm_Shown;
         }
 
@@ -92,44 +99,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 var nodes = await _libraryService.GetAllAsync();
                 _nodes.Clear();
-                _nodes.AddRange(nodes.OrderBy(x => x.Name, StringComparer.CurrentCultureIgnoreCase));
-
-                nodesListBox.BeginUpdate();
-                try
-                {
-                    nodesListBox.Items.Clear();
-                    foreach (var node in _nodes)
-                    {
-                        nodesListBox.Items.Add(node);
-                    }
-                }
-                finally
-                {
-                    nodesListBox.EndUpdate();
-                }
-
-                if (nodesListBox.Items.Count == 0)
-                {
-                    nodesListBox.SelectedIndex = -1;
-                    BindSelectedNode();
-                    return;
-                }
-
-                int selectedIndex = 0;
-                if (preferredNodeId.HasValue)
-                {
-                    for (int i = 0; i < nodesListBox.Items.Count; i++)
-                    {
-                        if (nodesListBox.Items[i] is BaseNodeDefinition node && node.BaseNodeId == preferredNodeId.Value)
-                        {
-                            selectedIndex = i;
-                            break;
-                        }
-                    }
-                }
-
-                nodesListBox.SelectedIndex = selectedIndex;
-                BindSelectedNode();
+                _nodes.AddRange(nodes.OrderBy(x => x.DisplayName, StringComparer.CurrentCultureIgnoreCase));
+                PopulateFilterValues();
+                ApplyNodeFilter(preferredNodeId);
             }
             catch (Exception ex)
             {
@@ -146,7 +118,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             var node = SelectedNode;
             bool hasNode = node != null;
 
-            editorPanel.Enabled = hasNode;
+     //       editorPanel.Enabled = hasNode;
             saveButton.Enabled = hasNode;
             deleteButton.Enabled = hasNode;
 
@@ -154,14 +126,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 _workingNode = null;
                 nodeCodeValueLabel.Text = "-";
-                nodeCodeLabel.Visible = true;
                 nodeCodeValueLabel.Visible = true;
                 nameTextBox.Text = string.Empty;
                 descriptionTextBox.Text = string.Empty;
                 nodeGroupComboBox.SelectedIndex = nodeGroupComboBox.Items.Count > 0 ? 0 : -1;
-                productKindComboBox.SelectedItem = "Универсальный";
+                productKindComboBox.SelectedItem = "Производственный";
                 productCategoryComboBox.SelectedItem = "Универсально";
                 detailsLabel.Text = "Выберите базовый узел для редактирования.";
+                previewTitleLabel.Text = "Визуальная библиотека узлов";
                 previewGrid.DataSource = null;
                 BaseNodePreviewHelper.Update(_previewPanel, (BaseNodeDefinition)null);
                 UpdateOperationButtonsState();
@@ -171,16 +143,279 @@ namespace SewingProduction.Features.TeamWork.Forms
             _workingNode = CloneNode(node);
 
             nodeCodeValueLabel.Text = string.IsNullOrWhiteSpace(_workingNode.NodeCode) ? "-" : _workingNode.NodeCode;
-            nodeCodeLabel.Visible = true;
+      //     nodeCodeLabel.Visible = true;
             nodeCodeValueLabel.Visible = true;
             nameTextBox.Text = _workingNode.Name ?? string.Empty;
             descriptionTextBox.Text = _workingNode.Description ?? string.Empty;
             SelectComboValue(nodeGroupComboBox, _workingNode.NodeGroup, string.Empty);
-            SelectComboValue(productKindComboBox, _workingNode.ProductKind, "Универсальный");
+            SelectComboValue(productKindComboBox, GetProductKindValue(_workingNode), "Производственный");
             SelectComboValue(productCategoryComboBox, _workingNode.ProductCategory, "Универсально");
             BaseNodePreviewHelper.Update(_previewPanel, _workingNode);
+            UpdateRtCodeCopyState(_workingNode.SourceRtCode, _workingNode.NodeCode);
+            previewTitleLabel.Text = string.IsNullOrWhiteSpace(_workingNode.Name) ? _workingNode.DisplayName : _workingNode.Name;
 
             RefreshOperationsPreview();
+        }
+
+        private void NodeCardsListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BindSelectedNode();
+        }
+
+        private void SearchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            ApplyNodeFilter(SelectedNode?.BaseNodeId);
+        }
+
+        private void FilterComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_updatingFilters)
+                return;
+
+            ApplyNodeFilter(SelectedNode?.BaseNodeId);
+        }
+
+        private void PreviewSourceLabel_Click(object sender, EventArgs e)
+        {
+            CopyRtCodeToClipboard();
+        }
+
+        private void NodeCodeValueLabel_Click(object sender, EventArgs e)
+        {
+            CopyRtCodeToClipboard();
+        }
+
+        private void CopyRtCodeToClipboard()
+        {
+            string sourceCode = StringNormalizer.TrimOrEmpty(_workingNode?.SourceRtCode);
+            if (string.IsNullOrWhiteSpace(sourceCode))
+                return;
+
+            try
+            {
+                Clipboard.SetText(sourceCode);
+                previewToolTip.Show("RT-код скопирован", this, PointToClient(Cursor.Position), 1500);
+            }
+            catch
+            {
+                // suppress clipboard failures in UI affordance
+            }
+        }
+
+        private void UpdateRtCodeCopyState(string sourceRtCode, string nodeCode)
+        {
+            string sourceArticul = StringNormalizer.TrimOrEmpty(_workingNode?.SourceArticul);
+            string codeToCopy = StringNormalizer.TrimOrEmpty(sourceRtCode);
+            if (string.IsNullOrWhiteSpace(codeToCopy))
+                codeToCopy = StringNormalizer.TrimOrEmpty(nodeCode);
+
+            string tooltip = string.IsNullOrWhiteSpace(codeToCopy)
+                ? (string.IsNullOrWhiteSpace(sourceArticul)
+                    ? "Источник не задан"
+                    : $"Артикул: {sourceArticul}")
+                : string.IsNullOrWhiteSpace(sourceArticul)
+                    ? $"RT-код: {codeToCopy}. Кликните, чтобы скопировать"
+                    : $"Артикул: {sourceArticul}. RT-код: {codeToCopy}. Кликните, чтобы скопировать RT-код";
+
+            previewToolTip.SetToolTip(previewSourceLabel, tooltip);
+            previewToolTip.SetToolTip(nodeCodeValueLabel, tooltip);
+        }
+
+        private void ApplyNodeFilter(int? preferredNodeId)
+        {
+            string filter = StringNormalizer.TrimOrEmpty(searchTextBox?.Text);
+            string productKind = StringNormalizer.TrimOrEmpty(libraryProductKindFilterComboBox.SelectedItem?.ToString());
+            string productCategory = StringNormalizer.TrimOrEmpty(libraryProductCategoryFilterComboBox.SelectedItem?.ToString());
+            string nodeGroup = StringNormalizer.TrimOrEmpty(libraryNodeGroupFilterComboBox.SelectedItem?.ToString());
+            var filtered = _nodes
+                .Where(node => MatchesNodeFilter(node, filter, productKind, productCategory, nodeGroup))
+                .OrderBy(node => node.DisplayName, StringComparer.CurrentCultureIgnoreCase)
+                .ToList();
+
+            nodeCardsListView.BeginUpdate();
+            try
+            {
+                nodeCardsListView.Items.Clear();
+                nodeCardsImageList.Images.Clear();
+
+                foreach (var node in filtered)
+                {
+                    string imageKey = $"node-{node.BaseNodeId}-{nodeCardsImageList.Images.Count}";
+                    nodeCardsImageList.Images.Add(imageKey, CreateNodeCardImage(node.SourceImagePath));
+
+                    var item = new ListViewItem(string.IsNullOrWhiteSpace(node.Name) ? node.DisplayName : node.Name)
+                    {
+                        Tag = node,
+                        ImageKey = imageKey
+                    };
+                    item.SubItems.Add($"РТ: {(string.IsNullOrWhiteSpace(node.SourceRtCode) ? "-" : node.SourceRtCode)}");
+                    item.SubItems.Add(BuildNodeCardSubtitle(node));
+                    nodeCardsListView.Items.Add(item);
+                }
+            }
+            finally
+            {
+                nodeCardsListView.EndUpdate();
+            }
+
+            if (nodeCardsListView.Items.Count == 0)
+            {
+                nodeCardsListView.SelectedIndices.Clear();
+                BindSelectedNode();
+                return;
+            }
+
+            int selectedIndex = 0;
+            if (preferredNodeId.HasValue)
+            {
+                for (int i = 0; i < nodeCardsListView.Items.Count; i++)
+                {
+                    if (nodeCardsListView.Items[i].Tag is BaseNodeDefinition node && node.BaseNodeId == preferredNodeId.Value)
+                    {
+                        selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            if (nodeCardsListView.Items.Count > selectedIndex)
+            {
+                nodeCardsListView.Items[selectedIndex].Selected = true;
+                nodeCardsListView.Items[selectedIndex].Focused = true;
+                nodeCardsListView.EnsureVisible(selectedIndex);
+            }
+            BindSelectedNode();
+        }
+
+        private void PopulateFilterValues()
+        {
+            _updatingFilters = true;
+            try
+            {
+                PopulateFilterComboBox(libraryProductKindFilterComboBox, _nodes.Where(node => node != null).Select(GetProductKindValue));
+                PopulateFilterComboBox(libraryProductCategoryFilterComboBox, _nodes.Where(node => node != null).Select(node => node.ProductCategory));
+                PopulateFilterComboBox(libraryNodeGroupFilterComboBox, _nodes.Where(node => node != null).Select(node => node.NodeGroup));
+            }
+            finally
+            {
+                _updatingFilters = false;
+            }
+        }
+
+        private static void PopulateFilterComboBox(ComboBox comboBox, IEnumerable<string> values)
+        {
+            string selectedValue = comboBox.SelectedItem?.ToString() ?? string.Empty;
+            var items = values
+                .Select(StringNormalizer.TrimOrEmpty)
+                .Where(value => !string.IsNullOrWhiteSpace(value))
+                .Distinct(StringComparer.CurrentCultureIgnoreCase)
+                .OrderBy(value => value, StringComparer.CurrentCultureIgnoreCase)
+                .ToList();
+
+            comboBox.BeginUpdate();
+            try
+            {
+                comboBox.Items.Clear();
+                comboBox.Items.Add(string.Empty);
+                foreach (var item in items)
+                    comboBox.Items.Add(item);
+            }
+            finally
+            {
+                comboBox.EndUpdate();
+            }
+
+            comboBox.SelectedItem = comboBox.Items.Contains(selectedValue)
+                ? selectedValue
+                : string.Empty;
+        }
+
+        private static bool MatchesNodeFilter(BaseNodeDefinition node, string filter, string productKind, string productCategory, string nodeGroup)
+        {
+            if (node == null)
+                return false;
+
+            if (!string.IsNullOrWhiteSpace(productKind) &&
+                !string.Equals(GetProductKindValue(node), productKind, StringComparison.CurrentCultureIgnoreCase))
+                return false;
+
+            if (!string.IsNullOrWhiteSpace(productCategory) &&
+                !string.Equals(StringNormalizer.TrimOrEmpty(node.ProductCategory), productCategory, StringComparison.CurrentCultureIgnoreCase))
+                return false;
+
+            if (!string.IsNullOrWhiteSpace(nodeGroup) &&
+                !string.Equals(StringNormalizer.TrimOrEmpty(node.NodeGroup), nodeGroup, StringComparison.CurrentCultureIgnoreCase))
+                return false;
+
+            if (string.IsNullOrWhiteSpace(filter))
+                return true;
+
+            string haystack = string.Join(" ", new[]
+            {
+                node.DisplayName,
+                node.Name,
+                node.NodeCode,
+                node.SourceArticul,
+                node.SourceRtCode,
+                node.NodeGroup,
+                node.NodeType,
+                node.ProductKind,
+                node.ProductCategory,
+                node.Description
+            }).ToLowerInvariant();
+
+            var tokens = filter.ToLowerInvariant()
+                .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            return tokens.All(token => haystack.Contains(token));
+        }
+
+        private static string GetProductKindValue(BaseNodeDefinition node)
+        {
+            return StringNormalizer.TrimOrEmpty(node?.ProductKind) switch
+            {
+                { Length: > 0 } value => value,
+                _ => StringNormalizer.TrimOrEmpty(node?.NodeType)
+            };
+        }
+
+        private static string BuildNodeCardSubtitle(BaseNodeDefinition node)
+        {
+            string productCategory = string.IsNullOrWhiteSpace(node?.ProductCategory) ? "Без категории" : node.ProductCategory;
+            string nodeGroup = string.IsNullOrWhiteSpace(node?.NodeGroup) ? "Без группы" : node.NodeGroup;
+            return $"{productCategory} • {nodeGroup}";
+        }
+
+        private static Image CreateNodeCardImage(string imagePath)
+        {
+            const int imageSize = 96;
+
+            if (!string.IsNullOrWhiteSpace(imagePath) && File.Exists(imagePath))
+            {
+                try
+                {
+                    using var sourceImage = Image.FromFile(imagePath);
+                    return new Bitmap(sourceImage, new Size(imageSize, imageSize));
+                }
+                catch
+                {
+                }
+            }
+
+            var bitmap = new Bitmap(imageSize, imageSize);
+            using var graphics = Graphics.FromImage(bitmap);
+            graphics.Clear(Color.WhiteSmoke);
+            using var borderPen = new Pen(Color.Gainsboro);
+            graphics.DrawRectangle(borderPen, 0, 0, imageSize - 1, imageSize - 1);
+            using var font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            using var textBrush = new SolidBrush(Color.DimGray);
+            var rectangle = new RectangleF(8, 8, imageSize - 16, imageSize - 16);
+            graphics.DrawString("Узел", font, textBrush, rectangle, new StringFormat
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            });
+            return bitmap;
         }
 
         private static void SelectComboValue(ComboBox comboBox, string value, string fallback)
@@ -292,8 +527,8 @@ namespace SewingProduction.Features.TeamWork.Forms
         private void ToggleBusyState(bool isBusy)
         {
             UseWaitCursor = isBusy;
-            nodesListBox.Enabled = !isBusy;
-            editorPanel.Enabled = !isBusy && SelectedNode != null;
+            nodeCardsListView.Enabled = !isBusy;
+            //editorPanel.Enabled = !isBusy && SelectedNode != null;
             saveButton.Enabled = !isBusy && SelectedNode != null;
             deleteButton.Enabled = !isBusy && SelectedNode != null;
             closeButton.Enabled = !isBusy;
@@ -313,7 +548,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             int chapters = _workingNode?.Operations?.Select(x => x.SourceN).Distinct().Count() ?? 0;
             detailsLabel.Text = _workingNode == null
                 ? "Выберите базовый узел для редактирования."
-                : $"Операций: {chapters}. Подопераций: {_workingNode.Operations.Count}.";
+                : $"РТ: {(string.IsNullOrWhiteSpace(_workingNode.SourceRtCode) ? "-" : _workingNode.SourceRtCode)}{Environment.NewLine}" +
+                  $"Класс изделия: {(string.IsNullOrWhiteSpace(GetProductKindValue(_workingNode)) ? "-" : GetProductKindValue(_workingNode))}{Environment.NewLine}" +
+                  $"Категория: {(string.IsNullOrWhiteSpace(_workingNode.ProductCategory) ? "-" : _workingNode.ProductCategory)}{Environment.NewLine}" +
+                  $"Группа: {(string.IsNullOrWhiteSpace(_workingNode.NodeGroup) ? "-" : _workingNode.NodeGroup)}{Environment.NewLine}" +
+                  $"Операций: {chapters}. Подопераций: {_workingNode.Operations.Count}.";
 
             previewGrid.DataSource = null;
             previewGrid.DataSource = _workingNode == null
@@ -423,6 +662,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 ProductKind = source.ProductKind,
                 ProductCategory = source.ProductCategory,
                 SourceAnnId = source.SourceAnnId,
+                SourceArticul = source.SourceArticul,
                 SourceRtCode = source.SourceRtCode,
                 SourceImagePath = source.SourceImagePath,
                 Description = source.Description,

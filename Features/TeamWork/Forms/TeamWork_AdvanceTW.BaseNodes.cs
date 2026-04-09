@@ -317,15 +317,15 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             if (operations == null || operations.Count == 0)
             {
-                return prefix + "????? ??????? ????";
+                return prefix + "Новый базовый узел";
             }
 
             if (operations.Count == 1)
             {
-                return $"{prefix}???? {operations[0].DisplayNumber}";
+                return $"{prefix}узел {operations[0].DisplayNumber}";
             }
 
-            return $"{prefix}???? {operations.First().DisplayNumber}-{operations.Last().DisplayNumber}";
+            return $"{prefix}узел {operations.First().DisplayNumber}-{operations.Last().DisplayNumber}";
         }
     }
 }

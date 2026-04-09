@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace SewingProduction.Features.TeamWork.Models
@@ -9,6 +9,7 @@ namespace SewingProduction.Features.TeamWork.Models
         public string Id { get; set; } = Guid.NewGuid().ToString("N");
         public string NodeCode { get; set; } = string.Empty;
         public int? SourceAnnId { get; set; }
+        public string SourceArticul { get; set; } = string.Empty;
         public string SourceRtCode { get; set; } = string.Empty;
         public string SourceImagePath { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
@@ -21,7 +22,23 @@ namespace SewingProduction.Features.TeamWork.Models
         public DateTime UpdatedAtUtc { get; set; } = DateTime.UtcNow;
         public List<BaseNodeOperationDefinition> Operations { get; set; } = new List<BaseNodeOperationDefinition>();
 
-        public override string ToString() => Name;
+        public string DisplayName
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(SourceRtCode))
+                    return Name;
+
+                if (string.IsNullOrWhiteSpace(Name))
+                    return $"[{SourceRtCode}]";
+
+                return Name.Contains(SourceRtCode, StringComparison.CurrentCultureIgnoreCase)
+                    ? Name
+                    : $"[{SourceRtCode}] {Name}";
+            }
+        }
+
+        public override string ToString() => DisplayName;
     }
 
     public sealed class BaseNodeOperationDefinition
