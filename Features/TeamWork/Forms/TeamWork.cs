@@ -36,6 +36,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly FormSettingsHelper _formSettingsHelper = new FormSettingsHelper();
         private readonly SecondsUpdateManager _secondsUpdateManager;
         private readonly ITeamWorkOrchestrator _teamWorkService;
+        private readonly TeamWorkArticlesQueryService _articlesQueryService;
         private UIHelper _uiHelper;
         private int bufferId = 0;
         private BindingList<ArtNormN> _bindingList;
@@ -109,6 +110,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             _jabberSender = (JabberSender)coreServices.JabberSender;
             _secondsUpdateManager = new SecondsUpdateManager(_artNormService, _logger);
             _teamWorkService = coreServices.Orchestrator;
+            _articlesQueryService = new TeamWorkArticlesQueryService(_artNormService, _dbService, _logger);
             _uiHelper = new UIHelper(_logger);
 
             // Инициализация основных BindingList и BindingSource

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using DevExpress.Data.Filtering;
@@ -416,8 +416,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 };
 
                 // Выполняем оба запроса параллельно
-                var wdToBindTask = _dbService.GetListAsync<MyDataANN>(queryWdToBind, parameters);
-                var unboundArtsTask = _dbService.GetListAsync<MyDataART>(queryUnboundArts, parameters);
+                var wdToBindTask = _articlesQueryService.SearchCurrentWorkDivisionsAsync(searchText);
+                var unboundArtsTask = _articlesQueryService.SearchUnboundArticlesAsync(searchText);
 
                 await Task.WhenAll(wdToBindTask, unboundArtsTask);
 
@@ -523,7 +523,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 GridControlBindedArts,
                 _nzpListWd,
                 (System.Windows.Forms.BindingSource)_nzpByKoddRtSourceWd,
-                async token => annId > 0 ? await _artNormService.GetNzpWithPztCounts(annId, token) : new List<NZPByKoddRt>(),
+                async token => await _articlesQueryService.LoadNzpAsync(annId, token),
                 ct);
             // Обновляем источник данных и представление после асинхронной загрузки
             GridControlBindedArts?.RefreshDataSource();
@@ -636,7 +636,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     var selectedMyDataAnn = gridView.GetRow(rowNumber) as MyDataANN;
                     if (selectedMyDataAnn == null) return;
                     annId = selectedMyDataAnn.AnnID;
-                    selectedArtNormN = await _artNormService.GetArtNormDataById(annId);
+                    selectedArtNormN = await _teamWorkService.LoadWorkDivisionAsync(annId);
                     if (selectedArtNormN == null) return;
                 }
 
@@ -780,15 +780,17 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 };
 
-                // 2. Вставляем "оболочку" в БД для получения AnnID
-                newAnnId = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newItemShell);
+                // 2. ??????? draft ????? application-layer orchestrator
+                var draftResult = await _teamWorkService.CreateWorkDivisionDraftAsync(newItemShell);
 
-                if (newAnnId <= 0)
+                if (!draftResult.Success || draftResult.NewAnnId <= 0)
                 {
-                    MessageBox.Show("Не удалось создать новую запись в базе данных.", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    await _logger.LogErrorAsync("", "Ошибка при вставке новой ArtNormN (AnnID <= 0) Кнопка Создать из артикула");
+                    MessageBox.Show(draftResult.Error ?? "?? ??????? ??????? ????? ?????? ? ???? ??????.", "?????? ??????????", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await _logger.LogErrorAsync("", "?????? ??? ???????? ????? ArtNormN ????? application-layer orchestrator");
                     return;
                 }
+                newAnnId = draftResult.NewAnnId;
+                newItemShell = draftResult.DraftAnn ?? newItemShell; // ??????????? ?????????? ID
                 newItemShell.AnnID = newAnnId; // Присваиваем полученный ID
 
                 // 3. Добавляем "оболочку" в основной список и грид (если _bindingList используется для ANNgridView)
@@ -879,14 +881,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         _bindingSource?.ResetBindings(false);
                         ANNgridControl?.RefreshDataSource();
 
-                        //await _artNormService.DeleteRelatedNormTables(newAnnId);
-                        await _artNormService.DeleteByAnnId(TableNames.Ann, newAnnId);
-                        if (teamWorkAdvanceTW.IsRaszInserted)
-                            await _artNormService.DeleteByAnnId(TableNames.Rasz, newAnnId);
-                        if (teamWorkAdvanceTW.IsRaskInserted)
-                            await _artNormService.DeleteByAnnId(TableNames.Rask, newAnnId);
-                        if (teamWorkAdvanceTW.IsKontInserted)
-                            await _artNormService.DeleteByAnnId(TableNames.Kont, newAnnId);
+                        await _teamWorkService.RollbackDraftAsync(newAnnId);
                     }
                 };
             }
@@ -904,7 +899,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         _bindingList.Remove(newItemShell);
                         _bindingSource?.ResetBindings(false);
                     }
-                    await _artNormService.DeleteByAnnId(TableNames.Ann, newAnnId);
+                    await _teamWorkService.RollbackDraftAsync(newAnnId);
                     // Здесь не можем проверить IsRaszInserted и т.д. из формы, если ошибка была до ее закрытия
                 }
             }

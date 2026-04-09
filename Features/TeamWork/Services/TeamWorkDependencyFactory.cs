@@ -1,4 +1,4 @@
-using SewingProduction.Helpers;
+﻿using SewingProduction.Helpers;
 using SewingProduction.Services;
 
 namespace SewingProduction.Features.TeamWork.Services
@@ -22,11 +22,22 @@ namespace SewingProduction.Features.TeamWork.Services
         {
             var databaseServices = CreateDatabaseServices();
             var jabberSender = new JabberSender(databaseServices.DbHelper);
-            var orchestrator = new TeamWorkOrchestrator(
+            var repository = new TeamWorkRepositoryAdapter(
                 databaseServices.ArtNormRepository,
                 databaseServices.DbService,
                 databaseServices.DbHelper,
-                jabberSender,
+                logger);
+            var unitOfWork = new TeamWorkUnitOfWorkAdapter(
+                databaseServices.ArtNormRepository,
+                databaseServices.DbService,
+                databaseServices.DbHelper);
+            var notificationService = new TeamWorkNotificationServiceAdapter(jabberSender);
+            var transactionBoundary = new TeamWorkTransactionBoundaryAdapter(databaseServices.DbHelper);
+            var orchestrator = new TeamWorkOrchestrator(
+                repository,
+                unitOfWork,
+                transactionBoundary,
+                notificationService,
                 logger);
 
             return new TeamWorkCoreServices(

@@ -1,4 +1,4 @@
-using DevExpress.XtraGrid.Views.Base;
+﻿using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.helpers;
 using SewingProduction.Helpers;
@@ -65,9 +65,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                     List<NormKont> kontData = new List<NormKont>();
                     if (initialAnnId > 0)
                     {
-                        raszData = await _artNormService.GetRelatedNormRasz(initialAnnId);
-                        raskData = await _artNormService.GetRelatedNormRask(initialAnnId);
-                        kontData = await _artNormService.GetRelatedNormKont(initialAnnId);
+                        raszData = await _articlesQueryService.LoadNormRaszAsync(initialAnnId);
+                        raskData = await _articlesQueryService.LoadNormRaskAsync(initialAnnId);
+                        kontData = await _articlesQueryService.LoadNormKontAsync(initialAnnId);
                     }
 
                     // Load NormRasz data
@@ -166,7 +166,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     gridControl_unboundArts,
                     _myDataArtList,
                     _myDataArtBindingSource,
-                    async _ => await _dbService.GetListAsync<MyDataART>(query, null),
+                    async _ => await _articlesQueryService.LoadUnboundArticlesAsync(),
                     cancellationToken);
 
                 await _logger.LogEventAsync($"Загружено {_myDataArtList.Count} записей MyDataART.", "MyDataArtLoad");
@@ -203,13 +203,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _myDataAnnBindingSource,
                     async _ =>
                     {
-                        var data = await _artNormService.GetArtNormDataCurrent(loadAll);
-                        if (data != null)
-                        {
-                            foreach (var item in data)
-                                item.Stat = StatusHelper.GetStatusText(item.Status);
-                        }
-                        return data ?? new List<MyDataANN>();
+                        return await _articlesQueryService.LoadCurrentWorkDivisionsAsync(loadAll);
                     },
                     cancellationToken);
             }
@@ -254,68 +248,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                List<MyDataANN> relatedData = new List<MyDataANN>();
-                bool loadAll = string.IsNullOrEmpty(articul);//showAllWD;
-                ////loadAll = layoutControlGroup14.CustomHeaderButtons[6].Properties.Checked;
-
-                // Если включен чекбокс "Загрузить все"
-                if (loadAll)
-                {
-                    return await _artNormService.GetArtNormDataCurrent(true);
-                }
-
-                // Загружаем все данные параллельно
-                var tasks = new List<Task<List<MyDataANN>>>();
-
-                // Загружаем данные по коду
-                //tasks.Add(_artNormService.GetArtNormDataCurrent(false));
-
-                // Если артикул не пустой, добавляем задачи для поиска по артикулу
-                if (!string.IsNullOrEmpty(articul))
-                {
-                    // Ищем по полному артикулу
-                    tasks.Add(_artNormService.GetArtNormDataByArticul(articul));
-
-                    // Ищем по артикулу без дефиса
-                    string artWithoutDash = articul.Replace("-", "");
-                    if (artWithoutDash != articul)
-                    {
-                        tasks.Add(_artNormService.GetArtNormDataByArticul(artWithoutDash));
-                    }
-
-                    // Если артикул содержит дефис, ищем по его первой части
-                    int dashIndex = articul.IndexOf("-");
-                    if (dashIndex > 0)
-                    {
-                        string artPrefix = articul.Substring(0, dashIndex);
-                        tasks.Add(_artNormService.GetArtNormDataByArticul(artPrefix));
-                    }
-                }
-
-                // Ждем завершения всех задач
-                var results = await Task.WhenAll(tasks);
-
-                // Объединяем результаты
-                foreach (var result in results)
-                {
-                    if (result != null)
-                    {
-                        relatedData.AddRange(result);
-                    }
-                }
-
-                // Удаляем дубликаты по AnnId используя Dictionary для быстрого поиска
-                var uniqueData = new Dictionary<int, MyDataANN>();
-                foreach (var item in relatedData)
-                {
-                    if (!uniqueData.ContainsKey(item.AnnID))
-                    {
-                        uniqueData[item.AnnID] = item;
-                    }
-                }
-
-                await _logger.LogEventAsync($"Успешная загрузка РТ для артикула {articul}", "LoadWorksbyArt");
-                return uniqueData.Values.ToList();
+                return await _articlesQueryService.LoadWorkDivisionsByArticulAsync(articul);
             }
             catch (Exception ex)
             {
@@ -420,7 +353,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 customGridControl3,
                 _normRaszListArticles,
                 _normRaszBindingSourceArticles,
-                async token => annId > 0 ? await _artNormService.GetRelatedNormRasz(annId) : Enumerable.Empty<NormRasz>(),
+                async token => await _articlesQueryService.LoadNormRaszAsync(annId, token),
                 cancellationToken);
         }
 
@@ -438,7 +371,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 customGridControl2,
                 _normRaskListArticles,
                 _normRaskBindingSourceArticles,
-                async token => annId > 0 ? await _artNormService.GetRelatedNormRask(annId, token) : Enumerable.Empty<NormRask>(),
+                async token => await _articlesQueryService.LoadNormRaskAsync(annId, token),
                 cancellationToken);
         }
 
@@ -456,7 +389,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGridControl1,
             _normKontListArticles,
             _normKontBindingSourceArticles,
-            async token => annId > 0 ? await _artNormService.GetRelatedNormKont(annId, token) : Enumerable.Empty<NormKont>(),
+            async token => await _articlesQueryService.LoadNormKontAsync(annId, token),
             cancellationToken);
     }
 
@@ -481,7 +414,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 gridControlNZP,
                 _nzpListArt,
                 _nzpByKoddRtSourceArt,
-                async token => annId > 0 ? await _artNormService.GetNzpWithPztCounts(annId, token) : Enumerable.Empty<NZPByKoddRt>(),
+                async token => await _articlesQueryService.LoadNzpAsync(annId, token),
                 cancellationToken); 
             Debug.WriteLine($"LoadNZPForArticlesTab DB/load: {swDb.ElapsedMilliseconds} ms");
 
@@ -506,7 +439,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     gridControlPreArch,
                     _preArchList,
                     _preArchBindingSource,
-                    async _ => await _dbService.GetListAsync<MyDataANN>(query, null),
+                    async _ => await _articlesQueryService.LoadPreArchiveAsync(),
                     cancellationToken);
 
                 await _logger.LogEventAsync($"Загружено {_preArchList.Count} записей в предварительный архив.", "PreArchLoad");
@@ -542,13 +475,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _archBindingSource,
                     async _ =>
                     {
-                        var data = await _dbService.GetListAsync<ArtNormN>(query, null);
-                        if (data != null)
-                        {
-                            foreach (var item in data)
-                                item.StatusText = StatusHelper.GetStatusText(item.Status);
-                        }
-                        return data ?? new List<ArtNormN>();
+                        return await _articlesQueryService.LoadArchiveAsync();
                     },
                     cancellationToken);
 
@@ -688,11 +615,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                     selectedAnnRow.mod = selectedArtRow.mod;
                 }
                 selectedAnnRow.size_label = selectedArtRow.size_label;
-                // Обновляем annId в базе данных
-                _artNormService.UpdateAnnIdinArticul(selectedAnnRow.AnnID, selectedArtRow.kodd, selectedArtRow.kodd_rt, selectedArtRow.Articul);
-                selectedArtRow.BindedArt = selectedAnnRow.Articul;//заполняем в артикуле из РТ
+                // Выполняем команду привязки через application-layer orchestrator
+                var bindResult = await _teamWorkService.BindArticleAsync(selectedAnnRow, selectedArtRow);
+                if (!bindResult.Success)
+                {
+                    MessageBox.Show(bindResult.Error ?? "Ошибка при привязке артикула.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
-                await _dbService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, selectedAnnRow);
+                selectedArtRow.BindedArt = selectedAnnRow.Articul;//заполняем в артикуле из РТ
                 // Обновляем UI:
                 if (artDataSource != null && selectedArtRow != null)
                 {
@@ -713,17 +644,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                     gridControl_binded?.RefreshDataSource();
                     gridControl_wdToBind?.RefreshDataSource();
                 }
-                // Вызываем процедуру updateSebZArticulPsz для обновления данных во всех справочниках
-                var parameters = new Dictionary<string, object>
-                {
-                    { "@xAnnID", selectedAnnRow.AnnID }
-                };
-                await _dbHelper.ExecuteQueryAsync(
-    "dbo.updateSebZArticulPsz",
-    parameters,
-    CommandType.StoredProcedure
-);
-                await _logger.LogEventAsync("Привязка завершена", $"Артикул {selectedArtRow.kodd_rt} привязан к РТ {selectedAnnRow.AnnID}");
                 MessageBox.Show("Привязка успешно выполнена.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -794,7 +714,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (gridView_wdToBind.FocusedRowHandle >= 0)
                     {
                         int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, gridView_wdToBind.FocusedRowHandle, "AnnId", 0);
-                        return annId > 0 ? await _artNormService.GetRelatedNormRasz(annId) : new List<NormRasz>();
+                        return await _articlesQueryService.LoadNormRaszAsync(annId);
                     }
                     return new List<NormRasz>();
                 });
@@ -803,7 +723,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (gridView_wdToBind.FocusedRowHandle >= 0)
                     {
                         int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, gridView_wdToBind.FocusedRowHandle, "AnnId", 0);
-                        return annId > 0 ? await _artNormService.GetRelatedNormRask(annId) : new List<NormRask>();
+                        return await _articlesQueryService.LoadNormRaskAsync(annId);
                     }
                     return new List<NormRask>();
                 });
@@ -812,7 +732,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (gridView_wdToBind.FocusedRowHandle >= 0)
                     {
                         int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, gridView_wdToBind.FocusedRowHandle, "AnnId", 0);
-                        return annId > 0 ? await _artNormService.GetRelatedNormKont(annId) : new List<NormKont>();
+                        return await _articlesQueryService.LoadNormKontAsync(annId);
                     }
                     return new List<NormKont>();
                 });
