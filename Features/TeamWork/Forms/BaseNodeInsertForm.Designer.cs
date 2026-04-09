@@ -1,4 +1,4 @@
-namespace SewingProduction.Features.TeamWork.Forms
+﻿namespace SewingProduction.Features.TeamWork.Forms
 {
     partial class BaseNodeInsertForm
     {
@@ -31,18 +31,27 @@ namespace SewingProduction.Features.TeamWork.Forms
             okButton = new System.Windows.Forms.Button();
             cancelButton = new System.Windows.Forms.Button();
             editNodesButton = new System.Windows.Forms.Button();
+            previewPanel = new System.Windows.Forms.Panel();
+            previewPictureBox = new System.Windows.Forms.PictureBox();
+            previewImageStatusLabel = new System.Windows.Forms.Label();
+            previewSourceLabel = new System.Windows.Forms.Label();
+            previewTitleLabel = new System.Windows.Forms.Label();
             mainLayoutPanel.SuspendLayout();
             leftLayoutPanel.SuspendLayout();
             rightTopLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)previewGrid).BeginInit();
             buttonsPanel.SuspendLayout();
+            previewPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)previewPictureBox).BeginInit();
             SuspendLayout();
             // 
             // mainLayoutPanel
             // 
-            mainLayoutPanel.ColumnCount = 2;
+            mainLayoutPanel.ColumnCount = 3;
             mainLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 245F));
             mainLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            mainLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 192F));
+            mainLayoutPanel.Controls.Add(previewPanel, 2, 0);
             mainLayoutPanel.Controls.Add(leftLayoutPanel, 0, 0);
             mainLayoutPanel.Controls.Add(rightTopLayoutPanel, 1, 0);
             mainLayoutPanel.Controls.Add(previewGrid, 1, 1);
@@ -52,11 +61,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             mainLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             mainLayoutPanel.Name = "mainLayoutPanel";
             mainLayoutPanel.Padding = new System.Windows.Forms.Padding(10, 9, 10, 9);
-            mainLayoutPanel.RowCount = 3;
+            mainLayoutPanel.RowCount = 4;
             mainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             mainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             mainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            mainLayoutPanel.Size = new System.Drawing.Size(914, 466);
+            mainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            mainLayoutPanel.Size = new System.Drawing.Size(1318, 495);
             mainLayoutPanel.TabIndex = 0;
             // 
             // leftLayoutPanel
@@ -73,7 +83,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             mainLayoutPanel.SetRowSpan(leftLayoutPanel, 3);
             leftLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             leftLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            leftLayoutPanel.Size = new System.Drawing.Size(239, 444);
+            leftLayoutPanel.Size = new System.Drawing.Size(239, 453);
             leftLayoutPanel.TabIndex = 0;
             // 
             // nodesLabel
@@ -96,7 +106,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             nodesListBox.Margin = new System.Windows.Forms.Padding(0, 6, 10, 0);
             nodesListBox.Name = "nodesListBox";
             nodesListBox.ScrollAlwaysVisible = true;
-            nodesListBox.Size = new System.Drawing.Size(229, 423);
+            nodesListBox.Size = new System.Drawing.Size(229, 432);
             nodesListBox.TabIndex = 1;
             // 
             // rightTopLayoutPanel
@@ -114,7 +124,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             rightTopLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             rightTopLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             rightTopLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            rightTopLayoutPanel.Size = new System.Drawing.Size(643, 80);
+            rightTopLayoutPanel.Size = new System.Drawing.Size(855, 80);
             rightTopLayoutPanel.TabIndex = 1;
             // 
             // positionLabel
@@ -123,7 +133,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             positionLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             positionLabel.Location = new System.Drawing.Point(3, 0);
             positionLabel.Name = "positionLabel";
-            positionLabel.Size = new System.Drawing.Size(637, 15);
+            positionLabel.Size = new System.Drawing.Size(849, 15);
             positionLabel.TabIndex = 0;
             positionLabel.Text = "Куда вставить узел";
             // 
@@ -135,7 +145,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             positionComboBox.Location = new System.Drawing.Point(3, 21);
             positionComboBox.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
             positionComboBox.Name = "positionComboBox";
-            positionComboBox.Size = new System.Drawing.Size(637, 23);
+            positionComboBox.Size = new System.Drawing.Size(849, 23);
             positionComboBox.TabIndex = 1;
             // 
             // detailsLabel
@@ -145,7 +155,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             detailsLabel.Location = new System.Drawing.Point(3, 52);
             detailsLabel.Margin = new System.Windows.Forms.Padding(3, 8, 3, 0);
             detailsLabel.Name = "detailsLabel";
-            detailsLabel.Size = new System.Drawing.Size(637, 28);
+            detailsLabel.Size = new System.Drawing.Size(849, 28);
             detailsLabel.TabIndex = 2;
             detailsLabel.Text = "detailsLabel";
             // 
@@ -157,14 +167,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             previewGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             previewGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             previewGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            previewGrid.Location = new System.Drawing.Point(258, 100);
+            previewGrid.Location = new System.Drawing.Point(258, 517);
             previewGrid.Margin = new System.Windows.Forms.Padding(3, 7, 3, 0);
             previewGrid.MultiSelect = false;
             previewGrid.Name = "previewGrid";
             previewGrid.ReadOnly = true;
             previewGrid.RowHeadersWidth = 51;
             previewGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            previewGrid.Size = new System.Drawing.Size(643, 319);
+            previewGrid.Size = new System.Drawing.Size(855, 1);
             previewGrid.TabIndex = 2;
             // 
             // buttonsPanel
@@ -175,16 +185,16 @@ namespace SewingProduction.Features.TeamWork.Forms
             buttonsPanel.Controls.Add(editNodesButton);
             buttonsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             buttonsPanel.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            buttonsPanel.Location = new System.Drawing.Point(258, 428);
+            buttonsPanel.Location = new System.Drawing.Point(258, 437);
             buttonsPanel.Margin = new System.Windows.Forms.Padding(3, 9, 3, 0);
             buttonsPanel.Name = "buttonsPanel";
-            buttonsPanel.Size = new System.Drawing.Size(643, 29);
+            buttonsPanel.Size = new System.Drawing.Size(855, 29);
             buttonsPanel.TabIndex = 3;
             // 
             // okButton
             // 
             okButton.AutoSize = true;
-            okButton.Location = new System.Drawing.Point(557, 2);
+            okButton.Location = new System.Drawing.Point(769, 2);
             okButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             okButton.Name = "okButton";
             okButton.Size = new System.Drawing.Size(83, 25);
@@ -197,7 +207,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             cancelButton.AutoSize = true;
             cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            cancelButton.Location = new System.Drawing.Point(474, 2);
+            cancelButton.Location = new System.Drawing.Point(686, 2);
             cancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             cancelButton.Name = "cancelButton";
             cancelButton.Size = new System.Drawing.Size(77, 25);
@@ -208,7 +218,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // editNodesButton
             // 
             editNodesButton.AutoSize = true;
-            editNodesButton.Location = new System.Drawing.Point(332, 2);
+            editNodesButton.Location = new System.Drawing.Point(544, 2);
             editNodesButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             editNodesButton.Name = "editNodesButton";
             editNodesButton.Size = new System.Drawing.Size(136, 25);
@@ -217,13 +227,68 @@ namespace SewingProduction.Features.TeamWork.Forms
             editNodesButton.UseVisualStyleBackColor = true;
             editNodesButton.Click += EditNodesButton_Click;
             // 
+            // previewPanel
+            // 
+            previewPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            previewPanel.Controls.Add(previewPictureBox);
+            previewPanel.Controls.Add(previewImageStatusLabel);
+            previewPanel.Controls.Add(previewSourceLabel);
+            previewPanel.Controls.Add(previewTitleLabel);
+            previewPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            previewPanel.Location = new System.Drawing.Point(1119, 12);
+            previewPanel.Name = "previewPanel";
+            previewPanel.Padding = new System.Windows.Forms.Padding(10, 12, 10, 12);
+            previewPanel.Size = new System.Drawing.Size(186, 495);
+            previewPanel.TabIndex = 1;
+            // 
+            // previewPictureBox
+            // 
+            previewPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            previewPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            previewPictureBox.Location = new System.Drawing.Point(10, 68);
+            previewPictureBox.Name = "previewPictureBox";
+            previewPictureBox.Size = new System.Drawing.Size(164, 389);
+            previewPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            previewPictureBox.TabIndex = 0;
+            previewPictureBox.TabStop = false;
+            // 
+            // previewImageStatusLabel
+            // 
+            previewImageStatusLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            previewImageStatusLabel.Location = new System.Drawing.Point(10, 457);
+            previewImageStatusLabel.Name = "previewImageStatusLabel";
+            previewImageStatusLabel.Size = new System.Drawing.Size(164, 24);
+            previewImageStatusLabel.TabIndex = 1;
+            previewImageStatusLabel.Text = "Изображение не задано";
+            previewImageStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // previewSourceLabel
+            // 
+            previewSourceLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            previewSourceLabel.Location = new System.Drawing.Point(10, 32);
+            previewSourceLabel.Name = "previewSourceLabel";
+            previewSourceLabel.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
+            previewSourceLabel.Size = new System.Drawing.Size(164, 36);
+            previewSourceLabel.TabIndex = 2;
+            previewSourceLabel.Text = "РТ: -";
+            // 
+            // previewTitleLabel
+            // 
+            previewTitleLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            previewTitleLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            previewTitleLabel.Location = new System.Drawing.Point(10, 12);
+            previewTitleLabel.Name = "previewTitleLabel";
+            previewTitleLabel.Size = new System.Drawing.Size(164, 20);
+            previewTitleLabel.TabIndex = 3;
+            previewTitleLabel.Text = "Источник базового узла";
+            // 
             // BaseNodeInsertForm
             // 
             AcceptButton = okButton;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             CancelButton = cancelButton;
-            ClientSize = new System.Drawing.Size(914, 466);
+            ClientSize = new System.Drawing.Size(1318, 495);
             Controls.Add(mainLayoutPanel);
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             MinimumSize = new System.Drawing.Size(807, 430);
@@ -239,6 +304,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)previewGrid).EndInit();
             buttonsPanel.ResumeLayout(false);
             buttonsPanel.PerformLayout();
+            previewPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)previewPictureBox).EndInit();
             ResumeLayout(false);
         }
 
@@ -257,5 +324,10 @@ namespace SewingProduction.Features.TeamWork.Forms
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button editNodesButton;
+        private System.Windows.Forms.Panel previewPanel;
+        private System.Windows.Forms.PictureBox previewPictureBox;
+        private System.Windows.Forms.Label previewImageStatusLabel;
+        private System.Windows.Forms.Label previewSourceLabel;
+        private System.Windows.Forms.Label previewTitleLabel;
     }
 }

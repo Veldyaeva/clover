@@ -29,7 +29,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             _nodes = (nodes ?? Array.Empty<BaseNodeDefinition>()).ToList();
 
             InitializeComponent();
-            _previewPanel = BaseNodePreviewHelper.AttachToForm(this, "Источник базового узла");
+            _previewPanel = BaseNodePreviewHelper.Create(previewPanel, previewSourceLabel, previewImageStatusLabel, previewPictureBox);
 
             nodesListBox.DisplayMember = nameof(BaseNodeDefinition.Name);
             nodesListBox.SelectedIndexChanged += (_, __) => RefreshPreview();

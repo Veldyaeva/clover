@@ -42,6 +42,11 @@
             buttonsPanel = new System.Windows.Forms.FlowLayoutPanel();
             okButton = new System.Windows.Forms.Button();
             cancelButton = new System.Windows.Forms.Button();
+            previewPanel = new System.Windows.Forms.Panel();
+            previewPictureBox = new System.Windows.Forms.PictureBox();
+            previewImageStatusLabel = new System.Windows.Forms.Label();
+            previewSourceLabel = new System.Windows.Forms.Label();
+            previewTitleLabel = new System.Windows.Forms.Label();
             mainLayoutPanel.SuspendLayout();
             metadataLayoutPanel.SuspendLayout();
             nodeGroupPanel.SuspendLayout();
@@ -50,6 +55,8 @@
             operationsButtonsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)previewGrid).BeginInit();
             buttonsPanel.SuspendLayout();
+            previewPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(previewPictureBox)).BeginInit();
             SuspendLayout();
             // 
             // mainLayoutPanel
@@ -142,9 +149,9 @@
             metadataLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             metadataLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             metadataLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            metadataLayoutPanel.Controls.Add(nodeGroupPanel, 2, 0);
+            metadataLayoutPanel.Controls.Add(nodeGroupPanel, 1, 0);
             metadataLayoutPanel.Controls.Add(productKindPanel, 0, 0);
-            metadataLayoutPanel.Controls.Add(productCategoryPanel, 1, 0);
+            metadataLayoutPanel.Controls.Add(productCategoryPanel, 2, 0);
             metadataLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
             metadataLayoutPanel.Location = new System.Drawing.Point(13, 180);
             metadataLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 9, 3, 0);
@@ -161,13 +168,13 @@
             nodeGroupPanel.Controls.Add(nodeGroupLabel, 0, 0);
             nodeGroupPanel.Controls.Add(nodeGroupComboBox, 0, 1);
             nodeGroupPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            nodeGroupPanel.Location = new System.Drawing.Point(556, 0);
+            nodeGroupPanel.Location = new System.Drawing.Point(278, 0);
             nodeGroupPanel.Margin = new System.Windows.Forms.Padding(0);
             nodeGroupPanel.Name = "nodeGroupPanel";
             nodeGroupPanel.RowCount = 2;
             nodeGroupPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             nodeGroupPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            nodeGroupPanel.Size = new System.Drawing.Size(279, 47);
+            nodeGroupPanel.Size = new System.Drawing.Size(278, 47);
             nodeGroupPanel.TabIndex = 0;
             // 
             // nodeGroupLabel
@@ -176,7 +183,7 @@
             nodeGroupLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             nodeGroupLabel.Location = new System.Drawing.Point(3, 0);
             nodeGroupLabel.Name = "nodeGroupLabel";
-            nodeGroupLabel.Size = new System.Drawing.Size(273, 15);
+            nodeGroupLabel.Size = new System.Drawing.Size(272, 15);
             nodeGroupLabel.TabIndex = 0;
             nodeGroupLabel.Text = "Группа узла";
             // 
@@ -188,7 +195,7 @@
             nodeGroupComboBox.Location = new System.Drawing.Point(3, 17);
             nodeGroupComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             nodeGroupComboBox.Name = "nodeGroupComboBox";
-            nodeGroupComboBox.Size = new System.Drawing.Size(273, 23);
+            nodeGroupComboBox.Size = new System.Drawing.Size(272, 23);
             nodeGroupComboBox.TabIndex = 1;
             // 
             // productKindPanel
@@ -235,13 +242,13 @@
             productCategoryPanel.Controls.Add(productCategoryLabel, 0, 0);
             productCategoryPanel.Controls.Add(productCategoryComboBox, 0, 1);
             productCategoryPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            productCategoryPanel.Location = new System.Drawing.Point(278, 0);
+            productCategoryPanel.Location = new System.Drawing.Point(556, 0);
             productCategoryPanel.Margin = new System.Windows.Forms.Padding(0);
             productCategoryPanel.Name = "productCategoryPanel";
             productCategoryPanel.RowCount = 2;
             productCategoryPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             productCategoryPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            productCategoryPanel.Size = new System.Drawing.Size(278, 47);
+            productCategoryPanel.Size = new System.Drawing.Size(279, 47);
             productCategoryPanel.TabIndex = 2;
             // 
             // productCategoryLabel
@@ -250,7 +257,7 @@
             productCategoryLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             productCategoryLabel.Location = new System.Drawing.Point(3, 0);
             productCategoryLabel.Name = "productCategoryLabel";
-            productCategoryLabel.Size = new System.Drawing.Size(272, 15);
+            productCategoryLabel.Size = new System.Drawing.Size(273, 15);
             productCategoryLabel.TabIndex = 0;
             productCategoryLabel.Text = "Категория изделия";
             // 
@@ -262,7 +269,7 @@
             productCategoryComboBox.Location = new System.Drawing.Point(3, 17);
             productCategoryComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             productCategoryComboBox.Name = "productCategoryComboBox";
-            productCategoryComboBox.Size = new System.Drawing.Size(272, 23);
+            productCategoryComboBox.Size = new System.Drawing.Size(273, 23);
             productCategoryComboBox.TabIndex = 1;
             // 
             // operationsButtonsPanel
@@ -370,6 +377,55 @@
             cancelButton.Text = "Отмена";
             cancelButton.UseVisualStyleBackColor = true;
             // 
+            // previewPanel
+            // 
+            previewPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            previewPanel.Controls.Add(previewPictureBox);
+            previewPanel.Controls.Add(previewImageStatusLabel);
+            previewPanel.Controls.Add(previewSourceLabel);
+            previewPanel.Controls.Add(previewTitleLabel);
+            previewPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            previewPanel.Name = "previewPanel";
+            previewPanel.Padding = new System.Windows.Forms.Padding(10, 12, 10, 12);
+            previewPanel.Size = new System.Drawing.Size(220, 496);
+            previewPanel.TabIndex = 1;
+            // 
+            // previewPictureBox
+            // 
+            previewPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            previewPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            previewPictureBox.Name = "previewPictureBox";
+            previewPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            previewPictureBox.TabIndex = 0;
+            previewPictureBox.TabStop = false;
+            // 
+            // previewImageStatusLabel
+            // 
+            previewImageStatusLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            previewImageStatusLabel.Name = "previewImageStatusLabel";
+            previewImageStatusLabel.Size = new System.Drawing.Size(198, 24);
+            previewImageStatusLabel.TabIndex = 1;
+            previewImageStatusLabel.Text = "\u0418\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435 \u043d\u0435 \u0437\u0430\u0434\u0430\u043d\u043e";
+            previewImageStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // previewSourceLabel
+            // 
+            previewSourceLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            previewSourceLabel.Name = "previewSourceLabel";
+            previewSourceLabel.Padding = new System.Windows.Forms.Padding(0, 6, 0, 6);
+            previewSourceLabel.Size = new System.Drawing.Size(198, 36);
+            previewSourceLabel.TabIndex = 2;
+            previewSourceLabel.Text = "\u0420\u0422: -";
+            // 
+            // previewTitleLabel
+            // 
+            previewTitleLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            previewTitleLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            previewTitleLabel.Name = "previewTitleLabel";
+            previewTitleLabel.Size = new System.Drawing.Size(198, 20);
+            previewTitleLabel.TabIndex = 3;
+            previewTitleLabel.Text = "\u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a \u0431\u0430\u0437\u043e\u0432\u043e\u0433\u043e \u0443\u0437\u043b\u0430";
+            // 
             // BaseNodeSaveForm
             // 
             AcceptButton = okButton;
@@ -378,6 +434,7 @@
             CancelButton = cancelButton;
             ClientSize = new System.Drawing.Size(861, 496);
             Controls.Add(mainLayoutPanel);
+            Controls.Add(previewPanel);
             Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             MinimumSize = new System.Drawing.Size(790, 475);
             Name = "BaseNodeSaveForm";
@@ -397,7 +454,10 @@
             ((System.ComponentModel.ISupportInitialize)previewGrid).EndInit();
             buttonsPanel.ResumeLayout(false);
             buttonsPanel.PerformLayout();
+            previewPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(previewPictureBox)).EndInit();
             ResumeLayout(false);
+            Controls.SetChildIndex(previewPanel, 0);
         }
 
         #endregion
@@ -426,5 +486,10 @@
         private System.Windows.Forms.FlowLayoutPanel buttonsPanel;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Panel previewPanel;
+        private System.Windows.Forms.PictureBox previewPictureBox;
+        private System.Windows.Forms.Label previewImageStatusLabel;
+        private System.Windows.Forms.Label previewSourceLabel;
+        private System.Windows.Forms.Label previewTitleLabel;
     }
 }
