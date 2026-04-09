@@ -14,6 +14,7 @@ namespace SewingProduction.Features.TeamWork.Helpers
     {
         private const string EmptySourceLabel = "Источник РТ: -";
         private const string MissingImageText = "Изображение не найдено";
+        private const string EmptyImageText = "Изображение не задано";
         public static BaseNodePreviewPanel Create(Panel root, Label sourceLabel, Label imageStatusLabel, PictureBox imageBox)
         {
             return new BaseNodePreviewPanel
@@ -42,7 +43,9 @@ namespace SewingProduction.Features.TeamWork.Helpers
             {
                 preview.ImageBox.ImageLocation = null;
                 preview.ImageBox.Image = null;
-                preview.ImageStatusLabel.Text = MissingImageText;
+                preview.ImageStatusLabel.Text = string.IsNullOrWhiteSpace(imagePath)
+                    ? EmptyImageText
+                    : $"{MissingImageText}: {Path.GetFileName(imagePath)}";
             }
         }
         public static void Update(BaseNodePreviewPanel preview, BaseNodeSaveDefaults defaults)
@@ -61,7 +64,9 @@ namespace SewingProduction.Features.TeamWork.Helpers
             {
                 preview.ImageBox.ImageLocation = null;
                 preview.ImageBox.Image = null;
-                preview.ImageStatusLabel.Text = MissingImageText;
+                preview.ImageStatusLabel.Text = string.IsNullOrWhiteSpace(defaults?.SourceImagePath)
+                    ? EmptyImageText
+                    : $"{MissingImageText}: {Path.GetFileName(defaults.SourceImagePath)}";
             }
         }
     }
