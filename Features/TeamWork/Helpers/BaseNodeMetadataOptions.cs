@@ -1,4 +1,4 @@
-namespace SewingProduction.Features.TeamWork.Helpers
+﻿namespace SewingProduction.Features.TeamWork.Helpers
 {
     internal static class BaseNodeMetadataOptions
     {

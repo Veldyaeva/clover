@@ -40,7 +40,37 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             nameTextBox.Text = BuildInitialName(defaultName);
             BaseNodePreviewHelper.Update(_previewPanel, _defaults);
+            UpdateRtCodeCopyState(_defaults?.SourceRtCode);
             RefreshOperationsPreview();
+        }
+
+        private void PreviewSourceLabel_Click(object sender, EventArgs e)
+        {
+            CopyRtCodeToClipboard();
+        }
+
+        private void CopyRtCodeToClipboard()
+        {
+            string sourceCode = StringNormalizer.TrimOrEmpty(_defaults?.SourceRtCode);
+            if (string.IsNullOrWhiteSpace(sourceCode))
+                return;
+
+            try
+            {
+                Clipboard.SetText(sourceCode);
+                previewToolTip.Show("RT-код скопирован", this, PointToClient(Cursor.Position), 1500);
+            }
+            catch
+            {
+            }
+        }
+
+        private void UpdateRtCodeCopyState(string sourceRtCode)
+        {
+            string tooltip = string.IsNullOrWhiteSpace(sourceRtCode)
+                ? "RT-код не задан"
+                : $"RT-код: {sourceRtCode}. Кликните, чтобы скопировать";
+            previewToolTip.SetToolTip(previewSourceLabel, tooltip);
         }
 
         private string BuildInitialName(string defaultName)

@@ -18,6 +18,7 @@
 
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             mainLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             summaryLabel = new System.Windows.Forms.Label();
             nameLabel = new System.Windows.Forms.Label();
@@ -47,6 +48,7 @@
             previewImageStatusLabel = new System.Windows.Forms.Label();
             previewSourceLabel = new System.Windows.Forms.Label();
             previewTitleLabel = new System.Windows.Forms.Label();
+            previewToolTip = new System.Windows.Forms.ToolTip(components);
             mainLayoutPanel.SuspendLayout();
             metadataLayoutPanel.SuspendLayout();
             nodeGroupPanel.SuspendLayout();
@@ -416,6 +418,8 @@
             previewSourceLabel.Size = new System.Drawing.Size(198, 36);
             previewSourceLabel.TabIndex = 2;
             previewSourceLabel.Text = "\u0420\u0422: -";
+            previewSourceLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            previewSourceLabel.Click += PreviewSourceLabel_Click;
             // 
             // previewTitleLabel
             // 
@@ -491,5 +495,6 @@
         private System.Windows.Forms.Label previewImageStatusLabel;
         private System.Windows.Forms.Label previewSourceLabel;
         private System.Windows.Forms.Label previewTitleLabel;
+        private System.Windows.Forms.ToolTip previewToolTip;
     }
 }

@@ -18,9 +18,12 @@
 
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             mainLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             leftLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             nodesLabel = new System.Windows.Forms.Label();
+            searchLabel = new System.Windows.Forms.Label();
+            searchTextBox = new System.Windows.Forms.TextBox();
             nodesListBox = new System.Windows.Forms.ListBox();
             editorPanel = new System.Windows.Forms.TableLayoutPanel();
             detailsLabel = new System.Windows.Forms.Label();
@@ -55,6 +58,7 @@
             previewImageStatusLabel = new System.Windows.Forms.Label();
             previewSourceLabel = new System.Windows.Forms.Label();
             previewTitleLabel = new System.Windows.Forms.Label();
+            previewToolTip = new System.Windows.Forms.ToolTip(components);
             mainLayoutPanel.SuspendLayout();
             leftLayoutPanel.SuspendLayout();
             editorPanel.SuspendLayout();
@@ -94,12 +98,16 @@
             leftLayoutPanel.ColumnCount = 1;
             leftLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             leftLayoutPanel.Controls.Add(nodesLabel, 0, 0);
-            leftLayoutPanel.Controls.Add(nodesListBox, 0, 1);
+            leftLayoutPanel.Controls.Add(searchLabel, 0, 1);
+            leftLayoutPanel.Controls.Add(searchTextBox, 0, 2);
+            leftLayoutPanel.Controls.Add(nodesListBox, 0, 3);
             leftLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             leftLayoutPanel.Location = new System.Drawing.Point(13, 11);
             leftLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             leftLayoutPanel.Name = "leftLayoutPanel";
-            leftLayoutPanel.RowCount = 2;
+            leftLayoutPanel.RowCount = 4;
+            leftLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            leftLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             leftLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             leftLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             leftLayoutPanel.Size = new System.Drawing.Size(239, 495);
@@ -115,18 +123,41 @@
             nodesLabel.TabIndex = 0;
             nodesLabel.Text = "Базовые узлы";
             // 
+            // searchLabel
+            // 
+            searchLabel.AutoSize = true;
+            searchLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            searchLabel.Location = new System.Drawing.Point(3, 15);
+            searchLabel.Name = "searchLabel";
+            searchLabel.Size = new System.Drawing.Size(233, 15);
+            searchLabel.TabIndex = 1;
+            searchLabel.Text = "Поиск";
+            // 
+            // searchTextBox
+            // 
+            searchTextBox.Dock = System.Windows.Forms.DockStyle.Top;
+            searchTextBox.Location = new System.Drawing.Point(0, 36);
+            searchTextBox.Margin = new System.Windows.Forms.Padding(0, 6, 10, 0);
+            searchTextBox.Name = "searchTextBox";
+            searchTextBox.PlaceholderText = "Поиск по тегам, RT-коду, названию";
+            searchTextBox.Size = new System.Drawing.Size(229, 23);
+            searchTextBox.TabIndex = 2;
+            searchTextBox.TextChanged += SearchTextBox_TextChanged;
+            // 
             // nodesListBox
             // 
+            nodesListBox.DisplayMember = "DisplayName";
             nodesListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             nodesListBox.FormattingEnabled = true;
             nodesListBox.HorizontalScrollbar = true;
             nodesListBox.ItemHeight = 15;
-            nodesListBox.Location = new System.Drawing.Point(0, 21);
+            nodesListBox.Location = new System.Drawing.Point(0, 65);
             nodesListBox.Margin = new System.Windows.Forms.Padding(0, 6, 10, 0);
             nodesListBox.Name = "nodesListBox";
             nodesListBox.ScrollAlwaysVisible = true;
-            nodesListBox.Size = new System.Drawing.Size(229, 474);
-            nodesListBox.TabIndex = 1;
+            nodesListBox.Size = new System.Drawing.Size(229, 430);
+            nodesListBox.TabIndex = 3;
+            nodesListBox.SelectedIndexChanged += NodesListBox_SelectedIndexChanged;
             // 
             // editorPanel
             // 
@@ -279,6 +310,8 @@
             nodeCodeValueLabel.Text = "-";
             nodeCodeValueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             nodeCodeValueLabel.Visible = false;
+            nodeCodeValueLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            nodeCodeValueLabel.Click += NodeCodeValueLabel_Click;
             // 
             // nameLabel
             // 
@@ -546,6 +579,8 @@
             previewSourceLabel.Size = new System.Drawing.Size(117, 36);
             previewSourceLabel.TabIndex = 2;
             previewSourceLabel.Text = "РТ: -";
+            previewSourceLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            previewSourceLabel.Click += PreviewSourceLabel_Click;
             // 
             // previewTitleLabel
             // 
@@ -598,6 +633,8 @@
         private System.Windows.Forms.TableLayoutPanel mainLayoutPanel;
         private System.Windows.Forms.TableLayoutPanel leftLayoutPanel;
         private System.Windows.Forms.Label nodesLabel;
+        private System.Windows.Forms.Label searchLabel;
+        private System.Windows.Forms.TextBox searchTextBox;
         private System.Windows.Forms.ListBox nodesListBox;
         private System.Windows.Forms.TableLayoutPanel editorPanel;
         private System.Windows.Forms.Label detailsLabel;
@@ -632,5 +669,6 @@
         private System.Windows.Forms.Label previewImageStatusLabel;
         private System.Windows.Forms.Label previewSourceLabel;
         private System.Windows.Forms.Label previewTitleLabel;
+        private System.Windows.Forms.ToolTip previewToolTip;
     }
 }

@@ -30,9 +30,6 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             InitializeComponent();
             _previewPanel = BaseNodePreviewHelper.Create(previewPanel, previewSourceLabel, previewImageStatusLabel, previewPictureBox);
-
-            nodesListBox.DisplayMember = nameof(BaseNodeDefinition.DisplayName);
-            nodesListBox.SelectedIndexChanged += (_, __) => RefreshPreview();
             editNodesButton.Enabled = _libraryService != null;
 
             foreach (var point in insertionPoints ?? Array.Empty<BaseNodeInsertionPoint>())
@@ -45,29 +42,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void BindData(int? defaultAfterN, int? preferredNodeId = null)
         {
-            nodesListBox.Items.Clear();
-            foreach (var node in _nodes.OrderBy(x => x.DisplayName, StringComparer.CurrentCultureIgnoreCase))
-            {
-                nodesListBox.Items.Add(node);
-            }
-
-            if (nodesListBox.Items.Count > 0)
-            {
-                int selectedIndex = 0;
-                if (preferredNodeId.HasValue)
-                {
-                    for (int i = 0; i < nodesListBox.Items.Count; i++)
-                    {
-                        if (nodesListBox.Items[i] is BaseNodeDefinition node && node.BaseNodeId == preferredNodeId.Value)
-                        {
-                            selectedIndex = i;
-                            break;
-                        }
-                    }
-                }
-
-                nodesListBox.SelectedIndex = selectedIndex;
-            }
+            ApplyNodeFilter(preferredNodeId);
 
             if (positionComboBox.Items.Count > 0 && positionComboBox.SelectedIndex < 0)
             {
@@ -115,11 +90,120 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             previewGrid.DataSource = BaseNodeMapper.CreatePreviewRows(node);
             BaseNodePreviewHelper.Update(_previewPanel, node);
+            UpdateRtCodeCopyState(node.SourceRtCode);
 
             int chapters = node.Operations.Select(x => x.SourceN).Distinct().Count();
             string description = string.IsNullOrWhiteSpace(node.Description) ? "Без описания" : StringNormalizer.TrimOrEmpty(node.Description);
             string sourceCode = string.IsNullOrWhiteSpace(node.SourceRtCode) ? "-" : node.SourceRtCode;
             detailsLabel.Text = $"РТ: {sourceCode}. Операций: {chapters}. Подопераций: {node.Operations.Count}. {description}";
+        }
+
+        private void NodesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshPreview();
+        }
+
+        private void SearchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            ApplyNodeFilter(SelectedNode?.BaseNodeId);
+        }
+
+        private void PreviewSourceLabel_Click(object sender, EventArgs e)
+        {
+            CopyRtCodeToClipboard();
+        }
+
+        private void CopyRtCodeToClipboard()
+        {
+            string sourceCode = StringNormalizer.TrimOrEmpty(SelectedNode?.SourceRtCode);
+            if (string.IsNullOrWhiteSpace(sourceCode))
+                return;
+
+            try
+            {
+                Clipboard.SetText(sourceCode);
+                previewToolTip.Show("RT-код скопирован", this, PointToClient(Cursor.Position), 1500);
+            }
+            catch
+            {
+            }
+        }
+
+        private void UpdateRtCodeCopyState(string sourceRtCode)
+        {
+            string tooltip = string.IsNullOrWhiteSpace(sourceRtCode)
+                ? "RT-код не задан"
+                : $"RT-код: {sourceRtCode}. Кликните, чтобы скопировать";
+            previewToolTip.SetToolTip(previewSourceLabel, tooltip);
+        }
+
+        private void ApplyNodeFilter(int? preferredNodeId)
+        {
+            string filter = StringNormalizer.TrimOrEmpty(searchTextBox?.Text);
+            var filtered = _nodes
+                .Where(node => MatchesNodeFilter(node, filter))
+                .OrderBy(node => node.DisplayName, StringComparer.CurrentCultureIgnoreCase)
+                .ToList();
+
+            nodesListBox.BeginUpdate();
+            try
+            {
+                nodesListBox.Items.Clear();
+                foreach (var node in filtered)
+                    nodesListBox.Items.Add(node);
+            }
+            finally
+            {
+                nodesListBox.EndUpdate();
+            }
+
+            if (nodesListBox.Items.Count == 0)
+            {
+                nodesListBox.SelectedIndex = -1;
+                RefreshPreview();
+                return;
+            }
+
+            int selectedIndex = 0;
+            if (preferredNodeId.HasValue)
+            {
+                for (int i = 0; i < nodesListBox.Items.Count; i++)
+                {
+                    if (nodesListBox.Items[i] is BaseNodeDefinition node && node.BaseNodeId == preferredNodeId.Value)
+                    {
+                        selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            nodesListBox.SelectedIndex = selectedIndex;
+        }
+
+        private static bool MatchesNodeFilter(BaseNodeDefinition node, string filter)
+        {
+            if (node == null)
+                return false;
+            if (string.IsNullOrWhiteSpace(filter))
+                return true;
+
+            string haystack = string.Join(" ", new[]
+            {
+                node.DisplayName,
+                node.Name,
+                node.NodeCode,
+                node.SourceRtCode,
+                node.NodeGroup,
+                node.NodeType,
+                node.ProductKind,
+                node.ProductCategory,
+                node.Description
+            }).ToLowerInvariant();
+
+            var tokens = filter.ToLowerInvariant()
+                .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            return tokens.All(token => haystack.Contains(token));
         }
 
         private async void EditNodesButton_Click(object sender, EventArgs e)
