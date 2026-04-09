@@ -21,7 +21,23 @@ namespace SewingProduction.Features.TeamWork.Models
         public DateTime UpdatedAtUtc { get; set; } = DateTime.UtcNow;
         public List<BaseNodeOperationDefinition> Operations { get; set; } = new List<BaseNodeOperationDefinition>();
 
-        public override string ToString() => Name;
+        public string DisplayName
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(SourceRtCode))
+                    return Name;
+
+                if (string.IsNullOrWhiteSpace(Name))
+                    return $"[{SourceRtCode}]";
+
+                return Name.Contains(SourceRtCode, StringComparison.CurrentCultureIgnoreCase)
+                    ? Name
+                    : $"[{SourceRtCode}] {Name}";
+            }
+        }
+
+        public override string ToString() => DisplayName;
     }
 
     public sealed class BaseNodeOperationDefinition

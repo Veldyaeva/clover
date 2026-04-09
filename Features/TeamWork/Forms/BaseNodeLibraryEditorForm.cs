@@ -32,7 +32,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             _previewPanel = BaseNodePreviewHelper.Create(previewPanel, previewSourceLabel, previewImageStatusLabel, previewPictureBox);
             InitializeSelectors();
 
-            nodesListBox.DisplayMember = nameof(BaseNodeDefinition.Name);
+            nodesListBox.DisplayMember = nameof(BaseNodeDefinition.DisplayName);
             nodesListBox.SelectedIndexChanged += (_, __) => BindSelectedNode();
             Shown += BaseNodeLibraryEditorForm_Shown;
         }
@@ -92,7 +92,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 var nodes = await _libraryService.GetAllAsync();
                 _nodes.Clear();
-                _nodes.AddRange(nodes.OrderBy(x => x.Name, StringComparer.CurrentCultureIgnoreCase));
+                _nodes.AddRange(nodes.OrderBy(x => x.DisplayName, StringComparer.CurrentCultureIgnoreCase));
 
                 nodesListBox.BeginUpdate();
                 try

@@ -31,7 +31,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             InitializeComponent();
             _previewPanel = BaseNodePreviewHelper.Create(previewPanel, previewSourceLabel, previewImageStatusLabel, previewPictureBox);
 
-            nodesListBox.DisplayMember = nameof(BaseNodeDefinition.Name);
+            nodesListBox.DisplayMember = nameof(BaseNodeDefinition.DisplayName);
             nodesListBox.SelectedIndexChanged += (_, __) => RefreshPreview();
             editNodesButton.Enabled = _libraryService != null;
 
@@ -46,7 +46,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private void BindData(int? defaultAfterN, int? preferredNodeId = null)
         {
             nodesListBox.Items.Clear();
-            foreach (var node in _nodes.OrderBy(x => x.Name, StringComparer.CurrentCultureIgnoreCase))
+            foreach (var node in _nodes.OrderBy(x => x.DisplayName, StringComparer.CurrentCultureIgnoreCase))
             {
                 nodesListBox.Items.Add(node);
             }
