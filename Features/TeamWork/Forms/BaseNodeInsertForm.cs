@@ -198,9 +198,9 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void PopulateFilterValues()
         {
-            PopulateFilterComboBox(productKindFilterComboBox, _nodes.Select(node => node.ProductKind));
-            PopulateFilterComboBox(productCategoryFilterComboBox, _nodes.Select(node => node.ProductCategory));
-            PopulateFilterComboBox(nodeGroupFilterComboBox, _nodes.Select(node => node.NodeGroup));
+            PopulateFilterComboBox(productKindFilterComboBox, _nodes.Where(node => node != null).Select(node => node.ProductKind));
+            PopulateFilterComboBox(productCategoryFilterComboBox, _nodes.Where(node => node != null).Select(node => node.ProductCategory));
+            PopulateFilterComboBox(nodeGroupFilterComboBox, _nodes.Where(node => node != null).Select(node => node.NodeGroup));
         }
 
         private static void PopulateFilterComboBox(ComboBox comboBox, IEnumerable<string> values)
