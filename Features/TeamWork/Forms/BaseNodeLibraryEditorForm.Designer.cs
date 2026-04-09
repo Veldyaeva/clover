@@ -1,4 +1,4 @@
-namespace SewingProduction.Features.TeamWork.Forms
+﻿namespace SewingProduction.Features.TeamWork.Forms
 {
     partial class BaseNodeLibraryEditorForm
     {
@@ -319,9 +319,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             metadataLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             metadataLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             metadataLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            metadataLayoutPanel.Controls.Add(nodeGroupPanel, 1, 0);
+            metadataLayoutPanel.Controls.Add(nodeGroupPanel, 2, 0);
             metadataLayoutPanel.Controls.Add(productKindPanel, 0, 0);
-            metadataLayoutPanel.Controls.Add(productCategoryPanel, 2, 0);
+            metadataLayoutPanel.Controls.Add(productCategoryPanel, 1, 0);
             metadataLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
             metadataLayoutPanel.Location = new System.Drawing.Point(3, 29);
             metadataLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 9, 3, 0);
@@ -339,13 +339,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             nodeGroupPanel.Controls.Add(nodeGroupLabel, 0, 0);
             nodeGroupPanel.Controls.Add(nodeGroupComboBox, 0, 1);
             nodeGroupPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            nodeGroupPanel.Location = new System.Drawing.Point(246, 0);
+            nodeGroupPanel.Location = new System.Drawing.Point(492, 0);
             nodeGroupPanel.Margin = new System.Windows.Forms.Padding(0);
             nodeGroupPanel.Name = "nodeGroupPanel";
             nodeGroupPanel.RowCount = 2;
             nodeGroupPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             nodeGroupPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            nodeGroupPanel.Size = new System.Drawing.Size(246, 47);
+            nodeGroupPanel.Size = new System.Drawing.Size(249, 47);
             nodeGroupPanel.TabIndex = 0;
             // 
             // nodeGroupLabel
@@ -354,7 +354,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             nodeGroupLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             nodeGroupLabel.Location = new System.Drawing.Point(3, 0);
             nodeGroupLabel.Name = "nodeGroupLabel";
-            nodeGroupLabel.Size = new System.Drawing.Size(240, 15);
+            nodeGroupLabel.Size = new System.Drawing.Size(243, 15);
             nodeGroupLabel.TabIndex = 0;
             nodeGroupLabel.Text = "Группа узла";
             // 
@@ -366,7 +366,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             nodeGroupComboBox.Location = new System.Drawing.Point(3, 17);
             nodeGroupComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             nodeGroupComboBox.Name = "nodeGroupComboBox";
-            nodeGroupComboBox.Size = new System.Drawing.Size(240, 23);
+            nodeGroupComboBox.Size = new System.Drawing.Size(243, 23);
             nodeGroupComboBox.TabIndex = 1;
             // 
             // productKindPanel
@@ -413,13 +413,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             productCategoryPanel.Controls.Add(productCategoryLabel, 0, 0);
             productCategoryPanel.Controls.Add(productCategoryComboBox, 0, 1);
             productCategoryPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            productCategoryPanel.Location = new System.Drawing.Point(492, 0);
+            productCategoryPanel.Location = new System.Drawing.Point(246, 0);
             productCategoryPanel.Margin = new System.Windows.Forms.Padding(0);
             productCategoryPanel.Name = "productCategoryPanel";
             productCategoryPanel.RowCount = 2;
             productCategoryPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             productCategoryPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            productCategoryPanel.Size = new System.Drawing.Size(249, 47);
+            productCategoryPanel.Size = new System.Drawing.Size(246, 47);
             productCategoryPanel.TabIndex = 2;
             // 
             // productCategoryLabel
@@ -428,7 +428,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             productCategoryLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             productCategoryLabel.Location = new System.Drawing.Point(3, 0);
             productCategoryLabel.Name = "productCategoryLabel";
-            productCategoryLabel.Size = new System.Drawing.Size(243, 15);
+            productCategoryLabel.Size = new System.Drawing.Size(240, 15);
             productCategoryLabel.TabIndex = 0;
             productCategoryLabel.Text = "Категория изделия";
             // 
@@ -440,7 +440,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             productCategoryComboBox.Location = new System.Drawing.Point(3, 17);
             productCategoryComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             productCategoryComboBox.Name = "productCategoryComboBox";
-            productCategoryComboBox.Size = new System.Drawing.Size(243, 23);
+            productCategoryComboBox.Size = new System.Drawing.Size(240, 23);
             productCategoryComboBox.TabIndex = 1;
             // 
             // buttonsPanel
