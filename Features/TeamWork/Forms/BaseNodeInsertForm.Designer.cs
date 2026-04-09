@@ -25,7 +25,7 @@
             previewSourceLabel = new System.Windows.Forms.Label();
             previewTitleLabel = new System.Windows.Forms.Label();
             searchTextBox = new System.Windows.Forms.TextBox();
-            productKindFilterComboBox = new System.Windows.Forms.ComboBox();
+            nodeTypeFilterComboBox = new System.Windows.Forms.ComboBox();
             productCategoryFilterComboBox = new System.Windows.Forms.ComboBox();
             nodeGroupFilterComboBox = new System.Windows.Forms.ComboBox();
             nodesListBox = new System.Windows.Forms.ListBox();
@@ -40,16 +40,16 @@
             layoutConverter1 = new DevExpress.XtraLayout.Converter.LayoutConverter(components);
             BaseNodeInsertFormlayoutControl1ConvertedLayout = new DevExpress.XtraLayout.LayoutControl();
             layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            previewPanelitem = new DevExpress.XtraLayout.LayoutControlItem();
             leftLayoutPanelitem = new DevExpress.XtraLayout.LayoutControlGroup();
-            rightTopLayoutPanelitem = new DevExpress.XtraLayout.LayoutControlGroup();
-            previewGriditem = new DevExpress.XtraLayout.LayoutControlItem();
-            buttonsPanelitem = new DevExpress.XtraLayout.LayoutControlItem();
             searchTextBoxitem = new DevExpress.XtraLayout.LayoutControlItem();
             nodesListBoxitem = new DevExpress.XtraLayout.LayoutControlItem();
-            productKindFilterComboBoxitem = new DevExpress.XtraLayout.LayoutControlItem();
+            nodeTypeFilterComboBoxitem = new DevExpress.XtraLayout.LayoutControlItem();
             productCategoryFilterComboBoxitem = new DevExpress.XtraLayout.LayoutControlItem();
             nodeGroupFilterComboBoxitem = new DevExpress.XtraLayout.LayoutControlItem();
+            previewGriditem = new DevExpress.XtraLayout.LayoutControlItem();
+            buttonsPanelitem = new DevExpress.XtraLayout.LayoutControlItem();
+            previewPanelitem = new DevExpress.XtraLayout.LayoutControlItem();
+            rightTopLayoutPanelitem = new DevExpress.XtraLayout.LayoutControlGroup();
             positionComboBoxitem = new DevExpress.XtraLayout.LayoutControlItem();
             detailsLabelitem = new DevExpress.XtraLayout.LayoutControlItem();
             previewPanel.SuspendLayout();
@@ -59,16 +59,16 @@
             ((System.ComponentModel.ISupportInitialize)BaseNodeInsertFormlayoutControl1ConvertedLayout).BeginInit();
             BaseNodeInsertFormlayoutControl1ConvertedLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)previewPanelitem).BeginInit();
             ((System.ComponentModel.ISupportInitialize)leftLayoutPanelitem).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)rightTopLayoutPanelitem).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)previewGriditem).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)buttonsPanelitem).BeginInit();
             ((System.ComponentModel.ISupportInitialize)searchTextBoxitem).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nodesListBoxitem).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)productKindFilterComboBoxitem).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nodeTypeFilterComboBoxitem).BeginInit();
             ((System.ComponentModel.ISupportInitialize)productCategoryFilterComboBoxitem).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nodeGroupFilterComboBoxitem).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)previewGriditem).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)buttonsPanelitem).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)previewPanelitem).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)rightTopLayoutPanelitem).BeginInit();
             ((System.ComponentModel.ISupportInitialize)positionComboBoxitem).BeginInit();
             ((System.ComponentModel.ISupportInitialize)detailsLabelitem).BeginInit();
             SuspendLayout();
@@ -139,16 +139,16 @@
             searchTextBox.TabIndex = 0;
             searchTextBox.TextChanged += SearchTextBox_TextChanged;
             // 
-            // productKindFilterComboBox
+            // nodeTypeFilterComboBox
             // 
-            productKindFilterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            productKindFilterComboBox.FormattingEnabled = true;
-            productKindFilterComboBox.Location = new System.Drawing.Point(12, 68);
-            productKindFilterComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            productKindFilterComboBox.Name = "productKindFilterComboBox";
-            productKindFilterComboBox.Size = new System.Drawing.Size(118, 23);
-            productKindFilterComboBox.TabIndex = 2;
-            productKindFilterComboBox.SelectedIndexChanged += FilterComboBox_SelectedIndexChanged;
+            nodeTypeFilterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            nodeTypeFilterComboBox.FormattingEnabled = true;
+            nodeTypeFilterComboBox.Location = new System.Drawing.Point(12, 68);
+            nodeTypeFilterComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            nodeTypeFilterComboBox.Name = "nodeTypeFilterComboBox";
+            nodeTypeFilterComboBox.Size = new System.Drawing.Size(118, 23);
+            nodeTypeFilterComboBox.TabIndex = 2;
+            nodeTypeFilterComboBox.SelectedIndexChanged += FilterComboBox_SelectedIndexChanged;
             // 
             // productCategoryFilterComboBox
             // 
@@ -182,7 +182,7 @@
             nodesListBox.Margin = new System.Windows.Forms.Padding(0, 6, 10, 0);
             nodesListBox.Name = "nodesListBox";
             nodesListBox.ScrollAlwaysVisible = true;
-            nodesListBox.Size = new System.Drawing.Size(430, 374);
+            nodesListBox.Size = new System.Drawing.Size(430, 364);
             nodesListBox.TabIndex = 5;
             nodesListBox.SelectedIndexChanged += NodesListBox_SelectedIndexChanged;
             // 
@@ -274,7 +274,7 @@
             // 
             BaseNodeInsertFormlayoutControl1ConvertedLayout.Controls.Add(previewPanel);
             BaseNodeInsertFormlayoutControl1ConvertedLayout.Controls.Add(searchTextBox);
-            BaseNodeInsertFormlayoutControl1ConvertedLayout.Controls.Add(productKindFilterComboBox);
+            BaseNodeInsertFormlayoutControl1ConvertedLayout.Controls.Add(nodeTypeFilterComboBox);
             BaseNodeInsertFormlayoutControl1ConvertedLayout.Controls.Add(productCategoryFilterComboBox);
             BaseNodeInsertFormlayoutControl1ConvertedLayout.Controls.Add(nodeGroupFilterComboBox);
             BaseNodeInsertFormlayoutControl1ConvertedLayout.Controls.Add(nodesListBox);
@@ -299,55 +299,16 @@
             layoutControlGroup1.Size = new System.Drawing.Size(1318, 495);
             layoutControlGroup1.TextVisible = false;
             // 
-            // previewPanelitem
-            // 
-            previewPanelitem.Control = previewPanel;
-            previewPanelitem.Location = new System.Drawing.Point(980, 0);
-            previewPanelitem.Name = "previewPanelitem";
-            previewPanelitem.OptionsTableLayoutItem.ColumnIndex = 2;
-            previewPanelitem.Size = new System.Drawing.Size(318, 436);
-            previewPanelitem.TextVisible = false;
-            // 
             // leftLayoutPanelitem
             // 
             leftLayoutPanelitem.CustomizationFormText = " поиск";
             leftLayoutPanelitem.GroupBordersVisible = false;
-            leftLayoutPanelitem.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { searchTextBoxitem, nodesListBoxitem, productKindFilterComboBoxitem, productCategoryFilterComboBoxitem, nodeGroupFilterComboBoxitem });
+            leftLayoutPanelitem.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { searchTextBoxitem, nodesListBoxitem, nodeTypeFilterComboBoxitem, productCategoryFilterComboBoxitem, nodeGroupFilterComboBoxitem });
             leftLayoutPanelitem.Location = new System.Drawing.Point(0, 0);
             leftLayoutPanelitem.Name = "leftLayoutPanelitem";
             leftLayoutPanelitem.OptionsTableLayoutItem.RowSpan = 3;
             leftLayoutPanelitem.Size = new System.Drawing.Size(434, 475);
             leftLayoutPanelitem.Text = " ";
-            // 
-            // rightTopLayoutPanelitem
-            // 
-            rightTopLayoutPanelitem.GroupBordersVisible = false;
-            rightTopLayoutPanelitem.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { positionComboBoxitem, detailsLabelitem });
-            rightTopLayoutPanelitem.Location = new System.Drawing.Point(434, 0);
-            rightTopLayoutPanelitem.Name = "rightTopLayoutPanelitem";
-            rightTopLayoutPanelitem.OptionsTableLayoutItem.ColumnIndex = 1;
-            rightTopLayoutPanelitem.Size = new System.Drawing.Size(546, 107);
-            rightTopLayoutPanelitem.Text = " ";
-            // 
-            // previewGriditem
-            // 
-            previewGriditem.Control = previewGrid;
-            previewGriditem.Location = new System.Drawing.Point(434, 107);
-            previewGriditem.Name = "previewGriditem";
-            previewGriditem.OptionsTableLayoutItem.ColumnIndex = 1;
-            previewGriditem.OptionsTableLayoutItem.RowIndex = 1;
-            previewGriditem.Size = new System.Drawing.Size(546, 329);
-            previewGriditem.TextVisible = false;
-            // 
-            // buttonsPanelitem
-            // 
-            buttonsPanelitem.Control = buttonsPanel;
-            buttonsPanelitem.Location = new System.Drawing.Point(434, 436);
-            buttonsPanelitem.Name = "buttonsPanelitem";
-            buttonsPanelitem.OptionsTableLayoutItem.ColumnIndex = 1;
-            buttonsPanelitem.OptionsTableLayoutItem.RowIndex = 2;
-            buttonsPanelitem.Size = new System.Drawing.Size(864, 39);
-            buttonsPanelitem.TextVisible = false;
             // 
             // searchTextBoxitem
             // 
@@ -373,13 +334,13 @@
             // 
             // productKindFilterComboBoxitem
             // 
-            productKindFilterComboBoxitem.Control = productKindFilterComboBox;
-            productKindFilterComboBoxitem.Location = new System.Drawing.Point(0, 40);
-            productKindFilterComboBoxitem.Name = "productKindFilterComboBoxitem";
-            productKindFilterComboBoxitem.Size = new System.Drawing.Size(122, 41);
-            productKindFilterComboBoxitem.Text = "Тип узла";
-            productKindFilterComboBoxitem.TextLocation = DevExpress.Utils.Locations.Top;
-            productKindFilterComboBoxitem.TextSize = new System.Drawing.Size(102, 13);
+            nodeTypeFilterComboBoxitem.Control = nodeTypeFilterComboBox;
+            nodeTypeFilterComboBoxitem.Location = new System.Drawing.Point(0, 40);
+            nodeTypeFilterComboBoxitem.Name = "productKindFilterComboBoxitem";
+            nodeTypeFilterComboBoxitem.Size = new System.Drawing.Size(122, 41);
+            nodeTypeFilterComboBoxitem.Text = "Тип узла";
+            nodeTypeFilterComboBoxitem.TextLocation = DevExpress.Utils.Locations.Top;
+            nodeTypeFilterComboBoxitem.TextSize = new System.Drawing.Size(102, 13);
             // 
             // productCategoryFilterComboBoxitem
             // 
@@ -402,6 +363,45 @@
             nodeGroupFilterComboBoxitem.Text = "Группа узла";
             nodeGroupFilterComboBoxitem.TextLocation = DevExpress.Utils.Locations.Top;
             nodeGroupFilterComboBoxitem.TextSize = new System.Drawing.Size(102, 13);
+            // 
+            // previewGriditem
+            // 
+            previewGriditem.Control = previewGrid;
+            previewGriditem.Location = new System.Drawing.Point(434, 107);
+            previewGriditem.Name = "previewGriditem";
+            previewGriditem.OptionsTableLayoutItem.ColumnIndex = 1;
+            previewGriditem.OptionsTableLayoutItem.RowIndex = 1;
+            previewGriditem.Size = new System.Drawing.Size(546, 329);
+            previewGriditem.TextVisible = false;
+            // 
+            // buttonsPanelitem
+            // 
+            buttonsPanelitem.Control = buttonsPanel;
+            buttonsPanelitem.Location = new System.Drawing.Point(434, 436);
+            buttonsPanelitem.Name = "buttonsPanelitem";
+            buttonsPanelitem.OptionsTableLayoutItem.ColumnIndex = 1;
+            buttonsPanelitem.OptionsTableLayoutItem.RowIndex = 2;
+            buttonsPanelitem.Size = new System.Drawing.Size(864, 39);
+            buttonsPanelitem.TextVisible = false;
+            // 
+            // previewPanelitem
+            // 
+            previewPanelitem.Control = previewPanel;
+            previewPanelitem.Location = new System.Drawing.Point(980, 0);
+            previewPanelitem.Name = "previewPanelitem";
+            previewPanelitem.OptionsTableLayoutItem.ColumnIndex = 2;
+            previewPanelitem.Size = new System.Drawing.Size(318, 436);
+            previewPanelitem.TextVisible = false;
+            // 
+            // rightTopLayoutPanelitem
+            // 
+            rightTopLayoutPanelitem.GroupBordersVisible = false;
+            rightTopLayoutPanelitem.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { positionComboBoxitem, detailsLabelitem });
+            rightTopLayoutPanelitem.Location = new System.Drawing.Point(434, 0);
+            rightTopLayoutPanelitem.Name = "rightTopLayoutPanelitem";
+            rightTopLayoutPanelitem.OptionsTableLayoutItem.ColumnIndex = 1;
+            rightTopLayoutPanelitem.Size = new System.Drawing.Size(546, 107);
+            rightTopLayoutPanelitem.Text = " ";
             // 
             // positionComboBoxitem
             // 
@@ -444,16 +444,16 @@
             ((System.ComponentModel.ISupportInitialize)BaseNodeInsertFormlayoutControl1ConvertedLayout).EndInit();
             BaseNodeInsertFormlayoutControl1ConvertedLayout.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)previewPanelitem).EndInit();
             ((System.ComponentModel.ISupportInitialize)leftLayoutPanelitem).EndInit();
-            ((System.ComponentModel.ISupportInitialize)rightTopLayoutPanelitem).EndInit();
-            ((System.ComponentModel.ISupportInitialize)previewGriditem).EndInit();
-            ((System.ComponentModel.ISupportInitialize)buttonsPanelitem).EndInit();
             ((System.ComponentModel.ISupportInitialize)searchTextBoxitem).EndInit();
             ((System.ComponentModel.ISupportInitialize)nodesListBoxitem).EndInit();
-            ((System.ComponentModel.ISupportInitialize)productKindFilterComboBoxitem).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nodeTypeFilterComboBoxitem).EndInit();
             ((System.ComponentModel.ISupportInitialize)productCategoryFilterComboBoxitem).EndInit();
             ((System.ComponentModel.ISupportInitialize)nodeGroupFilterComboBoxitem).EndInit();
+            ((System.ComponentModel.ISupportInitialize)previewGriditem).EndInit();
+            ((System.ComponentModel.ISupportInitialize)buttonsPanelitem).EndInit();
+            ((System.ComponentModel.ISupportInitialize)previewPanelitem).EndInit();
+            ((System.ComponentModel.ISupportInitialize)rightTopLayoutPanelitem).EndInit();
             ((System.ComponentModel.ISupportInitialize)positionComboBoxitem).EndInit();
             ((System.ComponentModel.ISupportInitialize)detailsLabelitem).EndInit();
             ResumeLayout(false);
@@ -461,7 +461,7 @@
 
         #endregion
         private System.Windows.Forms.TextBox searchTextBox;
-        private System.Windows.Forms.ComboBox productKindFilterComboBox;
+        private System.Windows.Forms.ComboBox nodeTypeFilterComboBox;
         private System.Windows.Forms.ComboBox productCategoryFilterComboBox;
         private System.Windows.Forms.ComboBox nodeGroupFilterComboBox;
         private System.Windows.Forms.ListBox nodesListBox;
@@ -490,7 +490,7 @@
         private DevExpress.XtraLayout.LayoutControlGroup rightTopLayoutPanelitem;
         private DevExpress.XtraLayout.LayoutControlItem positionComboBoxitem;
         private DevExpress.XtraLayout.LayoutControlItem detailsLabelitem;
-        private DevExpress.XtraLayout.LayoutControlItem productKindFilterComboBoxitem;
+        private DevExpress.XtraLayout.LayoutControlItem nodeTypeFilterComboBoxitem;
         private DevExpress.XtraLayout.LayoutControlItem previewGriditem;
         private DevExpress.XtraLayout.LayoutControlItem buttonsPanelitem;
     }

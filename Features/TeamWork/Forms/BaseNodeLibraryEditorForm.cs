@@ -276,7 +276,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             return StringNormalizer.TrimOrEmpty(node?.NodeType) switch
             {
                 { Length: > 0 } value => value,
-                _ => StringNormalizer.TrimOrEmpty(node?.ProductKind)
+                _ => StringNormalizer.TrimOrEmpty(node?.NodeType)
             };
         }
 

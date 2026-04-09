@@ -34,9 +34,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             editNodesButton.Enabled = _libraryService != null;
             searchTextBox.PlaceholderText = "Поиск по названию";
             searchTextBoxitem.Text = "Поиск по названию";
-            productKindFilterComboBoxitem.Text = "Тип узла (NodeType)";
-            productCategoryFilterComboBoxitem.Text = "Категория изделия (ProductCategory)";
-            nodeGroupFilterComboBoxitem.Text = "Группа узла (NodeGroup)";
+            nodeTypeFilterComboBoxitem.Text = "Тип узла";
+            productCategoryFilterComboBoxitem.Text = "Категория изделия";
+            nodeGroupFilterComboBoxitem.Text = "Группа узла";
 
             foreach (var point in insertionPoints ?? Array.Empty<BaseNodeInsertionPoint>())
             {
@@ -162,7 +162,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             string filter = StringNormalizer.TrimOrEmpty(searchTextBox?.Text);
             PopulateFilterValues();
 
-            string nodeType = StringNormalizer.TrimOrEmpty(productKindFilterComboBox.SelectedItem?.ToString());
+            string nodeType = StringNormalizer.TrimOrEmpty(nodeTypeFilterComboBox.SelectedItem?.ToString());
             string productCategory = StringNormalizer.TrimOrEmpty(productCategoryFilterComboBox.SelectedItem?.ToString());
             string nodeGroup = StringNormalizer.TrimOrEmpty(nodeGroupFilterComboBox.SelectedItem?.ToString());
 
@@ -211,7 +211,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             _updatingFilters = true;
             try
             {
-                PopulateFilterComboBox(productKindFilterComboBox, _nodes.Where(node => node != null).Select(GetNodeTypeValue));
+                PopulateFilterComboBox(nodeTypeFilterComboBox, _nodes.Where(node => node != null).Select(GetNodeTypeValue));
                 PopulateFilterComboBox(productCategoryFilterComboBox, _nodes.Where(node => node != null).Select(node => node.ProductCategory));
                 PopulateFilterComboBox(nodeGroupFilterComboBox, _nodes.Where(node => node != null).Select(node => node.NodeGroup));
             }
@@ -283,7 +283,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             return StringNormalizer.TrimOrEmpty(node?.NodeType) switch
             {
                 { Length: > 0 } value => value,
-                _ => StringNormalizer.TrimOrEmpty(node?.ProductKind)
+                _ => StringNormalizer.TrimOrEmpty(node?.NodeType)
             };
         }
 
