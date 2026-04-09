@@ -25,11 +25,12 @@ namespace SewingProduction.Features.TeamWork.Services
 
         public async Task<IReadOnlyList<BaseNodeDefinition>> GetAllAsync()
         {
-            const string query = @"
+            const string queryTemplate = @"
 SELECT
     n.BaseNodeId,
     n.NodeCode,
     n.SourceAnnId,
+{0}
     n.SourceRtCode,
     n.SourceImagePath,
     n.NodeName,
@@ -74,6 +75,11 @@ ORDER BY n.NodeName, bo.SortOrder, bo.BaseNodeOperationId;";
             try
             {
                 using var connection = _dbHelper.GetConnection();
+                bool hasSourceArticul = await HasBaseNodeColumnAsync(connection, null, "SourceArticul");
+                string sourceArticulSelect = hasSourceArticul
+                    ? "    n.SourceArticul,"
+                    : "    CAST(NULL AS NVARCHAR(255)) AS SourceArticul,";
+                string query = string.Format(queryTemplate, sourceArticulSelect);
                 var rows = (await connection.QueryAsync<BaseNodeRow>(query)).ToList();
 
                 return rows
@@ -141,6 +147,7 @@ ORDER BY caption;";
             try
             {
                 var existingNode = await FindExistingNodeAsync(connection, transaction, node);
+                bool hasSourceArticul = await HasBaseNodeColumnAsync(connection, transaction, "SourceArticul");
                 int baseNodeId;
                 string nodeCode;
                 var auditUser = BuildAuditUser();
@@ -148,11 +155,12 @@ ORDER BY caption;";
                 if (existingNode == null)
                 {
                     nodeCode = await NormalizeNodeCodeAsync(connection, transaction, node.NodeCode, node.Name);
-                    const string insertNodeSql = @"
+                    string insertNodeSql = $@"
 INSERT INTO dbo.BaseNode
 (
     NodeCode,
     SourceAnnId,
+    {(hasSourceArticul ? "SourceArticul," : string.Empty)}
     SourceRtCode,
     SourceImagePath,
     NodeName,
@@ -171,6 +179,7 @@ VALUES
 (
     @NodeCode,
     @SourceAnnId,
+    {(hasSourceArticul ? "NULLIF(@SourceArticul, N'')," : string.Empty)}
     NULLIF(@SourceRtCode, N''),
     NULLIF(@SourceImagePath, N''),
     @NodeName,
@@ -191,6 +200,7 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
                     {
                         NodeCode = nodeCode,
                         SourceAnnId = node.SourceAnnId,
+                        SourceArticul = NullIfWhiteSpace(node.SourceArticul),
                         SourceRtCode = NullIfWhiteSpace(node.SourceRtCode),
                         SourceImagePath = NullIfWhiteSpace(node.SourceImagePath),
                         NodeName = StringNormalizer.TrimOrEmpty(node.Name),
@@ -207,11 +217,12 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
                     baseNodeId = existingNode.BaseNodeId;
                     nodeCode = await NormalizeNodeCodeAsync(connection, transaction, node.NodeCode, node.Name);
 
-                    const string updateNodeSql = @"
+                    string updateNodeSql = $@"
 UPDATE dbo.BaseNode
 SET NodeName = @NodeName,
     NodeCode = @NodeCode,
     SourceAnnId = @SourceAnnId,
+    {(hasSourceArticul ? "SourceArticul = NULLIF(@SourceArticul, N'')," : string.Empty)}
     SourceRtCode = NULLIF(@SourceRtCode, N''),
     SourceImagePath = NULLIF(@SourceImagePath, N''),
     NodeGroup = NULLIF(@NodeGroup, N''),
@@ -228,6 +239,7 @@ WHERE BaseNodeId = @BaseNodeId;";
                         BaseNodeId = baseNodeId,
                         NodeCode = nodeCode,
                         SourceAnnId = node.SourceAnnId,
+                        SourceArticul = NullIfWhiteSpace(node.SourceArticul),
                         SourceRtCode = NullIfWhiteSpace(node.SourceRtCode),
                         SourceImagePath = NullIfWhiteSpace(node.SourceImagePath),
                         NodeName = StringNormalizer.TrimOrEmpty(node.Name),
@@ -522,6 +534,7 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
                 Id = first.BaseNodeId.ToString(),
                 NodeCode = first.NodeCode ?? string.Empty,
                 SourceAnnId = first.SourceAnnId,
+                SourceArticul = first.SourceArticul ?? string.Empty,
                 SourceRtCode = first.SourceRtCode ?? string.Empty,
                 SourceImagePath = first.SourceImagePath ?? string.Empty,
                 Name = first.NodeName ?? string.Empty,
@@ -591,6 +604,22 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
             return StringNormalizer.TrimToNull(value);
         }
 
+        private static async Task<bool> HasBaseNodeColumnAsync(SqlConnection connection, SqlTransaction transaction, string columnName)
+        {
+            const string query = @"
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM sys.columns
+        WHERE object_id = OBJECT_ID('dbo.BaseNode')
+          AND name = @ColumnName
+    ) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END;";
+
+            return await connection.ExecuteScalarAsync<bool>(query, new { ColumnName = columnName }, transaction);
+        }
+
         private sealed class BaseNodeHeaderRow
         {
             public int BaseNodeId { get; set; }
@@ -603,6 +632,7 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
             public int BaseNodeId { get; set; }
             public string NodeCode { get; set; }
             public int? SourceAnnId { get; set; }
+            public string SourceArticul { get; set; }
             public string SourceRtCode { get; set; }
             public string SourceImagePath { get; set; }
             public string NodeName { get; set; }

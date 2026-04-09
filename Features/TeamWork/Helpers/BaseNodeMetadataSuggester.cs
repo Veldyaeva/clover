@@ -42,6 +42,7 @@ namespace SewingProduction.Features.TeamWork.Helpers
             return new BaseNodeSaveDefaults
             {
                 SourceAnnId = annData?.AnnID,
+                SourceArticul = StringNormalizer.TrimOrEmpty(annData?.Articul),
                 SourceRtCode = StringNormalizer.TrimOrEmpty(annData?.Kod),
                 ProductCategory = ResolveAllowedOption(
                     DetectValue(articleContext, ProductCategoryRules),

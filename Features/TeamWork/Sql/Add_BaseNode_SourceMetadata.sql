@@ -5,6 +5,13 @@ BEGIN
 END
 GO
 
+IF COL_LENGTH('dbo.BaseNode', 'SourceArticul') IS NULL
+BEGIN
+    ALTER TABLE dbo.BaseNode
+        ADD SourceArticul NVARCHAR(255) NULL;
+END
+GO
+
 IF COL_LENGTH('dbo.BaseNode', 'SourceRtCode') IS NULL
 BEGIN
     ALTER TABLE dbo.BaseNode

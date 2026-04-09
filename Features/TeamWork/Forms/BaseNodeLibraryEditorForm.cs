@@ -119,7 +119,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 nameTextBox.Text = string.Empty;
                 descriptionTextBox.Text = string.Empty;
                 nodeGroupComboBox.SelectedIndex = nodeGroupComboBox.Items.Count > 0 ? 0 : -1;
-                productKindComboBox.SelectedItem = "Универсальный";
+                productKindComboBox.SelectedItem = "Производственный";
                 productCategoryComboBox.SelectedItem = "Универсально";
                 detailsLabel.Text = "Выберите базовый узел для редактирования.";
                 previewGrid.DataSource = null;
@@ -136,7 +136,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             nameTextBox.Text = _workingNode.Name ?? string.Empty;
             descriptionTextBox.Text = _workingNode.Description ?? string.Empty;
             SelectComboValue(nodeGroupComboBox, _workingNode.NodeGroup, string.Empty);
-            SelectComboValue(productKindComboBox, _workingNode.ProductKind, "Универсальный");
+            SelectComboValue(productKindComboBox, GetNodeTypeValue(_workingNode), "Производственный");
             SelectComboValue(productCategoryComboBox, _workingNode.ProductCategory, "Универсально");
             BaseNodePreviewHelper.Update(_previewPanel, _workingNode);
             UpdateRtCodeCopyState(_workingNode.SourceRtCode, _workingNode.NodeCode);
@@ -183,13 +183,18 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void UpdateRtCodeCopyState(string sourceRtCode, string nodeCode)
         {
+            string sourceArticul = StringNormalizer.TrimOrEmpty(_workingNode?.SourceArticul);
             string codeToCopy = StringNormalizer.TrimOrEmpty(sourceRtCode);
             if (string.IsNullOrWhiteSpace(codeToCopy))
                 codeToCopy = StringNormalizer.TrimOrEmpty(nodeCode);
 
             string tooltip = string.IsNullOrWhiteSpace(codeToCopy)
-                ? "RT-код не задан"
-                : $"RT-код: {codeToCopy}. Кликните, чтобы скопировать";
+                ? (string.IsNullOrWhiteSpace(sourceArticul)
+                    ? "Источник не задан"
+                    : $"Артикул: {sourceArticul}")
+                : string.IsNullOrWhiteSpace(sourceArticul)
+                    ? $"RT-код: {codeToCopy}. Кликните, чтобы скопировать"
+                    : $"Артикул: {sourceArticul}. RT-код: {codeToCopy}. Кликните, чтобы скопировать RT-код";
 
             previewToolTip.SetToolTip(previewSourceLabel, tooltip);
             previewToolTip.SetToolTip(nodeCodeValueLabel, tooltip);
@@ -251,6 +256,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 node.DisplayName,
                 node.Name,
                 node.NodeCode,
+                node.SourceArticul,
                 node.SourceRtCode,
                 node.NodeGroup,
                 node.NodeType,
@@ -263,6 +269,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                 .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             return tokens.All(token => haystack.Contains(token));
+        }
+
+        private static string GetNodeTypeValue(BaseNodeDefinition node)
+        {
+            return StringNormalizer.TrimOrEmpty(node?.NodeType) switch
+            {
+                { Length: > 0 } value => value,
+                _ => StringNormalizer.TrimOrEmpty(node?.ProductKind)
+            };
         }
 
         private static void SelectComboValue(ComboBox comboBox, string value, string fallback)
@@ -309,7 +324,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             updatedNode.Name = StringNormalizer.TrimOrEmpty(nameTextBox.Text);
             updatedNode.Description = StringNormalizer.TrimOrEmpty(descriptionTextBox.Text);
             updatedNode.NodeGroup = StringNormalizer.TrimOrEmpty(nodeGroupComboBox.SelectedItem?.ToString());
-            updatedNode.ProductKind = StringNormalizer.TrimOrEmpty(productKindComboBox.SelectedItem?.ToString());
+            updatedNode.NodeType = StringNormalizer.TrimOrEmpty(productKindComboBox.SelectedItem?.ToString());
             updatedNode.ProductCategory = StringNormalizer.TrimOrEmpty(productCategoryComboBox.SelectedItem?.ToString());
 
             ToggleBusyState(true);
@@ -505,6 +520,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 ProductKind = source.ProductKind,
                 ProductCategory = source.ProductCategory,
                 SourceAnnId = source.SourceAnnId,
+                SourceArticul = source.SourceArticul,
                 SourceRtCode = source.SourceRtCode,
                 SourceImagePath = source.SourceImagePath,
                 Description = source.Description,

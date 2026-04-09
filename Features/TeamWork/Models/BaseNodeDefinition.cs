@@ -9,6 +9,7 @@ namespace SewingProduction.Features.TeamWork.Models
         public string Id { get; set; } = Guid.NewGuid().ToString("N");
         public string NodeCode { get; set; } = string.Empty;
         public int? SourceAnnId { get; set; }
+        public string SourceArticul { get; set; } = string.Empty;
         public string SourceRtCode { get; set; } = string.Empty;
         public string SourceImagePath { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;

@@ -67,9 +67,14 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void UpdateRtCodeCopyState(string sourceRtCode)
         {
+            string sourceArticul = StringNormalizer.TrimOrEmpty(_defaults?.SourceArticul);
             string tooltip = string.IsNullOrWhiteSpace(sourceRtCode)
-                ? "RT-код не задан"
-                : $"RT-код: {sourceRtCode}. Кликните, чтобы скопировать";
+                ? (string.IsNullOrWhiteSpace(sourceArticul)
+                    ? "Источник не задан"
+                    : $"Артикул: {sourceArticul}")
+                : string.IsNullOrWhiteSpace(sourceArticul)
+                    ? $"RT-код: {sourceRtCode}. Кликните, чтобы скопировать"
+                    : $"Артикул: {sourceArticul}. RT-код: {sourceRtCode}. Кликните, чтобы скопировать RT-код";
             previewToolTip.SetToolTip(previewSourceLabel, tooltip);
         }
 
@@ -184,6 +189,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ResultNode = BaseNodeMapper.CreateDefinition(nameTextBox.Text, descriptionTextBox.Text, _operations);
             ResultNode.NodeCode = StringNormalizer.TrimOrEmpty(_defaults?.SourceRtCode);
             ResultNode.SourceAnnId = _defaults?.SourceAnnId;
+            ResultNode.SourceArticul = StringNormalizer.TrimOrEmpty(_defaults?.SourceArticul);
             ResultNode.SourceRtCode = StringNormalizer.TrimOrEmpty(_defaults?.SourceRtCode);
             ResultNode.SourceImagePath = StringNormalizer.TrimOrEmpty(_defaults?.SourceImagePath);
             ResultNode.NodeGroup = nodeGroupComboBox.SelectedItem?.ToString() ?? string.Empty;

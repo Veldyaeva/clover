@@ -4,6 +4,8 @@ namespace SewingProduction.Features.TeamWork.Models
     {
         public int? SourceAnnId { get; set; }
 
+        public string SourceArticul { get; set; }
+
         public string SourceRtCode { get; set; }
 
         public string SourceImagePath { get; set; }

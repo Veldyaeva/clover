@@ -34,7 +34,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             editNodesButton.Enabled = _libraryService != null;
             searchTextBox.PlaceholderText = "Поиск по названию";
             searchTextBoxitem.Text = "Поиск по названию";
-            productKindFilterComboBoxitem.Text = "Класс изделия (ProductKind)";
+            productKindFilterComboBoxitem.Text = "Тип узла (NodeType)";
             productCategoryFilterComboBoxitem.Text = "Категория изделия (ProductCategory)";
             nodeGroupFilterComboBoxitem.Text = "Группа узла (NodeGroup)";
 
@@ -100,8 +100,9 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             int chapters = node.Operations.Select(x => x.SourceN).Distinct().Count();
             string description = string.IsNullOrWhiteSpace(node.Description) ? "Без описания" : StringNormalizer.TrimOrEmpty(node.Description);
+            string sourceArticul = string.IsNullOrWhiteSpace(node.SourceArticul) ? "-" : node.SourceArticul;
             string sourceCode = string.IsNullOrWhiteSpace(node.SourceRtCode) ? "-" : node.SourceRtCode;
-            detailsLabel.Text = $"РТ: {sourceCode}. Операций: {chapters}. Подопераций: {node.Operations.Count}. {description}";
+            detailsLabel.Text = $"Артикул: {sourceArticul}. РТ: {sourceCode}. Операций: {chapters}. Подопераций: {node.Operations.Count}. {description}";
         }
 
         private void NodesListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -145,9 +146,14 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void UpdateRtCodeCopyState(string sourceRtCode)
         {
+            string sourceArticul = StringNormalizer.TrimOrEmpty(SelectedNode?.SourceArticul);
             string tooltip = string.IsNullOrWhiteSpace(sourceRtCode)
-                ? "RT-код не задан"
-                : $"RT-код: {sourceRtCode}. Кликните, чтобы скопировать";
+                ? (string.IsNullOrWhiteSpace(sourceArticul)
+                    ? "Источник не задан"
+                    : $"Артикул: {sourceArticul}")
+                : string.IsNullOrWhiteSpace(sourceArticul)
+                    ? $"RT-код: {sourceRtCode}. Кликните, чтобы скопировать"
+                    : $"Артикул: {sourceArticul}. RT-код: {sourceRtCode}. Кликните, чтобы скопировать RT-код";
             previewToolTip.SetToolTip(previewSourceLabel, tooltip);
         }
 
@@ -156,12 +162,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             string filter = StringNormalizer.TrimOrEmpty(searchTextBox?.Text);
             PopulateFilterValues();
 
-            string productKind = StringNormalizer.TrimOrEmpty(productKindFilterComboBox.SelectedItem?.ToString());
+            string nodeType = StringNormalizer.TrimOrEmpty(productKindFilterComboBox.SelectedItem?.ToString());
             string productCategory = StringNormalizer.TrimOrEmpty(productCategoryFilterComboBox.SelectedItem?.ToString());
             string nodeGroup = StringNormalizer.TrimOrEmpty(nodeGroupFilterComboBox.SelectedItem?.ToString());
 
             var filtered = _nodes
-                .Where(node => MatchesNodeFilter(node, filter, productKind, productCategory, nodeGroup))
+                .Where(node => MatchesNodeFilter(node, filter, nodeType, productCategory, nodeGroup))
                 .OrderBy(node => node.DisplayName, StringComparer.CurrentCultureIgnoreCase)
                 .ToList();
 
@@ -205,7 +211,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             _updatingFilters = true;
             try
             {
-                PopulateFilterComboBox(productKindFilterComboBox, _nodes.Where(node => node != null).Select(node => node.ProductKind));
+                PopulateFilterComboBox(productKindFilterComboBox, _nodes.Where(node => node != null).Select(GetNodeTypeValue));
                 PopulateFilterComboBox(productCategoryFilterComboBox, _nodes.Where(node => node != null).Select(node => node.ProductCategory));
                 PopulateFilterComboBox(nodeGroupFilterComboBox, _nodes.Where(node => node != null).Select(node => node.NodeGroup));
             }
@@ -246,15 +252,15 @@ namespace SewingProduction.Features.TeamWork.Forms
         private static bool MatchesNodeFilter(
             BaseNodeDefinition node,
             string filter,
-            string productKind,
+            string nodeType,
             string productCategory,
             string nodeGroup)
         {
             if (node == null)
                 return false;
 
-            if (!string.IsNullOrWhiteSpace(productKind) &&
-                !string.Equals(StringNormalizer.TrimOrEmpty(node.ProductKind), productKind, StringComparison.CurrentCultureIgnoreCase))
+            if (!string.IsNullOrWhiteSpace(nodeType) &&
+                !string.Equals(GetNodeTypeValue(node), nodeType, StringComparison.CurrentCultureIgnoreCase))
                 return false;
 
             if (!string.IsNullOrWhiteSpace(productCategory) &&
@@ -270,6 +276,15 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             return StringNormalizer.TrimOrEmpty(node.Name)
                 .Contains(filter, StringComparison.CurrentCultureIgnoreCase);
+        }
+
+        private static string GetNodeTypeValue(BaseNodeDefinition node)
+        {
+            return StringNormalizer.TrimOrEmpty(node?.NodeType) switch
+            {
+                { Length: > 0 } value => value,
+                _ => StringNormalizer.TrimOrEmpty(node?.ProductKind)
+            };
         }
 
         private async void EditNodesButton_Click(object sender, EventArgs e)
