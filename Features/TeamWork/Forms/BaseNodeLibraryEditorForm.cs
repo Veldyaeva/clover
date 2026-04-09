@@ -29,7 +29,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             _preferredNodeId = preferredNodeId;
 
             InitializeComponent();
-            _previewPanel = BaseNodePreviewHelper.AttachToForm(this, "Источник базового узла");
+            _previewPanel = BaseNodePreviewHelper.Create(previewPanel, previewSourceLabel, previewImageStatusLabel, previewPictureBox);
             InitializeSelectors();
 
             nodesListBox.DisplayMember = nameof(BaseNodeDefinition.Name);
@@ -459,3 +459,4 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
     }
 }
+
