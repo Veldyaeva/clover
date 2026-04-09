@@ -31,6 +31,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             InitializeComponent();
             _previewPanel = BaseNodePreviewHelper.Create(previewPanel, previewSourceLabel, previewImageStatusLabel, previewPictureBox);
             editNodesButton.Enabled = _libraryService != null;
+            searchTextBox.PlaceholderText = "Поиск по названию";
+            searchTextBoxitem.Text = "Поиск по названию";
+            productKindFilterComboBoxitem.Text = "Класс изделия (ProductKind)";
+            productCategoryFilterComboBoxitem.Text = "Категория изделия (ProductCategory)";
+            nodeGroupFilterComboBoxitem.Text = "Группа узла (NodeGroup)";
 
             foreach (var point in insertionPoints ?? Array.Empty<BaseNodeInsertionPoint>())
             {
