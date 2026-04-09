@@ -15,9 +15,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly BaseNodeLibraryService _libraryService;
         private readonly List<BaseNodeDefinition> _nodes;
         private readonly BaseNodePreviewPanel _previewPanel;
-        private readonly ComboBox _productKindFilterComboBox = new ComboBox();
-        private readonly ComboBox _productCategoryFilterComboBox = new ComboBox();
-        private readonly ComboBox _nodeGroupFilterComboBox = new ComboBox();
 
         public BaseNodeDefinition SelectedNode => nodesListBox.SelectedItem as BaseNodeDefinition;
         public BaseNodeInsertionPoint SelectedInsertionPoint => positionComboBox.SelectedItem as BaseNodeInsertionPoint;
@@ -34,9 +31,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             InitializeComponent();
             _previewPanel = BaseNodePreviewHelper.Create(previewPanel, previewSourceLabel, previewImageStatusLabel, previewPictureBox);
             editNodesButton.Enabled = _libraryService != null;
-            searchLabel.Text = "Поиск по названию";
-            searchTextBox.PlaceholderText = "Поиск по названию";
-            InitializeFiltersUi();
 
             foreach (var point in insertionPoints ?? Array.Empty<BaseNodeInsertionPoint>())
             {
@@ -153,9 +147,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             string filter = StringNormalizer.TrimOrEmpty(searchTextBox?.Text);
             PopulateFilterValues();
 
-            string productKind = StringNormalizer.TrimOrEmpty(_productKindFilterComboBox.SelectedItem?.ToString());
-            string productCategory = StringNormalizer.TrimOrEmpty(_productCategoryFilterComboBox.SelectedItem?.ToString());
-            string nodeGroup = StringNormalizer.TrimOrEmpty(_nodeGroupFilterComboBox.SelectedItem?.ToString());
+            string productKind = StringNormalizer.TrimOrEmpty(productKindFilterComboBox.SelectedItem?.ToString());
+            string productCategory = StringNormalizer.TrimOrEmpty(productCategoryFilterComboBox.SelectedItem?.ToString());
+            string nodeGroup = StringNormalizer.TrimOrEmpty(nodeGroupFilterComboBox.SelectedItem?.ToString());
 
             var filtered = _nodes
                 .Where(node => MatchesNodeFilter(node, filter, productKind, productCategory, nodeGroup))
@@ -197,65 +191,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             nodesListBox.SelectedIndex = selectedIndex;
         }
 
-        private void InitializeFiltersUi()
-        {
-            ConfigureFilterComboBox(_productKindFilterComboBox);
-            ConfigureFilterComboBox(_productCategoryFilterComboBox);
-            ConfigureFilterComboBox(_nodeGroupFilterComboBox);
-
-            _productKindFilterComboBox.SelectedIndexChanged += FilterComboBox_SelectedIndexChanged;
-            _productCategoryFilterComboBox.SelectedIndexChanged += FilterComboBox_SelectedIndexChanged;
-            _nodeGroupFilterComboBox.SelectedIndexChanged += FilterComboBox_SelectedIndexChanged;
-
-            var filtersPanel = new TableLayoutPanel
-            {
-                Dock = DockStyle.Top,
-                AutoSize = true,
-                ColumnCount = 1,
-                Margin = new Padding(0, 6, 10, 0)
-            };
-            filtersPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            filtersPanel.RowStyles.Add(new RowStyle());
-            filtersPanel.RowStyles.Add(new RowStyle());
-            filtersPanel.RowStyles.Add(new RowStyle());
-            filtersPanel.RowStyles.Add(new RowStyle());
-            filtersPanel.RowStyles.Add(new RowStyle());
-            filtersPanel.RowStyles.Add(new RowStyle());
-
-            filtersPanel.Controls.Add(CreateFilterLabel("Класс изделия (ProductKind)"), 0, 0);
-            filtersPanel.Controls.Add(_productKindFilterComboBox, 0, 1);
-            filtersPanel.Controls.Add(CreateFilterLabel("Категория изделия (ProductCategory)"), 0, 2);
-            filtersPanel.Controls.Add(_productCategoryFilterComboBox, 0, 3);
-            filtersPanel.Controls.Add(CreateFilterLabel("Группа узла (NodeGroup)"), 0, 4);
-            filtersPanel.Controls.Add(_nodeGroupFilterComboBox, 0, 5);
-
-            leftLayoutPanel.RowCount += 1;
-            leftLayoutPanel.RowStyles.Insert(3, new RowStyle());
-            leftLayoutPanel.Controls.Add(filtersPanel, 0, 3);
-            leftLayoutPanel.SetRow(nodesListBox, 4);
-        }
-
         private void PopulateFilterValues()
         {
-            PopulateFilterComboBox(_productKindFilterComboBox, _nodes.Select(node => node.ProductKind));
-            PopulateFilterComboBox(_productCategoryFilterComboBox, _nodes.Select(node => node.ProductCategory));
-            PopulateFilterComboBox(_nodeGroupFilterComboBox, _nodes.Select(node => node.NodeGroup));
-        }
-
-        private static void ConfigureFilterComboBox(ComboBox comboBox)
-        {
-            comboBox.Dock = DockStyle.Top;
-            comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-        }
-
-        private static Label CreateFilterLabel(string text)
-        {
-            return new Label
-            {
-                AutoSize = true,
-                Dock = DockStyle.Fill,
-                Text = text
-            };
+            PopulateFilterComboBox(productKindFilterComboBox, _nodes.Select(node => node.ProductKind));
+            PopulateFilterComboBox(productCategoryFilterComboBox, _nodes.Select(node => node.ProductCategory));
+            PopulateFilterComboBox(nodeGroupFilterComboBox, _nodes.Select(node => node.NodeGroup));
         }
 
         private static void PopulateFilterComboBox(ComboBox comboBox, IEnumerable<string> values)

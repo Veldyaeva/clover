@@ -24,6 +24,13 @@
             nodesLabel = new System.Windows.Forms.Label();
             searchLabel = new System.Windows.Forms.Label();
             searchTextBox = new System.Windows.Forms.TextBox();
+            filtersPanel = new System.Windows.Forms.TableLayoutPanel();
+            productKindFilterLabel = new System.Windows.Forms.Label();
+            productKindFilterComboBox = new System.Windows.Forms.ComboBox();
+            productCategoryFilterLabel = new System.Windows.Forms.Label();
+            productCategoryFilterComboBox = new System.Windows.Forms.ComboBox();
+            nodeGroupFilterLabel = new System.Windows.Forms.Label();
+            nodeGroupFilterComboBox = new System.Windows.Forms.ComboBox();
             nodesListBox = new System.Windows.Forms.ListBox();
             rightTopLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             positionLabel = new System.Windows.Forms.Label();
@@ -42,6 +49,7 @@
             previewToolTip = new System.Windows.Forms.ToolTip(components);
             mainLayoutPanel.SuspendLayout();
             leftLayoutPanel.SuspendLayout();
+            filtersPanel.SuspendLayout();
             rightTopLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)previewGrid).BeginInit();
             buttonsPanel.SuspendLayout();
@@ -79,13 +87,15 @@
             leftLayoutPanel.Controls.Add(nodesLabel, 0, 0);
             leftLayoutPanel.Controls.Add(searchLabel, 0, 1);
             leftLayoutPanel.Controls.Add(searchTextBox, 0, 2);
-            leftLayoutPanel.Controls.Add(nodesListBox, 0, 3);
+            leftLayoutPanel.Controls.Add(filtersPanel, 0, 3);
+            leftLayoutPanel.Controls.Add(nodesListBox, 0, 4);
             leftLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             leftLayoutPanel.Location = new System.Drawing.Point(13, 11);
             leftLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             leftLayoutPanel.Name = "leftLayoutPanel";
-            leftLayoutPanel.RowCount = 4;
+            leftLayoutPanel.RowCount = 5;
             mainLayoutPanel.SetRowSpan(leftLayoutPanel, 3);
+            leftLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             leftLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             leftLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             leftLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -124,6 +134,97 @@
             searchTextBox.TabIndex = 2;
             searchTextBox.TextChanged += SearchTextBox_TextChanged;
             // 
+            // filtersPanel
+            // 
+            filtersPanel.AutoSize = true;
+            filtersPanel.ColumnCount = 1;
+            filtersPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            filtersPanel.Controls.Add(productKindFilterLabel, 0, 0);
+            filtersPanel.Controls.Add(productKindFilterComboBox, 0, 1);
+            filtersPanel.Controls.Add(productCategoryFilterLabel, 0, 2);
+            filtersPanel.Controls.Add(productCategoryFilterComboBox, 0, 3);
+            filtersPanel.Controls.Add(nodeGroupFilterLabel, 0, 4);
+            filtersPanel.Controls.Add(nodeGroupFilterComboBox, 0, 5);
+            filtersPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            filtersPanel.Location = new System.Drawing.Point(0, 65);
+            filtersPanel.Margin = new System.Windows.Forms.Padding(0, 6, 10, 0);
+            filtersPanel.Name = "filtersPanel";
+            filtersPanel.RowCount = 6;
+            filtersPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            filtersPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            filtersPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            filtersPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            filtersPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            filtersPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            filtersPanel.Size = new System.Drawing.Size(229, 105);
+            filtersPanel.TabIndex = 3;
+            // 
+            // productKindFilterLabel
+            // 
+            productKindFilterLabel.AutoSize = true;
+            productKindFilterLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            productKindFilterLabel.Location = new System.Drawing.Point(3, 0);
+            productKindFilterLabel.Name = "productKindFilterLabel";
+            productKindFilterLabel.Size = new System.Drawing.Size(223, 15);
+            productKindFilterLabel.TabIndex = 0;
+            productKindFilterLabel.Text = "Класс изделия";
+            // 
+            // productKindFilterComboBox
+            // 
+            productKindFilterComboBox.Dock = System.Windows.Forms.DockStyle.Top;
+            productKindFilterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            productKindFilterComboBox.FormattingEnabled = true;
+            productKindFilterComboBox.Location = new System.Drawing.Point(3, 17);
+            productKindFilterComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            productKindFilterComboBox.Name = "productKindFilterComboBox";
+            productKindFilterComboBox.Size = new System.Drawing.Size(223, 23);
+            productKindFilterComboBox.TabIndex = 1;
+            productKindFilterComboBox.SelectedIndexChanged += FilterComboBox_SelectedIndexChanged;
+            // 
+            // productCategoryFilterLabel
+            // 
+            productCategoryFilterLabel.AutoSize = true;
+            productCategoryFilterLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            productCategoryFilterLabel.Location = new System.Drawing.Point(3, 42);
+            productCategoryFilterLabel.Name = "productCategoryFilterLabel";
+            productCategoryFilterLabel.Size = new System.Drawing.Size(223, 15);
+            productCategoryFilterLabel.TabIndex = 2;
+            productCategoryFilterLabel.Text = "Категория изделия";
+            // 
+            // productCategoryFilterComboBox
+            // 
+            productCategoryFilterComboBox.Dock = System.Windows.Forms.DockStyle.Top;
+            productCategoryFilterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            productCategoryFilterComboBox.FormattingEnabled = true;
+            productCategoryFilterComboBox.Location = new System.Drawing.Point(3, 59);
+            productCategoryFilterComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            productCategoryFilterComboBox.Name = "productCategoryFilterComboBox";
+            productCategoryFilterComboBox.Size = new System.Drawing.Size(223, 23);
+            productCategoryFilterComboBox.TabIndex = 3;
+            productCategoryFilterComboBox.SelectedIndexChanged += FilterComboBox_SelectedIndexChanged;
+            // 
+            // nodeGroupFilterLabel
+            // 
+            nodeGroupFilterLabel.AutoSize = true;
+            nodeGroupFilterLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            nodeGroupFilterLabel.Location = new System.Drawing.Point(3, 84);
+            nodeGroupFilterLabel.Name = "nodeGroupFilterLabel";
+            nodeGroupFilterLabel.Size = new System.Drawing.Size(223, 15);
+            nodeGroupFilterLabel.TabIndex = 4;
+            nodeGroupFilterLabel.Text = "Группа узла";
+            // 
+            // nodeGroupFilterComboBox
+            // 
+            nodeGroupFilterComboBox.Dock = System.Windows.Forms.DockStyle.Top;
+            nodeGroupFilterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            nodeGroupFilterComboBox.FormattingEnabled = true;
+            nodeGroupFilterComboBox.Location = new System.Drawing.Point(3, 101);
+            nodeGroupFilterComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            nodeGroupFilterComboBox.Name = "nodeGroupFilterComboBox";
+            nodeGroupFilterComboBox.Size = new System.Drawing.Size(223, 23);
+            nodeGroupFilterComboBox.TabIndex = 5;
+            nodeGroupFilterComboBox.SelectedIndexChanged += FilterComboBox_SelectedIndexChanged;
+            // 
             // nodesListBox
             // 
             nodesListBox.DisplayMember = "DisplayName";
@@ -131,12 +232,12 @@
             nodesListBox.FormattingEnabled = true;
             nodesListBox.HorizontalScrollbar = true;
             nodesListBox.ItemHeight = 15;
-            nodesListBox.Location = new System.Drawing.Point(0, 65);
+            nodesListBox.Location = new System.Drawing.Point(0, 176);
             nodesListBox.Margin = new System.Windows.Forms.Padding(0, 6, 10, 0);
             nodesListBox.Name = "nodesListBox";
             nodesListBox.ScrollAlwaysVisible = true;
-            nodesListBox.Size = new System.Drawing.Size(229, 388);
-            nodesListBox.TabIndex = 3;
+            nodesListBox.Size = new System.Drawing.Size(229, 277);
+            nodesListBox.TabIndex = 4;
             nodesListBox.SelectedIndexChanged += NodesListBox_SelectedIndexChanged;
             // 
             // rightTopLayoutPanel
@@ -331,6 +432,8 @@
             mainLayoutPanel.PerformLayout();
             leftLayoutPanel.ResumeLayout(false);
             leftLayoutPanel.PerformLayout();
+            filtersPanel.ResumeLayout(false);
+            filtersPanel.PerformLayout();
             rightTopLayoutPanel.ResumeLayout(false);
             rightTopLayoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)previewGrid).EndInit();
@@ -348,6 +451,13 @@
         private System.Windows.Forms.Label nodesLabel;
         private System.Windows.Forms.Label searchLabel;
         private System.Windows.Forms.TextBox searchTextBox;
+        private System.Windows.Forms.TableLayoutPanel filtersPanel;
+        private System.Windows.Forms.Label productKindFilterLabel;
+        private System.Windows.Forms.ComboBox productKindFilterComboBox;
+        private System.Windows.Forms.Label productCategoryFilterLabel;
+        private System.Windows.Forms.ComboBox productCategoryFilterComboBox;
+        private System.Windows.Forms.Label nodeGroupFilterLabel;
+        private System.Windows.Forms.ComboBox nodeGroupFilterComboBox;
         private System.Windows.Forms.ListBox nodesListBox;
         private System.Windows.Forms.TableLayoutPanel rightTopLayoutPanel;
         private System.Windows.Forms.Label positionLabel;
