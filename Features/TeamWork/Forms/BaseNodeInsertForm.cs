@@ -15,6 +15,9 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly BaseNodeLibraryService _libraryService;
         private readonly List<BaseNodeDefinition> _nodes;
         private readonly BaseNodePreviewPanel _previewPanel;
+        private readonly ComboBox _productKindFilterComboBox = new ComboBox();
+        private readonly ComboBox _productCategoryFilterComboBox = new ComboBox();
+        private readonly ComboBox _nodeGroupFilterComboBox = new ComboBox();
 
         public BaseNodeDefinition SelectedNode => nodesListBox.SelectedItem as BaseNodeDefinition;
         public BaseNodeInsertionPoint SelectedInsertionPoint => positionComboBox.SelectedItem as BaseNodeInsertionPoint;
@@ -31,6 +34,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             InitializeComponent();
             _previewPanel = BaseNodePreviewHelper.Create(previewPanel, previewSourceLabel, previewImageStatusLabel, previewPictureBox);
             editNodesButton.Enabled = _libraryService != null;
+            searchLabel.Text = "Поиск по названию";
+            searchTextBox.PlaceholderText = "Поиск по названию";
+            InitializeFiltersUi();
 
             foreach (var point in insertionPoints ?? Array.Empty<BaseNodeInsertionPoint>())
             {
@@ -108,6 +114,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             ApplyNodeFilter(SelectedNode?.BaseNodeId);
         }
 
+        private void FilterComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ApplyNodeFilter(SelectedNode?.BaseNodeId);
+        }
+
         private void PreviewSourceLabel_Click(object sender, EventArgs e)
         {
             CopyRtCodeToClipboard();
@@ -140,8 +151,14 @@ namespace SewingProduction.Features.TeamWork.Forms
         private void ApplyNodeFilter(int? preferredNodeId)
         {
             string filter = StringNormalizer.TrimOrEmpty(searchTextBox?.Text);
+            PopulateFilterValues();
+
+            string productKind = StringNormalizer.TrimOrEmpty(_productKindFilterComboBox.SelectedItem?.ToString());
+            string productCategory = StringNormalizer.TrimOrEmpty(_productCategoryFilterComboBox.SelectedItem?.ToString());
+            string nodeGroup = StringNormalizer.TrimOrEmpty(_nodeGroupFilterComboBox.SelectedItem?.ToString());
+
             var filtered = _nodes
-                .Where(node => MatchesNodeFilter(node, filter))
+                .Where(node => MatchesNodeFilter(node, filter, productKind, productCategory, nodeGroup))
                 .OrderBy(node => node.DisplayName, StringComparer.CurrentCultureIgnoreCase)
                 .ToList();
 
@@ -180,30 +197,122 @@ namespace SewingProduction.Features.TeamWork.Forms
             nodesListBox.SelectedIndex = selectedIndex;
         }
 
-        private static bool MatchesNodeFilter(BaseNodeDefinition node, string filter)
+        private void InitializeFiltersUi()
+        {
+            ConfigureFilterComboBox(_productKindFilterComboBox);
+            ConfigureFilterComboBox(_productCategoryFilterComboBox);
+            ConfigureFilterComboBox(_nodeGroupFilterComboBox);
+
+            _productKindFilterComboBox.SelectedIndexChanged += FilterComboBox_SelectedIndexChanged;
+            _productCategoryFilterComboBox.SelectedIndexChanged += FilterComboBox_SelectedIndexChanged;
+            _nodeGroupFilterComboBox.SelectedIndexChanged += FilterComboBox_SelectedIndexChanged;
+
+            var filtersPanel = new TableLayoutPanel
+            {
+                Dock = DockStyle.Top,
+                AutoSize = true,
+                ColumnCount = 1,
+                Margin = new Padding(0, 6, 10, 0)
+            };
+            filtersPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            filtersPanel.RowStyles.Add(new RowStyle());
+            filtersPanel.RowStyles.Add(new RowStyle());
+            filtersPanel.RowStyles.Add(new RowStyle());
+            filtersPanel.RowStyles.Add(new RowStyle());
+            filtersPanel.RowStyles.Add(new RowStyle());
+            filtersPanel.RowStyles.Add(new RowStyle());
+
+            filtersPanel.Controls.Add(CreateFilterLabel("Класс изделия (ProductKind)"), 0, 0);
+            filtersPanel.Controls.Add(_productKindFilterComboBox, 0, 1);
+            filtersPanel.Controls.Add(CreateFilterLabel("Категория изделия (ProductCategory)"), 0, 2);
+            filtersPanel.Controls.Add(_productCategoryFilterComboBox, 0, 3);
+            filtersPanel.Controls.Add(CreateFilterLabel("Группа узла (NodeGroup)"), 0, 4);
+            filtersPanel.Controls.Add(_nodeGroupFilterComboBox, 0, 5);
+
+            leftLayoutPanel.RowCount += 1;
+            leftLayoutPanel.RowStyles.Insert(3, new RowStyle());
+            leftLayoutPanel.Controls.Add(filtersPanel, 0, 3);
+            leftLayoutPanel.SetRow(nodesListBox, 4);
+        }
+
+        private void PopulateFilterValues()
+        {
+            PopulateFilterComboBox(_productKindFilterComboBox, _nodes.Select(node => node.ProductKind));
+            PopulateFilterComboBox(_productCategoryFilterComboBox, _nodes.Select(node => node.ProductCategory));
+            PopulateFilterComboBox(_nodeGroupFilterComboBox, _nodes.Select(node => node.NodeGroup));
+        }
+
+        private static void ConfigureFilterComboBox(ComboBox comboBox)
+        {
+            comboBox.Dock = DockStyle.Top;
+            comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        }
+
+        private static Label CreateFilterLabel(string text)
+        {
+            return new Label
+            {
+                AutoSize = true,
+                Dock = DockStyle.Fill,
+                Text = text
+            };
+        }
+
+        private static void PopulateFilterComboBox(ComboBox comboBox, IEnumerable<string> values)
+        {
+            string selectedValue = comboBox.SelectedItem?.ToString() ?? string.Empty;
+            var items = values
+                .Select(StringNormalizer.TrimOrEmpty)
+                .Where(value => !string.IsNullOrWhiteSpace(value))
+                .Distinct(StringComparer.CurrentCultureIgnoreCase)
+                .OrderBy(value => value, StringComparer.CurrentCultureIgnoreCase)
+                .ToList();
+
+            comboBox.BeginUpdate();
+            try
+            {
+                comboBox.Items.Clear();
+                comboBox.Items.Add(string.Empty);
+                foreach (var item in items)
+                    comboBox.Items.Add(item);
+            }
+            finally
+            {
+                comboBox.EndUpdate();
+            }
+
+            comboBox.SelectedItem = comboBox.Items.Contains(selectedValue)
+                ? selectedValue
+                : string.Empty;
+        }
+
+        private static bool MatchesNodeFilter(
+            BaseNodeDefinition node,
+            string filter,
+            string productKind,
+            string productCategory,
+            string nodeGroup)
         {
             if (node == null)
                 return false;
+
+            if (!string.IsNullOrWhiteSpace(productKind) &&
+                !string.Equals(StringNormalizer.TrimOrEmpty(node.ProductKind), productKind, StringComparison.CurrentCultureIgnoreCase))
+                return false;
+
+            if (!string.IsNullOrWhiteSpace(productCategory) &&
+                !string.Equals(StringNormalizer.TrimOrEmpty(node.ProductCategory), productCategory, StringComparison.CurrentCultureIgnoreCase))
+                return false;
+
+            if (!string.IsNullOrWhiteSpace(nodeGroup) &&
+                !string.Equals(StringNormalizer.TrimOrEmpty(node.NodeGroup), nodeGroup, StringComparison.CurrentCultureIgnoreCase))
+                return false;
+
             if (string.IsNullOrWhiteSpace(filter))
                 return true;
 
-            string haystack = string.Join(" ", new[]
-            {
-                node.DisplayName,
-                node.Name,
-                node.NodeCode,
-                node.SourceRtCode,
-                node.NodeGroup,
-                node.NodeType,
-                node.ProductKind,
-                node.ProductCategory,
-                node.Description
-            }).ToLowerInvariant();
-
-            var tokens = filter.ToLowerInvariant()
-                .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-            return tokens.All(token => haystack.Contains(token));
+            return StringNormalizer.TrimOrEmpty(node.Name)
+                .Contains(filter, StringComparison.CurrentCultureIgnoreCase);
         }
 
         private async void EditNodesButton_Click(object sender, EventArgs e)
