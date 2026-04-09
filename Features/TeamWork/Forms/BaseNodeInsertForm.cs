@@ -15,6 +15,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly BaseNodeLibraryService _libraryService;
         private readonly List<BaseNodeDefinition> _nodes;
         private readonly BaseNodePreviewPanel _previewPanel;
+        private bool _updatingFilters;
 
         public BaseNodeDefinition SelectedNode => nodesListBox.SelectedItem as BaseNodeDefinition;
         public BaseNodeInsertionPoint SelectedInsertionPoint => positionComboBox.SelectedItem as BaseNodeInsertionPoint;
@@ -115,6 +116,9 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void FilterComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (_updatingFilters)
+                return;
+
             ApplyNodeFilter(SelectedNode?.BaseNodeId);
         }
 
@@ -198,9 +202,17 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void PopulateFilterValues()
         {
-            PopulateFilterComboBox(productKindFilterComboBox, _nodes.Where(node => node != null).Select(node => node.ProductKind));
-            PopulateFilterComboBox(productCategoryFilterComboBox, _nodes.Where(node => node != null).Select(node => node.ProductCategory));
-            PopulateFilterComboBox(nodeGroupFilterComboBox, _nodes.Where(node => node != null).Select(node => node.NodeGroup));
+            _updatingFilters = true;
+            try
+            {
+                PopulateFilterComboBox(productKindFilterComboBox, _nodes.Where(node => node != null).Select(node => node.ProductKind));
+                PopulateFilterComboBox(productCategoryFilterComboBox, _nodes.Where(node => node != null).Select(node => node.ProductCategory));
+                PopulateFilterComboBox(nodeGroupFilterComboBox, _nodes.Where(node => node != null).Select(node => node.NodeGroup));
+            }
+            finally
+            {
+                _updatingFilters = false;
+            }
         }
 
         private static void PopulateFilterComboBox(ComboBox comboBox, IEnumerable<string> values)
