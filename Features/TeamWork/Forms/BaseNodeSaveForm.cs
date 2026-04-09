@@ -16,6 +16,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly BaseNodeLibraryService _libraryService;
         private readonly List<NormRasz> _operations;
         private readonly BaseNodeSaveDefaults _defaults;
+        private readonly BaseNodePreviewPanel _previewPanel;
 
         public BaseNodeDefinition ResultNode { get; private set; }
 
@@ -33,11 +34,32 @@ namespace SewingProduction.Features.TeamWork.Forms
             _defaults = defaults;
 
             InitializeComponent();
+            _previewPanel = BaseNodePreviewHelper.AttachToForm(this, "Источник базового узла");
             InitializeSelectors();
             Shown += BaseNodeSaveForm_Shown;
 
-            nameTextBox.Text = defaultName ?? string.Empty;
+            nameTextBox.Text = BuildInitialName(defaultName);
+            BaseNodePreviewHelper.Update(_previewPanel, _defaults);
             RefreshOperationsPreview();
+        }
+
+        private string BuildInitialName(string defaultName)
+        {
+            string trimmedName = StringNormalizer.TrimOrEmpty(defaultName);
+            string sourceRtCode = StringNormalizer.TrimOrEmpty(_defaults?.SourceRtCode);
+            if (string.IsNullOrWhiteSpace(sourceRtCode))
+            {
+                return trimmedName;
+            }
+
+            if (trimmedName.Contains(sourceRtCode, StringComparison.CurrentCultureIgnoreCase))
+            {
+                return trimmedName;
+            }
+
+            return string.IsNullOrWhiteSpace(trimmedName)
+                ? $"РТ {sourceRtCode}"
+                : $"РТ {sourceRtCode} - {trimmedName}";
         }
 
         private void InitializeSelectors()
@@ -130,7 +152,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
 
             ResultNode = BaseNodeMapper.CreateDefinition(nameTextBox.Text, descriptionTextBox.Text, _operations);
-            ResultNode.NodeCode = StringNormalizer.TrimOrEmpty(_defaults?.SourceArticul);
+            ResultNode.NodeCode = StringNormalizer.TrimOrEmpty(_defaults?.SourceRtCode);
+            ResultNode.SourceAnnId = _defaults?.SourceAnnId;
+            ResultNode.SourceRtCode = StringNormalizer.TrimOrEmpty(_defaults?.SourceRtCode);
+            ResultNode.SourceImagePath = StringNormalizer.TrimOrEmpty(_defaults?.SourceImagePath);
             ResultNode.NodeGroup = nodeGroupComboBox.SelectedItem?.ToString() ?? string.Empty;
             ResultNode.NodeType = productKindComboBox.SelectedItem?.ToString() ?? string.Empty;
             ResultNode.ProductKind = string.Empty;

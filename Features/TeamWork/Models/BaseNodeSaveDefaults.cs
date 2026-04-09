@@ -2,7 +2,11 @@ namespace SewingProduction.Features.TeamWork.Models
 {
     internal sealed class BaseNodeSaveDefaults
     {
-        public string SourceArticul { get; init; }
+        public int? SourceAnnId { get; set; }
+
+        public string SourceRtCode { get; set; }
+
+        public string SourceImagePath { get; set; }
 
         public string NodeGroup { get; init; }
 

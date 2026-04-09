@@ -1,4 +1,4 @@
-using SewingProduction.Features.TeamWork.Helpers;
+﻿using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Features.TeamWork.Models;
 using SewingProduction.Features.TeamWork.Services;
 using SewingProduction.Features.UserDistribution.Helpers;
@@ -14,6 +14,7 @@ namespace SewingProduction.Features.TeamWork.Forms
     {
         private readonly BaseNodeLibraryService _libraryService;
         private readonly List<BaseNodeDefinition> _nodes;
+        private readonly BaseNodePreviewPanel _previewPanel;
 
         public BaseNodeDefinition SelectedNode => nodesListBox.SelectedItem as BaseNodeDefinition;
         public BaseNodeInsertionPoint SelectedInsertionPoint => positionComboBox.SelectedItem as BaseNodeInsertionPoint;
@@ -28,6 +29,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             _nodes = (nodes ?? Array.Empty<BaseNodeDefinition>()).ToList();
 
             InitializeComponent();
+            _previewPanel = BaseNodePreviewHelper.AttachToForm(this, "Источник базового узла");
 
             nodesListBox.DisplayMember = nameof(BaseNodeDefinition.Name);
             nodesListBox.SelectedIndexChanged += (_, __) => RefreshPreview();
@@ -107,14 +109,17 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 previewGrid.DataSource = null;
                 detailsLabel.Text = "Выберите базовый узел.";
+                BaseNodePreviewHelper.Update(_previewPanel, (BaseNodeDefinition)null);
                 return;
             }
 
             previewGrid.DataSource = BaseNodeMapper.CreatePreviewRows(node);
+            BaseNodePreviewHelper.Update(_previewPanel, node);
 
             int chapters = node.Operations.Select(x => x.SourceN).Distinct().Count();
             string description = string.IsNullOrWhiteSpace(node.Description) ? "Без описания" : StringNormalizer.TrimOrEmpty(node.Description);
-            detailsLabel.Text = $"Операций: {chapters}. Подопераций:  {node.Operations.Count}. {description}";
+            string sourceCode = string.IsNullOrWhiteSpace(node.SourceRtCode) ? "-" : node.SourceRtCode;
+            detailsLabel.Text = $"РТ: {sourceCode}. Операций: {chapters}. Подопераций: {node.Operations.Count}. {description}";
         }
 
         private async void EditNodesButton_Click(object sender, EventArgs e)

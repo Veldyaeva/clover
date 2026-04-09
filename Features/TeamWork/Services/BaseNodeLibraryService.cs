@@ -1,4 +1,4 @@
-using Dapper;
+﻿using Dapper;
 using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Features.TeamWork.Models;
 using SewingProduction.Helpers;
@@ -29,6 +29,9 @@ namespace SewingProduction.Features.TeamWork.Services
 SELECT
     n.BaseNodeId,
     n.NodeCode,
+    n.SourceAnnId,
+    n.SourceRtCode,
+    n.SourceImagePath,
     n.NodeName,
     n.NodeGroup,
     n.NodeType,
@@ -149,6 +152,9 @@ ORDER BY caption;";
 INSERT INTO dbo.BaseNode
 (
     NodeCode,
+    SourceAnnId,
+    SourceRtCode,
+    SourceImagePath,
     NodeName,
     NodeGroup,
     NodeType,
@@ -164,6 +170,9 @@ INSERT INTO dbo.BaseNode
 VALUES
 (
     @NodeCode,
+    @SourceAnnId,
+    NULLIF(@SourceRtCode, N''),
+    NULLIF(@SourceImagePath, N''),
     @NodeName,
     NULLIF(@NodeGroup, N''),
     NULLIF(@NodeType, N''),
@@ -181,6 +190,9 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
                     baseNodeId = await connection.ExecuteScalarAsync<int>(insertNodeSql, new
                     {
                         NodeCode = nodeCode,
+                        SourceAnnId = node.SourceAnnId,
+                        SourceRtCode = NullIfWhiteSpace(node.SourceRtCode),
+                        SourceImagePath = NullIfWhiteSpace(node.SourceImagePath),
                         NodeName = StringNormalizer.TrimOrEmpty(node.Name),
                         NodeGroup = NullIfWhiteSpace(node.NodeGroup),
                         NodeType = NullIfWhiteSpace(node.NodeType),
@@ -199,6 +211,9 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
 UPDATE dbo.BaseNode
 SET NodeName = @NodeName,
     NodeCode = @NodeCode,
+    SourceAnnId = @SourceAnnId,
+    SourceRtCode = NULLIF(@SourceRtCode, N''),
+    SourceImagePath = NULLIF(@SourceImagePath, N''),
     NodeGroup = NULLIF(@NodeGroup, N''),
     NodeType = NULLIF(@NodeType, N''),
     ProductKind = NULLIF(@ProductKind, N''),
@@ -212,6 +227,9 @@ WHERE BaseNodeId = @BaseNodeId;";
                     {
                         BaseNodeId = baseNodeId,
                         NodeCode = nodeCode,
+                        SourceAnnId = node.SourceAnnId,
+                        SourceRtCode = NullIfWhiteSpace(node.SourceRtCode),
+                        SourceImagePath = NullIfWhiteSpace(node.SourceImagePath),
                         NodeName = StringNormalizer.TrimOrEmpty(node.Name),
                         NodeGroup = NullIfWhiteSpace(node.NodeGroup),
                         NodeType = NullIfWhiteSpace(node.NodeType),
@@ -503,6 +521,9 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
                 BaseNodeId = first.BaseNodeId,
                 Id = first.BaseNodeId.ToString(),
                 NodeCode = first.NodeCode ?? string.Empty,
+                SourceAnnId = first.SourceAnnId,
+                SourceRtCode = first.SourceRtCode ?? string.Empty,
+                SourceImagePath = first.SourceImagePath ?? string.Empty,
                 Name = first.NodeName ?? string.Empty,
                 NodeGroup = first.NodeGroup ?? string.Empty,
                 NodeType = first.NodeType ?? string.Empty,
@@ -581,6 +602,9 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
         {
             public int BaseNodeId { get; set; }
             public string NodeCode { get; set; }
+            public int? SourceAnnId { get; set; }
+            public string SourceRtCode { get; set; }
+            public string SourceImagePath { get; set; }
             public string NodeName { get; set; }
             public string NodeGroup { get; set; }
             public string NodeType { get; set; }

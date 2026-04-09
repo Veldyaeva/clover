@@ -17,6 +17,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly BaseNodeLibraryService _libraryService;
         private readonly List<BaseNodeDefinition> _nodes = new List<BaseNodeDefinition>();
         private readonly int? _preferredNodeId;
+        private readonly BaseNodePreviewPanel _previewPanel;
         private BaseNodeDefinition _workingNode;
 
         public BaseNodeDefinition SelectedNode => nodesListBox.SelectedItem as BaseNodeDefinition;
@@ -28,6 +29,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             _preferredNodeId = preferredNodeId;
 
             InitializeComponent();
+            _previewPanel = BaseNodePreviewHelper.AttachToForm(this, "Источник базового узла");
             InitializeSelectors();
 
             nodesListBox.DisplayMember = nameof(BaseNodeDefinition.Name);
@@ -152,6 +154,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 _workingNode = null;
                 nodeCodeValueLabel.Text = "-";
+                nodeCodeLabel.Visible = true;
+                nodeCodeValueLabel.Visible = true;
                 nameTextBox.Text = string.Empty;
                 descriptionTextBox.Text = string.Empty;
                 nodeGroupComboBox.SelectedIndex = nodeGroupComboBox.Items.Count > 0 ? 0 : -1;
@@ -159,6 +163,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 productCategoryComboBox.SelectedItem = "Универсально";
                 detailsLabel.Text = "Выберите базовый узел для редактирования.";
                 previewGrid.DataSource = null;
+                BaseNodePreviewHelper.Update(_previewPanel, (BaseNodeDefinition)null);
                 UpdateOperationButtonsState();
                 return;
             }
@@ -166,11 +171,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             _workingNode = CloneNode(node);
 
             nodeCodeValueLabel.Text = string.IsNullOrWhiteSpace(_workingNode.NodeCode) ? "-" : _workingNode.NodeCode;
+            nodeCodeLabel.Visible = true;
+            nodeCodeValueLabel.Visible = true;
             nameTextBox.Text = _workingNode.Name ?? string.Empty;
             descriptionTextBox.Text = _workingNode.Description ?? string.Empty;
             SelectComboValue(nodeGroupComboBox, _workingNode.NodeGroup, string.Empty);
             SelectComboValue(productKindComboBox, _workingNode.ProductKind, "Универсальный");
             SelectComboValue(productCategoryComboBox, _workingNode.ProductCategory, "Универсально");
+            BaseNodePreviewHelper.Update(_previewPanel, _workingNode);
 
             RefreshOperationsPreview();
         }
@@ -414,6 +422,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                 NodeType = source.NodeType,
                 ProductKind = source.ProductKind,
                 ProductCategory = source.ProductCategory,
+                SourceAnnId = source.SourceAnnId,
+                SourceRtCode = source.SourceRtCode,
+                SourceImagePath = source.SourceImagePath,
                 Description = source.Description,
                 CreatedAtUtc = source.CreatedAtUtc,
                 UpdatedAtUtc = source.UpdatedAtUtc,

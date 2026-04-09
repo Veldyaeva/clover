@@ -1,4 +1,4 @@
-using DevExpress.XtraBars.Docking2010;
+﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors.ButtonsPanelControl;
 using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Features.TeamWork.Models;
@@ -108,8 +108,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
                 }
 
-                string defaultName = BuildDefaultBaseNodeName(operations);
+                string sourceRtCode = StringNormalizer.TrimOrEmpty((_currentAnnData ?? CreatedAnn)?.Kod);
+                string defaultName = BuildDefaultBaseNodeName(operations, sourceRtCode);
                 var defaults = BaseNodeMetadataSuggester.Suggest(_currentAnnData ?? CreatedAnn, operations);
+                defaults.SourceImagePath = await _artNormService.GetImage(annId: (_currentAnnData ?? CreatedAnn)?.AnnID);
                 using var form = new BaseNodeSaveForm(User, operations, defaultName, defaults, _baseNodeLibraryService);
                 if (form.ShowDialog(this) != DialogResult.OK || form.ResultNode == null)
                 {
@@ -307,19 +309,23 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private string BuildDefaultBaseNodeName(IReadOnlyList<NormRasz> operations)
+        private string BuildDefaultBaseNodeName(IReadOnlyList<NormRasz> operations, string sourceRtCode = null)
         {
+            string prefix = string.IsNullOrWhiteSpace(sourceRtCode)
+                ? string.Empty
+                : $"РТ {sourceRtCode} - ";
+
             if (operations == null || operations.Count == 0)
             {
-                return "Новый базовый узел";
+                return prefix + "????? ??????? ????";
             }
 
             if (operations.Count == 1)
             {
-                return $"Узел {operations[0].DisplayNumber}";
+                return $"{prefix}???? {operations[0].DisplayNumber}";
             }
 
-            return $"Узел {operations.First().DisplayNumber}-{operations.Last().DisplayNumber}";
+            return $"{prefix}???? {operations.First().DisplayNumber}-{operations.Last().DisplayNumber}";
         }
     }
 }
