@@ -305,7 +305,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             return BaseNodeNameBuilder.Build(
                 (nodeGroupComboBox.SelectedItem as BaseNodeMetadataItem)?.Name ?? nodeGroupComboBox.SelectedItem?.ToString(),
                 (nodeSubgroupComboBox.SelectedItem as BaseNodeMetadataItem)?.Name ?? nodeSubgroupComboBox.SelectedItem?.ToString(),
-                productCategoryComboBox.SelectedItem?.ToString());
+                productCategoryComboBox.SelectedItem?.ToString(),
+                _defaults?.SourceArticul);
         }
 
         private void OkButton_Click(object sender, EventArgs e)

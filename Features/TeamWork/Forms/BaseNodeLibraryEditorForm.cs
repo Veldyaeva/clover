@@ -571,7 +571,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             string generatedName = BaseNodeNameBuilder.Build(
                 (nodeGroupComboBox.SelectedItem as BaseNodeMetadataItem)?.Name ?? nodeGroupComboBox.SelectedItem?.ToString(),
                 (nodeSubgroupComboBox.SelectedItem as BaseNodeMetadataItem)?.Name ?? nodeSubgroupComboBox.SelectedItem?.ToString(),
-                productCategoryComboBox.SelectedItem?.ToString());
+                productCategoryComboBox.SelectedItem?.ToString(),
+                _workingNode.SourceArticul);
 
             if (string.IsNullOrWhiteSpace(generatedName))
             {
