@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -670,7 +670,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 : $"1. Модель: {ShortDisplay(selectedArt.Articul)}";
 
             string rtCaption = showAllWD
-                ? $"2. Все РТ ({rtCount}), подходящие: {recommendedCount}"
+                ? $"2. Все РТ, подходящие: {recommendedCount}"
                 : $"2. Подходящие РТ ({rtCount})";
 
             string linkedCaption = selectedAnn == null
