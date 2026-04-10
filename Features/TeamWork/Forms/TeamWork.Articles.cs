@@ -64,12 +64,29 @@ namespace SewingProduction.Features.TeamWork.Forms
         private async Task InitializeCurrentWorksTabAsync(CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
+            showAllWD = false;
+            var showAllButton = FindButtonByTag(layoutControlGroup14, "bind:show-all");
+            if (showAllButton != null && showAllButton.Checked)
+            {
+                showAllButton.Checked = false;
+            }
 
             await WithArticlesFocusedRowHandlersSuspendedAsync(async () =>
             {
                 await LoadCurrentWorksArchiveDataAsync(cancellationToken);
                 await MyDataArtLoad(cancellationToken);
-                await MyDataAnnLoad(cancellationToken);
+
+                EnsureFocusedUnboundArtRowSelected();
+                string focusedArticul = GetFocusedUnboundArticul();
+                int focusedKod = GetFocusedUnboundArtKod();
+                if (!string.IsNullOrWhiteSpace(focusedArticul) || focusedKod > 0)
+                {
+                    await RefreshArticlesWorkDivisionsByArticulAsync(focusedArticul, clearWdFilters: false, cancellationToken);
+                }
+                else
+                {
+                    await ClearUnboundArtsRelatedData();
+                }
 
                 TWGridHelper.sortGridView(normRaszTab);
                 await SeedArticlesDetailsForCurrentSelectionAsync(cancellationToken);
@@ -135,6 +152,20 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             string kod = CommonFunctions.GetRowCellValueOrDefault<string>(gridView_unboundArts, gridView_unboundArts.FocusedRowHandle, "kodd_rt", string.Empty);
             return int.TryParse(kod, out int result) ? result : 0;
+        }
+
+        private void EnsureFocusedUnboundArtRowSelected()
+        {
+            if (gridView_unboundArts == null || gridView_unboundArts.DataRowCount <= 0 || gridView_unboundArts.FocusedRowHandle >= 0)
+            {
+                return;
+            }
+
+            int firstVisibleRow = gridView_unboundArts.GetVisibleRowHandle(0);
+            if (gridView_unboundArts.IsValidRowHandle(firstVisibleRow))
+            {
+                gridView_unboundArts.FocusedRowHandle = firstVisibleRow;
+            }
         }
 
         private int GetFocusedWdToBindAnnId()
