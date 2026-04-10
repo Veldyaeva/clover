@@ -603,9 +603,9 @@
             // 
             customSimpleButtonSpisok.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customSimpleButtonSpisok.Appearance.Options.UseFont = true;
-            customSimpleButtonSpisok.Location = new System.Drawing.Point(1368, 19);
+            customSimpleButtonSpisok.Location = new System.Drawing.Point(1368, 18);
             customSimpleButtonSpisok.Name = "customSimpleButtonSpisok";
-            customSimpleButtonSpisok.Size = new System.Drawing.Size(152, 22);
+            customSimpleButtonSpisok.Size = new System.Drawing.Size(152, 23);
             customSimpleButtonSpisok.StyleController = layoutControl1;
             customSimpleButtonSpisok.TabIndex = 23;
             customSimpleButtonSpisok.Text = "Список для увязки";

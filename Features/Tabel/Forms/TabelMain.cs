@@ -165,10 +165,6 @@ namespace SewingProduction.Features.Tabel.Forms
             gridView1.BestFitColumns();
             gridView1.EndUpdate();
 
-            //gridColumnFio.VisibleIndex = 3;
-            //gridColumnTabno.VisibleIndex = 2;
-            //gridColumnPomPech.VisibleIndex = 1;
-            //gridColumnCheckIncludePlan.VisibleIndex = 0;
         }
 
         private async void TabelMain_Load(object sender, EventArgs e)
@@ -177,14 +173,6 @@ namespace SewingProduction.Features.Tabel.Forms
             await Task.WhenAll(bindingsTask);
             CreateDayColumns(currentMG);
             CheckUserAccess(idUser);
-            if (idUser == 170 || idUser == 3)
-            {
-                layoutControlItem19.ContentVisible = true;
-            }
-            else
-            {
-                layoutControlItem19.ContentVisible = false;
-            }
         }
         private void RemoveDayColumns()
         {
