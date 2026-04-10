@@ -6,16 +6,17 @@ using System.IO;
 using System.Windows.Forms;
 using DevExpress.LookAndFeel;
 using DevExpress.XtraBars;
+using DevExpress.XtraReports.UI;
 using DevExpress.XtraTabbedMdi;
 using Microsoft.AspNet.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using SewingProduction.Core;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Features.Articul;
+using SewingProduction.Features.Articul.Reports;
 using SewingProduction.Features.CuttingProduction.Forms;
 using SewingProduction.Features.KnittingProduction.Forms;
 using SewingProduction.Features.Sprav;
-using SewingProduction.Features.Sprav.Forms;
 using SewingProduction.Features.Sprav.Forms;
 using SewingProduction.Features.Tabel.Forms;
 using SewingProduction.Features.TeamWork.Forms;
@@ -149,7 +150,7 @@ namespace SewingProduction
         }
         private void наценкиToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new SpravForAll("grup_men", "men,name,koef", "", "справочник коэффициентов наценки", _user,false,false,false), e.Item);
+            OpenForm(new SpravForAll("grup_men", "men,name,koef", "", "справочник коэффициентов наценки", _user, false, false, false), e.Item);
         }
         private void моделиСПризнакомМаркировкToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
@@ -217,6 +218,13 @@ namespace SewingProduction
         private void карточкаРасчетаToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
             OpenForm(new CardByNom(_user), e.Item);
+        }
+        #endregion
+        #region Отчеты
+        private void barBtnPublicArticul_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var report = new PrintPublicArticul();
+            report.ShowPreviewDialog(); 
         }
         #endregion
         #region Табель
@@ -383,17 +391,8 @@ namespace SewingProduction
                 return fullPath;
             }
         }
-        #endregion 
+        #endregion
 
-        private void МенюToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //private void barButtonTSDAdmin_ItemClick(object sender, ItemClickEventArgs e)
-        //{
-        //    OpenForm(new TSDAccessManagement(CurrentUser.User), e.Item);
-        //}
 
     }
 }

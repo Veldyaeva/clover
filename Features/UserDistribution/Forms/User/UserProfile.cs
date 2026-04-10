@@ -206,7 +206,6 @@ namespace SewingProduction.Features.UserDistribution.Forms
             }
         }
 
-
     }
     public class UserProfileDataService
     {

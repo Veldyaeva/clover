@@ -190,7 +190,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 }
                 else if (e.RelationIndex == 1)
                 {
-                    DataTable users = await _allRoleDataService.GetUsersWithRolesInfo(selectedRoleId, _user.CreatorID);
+                    DataTable users = await _allRoleDataService.GetUsersWithRolesInfo(selectedRoleId, _user.UserId);
                     e.ChildList = users.DefaultView;
                 }
             };
