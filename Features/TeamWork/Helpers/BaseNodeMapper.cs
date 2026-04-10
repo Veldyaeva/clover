@@ -134,7 +134,7 @@ namespace SewingProduction.Features.TeamWork.Helpers
                 .ThenBy(x => x.N1) ?? Enumerable.Empty<NormRasz>();
         }
 
-        private static BaseNodeOperationDefinition MapOperation(NormRasz operation)
+        public static BaseNodeOperationDefinition MapOperation(NormRasz operation)
         {
             return new BaseNodeOperationDefinition
             {

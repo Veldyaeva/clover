@@ -27,6 +27,7 @@
             productCategoryComboBox = new System.Windows.Forms.ComboBox();
             operationsButtonsPanel = new System.Windows.Forms.FlowLayoutPanel();
             deleteOperationButton = new System.Windows.Forms.Button();
+            editOperationButton = new System.Windows.Forms.Button();
             moveDownButton = new System.Windows.Forms.Button();
             moveUpButton = new System.Windows.Forms.Button();
             previewGrid = new System.Windows.Forms.DataGridView();
@@ -140,6 +141,7 @@
             // operationsButtonsPanel
             // 
             operationsButtonsPanel.Controls.Add(deleteOperationButton);
+            operationsButtonsPanel.Controls.Add(editOperationButton);
             operationsButtonsPanel.Controls.Add(moveDownButton);
             operationsButtonsPanel.Controls.Add(moveUpButton);
             operationsButtonsPanel.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
@@ -161,14 +163,26 @@
             deleteOperationButton.UseVisualStyleBackColor = true;
             deleteOperationButton.Click += DeleteOperationButton_Click;
             // 
+            // editOperationButton
+            // 
+            editOperationButton.AutoSize = true;
+            editOperationButton.Location = new System.Drawing.Point(342, 2);
+            editOperationButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            editOperationButton.Name = "editOperationButton";
+            editOperationButton.Size = new System.Drawing.Size(97, 25);
+            editOperationButton.TabIndex = 1;
+            editOperationButton.Text = "Изменить";
+            editOperationButton.UseVisualStyleBackColor = true;
+            editOperationButton.Click += EditOperationButton_Click;
+            // 
             // moveDownButton
             // 
             moveDownButton.AutoSize = true;
-            moveDownButton.Location = new System.Drawing.Point(348, 2);
+            moveDownButton.Location = new System.Drawing.Point(245, 2);
             moveDownButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             moveDownButton.Name = "moveDownButton";
             moveDownButton.Size = new System.Drawing.Size(91, 25);
-            moveDownButton.TabIndex = 1;
+            moveDownButton.TabIndex = 2;
             moveDownButton.Text = "Вниз";
             moveDownButton.UseVisualStyleBackColor = true;
             moveDownButton.Click += MoveDownButton_Click;
@@ -176,11 +190,11 @@
             // moveUpButton
             // 
             moveUpButton.AutoSize = true;
-            moveUpButton.Location = new System.Drawing.Point(251, 2);
+            moveUpButton.Location = new System.Drawing.Point(148, 2);
             moveUpButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             moveUpButton.Name = "moveUpButton";
             moveUpButton.Size = new System.Drawing.Size(91, 25);
-            moveUpButton.TabIndex = 2;
+            moveUpButton.TabIndex = 3;
             moveUpButton.Text = "Вверх";
             moveUpButton.UseVisualStyleBackColor = true;
             moveUpButton.Click += MoveUpButton_Click;
@@ -201,6 +215,7 @@
             previewGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             previewGrid.Size = new System.Drawing.Size(536, 203);
             previewGrid.TabIndex = 7;
+            previewGrid.CellDoubleClick += PreviewGrid_CellDoubleClick;
             // 
             // buttonsPanel
             // 
@@ -496,6 +511,7 @@
         private System.Windows.Forms.ComboBox productCategoryComboBox;
         private System.Windows.Forms.FlowLayoutPanel operationsButtonsPanel;
         private System.Windows.Forms.Button deleteOperationButton;
+        private System.Windows.Forms.Button editOperationButton;
         private System.Windows.Forms.Button moveDownButton;
         private System.Windows.Forms.Button moveUpButton;
         private System.Windows.Forms.DataGridView previewGrid;
