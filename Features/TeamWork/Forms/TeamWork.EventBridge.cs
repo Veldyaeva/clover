@@ -1,4 +1,4 @@
-using DevExpress.XtraBars.Docking2010;
+﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Models;
@@ -115,6 +115,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// </summary>
         private async void gridView_unboundArts_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
+            if (_isRestoringGridState)
+            {
+                return;
+            }
+
             gridView_unboundArts_FocusedRowChanged_Internal(sender, e);
         }
 
@@ -125,6 +130,10 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void ANNgridView_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
+            if (_isRestoringGridState)
+            {
+                return;
+            }
             try
             {
                 if (e.FocusedRowHandle >= 0 && ANNgridView.GetRow(e.FocusedRowHandle) is ArtNormN row)

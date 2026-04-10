@@ -1,4 +1,4 @@
-using SewingProduction.Features.TeamWork.Models;
+﻿using SewingProduction.Features.TeamWork.Models;
 using SewingProduction.Helpers;
 using System;
 using System.Threading.Tasks;
@@ -104,40 +104,33 @@ namespace SewingProduction.Features.TeamWork.Forms
             // При переключении вкладок не перезагружаем источники повторно:
             // просто останавливаем незавершенные операции.
             CancelCurrentLoad();
+            var token = StartNewLoadToken();
 
-            switch (e.Page.Name)
+            try
             {
-                case "xtraTabPageArticles":
-                    if (_articlesTabInitialized)
-                    {
-                        break;
-                    }
-
-                    var token = StartNewLoadToken();
-                    try
-                    {
-                        await CurrentWorks_Load(token);
-                    }
-                    catch (OperationCanceledException) when (token.IsCancellationRequested)
-                    {
-                        // Переключение вкладки отменило первичную загрузку — это штатно.
-                    }
-                    break;
-
-                default:
-                    break;
+                await RefreshMainTabAsync(e.Page.Name, token);
+            }
+            catch (OperationCanceledException) when (token.IsCancellationRequested)
+            {
+                // Более новая смена вкладки отменила текущее обновление.
             }
         }
 
-        /// <summary>
-        /// Обрабатывает смену вложенной вкладки в "Текущие работы"
-        /// </summary>
-        private void XtraTabControl2_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
+        private async void XtraTabControl2_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
         {
-            if (e.Page == null) return;
+            if (e.Page == null || xtraTabControl1?.SelectedTabPage?.Name != "xtraTabPageArticles") return;
 
-            // Для вложенных вкладок также только останавливаем текущие загрузки.
             CancelCurrentLoad();
+            var token = StartNewLoadToken();
+
+            try
+            {
+                await RefreshArticlesSubTabAsync(e.Page.Name, token);
+            }
+            catch (OperationCanceledException) when (token.IsCancellationRequested)
+            {
+                // Более новая смена вложенной вкладки отменила текущее обновление.
+            }
         }
     }
 }
