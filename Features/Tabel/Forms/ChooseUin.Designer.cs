@@ -229,7 +229,7 @@
 
         #endregion
 
-        private DevExpress.XtraLayout.LayoutControl customLayoutControl1;
+        private Core.Class.CustomLayoutControl customLayoutControl1;
         private Core.Class.CustomGridControl customGridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewSpisok;
         private DevExpress.XtraGrid.Columns.GridColumn gridSpisokUin;
