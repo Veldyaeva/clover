@@ -22,6 +22,7 @@
             nameTextBox = new System.Windows.Forms.TextBox();
             descriptionTextBox = new System.Windows.Forms.TextBox();
             nodeGroupComboBox = new System.Windows.Forms.ComboBox();
+            nodeSubgroupComboBox = new System.Windows.Forms.ComboBox();
             productKindComboBox = new System.Windows.Forms.ComboBox();
             productCategoryComboBox = new System.Windows.Forms.ComboBox();
             operationsButtonsPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -47,6 +48,7 @@
             metadataLayoutPanelitem = new DevExpress.XtraLayout.LayoutControlGroup();
             productKindComboBoxitem = new DevExpress.XtraLayout.LayoutControlItem();
             nodeGroupComboBoxitem = new DevExpress.XtraLayout.LayoutControlItem();
+            nodeSubgroupComboBoxitem = new DevExpress.XtraLayout.LayoutControlItem();
             productCategoryComboBoxitem = new DevExpress.XtraLayout.LayoutControlItem();
             operationsButtonsPanelitem = new DevExpress.XtraLayout.LayoutControlItem();
             previewGriditem = new DevExpress.XtraLayout.LayoutControlItem();
@@ -67,6 +69,7 @@
             ((System.ComponentModel.ISupportInitialize)metadataLayoutPanelitem).BeginInit();
             ((System.ComponentModel.ISupportInitialize)productKindComboBoxitem).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nodeGroupComboBoxitem).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nodeSubgroupComboBoxitem).BeginInit();
             ((System.ComponentModel.ISupportInitialize)productCategoryComboBoxitem).BeginInit();
             ((System.ComponentModel.ISupportInitialize)operationsButtonsPanelitem).BeginInit();
             ((System.ComponentModel.ISupportInitialize)previewGriditem).BeginInit();
@@ -101,7 +104,17 @@
             nodeGroupComboBox.Location = new System.Drawing.Point(177, 175);
             nodeGroupComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             nodeGroupComboBox.Name = "nodeGroupComboBox";
-            nodeGroupComboBox.Size = new System.Drawing.Size(148, 23);
+            nodeGroupComboBox.Size = new System.Drawing.Size(130, 23);
+            nodeGroupComboBox.TabIndex = 1;
+            // 
+            // nodeSubgroupComboBox
+            // 
+            nodeSubgroupComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            nodeSubgroupComboBox.FormattingEnabled = true;
+            nodeSubgroupComboBox.Location = new System.Drawing.Point(278, 175);
+            nodeSubgroupComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            nodeSubgroupComboBox.Name = "nodeSubgroupComboBox";
+            nodeSubgroupComboBox.Size = new System.Drawing.Size(136, 23);
             nodeGroupComboBox.TabIndex = 1;
             // 
             // productKindComboBox
@@ -111,17 +124,17 @@
             productKindComboBox.Location = new System.Drawing.Point(12, 175);
             productKindComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             productKindComboBox.Name = "productKindComboBox";
-            productKindComboBox.Size = new System.Drawing.Size(161, 23);
+            productKindComboBox.Size = new System.Drawing.Size(132, 23);
             productKindComboBox.TabIndex = 1;
             // 
             // productCategoryComboBox
             // 
             productCategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             productCategoryComboBox.FormattingEnabled = true;
-            productCategoryComboBox.Location = new System.Drawing.Point(329, 175);
+            productCategoryComboBox.Location = new System.Drawing.Point(418, 175);
             productCategoryComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             productCategoryComboBox.Name = "productCategoryComboBox";
-            productCategoryComboBox.Size = new System.Drawing.Size(219, 23);
+            productCategoryComboBox.Size = new System.Drawing.Size(130, 23);
             productCategoryComboBox.TabIndex = 1;
             // 
             // operationsButtonsPanel
@@ -286,6 +299,7 @@
             BaseNodeSaveFormlayoutControl1ConvertedLayout.Controls.Add(nameTextBox);
             BaseNodeSaveFormlayoutControl1ConvertedLayout.Controls.Add(descriptionTextBox);
             BaseNodeSaveFormlayoutControl1ConvertedLayout.Controls.Add(nodeGroupComboBox);
+            BaseNodeSaveFormlayoutControl1ConvertedLayout.Controls.Add(nodeSubgroupComboBox);
             BaseNodeSaveFormlayoutControl1ConvertedLayout.Controls.Add(productKindComboBox);
             BaseNodeSaveFormlayoutControl1ConvertedLayout.Controls.Add(productCategoryComboBox);
             BaseNodeSaveFormlayoutControl1ConvertedLayout.Controls.Add(operationsButtonsPanel);
@@ -342,7 +356,7 @@
             // metadataLayoutPanelitem
             // 
             metadataLayoutPanelitem.GroupBordersVisible = false;
-            metadataLayoutPanelitem.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { productKindComboBoxitem, nodeGroupComboBoxitem, productCategoryComboBoxitem });
+            metadataLayoutPanelitem.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { productKindComboBoxitem, nodeGroupComboBoxitem, nodeSubgroupComboBoxitem, productCategoryComboBoxitem });
             metadataLayoutPanelitem.Location = new System.Drawing.Point(0, 147);
             metadataLayoutPanelitem.Name = "metadataLayoutPanelitem";
             metadataLayoutPanelitem.OptionsTableLayoutItem.RowIndex = 5;
@@ -365,18 +379,28 @@
             nodeGroupComboBoxitem.Location = new System.Drawing.Point(165, 0);
             nodeGroupComboBoxitem.Name = "nodeGroupComboBoxitem";
             nodeGroupComboBoxitem.OptionsTableLayoutItem.RowIndex = 1;
-            nodeGroupComboBoxitem.Size = new System.Drawing.Size(152, 41);
+            nodeGroupComboBoxitem.Size = new System.Drawing.Size(132, 41);
             nodeGroupComboBoxitem.Text = "Группа узла";
             nodeGroupComboBoxitem.TextLocation = DevExpress.Utils.Locations.Top;
             nodeGroupComboBoxitem.TextSize = new System.Drawing.Size(99, 13);
             // 
+            // nodeSubgroupComboBoxitem
+            // 
+            nodeSubgroupComboBoxitem.Control = nodeSubgroupComboBox;
+            nodeSubgroupComboBoxitem.Location = new System.Drawing.Point(264, 0);
+            nodeSubgroupComboBoxitem.Name = "nodeSubgroupComboBoxitem";
+            nodeSubgroupComboBoxitem.Size = new System.Drawing.Size(140, 41);
+            nodeSubgroupComboBoxitem.Text = "Уточнение";
+            nodeSubgroupComboBoxitem.TextLocation = DevExpress.Utils.Locations.Top;
+            nodeSubgroupComboBoxitem.TextSize = new System.Drawing.Size(99, 13);
+            // 
             // productCategoryComboBoxitem
             // 
             productCategoryComboBoxitem.Control = productCategoryComboBox;
-            productCategoryComboBoxitem.Location = new System.Drawing.Point(317, 0);
+            productCategoryComboBoxitem.Location = new System.Drawing.Point(404, 0);
             productCategoryComboBoxitem.Name = "productCategoryComboBoxitem";
             productCategoryComboBoxitem.OptionsTableLayoutItem.RowIndex = 1;
-            productCategoryComboBoxitem.Size = new System.Drawing.Size(223, 41);
+            productCategoryComboBoxitem.Size = new System.Drawing.Size(136, 41);
             productCategoryComboBoxitem.Text = "Категория изделия";
             productCategoryComboBoxitem.TextLocation = DevExpress.Utils.Locations.Top;
             productCategoryComboBoxitem.TextSize = new System.Drawing.Size(99, 13);
@@ -453,6 +477,7 @@
             ((System.ComponentModel.ISupportInitialize)metadataLayoutPanelitem).EndInit();
             ((System.ComponentModel.ISupportInitialize)productKindComboBoxitem).EndInit();
             ((System.ComponentModel.ISupportInitialize)nodeGroupComboBoxitem).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nodeSubgroupComboBoxitem).EndInit();
             ((System.ComponentModel.ISupportInitialize)productCategoryComboBoxitem).EndInit();
             ((System.ComponentModel.ISupportInitialize)operationsButtonsPanelitem).EndInit();
             ((System.ComponentModel.ISupportInitialize)previewGriditem).EndInit();
@@ -466,6 +491,7 @@
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.TextBox descriptionTextBox;
         private System.Windows.Forms.ComboBox nodeGroupComboBox;
+        private System.Windows.Forms.ComboBox nodeSubgroupComboBox;
         private System.Windows.Forms.ComboBox productKindComboBox;
         private System.Windows.Forms.ComboBox productCategoryComboBox;
         private System.Windows.Forms.FlowLayoutPanel operationsButtonsPanel;
@@ -491,6 +517,7 @@
         private DevExpress.XtraLayout.LayoutControlItem descriptionTextBoxitem;
         private DevExpress.XtraLayout.LayoutControlGroup metadataLayoutPanelitem;
         private DevExpress.XtraLayout.LayoutControlItem nodeGroupComboBoxitem;
+        private DevExpress.XtraLayout.LayoutControlItem nodeSubgroupComboBoxitem;
         private DevExpress.XtraLayout.LayoutControlItem productCategoryComboBoxitem;
         private DevExpress.XtraLayout.LayoutControlItem operationsButtonsPanelitem;
         private DevExpress.XtraLayout.LayoutControlItem previewGriditem;
