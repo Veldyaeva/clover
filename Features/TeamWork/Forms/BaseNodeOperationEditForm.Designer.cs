@@ -1,4 +1,4 @@
-namespace SewingProduction.Features.TeamWork.Forms
+﻿namespace SewingProduction.Features.TeamWork.Forms
 {
     partial class BaseNodeOperationEditForm
     {
@@ -99,6 +99,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             kodProizvNumericUpDown.Name = "kodProizvNumericUpDown";
             kodProizvNumericUpDown.Size = new System.Drawing.Size(92, 23);
             kodProizvNumericUpDown.TabIndex = 7;
+            kodProizvNumericUpDown.Visible = false;
             // 
             // kodPodrNumericUpDown
             // 
@@ -107,6 +108,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             kodPodrNumericUpDown.Name = "kodPodrNumericUpDown";
             kodPodrNumericUpDown.Size = new System.Drawing.Size(92, 23);
             kodPodrNumericUpDown.TabIndex = 8;
+            kodPodrNumericUpDown.Visible = false;
             // 
             // operationCodeTextBox
             // 
@@ -150,7 +152,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             chapterTitleLabel.AutoSize = true;
             chapterTitleLabel.Location = new System.Drawing.Point(12, 9);
             chapterTitleLabel.Name = "chapterTitleLabel";
-            chapterTitleLabel.Size = new System.Drawing.Size(84, 15);
+            chapterTitleLabel.Size = new System.Drawing.Size(77, 15);
             chapterTitleLabel.TabIndex = 13;
             chapterTitleLabel.Text = "№ операции";
             // 
@@ -159,7 +161,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             operationNameLabel.AutoSize = true;
             operationNameLabel.Location = new System.Drawing.Point(12, 54);
             operationNameLabel.Name = "operationNameLabel";
-            operationNameLabel.Size = new System.Drawing.Size(122, 15);
+            operationNameLabel.Size = new System.Drawing.Size(116, 15);
             operationNameLabel.TabIndex = 14;
             operationNameLabel.Text = "Название операции";
             // 
@@ -168,7 +170,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             operationCodeLabel.AutoSize = true;
             operationCodeLabel.Location = new System.Drawing.Point(12, 98);
             operationCodeLabel.Name = "operationCodeLabel";
-            operationCodeLabel.Size = new System.Drawing.Size(88, 15);
+            operationCodeLabel.Size = new System.Drawing.Size(84, 15);
             operationCodeLabel.TabIndex = 15;
             operationCodeLabel.Text = "Код операции";
             // 
@@ -177,7 +179,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             equipmentLabel.AutoSize = true;
             equipmentLabel.Location = new System.Drawing.Point(12, 142);
             equipmentLabel.Name = "equipmentLabel";
-            equipmentLabel.Size = new System.Drawing.Size(93, 15);
+            equipmentLabel.Size = new System.Drawing.Size(88, 15);
             equipmentLabel.TabIndex = 16;
             equipmentLabel.Text = "Оборудование";
             // 
@@ -186,7 +188,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             specLabel.AutoSize = true;
             specLabel.Location = new System.Drawing.Point(290, 142);
             specLabel.Name = "specLabel";
-            specLabel.Size = new System.Drawing.Size(86, 15);
+            specLabel.Size = new System.Drawing.Size(92, 15);
             specLabel.TabIndex = 17;
             specLabel.Text = "Специальность";
             // 
@@ -195,7 +197,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             secondsLabel.AutoSize = true;
             secondsLabel.Location = new System.Drawing.Point(12, 230);
             secondsLabel.Name = "secondsLabel";
-            secondsLabel.Size = new System.Drawing.Size(59, 15);
+            secondsLabel.Size = new System.Drawing.Size(55, 15);
             secondsLabel.TabIndex = 18;
             secondsLabel.Text = "Секунды";
             // 
@@ -204,7 +206,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             razrydLabel.AutoSize = true;
             razrydLabel.Location = new System.Drawing.Point(148, 230);
             razrydLabel.Name = "razrydLabel";
-            razrydLabel.Size = new System.Drawing.Size(47, 15);
+            razrydLabel.Size = new System.Drawing.Size(44, 15);
             razrydLabel.TabIndex = 19;
             razrydLabel.Text = "Разряд";
             // 
@@ -213,7 +215,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             kodObLabel.AutoSize = true;
             kodObLabel.Location = new System.Drawing.Point(284, 230);
             kodObLabel.Name = "kodObLabel";
-            kodObLabel.Size = new System.Drawing.Size(43, 15);
+            kodObLabel.Size = new System.Drawing.Size(47, 15);
             kodObLabel.TabIndex = 20;
             kodObLabel.Text = "Код об.";
             // 
@@ -222,18 +224,20 @@ namespace SewingProduction.Features.TeamWork.Forms
             kodProizvLabel.AutoSize = true;
             kodProizvLabel.Location = new System.Drawing.Point(382, 230);
             kodProizvLabel.Name = "kodProizvLabel";
-            kodProizvLabel.Size = new System.Drawing.Size(60, 15);
+            kodProizvLabel.Size = new System.Drawing.Size(72, 15);
             kodProizvLabel.TabIndex = 21;
             kodProizvLabel.Text = "Код произв.";
+            kodProizvLabel.Visible = false;
             // 
             // kodPodrLabel
             // 
             kodPodrLabel.AutoSize = true;
             kodPodrLabel.Location = new System.Drawing.Point(480, 230);
             kodPodrLabel.Name = "kodPodrLabel";
-            kodPodrLabel.Size = new System.Drawing.Size(57, 15);
+            kodPodrLabel.Size = new System.Drawing.Size(77, 15);
             kodPodrLabel.TabIndex = 22;
             kodPodrLabel.Text = "Код подразд.";
+            kodPodrLabel.Visible = false;
             // 
             // BaseNodeOperationEditForm
             // 
