@@ -3,7 +3,6 @@ using DevExpress.Data;
 using DevExpress.Utils;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
-using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.ButtonsPanelControl;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
@@ -38,7 +37,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
 using Label = System.Windows.Forms.Label;
 
@@ -545,7 +543,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         ShiftId = _currentShiftId.Value,
                         TabEnd = tabEnd,
                         MinHours = 12m,
-                        CurrentRows = _planPresenter.AllRows?.ToList() ?? new List<KnitterPZVModel>()
+                        UserName = GetShiftAuditUserName()
                     });
 
                     if (!res.Success)
@@ -557,6 +555,23 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                             FocusFirstUnfinishedOperation();
                             XtraMessageBox.Show(this, "В смене есть начатые, но не завершённые операции. Завершите операции, прежде чем закончить смену.", "Завершение операций", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             LogWarning("Есть начатые и не завершённые операции. Смену закрывать нельзя", logContext);
+                            return;
+                        }
+
+                        if (res.AlreadyClosed)
+                        {
+                            XtraMessageBox.Show(this, res.ErrorMessage, "Смена уже закрыта", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            await LoadPlanForTabAsync(tabEnd, forceReload: true);
+                            await RefreshFioListAsync();
+                            ApplyShiftUi(false, null, null);
+                            LogWarning(res.ErrorMessage, logContext);
+                            return;
+                        }
+
+                        if (res.ConcurrentCloseInProgress)
+                        {
+                            XtraMessageBox.Show(this, res.ErrorMessage, "Смена закрывается", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            LogWarning(res.ErrorMessage, logContext);
                             return;
                         }
 
@@ -593,6 +608,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 if (!result.Success)
                 {
+                    if (result.AlreadyOpen)
+                    {
+                        XtraMessageBox.Show(this, result.ErrorMessage, "Смена уже открыта", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        await RefreshFioListAsync();
+                        await LoadPlanForTabAsync(selectedTab, forceReload: true);
+                        LogWarning(result.ErrorMessage, logContext);
+                        return;
+                    }
+
+                    if (result.ConcurrentOpenInProgress)
+                    {
+                        XtraMessageBox.Show(this, result.ErrorMessage, "Смена открывается", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LogWarning(result.ErrorMessage, logContext);
+                        return;
+                    }
+
                     LogWarning(result.ErrorMessage, logContext);
                     return;
                 }
@@ -611,6 +642,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 simpleButton2.Enabled = true;
             }
         }        
+
+        private string GetShiftAuditUserName()
+        {
+            if (!string.IsNullOrWhiteSpace(_user?.UserName))
+                return _user.UserName;
+
+            if (!string.IsNullOrWhiteSpace(_user?.Fio))
+                return _user.Fio;
+
+            return Environment.UserName;
+        }
 
         private bool ShowShiftEndConfirmationDialog()
         {
