@@ -67,12 +67,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                         command.UserName ?? string.Empty)
                     .ConfigureAwait(false);
 
-                var closed = await tx.TryEndWorkingShiftAsync(command.ShiftId, command.TabEnd).ConfigureAwait(false);
-                if (!closed)
+                var closeResult = await tx.TryEndWorkingShiftAsync(command.ShiftId, command.TabEnd).ConfigureAwait(false);
+                if (!closeResult.Closed)
                 {
                     return Failure(
-                        CloseShiftStatus.AlreadyClosed,
-                        "Смена уже закрыта на другом рабочем месте. Данные будут обновлены.");
+                        closeResult.Status,
+                        closeResult.ErrorMessage);
                 }
 
                 await tx.CommitAsync().ConfigureAwait(false);

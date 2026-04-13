@@ -538,7 +538,9 @@ WHERE pzvID = @pzvId;
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    await TryEndWorkingShiftAsync(connection, transaction: null, shiftId, tabEnd);
+                    var result = await TryEndWorkingShiftAsync(connection, transaction: null, shiftId, tabEnd);
+                    if (!result.Closed)
+                        throw new InvalidOperationException(result.ErrorMessage);
                 }
             }
             catch (Exception ex)
@@ -583,7 +585,7 @@ SELECT TOP 1
 	kwsDateStart AS dateStart
 FROM ACE.dbo.knitWorkingShiftNew
 WHERE kwsTabStart = @tab
-  AND (kwsDel = 0 OR kwsDel IS NULL)
+  AND kwsDateDel IS NULL
   AND kwsDateEnd IS NULL
 ORDER BY kwsDateStart DESC";
 					var row = await connection.QueryFirstOrDefaultAsync<(int shiftId, DateTime? dateStart)>(sql, new { tab });
@@ -611,7 +613,7 @@ SELECT TOP 1
 	kwsDateStart AS dateStart
 FROM ACE.dbo.knitWorkingShiftNew
 WHERE kwsKmaID = @kmaId
-  AND (kwsDel = 0 OR kwsDel IS NULL)
+  AND kwsDateDel IS NULL
   AND kwsDateEnd IS NULL
 ORDER BY kwsDateStart DESC";
 
@@ -711,7 +713,7 @@ SELECT TOP 1
     kwsDateStart AS DateStart
 FROM ACE.dbo.knitWorkingShiftNew WITH (UPDLOCK, HOLDLOCK)
 WHERE kwsKmaID = @kmaId
-  AND (kwsDel = 0 OR kwsDel IS NULL)
+  AND kwsDateDel IS NULL
   AND kwsDateEnd IS NULL
 ORDER BY kwsDateStart DESC;";
 
@@ -776,12 +778,12 @@ SELECT @result;";
             const string shiftSql = @"
 SELECT TOP 1
     kwsID AS ShiftId,
-    kwsDateEnd AS DateEnd
+    kwsDateEnd AS DateEnd,
+    kwsDateDel AS DateDel
 FROM ACE.dbo.knitWorkingShiftNew WITH (UPDLOCK, HOLDLOCK)
-WHERE kwsID = @shiftId
-  AND (kwsDel = 0 OR kwsDel IS NULL);";
+WHERE kwsID = @shiftId;";
 
-            var shift = await connection.QueryFirstOrDefaultAsync<(int ShiftId, DateTime? DateEnd)>(
+            var shift = await connection.QueryFirstOrDefaultAsync<(int ShiftId, DateTime? DateEnd, DateTime? DateDel)>(
                 shiftSql,
                 new { shiftId },
                 transaction: transaction);
@@ -801,6 +803,15 @@ WHERE kwsID = @shiftId
                 {
                     Status = CloseShiftStatus.AlreadyClosed,
                     ErrorMessage = "Смена уже закрыта на другом рабочем месте. Данные будут обновлены."
+                };
+            }
+
+            if (shift.DateDel.HasValue)
+            {
+                return new ShiftCloseLockResult
+                {
+                    Status = CloseShiftStatus.Deleted,
+                    ErrorMessage = "Смена помечена как удалённая. Закрытие невозможно; данные будут обновлены."
                 };
             }
 
@@ -936,15 +947,70 @@ WHERE mlv.kmlKmaID = @kmaId;";
             }
         }
 
-        private static async Task<bool> TryEndWorkingShiftAsync(System.Data.SqlClient.SqlConnection connection, IDbTransaction transaction, int shiftId, int tabEnd)
+        private static async Task<ShiftEndResult> TryEndWorkingShiftAsync(System.Data.SqlClient.SqlConnection connection, IDbTransaction transaction, int shiftId, int tabEnd)
         {
             const string sql = @"
 UPDATE ACE.dbo.knitWorkingShiftNew
 SET kwsTabEnd = @tabEnd,
     kwsDateEnd = GETDATE()
-WHERE kwsID = @shiftId AND (kwsDel = 0 OR kwsDel IS NULL) AND kwsDateEnd IS NULL;";
+WHERE kwsID = @shiftId
+  AND kwsDateEnd IS NULL
+  AND kwsDateDel IS NULL;";
             var rowsAffected = await connection.ExecuteAsync(sql, new { shiftId, tabEnd }, transaction: transaction);
-            return rowsAffected == 1;
+            if (rowsAffected == 1)
+            {
+                return new ShiftEndResult
+                {
+                    Status = CloseShiftStatus.Success,
+                    ErrorMessage = string.Empty
+                };
+            }
+
+            const string diagnoseSql = @"
+SELECT TOP 1
+    kwsID AS ShiftId,
+    kwsDateEnd AS DateEnd,
+    kwsDateDel AS DateDel
+FROM ACE.dbo.knitWorkingShiftNew WITH (UPDLOCK, HOLDLOCK)
+WHERE kwsID = @shiftId;";
+
+            var shift = await connection.QueryFirstOrDefaultAsync<(int ShiftId, DateTime? DateEnd, DateTime? DateDel)>(
+                diagnoseSql,
+                new { shiftId },
+                transaction: transaction);
+
+            if (shift.ShiftId == 0)
+            {
+                return new ShiftEndResult
+                {
+                    Status = CloseShiftStatus.NotFound,
+                    ErrorMessage = "Смена не найдена. Данные будут обновлены."
+                };
+            }
+
+            if (shift.DateEnd.HasValue)
+            {
+                return new ShiftEndResult
+                {
+                    Status = CloseShiftStatus.AlreadyClosed,
+                    ErrorMessage = "Смена уже закрыта на другом рабочем месте. Данные будут обновлены."
+                };
+            }
+
+            if (shift.DateDel.HasValue)
+            {
+                return new ShiftEndResult
+                {
+                    Status = CloseShiftStatus.Deleted,
+                    ErrorMessage = "Смена помечена как удалённая. Закрытие невозможно; данные будут обновлены."
+                };
+            }
+
+            return new ShiftEndResult
+            {
+                Status = CloseShiftStatus.Failed,
+                ErrorMessage = "Не удалось закрыть смену: запись найдена и дата окончания не заполнена, но обновление не применилось."
+            };
         }
 
         private static async Task UpdatePzvKwsIdAsync(System.Data.SqlClient.SqlConnection connection, IDbTransaction transaction, IEnumerable<int> pzvIds, int kwsId)
@@ -995,7 +1061,7 @@ WHERE pzvID IN @ids";
             public Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(int shiftId, decimal minHours, string userName = "") =>
                 KnitterRepository.AdjustNotStartedBeforeShiftEndAsync(_connection, _transaction, shiftId, minHours, userName);
 
-            public Task<bool> TryEndWorkingShiftAsync(int shiftId, int tabEnd) =>
+            public Task<ShiftEndResult> TryEndWorkingShiftAsync(int shiftId, int tabEnd) =>
                 KnitterRepository.TryEndWorkingShiftAsync(_connection, _transaction, shiftId, tabEnd);
 
             public Task CommitAsync()

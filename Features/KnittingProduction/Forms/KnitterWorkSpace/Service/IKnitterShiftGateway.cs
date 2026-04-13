@@ -22,7 +22,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         Task UpdatePzvKwsIdAsync(IEnumerable<int> pzvIds, int kwsId);
         Task<IReadOnlyList<PzvSplitResult>> SplitPzvByModeAsync(int pzvId, int mode, int qtyFact);
         Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(int shiftId, decimal minHours, string userName = "");
-        Task<bool> TryEndWorkingShiftAsync(int shiftId, int tabEnd);
+        Task<ShiftEndResult> TryEndWorkingShiftAsync(int shiftId, int tabEnd);
         Task CommitAsync();
     }
 
@@ -43,5 +43,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         public DateTime? ExistingDateStart { get; init; }
 
         public bool CanOpen => Status == StartShiftStatus.Success;
+    }
+
+    public sealed class ShiftEndResult
+    {
+        public CloseShiftStatus Status { get; init; }
+        public string ErrorMessage { get; init; } = "";
+
+        public bool Closed => Status == CloseShiftStatus.Success;
     }
 }

@@ -42,7 +42,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                     var lockResult = await tx.TryAcquireZoneOpenShiftLockAsync(command.KmaId).ConfigureAwait(false);
                     if (!lockResult.CanOpen)
                     {
-                        return Failure(lockResult.Status, BuildOpenLockMessage(command, lockResult));
+                        return Failure(lockResult.Status, BuildOpenLockMessage(command, lockResult), lockResult);
                     }
 
                     await tx.UpdatePzvTabAsync(command.PzvIds, command.Tab).ConfigureAwait(false);
@@ -91,13 +91,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
             };
         }
 
-        private static StartShiftResult Failure(StartShiftStatus status, string message)
+        private static StartShiftResult Failure(StartShiftStatus status, string message, ShiftOpenLockResult? lockResult = null)
         {
             return new StartShiftResult
             {
                 Success = false,
                 Status = status,
-                ErrorMessage = message ?? string.Empty
+                ErrorMessage = message ?? string.Empty,
+                ExistingShiftId = lockResult?.ExistingShiftId,
+                ExistingTabStart = lockResult?.ExistingTabStart,
+                ExistingDateStart = lockResult?.ExistingDateStart
             };
         }
 

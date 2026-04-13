@@ -16,6 +16,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         AlreadyClosed,
         HasUnfinishedOperations,
         NotFound,
+        Deleted,
         ConcurrentCloseInProgress,
         Failed
     }
@@ -46,6 +47,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         public bool AlreadyOpen => Status == StartShiftStatus.AlreadyOpen;
         public bool ConcurrentOpenInProgress => Status == StartShiftStatus.ConcurrentOpenInProgress;
         public int? ShiftId { get; init; }
+        public int? ExistingShiftId { get; init; }
+        public int? ExistingTabStart { get; init; }
+        public DateTime? ExistingDateStart { get; init; }
         public DateTime? ShiftStartTime { get; init; }
     }
 
@@ -64,6 +68,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         public string ErrorMessage { get; init; }
         public bool HasUnfinishedOperations { get; init; }
         public bool AlreadyClosed => Status == CloseShiftStatus.AlreadyClosed;
+        public bool NotFound => Status == CloseShiftStatus.NotFound;
+        public bool Deleted => Status == CloseShiftStatus.Deleted;
         public bool ConcurrentCloseInProgress => Status == CloseShiftStatus.ConcurrentCloseInProgress;
         public List<int> UnfinishedPzvIds { get; init; } = new();
     }
