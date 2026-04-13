@@ -252,13 +252,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                 textEdit3.Text = StringNormalizer.TrimEndOrEmpty(selectedItem.grup, ' ');
             }
 
-            await LoadGridImage(pictureBox2, annId: annId);
+            var imageTask = LoadGridImage(pictureBox2, annId: annId);
+            var raszTask = RefreshNormRaszForArticlesTab(annId, cancellationToken);
+            var raskTask = RefreshNormRaskForArticlesTab(annId, cancellationToken);
+            var kontTask = RefreshNormKontForArticlesTab(annId, cancellationToken);
+            var nzpTask = LoadNZPForArticlesTab(annId, cancellationToken);
+
+            await Task.WhenAll(imageTask, raszTask, raskTask, kontTask, nzpTask);
             cancellationToken.ThrowIfCancellationRequested();
-            await RefreshNormRaszForArticlesTab(annId, cancellationToken);
-            await RefreshNormRaskForArticlesTab(annId, cancellationToken);
-            await RefreshNormKontForArticlesTab(annId, cancellationToken);
-            cancellationToken.ThrowIfCancellationRequested();
-            await LoadNZPForArticlesTab(annId, cancellationToken);
             RefreshCurrentWorksUxState();
         }
 

@@ -93,29 +93,24 @@ namespace SewingProduction.Features.TeamWork.Services
                 return await _artNormRepository.GetArtNormDataCurrent(true);
             }
 
-            var tasks = new List<Task<List<MyDataANN>>>();
+            var prefixes = new List<string>();
             if (!string.IsNullOrEmpty(articul))
             {
-                tasks.Add(_artNormRepository.GetArtNormDataByArticul(articul));
+                prefixes.Add(articul);
 
                 string artWithoutDash = articul.Replace("-", "");
                 if (artWithoutDash != articul)
-                    tasks.Add(_artNormRepository.GetArtNormDataByArticul(artWithoutDash));
+                    prefixes.Add(artWithoutDash);
 
                 int dashIndex = articul.IndexOf("-");
                 if (dashIndex > 0)
                 {
                     string artPrefix = articul.Substring(0, dashIndex);
-                    tasks.Add(_artNormRepository.GetArtNormDataByArticul(artPrefix));
+                    prefixes.Add(artPrefix);
                 }
             }
 
-            var results = await Task.WhenAll(tasks);
-            foreach (var result in results)
-            {
-                if (result != null)
-                    relatedData.AddRange(result);
-            }
+            relatedData = await _artNormRepository.GetArtNormDataByArticulPatterns(prefixes);
 
             var uniqueData = new Dictionary<int, MyDataANN>();
             foreach (var item in relatedData)

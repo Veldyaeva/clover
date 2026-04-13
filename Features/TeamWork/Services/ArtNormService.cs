@@ -300,6 +300,48 @@ namespace SewingProduction.Services
             }
         }
 
+        public async Task<List<MyDataANN>> GetArtNormDataByArticulPatterns(IEnumerable<string> artPrefixes)
+        {
+            var prefixes = (artPrefixes ?? Enumerable.Empty<string>())
+                .Where(prefix => !string.IsNullOrWhiteSpace(prefix))
+                .Select(prefix => prefix.Trim())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToArray();
+
+            if (prefixes.Length == 0)
+            {
+                return new List<MyDataANN>();
+            }
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@StatusArchive", (int)Status.Archive);
+
+            var conditions = new List<string>();
+            for (int i = 0; i < prefixes.Length; i++)
+            {
+                string parameterName = $"ArtPattern{i}";
+                conditions.Add($"articul LIKE @{parameterName}");
+                parameters.Add(parameterName, prefixes[i] + "%");
+            }
+
+            string query = $@"SELECT 
+                annId, grup, articul, mod, size_label, sek, sek_vyaz, data_obn, sek_shv, 
+                status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, 
+                sek_kr, slogn, komment, annRecommendation, data_sozd, diz, constr,
+                annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId
+                FROM artNormNView 
+                WHERE status <> @StatusArchive AND ({string.Join(" OR ", conditions)})";
+
+            using (var connection = _dbHelper.GetConnection())
+            {
+                var result = await connection.QueryAsync<MyDataANN>(query, parameters);
+                return result
+                    .GroupBy(item => item.AnnID)
+                    .Select(group => group.First())
+                    .ToList();
+            }
+        }
+
         /// <summary>
         /// Получение пути к файлу изображения
         /// </summary>
