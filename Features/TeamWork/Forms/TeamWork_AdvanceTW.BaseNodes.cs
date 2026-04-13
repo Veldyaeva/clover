@@ -118,30 +118,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
                 }
 
-                var existing = (await _baseNodeLibraryService
-                    .GetAllAsync())
-                    .FirstOrDefault(node => string.Equals(node.Name, form.ResultNode.Name, StringComparison.CurrentCultureIgnoreCase));
-
-                if (existing != null)
-                {
-                    var overwriteResult = MessageBox.Show(
-                        this,
-                        $"Базовый узел \"{existing.Name}\" уже существует. Перезаписать его?",
-                        "Базовые узлы",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Question,
-                        MessageBoxDefaultButton.Button2);
-
-                    if (overwriteResult != DialogResult.Yes)
-                    {
-                        return;
-                    }
-
-                    form.ResultNode.BaseNodeId = existing.BaseNodeId;
-                    form.ResultNode.Id = existing.Id;
-                    form.ResultNode.CreatedAtUtc = existing.CreatedAtUtc;
-                }
-
                 var savedNode = await _baseNodeLibraryService.SaveAsync(form.ResultNode);
                 ClearBaseNodeSelection();
                 _ = _logger.LogEventAsync($"Сохранен базовый узел \"{savedNode.Name}\" ({savedNode.Operations.Count} операций)", "SaveSelectionAsBaseNode");

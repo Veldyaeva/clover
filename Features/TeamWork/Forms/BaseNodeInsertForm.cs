@@ -107,14 +107,18 @@ namespace SewingProduction.Features.TeamWork.Forms
             int chapters = node.Operations.Select(x => x.SourceN).Distinct().Count();
             string description = string.IsNullOrWhiteSpace(node.Description) ? "Без описания" : StringNormalizer.TrimOrEmpty(node.Description);
             string sourceCode = string.IsNullOrWhiteSpace(node.SourceRtCode) ? "-" : node.SourceRtCode;
+            string sourceArticul = string.IsNullOrWhiteSpace(node.SourceArticul) ? "-" : node.SourceArticul;
             string productKind = string.IsNullOrWhiteSpace(GetProductKindValue(node)) ? "-" : GetProductKindValue(node);
             string productCategory = string.IsNullOrWhiteSpace(node.ProductCategory) ? "-" : node.ProductCategory;
             string nodeGroup = string.IsNullOrWhiteSpace(node.NodeGroup) ? "-" : node.NodeGroup;
+            string nodeSubgroup = string.IsNullOrWhiteSpace(node.NodeGroupDetail) ? "-" : node.NodeGroupDetail;
             detailsLabel.Text =
                 $"РТ: {sourceCode}{Environment.NewLine}" +
-                $"Класс изделия: {productKind}{Environment.NewLine}" +
+                $"Артикул: {sourceArticul}{Environment.NewLine}" +
+                $"Тип узла: {productKind}{Environment.NewLine}" +
                 $"Категория: {productCategory}{Environment.NewLine}" +
                 $"Группа: {nodeGroup}{Environment.NewLine}" +
+                $"Уточнение: {nodeSubgroup}{Environment.NewLine}" +
                 $"Операций: {chapters}. Подопераций: {node.Operations.Count}.{Environment.NewLine}" +
                 description;
         }
@@ -202,7 +206,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         ImageKey = imageKey
                     };
 
-                    item.SubItems.Add($"РТ: {(string.IsNullOrWhiteSpace(node.SourceRtCode) ? "-" : node.SourceRtCode)}");
+                    item.SubItems.Add(BuildNodeSourceSubtitle(node));
                     item.SubItems.Add(BuildNodeCardSubtitle(node));
                     nodeCardsListView.Items.Add(item);
                 }
@@ -308,7 +312,21 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (string.IsNullOrWhiteSpace(filter))
                 return true;
 
-            return StringNormalizer.TrimOrEmpty(node.Name)
+            string haystack = string.Join(" ", new[]
+            {
+                node.DisplayName,
+                node.Name,
+                node.NodeCode,
+                node.SourceArticul,
+                node.SourceRtCode,
+                node.NodeGroup,
+                node.NodeGroupDetail,
+                node.NodeType,
+                node.ProductCategory,
+                node.Description
+            });
+
+            return StringNormalizer.TrimOrEmpty(haystack)
                 .Contains(filter, StringComparison.CurrentCultureIgnoreCase);
         }
 
@@ -325,7 +343,28 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             string productCategory = string.IsNullOrWhiteSpace(node?.ProductCategory) ? "Без категории" : node.ProductCategory;
             string nodeGroup = string.IsNullOrWhiteSpace(node?.NodeGroup) ? "Без группы" : node.NodeGroup;
-            return $"{productCategory} • {nodeGroup}";
+            string detail = string.IsNullOrWhiteSpace(node?.NodeGroupDetail) ? string.Empty : $" • {node.NodeGroupDetail}";
+            return $"{productCategory} • {nodeGroup}{detail}";
+        }
+
+        private static string BuildNodeSourceSubtitle(BaseNodeDefinition node)
+        {
+            if (!string.IsNullOrWhiteSpace(node?.SourceArticul) && !string.IsNullOrWhiteSpace(node?.SourceRtCode))
+            {
+                return $"Арт.: {node.SourceArticul} • РТ: {node.SourceRtCode}";
+            }
+
+            if (!string.IsNullOrWhiteSpace(node?.SourceArticul))
+            {
+                return $"Арт.: {node.SourceArticul}";
+            }
+
+            if (!string.IsNullOrWhiteSpace(node?.SourceRtCode))
+            {
+                return $"РТ: {node.SourceRtCode}";
+            }
+
+            return "Источник: -";
         }
 
         private static Image CreateNodeCardImage(string imagePath)
