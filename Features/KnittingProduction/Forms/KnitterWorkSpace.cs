@@ -58,7 +58,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private readonly IKnitterWorkSpaceService _workSpaceService;
         private readonly ILogger _logger = new FileLogger();
         private const string LoggerContext = "KnitterWorkSpace";
+        private const string KnitWorkingShiftTable = "dbo.knitWorkingShiftNew";
+        private const string ShiftEndFieldName = "kwsDateEnd";
         private static readonly TimeSpan PlanBrokerSelfMute = TimeSpan.FromSeconds(2);
+        private static readonly TimeSpan ShiftBrokerSelfMute = TimeSpan.FromSeconds(5);
+        private static readonly TimeSpan RemoteShiftClosedSplashDuration = TimeSpan.FromSeconds(5);
 
         /// <summary>
         /// Сервис для работы с ServiceBroker.
@@ -69,7 +73,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// Список SQL-объектов для отслеживания через ServiceBroker.
         /// </summary>
         private static readonly IReadOnlyList<string> _sbObjects =
-            new[] { "GetPlanZagrVyazNorm_ByTab3" };
+            new[] { "GetPlanZagrVyazNorm_ByTab3", "knitWorkingShiftNewCurrentSmen_view" };
         public IReadOnlyList<string> ServiceBrokerObjects => _sbObjects;
         /// <summary>
         /// Приоритеты обновления объектов (чем выше число, тем выше приоритет).
@@ -77,7 +81,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private static readonly IReadOnlyDictionary<string, int> _sbPriorities =
     new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
     {
-        { "GetPlanZagrVyazNorm_ByTab3", 10 }
+        { "GetPlanZagrVyazNorm_ByTab3", 10 },
+        { "knitWorkingShiftNewCurrentSmen_view", 10 }
     };
         public IReadOnlyDictionary<string, int> RefreshPriorities => _sbPriorities;
         public string ServiceBrokerFormName => GetType().Name;
@@ -175,6 +180,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// Последний загруженный табельный номер, чтобы не перезагружать план без смены таба.
         /// </summary>
         private int? _currentLoadedTab = null;
+        private int _remoteShiftClosedSplashShowing;
 
         /// <summary>
         /// Список ФИО для повторного показа сплеша при бездействии.
@@ -533,6 +539,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         return;
                     }
 
+                    _sbController.MuteTable(KnitWorkingShiftTable, ShiftBrokerSelfMute);
                     var res = await _workSpaceService.CloseShiftAsync(new CloseShiftCommand
                     {
                         ShiftId = _currentShiftId.Value,
@@ -575,6 +582,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     .Distinct()
                     .ToList();
 
+                _sbController.MuteTable(KnitWorkingShiftTable, ShiftBrokerSelfMute);
                 var result = await _workSpaceService.StartShiftAsync(new StartShiftCommand
                 {
                     Tab = selectedTab,
@@ -2231,7 +2239,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     LogSuccess($"Получен сигнал обновления для объекта {objectName}.", nameof(RestartDataByObjectNameAsync));
 
                     // Если это наша хранимая процедура плана - перезагружаем план
-                    if (string.Equals(objectName, "GetPlanZagrVyazNorm_ByTab3", StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(objectName, "GetPlanZagrVyazNorm_ByTab3", StringComparison.OrdinalIgnoreCase)
+                        || string.Equals(objectName, "knitWorkingShiftNewCurrentSmen_view", StringComparison.OrdinalIgnoreCase))
                     {
                         if (_currentLoadedTab.HasValue)
                         {
@@ -2304,6 +2313,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
+                await HandleRemoteShiftClosedByBrokerAsync(tableName, fieldsChangedCsv);
                 await _sbController.HandleUpdateAsync(tableName, fieldsChangedCsv ?? string.Empty);
             }
             catch (Exception ex)
@@ -2314,6 +2324,86 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         public Task UpdateDataInFormAsync(string tableName)
             => UpdateDataInFormAsync(tableName, fieldsChangedCsv: string.Empty);
+
+        private async Task HandleRemoteShiftClosedByBrokerAsync(string tableName, string? fieldsChangedCsv)
+        {
+            if (!_isShiftRunning || !_currentShiftId.HasValue || !_currentLoadedTab.HasValue)
+                return;
+
+            if (!IsShiftEndBrokerUpdate(tableName, fieldsChangedCsv))
+                return;
+
+            var previousShiftId = _currentShiftId.Value;
+            var currentTab = _currentLoadedTab.Value;
+
+            await UpdateShiftStateAsync(currentTab);
+
+            if (_currentShiftId.HasValue && _currentShiftId.Value == previousShiftId)
+                return;
+
+            await RefreshFioListAsync();
+            LogWarning(
+                $"Смена {previousShiftId} закрыта вне текущей формы. Текущий табель: {currentTab}.",
+                nameof(HandleRemoteShiftClosedByBrokerAsync));
+            _ = ShowRemoteShiftClosedSplashAsync();
+        }
+
+        private static bool IsShiftEndBrokerUpdate(string tableName, string? fieldsChangedCsv)
+        {
+            if (!IsMatchingBrokerTable(tableName, KnitWorkingShiftTable))
+                return false;
+
+            if (string.IsNullOrWhiteSpace(fieldsChangedCsv))
+                return true;
+
+            return fieldsChangedCsv
+                .Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(field => field.Trim().Trim('[', ']'))
+                .Any(field => string.Equals(field, ShiftEndFieldName, StringComparison.OrdinalIgnoreCase));
+        }
+
+        private static bool IsMatchingBrokerTable(string tableName, string expectedTableName)
+        {
+            if (string.IsNullOrWhiteSpace(tableName))
+                return false;
+
+            string Normalize(string value) =>
+                value
+                    .Trim()
+                    .Replace("[", string.Empty)
+                    .Replace("]", string.Empty);
+
+            var actual = Normalize(tableName);
+            var expected = Normalize(expectedTableName);
+
+            return string.Equals(actual, expected, StringComparison.OrdinalIgnoreCase)
+                   || actual.EndsWith("." + expected, StringComparison.OrdinalIgnoreCase)
+                   || expected.EndsWith("." + actual, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private async Task ShowRemoteShiftClosedSplashAsync()
+        {
+            if (Interlocked.Exchange(ref _remoteShiftClosedSplashShowing, 1) != 0)
+                return;
+
+            try
+            {
+                SplashScreenHelper.ShowSplash("Смена закрыта на другом компьютере", textOnly: true);
+                await Task.Delay(RemoteShiftClosedSplashDuration);
+            }
+            finally
+            {
+                try
+                {
+                    SplashScreenHelper.CloseSplash();
+                }
+                catch
+                {
+                }
+
+                Interlocked.Exchange(ref _remoteShiftClosedSplashShowing, 0);
+            }
+        }
 
         private async void layoutControlGroup1_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
         {
