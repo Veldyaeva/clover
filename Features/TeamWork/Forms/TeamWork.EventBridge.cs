@@ -1,4 +1,4 @@
-using DevExpress.XtraBars.Docking2010;
+﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Models;
@@ -39,11 +39,87 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewNZP_FocusedRowChanged_Internal(sender, e);
         }
 
+        private void ApplyAnnGridKitSearchFilter(GridView gridView)
+        {
+            if (gridView == null || _isUpdatingAnnGridKitFilter)
+            {
+                return;
+            }
+
+            string searchText = StringNormalizer.TrimOrEmpty(gridView.FindFilterText);
+            bool shouldUseKitFilter = toggleSwitchKit?.IsOn == true && !string.IsNullOrEmpty(searchText);
+
+            string targetFilter = string.Empty;
+            if (shouldUseKitFilter)
+            {
+                var parsedArticle = ParseKitArticle(searchText);
+                if (parsedArticle.HasValidComponents)
+                {
+                    targetFilter = BuildKitArticleFilter(parsedArticle.Component1, parsedArticle.Component2);
+                }
+            }
+
+            if (string.IsNullOrEmpty(targetFilter))
+            {
+                if (!_annGridKitFilterActive)
+                {
+                    return;
+                }
+
+                _isUpdatingAnnGridKitFilter = true;
+                try
+                {
+                    _annGridKitFilterActive = false;
+                    gridView.ActiveFilterString = string.Empty;
+                }
+                finally
+                {
+                    _isUpdatingAnnGridKitFilter = false;
+                }
+
+                return;
+            }
+
+            if (_annGridKitFilterActive && string.Equals(gridView.ActiveFilterString, targetFilter, StringComparison.Ordinal))
+            {
+                return;
+            }
+
+            _isUpdatingAnnGridKitFilter = true;
+            try
+            {
+                _annGridKitFilterActive = true;
+                gridView.ActiveFilterString = targetFilter;
+            }
+            finally
+            {
+                _isUpdatingAnnGridKitFilter = false;
+            }
+        }
+
+        private static string BuildKitArticleFilter(string component1, string component2)
+        {
+            string escapedComponent1 = EscapeGridFilterValue(component1);
+            string escapedComponent2 = EscapeGridFilterValue(component2);
+
+            return $"([Articul] LIKE '%{escapedComponent1}%') OR ([Articul] LIKE '%{escapedComponent2}%')";
+        }
+
+        private static string EscapeGridFilterValue(string value)
+        {
+            return StringNormalizer.TrimOrEmpty(value).Replace("'", "''");
+        }
+
         /// <summary>
         /// Обрабатывает смену строки в неувязанных артикулах
         /// </summary>
         private async void gridView_unboundArts_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
+            if (_isRestoringGridState)
+            {
+                return;
+            }
+
             gridView_unboundArts_FocusedRowChanged_Internal(sender, e);
         }
 
@@ -54,6 +130,10 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void ANNgridView_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
+            if (_isRestoringGridState)
+            {
+                return;
+            }
             try
             {
                 if (e.FocusedRowHandle >= 0 && ANNgridView.GetRow(e.FocusedRowHandle) is ArtNormN row)
@@ -75,65 +155,15 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                var gv = sender as GridView;
-                if (gv == null) return;
-
                 var gridView = sender as GridView;
                 if (gridView == null) return;
 
-                // В режиме комплекта проверяем FindFilterText для комплектного поиска
-                if (toggleSwitchKit.IsOn && !string.IsNullOrEmpty(gridView.FindFilterText))
-                {
-                    string searchText = gridView.FindFilterText.Trim();
-                    var kitComponents = ParseKitArticle(searchText);
-
-                    if (kitComponents.HasValidComponents)
-                    {
-                        // Применяем комплектный поиск
-                        string filterExpression = $"[Articul] Like '%{kitComponents.Component1}%' OR [Articul] Like '%{kitComponents.Component2}%'";
-
-                        // Временно отключаем FindFilter и применяем кастомный фильтр
-                        gridView.GridControl.BeginInvoke(new Action(() =>
-                        {
-                            try
-                            {
-                                gridView.FindFilterText = string.Empty;
-                                gridView.ActiveFilterString = filterExpression;
-
-                                _logger?.LogEventAsync($"Комплектный поиск: '{searchText}' разобран на '{kitComponents.Component1}' и '{kitComponents.Component2}'", "ANNgridView_ActiveFilterChanged");
-                            }
-                            catch (Exception ex)
-                            {
-                                _logger?.LogErrorAsync(ex, "Ошибка при применении комплектного поиска");
-                            }
-                        }));
-                        return; // Выходим, чтобы не выполнять стандартную логику
-                    }
-                }
-
-                // Стандартная логика для обычного поиска
-                if (gridView.ActiveFilterCriteria != null)
-                {
-                    try
-                    {
-                        if (gridView.DataRowCount > 0)
-                        {
-                            int firstVisibleRow = gridView.GetVisibleRowHandle(0);
-                            if (gridView.IsValidRowHandle(firstVisibleRow))
-                            {
-                                gridView.FocusedRowHandle = firstVisibleRow;
-                                gridView.MakeRowVisible(firstVisibleRow);
-
-                                _logger?.LogEventAsync($"Автоматический переход на первую строку результатов поиска. Всего строк: {gridView.DataRowCount}", "ANNgridView_ActiveFilterChanged");
-                                ANNgridView_FocusedRowChanged_Internal(ANNgridView, new FocusedRowChangedEventArgs(-1, ANNgridView.FocusedRowHandle));
-                            }
-                        }
-                    }
-                    catch (Exception) { }
-                }
-
                 if (!IsHandleCreated) return;
-                BeginInvoke((MethodInvoker)(() => FocusFirstResultAndLoadRelated()));
+                BeginInvoke((MethodInvoker)(() =>
+                {
+                    ApplyAnnGridKitSearchFilter(gridView);
+                    RefreshAnnGridSearchVisualState();
+                }));
             }
             catch (Exception ex)
             {
@@ -151,7 +181,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (string.IsNullOrWhiteSpace(articleText))
                     return (false, string.Empty, string.Empty);
 
-                string cleanText = articleText.Trim().ToUpperInvariant();
+                string cleanText = StringNormalizer.NormalizeUpperInvariant(articleText);
 
                 var patterns = new[]
                 {
@@ -246,17 +276,20 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private async void layoutControlGroup2_CustomButtonClick(object sender, BaseButtonEventArgs e)
         {
-            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+            var tag = (e.Button as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton)?.Tag as string;
 
-            switch (buttonIndex)
+            switch (tag)
             {
-                case 2:
+                case "btnAdd":
+                case "rt:add":
                     ButtonPreliminaryWd_Click_Internal(sender, e);
                     break;
-                case 4:
+                case "btnEdit":
+                case "rt:duplicate":
                     await DuplicateWorkDivision_Click_Internal(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, forMyDataAnnView: true);
                     break;
-                case 6:
+                case "btnArch":
+                case "rt:arch-and-copy":
                     await ArchAndCopy(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, true);
                     break;
             }
@@ -307,33 +340,33 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private async void layoutControlGroup8_CustomButtonClick(object sender, BaseButtonEventArgs e)
         {
-            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+            var tag = (e.Button as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton)?.Tag as string;
 
-            switch (buttonIndex)
+            switch (tag)
             {
-                case 0:
+                case "wd:add-prelim":
                     if (ButtonPreliminaryWd.Enabled && ButtonPreliminaryWd.Visible)
                         ButtonPreliminaryWd_Click_Internal(sender, e);
                     break;
-                case 2:
+                case "wd:edit":
                     if (ButtonEditOnlyAdv.Enabled && ButtonEditOnlyAdv.Visible)
                         await EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: true);
                     else if (ButtonEditWd.Enabled && ButtonEditWd.Visible)
                         await EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: false);
                     break;
-                case 4:
+                case "wd:clone":
                     if (ButtonDouble.Enabled && ButtonDouble.Visible)
                         await DuplicateWorkDivision_Click_Internal(ANNgridView, _bindingList, _bindingSource);
                     break;
-                case 6:
+                case "wd:archive":
                     if (ButtonArchAndCopyWd.Enabled && ButtonArchAndCopyWd.Visible)
                         await SetArchiveStatus_Internal(sender, e);
                     break;
-                case 9:
+                case "wd:print":
                     if (PrintButton.Enabled && PrintButton.Visible)
                         PrintWorkDivisionScheme_Click(null, null);
                     break;
-                case 11:
+                case "wd:print-plus":
                     if (printButtonPlus.Enabled && printButtonPlus.Visible)
                         printButtonPlus_Click(null, null);
                     break;
@@ -355,17 +388,17 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private async void layoutControlGroup14_CustomButtonClick(object sender, BaseButtonEventArgs e)
         {
-            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+            var tag = (e.Button as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton)?.Tag as string;
 
-            switch (buttonIndex)
+            switch (tag)
             {
-                case 0:
+                case "bind:link":
                     await BindButton_Click_Internal(sender, e);
                     break;
-                case 2:
+                case "bind:unlink":
                     await UnbindWD(sender, e);
                     break;
-                case 4:
+                case "bind:touch-update-date":
                     await SetUpdateDate_Internal(sender, e);
                     break;
             }
@@ -376,11 +409,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// </summary>
         private async void layoutControlGroup19_CustomButtonClick(object sender, BaseButtonEventArgs e)
         {
-            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+            var tag = (e.Button as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton)?.Tag as string;
 
-            switch (buttonIndex)
+            switch (tag)
             {
-                case 0:
+                case "arch:restore":
                     await RestoreFromArchive_Internal(sender, e);
                     break;
             }

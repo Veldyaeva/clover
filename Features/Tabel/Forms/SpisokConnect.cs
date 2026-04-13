@@ -210,7 +210,7 @@ namespace SewingProduction.Features.Tabel.Forms
                     MessageBox.Show("Увязка с 1с не требуется!");
                     return;
                 }
-                using (var chooseForm = new ChooseUin(lastName, firstName, middleName, tabno, naimenPodr, nameGroup))
+                using (var chooseForm = new ChooseUin(_user,lastName, firstName, middleName, tabno, naimenPodr, nameGroup))
                 {
                     //Point mousePosition = Control.MousePosition;
                     //calculator.StartPosition = FormStartPosition.Manual;

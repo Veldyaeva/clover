@@ -6,11 +6,12 @@ using DevExpress.XtraReports.UI;
 
 namespace SewingProduction.Features.Sprav.Reports
 {
-    public partial class OborudBrigReport : DevExpress.XtraReports.UI.XtraReport
+    public partial class OborudBrigReport : SewingProduction.Report.ConnectedXtraReport
     {
         public OborudBrigReport()
         {
             InitializeComponent();
+            UseCurrentConnection();
         }
     }
 }

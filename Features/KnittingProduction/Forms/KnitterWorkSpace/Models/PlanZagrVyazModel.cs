@@ -1,6 +1,6 @@
 ﻿using DevExpress.CodeParser;
 using DevExpress.XtraCharts;
-using Microsoft.Identity.Client;
+//using Microsoft.Identity.Client;
 using SewingProduction.Features.KnittingProduction.Models;
 using System;
 using System.Collections.Generic;

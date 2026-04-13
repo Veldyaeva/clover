@@ -6,11 +6,12 @@ using System.Drawing;
 
 namespace SewingProduction.Report
 {
-    public partial class PZVCurrentMachineAssignmentReport : DevExpress.XtraReports.UI.XtraReport
+    public partial class PZVCurrentMachineAssignmentReport : ConnectedXtraReport
     {
         public PZVCurrentMachineAssignmentReport()
         {
             InitializeComponent();
+            UseCurrentConnection();
         }
     }
 }

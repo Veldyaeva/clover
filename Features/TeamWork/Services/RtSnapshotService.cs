@@ -80,7 +80,7 @@ namespace SewingProduction.Features.TeamWork.Services
             // Загружаем ANN, sek, seb, sek_vyaz, data_obn, sek_shvб status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_vyaz18, sek_vyaz57, sek_kr, slogn, , annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId, annRecommendation as Reco,
             var annQuery = @"
                 SELECT 
-                    annId, grup, RTRIM(LTRIM(articul)) articul, mod, size_label, status_ann.name AS statusText, komment,
+                    annId, grup, articul, mod, size_label, status_ann.name AS statusText, komment,
                     data_sozd, diz, constr
                 FROM ArtNormNView 
                 JOIN status_ann ON status = status_id
@@ -157,11 +157,11 @@ namespace SewingProduction.Features.TeamWork.Services
                 curS.Rasz ?? Enumerable.Empty<NormRasz>(),
                  key: r => (r.nrID > 0
         ? $"id:{r.nrID}"                                   // группировка по id
-        : $"№:{r.DisplayNumber}|код:{r.Kod}|текст:{r.Text?.TrimEnd()}"), // fallback для новых/без id
+        : $"№:{r.DisplayNumber}|код:{r.Kod}|текст:{StringNormalizer.TrimEndOrEmpty(r.Text)}"), // fallback для новых/без id
                   headerOld: r => $"№ {r.DisplayNumber}",     // ← СТАРЫЙ номер из снимка
     headerTitle: r => $"№ {r.DisplayNumber}",              // ← показываем DisplayNumber
     important: r => new (string name, object value)[] {
-        ("№", r.DisplayNumber), ("текст", r.Text?.TrimEnd())
+        ("№", r.DisplayNumber), ("текст", StringNormalizer.TrimEndOrEmpty(r.Text))
         //, ("сек", r.Sek),("разряд ", r.razryd), ("произв. ", r.KodProizv),   // отображаем только номер и текст, без подробностей
         //("подр. ", r.KodPodr), ("обор. ", r.KodOb), ("спец. ", r.Spec)
                 });

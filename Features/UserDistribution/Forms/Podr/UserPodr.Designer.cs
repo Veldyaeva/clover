@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserPodr));
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             customGridControlPodr = new SewingProduction.Core.Class.CustomGridControl();
             gridViewPodr = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -92,9 +93,7 @@
             // 
             // gridViewPodr
             // 
-            // gridViewPodr.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewPodr.Appearance.EvenRow.Options.UseBackColor = true;
-            // gridViewPodr.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewPodr.Appearance.FocusedRow.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
             gridViewPodr.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewPodr.Appearance.FocusedRow.Options.UseFont = true;
@@ -116,7 +115,9 @@
             gridViewPodr.RowClick += gridViewPodr_RowClick;
             gridViewPodr.CustomDrawGroupRow += gridViewPodr_CustomDrawGroupRow;
             gridViewPodr.CellValueChanged += gridViewPodr_CellValueChanged;
+            gridViewPodr.CellValueChanging += gridViewPodr_CellValueChanging;
             gridViewPodr.KeyDown += gridViewPodr_KeyDown;
+            gridViewPodr.DoubleClick += gridViewPodr_DoubleClick;
             // 
             // IsSelectedPodr
             // 
@@ -198,9 +199,7 @@
             // 
             // gridViewUser
             // 
-            // gridViewUser.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewUser.Appearance.EvenRow.Options.UseBackColor = true;
-            // gridViewUser.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewUser.Appearance.FocusedRow.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
             gridViewUser.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewUser.Appearance.FocusedRow.Options.UseFont = true;
@@ -321,6 +320,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1203, 629);
             Controls.Add(layoutControl1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "UserPodr";
             Text = "Администрирование табеля";
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();

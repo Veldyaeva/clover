@@ -1,4 +1,4 @@
-using DevExpress.CodeParser;
+﻿using DevExpress.CodeParser;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
@@ -37,12 +37,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                 ANNgridControl?.BeginUpdate();
                 ct.ThrowIfCancellationRequested();
                 // Получаем данные
-                var fioList = await _artNormService.GetRelDesigner();
+                var reloadResult = await _teamWorkService.LoadWorkDivisionsWithFocusAsync();
                 ct.ThrowIfCancellationRequested();
 
+                var fioList = reloadResult.Designers ?? new List<FioModel>();
                 ArtNormN.FioSource = fioList;
+                _cachedFioData = fioList.Count > 0 ? new List<FioModel>(fioList) : _cachedFioData;
 
-                var data = await _artNormService.GetArtNormData();
+                var data = reloadResult.Data;
                 ct.ThrowIfCancellationRequested();
 
                 if (data == null || data.Count == 0)
@@ -161,13 +163,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             RecoRichTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Reco), false);
 
             textEditMod.DataBindings.Clear();
-            textEditMod.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Mod), true, DataSourceUpdateMode.OnPropertyChanged);
+            textEditMod.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Mod), true, DataSourceUpdateMode.Never);
             textEditArt.DataBindings.Clear();
-            textEditArt.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Articul), true, DataSourceUpdateMode.OnPropertyChanged);
+            textEditArt.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Articul), true, DataSourceUpdateMode.Never);
             textEditSec.DataBindings.Clear();
-            textEditSec.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Sek), true, DataSourceUpdateMode.OnPropertyChanged);
+            textEditSec.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Sek), true, DataSourceUpdateMode.Never);
             textEditCreate.DataBindings.Clear();
-            textEditCreate.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.dateCreate), true, DataSourceUpdateMode.OnPropertyChanged);
+            textEditCreate.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.dateCreate), true, DataSourceUpdateMode.Never);
         }
 
         /// <summary>
@@ -363,6 +365,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (selectedRow == null)
                 {
                     ButtonUnbindWd.Enabled = false;
+                    RefreshCurrentWorksUxState();
                     return;
                 }
 
@@ -370,6 +373,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 int pzt = selectedRow.PZTCount;
 
                 ButtonUnbindWd.Enabled = (nzp <= 0 || pzt <= 0);
+                RefreshCurrentWorksUxState();
             }
             catch (Exception ex)
             {
@@ -378,6 +382,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     await _logger.LogErrorAsync(ex, "Ошибка при обновлении статуса кнопки отвязки НЗП");
                 }
                 ButtonUnbindWd.Enabled = false;
+                RefreshCurrentWorksUxState();
             }
         }
         /// <summary>
@@ -591,7 +596,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                         if (value == null || value == DBNull.Value)
                             return " ";
                         string stringValue = value.ToString();
-                        return string.IsNullOrEmpty(stringValue) ? " " : stringValue.TrimEnd(' ');
+                        string normalizedValue = StringNormalizer.TrimEndOrEmpty(stringValue, ' ');
+                        return string.IsNullOrEmpty(normalizedValue) ? " " : normalizedValue;
                     }
 
                     var grupVal = GetSafeValue("grup");
@@ -655,15 +661,16 @@ namespace SewingProduction.Features.TeamWork.Forms
                 AnnID = 0
             };
 
-            int newId = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newItem);
-            if (newId <= 0)
+            var draftResult = await _teamWorkService.CreateWorkDivisionDraftAsync(newItem);
+            if (!draftResult.Success || draftResult.NewAnnId <= 0)
             {
-                MessageBox.Show("Ошибка сохранения в БД!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                await _logger.LogWarningAsync("Ошибка при вставке новой записи в таблицу Ann", "ButtonPreliminaryWd_Click");
+                MessageBox.Show(draftResult.Error ?? "Ошибка сохранения в БД!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await _logger.LogWarningAsync("Ошибка при создании черновика РТ", "ButtonPreliminaryWd_Click");
                 return;
             }
 
-            newItem.AnnID = newId;
+            int newId = draftResult.NewAnnId;
+            newItem = draftResult.DraftAnn ?? newItem;
             _bindingList.Add(newItem);
             _bindingSource.ResetBindings(false);
             ANNgridControl.RefreshDataSource();
@@ -748,13 +755,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     _bindingList.Remove(newItem);
                     _bindingSource.Remove(newItem);
-                    await _artNormService.DeleteByAnnId(TableNames.Ann, newItem.AnnID);
-                    if (teamWork_AdvanceTW.IsRaszInserted)
-                        await _artNormService.DeleteByAnnId(TableNames.Rasz, newItem.AnnID);
-                    if (teamWork_AdvanceTW.IsRaskInserted)
-                        await _artNormService.DeleteByAnnId(TableNames.Rask, newItem.AnnID);
-                    if (teamWork_AdvanceTW.IsKontInserted)
-                        await _artNormService.DeleteByAnnId(TableNames.Kont, newItem.AnnID);
+                    await _teamWorkService.RollbackDraftAsync(newItem.AnnID);
 
                     _bindingSource.ResetBindings(false);
                     ANNgridControl.RefreshDataSource();
@@ -877,7 +878,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 var myDataAnn = gridView.GetRow(rowHandle) as MyDataANN;
                 if (myDataAnn != null)
-                    selectedItem = await _artNormService.GetArtNormDataById(myDataAnn.AnnID);
+                    selectedItem = await _teamWorkService.LoadWorkDivisionAsync(myDataAnn.AnnID);
             }
             if (selectedItem == null) return;
 
@@ -941,15 +942,17 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Добавляем в нужный список, если это второй грид
                 list.Add(itemToAdd);
 
-                // Сохраняем в базе
-                newRecord.AnnID = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newRecord);
-                if (newRecord.AnnID <= 0)
+                // Сохраняем в базе через application-layer orchestrator
+                var draftResult = await _teamWorkService.CreateWorkDivisionDraftAsync(newRecord);
+                if (!draftResult.Success || draftResult.NewAnnId <= 0)
                 {
                     MessageBox.Show("Не удалось сохранить копию записи в базе данных.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     await _logger.LogErrorAsync(new Exception("InsertEntityAsync вернул 0 или отрицательное значение"), "Ошибка при сохранении копии записи");
                     list.Remove(itemToAdd); // удаляем из списка если база не сохранила
                     return null;
                 }
+
+                newRecord = draftResult.DraftAnn ?? newRecord;
 
                 // Если это gridView_wdToBind — обновляем MyDataANN с актуальным AnnID
                 if (forMyDataAnnView)
@@ -1116,13 +1119,15 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 _bindingList.Add(newRecord);
 
-                newRecord.AnnID = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newRecord);
-                if (newRecord.AnnID <= 0)
+                var draftResult = await _teamWorkService.CreateWorkDivisionDraftAsync(newRecord);
+                if (!draftResult.Success || draftResult.NewAnnId <= 0)
                 {
                     MessageBox.Show("Не удалось сохранить копию записи в базе данных.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     await _logger.LogErrorAsync(new Exception("InsertEntityAsync вернул 0 или отрицательное значение"), "Ошибка при сохранении копии записи");
                     return null;
                 }
+
+                newRecord = draftResult.DraftAnn ?? newRecord;
 
                 return newRecord;
             }

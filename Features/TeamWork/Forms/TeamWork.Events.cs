@@ -1,9 +1,7 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using DevExpress.Data.Filtering;
-using DevExpress.XtraBars.Customization;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
@@ -14,17 +12,14 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
-using DevExpress.XtraScheduler.Commands;
-using DevExpress.XtraScheduler.Reporting;
-using DevExpress.XtraVerticalGrid;
-using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Interfaces;
 using SewingProduction.Models;
+using SewingProduction.Features.TeamWork.Models;
+using SewingProduction.Features.TeamWork.Services;
+using SewingProduction.Core.helpers;
 using SewingProduction.Report;
 using SewingProduction.Services;
-using SewingProduction.Features.TeamWork.Models;
-using SewingProduction.Core.helpers;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -43,6 +38,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (view == null || e.FocusedRowHandle < 0)
                 {
                     ButtonUnbindWd.Enabled = false;
+                    RefreshCurrentWorksUxState();
                     return;
                 }
 
@@ -51,6 +47,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (selectedRow == null)
                 {
                     ButtonUnbindWd.Enabled = false;
+                    RefreshCurrentWorksUxState();
                     await _logger.LogWarningAsync($"Не удалось получить объект NZPByKoddRt для строки {e.FocusedRowHandle}", "gridView5_FocusedRowChanged_Internal");
                     return;
                 }
@@ -60,10 +57,12 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // Кнопка активна, если либо нет НЗП, либо нет PZT операций
                 ButtonUnbindWd.Enabled = (nzp <= 0 || pzt <= 0);
+                RefreshCurrentWorksUxState();
             }
             catch (Exception ex)
             {
                 ButtonUnbindWd.Enabled = false;
+                RefreshCurrentWorksUxState();
                 await _logger.LogErrorAsync(ex, "Ошибка при обработке смены строки в GridView5");
             }
         }
@@ -75,7 +74,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// <typeparam name="T">Тип данных, реализующий `ICheckable`</typeparam>
         /// <param name="gridControl">GridControl, где произошло изменение</param>
         /// <param name="e">Аргумент события `CellValueChangedEventArgs`</param>
-        private async void GridView_CellValueChanged<T>(GridControl gridControl, CellValueChangedEventArgs e) where T : class, ICheckable
+        private void GridView_CellValueChanged<T>(GridControl gridControl, CellValueChangedEventArgs e) where T : class, ICheckable
         {
             if (e.Column.FieldName != nameof(ICheckable.IsChecked)) return;
 
@@ -92,6 +91,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             if (isChecked)
             {
+                view.FocusedRowHandle = e.RowHandle;
                 // Устанавливаем флаг перед изменением других строк
                 _isUnchecking = true;
                 try
@@ -128,6 +128,62 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
             }
             _hasUnsavedChanges = true;
+            RefreshCurrentWorksUxState();
+        }
+
+        private void gridViewNZP_CellValueChanged(object sender, CellValueChangedEventArgs e)
+        {
+            if (e.Column.FieldName != "IsChecked")
+            {
+                return;
+            }
+
+            if (sender is not GridView view)
+            {
+                return;
+            }
+
+            if (Convert.ToBoolean(e.Value))
+            {
+                view.FocusedRowHandle = e.RowHandle;
+            }
+
+            RefreshCurrentWorksUxState();
+        }
+
+        private void ApplySearchResultsToUnboundArts(IReadOnlyCollection<MyDataART> results)
+        {
+            _myDataArtList.Clear();
+            if (results == null || results.Count == 0)
+            {
+                return;
+            }
+
+            _myDataArtList.BulkLoad(results);
+            if (gridView_unboundArts.DataRowCount > 0)
+            {
+                gridView_unboundArts.FocusedRowHandle = 0;
+            }
+        }
+
+        private void ApplySearchResultsToWorkDivisions(IReadOnlyCollection<MyDataANN> results)
+        {
+            _myDataAnnList.Clear();
+            if (results == null || results.Count == 0)
+            {
+                return;
+            }
+
+            foreach (var item in results)
+            {
+                item.Stat = StatusHelper.GetStatusText(item.Status);
+            }
+
+            _myDataAnnList.BulkLoad(results);
+            if (gridView_wdToBind.DataRowCount > 0)
+            {
+                gridView_wdToBind.FocusedRowHandle = 0;
+            }
         }
         /// <summary>
         /// Обработчик изменения состояния customCheckBox6.  
@@ -228,7 +284,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                         if (value == null || value == DBNull.Value)
                             return " ";
                         string stringValue = value.ToString();
-                        return string.IsNullOrEmpty(stringValue) ? " " : stringValue.TrimEnd(' ');
+                        string normalizedValue = StringNormalizer.TrimEndOrEmpty(stringValue, ' ');
+                        return string.IsNullOrEmpty(normalizedValue) ? " " : normalizedValue;
                     }
 
                     var grupVal = GetSafeValue("grup");
@@ -357,7 +414,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                string searchText = searchControl1.Text?.Trim();
+                string searchText = StringNormalizer.TrimOrEmpty(searchControl1.Text);
                 if (string.IsNullOrEmpty(searchText))
                 {
                     await _logger.LogWarningAsync("Пустой текст для поиска артикулов", "SearchArticulesByText");
@@ -366,77 +423,17 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 await _logger.LogEventAsync($"Начало поиска артикулов по тексту: '{searchText}' в таблицах WDtoBind и unboundArts", "SearchArticulesByText");
 
-                // Запрос для gridView_wdToBind (модель MyDataANN)
-                string queryWdToBind = @"SELECT ann.annId as AnnID, ann.kod as Kod, ann.articul as Articul, 
-                                       ann.status as Status, ann.grup, ann.mod, ann.size_label, ann.data_obn as dateUpdate
-                                       FROM art_norm_n ann 
-                                       WHERE ann.annId IN (
-                                           SELECT sa.annId 
-                                           FROM sp_articul sa 
-                                           WHERE sa.articul LIKE @searchPattern)
-                                       ORDER BY ann.annId DESC";
-
-                // Запрос для gridView_unboundArts (модель MyDataART)
-                string queryUnboundArts = @"SELECT * FROM articulListGroupBySizeLabel 
-                                          WHERE  (annId is null or annId = 0) and
-                                          articul LIKE @searchPattern 
-                                          ORDER BY articul, row_num";
-
-                var parameters = new Dictionary<string, object>
-                {
-                    { "@searchPattern", $"%{searchText}%" }
-                };
-
-                // Выполняем оба запроса параллельно
-                var wdToBindTask = _dbService.GetListAsync<MyDataANN>(queryWdToBind, parameters);
-                var unboundArtsTask = _dbService.GetListAsync<MyDataART>(queryUnboundArts, parameters);
+                var wdToBindTask = _articlesQueryService.SearchCurrentWorkDivisionsAsync(searchText);
+                var unboundArtsTask = _articlesQueryService.SearchUnboundArticlesAsync(searchText);
 
                 await Task.WhenAll(wdToBindTask, unboundArtsTask);
 
                 var wdToBindResults = await wdToBindTask;
                 var unboundArtsResults = await unboundArtsTask;
-                // Обновляем данные в gridView_unboundArts
-                if (unboundArtsResults != null && unboundArtsResults.Any())
-                {
-                    _myDataArtList.Clear();
-                    _myDataArtList.BulkLoad(unboundArtsResults);
 
-                    // Устанавливаем фокус на первую строку в gridView_unboundArts
-                    if (gridView_unboundArts.DataRowCount > 0)
-                    {
-                        gridView_unboundArts.FocusedRowHandle = 0;
-                    }
-                }
-                else
-                {
-                    _myDataArtList.Clear();
-                }
+                ApplySearchResultsToUnboundArts(unboundArtsResults);
+                ApplySearchResultsToWorkDivisions(wdToBindResults);
 
-
-                // Обновляем данные в gridView_wdToBind
-                if (wdToBindResults != null && wdToBindResults.Any())
-                {
-                    // Заполняем текстовый статус для каждой записи
-                    foreach (var item in wdToBindResults)
-                    {
-                        item.Stat = StatusHelper.GetStatusText(item.Status);
-                    }
-
-                    _myDataAnnList.Clear();
-                    _myDataAnnList.BulkLoad(wdToBindResults);
-
-                    // Устанавливаем фокус на первую строку в gridView_wdToBind
-                    if (gridView_wdToBind.DataRowCount > 0)
-                    {
-                        gridView_wdToBind.FocusedRowHandle = 0;
-                    }
-                }
-                else
-                {
-                    _myDataAnnList.Clear();
-                }
-
-                // Логируем результаты
                 int totalResults = (wdToBindResults?.Count ?? 0) + (unboundArtsResults?.Count ?? 0);
                 if (totalResults > 0)
                 {
@@ -473,10 +470,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                     bool disableButton = selectedItem.Status == (int)Status.Archive
                                       || selectedItem.Status == (int)Status.PreliminaryArchive;
                     ButtonArchAndCopyWd.Enabled = !disableButton;
-                    textEditMod.Text = selectedItem.Mod?.TrimEnd(' ') ?? string.Empty;
-                    textEditArt.Text = selectedItem.Articul?.TrimEnd(' ') ?? string.Empty;
-                    textEditSec.Text = selectedItem.Sek.ToString();
-                    textEditCreate.Text = selectedItem.dateCreate.HasValue ? selectedItem.dateCreate.Value.ToString("dd.MM.yyyy") : string.Empty;
                 }
                 else
                 {
@@ -499,7 +492,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 GridControlBindedArts,
                 _nzpListWd,
                 (System.Windows.Forms.BindingSource)_nzpByKoddRtSourceWd,
-                async token => annId > 0 ? await _artNormService.GetNzpWithPztCounts(annId, token) : new List<NZPByKoddRt>(),
+                async token => await _articlesQueryService.LoadNzpAsync(annId, token),
                 ct);
             // Обновляем источник данных и представление после асинхронной загрузки
             GridControlBindedArts?.RefreshDataSource();
@@ -612,7 +605,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     var selectedMyDataAnn = gridView.GetRow(rowNumber) as MyDataANN;
                     if (selectedMyDataAnn == null) return;
                     annId = selectedMyDataAnn.AnnID;
-                    selectedArtNormN = await _artNormService.GetArtNormDataById(annId);
+                    selectedArtNormN = await _teamWorkService.LoadWorkDivisionAsync(annId);
                     if (selectedArtNormN == null) return;
                 }
 
@@ -756,15 +749,17 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 };
 
-                // 2. Вставляем "оболочку" в БД для получения AnnID
-                newAnnId = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newItemShell);
+                // 2. ??????? draft ????? application-layer orchestrator
+                var draftResult = await _teamWorkService.CreateWorkDivisionDraftAsync(newItemShell);
 
-                if (newAnnId <= 0)
+                if (!draftResult.Success || draftResult.NewAnnId <= 0)
                 {
-                    MessageBox.Show("Не удалось создать новую запись в базе данных.", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    await _logger.LogErrorAsync("", "Ошибка при вставке новой ArtNormN (AnnID <= 0) Кнопка Создать из артикула");
+                    MessageBox.Show(draftResult.Error ?? "?? ??????? ??????? ????? ?????? ? ???? ??????.", "?????? ??????????", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await _logger.LogErrorAsync("", "?????? ??? ???????? ????? ArtNormN ????? application-layer orchestrator");
                     return;
                 }
+                newAnnId = draftResult.NewAnnId;
+                newItemShell = draftResult.DraftAnn ?? newItemShell; // ??????????? ?????????? ID
                 newItemShell.AnnID = newAnnId; // Присваиваем полученный ID
 
                 // 3. Добавляем "оболочку" в основной список и грид (если _bindingList используется для ANNgridView)
@@ -855,14 +850,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         _bindingSource?.ResetBindings(false);
                         ANNgridControl?.RefreshDataSource();
 
-                        //await _artNormService.DeleteRelatedNormTables(newAnnId);
-                        await _artNormService.DeleteByAnnId(TableNames.Ann, newAnnId);
-                        if (teamWorkAdvanceTW.IsRaszInserted)
-                            await _artNormService.DeleteByAnnId(TableNames.Rasz, newAnnId);
-                        if (teamWorkAdvanceTW.IsRaskInserted)
-                            await _artNormService.DeleteByAnnId(TableNames.Rask, newAnnId);
-                        if (teamWorkAdvanceTW.IsKontInserted)
-                            await _artNormService.DeleteByAnnId(TableNames.Kont, newAnnId);
+                        await _teamWorkService.RollbackDraftAsync(newAnnId);
                     }
                 };
             }
@@ -880,7 +868,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         _bindingList.Remove(newItemShell);
                         _bindingSource?.ResetBindings(false);
                     }
-                    await _artNormService.DeleteByAnnId(TableNames.Ann, newAnnId);
+                    await _teamWorkService.RollbackDraftAsync(newAnnId);
                     // Здесь не можем проверить IsRaszInserted и т.д. из формы, если ошибка была до ее закрытия
                 }
             }
@@ -970,9 +958,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                 string message = selectedItems.Count == 1
                     ? $"Пометить разделение труда на удаление:\n\n" +
                       $"AnnID: {selectedItems[0].AnnID}\n" +
-                      $"Группа: {selectedItems[0].grup?.TrimEnd(' ')}, " +
-                      $"Модель: {selectedItems[0].Mod?.TrimEnd(' ')}, " +
-                      $"Артикул: {selectedItems[0].Articul?.TrimEnd(' ')}\n\n" +
+                      $"Группа: {StringNormalizer.TrimEndOrEmpty(selectedItems[0].grup, ' ')}, " +
+                      $"Модель: {StringNormalizer.TrimEndOrEmpty(selectedItems[0].Mod, ' ')}, " +
+                      $"Артикул: {StringNormalizer.TrimEndOrEmpty(selectedItems[0].Articul, ' ')}\n\n" +
                       $"Будут установлены:\n" +
                       $"• annDateDel = {currentDate:dd.MM.yyyy HH:mm:ss}\n" +
                       $"• annCompDel = {computerName}\n\n" +
@@ -1015,7 +1003,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         // Обновляем строку в гриде
                         TryRefreshRowByAnnId(ANNgridView, item.AnnID);
 
-                        await _logger.LogEventAsync($"РТ помечено на удаление. AnnID: {item.AnnID}, Группа: {item.grup?.TrimEnd(' ')}, Модель: {item.Mod?.TrimEnd(' ')}, Артикул: {item.Articul?.TrimEnd(' ')}, Дата: {currentDate:dd.MM.yyyy HH:mm:ss}, Компьютер: {computerName}", "MarkForDeletion");
+                        await _logger.LogEventAsync($"РТ помечено на удаление. AnnID: {item.AnnID}, Группа: {StringNormalizer.TrimEndOrEmpty(item.grup, ' ')}, Модель: {StringNormalizer.TrimEndOrEmpty(item.Mod, ' ')}, Артикул: {StringNormalizer.TrimEndOrEmpty(item.Articul, ' ')}, Дата: {currentDate:dd.MM.yyyy HH:mm:ss}, Компьютер: {computerName}", "MarkForDeletion");
                     }
                 }
                 finally
@@ -1290,7 +1278,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
                 }
 
-                string articul = selectedNzp.articul.TrimEnd(' ');
+                string articul = StringNormalizer.TrimEndOrEmpty(selectedNzp.articul, ' ');
                 string kod = selectedNzp.kodd.ToString();
                 if (string.IsNullOrEmpty(articul))
                 {
@@ -1482,7 +1470,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         var selectedData = GetSafeUnboundArtData(gridView_unboundArts, gridView_unboundArts.FocusedRowHandle);
                         if (selectedData != null && !string.IsNullOrEmpty(selectedData.Articul))
                         {
-                            articul = selectedData.Articul.TrimEnd(' ');
+                            articul = StringNormalizer.TrimEndOrEmpty(selectedData.Articul, ' ');
                         }
                         else
                         {
@@ -1495,6 +1483,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
 
                     list = await LoadWorksbyArt(articul);
+                    SetRecommendedAnnIds(list);
                     await _logger.LogEventAsync($"showAllWD: Загружены РТ для артикула '{articul}'", "loadAllCheckBox_CheckedChanged");
                 }
                 // gridControl_wdToBind.DataSource = list;//loadAllCheckBox.Checked ? LoadWorksbyArt(0, "") : LoadWorksbyArt(kod, articul);
@@ -1520,6 +1509,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
                 _myDataAnnBindingSource.ResetBindings(false);
                 gridView_wdToBind.RefreshData();
+                FocusFirstRecommendedWorkDivision();
+                RefreshCurrentWorksUxState();
             }
             catch (Exception ex)
             {
@@ -1528,6 +1519,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _myDataAnnList.Clear();
                 _myDataAnnBindingSource.ResetBindings(false);
                 gridView_wdToBind.RefreshData();
+                RefreshCurrentWorksUxState();
             }
         }
 
@@ -1547,10 +1539,10 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// <param name="e"></param>
         private void layoutControlGroupPreArch_CustomButtonClick(object sender, BaseButtonEventArgs e)
         {
-            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
-            switch (buttonIndex)
+            var tag = (e.Button as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton)?.Tag as string;
+            switch (tag)
             {
-                case 0:
+                case "prearch:archive":
                     {
                         Arch(sender, e);
                         break;
@@ -1580,12 +1572,12 @@ namespace SewingProduction.Features.TeamWork.Forms
         private void PrintWorkDivisionScheme_Click(object sender, EventArgs e)
         {
             int rowNumber = ANNgridView.FocusedRowHandle;
-
-            NormRaszTest report1 = new NormRaszTest();
-            //report1.RequestParameters = false;
             var selectedAnn = ANNgridView.GetRow(rowNumber) as ArtNormN;
+            if (selectedAnn == null)
+                return;
 
-            report1.Parameters["_annId"].Value = selectedAnn.AnnID;
+            var preparedData = new NormRaszReportDataService().Load(selectedAnn.AnnID);
+            NormRaszTest report1 = new NormRaszTest(preparedData);
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
         }
@@ -1593,3 +1585,5 @@ namespace SewingProduction.Features.TeamWork.Forms
         #endregion
     }
 }
+
+

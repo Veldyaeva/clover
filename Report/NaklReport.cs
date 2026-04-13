@@ -13,11 +13,12 @@ using System.Windows.Forms;
 
 namespace SewingProduction
 {
-    public partial class NaklReport : DevExpress.XtraReports.UI.XtraReport
+    public partial class NaklReport : SewingProduction.Report.ConnectedXtraReport
     {
         public NaklReport()
         {
             InitializeComponent();
+            UseCurrentConnection();
         }
         private void PrintNaklReport_BeforePrint(object sender, CancelEventArgs e)
         {

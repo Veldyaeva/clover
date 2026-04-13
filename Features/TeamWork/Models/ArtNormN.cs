@@ -26,32 +26,72 @@ namespace SewingProduction.Models
         public string Kod
         {
             get => _kod;
-            set { if (_kod != value) { _kod = value; OnPropertyChanged(nameof(Kod)); } }
+            set
+            {
+                string normalizedValue = StringNormalizer.TrimOrNull(value);
+                if (_kod != normalizedValue)
+                {
+                    _kod = normalizedValue;
+                    OnPropertyChanged(nameof(Kod));
+                }
+            }
         }
 
         [Column("grup")]
         public string grup
         {
             get => _group;
-            set { if (_group != value) { _group = value; OnPropertyChanged(nameof(grup)); } }
+            set
+            {
+                string normalizedValue = StringNormalizer.TrimOrNull(value);
+                if (_group != normalizedValue)
+                {
+                    _group = normalizedValue;
+                    OnPropertyChanged(nameof(grup));
+                }
+            }
         }
 
         public string Articul
         {
             get => _articul;
-            set { if (_articul != value) { _articul = value; OnPropertyChanged(nameof(Articul)); } }
+            set
+            {
+                string normalizedValue = StringNormalizer.TrimOrNull(value);
+                if (_articul != normalizedValue)
+                {
+                    _articul = normalizedValue;
+                    OnPropertyChanged(nameof(Articul));
+                }
+            }
         }
 
         public string Mod
         {
             get => _mod;
-            set { if (_mod != value) { _mod = value; OnPropertyChanged(nameof(Mod)); } }
+            set
+            {
+                string normalizedValue = StringNormalizer.TrimOrNull(value);
+                if (_mod != normalizedValue)
+                {
+                    _mod = normalizedValue;
+                    OnPropertyChanged(nameof(Mod));
+                }
+            }
         }
 
         public string Size_label
         {
             get => _size_label;
-            set { if (_size_label != value) { _size_label = value; OnPropertyChanged(nameof(Size_label)); } }
+            set
+            {
+                string normalizedValue = StringNormalizer.TrimOrNull(value);
+                if (_size_label != normalizedValue)
+                {
+                    _size_label = normalizedValue;
+                    OnPropertyChanged(nameof(Size_label));
+                }
+            }
         }
         public int Sek
         {

@@ -1,10 +1,11 @@
 ﻿namespace SewingProduction.report.subreport
 {
-    public partial class PrintTakingCardReport : DevExpress.XtraReports.UI.XtraReport
+    public partial class PrintTakingCardReport : SewingProduction.Report.ConnectedXtraReport
     {
         public PrintTakingCardReport()
         {
             InitializeComponent();
+            UseCurrentConnection();
         }
 
     }
