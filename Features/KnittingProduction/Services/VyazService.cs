@@ -495,13 +495,13 @@ namespace SewingProduction.Features.KnittingProduction.Services
             }
         }
         
-        public async Task<BindingSource> GetPlanTotalQuantityByArticul(CancellationToken cancellationToken)
+        public async Task<BindingSource> GetPlanTotalQuantityByArticul(CancellationToken cancellationToken, int _vyazPodrKod)
         {
             try
             {
                 await using var connection = _dbHelper.GetConnection();
-                const string query = @"EXEC dbo.GetPlanTotalQuantityByArticul";
-                var command = new CommandDefinition(query, new { }, cancellationToken: cancellationToken);
+                const string query = @"EXEC dbo.GetPlanTotalQuantityByArticul @xPodrKod = @vyazPodrKod";
+                var command = new CommandDefinition(query, new { vyazPodrKod = _vyazPodrKod }, cancellationToken: cancellationToken);
 
                 var list = (await connection
                     .QueryAsync<PlanTotalQuantityByArticul>(command))
