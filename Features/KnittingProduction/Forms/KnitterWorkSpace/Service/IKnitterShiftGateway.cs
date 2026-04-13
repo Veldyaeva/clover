@@ -14,6 +14,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
     public interface IKnitterShiftTransaction : IAsyncDisposable
     {
+        Task<ShiftOpenLockResult> TryAcquireZoneOpenShiftLockAsync(int? kmaId);
         Task<ShiftCloseLockResult> TryAcquireShiftCloseLockAsync(int shiftId);
         Task<IReadOnlyList<int>> GetUnfinishedOperationIdsForShiftAsync(int shiftId);
         Task UpdatePzvTabAsync(IEnumerable<int> pzvIds, int tab);
@@ -31,5 +32,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         public string ErrorMessage { get; init; } = "";
 
         public bool CanClose => Status == CloseShiftStatus.Success;
+    }
+
+    public sealed class ShiftOpenLockResult
+    {
+        public StartShiftStatus Status { get; init; }
+        public string ErrorMessage { get; init; } = "";
+        public int? ExistingShiftId { get; init; }
+        public int? ExistingTabStart { get; init; }
+        public DateTime? ExistingDateStart { get; init; }
+
+        public bool CanOpen => Status == StartShiftStatus.Success;
     }
 }

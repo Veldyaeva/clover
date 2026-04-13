@@ -670,6 +670,75 @@ ORDER BY kwsDateStart DESC";
                 .ToArray();
         }
 
+        private static async Task<ShiftOpenLockResult> TryAcquireZoneOpenShiftLockAsync(System.Data.SqlClient.SqlConnection connection, IDbTransaction transaction, int? kmaId)
+        {
+            if (!kmaId.HasValue || kmaId.Value <= 0)
+            {
+                return new ShiftOpenLockResult
+                {
+                    Status = StartShiftStatus.Success,
+                    ErrorMessage = string.Empty
+                };
+            }
+
+            const string lockSql = @"
+DECLARE @result int;
+EXEC @result = sys.sp_getapplock
+    @Resource = @resource,
+    @LockMode = 'Exclusive',
+    @LockOwner = 'Transaction',
+    @LockTimeout = 0;
+SELECT @result;";
+
+            var lockResult = await connection.ExecuteScalarAsync<int>(
+                lockSql,
+                new { resource = $"KnitterOpenShiftByZone:{kmaId.Value}" },
+                transaction: transaction);
+
+            if (lockResult < 0)
+            {
+                return new ShiftOpenLockResult
+                {
+                    Status = StartShiftStatus.ConcurrentOpenInProgress,
+                    ErrorMessage = "Смена в этой зоне уже открывается на другом рабочем месте. Обновите данные через несколько секунд."
+                };
+            }
+
+            const string shiftSql = @"
+SELECT TOP 1
+    kwsID AS ShiftId,
+    kwsTabStart AS TabStart,
+    kwsDateStart AS DateStart
+FROM ACE.dbo.knitWorkingShiftNew WITH (UPDLOCK, HOLDLOCK)
+WHERE kwsKmaID = @kmaId
+  AND (kwsDel = 0 OR kwsDel IS NULL)
+  AND kwsDateEnd IS NULL
+ORDER BY kwsDateStart DESC;";
+
+            var existing = await connection.QueryFirstOrDefaultAsync<(int ShiftId, int TabStart, DateTime? DateStart)>(
+                shiftSql,
+                new { kmaId = kmaId.Value },
+                transaction: transaction);
+
+            if (existing.ShiftId != 0)
+            {
+                return new ShiftOpenLockResult
+                {
+                    Status = StartShiftStatus.AlreadyOpen,
+                    ErrorMessage = "В этой зоне уже открыта смена.",
+                    ExistingShiftId = existing.ShiftId,
+                    ExistingTabStart = existing.TabStart,
+                    ExistingDateStart = existing.DateStart
+                };
+            }
+
+            return new ShiftOpenLockResult
+            {
+                Status = StartShiftStatus.Success,
+                ErrorMessage = string.Empty
+            };
+        }
+
         private static async Task<ShiftCloseLockResult> TryAcquireShiftCloseLockAsync(System.Data.SqlClient.SqlConnection connection, IDbTransaction transaction, int shiftId)
         {
             if (shiftId <= 0)
@@ -901,6 +970,9 @@ WHERE pzvID IN @ids";
                 _connection = connection;
                 _transaction = transaction;
             }
+
+            public Task<ShiftOpenLockResult> TryAcquireZoneOpenShiftLockAsync(int? kmaId) =>
+                KnitterRepository.TryAcquireZoneOpenShiftLockAsync(_connection, _transaction, kmaId);
 
             public Task<ShiftCloseLockResult> TryAcquireShiftCloseLockAsync(int shiftId) =>
                 KnitterRepository.TryAcquireShiftCloseLockAsync(_connection, _transaction, shiftId);

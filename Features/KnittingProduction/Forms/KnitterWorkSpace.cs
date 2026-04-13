@@ -3,7 +3,6 @@ using DevExpress.Data;
 using DevExpress.Utils;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
-using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.ButtonsPanelControl;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
@@ -38,7 +37,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
 using Label = System.Windows.Forms.Label;
 
@@ -602,6 +600,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 if (!result.Success)
                 {
+                    if (result.AlreadyOpen)
+                    {
+                        XtraMessageBox.Show(this, result.ErrorMessage, "Смена уже открыта", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        await RefreshFioListAsync();
+                        await LoadPlanForTabAsync(selectedTab, forceReload: true);
+                        LogWarning(result.ErrorMessage, logContext);
+                        return;
+                    }
+
+                    if (result.ConcurrentOpenInProgress)
+                    {
+                        XtraMessageBox.Show(this, result.ErrorMessage, "Смена открывается", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LogWarning(result.ErrorMessage, logContext);
+                        return;
+                    }
+
                     LogWarning(result.ErrorMessage, logContext);
                     return;
                 }

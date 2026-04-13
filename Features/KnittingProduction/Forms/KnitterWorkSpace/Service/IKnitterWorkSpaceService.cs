@@ -20,6 +20,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         Failed
     }
 
+    public enum StartShiftStatus
+    {
+        Success,
+        AlreadyOpen,
+        NoEmployee,
+        NoRows,
+        ConcurrentOpenInProgress,
+        Failed
+    }
+
     public sealed class StartShiftCommand
     {
         public int Tab { get; init; }
@@ -31,7 +41,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
     public sealed class StartShiftResult
     {
         public bool Success { get; init; }
+        public StartShiftStatus Status { get; init; } = StartShiftStatus.Failed;
         public string ErrorMessage { get; init; }
+        public bool AlreadyOpen => Status == StartShiftStatus.AlreadyOpen;
+        public bool ConcurrentOpenInProgress => Status == StartShiftStatus.ConcurrentOpenInProgress;
         public int? ShiftId { get; init; }
         public DateTime? ShiftStartTime { get; init; }
     }
