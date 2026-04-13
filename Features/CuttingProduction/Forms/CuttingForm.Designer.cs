@@ -30,8 +30,8 @@ namespace SewingProduction.Features.CuttingProduction.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue1 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue2 = new DevExpress.XtraEditors.FormatConditionRuleValue();
             gridColumnRzuNom = new DevExpress.XtraGrid.Columns.GridColumn();
             NomZadSearchTextBox = new CustomTextBox();
             layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
@@ -48,7 +48,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             nomZadTextBox = new CustomTextBox();
             datePlanTextBox = new CustomTextBox();
             customLabel12 = new CustomLabel();
-            customButton13 = new CustomButton();
+            customButtonSewn = new CustomButton();
             customButton12 = new CustomButton();
             customButton11 = new CustomButton();
             customButton10 = new CustomButton();
@@ -298,7 +298,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             layoutControl2.Controls.Add(YearSearchTextBox);
             layoutControl2.Controls.Add(PachSearchTextBox);
             layoutControl2.Controls.Add(tableLayoutPanel2);
-            layoutControl2.Controls.Add(customButton13);
+            layoutControl2.Controls.Add(customButtonSewn);
             layoutControl2.Controls.Add(customButton12);
             layoutControl2.Controls.Add(customButton11);
             layoutControl2.Controls.Add(customButton10);
@@ -503,15 +503,16 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             customLabel12.Text = "Плановая сдача";
             customLabel12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // customButton13
+            // customButtonSewn
             // 
-            customButton13.Font = new System.Drawing.Font("Arial", 10F);
-            customButton13.Location = new System.Drawing.Point(1345, 538);
-            customButton13.Name = "customButton13";
-            customButton13.Size = new System.Drawing.Size(100, 56);
-            customButton13.TabIndex = 35;
-            customButton13.Text = "Вшивки";
-            customButton13.UseVisualStyleBackColor = false;
+            customButtonSewn.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonSewn.Location = new System.Drawing.Point(1345, 538);
+            customButtonSewn.Name = "customButtonSewn";
+            customButtonSewn.Size = new System.Drawing.Size(100, 56);
+            customButtonSewn.TabIndex = 35;
+            customButtonSewn.Text = "Вшивки";
+            customButtonSewn.UseVisualStyleBackColor = false;
+            customButtonSewn.Click += customButtonSewn_Click;
             // 
             // customButton12
             // 
@@ -1220,15 +1221,15 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             gridViewRzu.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewRzu.Appearance.FocusedRow.Options.UseFont = true;
             gridViewRzu.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnRzuChipStatus, gridColumnRzuNom, gridColumnRzuNomN, gridColumnRzuNPach, gridColumnRzuDataR, gridColumnRzuArticul, gridColumnRzuMod, gridColumnRzuRazm, gridColumnRzuKol, gridColumnRzuDataPr, gridColumnRzuDataPt, gridColumnRzuDataV, gridColumnRzuBus, gridColumnRzuStra, gridColumnRzuGofp, gridColumnRzuPPress, gridColumnRzuDtfPrint, gridColumnRzuBd, gridColumnRzuTabP, gridColumnRzuTabKlad, gridColumnRzuTabBuh, gridColumnRzuTabM, gridColumnRzuTabK, gridColumnRzuTabKpv, gridColumnRzuVsh, gridColumnRzuKle, gridColumnRzuDataZeh, gridColumnRzuDostZeh, gridColumnRzuPomBezKompl, gridColumnRzuHReestr, gridColumnRzuDataDubcd, gridColumnRzuDataSkZp, gridColumnRzuIz, gridColumnRzuDataRst, gridColumnRzuVipad, gridColumnRzuKodK, gridColumnRzuDataRasp, gridColumnRzuDataRasv, gridColumnRzuDataCd, gridColumnRzuMgZakr, gridColumnRzuNomZad, gridColumnRzuDataP, gridColumnRzuDataKlad, gridColumnRzuPachYear, gridColumnRzuDataSozd });
-            gridFormatRule1.ApplyToRow = true;
-            gridFormatRule1.Column = gridColumnRzuNom;
-            gridFormatRule1.Name = "Format0";
-            formatConditionRuleValue1.Appearance.Options.UseBackColor = true;
-            formatConditionRuleValue1.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue1.Condition = DevExpress.XtraEditors.FormatCondition.Expression;
-            formatConditionRuleValue1.Expression = "[gridColumnRzuNom] %2=0";
-            gridFormatRule1.Rule = formatConditionRuleValue1;
-            gridViewRzu.FormatRules.Add(gridFormatRule1);
+            gridFormatRule2.ApplyToRow = true;
+            gridFormatRule2.Column = gridColumnRzuNom;
+            gridFormatRule2.Name = "Format0";
+            formatConditionRuleValue2.Appearance.Options.UseBackColor = true;
+            formatConditionRuleValue2.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue2.Condition = DevExpress.XtraEditors.FormatCondition.Expression;
+            formatConditionRuleValue2.Expression = "[gridColumnRzuNom] %2=0";
+            gridFormatRule2.Rule = formatConditionRuleValue2;
+            gridViewRzu.FormatRules.Add(gridFormatRule2);
             gridViewRzu.GridControl = customGridRzu;
             gridViewRzu.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             gridViewRzu.Name = "gridViewRzu";
@@ -2020,7 +2021,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // layoutControlItem33
             // 
-            layoutControlItem33.Control = customButton13;
+            layoutControlItem33.Control = customButtonSewn;
             layoutControlItem33.Location = new System.Drawing.Point(203, 0);
             layoutControlItem33.Name = "layoutControlItem33";
             layoutControlItem33.Size = new System.Drawing.Size(104, 60);
@@ -2151,7 +2152,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
         private CustomTextBox nomZadTextBox;
         private CustomTextBox datePlanTextBox;
         private CustomLabel customLabel12;
-        private Core.Class.CustomButton customButton13;
+        private Core.Class.CustomButton customButtonSewn;
         private Core.Class.CustomButton customButton12;
         private Core.Class.CustomButton customButton11;
         private Core.Class.CustomButton customButton10;

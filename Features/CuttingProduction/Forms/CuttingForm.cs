@@ -588,5 +588,10 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             GC.WaitForPendingFinalizers();
             GC.Collect();*/
         }
+
+        private void customButtonSewn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
