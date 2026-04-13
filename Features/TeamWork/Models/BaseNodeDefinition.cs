@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace SewingProduction.Features.TeamWork.Models
@@ -8,11 +8,16 @@ namespace SewingProduction.Features.TeamWork.Models
         public int BaseNodeId { get; set; }
         public string Id { get; set; } = Guid.NewGuid().ToString("N");
         public string NodeCode { get; set; } = string.Empty;
+        public int? NodeTypeId { get; set; }
+        public int? NodeGroupId { get; set; }
+        public int? NodeSubgroupId { get; set; }
         public int? SourceAnnId { get; set; }
+        public string SourceArticul { get; set; } = string.Empty;
         public string SourceRtCode { get; set; } = string.Empty;
         public string SourceImagePath { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
         public string NodeGroup { get; set; } = string.Empty;
+        public string NodeGroupDetail { get; set; } = string.Empty;
         public string NodeType { get; set; } = string.Empty;
         public string ProductKind { get; set; } = string.Empty;
         public string ProductCategory { get; set; } = string.Empty;
@@ -38,6 +43,18 @@ namespace SewingProduction.Features.TeamWork.Models
         }
 
         public override string ToString() => DisplayName;
+    }
+
+    public sealed class BaseNodeMetadataItem
+    {
+        public int Id { get; set; }
+        public int? ParentId { get; set; }
+        public string Code { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public int SortOrder { get; set; }
+        public bool IsActive { get; set; } = true;
+
+        public override string ToString() => Name;
     }
 
     public sealed class BaseNodeOperationDefinition

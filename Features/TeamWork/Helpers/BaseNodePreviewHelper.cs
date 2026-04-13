@@ -12,7 +12,7 @@ namespace SewingProduction.Features.TeamWork.Helpers
     }
     internal static class BaseNodePreviewHelper
     {
-        private const string EmptySourceLabel = "Источник РТ: -";
+        private const string EmptySourceLabel = "Источник: -";
         private const string MissingImageText = "Изображение не найдено";
         private const string EmptyImageText = "Изображение не задано";
         public static BaseNodePreviewPanel Create(Panel root, Label sourceLabel, Label imageStatusLabel, PictureBox imageBox)
@@ -29,11 +29,10 @@ namespace SewingProduction.Features.TeamWork.Helpers
         {
             if (preview == null)
                 return;
+            string sourceArticul = node?.SourceArticul;
             string sourceRtCode = node?.SourceRtCode;
             string imagePath = node?.SourceImagePath;
-            preview.SourceLabel.Text = string.IsNullOrWhiteSpace(sourceRtCode)
-                ? EmptySourceLabel
-                : $"РТ: {sourceRtCode}";
+            preview.SourceLabel.Text = BuildSourceLabel(sourceArticul, sourceRtCode);
             if (!string.IsNullOrWhiteSpace(imagePath) && File.Exists(imagePath))
             {
                 preview.ImageBox.ImageLocation = imagePath;
@@ -52,9 +51,7 @@ namespace SewingProduction.Features.TeamWork.Helpers
         {
             if (preview == null)
                 return;
-            preview.SourceLabel.Text = string.IsNullOrWhiteSpace(defaults?.SourceRtCode)
-                ? EmptySourceLabel
-                : $"РТ: {defaults.SourceRtCode}";
+            preview.SourceLabel.Text = BuildSourceLabel(defaults?.SourceArticul, defaults?.SourceRtCode);
             if (!string.IsNullOrWhiteSpace(defaults?.SourceImagePath) && File.Exists(defaults.SourceImagePath))
             {
                 preview.ImageBox.ImageLocation = defaults.SourceImagePath;
@@ -68,6 +65,29 @@ namespace SewingProduction.Features.TeamWork.Helpers
                     ? EmptyImageText
                     : $"{MissingImageText}: {Path.GetFileName(defaults.SourceImagePath)}";
             }
+        }
+
+        private static string BuildSourceLabel(string sourceArticul, string sourceRtCode)
+        {
+            bool hasArticul = !string.IsNullOrWhiteSpace(sourceArticul);
+            bool hasRtCode = !string.IsNullOrWhiteSpace(sourceRtCode);
+
+            if (!hasArticul && !hasRtCode)
+            {
+                return EmptySourceLabel;
+            }
+
+            if (hasArticul && hasRtCode)
+            {
+                return $"Артикул: {sourceArticul} | РТ: {sourceRtCode}";
+            }
+
+            if (hasArticul)
+            {
+                return $"Артикул: {sourceArticul}";
+            }
+
+            return $"РТ: {sourceRtCode}";
         }
     }
 }

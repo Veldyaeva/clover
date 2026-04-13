@@ -305,7 +305,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             return BaseNodeNameBuilder.Build(
                 (nodeGroupComboBox.SelectedItem as BaseNodeMetadataItem)?.Name ?? nodeGroupComboBox.SelectedItem?.ToString(),
                 (nodeSubgroupComboBox.SelectedItem as BaseNodeMetadataItem)?.Name ?? nodeSubgroupComboBox.SelectedItem?.ToString(),
-                productCategoryComboBox.SelectedItem?.ToString());
+                productCategoryComboBox.SelectedItem?.ToString(),
+                _defaults?.SourceArticul);
         }
 
         private void OkButton_Click(object sender, EventArgs e)
@@ -356,6 +357,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             previewGrid.DataSource = BaseNodeMapper.CreatePreviewRows(_operations);
 
             SelectPreviewRow(selectedIndex);
+            UpdateOperationButtonsState();
         }
 
         private int GetSelectedOperationIndex()
@@ -431,6 +433,57 @@ namespace SewingProduction.Features.TeamWork.Forms
             RefreshOperationsPreview(targetIndex);
         }
 
+        private void EditOperationButton_Click(object sender, EventArgs e)
+        {
+            EditSelectedOperation();
+        }
+
+        private void PreviewGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                EditSelectedOperation();
+            }
+        }
+
+        private void EditSelectedOperation()
+        {
+            int selectedIndex = GetSelectedOperationIndex();
+            if (selectedIndex < 0 || selectedIndex >= _operations.Count)
+            {
+                MessageBox.Show(this, "Выберите операцию в списке.", "Проверка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var selectedOperation = BaseNodeMapper.MapOperation(_operations[selectedIndex]);
+            using var form = new BaseNodeOperationEditForm(User, selectedOperation);
+            if (form.ShowDialog(this) != DialogResult.OK || form.ResultOperation == null)
+            {
+                return;
+            }
+
+            ApplyEditedOperation(_operations[selectedIndex], form.ResultOperation);
+            RefreshOperationsPreview(selectedIndex);
+        }
+
+        private static void ApplyEditedOperation(NormRasz target, BaseNodeOperationDefinition source)
+        {
+            if (target == null || source == null)
+            {
+                return;
+            }
+
+            target.kod_o = source.KodO;
+            target.Text = source.Text;
+            target.razryd = source.Razryd;
+            target.Sek = source.Sek;
+            target.Obor = source.Obor;
+            target.Spec = source.Spec;
+            target.KodProizv = source.KodProizv;
+            target.KodPodr = source.KodPodr;
+            target.KodOb = source.KodOb;
+        }
+
         private void DeleteOperationButton_Click(object sender, EventArgs e)
         {
             int selectedIndex = GetSelectedOperationIndex();
@@ -442,6 +495,15 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             BaseNodeOperationEditingHelper.RemoveAt(_operations, selectedIndex);
             RefreshOperationsPreview(Math.Min(selectedIndex, _operations.Count - 1));
+        }
+
+        private void UpdateOperationButtonsState()
+        {
+            bool hasOperations = _operations.Count > 0;
+            editOperationButton.Enabled = hasOperations;
+            deleteOperationButton.Enabled = hasOperations;
+            moveUpButton.Enabled = _operations.Count > 1;
+            moveDownButton.Enabled = _operations.Count > 1;
         }
     }
 }
