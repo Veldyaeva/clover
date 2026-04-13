@@ -30,19 +30,16 @@ namespace SewingProduction.Features.TeamWork.Services
 
         public Task<List<MyDataART>> LoadUnboundArticlesAsync()
         {
-            const string query = "SELECT * FROM articulListGroupBySizeLabel where annId is null or annId = 0";
+            const string query = "EXEC dbo.TeamWork_GetUnboundArticles";
             return _dbService.GetListAsync<MyDataART>(query, null);
         }
 
         public Task<List<MyDataART>> SearchUnboundArticlesAsync(string searchText)
         {
-            const string query = @"SELECT * FROM articulListGroupBySizeLabel 
-                                          WHERE  (annId is null or annId = 0) and
-                                          articul LIKE @searchPattern 
-                                          ORDER BY articul, row_num";
+            const string query = "EXEC dbo.TeamWork_GetUnboundArticles @SearchText";
             var parameters = new Dictionary<string, object>
             {
-                { "@searchPattern", $"%{searchText}%" }
+                { "@SearchText", searchText }
             };
 
             return _dbService.GetListAsync<MyDataART>(query, parameters);

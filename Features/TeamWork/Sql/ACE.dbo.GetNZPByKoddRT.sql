@@ -17,9 +17,53 @@ BEGIN
         vsa.razm, 
         vsa.kod_v
         , vsa.annId
+        , vsa.ko AS kodd
     INTO #articulKodSelect
     FROM View_sp_articul vsa WITH (NOLOCK)
     WHERE vsa.annID = @xAnnID;
+
+    IF OBJECT_ID('tempdb..#Labels') IS NOT NULL
+        DROP TABLE #Labels;
+
+    ;WITH RankedData AS
+    (
+        SELECT
+            aks.annId,
+            aks.kodd_rt,
+            aks.articul,
+            MIN(r.razm_all) AS minSizeAll,
+            MAX(r.razm_all) AS maxSizeAll,
+            ROW_NUMBER() OVER (PARTITION BY aks.articul ORDER BY aks.kodd_rt) AS row_num,
+            COUNT(*) OVER (PARTITION BY aks.articul) AS total_count
+        FROM #articulKodSelect aks
+        LEFT JOIN razm r
+            ON aks.razm = r.razm
+        GROUP BY
+            aks.annId,
+            aks.kodd_rt,
+            aks.articul
+    )
+    SELECT
+        annId,
+        kodd_rt,
+        articul,
+        minSizeAll,
+        maxSizeAll,
+        CASE
+            WHEN total_count = 1 THEN ''
+            WHEN row_num = 1 THEN 'min'
+            WHEN row_num = total_count THEN 'max'
+            ELSE 'mid'
+        END AS size_label,
+        TRIM(articul) + ' ' +
+        CASE
+            WHEN total_count = 1 THEN ''
+            WHEN row_num = 1 THEN 'min'
+            WHEN row_num = total_count THEN 'max'
+            ELSE 'mid'
+        END AS articulForRT
+    INTO #Labels
+    FROM RankedData;
 
     -- 2. Собираем основную информацию по НЗП (незавершенное производство)
     IF OBJECT_ID('tempdb..#PachData') IS NOT NULL
@@ -107,10 +151,20 @@ BEGIN
             labels.minSizeAll,
             labels.maxSizeAll,
             labels.size_label,
-            labels.articulForRT
+            labels.articulForRT,
+            ISNULL(pzt.PztCount, 0) AS PztCount
         FROM #NZPData nzp
-        LEFT JOIN dbo.articulListGroupBySizeLabel labels WITH (NOLOCK)
+        LEFT JOIN #Labels labels
             ON nzp.annID = labels.annID AND nzp.kodd_rt = labels.kodd_rt AND nzp.articul = labels.articul
+        OUTER APPLY
+        (
+            SELECT COUNT_BIG(*) AS PztCount
+            FROM plan_zagr_two pzt WITH (NOLOCK)
+            INNER JOIN norm_rasz nr WITH (NOLOCK)
+                ON pzt.pztNrID = nr.nrID
+            WHERE nr.annId = @xAnnID
+              AND pzt.tab > 0
+        ) pzt
         ORDER BY 
             nzp.kodd_rt, 
             nzp.kodd, 
@@ -128,6 +182,8 @@ BEGIN
     -- Очистка временных таблиц
     DROP TABLE #articulKodSelect;
     DROP TABLE #NZPData;
+IF OBJECT_ID('tempdb..#Labels') IS NOT NULL
+    DROP TABLE #Labels;
 IF OBJECT_ID('tempdb..#PachData') IS NOT NULL
     DROP TABLE #PachData;
 
