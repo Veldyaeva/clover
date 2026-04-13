@@ -1,4 +1,4 @@
-using Dapper;
+﻿using Dapper;
 using DevExpress.XtraDiagram.Base;
 using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
@@ -950,14 +950,19 @@ WHERE mlv.kmlKmaID = @kmaId;";
         private static async Task<ShiftEndResult> TryEndWorkingShiftAsync(System.Data.SqlClient.SqlConnection connection, IDbTransaction transaction, int shiftId, int tabEnd)
         {
             const string sql = @"
+DECLARE @updated TABLE (kwsID int NOT NULL);
+
 UPDATE ACE.dbo.knitWorkingShiftNew
 SET kwsTabEnd = @tabEnd,
     kwsDateEnd = GETDATE()
+OUTPUT inserted.kwsID INTO @updated(kwsID)
 WHERE kwsID = @shiftId
   AND kwsDateEnd IS NULL
-  AND kwsDateDel IS NULL;";
-            var rowsAffected = await connection.ExecuteAsync(sql, new { shiftId, tabEnd }, transaction: transaction);
-            if (rowsAffected == 1)
+  AND kwsDateDel IS NULL;
+
+SELECT COUNT(*) FROM @updated;";
+            var updatedRows = await connection.ExecuteScalarAsync<int>(sql, new { shiftId, tabEnd }, transaction: transaction);
+            if (updatedRows > 0)
             {
                 return new ShiftEndResult
                 {

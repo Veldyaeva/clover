@@ -2301,12 +2301,40 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             TabGridLookUpEdit.EditValue = tab;
 
             await UpdateZoneAsync(tab);
+            var zoneShift = await TryGetOpenShiftInCurrentZoneAsync();
+            if (zoneShift.shiftId.HasValue &&
+                zoneShift.tabStart.HasValue &&
+                zoneShift.tabStart.Value > 0 &&
+                zoneShift.tabStart.Value != tab)
+            {
+                tab = zoneShift.tabStart.Value;
+                FioGridLookUpEdit.EditValue = tab;
+                TabGridLookUpEdit.EditValue = tab;
+                await UpdateZoneAsync(tab);
+            }
+
             await UpdateShiftStateAsync(tab);
 
             // Сохраняем фокус до перезагрузки (обновление по Service Broker иначе сбрасывает фокус).
             // Снимок делаем до await — после await продолжение может выполниться не на UI-потоке.
             var focusSnap = _planFocusService.CaptureCurrent();
             await ReloadPlanAndRestoreFocusAsync(tab, focusSnap);
+        }
+
+        private async Task<(int? shiftId, int? tabStart, DateTime? dateStart)> TryGetOpenShiftInCurrentZoneAsync()
+        {
+            if (!_currentKmaId.HasValue || _currentKmaId.Value <= 0)
+                return (null, null, null);
+
+            try
+            {
+                return await _orchestrator.GetOpenShiftByZoneAsync(_currentKmaId.Value);
+            }
+            catch (Exception ex)
+            {
+                LogWarning($"Не удалось определить открытую смену по зоне {_currentKmaId}. {ex.Message}", nameof(TryGetOpenShiftInCurrentZoneAsync));
+                return (null, null, null);
+            }
         }
 
         private async Task UpdateZoneAsync(int tab)
@@ -2336,12 +2364,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 }
                 else
                 {
-                    ApplyShiftUi(false, null, null);
+                    var zoneOpen = await TryGetOpenShiftInCurrentZoneAsync();
+                    if (zoneOpen.shiftId.HasValue && zoneOpen.dateStart.HasValue)
+                    {
+                        ApplyShiftUi(true, zoneOpen.shiftId.Value, zoneOpen.dateStart);
+                    }
+                    else
+                    {
+                        ApplyShiftUi(false, null, null);
+                    }
                 }
             }
             catch (Exception)
             {
-                ApplyShiftUi(false, null, null);
                 LogWarning($"Не удалось определить состояние смены для табельного номера {tab}.", nameof(UpdateShiftStateAsync));
             }
         }
