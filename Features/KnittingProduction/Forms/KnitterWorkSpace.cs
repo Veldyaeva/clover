@@ -538,7 +538,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         ShiftId = _currentShiftId.Value,
                         TabEnd = tabEnd,
                         MinHours = 12m,
-                        CurrentRows = _planPresenter.AllRows?.ToList() ?? new List<KnitterPZVModel>()
+                        UserName = GetShiftAuditUserName()
                     });
 
                     if (!res.Success)
@@ -550,6 +550,23 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                             FocusFirstUnfinishedOperation();
                             XtraMessageBox.Show(this, "В смене есть начатые, но не завершённые операции. Завершите операции, прежде чем закончить смену.", "Завершение операций", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             LogWarning("Есть начатые и не завершённые операции. Смену закрывать нельзя", logContext);
+                            return;
+                        }
+
+                        if (res.AlreadyClosed)
+                        {
+                            XtraMessageBox.Show(this, res.ErrorMessage, "Смена уже закрыта", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            await LoadPlanForTabAsync(tabEnd, forceReload: true);
+                            await RefreshFioListAsync();
+                            ApplyShiftUi(false, null, null);
+                            LogWarning(res.ErrorMessage, logContext);
+                            return;
+                        }
+
+                        if (res.ConcurrentCloseInProgress)
+                        {
+                            XtraMessageBox.Show(this, res.ErrorMessage, "Смена закрывается", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            LogWarning(res.ErrorMessage, logContext);
                             return;
                         }
 
@@ -603,6 +620,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 simpleButton2.Enabled = true;
             }
         }        
+
+        private string GetShiftAuditUserName()
+        {
+            if (!string.IsNullOrWhiteSpace(_user?.UserName))
+                return _user.UserName;
+
+            if (!string.IsNullOrWhiteSpace(_user?.Fio))
+                return _user.Fio;
+
+            return Environment.UserName;
+        }
 
         private bool ShowShiftEndConfirmationDialog()
         {

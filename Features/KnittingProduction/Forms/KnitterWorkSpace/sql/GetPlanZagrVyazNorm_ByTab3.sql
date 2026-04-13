@@ -1,4 +1,5 @@
-﻿-- Группировка с отбором операций до 14 план. часов для вязальной машины (ВМ) 
+﻿
+-- Группировка с отбором операций до 14 план. часов для вязальной машины (ВМ) 
 CREATE PROCEDURE dbo.GetPlanZagrVyazNorm_ByTab3
      @Tab             INT            = 9797,
      @KwsId           INT            = 0,        -- ID смены. открытая смена => фильтр по смене
@@ -124,7 +125,7 @@ BEGIN
             END AS IsAssignedToMe,
 
             -- Для лимита часов по кандидатам (в закрытой смене / tab=0) берем плановые часы.
-            -- У неназначенных (pzvTab=0) план лежит в pzvNChasi (по твоему правилу).
+            -- У неназначенных (pzvTab=0) план лежит в pzvNChasi
             CAST(ISNULL(pzv.pzvNChasi,0) AS DECIMAL(18,2)) AS TaskHours
         FROM dbo.planZagrVyaz AS pzv
         JOIN dbo.norm_rasz    AS nr   ON nr.nrID = pzv.pzvNrID
@@ -328,5 +329,6 @@ ORDER BY
 
     END
 END
+
 
 GO

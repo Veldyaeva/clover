@@ -1,7 +1,4 @@
-using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
@@ -10,12 +7,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
     {
         private readonly IKnitterShiftGateway _shiftGateway;
         private readonly ILogger _logger;
-        private const string LoggerContext = "KnitterWorkSpaceService";
+        private readonly CloseKnitterShiftUseCase _closeShiftUseCase;
 
         public KnitterWorkSpaceService(IKnitterShiftGateway shiftGateway, ILogger? logger = null)
         {
             _shiftGateway = shiftGateway ?? throw new ArgumentNullException(nameof(shiftGateway));
             _logger = logger ?? new FileLogger();
+            _closeShiftUseCase = new CloseKnitterShiftUseCase(_shiftGateway, _logger);
         }
 
         public async Task<StartShiftResult> StartShiftAsync(StartShiftCommand command)
@@ -70,80 +68,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
         public async Task<CloseShiftResult> CloseShiftAsync(CloseShiftCommand command)
         {
-            if (command == null)
-                throw new ArgumentNullException(nameof(command));
-
-            if (command.ShiftId <= 0)
-            {
-                return new CloseShiftResult
-                {
-                    Success = false,
-                    ErrorMessage = "Не удалось определить открытую смену."
-                };
-            }
-
-            var unfinished = (command.CurrentRows ?? new List<KnitterPZVModel>())
-                .Where(r => r.pzvDateStart != null && r.pzvDateEnd == null)
-                .Select(r => r.pzvID)
-                .Distinct()
-                .ToList();
-
-            if (unfinished.Count > 0)
-            {
-                return new CloseShiftResult
-                {
-                    Success = false,
-                    ErrorMessage = "Есть начатые и не завершённые операции. Смену закрывать нельзя.",
-                    HasUnfinishedOperations = true,
-                    UnfinishedPzvIds = unfinished
-                };
-            }
-
-            var notStarted = (command.CurrentRows ?? new List<KnitterPZVModel>())
-                .Where(r => r.pzvID > 0 && r.pzvDateStart == null && r.pzvDateEnd == null)
-                .Select(r => r.pzvID)
-                .Distinct()
-                .ToList();
-
-            await using (var tx = await _shiftGateway.BeginShiftTransactionAsync())
-            {
-                foreach (var pzvId in notStarted)
-                {
-                    try
-                    {
-                        await tx.SplitPzvByModeAsync(pzvId, mode: 2, qtyFact: 0);
-                    }
-                    catch (Exception ex)
-                    {
-                        await SafeLogAsync(() => _logger.LogErrorAsync(
-                            ex,
-                            $"{LoggerContext}.{nameof(CloseShiftAsync)}.SplitPzvByModeAsync(pzvId={pzvId})"));
-                    }
-                }
-
-                await tx.AdjustNotStartedBeforeShiftEndAsync(command.ShiftId, command.MinHours);
-                await tx.EndWorkingShiftAsync(command.ShiftId, command.TabEnd);
-                await tx.CommitAsync();
-            }
-
-            return new CloseShiftResult
-            {
-                Success = true,
-                ErrorMessage = string.Empty,
-                HasUnfinishedOperations = false,
-                UnfinishedPzvIds = new List<int>()
-            };
-        }
-
-        private static async Task SafeLogAsync(Func<Task> writeLog)
-        {
-            try
-            {
-                await writeLog().ConfigureAwait(false);
-            }
-            catch
-            {
-            }
+            return await _closeShiftUseCase.ExecuteAsync(command).ConfigureAwait(false);
         }
     }
 }
