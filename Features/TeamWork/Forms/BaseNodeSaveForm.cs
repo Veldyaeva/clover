@@ -23,6 +23,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private IReadOnlyList<BaseNodeMetadataItem> _nodeTypes = Array.Empty<BaseNodeMetadataItem>();
         private IReadOnlyList<BaseNodeMetadataItem> _nodeGroups = Array.Empty<BaseNodeMetadataItem>();
         private IReadOnlyList<BaseNodeMetadataItem> _nodeSubgroups = Array.Empty<BaseNodeMetadataItem>();
+        private IReadOnlyList<BaseNodeMetadataItem> _productCategories = Array.Empty<BaseNodeMetadataItem>();
 
         public BaseNodeDefinition ResultNode { get; private set; }
 
@@ -108,7 +109,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             nodeGroupComboBox.Items.Add(string.Empty);
             nodeSubgroupComboBox.Items.Add(string.Empty);
             productKindComboBox.Items.AddRange(BaseNodeMetadataOptions.NodeTypes.Cast<object>().ToArray());
-            SelectComboValue(productCategoryComboBox, _defaults?.ProductCategory, "Универсально");
 
             productKindComboBox.SelectedIndexChanged += MetadataComboBox_SelectedIndexChanged;
             productCategoryComboBox.SelectedIndexChanged += MetadataComboBox_SelectedIndexChanged;
@@ -129,8 +129,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 _nodeTypes = BaseNodeMetadataOptions.NodeTypes;
                 _nodeGroups = BaseNodeMetadataOptions.NodeGroups;
+                _productCategories = BuildFallbackProductCategories();
                 ApplyNodeTypes(_nodeTypes, _defaults?.NodeTypeId, _defaults?.NodeType);
                 ApplyNodeGroups(_nodeGroups, _defaults?.NodeGroupId, _defaults?.NodeGroup);
+                ApplyProductCategories(_productCategories, _defaults?.ProductCategory);
                 await LoadNodeSubgroupsAsync(_defaults?.NodeSubgroupId, _defaults?.NodeGroupDetail);
                 TryApplyGeneratedName(force: true);
                 return;
@@ -140,8 +142,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 _nodeTypes = await _libraryService.GetNodeTypesAsync();
                 _nodeGroups = await _libraryService.GetNodeGroupsAsync();
+                _productCategories = await _libraryService.GetProductCategoriesAsync();
                 ApplyNodeTypes(_nodeTypes, _defaults?.NodeTypeId, _defaults?.NodeType);
                 ApplyNodeGroups(_nodeGroups, _defaults?.NodeGroupId, _defaults?.NodeGroup);
+                ApplyProductCategories(_productCategories, _defaults?.ProductCategory);
                 await LoadNodeSubgroupsAsync(_defaults?.NodeSubgroupId, _defaults?.NodeGroupDetail);
                 TryApplyGeneratedName(force: true);
             }
@@ -191,6 +195,25 @@ namespace SewingProduction.Features.TeamWork.Forms
             SelectMetadataItem(nodeGroupComboBox, selectedId, selectedValue);
         }
 
+        private void ApplyProductCategories(IEnumerable<BaseNodeMetadataItem> productCategories, string selectedValue)
+        {
+            productCategoryComboBox.BeginUpdate();
+            try
+            {
+                productCategoryComboBox.Items.Clear();
+                foreach (var productCategory in productCategories ?? BuildFallbackProductCategories())
+                {
+                    productCategoryComboBox.Items.Add(productCategory);
+                }
+            }
+            finally
+            {
+                productCategoryComboBox.EndUpdate();
+            }
+
+            SelectMetadataItem(productCategoryComboBox, null, selectedValue);
+        }
+
         private async Task LoadNodeSubgroupsAsync(int? selectedId, string selectedValue)
         {
             var selectedGroup = nodeGroupComboBox.SelectedItem as BaseNodeMetadataItem;
@@ -232,6 +255,21 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 comboBox.SelectedIndex = 0;
             }
+        }
+
+        private static IReadOnlyList<BaseNodeMetadataItem> BuildFallbackProductCategories()
+        {
+            return BaseNodeMetadataOptions.ProductCategories
+                .Select((name, index) => new BaseNodeMetadataItem
+                {
+                    Id = index + 1,
+                    Code = $"PC_{index + 1}",
+                    Name = name,
+                    SortOrder = (index + 1) * 10
+                })
+                .OrderBy(x => x.SortOrder)
+                .ThenBy(x => x.Name)
+                .ToList();
         }
 
         private static void SelectMetadataItem(ComboBox comboBox, int? selectedId, string selectedValue)
@@ -305,7 +343,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             return BaseNodeNameBuilder.Build(
                 (nodeGroupComboBox.SelectedItem as BaseNodeMetadataItem)?.Name ?? nodeGroupComboBox.SelectedItem?.ToString(),
                 (nodeSubgroupComboBox.SelectedItem as BaseNodeMetadataItem)?.Name ?? nodeSubgroupComboBox.SelectedItem?.ToString(),
-                productCategoryComboBox.SelectedItem?.ToString());
+                (productCategoryComboBox.SelectedItem as BaseNodeMetadataItem)?.Name ?? productCategoryComboBox.SelectedItem?.ToString());
         }
 
         private void OkButton_Click(object sender, EventArgs e)
@@ -336,7 +374,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             ResultNode.NodeType = (productKindComboBox.SelectedItem as BaseNodeMetadataItem)?.Name ?? string.Empty;
             ResultNode.NodeTypeId = (productKindComboBox.SelectedItem as BaseNodeMetadataItem)?.Id;
             ResultNode.ProductKind = string.Empty;
-            ResultNode.ProductCategory = productCategoryComboBox.SelectedItem?.ToString() ?? string.Empty;
+            ResultNode.ProductCategory = (productCategoryComboBox.SelectedItem as BaseNodeMetadataItem)?.Name
+                ?? productCategoryComboBox.SelectedItem?.ToString()
+                ?? string.Empty;
 
             DialogResult = DialogResult.OK;
             Close();

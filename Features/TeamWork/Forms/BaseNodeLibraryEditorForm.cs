@@ -27,6 +27,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private IReadOnlyList<BaseNodeMetadataItem> _nodeTypes = Array.Empty<BaseNodeMetadataItem>();
         private IReadOnlyList<BaseNodeMetadataItem> _nodeGroups = Array.Empty<BaseNodeMetadataItem>();
         private IReadOnlyList<BaseNodeMetadataItem> _nodeSubgroups = Array.Empty<BaseNodeMetadataItem>();
+        private IReadOnlyList<BaseNodeMetadataItem> _productCategories = Array.Empty<BaseNodeMetadataItem>();
 
         public BaseNodeDefinition SelectedNode => nodeCardsListView.SelectedItems.Count > 0
             ? nodeCardsListView.SelectedItems[0].Tag as BaseNodeDefinition
@@ -61,7 +62,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             nodeGroupComboBox.Items.Add(string.Empty);
             nodeSubgroupComboBox.Items.Add(string.Empty);
             productKindComboBox.Items.AddRange(BaseNodeMetadataOptions.NodeTypes.Cast<object>().ToArray());
-            productCategoryComboBox.Items.AddRange(BaseNodeMetadataOptions.ProductCategories);
             productKindComboBox.SelectedIndexChanged += MetadataComboBox_SelectedIndexChanged;
             productCategoryComboBox.SelectedIndexChanged += MetadataComboBox_SelectedIndexChanged;
             nodeGroupComboBox.SelectedIndexChanged += NodeGroupComboBox_SelectedIndexChanged;
@@ -73,14 +73,40 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                _nodeTypes = await _libraryService.GetNodeTypesAsync();
-                _nodeGroups = await _libraryService.GetNodeGroupsAsync();
+                //                _nodeTypes = await _libraryService.GetNodeTypesAsync();
+                //                _nodeGroups = await _libraryService.GetNodeGroupsAsync();
+                //                _productCategories = await _libraryService.GetProductCategoriesAsync();
+                var nodeTypes = await _libraryService.GetNodeTypesAsync();
+                var nodeGroups = await _libraryService.GetNodeGroupsAsync();
+                var productCategories = await _libraryService.GetProductCategoriesAsync();
+
+                _nodeTypes = nodeTypes != null && nodeTypes.Count > 0
+                    ? nodeTypes
+                    : BaseNodeMetadataOptions.NodeTypes;
+
+                _nodeGroups = nodeGroups != null && nodeGroups.Count > 0
+                    ? nodeGroups
+                    : BaseNodeMetadataOptions.NodeGroups;
+
+                _productCategories = productCategories != null && productCategories.Count > 0
+                    ? productCategories
+                    : BuildFallbackProductCategories();
                 ApplyNodeTypes(_workingNode?.NodeTypeId, _workingNode?.NodeType);
                 ApplyNodeGroups(_workingNode?.NodeGroupId, _workingNode?.NodeGroup);
+                ApplyProductCategories(_workingNode?.ProductCategory);
                 await LoadNodeSubgroupsAsync(_workingNode?.NodeSubgroupId, _workingNode?.NodeGroupDetail);
+                PopulateFilterValuesFromMetadata();
             }
             catch (Exception ex)
             {
+                _nodeTypes = BaseNodeMetadataOptions.NodeTypes;
+                _nodeGroups = BaseNodeMetadataOptions.NodeGroups;
+                _productCategories = BuildFallbackProductCategories();
+                ApplyNodeTypes(_workingNode?.NodeTypeId, _workingNode?.NodeType);
+                ApplyNodeGroups(_workingNode?.NodeGroupId, _workingNode?.NodeGroup);
+                ApplyProductCategories(_workingNode?.ProductCategory);
+                await LoadNodeSubgroupsAsync(_workingNode?.NodeSubgroupId, _workingNode?.NodeGroupDetail);
+                PopulateFilterValuesFromMetadata();
                 MessageBox.Show(this, $"Не удалось загрузить группы узлов: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
@@ -125,14 +151,55 @@ namespace SewingProduction.Features.TeamWork.Forms
             SelectMetadataItem(nodeGroupComboBox, selectedId, selectedValue);
         }
 
+        private void ApplyProductCategories(string selectedValue)
+        {
+            productCategoryComboBox.BeginUpdate();
+            try
+            {
+                productCategoryComboBox.Items.Clear();
+                foreach (var productCategory in _productCategories.Any() ? _productCategories : BuildFallbackProductCategories())
+                {
+                    productCategoryComboBox.Items.Add(productCategory);
+                }
+            }
+            finally
+            {
+                productCategoryComboBox.EndUpdate();
+            }
+
+            SelectMetadataItem(productCategoryComboBox, null, selectedValue);
+        }
+
         private async Task LoadNodeSubgroupsAsync(int? selectedId, string selectedValue)
         {
             var selectedGroup = nodeGroupComboBox.SelectedItem as BaseNodeMetadataItem;
-            _nodeSubgroups = selectedGroup == null
-                ? Array.Empty<BaseNodeMetadataItem>()
-                : await _libraryService.GetNodeSubgroupsAsync(selectedGroup.Id);
-
-            nodeSubgroupComboBox.BeginUpdate();
+            //_nodeSubgroups = selectedGroup == null
+            //    ? Array.Empty<BaseNodeMetadataItem>()
+            // //   : await _libraryService.GetNodeSubgroupsAsync(selectedGroup.Id);
+            // : await TryLoadNodeSubgroupsWithFallback(selectedGroup.Id);
+                        if (selectedGroup == null)
+                            {
+                _nodeSubgroups = Array.Empty<BaseNodeMetadataItem>();
+                            }
+                        else if (_libraryService == null)
+                            {
+                _nodeSubgroups = BaseNodeMetadataOptions.GetNodeSubgroups(selectedGroup.Id);
+                            }
+                        else
+                            {
+                                try
+                {
+                    var fromDb = await _libraryService.GetNodeSubgroupsAsync(selectedGroup.Id);
+                    _nodeSubgroups = fromDb != null && fromDb.Count > 0
+                                            ? fromDb
+                                            : BaseNodeMetadataOptions.GetNodeSubgroups(selectedGroup.Id);
+                                    }
+                                catch
+                {
+                    _nodeSubgroups = BaseNodeMetadataOptions.GetNodeSubgroups(selectedGroup.Id);
+                                    }
+                            }
+                nodeSubgroupComboBox.BeginUpdate();
             try
             {
                 nodeSubgroupComboBox.Items.Clear();
@@ -150,7 +217,23 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             SelectMetadataItem(nodeSubgroupComboBox, selectedId, selectedValue);
         }
+        private async Task<IReadOnlyList<BaseNodeMetadataItem>> TryLoadNodeSubgroupsWithFallback(int nodeGroupId)
+        {
+            if (_libraryService == null)
+                return BaseNodeMetadataOptions.GetNodeSubgroups(nodeGroupId);
 
+            try
+            {
+                var fromDb = await _libraryService.GetNodeSubgroupsAsync(nodeGroupId);
+                if (fromDb != null && fromDb.Count > 0)
+                    return fromDb;
+            }
+            catch
+            {
+            }
+
+            return BaseNodeMetadataOptions.GetNodeSubgroups(nodeGroupId);
+        }
         private async Task ReloadNodesAsync(int? preferredNodeId = null)
         {
             ToggleBusyState(true);
@@ -159,7 +242,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 var nodes = await _libraryService.GetAllAsync();
                 _nodes.Clear();
                 _nodes.AddRange(nodes.OrderBy(x => x.DisplayName, StringComparer.CurrentCultureIgnoreCase));
-                PopulateFilterValues();
+                PopulateFilterValuesFromMetadata();
                 ApplyNodeFilter(preferredNodeId);
             }
             catch (Exception ex)
@@ -190,7 +273,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 descriptionTextBox.Text = string.Empty;
                 nodeGroupComboBox.SelectedIndex = nodeGroupComboBox.Items.Count > 0 ? 0 : -1;
                 productKindComboBox.SelectedItem = "Производственный";
-                productCategoryComboBox.SelectedItem = "Универсально";
+                SelectMetadataItem(productCategoryComboBox, null, "Универсально");
                 detailsLabel.Text = "Выберите базовый узел для редактирования.";
                 previewTitleLabel.Text = "Визуальная библиотека узлов";
                 previewGrid.DataSource = null;
@@ -209,7 +292,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ApplyNodeTypes(_workingNode.NodeTypeId, _workingNode.NodeType);
             ApplyNodeGroups(_workingNode.NodeGroupId, _workingNode.NodeGroup);
             _ = LoadNodeSubgroupsAsync(_workingNode.NodeSubgroupId, _workingNode.NodeGroupDetail);
-            SelectComboValue(productCategoryComboBox, _workingNode.ProductCategory, "Универсально");
+            SelectMetadataItem(productCategoryComboBox, null, _workingNode.ProductCategory);
             BaseNodePreviewHelper.Update(_previewPanel, _workingNode);
             UpdateRtCodeCopyState(_workingNode.SourceRtCode, _workingNode.NodeCode);
             previewTitleLabel.Text = string.IsNullOrWhiteSpace(_workingNode.Name) ? _workingNode.DisplayName : _workingNode.Name;
@@ -348,14 +431,17 @@ namespace SewingProduction.Features.TeamWork.Forms
             BindSelectedNode();
         }
 
-        private void PopulateFilterValues()
+        private void PopulateFilterValuesFromMetadata()
         {
             _updatingFilters = true;
             try
             {
-                PopulateFilterComboBox(libraryProductKindFilterComboBox, _nodes.Where(node => node != null).Select(GetProductKindValue));
-                PopulateFilterComboBox(libraryProductCategoryFilterComboBox, _nodes.Where(node => node != null).Select(node => node.ProductCategory));
-                PopulateFilterComboBox(libraryNodeGroupFilterComboBox, _nodes.Where(node => node != null).Select(node => node.NodeGroup));
+                //                PopulateFilterComboBox(libraryProductKindFilterComboBox, _nodes.Where(node => node != null).Select(GetProductKindValue));
+                //                PopulateFilterComboBox(libraryProductCategoryFilterComboBox, _nodes.Where(node => node != null).Select(node => node.ProductCategory));
+                //                PopulateFilterComboBox(libraryNodeGroupFilterComboBox, _nodes.Where(node => node != null).Select(node => node.NodeGroup));
+                PopulateFilterComboBox(libraryProductKindFilterComboBox, _nodeTypes.Select(x => x.Name));
+                PopulateFilterComboBox(libraryProductCategoryFilterComboBox, _productCategories.Select(x => x.Name));
+                PopulateFilterComboBox(libraryNodeGroupFilterComboBox, _nodeGroups.Select(x => x.Name));
             }
             finally
             {
@@ -389,6 +475,21 @@ namespace SewingProduction.Features.TeamWork.Forms
             comboBox.SelectedItem = comboBox.Items.Contains(selectedValue)
                 ? selectedValue
                 : string.Empty;
+        }
+
+        private static IReadOnlyList<BaseNodeMetadataItem> BuildFallbackProductCategories()
+        {
+            return BaseNodeMetadataOptions.ProductCategories
+                .Select((name, index) => new BaseNodeMetadataItem
+                {
+                    Id = index + 1,
+                    Code = $"PC_{index + 1}",
+                    Name = name,
+                    SortOrder = (index + 1) * 10
+                })
+                .OrderBy(x => x.SortOrder)
+                .ThenBy(x => x.Name)
+                .ToList();
         }
 
         private static bool MatchesNodeFilter(BaseNodeDefinition node, string filter, string productKind, string productCategory, string nodeGroup)
@@ -434,11 +535,12 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private static string GetProductKindValue(BaseNodeDefinition node)
         {
-            return StringNormalizer.TrimOrEmpty(node?.ProductKind) switch
-            {
-                { Length: > 0 } value => value,
-                _ => StringNormalizer.TrimOrEmpty(node?.NodeType)
-            };
+            //return StringNormalizer.TrimOrEmpty(node?.ProductKind) switch
+            //{
+            //    { Length: > 0 } value => value,
+            //    _ => StringNormalizer.TrimOrEmpty(node?.NodeType)
+            //};
+            return StringNormalizer.TrimOrEmpty(node?.NodeType);
         }
 
         private static string BuildNodeCardSubtitle(BaseNodeDefinition node)
@@ -571,7 +673,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             string generatedName = BaseNodeNameBuilder.Build(
                 (nodeGroupComboBox.SelectedItem as BaseNodeMetadataItem)?.Name ?? nodeGroupComboBox.SelectedItem?.ToString(),
                 (nodeSubgroupComboBox.SelectedItem as BaseNodeMetadataItem)?.Name ?? nodeSubgroupComboBox.SelectedItem?.ToString(),
-                productCategoryComboBox.SelectedItem?.ToString());
+                (productCategoryComboBox.SelectedItem as BaseNodeMetadataItem)?.Name ?? productCategoryComboBox.SelectedItem?.ToString());
 
             if (string.IsNullOrWhiteSpace(generatedName))
             {
@@ -625,7 +727,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             updatedNode.NodeType = (productKindComboBox.SelectedItem as BaseNodeMetadataItem)?.Name ?? string.Empty;
             updatedNode.NodeTypeId = (productKindComboBox.SelectedItem as BaseNodeMetadataItem)?.Id;
             updatedNode.ProductKind = string.Empty;
-            updatedNode.ProductCategory = StringNormalizer.TrimOrEmpty(productCategoryComboBox.SelectedItem?.ToString());
+            updatedNode.ProductCategory = StringNormalizer.TrimOrEmpty(
+                (productCategoryComboBox.SelectedItem as BaseNodeMetadataItem)?.Name
+                ?? productCategoryComboBox.SelectedItem?.ToString());
 
             ToggleBusyState(true);
             try
@@ -755,6 +859,33 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 previewGrid.CurrentCell = row.Cells[0];
             }
+        }
+
+        private void PreviewGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
+
+            EditOperationAt(e.RowIndex);
+        }
+
+        private void EditOperationAt(int selectedIndex)
+        {
+            if (_workingNode == null || selectedIndex < 0 || selectedIndex >= _workingNode.Operations.Count)
+            {
+                return;
+            }
+
+            using var form = new BaseNodeOperationEditForm(User, _workingNode.Operations[selectedIndex]);
+            if (form.ShowDialog(this) != DialogResult.OK || form.ResultOperation == null)
+            {
+                return;
+            }
+
+            _workingNode.Operations[selectedIndex] = form.ResultOperation;
+            RefreshOperationsPreview(selectedIndex);
         }
 
         private bool EnsureCanMoveSelectedOperation(int delta, out int selectedIndex, out int targetIndex)

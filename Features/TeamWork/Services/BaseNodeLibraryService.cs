@@ -140,7 +140,16 @@ ORDER BY SortOrder, Name;";
                         .ToList();
                 }
 
-                return (await connection.QueryAsync<BaseNodeMetadataItem>(query)).ToList();
+                var nodeTypes = (await connection.QueryAsync<BaseNodeMetadataItem>(query)).ToList();
+                if (nodeTypes.Count > 0)
+                {
+                    return nodeTypes;
+                }
+
+                return BaseNodeMetadataOptions.NodeTypes
+                    .OrderBy(x => x.SortOrder)
+                    .ThenBy(x => x.Name)
+                    .ToList();
             }
             catch (Exception ex)
             {
@@ -177,7 +186,16 @@ ORDER BY SortOrder, Name;";
                         .ToList();
                 }
 
-                return (await connection.QueryAsync<BaseNodeMetadataItem>(query)).ToList();
+                var nodeGroups = (await connection.QueryAsync<BaseNodeMetadataItem>(query)).ToList();
+                if (nodeGroups.Count > 0)
+                {
+                    return nodeGroups;
+                }
+
+                return BaseNodeMetadataOptions.NodeGroups
+                    .OrderBy(x => x.SortOrder)
+                    .ThenBy(x => x.Name)
+                    .ToList();
             }
             catch (Exception ex)
             {
@@ -217,12 +235,55 @@ ORDER BY SortOrder, Name;";
                     return BaseNodeMetadataOptions.GetNodeSubgroups(nodeGroupId).ToList();
                 }
 
-                return (await connection.QueryAsync<BaseNodeMetadataItem>(query, new { NodeGroupId = nodeGroupId.Value })).ToList();
+                var nodeSubgroups = (await connection.QueryAsync<BaseNodeMetadataItem>(query, new { NodeGroupId = nodeGroupId.Value })).ToList();
+                if (nodeSubgroups.Count > 0)
+                {
+                    return nodeSubgroups;
+                }
+
+                return BaseNodeMetadataOptions.GetNodeSubgroups(nodeGroupId).ToList();
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при загрузке подгрупп базовых узлов");
                 return BaseNodeMetadataOptions.GetNodeSubgroups(nodeGroupId).ToList();
+            }
+        }
+
+        public async Task<IReadOnlyList<BaseNodeMetadataItem>> GetProductCategoriesAsync()
+        {
+            const string query = @"
+SELECT
+    ProductCategoryId AS Id,
+    ProductKindId AS ParentId,
+    Code,
+    Name,
+    SortOrder,
+    CAST(ISNULL(IsActive, 1) AS bit) AS IsActive
+FROM dbo.ProductCategoryDictionary
+WHERE ISNULL(IsActive, 1) = 1
+ORDER BY SortOrder, Name;";
+
+            try
+            {
+                using var connection = _dbHelper.GetConnection();
+                if (!await HasTableAsync(connection, null, "ProductCategoryDictionary"))
+                {
+                    return BuildFallbackProductCategories();
+                }
+
+                var productCategories = (await connection.QueryAsync<BaseNodeMetadataItem>(query)).ToList();
+                if (productCategories.Count > 0)
+                {
+                    return productCategories;
+                }
+
+                return BuildFallbackProductCategories();
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при загрузке категорий изделий для базовых узлов");
+                return BuildFallbackProductCategories();
             }
         }
 
@@ -740,6 +801,21 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
         private static string NullIfWhiteSpace(string value)
         {
             return StringNormalizer.TrimToNull(value);
+        }
+
+        private static IReadOnlyList<BaseNodeMetadataItem> BuildFallbackProductCategories()
+        {
+            return BaseNodeMetadataOptions.ProductCategories
+                .Select((name, index) => new BaseNodeMetadataItem
+                {
+                    Id = index + 1,
+                    Code = $"PC_{index + 1}",
+                    Name = name,
+                    SortOrder = (index + 1) * 10
+                })
+                .OrderBy(x => x.SortOrder)
+                .ThenBy(x => x.Name)
+                .ToList();
         }
 
         private static async Task<bool> HasBaseNodeColumnAsync(SqlConnection connection, SqlTransaction transaction, string columnName)
