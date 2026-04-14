@@ -1,4 +1,6 @@
-using DevExpress.XtraBars.Docking2010;
+﻿using DevExpress.XtraBars.Docking2010;
+using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Models;
 using System;
 using System.Diagnostics;
@@ -28,12 +30,11 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void layoutControlGroup14_CustomButtonChecked(object sender, BaseButtonEventArgs e)
         {
-            //SvgImage checkIcon = SvgImage.FromResources(Properties.Resources.save_16x16, typeof(Program).Assembly);
-            //SvgImage uncheckIcon = SvgImage.FromResources(Properties.Resources.CheckboxComposite, typeof(Program).Assembly);
             var button = e.Button as DevExpress.XtraEditors.ButtonPanel.BaseButton;
             if (button != null)
             {
                 showAllWD = button.Checked;
+                RefreshCurrentWorksUxState();
                 loadAllCheckBox_CheckedChanged_Internal(sender, e, button.Checked);
             }
         }
@@ -44,6 +45,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (button != null)
             {
                 showAllWD = button.Checked;
+                RefreshCurrentWorksUxState();
                 loadAllCheckBox_CheckedChanged_Internal(sender, e, button.Checked);
             }
         }
@@ -69,19 +71,111 @@ namespace SewingProduction.Features.TeamWork.Forms
             var ct = StartNewLoadToken();
             try
             {
-                switch (activePage.Name)
-                {
-                    case "TabPage1":
-                        await LoadWorkDivisions(ct);
-                        break;
-                    case "xtraTabPageArticles":
-                        await CurrentWorks_Load(ct);
-                        break;
-                }
+                await RefreshMainTabAsync(activePage.Name, ct);
             }
             catch (OperationCanceledException) when (ct.IsCancellationRequested)
             {
-                // Перезагрузка вкладки была отменена (например, вкладку опять сменили) - это ок
+                // Перезагрузка вкладки была отменена более новым действием.
+            }
+        }
+
+        private async Task RefreshMainTabAsync(string tabName, CancellationToken ct)
+        {
+            switch (tabName)
+            {
+                case "TabPage1":
+                    await RefreshWorkDivisionsTabPreservingStateAsync(ct);
+                    break;
+                case "xtraTabPageArticles":
+                    await RefreshArticlesTabPreservingStateAsync(ct);
+                    break;
+            }
+        }
+
+        private async Task RefreshArticlesSubTabAsync(string tabName, CancellationToken ct)
+        {
+            switch (tabName)
+            {
+                case "xtraTabPageWorkDivisions":
+                    await RefreshArticlesTabPreservingStateAsync(ct);
+                    break;
+                case "xtraTabPage3":
+                    await RefreshArchiveTabPreservingStateAsync(ct);
+                    break;
+            }
+        }
+
+        private async Task RefreshWorkDivisionsTabPreservingStateAsync(CancellationToken ct)
+        {
+            var annGridState = GridViewRefreshStateHelper.Capture(ANNgridView, "AnnID");
+
+            await LoadWorkDivisions(ct, loadRelatedData: false);
+            RestoreGridViewRefreshState(ANNgridView, annGridState);
+
+            int restoredAnnId = GridViewRefreshStateHelper.GetFocusedIntValue(ANNgridView, "AnnID");
+            if (restoredAnnId > 0)
+            {
+                await LoadRelatedData(restoredAnnId, ct);
+            }
+        }
+
+        private async Task RefreshArticlesTabPreservingStateAsync(CancellationToken ct)
+        {
+            var unboundArtsState = GridViewRefreshStateHelper.Capture(gridView_unboundArts, "kodd_rt");
+            var workDivisionsState = GridViewRefreshStateHelper.Capture(gridView_wdToBind, "AnnID");
+            var preArchiveState = GridViewRefreshStateHelper.Capture(gridViewPreArch, "AnnID");
+            var archiveState = GridViewRefreshStateHelper.Capture(gridViewArch, "AnnID");
+
+            if (_articlesTabInitialized)
+            {
+                await RefreshCurrentWorksTabAsync(ct);
+            }
+            else
+            {
+                await InitializeCurrentWorksTabAsync(ct);
+            }
+
+            RestoreGridViewRefreshState(gridView_unboundArts, unboundArtsState);
+            RestoreGridViewRefreshState(gridView_wdToBind, workDivisionsState);
+            RestoreGridViewRefreshState(gridViewPreArch, preArchiveState);
+            RestoreGridViewRefreshState(gridViewArch, archiveState);
+
+            await SeedArticlesDetailsForCurrentSelectionAsync(ct);
+        }
+
+        private async Task RefreshArchiveTabPreservingStateAsync(CancellationToken ct)
+        {
+            var preArchiveState = GridViewRefreshStateHelper.Capture(gridViewPreArch, "AnnID");
+            var archiveState = GridViewRefreshStateHelper.Capture(gridViewArch, "AnnID");
+
+            Task preArchTask = PreArchLoad(ct);
+            Task archTask = ArchLoad(ct);
+            await Task.WhenAll(preArchTask, archTask);
+
+            RestoreGridViewRefreshState(gridViewPreArch, preArchiveState);
+            RestoreGridViewRefreshState(gridViewArch, archiveState);
+        }
+
+        private void RestoreGridViewRefreshState(GridView gridView, GridViewRefreshState state)
+        {
+            if (gridView == null || state == null)
+            {
+                return;
+            }
+
+            _isRestoringGridState = true;
+            try
+            {
+                GridViewRefreshStateHelper.Restore(gridView, state);
+            }
+            finally
+            {
+                _isRestoringGridState = false;
+            }
+
+            if (ReferenceEquals(gridView, ANNgridView))
+            {
+                ApplyAnnGridKitSearchFilter(gridView);
             }
         }
 

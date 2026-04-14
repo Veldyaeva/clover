@@ -23,6 +23,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private List<RolePodrModel> _allRolePodr;
         private AllTableNameModel _selectedPodr;
         private RoleModel _selectedRole;
+        int _roleLastTopRowIndex;
+        int _roleLastVisibleIndex;
         public RolePodr(UserClass user) : base(user)
         {
             InitializeComponent();
@@ -46,6 +48,13 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customGridControlTable.RefreshDataSource();
 
             customCheckBoxPodr.Checked = true;
+        }
+        private void gridViewRole_CellValueChanging(
+        object sender, 
+        DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            _roleLastVisibleIndex = gridViewRole.GetVisibleIndex(e.RowHandle);
+            _roleLastTopRowIndex = gridViewRole.TopRowIndex;
         }
         private async void gridViewRole_CellValueChanged(
         object sender,
@@ -90,6 +99,17 @@ namespace SewingProduction.Features.UserDistribution.Forms
                     x.RoleID == role.RoleID &&
                     x.PodrTableID == _selectedPodr.id_atn);
             }
+
+            BeginInvoke(new Action(() =>
+            {
+                if (_roleLastTopRowIndex >= 0)
+                    gridViewRole.TopRowIndex = _roleLastTopRowIndex;
+
+                int targetHandle = gridViewRole.GetVisibleRowHandle(_roleLastVisibleIndex);
+
+                if (targetHandle >= 0)
+                    gridViewRole.FocusedRowHandle = targetHandle;
+            }));
         }
 
         private void gridViewTable_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
@@ -160,7 +180,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             {
                 if (allowedIds.Count == 0)
                 {
-                    gridViewTable.ActiveFilterString = "1 = 0"; 
+                    gridViewTable.ActiveFilterString = "1 = 0";
                 }
                 else
                 {

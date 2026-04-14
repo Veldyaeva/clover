@@ -1,4 +1,4 @@
-using DevExpress.XtraBars.Docking2010;
+﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
@@ -36,6 +36,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly FormSettingsHelper _formSettingsHelper = new FormSettingsHelper();
         private readonly SecondsUpdateManager _secondsUpdateManager;
         private readonly ITeamWorkOrchestrator _teamWorkService;
+        private readonly TeamWorkArticlesQueryService _articlesQueryService;
         private UIHelper _uiHelper;
         private int bufferId = 0;
         private BindingList<ArtNormN> _bindingList;
@@ -83,6 +84,10 @@ namespace SewingProduction.Features.TeamWork.Forms
         private BindingList<NormKont> _normKontListArticles;
         private BindingSource _normKontBindingSourceArticles;
         private bool _articlesTabInitialized = false;
+        private bool _isRestoringGridState = false;
+        private bool _isUpdatingAnnGridKitFilter = false;
+        private bool _annGridKitFilterActive = false;
+        private readonly HashSet<int> _recommendedAnnIds = new HashSet<int>();
 
         private List<KodProizvModel> kodProizvList;
         private List<PodrVyazModel> podrVyazList;
@@ -99,12 +104,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             ANNgridView.OptionsView.ShowPreview = false;
             ANNgridView.PreviewLineCount = 0;
             DapperMappings.Configure();
-            _dbHelper = new DatabaseHelper();
-            _dbService = new DbService(_dbHelper);
-            _artNormService = new ArtNormRepository(_dbHelper);
-            _jabberSender = new JabberSender(_dbHelper);
+            var coreServices = TeamWorkDependencyFactory.CreateCoreServices(_logger);
+            _dbHelper = coreServices.DbHelper;
+            _dbService = coreServices.DbService;
+            _artNormService = coreServices.ArtNormRepository;
+            _jabberSender = (JabberSender)coreServices.JabberSender;
             _secondsUpdateManager = new SecondsUpdateManager(_artNormService, _logger);
-            _teamWorkService = new TeamWorkOrchestrator(_artNormService, _dbService, _dbHelper, _jabberSender, _logger);
+            _teamWorkService = coreServices.Orchestrator;
+            _articlesQueryService = new TeamWorkArticlesQueryService(_artNormService, _dbService, _logger);
             _uiHelper = new UIHelper(_logger);
 
             // Инициализация основных BindingList и BindingSource
@@ -181,6 +188,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             // Взаимоисключаем видимость кнопок редактирования по событию изменения видимости
             if (ButtonEditOnlyAdv != null)
                 ButtonEditOnlyAdv.VisibleChanged += ButtonEditOnlyAdv_VisibleChanged;
+
+            if (xtraTabControl2 != null)
+            {
+                xtraTabControl2.SelectedPageChanged -= XtraTabControl2_SelectedPageChanged;
+                xtraTabControl2.SelectedPageChanged += XtraTabControl2_SelectedPageChanged;
+            }
         }
 
         ///// <summary>

@@ -1,4 +1,4 @@
-using SewingProduction.Features.TeamWork.Models;
+﻿using SewingProduction.Features.TeamWork.Models;
 using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
@@ -19,25 +19,43 @@ namespace SewingProduction.Features.TeamWork.Helpers
             (new[] { "блуз", "рубаш", "сороч" }, "Блуза")
         };
 
-        private static readonly (string[] Keywords, string Value)[] ProductKindRules =
-        {
-            (new[] { "трикот", "кулир", "футер", "рибан", "кашкорсе", "интерлок", "лапша" }, "Трикотаж"),
-            (new[] { "текст", "ткан", "сороч", "костюм", "плательн", "джинс" }, "Текстиль")
-        };
-
         private static readonly (string[] Keywords, string Value)[] NodeGroupRules =
         {
             (new[] { "капюш" }, "Капюшон"),
-            (new[] { "карман", "листочк", "клапан" }, "Карманы"),
+            (new[] { "карман", "листочк", "клапан" }, "Карман"),
             (new[] { "рукав", "манжет" }, "Рукав"),
             (new[] { "горлов", "ворот", "бейк", "стойк" }, "Горловина"),
             (new[] { "пояс", "резинк" }, "Пояс"),
             (new[] { "низ изделия", "подгиб низа", "низ" }, "Низ изделия"),
             (new[] { "полоч" }, "Полочка"),
             (new[] { "спинк" }, "Спинка"),
-            (new[] { "боков", "боков ш" }, "Боковые швы"),
+            (new[] { "боков", "боков ш" }, "Декор"),
             (new[] { "молн", "застеж", "пугов", "петл", "планк" }, "Застежка"),
-            (new[] { "отделк", "декор", "кант", "ярлык", "этикет" }, "Отделка")
+            (new[] { "отделк", "декор", "кант", "ярлык", "этикет" }, "Маркировка")
+        };
+
+        private static readonly (string[] Keywords, string Group, string Value)[] NodeSubgroupRules =
+        {
+            (new[] { "наклад" }, "Карман", "Накладной"),
+            (new[] { "в шве" }, "Карман", "В шве"),
+            (new[] { "листочк" }, "Карман", "С листочкой"),
+            (new[] { "молн" }, "Карман", "С молнией"),
+            (new[] { "клапан" }, "Карман", "С клапаном"),
+            (new[] { "втачн" }, "Карман", "Втачной"),
+            (new[] { "стойк" }, "Воротник", "Стойка"),
+            (new[] { "отлож" }, "Воротник", "Отложной"),
+            (new[] { "шальк" }, "Воротник", "Шалька"),
+            (new[] { "отрезн" }, "Воротник", "С отрезной стойкой"),
+            (new[] { "цельнокро" }, "Воротник", "Цельнокроеный"),
+            (new[] { "обтач" }, "Горловина", "С обтачкой"),
+            (new[] { "окант" }, "Горловина", "С окантовкой"),
+            (new[] { "бейк" }, "Горловина", "С бейкой"),
+            (new[] { "капл" }, "Горловина", "С каплей"),
+            (new[] { "усил" }, "Горловина", "С усилителем"),
+            (new[] { "реглан" }, "Рукав", "Реглан"),
+            (new[] { "манжет" }, "Рукав", "С манжетой"),
+            (new[] { "резинк" }, "Рукав", "На резинке"),
+            (new[] { "втачн" }, "Рукав", "Втачной")
         };
 
         public static BaseNodeSaveDefaults Suggest(ArtNormN annData, IReadOnlyCollection<NormRasz> operations)
@@ -47,18 +65,17 @@ namespace SewingProduction.Features.TeamWork.Helpers
 
             return new BaseNodeSaveDefaults
             {
+                SourceAnnId = annData?.AnnID,
+                SourceArticul = StringNormalizer.TrimOrEmpty(annData?.Articul),
+                SourceRtCode = StringNormalizer.TrimOrEmpty(annData?.Kod),
                 ProductCategory = ResolveAllowedOption(
                     DetectValue(articleContext, ProductCategoryRules),
                     BaseNodeMetadataOptions.ProductCategories,
                     "Универсально"),
-                ProductKind = ResolveAllowedOption(
-                    DetectValue(articleContext, ProductKindRules),
-                    BaseNodeMetadataOptions.ProductKinds,
-                    "Универсальный"),
-                NodeGroup = ResolveAllowedOption(
-                    DetectValue(operationsContext, NodeGroupRules),
-                    BaseNodeMetadataOptions.NodeGroups,
-                    string.Empty)
+                NodeType = "Заготовка",
+                // NodeGroup приходит из DB-справочника, поэтому здесь оставляем только подсказку.
+                NodeGroup = DetectValue(operationsContext, NodeGroupRules) ?? string.Empty,
+                NodeGroupDetail = DetectSubgroup(operationsContext)
             };
         }
 
@@ -110,6 +127,35 @@ namespace SewingProduction.Features.TeamWork.Helpers
             }
 
             return null;
+        }
+
+        private static string DetectSubgroup(string context)
+        {
+            if (string.IsNullOrWhiteSpace(context))
+            {
+                return string.Empty;
+            }
+
+            string detectedGroup = DetectValue(context, NodeGroupRules);
+            if (string.IsNullOrWhiteSpace(detectedGroup))
+            {
+                return string.Empty;
+            }
+
+            foreach (var (keywords, group, value) in NodeSubgroupRules)
+            {
+                if (!string.Equals(group, detectedGroup, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    continue;
+                }
+
+                if (keywords.Any(keyword => context.Contains(keyword, StringComparison.CurrentCultureIgnoreCase)))
+                {
+                    return value;
+                }
+            }
+
+            return string.Empty;
         }
 
         private static string ResolveAllowedOption(string value, IEnumerable<string> allowedValues, string fallback)

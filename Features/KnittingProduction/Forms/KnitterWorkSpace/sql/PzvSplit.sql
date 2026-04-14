@@ -1,4 +1,4 @@
-﻿CREATE OR ALTER PROCEDURE dbo.PZV_Split
+﻿CREATE PROCEDURE dbo.PZV_Split
   @pzvId int,
   @mode int,         -- 1 = уточнение факт, 2 = сторно/деление, 3 = предв. деление
   @qtyFact int,      -- mode 1: факт; mode 3: первая часть; mode 2: обычно 0
@@ -36,7 +36,7 @@ BEGIN
     DECLARE @Base TABLE
     (
       pzvID int NOT NULL,
-      pzvMod nvarchar(25) NULL,
+      pzvMod nvarchar(50) NULL,
       pzvArticul nvarchar(25) NULL,
       pzvKmlID int NULL,
       pzvNomN int NULL,
