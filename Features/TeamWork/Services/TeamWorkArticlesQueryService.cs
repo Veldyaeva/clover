@@ -30,19 +30,16 @@ namespace SewingProduction.Features.TeamWork.Services
 
         public Task<List<MyDataART>> LoadUnboundArticlesAsync()
         {
-            const string query = "SELECT * FROM articulListGroupBySizeLabel where annId is null or annId = 0";
+            const string query = "EXEC dbo.TeamWork_GetUnboundArticles";
             return _dbService.GetListAsync<MyDataART>(query, null);
         }
 
         public Task<List<MyDataART>> SearchUnboundArticlesAsync(string searchText)
         {
-            const string query = @"SELECT * FROM articulListGroupBySizeLabel 
-                                          WHERE  (annId is null or annId = 0) and
-                                          articul LIKE @searchPattern 
-                                          ORDER BY articul, row_num";
+            const string query = "EXEC dbo.TeamWork_GetUnboundArticles @SearchText";
             var parameters = new Dictionary<string, object>
             {
-                { "@searchPattern", $"%{searchText}%" }
+                { "@SearchText", searchText }
             };
 
             return _dbService.GetListAsync<MyDataART>(query, parameters);
@@ -93,29 +90,24 @@ namespace SewingProduction.Features.TeamWork.Services
                 return await _artNormRepository.GetArtNormDataCurrent(true);
             }
 
-            var tasks = new List<Task<List<MyDataANN>>>();
+            var prefixes = new List<string>();
             if (!string.IsNullOrEmpty(articul))
             {
-                tasks.Add(_artNormRepository.GetArtNormDataByArticul(articul));
+                prefixes.Add(articul);
 
                 string artWithoutDash = articul.Replace("-", "");
                 if (artWithoutDash != articul)
-                    tasks.Add(_artNormRepository.GetArtNormDataByArticul(artWithoutDash));
+                    prefixes.Add(artWithoutDash);
 
                 int dashIndex = articul.IndexOf("-");
                 if (dashIndex > 0)
                 {
                     string artPrefix = articul.Substring(0, dashIndex);
-                    tasks.Add(_artNormRepository.GetArtNormDataByArticul(artPrefix));
+                    prefixes.Add(artPrefix);
                 }
             }
 
-            var results = await Task.WhenAll(tasks);
-            foreach (var result in results)
-            {
-                if (result != null)
-                    relatedData.AddRange(result);
-            }
+            relatedData = await _artNormRepository.GetArtNormDataByArticulPatterns(prefixes);
 
             var uniqueData = new Dictionary<int, MyDataANN>();
             foreach (var item in relatedData)

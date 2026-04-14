@@ -30,7 +30,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// Загрузка вкладки "Список РТ"
         /// </summary>
         /// <returns></returns>
-        private async Task LoadWorkDivisions(CancellationToken ct)
+        private async Task LoadWorkDivisions(CancellationToken ct, bool loadRelatedData = true)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // Устанавливаем привязки после позиции
                 BindTextFields();
-                Task bindingsTask = InitializeBindingsAsync();
+                InitializeBindings();
 
                 await _logger.LogEventAsync("Данные загружены успешно", "LoadData");
                 // Включаем обновление UI
@@ -113,7 +113,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     await _logger.LogErrorAsync(ex, "LoadWorkDivisions: failed to resolve targetAnnId");
                 }
 
-                if (targetAnnId > 0)
+                if (loadRelatedData && targetAnnId > 0)
                     await LoadRelatedData(targetAnnId);
             }
             catch (OperationCanceledException)
@@ -176,36 +176,47 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// Устанавливаем источники данных для связанных гридов
         /// </summary>
         /// <returns></returns>
-        private async Task InitializeBindingsAsync()
+        private void InitializeBindings()
         {
             try
             {
-                var normRaszTask = Task.Run(() =>
+                if (_normRaszListTW == null)
                 {
                     _normRaszListTW = new BindingList<NormRasz>();
                     _normRaszBindingSourceTW = new BindingSource { DataSource = _normRaszListTW };
-                });
-                var normRaskTask = Task.Run(() =>
+                }
+                else if (_normRaszBindingSourceTW == null)
+                {
+                    _normRaszBindingSourceTW = new BindingSource { DataSource = _normRaszListTW };
+                }
+
+                if (_normRaskListTW == null)
                 {
                     _normRaskListTW = new BindingList<NormRask>();
                     _normRaskBindingSourceTW = new BindingSource { DataSource = _normRaskListTW };
-                });
-                var normKontTask = Task.Run(() =>
+                }
+                else if (_normRaskBindingSourceTW == null)
+                {
+                    _normRaskBindingSourceTW = new BindingSource { DataSource = _normRaskListTW };
+                }
+
+                if (_normKontListTW == null)
                 {
                     _normKontListTW = new BindingList<NormKont>();
                     _normKontBindingSourceTW = new BindingSource { DataSource = _normKontListTW };
-                });
-
-                await Task.WhenAll(normRaszTask, normRaskTask, normKontTask);
+                }
+                else if (_normKontBindingSourceTW == null)
+                {
+                    _normKontBindingSourceTW = new BindingSource { DataSource = _normKontListTW };
+                }
 
                 gridControlRaszTW.DataSource = _normRaszBindingSourceTW;
                 gridControlRaskrTW.DataSource = _normRaskBindingSourceTW;
                 gridControlKontTW.DataSource = _normKontBindingSourceTW;
 
             }
-            catch (Exception ex)
+            catch
             {
-                await _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок");
                 throw;
             }
         }

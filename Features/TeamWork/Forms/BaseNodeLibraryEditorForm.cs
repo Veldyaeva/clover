@@ -571,8 +571,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             string generatedName = BaseNodeNameBuilder.Build(
                 (nodeGroupComboBox.SelectedItem as BaseNodeMetadataItem)?.Name ?? nodeGroupComboBox.SelectedItem?.ToString(),
                 (nodeSubgroupComboBox.SelectedItem as BaseNodeMetadataItem)?.Name ?? nodeSubgroupComboBox.SelectedItem?.ToString(),
-                productCategoryComboBox.SelectedItem?.ToString(),
-                _workingNode.SourceArticul);
+                productCategoryComboBox.SelectedItem?.ToString());
 
             if (string.IsNullOrWhiteSpace(generatedName))
             {
@@ -701,7 +700,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         private void UpdateOperationButtonsState(bool isBusy = false)
         {
             bool hasOperations = _workingNode?.Operations?.Count > 0;
-            editOperationButton.Enabled = !isBusy && hasOperations;
             deleteOperationButton.Enabled = !isBusy && hasOperations;
             moveUpButton.Enabled = !isBusy && (_workingNode?.Operations?.Count ?? 0) > 1;
             moveDownButton.Enabled = !isBusy && (_workingNode?.Operations?.Count ?? 0) > 1;
@@ -799,38 +797,6 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             BaseNodeOperationEditingHelper.Move(_workingNode.Operations, selectedIndex, targetIndex);
             RefreshOperationsPreview(targetIndex);
-        }
-
-        private void EditOperationButton_Click(object sender, EventArgs e)
-        {
-            EditSelectedOperation();
-        }
-
-        private void PreviewGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                EditSelectedOperation();
-            }
-        }
-
-        private void EditSelectedOperation()
-        {
-            int selectedIndex = GetSelectedOperationIndex();
-            if (_workingNode == null || selectedIndex < 0 || selectedIndex >= _workingNode.Operations.Count)
-            {
-                MessageBox.Show(this, "Выберите операцию в списке.", "Проверка", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            using var form = new BaseNodeOperationEditForm(User, CloneOperation(_workingNode.Operations[selectedIndex]));
-            if (form.ShowDialog(this) != DialogResult.OK || form.ResultOperation == null)
-            {
-                return;
-            }
-
-            _workingNode.Operations[selectedIndex] = form.ResultOperation;
-            RefreshOperationsPreview(selectedIndex);
         }
 
         private void DeleteOperationButton_Click(object sender, EventArgs e)

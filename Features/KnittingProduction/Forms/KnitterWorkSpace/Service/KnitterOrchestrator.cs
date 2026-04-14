@@ -33,5 +33,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         public Task<(int? kmaId, string kmaNum)> GetZoneByTabAsync(int tab) => _uiGateway.GetZoneByTabAsync(tab);
 
         public Task<(int? shiftId, DateTime? dateStart)> GetOpenShiftByTabAsync(int tab) => _uiGateway.GetOpenShiftByTabAsync(tab);
+
+        public Task<(int? shiftId, int? tabStart, DateTime? dateStart)> GetOpenShiftByZoneAsync(int kmaId) => _uiGateway.GetOpenShiftByZoneAsync(kmaId);
     }
 }
