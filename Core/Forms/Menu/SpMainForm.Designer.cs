@@ -52,6 +52,7 @@ namespace SewingProduction
             barBtnTeams = new BarButtonItem();
             barBtnShops = new BarButtonItem();
             barBtnProdTypes = new BarButtonItem();
+            barButtonItemBrigObject = new BarButtonItem();
             barBtnCalcCard1 = new BarButtonItem();
             barBtnWorkers = new BarButtonItem();
             barBtnTariffs = new BarButtonItem();
@@ -108,8 +109,8 @@ namespace SewingProduction
             barManager1.DockControls.Add(barDockControlRight);
             barManager1.Form = this;
             barManager1.HideIfNoRight = true;
-            barManager1.Items.AddRange(new BarItem[] { skinBarSubItem1, skinDropDownButtonItem1, skinPaletteDropDownButtonItem1, skinBarSubItem2, skinDropDownButtonItem2, skinPaletteDropDownButtonItem2, barSubMenu, barBtnProfile, barBtnSettings, barBtnAbout, barBtnHelp, barSubSpr, barSubEquipment, barBtnEqInTeams, barBtnEqDirectory, barBtnEqTypes, barBtnClassMatrix, barBtnOperationTypes, barSubTeamsShop, barBtnTeams, barBtnShops, barBtnProdTypes, barBtnCalcCard1, barBtnWorkers, barBtnTariffs, barBtnNacenki, barBtnModelsMark, barSubDefects, barBtnSockDefects, barSubProduction, barSubKnitting, barBtnOperPlan, barBtnMasterDesk1, barBtnKnitterDesk, barBtnAnalytics, barSubSewing, barBtnMasterDesk, barBtnCutShop, barBtnTeamWork, barBtnArticle, barBtnCalcCard, barBtnTimesheet, barBtnQuestion, barBtnAt, barButtonItemSteamMasterWorkTable, barButtonItemCutMasterWorkTable, barButtonItemScreen });
-            barManager1.MaxItemId = 48;
+            barManager1.Items.AddRange(new BarItem[] { skinBarSubItem1, skinDropDownButtonItem1, skinPaletteDropDownButtonItem1, skinBarSubItem2, skinDropDownButtonItem2, skinPaletteDropDownButtonItem2, barSubMenu, barBtnProfile, barBtnSettings, barBtnAbout, barBtnHelp, barSubSpr, barSubEquipment, barBtnEqInTeams, barBtnEqDirectory, barBtnEqTypes, barBtnClassMatrix, barBtnOperationTypes, barSubTeamsShop, barBtnTeams, barBtnShops, barBtnProdTypes, barBtnCalcCard1, barBtnWorkers, barBtnTariffs, barBtnNacenki, barBtnModelsMark, barSubDefects, barBtnSockDefects, barSubProduction, barSubKnitting, barBtnOperPlan, barBtnMasterDesk1, barBtnKnitterDesk, barBtnAnalytics, barSubSewing, barBtnMasterDesk, barBtnCutShop, barBtnTeamWork, barBtnArticle, barBtnCalcCard, barBtnTimesheet, barBtnQuestion, barBtnAt, barButtonItemSteamMasterWorkTable, barButtonItemCutMasterWorkTable, barButtonItemScreen, barButtonItemBrigObject });
+            barManager1.MaxItemId = 49;
             barManager1.SkipDevExpressSkinItems = true;
             // 
             // bar1
@@ -230,7 +231,7 @@ namespace SewingProduction
             // 
             barSubTeamsShop.Caption = "Бригады/Цеха";
             barSubTeamsShop.Id = 18;
-            barSubTeamsShop.LinksPersistInfo.AddRange(new LinkPersistInfo[] { new LinkPersistInfo(barBtnTeams), new LinkPersistInfo(barBtnShops), new LinkPersistInfo(barBtnProdTypes) });
+            barSubTeamsShop.LinksPersistInfo.AddRange(new LinkPersistInfo[] { new LinkPersistInfo(barBtnTeams), new LinkPersistInfo(barBtnShops), new LinkPersistInfo(barBtnProdTypes), new LinkPersistInfo(barButtonItemBrigObject) });
             barSubTeamsShop.Name = "barSubTeamsShop";
             barSubTeamsShop.Tag = "бригадыЦехаToolStripMenuItem";
             // 
@@ -257,6 +258,13 @@ namespace SewingProduction
             barBtnProdTypes.Name = "barBtnProdTypes";
             barBtnProdTypes.Tag = "видыПроизводствToolStripMenuItem";
             barBtnProdTypes.ItemClick += видыПроизводстваToolStripMenuItem_Click;
+            // 
+            // barButtonItemBrigObject
+            // 
+            barButtonItemBrigObject.Caption = "Подразделения бригад";
+            barButtonItemBrigObject.Id = 48;
+            barButtonItemBrigObject.Name = "barButtonItemBrigObject";
+            barButtonItemBrigObject.ItemClick += barButtonItemBrigObject_ItemClick;
             // 
             // barBtnCalcCard1
             // 
@@ -666,5 +674,6 @@ namespace SewingProduction
         private BarButtonItem barButtonItemSteamMasterWorkTable;
         private BarButtonItem barButtonItemCutMasterWorkTable;
         private BarButtonItem barButtonItemScreen;
+        private BarButtonItem barButtonItemBrigObject;
     }
 }

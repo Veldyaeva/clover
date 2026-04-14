@@ -149,7 +149,7 @@ namespace SewingProduction
         }
         private void наценкиToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new SpravForAll("grup_men", "men,name,koef", "", "справочник коэффициентов наценки", _user,false,false,false), e.Item);
+            OpenForm(new SpravForAll("grup_men", "men,name,koef", "", "справочник коэффициентов наценки", _user, false, false, false), e.Item);
         }
         private void моделиСПризнакомМаркировкToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
@@ -388,6 +388,11 @@ namespace SewingProduction
         private void МенюToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void barButtonItemBrigObject_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenForm(new SpravForAll("brig_object", rusNameTableSQL: "Подразделения бригад", user: _user), e.Item);
         }
 
         //private void barButtonTSDAdmin_ItemClick(object sender, ItemClickEventArgs e)

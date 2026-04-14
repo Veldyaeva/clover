@@ -1,9 +1,10 @@
-﻿using System.ComponentModel;
+﻿using DevExpress.XtraReports.UI;
+using System.ComponentModel;
 
 namespace SewingProduction
 {
     public partial class MlRtReport : SewingProduction.Report.ConnectedXtraReport
-        //public partial class MlRtReport : DevExpress.XtraReports.UI.XtraReport
+    //public partial class MlRtReport : DevExpress.XtraReports.UI.XtraReport
     {
         public MlRtReport()
         {
