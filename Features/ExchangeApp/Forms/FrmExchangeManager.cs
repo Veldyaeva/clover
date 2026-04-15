@@ -1,12 +1,17 @@
 ﻿using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
+using ExchangeApp.Data;
 using ExchangeApp.Models;
 using ExchangeApp.Services;
 using SewingProduction;
 using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ExchangeApp.Forms
 {
@@ -16,20 +21,38 @@ namespace ExchangeApp.Forms
         private List<ExchangeDocumentItem> _documents = new List<ExchangeDocumentItem>();
         private List<ExportBatchItem> _batches = new List<ExportBatchItem>();
 
-        public FrmExchangeManager(UserClass User, IExchangeManagerService service) : base(User)
-        {
-            _service = service ?? throw new ArgumentNullException(nameof(service));
-            InitializeComponent();
-        }
+        private readonly DatabaseHelper _dbHelper;
+        //public FrmExchangeManager(UserClass User, IExchangeManagerService service) : base(User)
+        //{
+        //    _service = service ?? throw new ArgumentNullException(nameof(service));
+        //    InitializeComponent();
+        //    _dbHelper = new DatabaseHelper("cleverPG");
+        //    ConfigureDocumentGrid();
+        //    ConfigureBatchGrid();
+        //}
         public FrmExchangeManager(UserClass User) : base(User)
         {
+            _service = BuildExchangeManagerService();
             InitializeComponent();
+            _dbHelper = new DatabaseHelper("cleverPG");
+            ConfigureDocumentGrid();
+            ConfigureBatchGrid();
         }
         private async void FrmExchangeManager_Load(object sender, EventArgs e)
         {
+            if (_service == null)
+                throw new Exception("_service == null");
             await InitializeFormAsync();
         }
+        private static IExchangeManagerService BuildExchangeManagerService()
+        {
+            //string connectionString = SewingProduction.Properties.Settings.Default.CleverPGConnectionString;
 
+            //var repository = new ExchangeRepository(connectionString);
+            //return new ExchangeManagerService(repository);
+            var repository = new ExchangeRepository();
+            return new ExchangeManagerService(repository);
+        }
         private async Task InitializeFormAsync()
         {
             try
@@ -69,6 +92,27 @@ namespace ExchangeApp.Forms
                 lueCompany.EditValue = companies[0].CompanyId;
         }
 
+        //private async Task LoadExportTypesAsync()
+        //{
+        //    var exportTypes = await _service.GetExportTypesAsync();
+
+        //    ccbeExportTypes.Properties.Items.Clear();
+        //    foreach (var item in exportTypes)
+        //    {
+        //        //cbeExportTypes.Properties.Items.Add(item.Code, item.Name, item.IsSelected);
+        //        ccbeExportTypes.Properties.Items.Add(
+        //            item.Code,
+        //            item.Name,
+        //            item.IsSelected ? CheckState.Checked : CheckState.Unchecked,
+        //            true
+        //        );
+        //    }
+
+        //    if (ccbeExportTypes.Properties.Items.Count > 0)
+        //    {
+        //        ccbeExportTypes.Properties.Items[0].CheckState = System.Windows.Forms.CheckState.Checked;
+        //    }
+        //}
         private async Task LoadExportTypesAsync()
         {
             var exportTypes = await _service.GetExportTypesAsync();
@@ -76,11 +120,10 @@ namespace ExchangeApp.Forms
             ccbeExportTypes.Properties.Items.Clear();
             foreach (var item in exportTypes)
             {
-                //cbeExportTypes.Properties.Items.Add(item.Code, item.Name, item.IsSelected);
                 ccbeExportTypes.Properties.Items.Add(
                     item.Code,
                     item.Name,
-                    item.IsSelected ? System.Windows.Forms.CheckState.Checked : System.Windows.Forms.CheckState.Unchecked,
+                    item.IsSelected ? CheckState.Checked : CheckState.Unchecked,
                     true
                 );
             }
@@ -317,6 +360,118 @@ namespace ExchangeApp.Forms
         private void btnClose_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void gvDocuments_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            if (e.RowHandle < 0)
+                return;
+
+            var row = gvDocuments.GetRow(e.RowHandle) as ExchangeDocumentItem;
+            if (row == null)
+                return;
+
+            if (row.NeedsReexport)
+            {
+                e.Appearance.BackColor = Color.MistyRose;
+            }
+            else if (row.NeedsExport)
+            {
+                e.Appearance.BackColor = Color.LemonChiffon;
+            }
+
+            if (string.Equals(row.LastLoadStatus, "error", StringComparison.OrdinalIgnoreCase))
+            {
+                e.Appearance.ForeColor = Color.DarkRed;
+                e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+            }
+            else if (string.Equals(row.LastLoadStatus, "loaded", StringComparison.OrdinalIgnoreCase))
+            {
+                e.Appearance.ForeColor = Color.DarkGreen;
+            }
+        }
+
+        private void gvBatches_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            if (e.RowHandle < 0)
+                return;
+
+            var row = gvBatches.GetRow(e.RowHandle) as ExportBatchItem;
+            if (row == null)
+                return;
+
+            if (string.Equals(row.Status, "error", StringComparison.OrdinalIgnoreCase))
+            {
+                e.Appearance.BackColor = Color.MistyRose;
+                e.Appearance.ForeColor = Color.DarkRed;
+                e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+            }
+            else if (string.Equals(row.Status, "partially_loaded", StringComparison.OrdinalIgnoreCase))
+            {
+                e.Appearance.BackColor = Color.LemonChiffon;
+                e.Appearance.ForeColor = Color.DarkOrange;
+            }
+            else if (string.Equals(row.Status, "loaded", StringComparison.OrdinalIgnoreCase))
+            {
+                e.Appearance.BackColor = Color.Honeydew;
+                e.Appearance.ForeColor = Color.DarkGreen;
+            }
+            else if (string.Equals(row.Status, "ready", StringComparison.OrdinalIgnoreCase))
+            {
+                e.Appearance.ForeColor = Color.DarkBlue;
+            }
+        }
+
+        private void gvBatches_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        {
+            if (e.Column == null || e.Value == null)
+                return;
+
+            if (e.Column.FieldName == nameof(ExportBatchItem.Reason))
+            {
+                e.DisplayText = e.Value.ToString() switch
+                {
+                    "primary" => "Первичная",
+                    "delta" => "Догрузка",
+                    "reexport" => "Перевыгрузка",
+                    "manual" => "Ручная",
+                    _ => e.Value.ToString()
+                };
+            }
+
+            if (e.Column.FieldName == nameof(ExportBatchItem.Status))
+            {
+                e.DisplayText = e.Value.ToString() switch
+                {
+                    "new" => "Новый",
+                    "building" => "Формируется",
+                    "ready" => "Готов",
+                    "sent" => "Отправлен",
+                    "loaded" => "Загружен",
+                    "partially_loaded" => "Частично загружен",
+                    "error" => "Ошибка",
+                    "cancelled" => "Отменен",
+                    _ => e.Value.ToString()
+                };
+            }
+        }
+
+        private void gvDocuments_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        {
+            if (e.Column == null || e.Value == null)
+                return;
+
+            if (e.Column.FieldName == nameof(ExchangeDocumentItem.LastLoadStatus))
+            {
+                e.DisplayText = e.Value.ToString() switch
+                {
+                    "loaded" => "Загружен",
+                    "error" => "Ошибка",
+                    "skipped" => "Пропущен",
+                    "pending" => "Ожидает",
+                    _ => e.Value.ToString()
+                };
+            }
         }
     }
 }

@@ -48,6 +48,10 @@ namespace SewingProduction.Helpers
                 case "omsconnectionstring":
                     _connectionString = SewingProduction.Properties.Settings.Default.OMSConnectionString;
                     break;
+                case "cleverPG":
+                case "cleverPGconnectionstring":
+                    _connectionString = SewingProduction.Properties.Settings.Default.CleverPGConnectionString;
+                    break;
                 default:
                     _connectionString = SewingProduction.Properties.Settings.Default.ACEConnectionString;
                     break;

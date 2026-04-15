@@ -127,8 +127,8 @@ namespace SewingProduction.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.251.2:5432;Initial Catalog=clever;Persist Security Info=True;" +
-            "User ID=sa;Password=kf,bhbyn;Encrypt=False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Host=192.168.251.2; Port=5432; Database=clever; Username=sa; Password=kf,bhbyn;\r\n" +
+            "")]
         public string CleverPGConnectionString {
             get {
                 return ((string)(this["CleverPGConnectionString"]));

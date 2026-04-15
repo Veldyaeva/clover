@@ -44,327 +44,325 @@
 
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-
-            this.panelTop = new DevExpress.XtraEditors.PanelControl();
-            this.panelBottom = new DevExpress.XtraEditors.PanelControl();
-            this.splitMain = new DevExpress.XtraEditors.SplitContainerControl();
-
-            this.lueCompany = new DevExpress.XtraEditors.LookUpEdit();
-            this.deFrom = new DevExpress.XtraEditors.DateEdit();
-            this.deTo = new DevExpress.XtraEditors.DateEdit();
-            this.rgMode = new DevExpress.XtraEditors.RadioGroup();
-            this.ccbeExportTypes = new DevExpress.XtraEditors.CheckedComboBoxEdit();
-
-            this.lblCompany = new DevExpress.XtraEditors.LabelControl();
-            this.lblFrom = new DevExpress.XtraEditors.LabelControl();
-            this.lblTo = new DevExpress.XtraEditors.LabelControl();
-            this.lblMode = new DevExpress.XtraEditors.LabelControl();
-            this.lblExportTypes = new DevExpress.XtraEditors.LabelControl();
-            this.lblHint = new DevExpress.XtraEditors.LabelControl();
-
-            this.btnLoadDocuments = new DevExpress.XtraEditors.SimpleButton();
-            this.btnRun = new DevExpress.XtraEditors.SimpleButton();
-            this.btnRefresh = new DevExpress.XtraEditors.SimpleButton();
-            this.btnSelectAllDocuments = new DevExpress.XtraEditors.SimpleButton();
-            this.btnUnselectAllDocuments = new DevExpress.XtraEditors.SimpleButton();
-            this.btnClose = new DevExpress.XtraEditors.SimpleButton();
-
-            this.gcDocuments = new DevExpress.XtraGrid.GridControl();
-            this.gvDocuments = new DevExpress.XtraGrid.Views.Grid.GridView();
-
-            this.gcBatches = new DevExpress.XtraGrid.GridControl();
-            this.gvBatches = new DevExpress.XtraGrid.Views.Grid.GridView();
-
-            ((System.ComponentModel.ISupportInitialize)(this.panelTop)).BeginInit();
-            this.panelTop.SuspendLayout();
-
-            ((System.ComponentModel.ISupportInitialize)(this.panelBottom)).BeginInit();
-            this.panelBottom.SuspendLayout();
-
-            ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitMain.Panel1)).BeginInit();
-            this.splitMain.Panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitMain.Panel2)).BeginInit();
-            this.splitMain.Panel2.SuspendLayout();
-            this.splitMain.SuspendLayout();
-
-            ((System.ComponentModel.ISupportInitialize)(this.lueCompany.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rgMode.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ccbeExportTypes.Properties)).BeginInit();
-
-            ((System.ComponentModel.ISupportInitialize)(this.gcDocuments)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvDocuments)).BeginInit();
-
-            ((System.ComponentModel.ISupportInitialize)(this.gcBatches)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvBatches)).BeginInit();
-
-            this.SuspendLayout();
-
+            panelTop = new DevExpress.XtraEditors.PanelControl();
+            lblCompany = new DevExpress.XtraEditors.LabelControl();
+            lueCompany = new DevExpress.XtraEditors.LookUpEdit();
+            lblFrom = new DevExpress.XtraEditors.LabelControl();
+            deFrom = new DevExpress.XtraEditors.DateEdit();
+            lblTo = new DevExpress.XtraEditors.LabelControl();
+            deTo = new DevExpress.XtraEditors.DateEdit();
+            lblMode = new DevExpress.XtraEditors.LabelControl();
+            rgMode = new DevExpress.XtraEditors.RadioGroup();
+            lblExportTypes = new DevExpress.XtraEditors.LabelControl();
+            ccbeExportTypes = new DevExpress.XtraEditors.CheckedComboBoxEdit();
+            lblHint = new DevExpress.XtraEditors.LabelControl();
+            panelBottom = new DevExpress.XtraEditors.PanelControl();
+            btnLoadDocuments = new DevExpress.XtraEditors.SimpleButton();
+            btnRun = new DevExpress.XtraEditors.SimpleButton();
+            btnRefresh = new DevExpress.XtraEditors.SimpleButton();
+            btnSelectAllDocuments = new DevExpress.XtraEditors.SimpleButton();
+            btnUnselectAllDocuments = new DevExpress.XtraEditors.SimpleButton();
+            btnClose = new DevExpress.XtraEditors.SimpleButton();
+            splitMain = new DevExpress.XtraEditors.SplitContainerControl();
+            gcDocuments = new DevExpress.XtraGrid.GridControl();
+            gvDocuments = new DevExpress.XtraGrid.Views.Grid.GridView();
+            gcBatches = new DevExpress.XtraGrid.GridControl();
+            gvBatches = new DevExpress.XtraGrid.Views.Grid.GridView();
+            ((System.ComponentModel.ISupportInitialize)panelTop).BeginInit();
+            panelTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)lueCompany.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)deFrom.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)deFrom.Properties.CalendarTimeProperties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)deTo.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)deTo.Properties.CalendarTimeProperties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)rgMode.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ccbeExportTypes.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)panelBottom).BeginInit();
+            panelBottom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitMain).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitMain.Panel1).BeginInit();
+            splitMain.Panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitMain.Panel2).BeginInit();
+            splitMain.Panel2.SuspendLayout();
+            splitMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gcDocuments).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gvDocuments).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gcBatches).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gvBatches).BeginInit();
+            SuspendLayout();
+            // 
             // panelTop
-            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTop.Location = new System.Drawing.Point(0, 0);
-            this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(1600, 95);
-            this.panelTop.TabIndex = 0;
-
-            // panelBottom
-            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 810);
-            this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(1600, 60);
-            this.panelBottom.TabIndex = 1;
-
-            // splitMain
-            this.splitMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitMain.Location = new System.Drawing.Point(0, 95);
-            this.splitMain.Name = "splitMain";
-            this.splitMain.Panel1.Controls.Add(this.gcDocuments);
-            this.splitMain.Panel2.Controls.Add(this.gcBatches);
-            this.splitMain.Size = new System.Drawing.Size(1600, 715);
-            this.splitMain.SplitterPosition = 900;
-            this.splitMain.TabIndex = 2;
-
+            // 
+            panelTop.Controls.Add(lblCompany);
+            panelTop.Controls.Add(lueCompany);
+            panelTop.Controls.Add(lblFrom);
+            panelTop.Controls.Add(deFrom);
+            panelTop.Controls.Add(lblTo);
+            panelTop.Controls.Add(deTo);
+            panelTop.Controls.Add(lblMode);
+            panelTop.Controls.Add(rgMode);
+            panelTop.Controls.Add(lblExportTypes);
+            panelTop.Controls.Add(ccbeExportTypes);
+            panelTop.Controls.Add(lblHint);
+            panelTop.Dock = System.Windows.Forms.DockStyle.Top;
+            panelTop.Location = new System.Drawing.Point(0, 0);
+            panelTop.Name = "panelTop";
+            panelTop.Size = new System.Drawing.Size(1400, 89);
+            panelTop.TabIndex = 0;
+            // 
             // lblCompany
-            this.lblCompany.Location = new System.Drawing.Point(12, 12);
-            this.lblCompany.Name = "lblCompany";
-            this.lblCompany.Size = new System.Drawing.Size(72, 16);
-            this.lblCompany.Text = "Организация";
-
+            // 
+            lblCompany.Location = new System.Drawing.Point(10, 11);
+            lblCompany.Name = "lblCompany";
+            lblCompany.Size = new System.Drawing.Size(66, 13);
+            lblCompany.TabIndex = 0;
+            lblCompany.Text = "Организация";
+            // 
             // lueCompany
-            this.lueCompany.Location = new System.Drawing.Point(12, 34);
-            this.lueCompany.Name = "lueCompany";
-            this.lueCompany.Size = new System.Drawing.Size(240, 22);
-            this.lueCompany.TabIndex = 0;
-
+            // 
+            lueCompany.Location = new System.Drawing.Point(10, 32);
+            lueCompany.Name = "lueCompany";
+            lueCompany.Size = new System.Drawing.Size(210, 20);
+            lueCompany.TabIndex = 0;
+            // 
             // lblFrom
-            this.lblFrom.Location = new System.Drawing.Point(272, 12);
-            this.lblFrom.Name = "lblFrom";
-            this.lblFrom.Size = new System.Drawing.Size(8, 16);
-            this.lblFrom.Text = "С";
-
+            // 
+            lblFrom.Location = new System.Drawing.Point(238, 11);
+            lblFrom.Name = "lblFrom";
+            lblFrom.Size = new System.Drawing.Size(7, 13);
+            lblFrom.TabIndex = 1;
+            lblFrom.Text = "С";
+            // 
             // deFrom
-            this.deFrom.EditValue = null;
-            this.deFrom.Location = new System.Drawing.Point(272, 34);
-            this.deFrom.Name = "deFrom";
-            this.deFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[]
-            {
-                new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)
-            });
-            this.deFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[]
-            {
-                new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)
-            });
-            this.deFrom.Size = new System.Drawing.Size(110, 22);
-            this.deFrom.TabIndex = 1;
-
+            // 
+            deFrom.EditValue = null;
+            deFrom.Location = new System.Drawing.Point(238, 32);
+            deFrom.Name = "deFrom";
+            deFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            deFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            deFrom.Size = new System.Drawing.Size(96, 20);
+            deFrom.TabIndex = 1;
+            // 
             // lblTo
-            this.lblTo.Location = new System.Drawing.Point(398, 12);
-            this.lblTo.Name = "lblTo";
-            this.lblTo.Size = new System.Drawing.Size(16, 16);
-            this.lblTo.Text = "По";
-
+            // 
+            lblTo.Location = new System.Drawing.Point(348, 11);
+            lblTo.Name = "lblTo";
+            lblTo.Size = new System.Drawing.Size(13, 13);
+            lblTo.TabIndex = 2;
+            lblTo.Text = "По";
+            // 
             // deTo
-            this.deTo.EditValue = null;
-            this.deTo.Location = new System.Drawing.Point(398, 34);
-            this.deTo.Name = "deTo";
-            this.deTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[]
-            {
-                new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)
-            });
-            this.deTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[]
-            {
-                new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)
-            });
-            this.deTo.Size = new System.Drawing.Size(110, 22);
-            this.deTo.TabIndex = 2;
-
+            // 
+            deTo.EditValue = null;
+            deTo.Location = new System.Drawing.Point(348, 32);
+            deTo.Name = "deTo";
+            deTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            deTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            deTo.Size = new System.Drawing.Size(96, 20);
+            deTo.TabIndex = 2;
+            // 
             // lblMode
-            this.lblMode.Location = new System.Drawing.Point(526, 12);
-            this.lblMode.Name = "lblMode";
-            this.lblMode.Size = new System.Drawing.Size(40, 16);
-            this.lblMode.Text = "Режим";
-
+            // 
+            lblMode.Location = new System.Drawing.Point(460, 11);
+            lblMode.Name = "lblMode";
+            lblMode.Size = new System.Drawing.Size(32, 13);
+            lblMode.TabIndex = 3;
+            lblMode.Text = "Режим";
+            // 
             // rgMode
-            this.rgMode.Location = new System.Drawing.Point(526, 29);
-            this.rgMode.Name = "rgMode";
-            this.rgMode.Size = new System.Drawing.Size(360, 30);
-            this.rgMode.TabIndex = 3;
-            this.rgMode.Properties.Items.Add(new DevExpress.XtraEditors.Controls.RadioGroupItem(ExchangeApp.Models.ExportRunMode.Primary, "Первичная"));
-            this.rgMode.Properties.Items.Add(new DevExpress.XtraEditors.Controls.RadioGroupItem(ExchangeApp.Models.ExportRunMode.Delta, "Догрузка"));
-            this.rgMode.Properties.Items.Add(new DevExpress.XtraEditors.Controls.RadioGroupItem(ExchangeApp.Models.ExportRunMode.Reexport, "Перевыгрузка"));
-            this.rgMode.SelectedIndexChanged += new System.EventHandler(this.rgMode_SelectedIndexChanged);
-
+            // 
+            rgMode.Location = new System.Drawing.Point(460, 27);
+            rgMode.Name = "rgMode";
+            rgMode.Size = new System.Drawing.Size(315, 28);
+            rgMode.TabIndex = 3;
+            rgMode.SelectedIndexChanged += rgMode_SelectedIndexChanged;
+            // 
             // lblExportTypes
-            this.lblExportTypes.Location = new System.Drawing.Point(904, 12);
-            this.lblExportTypes.Name = "lblExportTypes";
-            this.lblExportTypes.Size = new System.Drawing.Size(86, 16);
-            this.lblExportTypes.Text = "Виды выгрузки";
-
+            // 
+            lblExportTypes.Location = new System.Drawing.Point(791, 11);
+            lblExportTypes.Name = "lblExportTypes";
+            lblExportTypes.Size = new System.Drawing.Size(78, 13);
+            lblExportTypes.TabIndex = 4;
+            lblExportTypes.Text = "Виды выгрузки";
+            // 
             // ccbeExportTypes
-            this.ccbeExportTypes.Location = new System.Drawing.Point(904, 34);
-            this.ccbeExportTypes.Name = "ccbeExportTypes";
-            this.ccbeExportTypes.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[]
-            {
-                new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)
-            });
-            this.ccbeExportTypes.Size = new System.Drawing.Size(260, 22);
-            this.ccbeExportTypes.TabIndex = 4;
-
+            // 
+            ccbeExportTypes.Location = new System.Drawing.Point(791, 32);
+            ccbeExportTypes.Name = "ccbeExportTypes";
+            ccbeExportTypes.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            ccbeExportTypes.Size = new System.Drawing.Size(228, 20);
+            ccbeExportTypes.TabIndex = 4;
+            // 
             // lblHint
-            this.lblHint.Location = new System.Drawing.Point(12, 67);
-            this.lblHint.Name = "lblHint";
-            this.lblHint.Size = new System.Drawing.Size(0, 16);
-
-            // gcDocuments
-            this.gcDocuments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcDocuments.Location = new System.Drawing.Point(0, 0);
-            this.gcDocuments.MainView = this.gvDocuments;
-            this.gcDocuments.Name = "gcDocuments";
-            this.gcDocuments.Size = new System.Drawing.Size(900, 715);
-            this.gcDocuments.TabIndex = 0;
-            this.gcDocuments.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-                this.gvDocuments
-            });
-
-            // gvDocuments
-            this.gvDocuments.GridControl = this.gcDocuments;
-            this.gvDocuments.Name = "gvDocuments";
-            this.gvDocuments.OptionsBehavior.Editable = true;
-            this.gvDocuments.OptionsView.ShowAutoFilterRow = true;
-            this.gvDocuments.OptionsView.ShowGroupPanel = false;
-
-            // gcBatches
-            this.gcBatches.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcBatches.Location = new System.Drawing.Point(0, 0);
-            this.gcBatches.MainView = this.gvBatches;
-            this.gcBatches.Name = "gcBatches";
-            this.gcBatches.Size = new System.Drawing.Size(688, 715);
-            this.gcBatches.TabIndex = 0;
-            this.gcBatches.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-                this.gvBatches
-            });
-
-            // gvBatches
-            this.gvBatches.GridControl = this.gcBatches;
-            this.gvBatches.Name = "gvBatches";
-            this.gvBatches.OptionsBehavior.Editable = false;
-            this.gvBatches.OptionsView.ShowAutoFilterRow = true;
-            this.gvBatches.OptionsView.ShowGroupPanel = false;
-
+            // 
+            lblHint.Location = new System.Drawing.Point(10, 63);
+            lblHint.Name = "lblHint";
+            lblHint.Size = new System.Drawing.Size(0, 13);
+            lblHint.TabIndex = 5;
+            // 
+            // panelBottom
+            // 
+            panelBottom.Controls.Add(btnLoadDocuments);
+            panelBottom.Controls.Add(btnRun);
+            panelBottom.Controls.Add(btnRefresh);
+            panelBottom.Controls.Add(btnSelectAllDocuments);
+            panelBottom.Controls.Add(btnUnselectAllDocuments);
+            panelBottom.Controls.Add(btnClose);
+            panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            panelBottom.Location = new System.Drawing.Point(0, 760);
+            panelBottom.Name = "panelBottom";
+            panelBottom.Size = new System.Drawing.Size(1400, 56);
+            panelBottom.TabIndex = 1;
+            // 
             // btnLoadDocuments
-            this.btnLoadDocuments.Location = new System.Drawing.Point(12, 14);
-            this.btnLoadDocuments.Name = "btnLoadDocuments";
-            this.btnLoadDocuments.Size = new System.Drawing.Size(160, 30);
-            this.btnLoadDocuments.TabIndex = 0;
-            this.btnLoadDocuments.Text = "Загрузить документы";
-            this.btnLoadDocuments.Click += new System.EventHandler(this.btnLoadDocuments_Click);
-
+            // 
+            btnLoadDocuments.Location = new System.Drawing.Point(10, 13);
+            btnLoadDocuments.Name = "btnLoadDocuments";
+            btnLoadDocuments.Size = new System.Drawing.Size(140, 28);
+            btnLoadDocuments.TabIndex = 0;
+            btnLoadDocuments.Text = "Загрузить документы";
+            btnLoadDocuments.Click += btnLoadDocuments_Click;
+            // 
             // btnRun
-            this.btnRun.Location = new System.Drawing.Point(178, 14);
-            this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(130, 30);
-            this.btnRun.TabIndex = 1;
-            this.btnRun.Text = "Выполнить";
-            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
-
+            // 
+            btnRun.Location = new System.Drawing.Point(156, 13);
+            btnRun.Name = "btnRun";
+            btnRun.Size = new System.Drawing.Size(114, 28);
+            btnRun.TabIndex = 1;
+            btnRun.Text = "Выполнить";
+            btnRun.Click += btnRun_Click;
+            // 
             // btnRefresh
-            this.btnRefresh.Location = new System.Drawing.Point(314, 14);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(130, 30);
-            this.btnRefresh.TabIndex = 2;
-            this.btnRefresh.Text = "Обновить пакеты";
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-
+            // 
+            btnRefresh.Location = new System.Drawing.Point(275, 13);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.Size = new System.Drawing.Size(114, 28);
+            btnRefresh.TabIndex = 2;
+            btnRefresh.Text = "Обновить пакеты";
+            btnRefresh.Click += btnRefresh_Click;
+            // 
             // btnSelectAllDocuments
-            this.btnSelectAllDocuments.Location = new System.Drawing.Point(470, 14);
-            this.btnSelectAllDocuments.Name = "btnSelectAllDocuments";
-            this.btnSelectAllDocuments.Size = new System.Drawing.Size(160, 30);
-            this.btnSelectAllDocuments.TabIndex = 3;
-            this.btnSelectAllDocuments.Text = "Отметить все";
-            this.btnSelectAllDocuments.Click += new System.EventHandler(this.btnSelectAllDocuments_Click);
-
+            // 
+            btnSelectAllDocuments.Location = new System.Drawing.Point(411, 13);
+            btnSelectAllDocuments.Name = "btnSelectAllDocuments";
+            btnSelectAllDocuments.Size = new System.Drawing.Size(140, 28);
+            btnSelectAllDocuments.TabIndex = 3;
+            btnSelectAllDocuments.Text = "Отметить все";
+            btnSelectAllDocuments.Click += btnSelectAllDocuments_Click;
+            // 
             // btnUnselectAllDocuments
-            this.btnUnselectAllDocuments.Location = new System.Drawing.Point(636, 14);
-            this.btnUnselectAllDocuments.Name = "btnUnselectAllDocuments";
-            this.btnUnselectAllDocuments.Size = new System.Drawing.Size(160, 30);
-            this.btnUnselectAllDocuments.TabIndex = 4;
-            this.btnUnselectAllDocuments.Text = "Снять все";
-            this.btnUnselectAllDocuments.Click += new System.EventHandler(this.btnUnselectAllDocuments_Click);
-
+            // 
+            btnUnselectAllDocuments.Location = new System.Drawing.Point(556, 13);
+            btnUnselectAllDocuments.Name = "btnUnselectAllDocuments";
+            btnUnselectAllDocuments.Size = new System.Drawing.Size(140, 28);
+            btnUnselectAllDocuments.TabIndex = 4;
+            btnUnselectAllDocuments.Text = "Снять все";
+            btnUnselectAllDocuments.Click += btnUnselectAllDocuments_Click;
+            // 
             // btnClose
-            this.btnClose.Location = new System.Drawing.Point(802, 14);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(130, 30);
-            this.btnClose.TabIndex = 5;
-            this.btnClose.Text = "Закрыть";
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-
-            // top panel controls
-            this.panelTop.Controls.Add(this.lblCompany);
-            this.panelTop.Controls.Add(this.lueCompany);
-            this.panelTop.Controls.Add(this.lblFrom);
-            this.panelTop.Controls.Add(this.deFrom);
-            this.panelTop.Controls.Add(this.lblTo);
-            this.panelTop.Controls.Add(this.deTo);
-            this.panelTop.Controls.Add(this.lblMode);
-            this.panelTop.Controls.Add(this.rgMode);
-            this.panelTop.Controls.Add(this.lblExportTypes);
-            this.panelTop.Controls.Add(this.ccbeExportTypes);
-            this.panelTop.Controls.Add(this.lblHint);
-
-            // bottom panel controls
-            this.panelBottom.Controls.Add(this.btnLoadDocuments);
-            this.panelBottom.Controls.Add(this.btnRun);
-            this.panelBottom.Controls.Add(this.btnRefresh);
-            this.panelBottom.Controls.Add(this.btnSelectAllDocuments);
-            this.panelBottom.Controls.Add(this.btnUnselectAllDocuments);
-            this.panelBottom.Controls.Add(this.btnClose);
-
-            // form
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1600, 870);
-            this.Controls.Add(this.splitMain);
-            this.Controls.Add(this.panelBottom);
-            this.Controls.Add(this.panelTop);
-            this.Name = "FrmExchangeManager";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Управление выгрузкой / догрузкой / перевыгрузкой";
-            this.Load += new System.EventHandler(this.FrmExchangeManager_Load);
-
-            ((System.ComponentModel.ISupportInitialize)(this.panelTop)).EndInit();
-            this.panelTop.ResumeLayout(false);
-            this.panelTop.PerformLayout();
-
-            ((System.ComponentModel.ISupportInitialize)(this.panelBottom)).EndInit();
-            this.panelBottom.ResumeLayout(false);
-
-            ((System.ComponentModel.ISupportInitialize)(this.splitMain.Panel1)).EndInit();
-            this.splitMain.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitMain.Panel2)).EndInit();
-            this.splitMain.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitMain)).EndInit();
-            this.splitMain.ResumeLayout(false);
-
-            ((System.ComponentModel.ISupportInitialize)(this.lueCompany.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rgMode.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ccbeExportTypes.Properties)).EndInit();
-
-            ((System.ComponentModel.ISupportInitialize)(this.gcDocuments)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvDocuments)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcBatches)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvBatches)).EndInit();
-
-            this.ResumeLayout(false);
+            // 
+            btnClose.Location = new System.Drawing.Point(702, 13);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new System.Drawing.Size(114, 28);
+            btnClose.TabIndex = 5;
+            btnClose.Text = "Закрыть";
+            btnClose.Click += btnClose_Click;
+            // 
+            // splitMain
+            // 
+            splitMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            splitMain.Location = new System.Drawing.Point(0, 89);
+            splitMain.Name = "splitMain";
+            // 
+            // splitMain.Panel1
+            // 
+            splitMain.Panel1.Controls.Add(gcDocuments);
+            // 
+            // splitMain.Panel2
+            // 
+            splitMain.Panel2.Controls.Add(gcBatches);
+            splitMain.Size = new System.Drawing.Size(1400, 671);
+            splitMain.SplitterPosition = 787;
+            splitMain.TabIndex = 2;
+            // 
+            // gcDocuments
+            // 
+            gcDocuments.Dock = System.Windows.Forms.DockStyle.Fill;
+            gcDocuments.Location = new System.Drawing.Point(0, 0);
+            gcDocuments.MainView = gvDocuments;
+            gcDocuments.Name = "gcDocuments";
+            gcDocuments.Size = new System.Drawing.Size(787, 671);
+            gcDocuments.TabIndex = 0;
+            gcDocuments.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gvDocuments });
+            // 
+            // gvDocuments
+            // 
+            gvDocuments.DetailHeight = 328;
+            gvDocuments.GridControl = gcDocuments;
+            gvDocuments.Name = "gvDocuments";
+            gvDocuments.OptionsEditForm.PopupEditFormWidth = 700;
+            gvDocuments.OptionsView.ShowAutoFilterRow = true;
+            gvDocuments.OptionsView.ShowGroupPanel = false;
+            gvDocuments.RowCellStyle += gvDocuments_RowCellStyle;
+            gvDocuments.CustomColumnDisplayText += gvDocuments_CustomColumnDisplayText;
+            // 
+            // gcBatches
+            // 
+            gcBatches.Dock = System.Windows.Forms.DockStyle.Fill;
+            gcBatches.Location = new System.Drawing.Point(0, 0);
+            gcBatches.MainView = gvBatches;
+            gcBatches.Name = "gcBatches";
+            gcBatches.Size = new System.Drawing.Size(603, 671);
+            gcBatches.TabIndex = 0;
+            gcBatches.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gvBatches });
+            // 
+            // gvBatches
+            // 
+            gvBatches.DetailHeight = 328;
+            gvBatches.GridControl = gcBatches;
+            gvBatches.Name = "gvBatches";
+            gvBatches.OptionsBehavior.Editable = false;
+            gvBatches.OptionsEditForm.PopupEditFormWidth = 700;
+            gvBatches.OptionsView.ShowAutoFilterRow = true;
+            gvBatches.OptionsView.ShowGroupPanel = false;
+            gvBatches.RowCellStyle += gvBatches_RowCellStyle;
+            gvBatches.CustomColumnDisplayText += gvBatches_CustomColumnDisplayText;
+            // 
+            // FrmExchangeManager
+            // 
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1400, 816);
+            Controls.Add(splitMain);
+            Controls.Add(panelBottom);
+            Controls.Add(panelTop);
+            Name = "FrmExchangeManager";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Управление выгрузкой / догрузкой / перевыгрузкой";
+            Load += FrmExchangeManager_Load;
+            ((System.ComponentModel.ISupportInitialize)panelTop).EndInit();
+            panelTop.ResumeLayout(false);
+            panelTop.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)lueCompany.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)deFrom.Properties.CalendarTimeProperties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)deFrom.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)deTo.Properties.CalendarTimeProperties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)deTo.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)rgMode.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ccbeExportTypes.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)panelBottom).EndInit();
+            panelBottom.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitMain.Panel1).EndInit();
+            splitMain.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitMain.Panel2).EndInit();
+            splitMain.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitMain).EndInit();
+            splitMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)gcDocuments).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gvDocuments).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gcBatches).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gvBatches).EndInit();
+            ResumeLayout(false);
         }
     }
 }
