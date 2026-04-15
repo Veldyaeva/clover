@@ -76,7 +76,13 @@ namespace ExchangeApp.Forms
             ccbeExportTypes.Properties.Items.Clear();
             foreach (var item in exportTypes)
             {
-                ccbeExportTypes.Properties.Items.Add(item.Code, item.Name, item.IsSelected);
+                //cbeExportTypes.Properties.Items.Add(item.Code, item.Name, item.IsSelected);
+                ccbeExportTypes.Properties.Items.Add(
+                    item.Code,
+                    item.Name,
+                    item.IsSelected ? System.Windows.Forms.CheckState.Checked : System.Windows.Forms.CheckState.Unchecked,
+                    true
+                );
             }
 
             if (ccbeExportTypes.Properties.Items.Count > 0)
