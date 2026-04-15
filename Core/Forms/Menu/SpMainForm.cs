@@ -1,12 +1,7 @@
-﻿using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Windows.Forms;
-using DevExpress.LookAndFeel;
+﻿using DevExpress.LookAndFeel;
 using DevExpress.XtraBars;
 using DevExpress.XtraTabbedMdi;
+using ExchangeApp.Forms;
 using Microsoft.AspNet.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using SewingProduction.Core;
@@ -24,6 +19,12 @@ using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
 using SewingProduction.Helpers;
+using System;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Windows.Forms;
 
 namespace SewingProduction
 {
@@ -393,6 +394,11 @@ namespace SewingProduction
         private void barButtonItemBrigObject_ItemClick(object sender, ItemClickEventArgs e)
         {
             OpenForm(new SpravForAll("brig_object", rusNameTableSQL: "Подразделения бригад", user: _user), e.Item);
+        }
+
+        private void barButtonItemExchangeApp_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenForm(new FrmExchangeManager(_user), e.Item);
         }
 
         //private void barButtonTSDAdmin_ItemClick(object sender, ItemClickEventArgs e)

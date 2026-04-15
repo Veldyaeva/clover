@@ -1,0 +1,316 @@
+﻿using DevExpress.XtraEditors;
+using ExchangeApp.Models;
+using ExchangeApp.Services;
+using SewingProduction;
+using SewingProduction.Features.UserDistribution.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace ExchangeApp.Forms
+{
+    public partial class FrmExchangeManager : CustomForm
+    {
+        private readonly IExchangeManagerService _service;
+        private List<ExchangeDocumentItem> _documents = new List<ExchangeDocumentItem>();
+        private List<ExportBatchItem> _batches = new List<ExportBatchItem>();
+
+        public FrmExchangeManager(UserClass User, IExchangeManagerService service) : base(User)
+        {
+            _service = service ?? throw new ArgumentNullException(nameof(service));
+            InitializeComponent();
+        }
+        public FrmExchangeManager(UserClass User) : base(User)
+        {
+            InitializeComponent();
+        }
+        private async void FrmExchangeManager_Load(object sender, EventArgs e)
+        {
+            await InitializeFormAsync();
+        }
+
+        private async Task InitializeFormAsync()
+        {
+            try
+            {
+                ToggleUi(false);
+
+                await LoadCompaniesAsync();
+                await LoadExportTypesAsync();
+                await RefreshBatchesAsync();
+
+                deFrom.EditValue = DateTime.Today.AddDays(-7);
+                deTo.EditValue = DateTime.Today;
+                rgMode.EditValue = ExportRunMode.Primary;
+
+                ApplyModeUi();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(this, ex.Message, "Ошибка инициализации");
+            }
+            finally
+            {
+                ToggleUi(true);
+            }
+        }
+
+        private async Task LoadCompaniesAsync()
+        {
+            var companies = await _service.GetCompaniesAsync();
+
+            lueCompany.Properties.DataSource = companies;
+            lueCompany.Properties.DisplayMember = nameof(CompanyItem.CompanyName);
+            lueCompany.Properties.ValueMember = nameof(CompanyItem.CompanyId);
+            lueCompany.Properties.NullText = "";
+
+            if (companies.Count > 0)
+                lueCompany.EditValue = companies[0].CompanyId;
+        }
+
+        private async Task LoadExportTypesAsync()
+        {
+            var exportTypes = await _service.GetExportTypesAsync();
+
+            ccbeExportTypes.Properties.Items.Clear();
+            foreach (var item in exportTypes)
+            {
+                ccbeExportTypes.Properties.Items.Add(item.Code, item.Name, item.IsSelected);
+            }
+
+            if (ccbeExportTypes.Properties.Items.Count > 0)
+            {
+                ccbeExportTypes.Properties.Items[0].CheckState = System.Windows.Forms.CheckState.Checked;
+            }
+        }
+
+        private async Task LoadDocumentsAsync()
+        {
+            var selectedTypes = GetSelectedExportTypes();
+            if (selectedTypes.Count == 0)
+            {
+                XtraMessageBox.Show(this, "Выберите хотя бы один вид выгрузки.");
+                return;
+            }
+
+            if (!TryGetSelectedCompanyId(out int companyId))
+                return;
+
+            if (deFrom.EditValue == null || deTo.EditValue == null)
+            {
+                XtraMessageBox.Show(this, "Укажите период.");
+                return;
+            }
+
+            var dateFrom = Convert.ToDateTime(deFrom.EditValue).Date;
+            var dateTo = Convert.ToDateTime(deTo.EditValue).Date;
+
+            ToggleUi(false);
+            try
+            {
+                // Для минимального интерфейса показываем документы по первому выбранному виду выгрузки.
+                _documents = await _service.GetDocumentsAsync(companyId, dateFrom, dateTo, selectedTypes[0]);
+                gcDocuments.DataSource = _documents;
+                gvDocuments.BestFitColumns();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(this, ex.Message, "Ошибка загрузки документов");
+            }
+            finally
+            {
+                ToggleUi(true);
+            }
+        }
+
+        private async Task RefreshBatchesAsync()
+        {
+            if (!TryGetSelectedCompanyId(out int companyId))
+                return;
+
+            ToggleUi(false);
+            try
+            {
+                _batches = await _service.GetBatchesAsync(companyId);
+                gcBatches.DataSource = _batches;
+                gvBatches.BestFitColumns();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(this, ex.Message, "Ошибка загрузки пакетов");
+            }
+            finally
+            {
+                ToggleUi(true);
+            }
+        }
+
+        private async Task RunAsync()
+        {
+            var selectedTypes = GetSelectedExportTypes();
+            if (selectedTypes.Count == 0)
+            {
+                XtraMessageBox.Show(this, "Выберите хотя бы один вид выгрузки.");
+                return;
+            }
+
+            if (!TryGetSelectedCompanyId(out int companyId))
+                return;
+
+            if (deFrom.EditValue == null || deTo.EditValue == null)
+            {
+                XtraMessageBox.Show(this, "Укажите период.");
+                return;
+            }
+
+            var mode = (ExportRunMode)rgMode.EditValue;
+            var userName = Environment.UserName;
+            var dateFrom = Convert.ToDateTime(deFrom.EditValue).Date;
+            var dateTo = Convert.ToDateTime(deTo.EditValue).Date;
+
+            ToggleUi(false);
+            try
+            {
+                if (mode == ExportRunMode.Primary)
+                {
+                    foreach (var exportType in selectedTypes)
+                    {
+                        await _service.RunPrimaryExportAsync(exportType, companyId, dateFrom, dateTo, userName);
+                    }
+                }
+                else
+                {
+                    var selectedDocIds = _documents
+                        .Where(x => x.IsSelected)
+                        .Select(x => x.DocumentId)
+                        .Distinct()
+                        .ToList();
+
+                    if (selectedDocIds.Count == 0)
+                    {
+                        XtraMessageBox.Show(this, "Отметьте хотя бы один документ.");
+                        return;
+                    }
+
+                    foreach (var exportType in selectedTypes)
+                    {
+                        await _service.CreateRequestAndRunAsync(exportType, mode, companyId, selectedDocIds, userName);
+                    }
+                }
+
+                await RefreshBatchesAsync();
+                XtraMessageBox.Show(this, "Операция выполнена.");
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(this, ex.Message, "Ошибка выполнения");
+            }
+            finally
+            {
+                ToggleUi(true);
+            }
+        }
+
+        private List<string> GetSelectedExportTypes()
+        {
+            return ccbeExportTypes.Properties.Items
+                .GetCheckedValues()
+                .Cast<object>()
+                .Select(x => x?.ToString())
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+                .ToList();
+        }
+
+        private bool TryGetSelectedCompanyId(out int companyId)
+        {
+            companyId = 0;
+
+            if (lueCompany.EditValue == null)
+            {
+                XtraMessageBox.Show(this, "Выберите организацию.");
+                return false;
+            }
+
+            if (!int.TryParse(lueCompany.EditValue.ToString(), out companyId))
+            {
+                XtraMessageBox.Show(this, "Некорректная организация.");
+                return false;
+            }
+
+            return true;
+        }
+
+        private void ToggleUi(bool enabled)
+        {
+            UseWaitCursor = !enabled;
+            panelTop.Enabled = enabled;
+            panelBottom.Enabled = enabled;
+            splitMain.Enabled = enabled;
+        }
+
+        private void ApplyModeUi()
+        {
+            var mode = (ExportRunMode)rgMode.EditValue;
+            bool needDocuments = mode != ExportRunMode.Primary;
+
+            gcDocuments.Enabled = true;
+            btnLoadDocuments.Enabled = true;
+
+            lblHint.Text = mode switch
+            {
+                ExportRunMode.Primary => "Первичная выгрузка: документы можно не отмечать, пакет формируется за период.",
+                ExportRunMode.Delta => "Догрузка: отметьте документы, которые нужно догрузить.",
+                ExportRunMode.Reexport => "Перевыгрузка: отметьте документы, которые нужно перевыгрузить.",
+                _ => string.Empty
+            };
+
+            if (!needDocuments)
+            {
+                // Документы можно загружать и при первичной, но это не обязательно.
+                gvDocuments.ClearSelection();
+            }
+        }
+
+        private async void btnLoadDocuments_Click(object sender, EventArgs e)
+        {
+            await LoadDocumentsAsync();
+        }
+
+        private async void btnRun_Click(object sender, EventArgs e)
+        {
+            await RunAsync();
+        }
+
+        private async void btnRefresh_Click(object sender, EventArgs e)
+        {
+            await RefreshBatchesAsync();
+        }
+
+        private void rgMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ApplyModeUi();
+        }
+
+        private void btnSelectAllDocuments_Click(object sender, EventArgs e)
+        {
+            foreach (var doc in _documents)
+                doc.IsSelected = true;
+
+            gcDocuments.RefreshDataSource();
+        }
+
+        private void btnUnselectAllDocuments_Click(object sender, EventArgs e)
+        {
+            foreach (var doc in _documents)
+                doc.IsSelected = false;
+
+            gcDocuments.RefreshDataSource();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+    }
+}

@@ -56,5 +56,8 @@
     <Setting Name="SettingsUpgraded" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="CleverPGConnectionString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=192.168.251.2:5432;Initial Catalog=clever;Persist Security Info=True;User ID=sa;Password=kf,bhbyn;Encrypt=False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

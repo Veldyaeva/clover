@@ -124,5 +124,18 @@ namespace SewingProduction.Properties {
                 this["SettingsUpgraded"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.251.2:5432;Initial Catalog=clever;Persist Security Info=True;" +
+            "User ID=sa;Password=kf,bhbyn;Encrypt=False")]
+        public string CleverPGConnectionString {
+            get {
+                return ((string)(this["CleverPGConnectionString"]));
+            }
+            set {
+                this["CleverPGConnectionString"] = value;
+            }
+        }
     }
 }

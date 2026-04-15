@@ -103,6 +103,9 @@
     <Compile Update="Features\CardByNom\Forms\NomLookUp.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\ExchangeApp\Forms\FrmExchangeManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\KnittingProduction\Forms\KnitterWorkSpace.cs">
       <SubType>Form</SubType>
     </Compile>
