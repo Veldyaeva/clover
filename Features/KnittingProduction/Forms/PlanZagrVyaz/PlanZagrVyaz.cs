@@ -80,7 +80,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private static readonly TimeSpan PlanBrokerSelfMute = TimeSpan.FromSeconds(2);
 
-        private static DatabaseHelper _dbHelper;
+        private static DatabaseHelperSQL _dbHelper;
         private static DbService _dbService;
         private static MlService _mlService;
         private static ArtNormRepository _anService;
@@ -273,7 +273,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     Text = "РС Мастера РЦ";
                     break;
             }
-            _dbHelper = new DatabaseHelper("ace");
+            _dbHelper = new DatabaseHelperSQL("ace");
             _dbService = new DbService(_dbHelper);
             _anService = new ArtNormRepository(_dbHelper);
             _sbService = new ServiceBrokerService(_dbHelper);

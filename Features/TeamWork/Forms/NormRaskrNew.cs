@@ -15,7 +15,7 @@ namespace SewingProduction.form.TeamWork.Forms
 {
     public partial class norm_raskrNew : CustomForm
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly DbService _dbService;
         private readonly ArtNormRepository _artNormService;
         private readonly ILogger _logger = new FileLogger();
@@ -46,8 +46,8 @@ namespace SewingProduction.form.TeamWork.Forms
             InitializeComponent();
             _annId = annId;
 
-            _dbService = new DbService(new DatabaseHelper());
-            _artNormService = new ArtNormRepository(new DatabaseHelper());
+            _dbService = new DbService(new DatabaseHelperSQL());
+            _artNormService = new ArtNormRepository(new DatabaseHelperSQL());
             //ThemeManager.UpdateTheme(this);
             // Загружаем настройки грида перед загрузкой данных
             ConfigureGrid();

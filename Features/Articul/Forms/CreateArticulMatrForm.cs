@@ -22,7 +22,7 @@ namespace SewingProduction.Features.Articul.Forms
     public partial class CreateArticulMatrForm : CustomForm
 
     {
-        private DatabaseHelper _dbHelper;
+        private DatabaseHelperSQL _dbHelper;
         private DbService _dbService;
         private readonly MatrixService _matrixService;
 
@@ -44,7 +44,7 @@ namespace SewingProduction.Features.Articul.Forms
 
         public CreateArticulMatrForm(UserClass user) : base(user)
         {
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
 
             InitializeComponent();

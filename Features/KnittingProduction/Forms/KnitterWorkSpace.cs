@@ -220,7 +220,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _sbHub = AppServices.Services.GetRequiredService<IAppServiceBrokerHub>();
                 dataLayoutControl1.DataSource = _planBindingSource;
 
-                var dbHelper = new DatabaseHelper();
+                var dbHelper = new DatabaseHelperSQL();
                 IKnitterRepository repo = new KnitterRepository(dbHelper);
                 _orchestrator = new KnitterOrchestrator(repo);
                 _workSpaceService = new KnitterWorkSpaceService(repo, _logger);
@@ -2277,7 +2277,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             if (_sbService == null)
             {
-                var dbHelper = new DatabaseHelper("ace");
+                var dbHelper = new DatabaseHelperSQL("ace");
                 _sbService = new ServiceBrokerService(dbHelper);
             }
 

@@ -44,7 +44,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly ITeamWorkUIService _uiService;
         private readonly ITeamWorkValidationService _validationService;
         private int _bufferWorkDivision;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly TWGridHelper _gridHelper = new TWGridHelper();
         private readonly LayoutControlGroupHelper _layoutControlGroupHelper = new LayoutControlGroupHelper();
         private int _newAnnId = -1;
@@ -199,7 +199,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // Группировка по основному номеру операции (N)
             ConfigureRaszGrouping();
 
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
             _artNormService = new ArtNormRepository(_dbHelper);
             _baseNodeLibraryService = new BaseNodeLibraryService(_dbHelper, _logger);

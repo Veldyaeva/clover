@@ -19,11 +19,11 @@ namespace SewingProduction.Features.TeamWork.Services
     {
         private readonly ArtNormRepository _artNormService;
         private readonly DbService _dbService;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly IJabberSender _jabberSender;
         private readonly ILogger _logger;
 
-        public TeamWorkOrchestrator(ArtNormRepository artNormService, DbService dbService, DatabaseHelper dbHelper, IJabberSender jabberSender, ILogger logger)
+        public TeamWorkOrchestrator(ArtNormRepository artNormService, DbService dbService, DatabaseHelperSQL dbHelper, IJabberSender jabberSender, ILogger logger)
         {
             _artNormService = artNormService;
             _dbService = dbService;

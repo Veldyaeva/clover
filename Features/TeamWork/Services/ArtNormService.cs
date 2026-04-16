@@ -24,7 +24,7 @@ namespace SewingProduction.Services
     // Canonical file for further extensions: Services/ArtNormRepository.cs.
     public partial class ArtNormRepository
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         //    private readonly HybridLogger _logger = new HybridLogger();
         private readonly FileLogger _logger = new FileLogger();
         private readonly DbService _dbService;
@@ -34,7 +34,7 @@ namespace SewingProduction.Services
         /// Инициализирует новый экземпляр сервиса
         /// </summary>
         /// <param name="dbHelper">Помощник для работы с базой данных.</param>
-        public ArtNormRepository(DatabaseHelper dbHelper)
+        public ArtNormRepository(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
             _dbService = new DbService(_dbHelper);
@@ -769,11 +769,11 @@ WHERE nr.annId = @annId";
 
     public sealed class JabberSender : IJabberSender
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         //    private readonly HybridLogger _logger = new HybridLogger();
         private readonly FileLogger _logger = new FileLogger();
         private readonly DbService _dbService;
-        public JabberSender(DatabaseHelper dbHelper)
+        public JabberSender(DatabaseHelperSQL dbHelper)
        => _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
         public async Task SendToBrigsAsync(IEnumerable<int> brigIds, string message, int idType = 14, int tester = 63)
         {

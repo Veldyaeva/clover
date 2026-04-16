@@ -12,14 +12,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application
     public sealed class PzvBulkUpdateService : IPzvBulkUpdateService
     {
         private readonly BindingSource _bindingSource;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly BulkHelper _bulkHelper;
         private readonly Action _muteBrokerNotifications;
         private readonly Func<Task> _reloadCallback;
 
         public PzvBulkUpdateService(
             BindingSource bindingSource,
-            DatabaseHelper dbHelper,
+            DatabaseHelperSQL dbHelper,
             BulkHelper bulkHelper,
             Action muteBrokerNotifications,
             Func<Task> reloadCallback)

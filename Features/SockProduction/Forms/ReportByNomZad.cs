@@ -12,7 +12,7 @@ namespace SewingProduction.Features.SockProduction.Forms
 {
     public partial class ReportByNomZad : Form
     {
-        private static DatabaseHelper _dbHelper;
+        private static DatabaseHelperSQL _dbHelper;
         private static DbService _dbService;
         private static BulkHelper _bulkHelper;
         private readonly ILogger _logger = new FileLogger();
@@ -24,7 +24,7 @@ namespace SewingProduction.Features.SockProduction.Forms
         public ReportByNomZad()
         {
             InitializeComponent();
-            _dbHelper = new DatabaseHelper("ace");
+            _dbHelper = new DatabaseHelperSQL("ace");
             _dbService = new DbService(_dbHelper);
             _bulkHelper = new BulkHelper();
             _vyazService = new VyazService(_dbHelper);

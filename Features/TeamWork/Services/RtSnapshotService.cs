@@ -14,10 +14,10 @@ namespace SewingProduction.Features.TeamWork.Services
     public sealed class RtSnapshotService
     {
         private readonly DbService _db;
-        private readonly DatabaseHelper _helper;
+        private readonly DatabaseHelperSQL _helper;
         private readonly ILogger _logger;
 
-        public RtSnapshotService(DbService db, DatabaseHelper helper, ILogger logger)
+        public RtSnapshotService(DbService db, DatabaseHelperSQL helper, ILogger logger)
         {
             _db = db;
             _helper = helper;

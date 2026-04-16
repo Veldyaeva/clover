@@ -25,7 +25,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 {
     public partial class TeamWork : CustomForm
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly DbService _dbService;
         private readonly ArtNormRepository _artNormService; // репозиторий данных
         private readonly JabberSender _jabberSender;
@@ -99,7 +99,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ANNgridView.OptionsView.ShowPreview = false;
             ANNgridView.PreviewLineCount = 0;
             DapperMappings.Configure();
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
             _artNormService = new ArtNormRepository(_dbHelper);
             _jabberSender = new JabberSender(_dbHelper);

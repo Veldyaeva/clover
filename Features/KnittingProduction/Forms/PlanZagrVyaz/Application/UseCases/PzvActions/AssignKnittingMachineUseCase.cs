@@ -19,12 +19,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application
     {
         private readonly PzvActionValidator _validator;
         private readonly IPzvBulkUpdateService _bulkUpdateService;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
 
         public AssignKnittingMachineUseCase(
             PzvActionValidator validator,
             IPzvBulkUpdateService bulkUpdateService,
-            DatabaseHelper dbHelper)
+            DatabaseHelperSQL dbHelper)
         {
             _validator = validator;
             _bulkUpdateService = bulkUpdateService;

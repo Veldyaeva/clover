@@ -18,7 +18,7 @@ namespace SewingProduction.Features.UserDistribution
     public partial class AllDistribution : CustomForm // форма создана Сhat GPT
     {
         private readonly AllRoleDataService _data;   // готовый сервис из AllRole.cs
-        private readonly DatabaseHelper _db = new DatabaseHelper();
+        private readonly DatabaseHelperSQL _db = new DatabaseHelperSQL();
         private readonly UserClass _user;
         private readonly UserModelDataService _userModelDataService;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox _repoMode;
@@ -585,12 +585,12 @@ namespace SewingProduction.Features.UserDistribution
                 if (current != null) continue;
 
                 var svcType = field.FieldType;
-                var ctor = svcType.GetConstructor(new[] { typeof(DatabaseHelper) });
+                var ctor = svcType.GetConstructor(new[] { typeof(DatabaseHelperSQL) });
                 if (ctor != null)
                 {
                     try
                     {
-                        var svc = ctor.Invoke(new object[] { new DatabaseHelper() });
+                        var svc = ctor.Invoke(new object[] { new DatabaseHelperSQL() });
                         field.SetValue(form, svc);
                     }
                     catch { /* молча пропускаем, если сервис не создался */ }

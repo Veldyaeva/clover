@@ -18,7 +18,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
     public partial class UserProfile : CustomForm
     {
         private readonly UserProfileDataService _userProfileDataService;
-        DatabaseHelper dbHelper = new DatabaseHelper();
+        DatabaseHelperSQL dbHelper = new DatabaseHelperSQL();
         private readonly UserClass _user;
         private readonly IPasswordHasher _passwordHasher;
         private readonly LoginFormDataService _loginService;
@@ -211,7 +211,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
     public class UserProfileDataService
     {
         private readonly DbService _dbService;
-        public UserProfileDataService(DatabaseHelper dbHelper)
+        public UserProfileDataService(DatabaseHelperSQL dbHelper)
         {
             _dbService = new DbService(dbHelper);
         }

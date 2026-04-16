@@ -21,7 +21,7 @@ namespace ExchangeApp.Forms
         private List<ExchangeDocumentItem> _documents = new List<ExchangeDocumentItem>();
         private List<ExportBatchItem> _batches = new List<ExportBatchItem>();
 
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DataBaseHelperPostgreSQL _dbHelper;
         //public FrmExchangeManager(UserClass User, IExchangeManagerService service) : base(User)
         //{
         //    _service = service ?? throw new ArgumentNullException(nameof(service));
@@ -34,7 +34,8 @@ namespace ExchangeApp.Forms
         {
             _service = BuildExchangeManagerService();
             InitializeComponent();
-            _dbHelper = new DatabaseHelper("cleverPG");
+            InitModeItems();
+            _dbHelper = new DataBaseHelperPostgreSQL("cleverPG");
             ConfigureDocumentGrid();
             ConfigureBatchGrid();
         }
@@ -43,6 +44,15 @@ namespace ExchangeApp.Forms
             if (_service == null)
                 throw new Exception("_service == null");
             await InitializeFormAsync();
+            //MessageBox.Show(rgMode.Properties.Items.Count.ToString());
+        }
+        private void InitModeItems()
+        {
+            rgMode.Properties.Items.Clear();
+            rgMode.Properties.Items.Add(new DevExpress.XtraEditors.Controls.RadioGroupItem(ExportRunMode.Primary, "Первичная"));
+            rgMode.Properties.Items.Add(new DevExpress.XtraEditors.Controls.RadioGroupItem(ExportRunMode.Delta, "Догрузка"));
+            rgMode.Properties.Items.Add(new DevExpress.XtraEditors.Controls.RadioGroupItem(ExportRunMode.Reexport, "Перевыгрузка"));
+            rgMode.EditValue = ExportRunMode.Primary;
         }
         private static IExchangeManagerService BuildExchangeManagerService()
         {

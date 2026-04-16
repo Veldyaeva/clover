@@ -14,11 +14,11 @@ namespace SewingProduction.Features.CuttingProduction.Services
 
     public class CuttingService
     {
-        private static DatabaseHelper _dbHelper;
+        private static DatabaseHelperSQL _dbHelper;
         private readonly DbService _dbService;
         //    private readonly HybridLogger _logger = new HybridLogger();
         private readonly FileLogger _logger = new FileLogger();
-        public CuttingService(DatabaseHelper dbHelper)
+        public CuttingService(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
             _dbService = new DbService(_dbHelper);

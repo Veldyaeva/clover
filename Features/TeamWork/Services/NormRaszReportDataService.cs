@@ -9,11 +9,11 @@ namespace SewingProduction.Features.TeamWork.Services
 {
     public sealed class NormRaszReportDataService
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
 
-        public NormRaszReportDataService(DatabaseHelper dbHelper = null)
+        public NormRaszReportDataService(DatabaseHelperSQL dbHelper = null)
         {
-            _dbHelper = dbHelper ?? new DatabaseHelper();
+            _dbHelper = dbHelper ?? new DatabaseHelperSQL();
         }
 
         public NormRaszPreparedData Load(int annId)

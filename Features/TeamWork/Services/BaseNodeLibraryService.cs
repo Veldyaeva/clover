@@ -14,10 +14,10 @@ namespace SewingProduction.Features.TeamWork.Services
 {
     public sealed class BaseNodeLibraryService
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly ILogger _logger;
 
-        public BaseNodeLibraryService(DatabaseHelper dbHelper, ILogger logger)
+        public BaseNodeLibraryService(DatabaseHelperSQL dbHelper, ILogger logger)
         {
             _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));

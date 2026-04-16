@@ -19,7 +19,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 {
     public partial class KnittingMachinesUnitLoading : CustomForm
     {
-        private static DatabaseHelper _dbHelper;
+        private static DatabaseHelperSQL _dbHelper;
         private static DbService _dbService;
         private static BulkHelper _bulkHelper;
         private readonly ILogger _logger = new FileLogger();
@@ -39,7 +39,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         public KnittingMachinesUnitLoading(int xKmlID, string xKmlNumber)
         {
             InitializeComponent();
-            _dbHelper = new DatabaseHelper("ace");
+            _dbHelper = new DatabaseHelperSQL("ace");
             _dbService = new DbService(_dbHelper);
             _vyazService = new VyazService(_dbHelper);
             _bulkHelper = new BulkHelper();
