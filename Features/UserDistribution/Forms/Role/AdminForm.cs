@@ -18,7 +18,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
     {
         public MrWizardContext StartMode = new MrWizardContext();
         private readonly AdminFormDataService _adminFormDataService;
-        DatabaseHelper dbHelper = new DatabaseHelper();
+        DatabaseHelper dbHelper = new DatabaseHelper("ace");
         private readonly UserClass _user;
         public AdminForm(UserClass user) : base(user)
         {
@@ -470,7 +470,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private readonly DatabaseHelper _dbHelper;
         public AdminFormDataService()
         {
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelper("ace");
         }
         public async Task<System.Data.DataTable> GetUser()
         {

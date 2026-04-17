@@ -17,7 +17,7 @@ namespace SewingProduction.Features.UserDistribution.Models
 
         public UserRoleDataService()
         {
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelper("ace");
             _dbService = new DbService(_dbHelper);
         }
         public async Task<int> AssignRoleAsync(int userId, int roleId)

@@ -17,7 +17,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
     {
         public MrRoleMode StartMode { get; set; } = MrRoleMode.None;
         private readonly AllRoleDataService _allRoleDataService;
-        DatabaseHelper dbHelper = new DatabaseHelper();
+        DatabaseHelper dbHelper = new DatabaseHelper("ace");
         private readonly UserClass _user;
         private int selectedRoleId = -1;
         private int selectedUserId = -1;
@@ -438,7 +438,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private readonly DatabaseHelper _dbHelper;
         public AllRoleDataService()
         {
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelper("ace");
         }
 
         #region бд роли

@@ -20,7 +20,7 @@ namespace SewingProduction.Features.UserDistribution.DataService
 
         public UserModelDataService()
         {
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelper("ace");
             _dbService = new DbService(_dbHelper);
         }
 

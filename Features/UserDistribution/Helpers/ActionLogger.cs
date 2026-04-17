@@ -7,7 +7,7 @@ namespace SewingProduction.Features.UserDistribution.Helpers
 {
     public static class ActionLogger
     {
-        private static readonly DatabaseHelper dbHelper = new DatabaseHelper();
+        private static readonly DatabaseHelper dbHelper = new DatabaseHelper("ace");
 
         public static async Task Log(int userId, string eventDescription, string komp = null, string NameForm = null, string NameObject = null)
         {
