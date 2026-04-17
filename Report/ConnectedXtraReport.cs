@@ -3,7 +3,7 @@ using SewingProduction.Core.helpers;
 
 namespace SewingProduction.Report
 {
-    public abstract class ConnectedXtraReport : XtraReport
+    public class ConnectedXtraReport : XtraReport
     {
         protected void UseCurrentConnection()
         {
