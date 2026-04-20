@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.BandedGrid;
+using SewingProduction.Features.TeamWork.Services;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
@@ -28,6 +29,7 @@ namespace SewingProduction.form.TeamWork.Forms
         private List<GridBand> _selectedBands = new List<GridBand>(); // Список для хранения выбранных бэндов
         private List<BandData> _bandDataList = new List<BandData>(); // Список для хранения данных выбранных бэндов
         private int _annId;
+        private bool _loadingGroups;
         public struct BandData
         {
             public int gr { get; set; }
@@ -46,8 +48,10 @@ namespace SewingProduction.form.TeamWork.Forms
             InitializeComponent();
             _annId = annId;
 
-            _dbService = new DbService(new DatabaseHelper());
-            _artNormService = new ArtNormRepository(new DatabaseHelper());
+            var databaseServices = TeamWorkDependencyFactory.CreateDatabaseServices();
+            _dbHelper = databaseServices.DbHelper;
+            _dbService = databaseServices.DbService;
+            _artNormService = databaseServices.ArtNormRepository;
             //ThemeManager.UpdateTheme(this);
             // Загружаем настройки грида перед загрузкой данных
             ConfigureGrid();
@@ -73,6 +77,7 @@ namespace SewingProduction.form.TeamWork.Forms
         {
             try
             {
+                _loadingGroups = true;
                 DataTable data = await _artNormService.GetRaskroyNormGroups();
                 if (data != null && data.Rows.Count > 0)
                 {
@@ -90,10 +95,19 @@ namespace SewingProduction.form.TeamWork.Forms
                 await _logger.LogErrorAsync(ex, "Ошибка загрузки групп в ComboBox");
                 MessageBox.Show($"Ошибка при загрузке групп: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            finally
+            {
+                _loadingGroups = false;
+            }
         }
 
         private async void CustomComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (_loadingGroups)
+            {
+                return;
+            }
+
             try
             {
                 if (customComboBox1.SelectedValue != null)
@@ -251,7 +265,7 @@ namespace SewingProduction.form.TeamWork.Forms
         private List<NormRask> GenerateNormRaskList(BandData raskroyList, int _slogn)
         {
             int kol = raskroyList.gr;
-            string obor = raskroyList.Naimen?.TrimEnd();
+            string obor = StringNormalizer.TrimEndOrNull(raskroyList.Naimen);
             return new List<NormRask>
             {
                 new NormRask{IsNew = true, AnnId = -1, Kod_o = "301", TextRask = "Рассекание на куски диском", Sek = raskroyList.Dras, razryd =  5, N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0,Seb_s = 0, Spec = ""},

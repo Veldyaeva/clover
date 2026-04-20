@@ -1819,7 +1819,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             buttonTab999WorkAssignment.StyleController = layoutControl2;
             buttonTab999WorkAssignment.TabIndex = 5;
             buttonTab999WorkAssignment.Text = "Таб 999 по V";
-            buttonTab999WorkAssignment.Click += buttonTab999WorkAssignment_Click;
+            buttonTab999WorkAssignment.Click += this.buttonTab999WorkAssignment_Click;
             // 
             // buttonKnittingMachineWorkAssignment
             // 
@@ -2695,7 +2695,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridViewNaryadZadany.OptionsView.EnableAppearanceEvenRow = true;
             gridViewNaryadZadany.OptionsView.ShowFooter = true;
             gridViewNaryadZadany.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridNaryadZadanyColumnKmlNumber, DevExpress.Data.ColumnSortOrder.Ascending), new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridNaryadZadanyColumnPzvArticul, DevExpress.Data.ColumnSortOrder.Ascending) });
-            gridViewNaryadZadany.PopupMenuShowing += gridViewNaryadZadany_PopupMenuShowing;
             // 
             // gridNaryadZadanyColumnKmlNumber
             // 
@@ -2870,7 +2869,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridViewPZVOperList.OptionsView.ShowFooter = true;
             gridViewPZVOperList.OptionsView.ShowGroupPanel = false;
             gridViewPZVOperList.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridPZVOperListColumnOlPzvArticul, DevExpress.Data.ColumnSortOrder.Ascending), new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridPZVOperListColumnOlNom, DevExpress.Data.ColumnSortOrder.Ascending) });
-            gridViewPZVOperList.RowCellClick += gridViewPZVOperList_RowCellClick;
             gridViewPZVOperList.FocusedRowChanged += gridViewPZVOperList_FocusedRowChanged;
             gridViewPZVOperList.CellValueChanged += gridViewPZVOperList_CellValueChanged;
             gridViewPZVOperList.BeforeLeaveRow += gridViewPZVOperList_BeforeLeaveRow;
@@ -3289,8 +3287,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridViewRzvPachListByNom.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
             gridViewRzvPachListByNom.OptionsView.ShowGroupPanel = false;
             gridViewRzvPachListByNom.ShowingEditor += gridViewRzvPachListByNom_ShowingEditor;
-            gridViewRzvPachListByNom.FocusedRowChanged += gridViewRzvPachListByNom_FocusedRowChanged;
-            gridViewRzvPachListByNom.CellValueChanging += gridViewRzvPachListByNom_CellValueChanging;
             gridViewRzvPachListByNom.CustomUnboundColumnData += gridViewRzvPachListByNom_CustomUnboundColumnData;
             // 
             // gridRzvPachListByNomColumnNomZad
@@ -3412,10 +3408,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridViewZadanyList.OptionsView.EnableAppearanceEvenRow = true;
             gridViewZadanyList.OptionsView.ShowGroupPanel = false;
             gridViewZadanyList.FocusedRowChanged += gridViewZadanyList_FocusedRowChanged;
-            gridViewZadanyList.CellValueChanged += gridViewZadanyList_CellValueChanged;
-            gridViewZadanyList.CellValueChanging += gridViewZadanyList_CellValueChanging;
-            gridViewZadanyList.Click += gridViewZadanyList_Click;
-            gridViewZadanyList.DoubleClick += gridViewZadanyList_DoubleClick;
             // 
             // gridZadanyListColumnPszNom
             // 
@@ -3527,8 +3519,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             repositoryItemCheckEdit1.ValueUnchecked = 0;
             repositoryItemCheckEdit1.CheckedChanged += repositoryItemCheckEdit1_CheckedChanged;
             repositoryItemCheckEdit1.EditValueChanged += repositoryItemCheckEdit1_EditValueChanged;
-            repositoryItemCheckEdit1.DoubleClick += repositoryItemCheckEdit1_DoubleClick;
-            repositoryItemCheckEdit1.MouseUp += repositoryItemCheckEdit1_MouseUp;
             // 
             // gridZadanyListColumnKmlID
             // 
@@ -3698,7 +3688,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlGroup1.Size = new System.Drawing.Size(1050, 209);
             layoutControlGroup1.Text = "НЕЗАВЕРШЕННОЕ ПРОИЗВОДСТВО";
             layoutControlGroup1.CustomButtonClick += layoutControlGroup1_CustomButtonClick;
-            layoutControlGroup1.CustomButtonChecked += layoutControlGroup1_CustomButtonChecked;
             // 
             // layoutControlGroup7
             // 
@@ -3884,7 +3873,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlGroup2.Size = new System.Drawing.Size(795, 399);
             layoutControlGroup2.Text = "СМЕННОЕ ЗАДАНИЕ";
             layoutControlGroup2.CustomButtonClick += layoutControlGroup2_CustomButtonClick;
-            layoutControlGroup2.CustomButtonChecked += layoutControlGroup2_CustomButtonChecked;
             // 
             // layoutControlItem43
             // 
@@ -4047,7 +4035,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             Text = "Рабочий стол мастера вяз цеха";
             FormClosing += OnFormClosing;
             Load += PlanZagrVyaz_Load;
-            Click += PlanZagrVyaz_Click;
             ((System.ComponentModel.ISupportInitialize)gridViewSmenZadanyOtp).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControlSmenZadany).EndInit();
             ((System.ComponentModel.ISupportInitialize)advBandedGridViewSmenZadany).EndInit();

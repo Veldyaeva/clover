@@ -1,13 +1,13 @@
-using Dapper;
+﻿using Dapper;
 using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Features.TeamWork.Models;
 using SewingProduction.Helpers;
+using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SewingProduction.Features.TeamWork.Services
@@ -25,12 +25,20 @@ namespace SewingProduction.Features.TeamWork.Services
 
         public async Task<IReadOnlyList<BaseNodeDefinition>> GetAllAsync()
         {
-            const string query = @"
+            const string queryTemplate = @"
 SELECT
     n.BaseNodeId,
     n.NodeCode,
+{1}
+{2}
+{3}
+    n.SourceAnnId,
+{0}
+    n.SourceRtCode,
+    n.SourceImagePath,
     n.NodeName,
     n.NodeGroup,
+{4}
     n.NodeType,
     n.ProductKind,
     n.ProductCategory,
@@ -71,6 +79,27 @@ ORDER BY n.NodeName, bo.SortOrder, bo.BaseNodeOperationId;";
             try
             {
                 using var connection = _dbHelper.GetConnection();
+                bool hasSourceArticul = await HasBaseNodeColumnAsync(connection, null, "SourceArticul");
+                bool hasNodeTypeId = await HasBaseNodeColumnAsync(connection, null, "NodeTypeId");
+                bool hasNodeGroupId = await HasBaseNodeColumnAsync(connection, null, "NodeGroupId");
+                bool hasNodeSubgroupId = await HasBaseNodeColumnAsync(connection, null, "NodeSubgroupId");
+                bool hasNodeGroupDetail = await HasBaseNodeColumnAsync(connection, null, "NodeGroupDetail");
+                string sourceArticulSelect = hasSourceArticul
+                    ? "    n.SourceArticul,"
+                    : "    CAST(NULL AS NVARCHAR(255)) AS SourceArticul,";
+                string nodeTypeIdSelect = hasNodeTypeId
+                    ? "    n.NodeTypeId,"
+                    : "    CAST(NULL AS INT) AS NodeTypeId,";
+                string nodeGroupIdSelect = hasNodeGroupId
+                    ? "    n.NodeGroupId,"
+                    : "    CAST(NULL AS INT) AS NodeGroupId,";
+                string nodeSubgroupIdSelect = hasNodeSubgroupId
+                    ? "    n.NodeSubgroupId,"
+                    : "    CAST(NULL AS INT) AS NodeSubgroupId,";
+                string nodeGroupDetailSelect = hasNodeGroupDetail
+                    ? "    n.NodeGroupDetail,"
+                    : "    CAST(NULL AS NVARCHAR(255)) AS NodeGroupDetail,";
+                string query = string.Format(queryTemplate, sourceArticulSelect, nodeTypeIdSelect, nodeGroupIdSelect, nodeSubgroupIdSelect, nodeGroupDetailSelect);
                 var rows = (await connection.QueryAsync<BaseNodeRow>(query)).ToList();
 
                 return rows
@@ -83,6 +112,178 @@ ORDER BY n.NodeName, bo.SortOrder, bo.BaseNodeOperationId;";
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при загрузке библиотеки базовых узлов");
                 throw;
+            }
+        }
+
+        public async Task<IReadOnlyList<BaseNodeMetadataItem>> GetNodeTypesAsync()
+        {
+            const string query = @"
+SELECT
+    NodeTypeId AS Id,
+    CAST(NULL AS INT) AS ParentId,
+    Code,
+    Name,
+    SortOrder,
+    CAST(ISNULL(IsActive, 1) AS bit) AS IsActive
+FROM dbo.NodeTypeDictionary
+WHERE ISNULL(IsActive, 1) = 1
+ORDER BY SortOrder, Name;";
+
+            try
+            {
+                using var connection = _dbHelper.GetConnection();
+                if (!await HasTableAsync(connection, null, "NodeTypeDictionary"))
+                {
+                    return BaseNodeMetadataOptions.NodeTypes
+                        .OrderBy(x => x.SortOrder)
+                        .ThenBy(x => x.Name)
+                        .ToList();
+                }
+
+                var nodeTypes = (await connection.QueryAsync<BaseNodeMetadataItem>(query)).ToList();
+                if (nodeTypes.Count > 0)
+                {
+                    return nodeTypes;
+                }
+
+                return BaseNodeMetadataOptions.NodeTypes
+                    .OrderBy(x => x.SortOrder)
+                    .ThenBy(x => x.Name)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при загрузке типов базовых узлов");
+                return BaseNodeMetadataOptions.NodeTypes
+                    .OrderBy(x => x.SortOrder)
+                    .ThenBy(x => x.Name)
+                    .ToList();
+            }
+        }
+
+        public async Task<IReadOnlyList<BaseNodeMetadataItem>> GetNodeGroupsAsync()
+        {
+            const string query = @"
+SELECT
+    NodeGroupId AS Id,
+    CAST(NULL AS INT) AS ParentId,
+    Code,
+    Name,
+    SortOrder,
+    CAST(ISNULL(IsActive, 1) AS bit) AS IsActive
+FROM dbo.NodeGroupDictionary
+WHERE ISNULL(IsActive, 1) = 1
+ORDER BY SortOrder, Name;";
+
+            try
+            {
+                using var connection = _dbHelper.GetConnection();
+                if (!await HasTableAsync(connection, null, "NodeGroupDictionary"))
+                {
+                    return BaseNodeMetadataOptions.NodeGroups
+                        .OrderBy(x => x.SortOrder)
+                        .ThenBy(x => x.Name)
+                        .ToList();
+                }
+
+                var nodeGroups = (await connection.QueryAsync<BaseNodeMetadataItem>(query)).ToList();
+                if (nodeGroups.Count > 0)
+                {
+                    return nodeGroups;
+                }
+
+                return BaseNodeMetadataOptions.NodeGroups
+                    .OrderBy(x => x.SortOrder)
+                    .ThenBy(x => x.Name)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при загрузке групп базовых узлов");
+                return BaseNodeMetadataOptions.NodeGroups
+                    .OrderBy(x => x.SortOrder)
+                    .ThenBy(x => x.Name)
+                    .ToList();
+            }
+        }
+
+        public async Task<IReadOnlyList<BaseNodeMetadataItem>> GetNodeSubgroupsAsync(int? nodeGroupId)
+        {
+            if (!nodeGroupId.HasValue || nodeGroupId.Value <= 0)
+            {
+                return new List<BaseNodeMetadataItem>();
+            }
+
+            const string query = @"
+SELECT
+    NodeSubgroupId AS Id,
+    NodeGroupId AS ParentId,
+    Code,
+    Name,
+    SortOrder,
+    CAST(ISNULL(IsActive, 1) AS bit) AS IsActive
+FROM dbo.NodeSubgroupDictionary
+WHERE ISNULL(IsActive, 1) = 1
+  AND NodeGroupId = @NodeGroupId
+ORDER BY SortOrder, Name;";
+
+            try
+            {
+                using var connection = _dbHelper.GetConnection();
+                if (!await HasTableAsync(connection, null, "NodeSubgroupDictionary"))
+                {
+                    return BaseNodeMetadataOptions.GetNodeSubgroups(nodeGroupId).ToList();
+                }
+
+                var nodeSubgroups = (await connection.QueryAsync<BaseNodeMetadataItem>(query, new { NodeGroupId = nodeGroupId.Value })).ToList();
+                if (nodeSubgroups.Count > 0)
+                {
+                    return nodeSubgroups;
+                }
+
+                return BaseNodeMetadataOptions.GetNodeSubgroups(nodeGroupId).ToList();
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при загрузке подгрупп базовых узлов");
+                return BaseNodeMetadataOptions.GetNodeSubgroups(nodeGroupId).ToList();
+            }
+        }
+
+        public async Task<IReadOnlyList<BaseNodeMetadataItem>> GetProductCategoriesAsync()
+        {
+            const string query = @"
+SELECT
+    ProductCategoryId AS Id,
+    ProductKindId AS ParentId,
+    Code,
+    Name,
+    SortOrder,
+    CAST(ISNULL(IsActive, 1) AS bit) AS IsActive
+FROM dbo.ProductCategoryDictionary
+WHERE ISNULL(IsActive, 1) = 1
+ORDER BY SortOrder, Name;";
+
+            try
+            {
+                using var connection = _dbHelper.GetConnection();
+                if (!await HasTableAsync(connection, null, "ProductCategoryDictionary"))
+                {
+                    return BuildFallbackProductCategories();
+                }
+
+                var productCategories = (await connection.QueryAsync<BaseNodeMetadataItem>(query)).ToList();
+                if (productCategories.Count > 0)
+                {
+                    return productCategories;
+                }
+
+                return BuildFallbackProductCategories();
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при загрузке категорий изделий для базовых узлов");
+                return BuildFallbackProductCategories();
             }
         }
 
@@ -109,19 +310,32 @@ ORDER BY n.NodeName, bo.SortOrder, bo.BaseNodeOperationId;";
             try
             {
                 var existingNode = await FindExistingNodeAsync(connection, transaction, node);
+                bool hasSourceArticul = await HasBaseNodeColumnAsync(connection, transaction, "SourceArticul");
+                bool hasNodeTypeId = await HasBaseNodeColumnAsync(connection, transaction, "NodeTypeId");
+                bool hasNodeGroupId = await HasBaseNodeColumnAsync(connection, transaction, "NodeGroupId");
+                bool hasNodeSubgroupId = await HasBaseNodeColumnAsync(connection, transaction, "NodeSubgroupId");
+                bool hasNodeGroupDetail = await HasBaseNodeColumnAsync(connection, transaction, "NodeGroupDetail");
                 int baseNodeId;
                 string nodeCode;
                 var auditUser = BuildAuditUser();
 
                 if (existingNode == null)
                 {
-                    nodeCode = await GenerateNodeCodeAsync(connection, transaction, node.Name);
-                    const string insertNodeSql = @"
+                    nodeCode = await NormalizeNodeCodeAsync(connection, transaction, 0, node.NodeCode, node.Name);
+                    string insertNodeSql = $@"
 INSERT INTO dbo.BaseNode
 (
     NodeCode,
+    {(hasNodeTypeId ? "NodeTypeId," : string.Empty)}
+    {(hasNodeGroupId ? "NodeGroupId," : string.Empty)}
+    {(hasNodeSubgroupId ? "NodeSubgroupId," : string.Empty)}
+    SourceAnnId,
+    {(hasSourceArticul ? "SourceArticul," : string.Empty)}
+    SourceRtCode,
+    SourceImagePath,
     NodeName,
     NodeGroup,
+    {(hasNodeGroupDetail ? "NodeGroupDetail," : string.Empty)}
     NodeType,
     ProductKind,
     ProductCategory,
@@ -135,8 +349,16 @@ INSERT INTO dbo.BaseNode
 VALUES
 (
     @NodeCode,
+    {(hasNodeTypeId ? "@NodeTypeId," : string.Empty)}
+    {(hasNodeGroupId ? "@NodeGroupId," : string.Empty)}
+    {(hasNodeSubgroupId ? "@NodeSubgroupId," : string.Empty)}
+    @SourceAnnId,
+    {(hasSourceArticul ? "NULLIF(@SourceArticul, N'')," : string.Empty)}
+    NULLIF(@SourceRtCode, N''),
+    NULLIF(@SourceImagePath, N''),
     @NodeName,
     NULLIF(@NodeGroup, N''),
+    {(hasNodeGroupDetail ? "NULLIF(@NodeGroupDetail, N'')," : string.Empty)}
     NULLIF(@NodeType, N''),
     NULLIF(@ProductKind, N''),
     NULLIF(@ProductCategory, N''),
@@ -152,24 +374,41 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
                     baseNodeId = await connection.ExecuteScalarAsync<int>(insertNodeSql, new
                     {
                         NodeCode = nodeCode,
-                        NodeName = node.Name.Trim(),
-                        NodeGroup = node.NodeGroup?.Trim(),
-                        NodeType = node.NodeType?.Trim(),
-                        ProductKind = node.ProductKind?.Trim(),
-                        ProductCategory = node.ProductCategory?.Trim(),
-                        Comment = node.Description?.Trim(),
+                        NodeTypeId = node.NodeTypeId,
+                        NodeGroupId = node.NodeGroupId,
+                        NodeSubgroupId = node.NodeSubgroupId,
+                        SourceAnnId = node.SourceAnnId,
+                        SourceArticul = NullIfWhiteSpace(node.SourceArticul),
+                        SourceRtCode = NullIfWhiteSpace(node.SourceRtCode),
+                        SourceImagePath = NullIfWhiteSpace(node.SourceImagePath),
+                        NodeName = StringNormalizer.TrimOrEmpty(node.Name),
+                        NodeGroup = NullIfWhiteSpace(node.NodeGroup),
+                        NodeGroupDetail = NullIfWhiteSpace(node.NodeGroupDetail),
+                        NodeType = NullIfWhiteSpace(node.NodeType),
+                        ProductKind = NullIfWhiteSpace(node.ProductKind),
+                        ProductCategory = NullIfWhiteSpace(node.ProductCategory),
+                        Comment = NullIfWhiteSpace(node.Description),
                         AuditUser = auditUser
                     }, transaction);
                 }
                 else
                 {
                     baseNodeId = existingNode.BaseNodeId;
-                    nodeCode = existingNode.NodeCode;
+                    nodeCode = await NormalizeNodeCodeAsync(connection, transaction, baseNodeId, node.NodeCode, node.Name);
 
-                    const string updateNodeSql = @"
+                    string updateNodeSql = $@"
 UPDATE dbo.BaseNode
 SET NodeName = @NodeName,
+    NodeCode = @NodeCode,
+    {(hasNodeTypeId ? "NodeTypeId = @NodeTypeId," : string.Empty)}
+    {(hasNodeGroupId ? "NodeGroupId = @NodeGroupId," : string.Empty)}
+    {(hasNodeSubgroupId ? "NodeSubgroupId = @NodeSubgroupId," : string.Empty)}
+    SourceAnnId = @SourceAnnId,
+    {(hasSourceArticul ? "SourceArticul = NULLIF(@SourceArticul, N'')," : string.Empty)}
+    SourceRtCode = NULLIF(@SourceRtCode, N''),
+    SourceImagePath = NULLIF(@SourceImagePath, N''),
     NodeGroup = NULLIF(@NodeGroup, N''),
+    {(hasNodeGroupDetail ? "NodeGroupDetail = NULLIF(@NodeGroupDetail, N'')," : string.Empty)}
     NodeType = NULLIF(@NodeType, N''),
     ProductKind = NULLIF(@ProductKind, N''),
     ProductCategory = NULLIF(@ProductCategory, N''),
@@ -181,12 +420,21 @@ WHERE BaseNodeId = @BaseNodeId;";
                     await connection.ExecuteAsync(updateNodeSql, new
                     {
                         BaseNodeId = baseNodeId,
-                        NodeName = node.Name.Trim(),
-                        NodeGroup = node.NodeGroup?.Trim(),
-                        NodeType = node.NodeType?.Trim(),
-                        ProductKind = node.ProductKind?.Trim(),
-                        ProductCategory = node.ProductCategory?.Trim(),
-                        Comment = node.Description?.Trim(),
+                        NodeCode = nodeCode,
+                        NodeTypeId = node.NodeTypeId,
+                        NodeGroupId = node.NodeGroupId,
+                        NodeSubgroupId = node.NodeSubgroupId,
+                        SourceAnnId = node.SourceAnnId,
+                        SourceArticul = NullIfWhiteSpace(node.SourceArticul),
+                        SourceRtCode = NullIfWhiteSpace(node.SourceRtCode),
+                        SourceImagePath = NullIfWhiteSpace(node.SourceImagePath),
+                        NodeName = StringNormalizer.TrimOrEmpty(node.Name),
+                        NodeGroup = NullIfWhiteSpace(node.NodeGroup),
+                        NodeGroupDetail = NullIfWhiteSpace(node.NodeGroupDetail),
+                        NodeType = NullIfWhiteSpace(node.NodeType),
+                        ProductKind = NullIfWhiteSpace(node.ProductKind),
+                        ProductCategory = NullIfWhiteSpace(node.ProductCategory),
+                        Comment = NullIfWhiteSpace(node.Description),
                         AuditUser = auditUser
                     }, transaction);
 
@@ -346,13 +594,7 @@ WHERE BaseNodeId = @BaseNodeId;";
             {
                 return await connection.QueryFirstOrDefaultAsync<BaseNodeHeaderRow>(byIdSql, new { node.BaseNodeId }, transaction);
             }
-
-            const string byNameSql = @"
-SELECT TOP (1) BaseNodeId, NodeCode, NodeName
-FROM dbo.BaseNode
-WHERE NodeName = @NodeName;";
-
-            return await connection.QueryFirstOrDefaultAsync<BaseNodeHeaderRow>(byNameSql, new { NodeName = node.Name.Trim() }, transaction);
+            return null;
         }
 
         private async Task<int> ResolveOperationRefIdAsync(SqlConnection connection, SqlTransaction transaction, BaseNodeOperationDefinition operation, string auditUser)
@@ -367,7 +609,7 @@ WHERE ISNULL(OperationCode, N'') = ISNULL(@OperationCode, N'')
             var existingId = await connection.QueryFirstOrDefaultAsync<int?>(findSql, new
             {
                 OperationCode = NullIfWhiteSpace(operation.KodO),
-                OperationName = operation.Text?.Trim(),
+                OperationName = StringNormalizer.TrimOrEmpty(operation.Text),
                 DefaultKodOb = NullableFromZero(operation.KodOb)
             }, transaction);
 
@@ -422,15 +664,15 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
             return await connection.ExecuteScalarAsync<int>(insertSql, new
             {
-                OperationCode = operation.KodO?.Trim(),
-                OperationName = operation.Text?.Trim(),
+                OperationCode = NullIfWhiteSpace(operation.KodO),
+                OperationName = StringNormalizer.TrimOrEmpty(operation.Text),
                 OperationClass = operationClass,
                 OperationObject = operationObject,
                 DefaultRazryd = NullableFromZero(operation.Razryd),
                 DefaultSek = DecimalFromZero(operation.Sek),
-                DefaultObor = operation.Obor?.Trim(),
+                DefaultObor = NullIfWhiteSpace(operation.Obor),
                 DefaultKodOb = NullableFromZero(operation.KodOb),
-                DefaultSpec = operation.Spec?.Trim(),
+                DefaultSpec = NullIfWhiteSpace(operation.Spec),
                 DefaultKodProizv = NullableFromZero(operation.KodProizv),
                 DefaultKodPodr = NullableFromZero(operation.KodPodr),
                 AuditUser = auditUser
@@ -453,6 +695,31 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
             return code;
         }
 
+        private async Task<string> NormalizeNodeCodeAsync(SqlConnection connection, SqlTransaction transaction, int existingBaseNodeId, string requestedNodeCode, string nodeName)
+        {
+            string normalizedNodeCode = StringNormalizer.TrimOrEmpty(requestedNodeCode);
+            if (string.IsNullOrWhiteSpace(normalizedNodeCode))
+            {
+                return await GenerateNodeCodeAsync(connection, transaction, nodeName);
+            }
+
+            const string existsSql = "SELECT COUNT(1) FROM dbo.BaseNode WHERE NodeCode = @NodeCode AND BaseNodeId <> @BaseNodeId;";
+            if (await connection.ExecuteScalarAsync<int>(existsSql, new { NodeCode = normalizedNodeCode, BaseNodeId = existingBaseNodeId }, transaction) == 0)
+            {
+                return normalizedNodeCode;
+            }
+
+            string candidate = normalizedNodeCode;
+            int suffix = 1;
+            while (await connection.ExecuteScalarAsync<int>(existsSql, new { NodeCode = candidate, BaseNodeId = existingBaseNodeId }, transaction) > 0)
+            {
+                suffix++;
+                candidate = $"{normalizedNodeCode}_{suffix}";
+            }
+
+            return candidate;
+        }
+
         private static BaseNodeDefinition MapNode(IGrouping<int, BaseNodeRow> group)
         {
             var first = group.First();
@@ -461,8 +728,16 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
                 BaseNodeId = first.BaseNodeId,
                 Id = first.BaseNodeId.ToString(),
                 NodeCode = first.NodeCode ?? string.Empty,
+                NodeTypeId = first.NodeTypeId,
+                NodeGroupId = first.NodeGroupId,
+                NodeSubgroupId = first.NodeSubgroupId,
+                SourceAnnId = first.SourceAnnId,
+                SourceArticul = first.SourceArticul ?? string.Empty,
+                SourceRtCode = first.SourceRtCode ?? string.Empty,
+                SourceImagePath = first.SourceImagePath ?? string.Empty,
                 Name = first.NodeName ?? string.Empty,
                 NodeGroup = first.NodeGroup ?? string.Empty,
+                NodeGroupDetail = first.NodeGroupDetail ?? string.Empty,
                 NodeType = first.NodeType ?? string.Empty,
                 ProductKind = first.ProductKind ?? string.Empty,
                 ProductCategory = first.ProductCategory ?? string.Empty,
@@ -505,19 +780,7 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
         private static string BuildBaseCode(string nodeName)
         {
-            var source = string.IsNullOrWhiteSpace(nodeName) ? "NODE" : nodeName.Trim().ToUpperInvariant();
-            string normalized = Regex.Replace(source, @"[^A-Z0-9]+", "_").Trim('_');
-            if (string.IsNullOrWhiteSpace(normalized))
-            {
-                normalized = "NODE";
-            }
-
-            if (normalized.Length > 42)
-            {
-                normalized = normalized.Substring(0, 42);
-            }
-
-            return $"BN_{normalized}";
+            return $"BN_{StringNormalizer.NormalizeCodeToken(nodeName, "NODE", 42)}";
         }
 
         private static int ToInt(decimal? value)
@@ -537,7 +800,54 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
         private static string NullIfWhiteSpace(string value)
         {
-            return string.IsNullOrWhiteSpace(value) ? null : value.Trim();
+            return StringNormalizer.TrimToNull(value);
+        }
+
+        private static IReadOnlyList<BaseNodeMetadataItem> BuildFallbackProductCategories()
+        {
+            return BaseNodeMetadataOptions.ProductCategories
+                .Select((name, index) => new BaseNodeMetadataItem
+                {
+                    Id = index + 1,
+                    Code = $"PC_{index + 1}",
+                    Name = name,
+                    SortOrder = (index + 1) * 10
+                })
+                .OrderBy(x => x.SortOrder)
+                .ThenBy(x => x.Name)
+                .ToList();
+        }
+
+        private static async Task<bool> HasBaseNodeColumnAsync(SqlConnection connection, SqlTransaction transaction, string columnName)
+        {
+            const string query = @"
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM sys.columns
+        WHERE object_id = OBJECT_ID('dbo.BaseNode')
+          AND name = @ColumnName
+    ) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END;";
+
+            return await connection.ExecuteScalarAsync<bool>(query, new { ColumnName = columnName }, transaction);
+        }
+
+        private static async Task<bool> HasTableAsync(SqlConnection connection, SqlTransaction transaction, string tableName)
+        {
+            const string query = @"
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM sys.tables
+        WHERE name = @TableName
+          AND schema_id = SCHEMA_ID('dbo')
+    ) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END;";
+
+            return await connection.ExecuteScalarAsync<bool>(query, new { TableName = tableName }, transaction);
         }
 
         private sealed class BaseNodeHeaderRow
@@ -551,8 +861,16 @@ SELECT CAST(SCOPE_IDENTITY() AS INT);";
         {
             public int BaseNodeId { get; set; }
             public string NodeCode { get; set; }
+            public int? NodeTypeId { get; set; }
+            public int? NodeGroupId { get; set; }
+            public int? NodeSubgroupId { get; set; }
+            public int? SourceAnnId { get; set; }
+            public string SourceArticul { get; set; }
+            public string SourceRtCode { get; set; }
+            public string SourceImagePath { get; set; }
             public string NodeName { get; set; }
             public string NodeGroup { get; set; }
+            public string NodeGroupDetail { get; set; }
             public string NodeType { get; set; }
             public string ProductKind { get; set; }
             public string ProductCategory { get; set; }

@@ -1,4 +1,4 @@
-using SewingProduction.Features.TeamWork.Models;
+﻿using SewingProduction.Features.TeamWork.Models;
 using SewingProduction.Helpers;
 using System;
 using System.Threading.Tasks;
@@ -30,13 +30,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // создаем первый CTS для начальной загрузки,
                 // чтобы его можно было отменить при закрытии формы / смене вкладки
                 var ct = StartNewLoadToken();
-                await LoadWorkDivisions(ct);
+                await LoadWorkDivisions(ct, loadRelatedData: _lastFocusedAnnId <= 0);
                 // После загрузки восстановим фокус, если есть сохраненный AnnID
                 if (_lastFocusedAnnId > 0)
                 {
                     await RestoreFocusAsync(_lastFocusedAnnId);
                 }
                 InitHeaderButtonTags();
+                InitializeMainBaseNodeActions();
 
                 // Инициализируем переменную состояния кнопки "показать все"
                 var showAllButton = FindButtonByTag(layoutControlGroup14, "bind:show-all");
@@ -47,6 +48,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // Инициализируем объект управления кнопкой "bind:unlink"
                 ButtonUnbindWd = new ButtonUnbindWd(layoutControlGroup14, "bind:unlink");
+                RefreshCurrentWorksUxState();
             }
             catch (Exception ex)
             {
@@ -100,72 +102,35 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             if (e.Page == null) return;
 
-            // Отменяем все активные загрузки на предыдущей вкладке
-            CancelAllLoads();
-            // для новой вкладки создаем НОВЫЙ токен
+            // При переключении вкладок не перезагружаем источники повторно:
+            // просто останавливаем незавершенные операции.
+            CancelCurrentLoad();
             var token = StartNewLoadToken();
-            switch (e.Page.Name)
-            {
-                case "TabPage1":
-                    await LoadWorkDivisions(token);
-                    break;
-
-                case "xtraTabPageArticles":
-                    // Загружаем данные для вкладки артикулов с токеном отмены
-                    await CurrentWorks_Load(token);//_loadCts.Token);
-                    break;
-
-                default:
-                    // При переходе на другие вкладки можно добавить дополнительную логику если необходимо
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Обрабатывает смену вложенной вкладки в "Текущие работы"
-        /// </summary>
-        private async void XtraTabControl2_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
-        {
-            if (e.Page == null) return;
-
-            // Отменяем все активные загрузки на предыдущей вложенной вкладке
-            CancelAllLoads();
 
             try
             {
-                switch (e.Page.Name)
-                {
-                    case "xtraTabPageWorkDivisions":
-                        // Когда переходим на вкладку "Требуют увязки", обновляем данные для normRaskArt
-                        if (gridView_wdToBind?.RowCount > 0 && gridView_wdToBind.FocusedRowHandle >= 0)
-                        {
-                            int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, gridView_wdToBind.FocusedRowHandle, "AnnID", 0);
-                            if (annId > 0)
-                            {
-                                await _logger.LogEventAsync($"XtraTabControl2_SelectedPageChanged: Refreshing NormRask data for annId={annId} on xtraTabPageWorkDivisions", "XtraTabControl2_SelectedPageChanged");
-                                await RefreshNormRaskForArticlesTab(annId, _loadCts.Token);
-
-                                // Check the grid state after refresh
-                                await CheckNormRaskArtState();
-                            }
-                        }
-                        else
-                        {
-                            await _logger.LogWarningAsync("XtraTabControl2_SelectedPageChanged: No focused row in gridView_wdToBind", "XtraTabControl2_SelectedPageChanged");
-                        }
-                        break;
-
-                    case "xtraTabPage3":
-                        // Можно добавить логику для другой вложенной вкладки если необходимо
-                        break;
-
-                    default:
-                        break;
-                }
+                await RefreshMainTabAsync(e.Page.Name, token);
             }
-            catch (Exception ex)
+            catch (OperationCanceledException) when (token.IsCancellationRequested)
             {
-                await _logger.LogErrorAsync(ex, "Error in XtraTabControl2_SelectedPageChanged");
+                // Более новая смена вкладки отменила текущее обновление.
+            }
+        }
+
+        private async void XtraTabControl2_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
+        {
+            if (e.Page == null || xtraTabControl1?.SelectedTabPage?.Name != "xtraTabPageArticles") return;
+
+            CancelCurrentLoad();
+            var token = StartNewLoadToken();
+
+            try
+            {
+                await RefreshArticlesSubTabAsync(e.Page.Name, token);
+            }
+            catch (OperationCanceledException) when (token.IsCancellationRequested)
+            {
+                // Более новая смена вложенной вкладки отменила текущее обновление.
             }
         }
     }

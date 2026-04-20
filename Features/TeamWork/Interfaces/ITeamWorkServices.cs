@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using SewingProduction.Features.TeamWork.Models.UseCases;
 using SewingProduction.Models;
 
 namespace SewingProduction.Features.TeamWork.Interfaces
@@ -9,6 +10,10 @@ namespace SewingProduction.Features.TeamWork.Interfaces
     {
         Task<ArtNormN> LoadAnnDataAsync(int annId);
         Task SaveAnnDataAsync(ArtNormN data);
+        Task<RelatedDataResult> LoadRelatedDataAsync(int annId);
+        Task<TeamWorkReferenceDataResult> LoadReferenceDataAsync();
+        Task<List<FioModel>> LoadDesignersAsync();
+        Task<string> GetSpecByOborudKodAsync(int kodOb);
     }
 
     public interface ITeamWorkUIService

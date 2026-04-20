@@ -1,4 +1,4 @@
-using DevExpress.XtraGrid.Views.Grid;
+﻿using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using System;
@@ -80,7 +80,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         var myDataAnn = workDivisionGridView.GetRow(workDivisionGridView.FocusedRowHandle) as MyDataANN;
                         if (myDataAnn != null)
                         {
-                            selectedAnn = await _artNormService.GetArtNormDataById(myDataAnn.AnnID);
+                            selectedAnn = await _teamWorkService.LoadWorkDivisionAsync(myDataAnn.AnnID);
                         }
                     }
                 }
@@ -92,9 +92,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 // Подтверждение операции
-                string displayInfo = $"Группа: {selectedAnn.grup?.TrimEnd(' ')}, " +
-                                   $"Модель: {selectedAnn.Mod?.TrimEnd(' ')}, " +
-                                   $"Артикул: {selectedAnn.Articul?.TrimEnd(' ')}";
+                string displayInfo = $"Группа: {StringNormalizer.TrimEndOrEmpty(selectedAnn.grup, ' ')}, " +
+                                   $"Модель: {StringNormalizer.TrimEndOrEmpty(selectedAnn.Mod, ' ')}, " +
+                                   $"Артикул: {StringNormalizer.TrimEndOrEmpty(selectedAnn.Articul, ' ')}";
 
                 string message = $"Отвязать {itemsToUnbind.Count} артикул(ов) от разделения труда:\n\n" +
                                 $"AnnID: {selectedAnn.AnnID}\n" +
@@ -165,7 +165,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                     if (annId > 0)
                     {
-                        var nzpData = await _artNormService.GetNzpWithPztCounts(annId);
+                        var nzpData = await _articlesQueryService.LoadNzpAsync(annId);
                         if (workDivisionGridView.Name == "ANNgridView")
                         {
                             _nzpListWd?.BulkLoad(nzpData ?? new List<NZPByKoddRt>());

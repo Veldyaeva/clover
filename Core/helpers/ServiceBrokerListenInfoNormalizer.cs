@@ -1,4 +1,5 @@
 using SewingProduction.Core.Models;
+using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,11 @@ namespace SewingProduction.Core.helpers
                 ["dbo.knitWorkingShiftMachineListNew"] = new[]
                 {
                     "kiwsmlLongRep","kwsmlKmlID","kwsmlKodOb","kwsmlKwsID"
+                },
+                ["dbo.knitWorkingShiftNew"] = new[]
+                {
+                    "kwsID","kwsTabStart","kwsTabEnd","kwsKmaID","kwsKmsID","kwsDateStart","kwsDateEnd",
+                    "kwsDateDel","kwsDel","kwsCompDel"
                 }
             };
 
@@ -45,8 +51,8 @@ namespace SewingProduction.Core.helpers
 
         private static string BuildTableKey(string schema, string table)
         {
-            var normalizedSchema = string.IsNullOrWhiteSpace(schema) ? "dbo" : schema.Trim();
-            var normalizedTable = table?.Trim() ?? string.Empty;
+            var normalizedSchema = string.IsNullOrWhiteSpace(schema) ? "dbo" : StringNormalizer.TrimOrEmpty(schema);
+            var normalizedTable = StringNormalizer.TrimOrEmpty(table);
             return $"{normalizedSchema}.{normalizedTable}";
         }
     }

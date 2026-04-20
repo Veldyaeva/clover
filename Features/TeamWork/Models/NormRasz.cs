@@ -34,7 +34,7 @@ namespace SewingProduction.Models
         public string Kod
         {
             get => _kod;
-            set => _kod = value?.Length > 7 ? value.Substring(0, 7) : value;
+            set => _kod = StringNormalizer.TrimAndLimitOrNull(value, 7);
         }
 
         private string _kod_o;
@@ -42,7 +42,7 @@ namespace SewingProduction.Models
         public string kod_o
         {
             get => _kod_o;
-            set => _kod_o = value?.Length > 3 ? value.Substring(0, 3) : value;
+            set => _kod_o = StringNormalizer.TrimAndLimitOrNull(value, 3);
         }
 
         private string _text;
@@ -50,7 +50,7 @@ namespace SewingProduction.Models
         public string Text
         {
             get => _text;
-            set => _text = value?.Length > 200 ? value.Substring(0, 200) : value;
+            set => _text = StringNormalizer.TrimAndLimitOrNull(value, 200);
         }
         [Column("razryd")]
         public int razryd { get; set; }
@@ -70,7 +70,7 @@ namespace SewingProduction.Models
             get => _obor;
             set
             {
-                var newValue = value?.Length > 35 ? value.Substring(0, 35) : value;
+                var newValue = StringNormalizer.TrimAndLimitOrNull(value, 35);
                 SetProperty(ref _obor, newValue, nameof(Obor));
             }
         }
@@ -80,18 +80,33 @@ namespace SewingProduction.Models
         public string Spec
         {
             get => _spec;
-            set => _spec = value?.Length > 3 ? value.Substring(0, 3) : value;
+            set => _spec = StringNormalizer.TrimAndLimitOrNull(value, 3);
         }
 
+        private string _textProizv;
         [NotMapped]
-        public string TextProizv { get; set; }
+        public string TextProizv
+        {
+            get => _textProizv;
+            set => _textProizv = StringNormalizer.TrimOrNull(value);
+        }
 
+        private string _textOb;
         [NotMapped]
         [Column("text_ob")]
-        public string TextOb { get; set; }
+        public string TextOb
+        {
+            get => _textOb;
+            set => _textOb = StringNormalizer.TrimOrNull(value);
+        }
 
+        private string _textVyaz;
         [NotMapped]
-        public string TextVyaz { get; set; }
+        public string TextVyaz
+        {
+            get => _textVyaz;
+            set => _textVyaz = StringNormalizer.TrimOrNull(value);
+        }
 
         private int _kod_proizv;
         [Column("kod_proizv")]
@@ -126,12 +141,20 @@ namespace SewingProduction.Models
         public DateTime? date_add { get; set; }
 
         private string _komp_name;
-        public string komp_name { get => _komp_name; set => _komp_name = value?.Length > 50 ? value.Substring(0, 50) : value; }
+        public string komp_name
+        {
+            get => _komp_name;
+            set => _komp_name = StringNormalizer.TrimAndLimitOrNull(value, 50);
+        }
 
         public DateTime? nrDateDel { get; set; }
 
         private string _nrCompDel;
-        public string nrCompDel { get => _nrCompDel; set => _nrCompDel = value?.Length > 50 ? value.Substring(0, 50) : value; }
+        public string nrCompDel
+        {
+            get => _nrCompDel;
+            set => _nrCompDel = StringNormalizer.TrimAndLimitOrNull(value, 50);
+        }
         //яычвяыкавяычапв
         public void CopyPropertiesFrom(NormRasz source)
         {

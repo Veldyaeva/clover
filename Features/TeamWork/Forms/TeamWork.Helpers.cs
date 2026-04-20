@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.Data.Filtering;
+using DevExpress.Utils;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.ButtonsPanelControl;
 using DevExpress.XtraGrid;
@@ -14,6 +15,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
 using SewingProduction.Core.Extensions;
 using SewingProduction.Helpers;
+using SewingProduction.Interfaces;
 using SewingProduction.Models;
 using SewingProduction.Services;
 
@@ -106,14 +108,29 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (gridControl_unboundArts?.MainView is GridView unboundArtsView)
             {
                 ConfigureGridSelection(unboundArtsView, "unboundArts");
+                ConfigureSingleClickCheckColumn(unboundArtsView);
+                repositoryItemCheckEdit1.EditValueChanged += (s, e) => CommitCheckEditValue(unboundArtsView);
                 unboundArtsView.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataART>(gridControl_unboundArts, e);
-                unboundArtsView.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataART>(gridControl_unboundArts, e);
             }
 
             if (gridControl_wdToBind?.MainView is GridView wdToBindView)
             {
                 ConfigureGridSelection(wdToBindView, "wdToBind");
-                wdToBindView.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataANN>(gridControl_wdToBind, e);
+                ConfigureSingleClickCheckColumn(wdToBindView);
+                repositoryItemCheckEdit3.EditValueChanged += (s, e) => CommitCheckEditValue(wdToBindView);
+                wdToBindView.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataANN>(gridControl_wdToBind, e);
+                wdToBindView.RowStyle += gridView_wdToBind_RowStyle;
+            }
+
+            if (gridControlNZP?.MainView is GridView nzpView)
+            {
+                ConfigureSingleClickCheckColumn(nzpView);
+                repositoryItemCheckEdit8.EditValueChanged += (s, e) => CommitCheckEditValue(nzpView);
+                nzpView.CellValueChanged += gridViewNZP_CellValueChanged;
+                nzpView.OptionsSelection.MultiSelect = false;
+                nzpView.OptionsSelection.MultiSelectMode = GridMultiSelectMode.RowSelect;
+                nzpView.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DefaultBoolean.False;
+                nzpView.OptionsSelection.ShowCheckBoxSelectorInGroupRow = DefaultBoolean.False;
             }
 
         }
@@ -194,6 +211,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 ("Архив РТ",                  "wd:archive"),
                 ("Печать",                    "wd:print"),
                 ("Печать+",                   "wd:print-plus"),
+                ("Редактировать узлы",        "wd:edit-base-nodes"),
             });
 
             // layoutControlGroup14 — блок увязки
@@ -258,14 +276,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
         private static string MakeSlug(string text)
         {
-            if (string.IsNullOrWhiteSpace(text)) return "";
-            var chars = text.Trim()
-                            .ToLowerInvariant()
-                            .Select(ch => char.IsLetterOrDigit(ch) ? ch : '-')
-                            .ToArray();
-            var raw = new string(chars);
-            while (raw.Contains("--")) raw = raw.Replace("--", "-");
-            return raw.Trim('-');
+            return StringNormalizer.NormalizeSlug(text);
         }
         /// <summary>
         /// Поиск кнопки по тегу
@@ -468,7 +479,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView.OptionsSelection.MultiSelectMode = GridMultiSelectMode.RowSelect;
 
             // Можно добавить специфические настройки для разных гридов
-            switch (gridName.ToLower())
+            switch (StringNormalizer.NormalizeLowerInvariant(gridName))
             {
                 case "unboundarts":
                 case "wdtobind":
@@ -477,6 +488,223 @@ namespace SewingProduction.Features.TeamWork.Forms
                 default:
                     break;
             }
+        }
+
+        private void ConfigureSingleClickCheckColumn(GridView gridView)
+        {
+            if (gridView == null)
+            {
+                return;
+            }
+
+            gridView.OptionsBehavior.EditorShowMode = EditorShowMode.MouseDown;
+
+            GridColumn checkColumn = gridView.Columns.ColumnByFieldName(nameof(ICheckable.IsChecked));
+            if (checkColumn == null)
+            {
+                return;
+            }
+
+            checkColumn.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
+            checkColumn.OptionsColumn.AllowEdit = true;
+        }
+
+        private void CommitCheckEditValue(GridView gridView)
+        {
+            if (gridView?.ActiveEditor == null)
+            {
+                return;
+            }
+
+            gridView.PostEditor();
+            gridView.UpdateCurrentRow();
+        }
+
+        private IList<T> GetGridDataItems<T>(GridView gridView) where T : class
+        {
+            if (gridView?.DataSource is IList<T> list)
+            {
+                return list;
+            }
+
+            if (gridView?.DataSource is BindingSource bindingSource && bindingSource.DataSource is IList<T> bindingList)
+            {
+                return bindingList;
+            }
+
+            return null;
+        }
+
+        private T GetCheckedRow<T>(GridView gridView) where T : class, ICheckable
+        {
+            var items = GetGridDataItems<T>(gridView);
+            return items?.FirstOrDefault(item => item != null && item.IsChecked);
+        }
+
+        private void SetRecommendedAnnIds(IEnumerable<MyDataANN> items)
+        {
+            _recommendedAnnIds.Clear();
+
+            if (items == null)
+            {
+                return;
+            }
+
+            foreach (var item in items)
+            {
+                if (item != null && item.AnnID > 0)
+                {
+                    _recommendedAnnIds.Add(item.AnnID);
+                }
+            }
+        }
+
+        private bool IsRecommendedAnnId(int annId) => annId > 0 && _recommendedAnnIds.Contains(annId);
+
+        private bool FocusFirstRecommendedWorkDivision()
+        {
+            if (!showAllWD || gridView_wdToBind == null || _recommendedAnnIds.Count == 0 || gridView_wdToBind.DataRowCount <= 0)
+            {
+                return false;
+            }
+
+            for (int visibleIndex = 0; visibleIndex < gridView_wdToBind.DataRowCount; visibleIndex++)
+            {
+                int rowHandle = gridView_wdToBind.GetVisibleRowHandle(visibleIndex);
+                if (!gridView_wdToBind.IsValidRowHandle(rowHandle))
+                {
+                    continue;
+                }
+
+                if (gridView_wdToBind.GetRow(rowHandle) is not MyDataANN row || !IsRecommendedAnnId(row.AnnID))
+                {
+                    continue;
+                }
+
+                gridView_wdToBind.FocusedRowHandle = rowHandle;
+                gridView_wdToBind.MakeRowVisible(rowHandle);
+                return true;
+            }
+
+            return false;
+        }
+
+        private void gridView_wdToBind_RowStyle(object sender, RowStyleEventArgs e)
+        {
+            if (!showAllWD || e.RowHandle < 0)
+            {
+                return;
+            }
+
+            if (sender is not GridView view)
+            {
+                return;
+            }
+
+            if (view.GetRow(e.RowHandle) is not MyDataANN row || !IsRecommendedAnnId(row.AnnID))
+            {
+                return;
+            }
+
+            if (view.FocusedRowHandle == e.RowHandle)
+            {
+                return;
+            }
+
+            e.Appearance.BackColor = Color.FromArgb(255, 247, 214);
+            e.Appearance.ForeColor = Color.FromArgb(70, 50, 0);
+            e.Appearance.FontStyleDelta = FontStyle.Bold;
+            e.HighPriority = true;
+        }
+
+        private static string ShortDisplay(string value, int maxLength = 48)
+        {
+            string trimmed = StringNormalizer.TrimOrEmpty(value);
+            if (trimmed.Length <= maxLength)
+            {
+                return trimmed;
+            }
+
+            return trimmed.Substring(0, Math.Max(0, maxLength - 3)) + "...";
+        }
+
+        private void UpdateCurrentWorksBindButtonState()
+        {
+            var bindButton = FindButtonByTag(layoutControlGroup14, "bind:link");
+            if (bindButton == null)
+            {
+                return;
+            }
+
+            bool hasArticle = GetCheckedRow<MyDataART>(gridView_unboundArts) != null;
+            bool hasWorkDivision = GetCheckedRow<MyDataANN>(gridView_wdToBind) != null;
+            bindButton.Enabled = hasArticle && hasWorkDivision;
+        }
+
+        private string BuildUnbindStatusText()
+        {
+            var selectedNzp = gridViewNZP?.GetRow(gridViewNZP.FocusedRowHandle) as NZPByKoddRt;
+            if (selectedNzp == null)
+            {
+                return "выберите артикул для отвязки";
+            }
+
+            if (selectedNzp.kolNZP > 0 && selectedNzp.PZTCount > 0)
+            {
+                return "отвязка заблокирована: есть НЗП и ПЗТ";
+            }
+
+            return "можно отвязать выбранный артикул";
+        }
+
+        private void RefreshCurrentWorksUxState()
+        {
+            var selectedArt = GetCheckedRow<MyDataART>(gridView_unboundArts);
+            var selectedAnn = GetCheckedRow<MyDataANN>(gridView_wdToBind);
+            int rtCount = _myDataAnnList?.Count ?? 0;
+            int recommendedCount = _recommendedAnnIds.Count;
+            int linkedCount = _nzpListArt?.Count ?? 0;
+            int sessionLinkedCount = _boundArtList?.Count ?? 0;
+
+            string articleCaption = selectedArt == null
+                ? $"1. Выберите модель без увязки ({_myDataArtList?.Count ?? 0})"
+                : $"1. Модель: {ShortDisplay(selectedArt.Articul)}";
+
+            string rtCaption = showAllWD
+                ? $"2. Все РТ, подходящие: {recommendedCount}"
+                : $"2. Подходящие РТ ({rtCount})";
+
+            string linkedCaption = selectedAnn == null
+                ? $"3. Связанные артикулы ({linkedCount})"
+                : $"3. Связанные артикулы ({linkedCount}) | {BuildUnbindStatusText()}";
+
+            if (layoutControlGroup6 != null)
+            {
+                layoutControlGroup6.Text = articleCaption;
+            }
+
+            if (layoutControlGroup14 != null)
+            {
+                layoutControlGroup14.Text = rtCaption;
+            }
+
+            if (layoutControlGroup13 != null)
+            {
+                layoutControlGroup13.Text = linkedCaption;
+            }
+
+            if (customLabel2 != null)
+            {
+                customLabel2.Text = $"Увязанные в этом сеансе: {sessionLinkedCount}";
+            }
+
+            var showAllButton = FindButtonByTag(layoutControlGroup14, "bind:show-all");
+            if (showAllButton != null)
+            {
+                showAllButton.Caption = showAllWD ? "Показаны все РТ" : "Показать все РТ";
+            }
+
+            UpdateCurrentWorksBindButtonState();
         }
 
 
@@ -658,6 +886,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 gridView_wdToBind.RefreshData();
                 gridView_unboundArts.RefreshData();
+                FocusFirstRecommendedWorkDivision();
 
                 await _logger.LogEventAsync("RestoreOriginalData: Исходные данные восстановлены", "RestoreOriginalData");
             }
@@ -689,7 +918,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (searchControl == null) return;
 
                 // Если текст очищен, возвращаем исходные данные
-                if (string.IsNullOrEmpty(searchControl.Text?.Trim()))
+                if (string.IsNullOrEmpty(StringNormalizer.TrimOrEmpty(searchControl.Text)))
                 {
                     await _logger.LogEventAsync("searchControl1: Текст очищен, восстанавливаем исходные данные", "searchControl1_TextChanged");
                     await RestoreOriginalData();
@@ -926,6 +1155,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             // Очищаем буфер при переключении режима
             TeamWorkBuffer.ClearBuffer();
 
+            ApplyAnnGridKitSearchFilter(ANNgridView);
+            RefreshAnnGridSearchVisualState();
+
             // Взаимоисключаем кнопки редактирования: если доступна расширенная, скрываем обычную
             EnforceEditButtonsExclusivity();
         }
@@ -964,6 +1196,9 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             // Очищаем буфер при переключении режима
             TeamWorkBuffer.ClearBuffer();
+
+            ApplyAnnGridKitSearchFilter(ANNgridView);
+            RefreshAnnGridSearchVisualState();
 
             // На всякий случай поддержим консистентность взаимной видимости
             EnforceEditButtonsExclusivity();
