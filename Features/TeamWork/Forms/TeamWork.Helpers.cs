@@ -211,6 +211,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 ("Архив РТ",                  "wd:archive"),
                 ("Печать",                    "wd:print"),
                 ("Печать+",                   "wd:print-plus"),
+                ("Редактировать узлы",        "wd:edit-base-nodes"),
             });
 
             // layoutControlGroup14 — блок увязки

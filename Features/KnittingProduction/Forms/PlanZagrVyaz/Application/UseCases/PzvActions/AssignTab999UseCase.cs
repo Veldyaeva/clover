@@ -49,8 +49,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application
                 row.olPzvTab = 999;
                 row.olPzvDateNaznTab = System.DateTime.Now;
                 row.olPzvKwsID = 0;
-                row.olPzvSekNazn = row.olSekEd;
                 row.olPzvKolNazn = row.olKol;
+                row.olPzvSekNazn = row.olSekEd * row.olPzvKolNazn;
                 row.olPzvChasNazn = row.olPzvNChasi;
                 row.olPzvDateStart = System.DateTime.Now;
                 row.olPzvDateEnd = System.DateTime.Now;

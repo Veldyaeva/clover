@@ -548,8 +548,8 @@ namespace SewingProduction.Core.Models
         public int Sek_vyaz72 { get; set; }
         public decimal Sek_vyaz57 { get; set; }
         public decimal Sek_vyaz18 { get; set; }
-        private short _kruj;
-        public short Kruj { get => _kruj; set => SetField(ref _kruj, value); }
+    //    private short _kruj;
+        public int Kruj { get; set; }// { get => _kruj; set => SetField(ref _kruj, value); }
 
         public string Kod_lv3 { get; set; }
         public int Sek_cord { get; set; }

@@ -1,4 +1,4 @@
-using DevExpress.CodeParser;
+﻿using DevExpress.CodeParser;
 using SewingProduction.Features.Articul.Models;
 using System;
 using System.Collections.Generic;
@@ -225,8 +225,8 @@ namespace SewingProduction.Features.Articul.Service
                 new()
                 {
                     PropertyName = nameof(SpArticulPreviewModel.Tkb),
-                    ExpectedValue = row.Tb_id,
-                    DisplayName = "ТКБ"
+                    ExpectedValue = row.Tkb,
+                    DisplayName = "Полотно"
                 },
                 new()
                 {
@@ -237,13 +237,13 @@ namespace SewingProduction.Features.Articul.Service
                 new()
                 {
                     PropertyName = nameof(SpArticulPreviewModel.AssortName),
-                    ExpectedValue = row.Text_mo,
+                    ExpectedValue = row.AssortName, 
                     DisplayName = "Ассортимент"
                 },
                 new()
                 {
-                    PropertyName = nameof(SpArticulPreviewModel.Ag_id),//Ag_id),
-                    ExpectedValue = row.Ag_id,//.Ag_id,
+                    PropertyName = nameof(SpArticulPreviewModel.Ag_id),
+                    ExpectedValue = row.Ag_id,
                     DisplayName = "Группа"
                 },
                 new()
