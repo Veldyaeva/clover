@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.BandedGrid;
+using SewingProduction.Features.TeamWork.Services;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
@@ -28,6 +29,7 @@ namespace SewingProduction.form.TeamWork.Forms
         private List<GridBand> _selectedBands = new List<GridBand>(); // Список для хранения выбранных бэндов
         private List<BandData> _bandDataList = new List<BandData>(); // Список для хранения данных выбранных бэндов
         private int _annId;
+        private bool _loadingGroups;
         public struct BandData
         {
             public int gr { get; set; }
@@ -46,6 +48,8 @@ namespace SewingProduction.form.TeamWork.Forms
             InitializeComponent();
             _annId = annId;
 
+			var databaseServices = TeamWorkDependencyFactory.CreateDatabaseServices();
+            _dbHelper = databaseServices.DbHelper;
             _dbService = new DbService(new DatabaseHelperSQL());
             _artNormService = new ArtNormRepository(new DatabaseHelperSQL());
             //ThemeManager.UpdateTheme(this);
@@ -73,6 +77,7 @@ namespace SewingProduction.form.TeamWork.Forms
         {
             try
             {
+                _loadingGroups = true;
                 DataTable data = await _artNormService.GetRaskroyNormGroups();
                 if (data != null && data.Rows.Count > 0)
                 {
@@ -90,10 +95,19 @@ namespace SewingProduction.form.TeamWork.Forms
                 await _logger.LogErrorAsync(ex, "Ошибка загрузки групп в ComboBox");
                 MessageBox.Show($"Ошибка при загрузке групп: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            finally
+            {
+                _loadingGroups = false;
+            }
         }
 
         private async void CustomComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (_loadingGroups)
+            {
+                return;
+            }
+
             try
             {
                 if (customComboBox1.SelectedValue != null)

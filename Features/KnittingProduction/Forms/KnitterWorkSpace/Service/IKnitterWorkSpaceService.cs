@@ -1,4 +1,3 @@
-using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,6 +8,27 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
     {
         Task<StartShiftResult> StartShiftAsync(StartShiftCommand command);
         Task<CloseShiftResult> CloseShiftAsync(CloseShiftCommand command);
+    }
+
+    public enum CloseShiftStatus
+    {
+        Success,
+        AlreadyClosed,
+        HasUnfinishedOperations,
+        NotFound,
+        Deleted,
+        ConcurrentCloseInProgress,
+        Failed
+    }
+
+    public enum StartShiftStatus
+    {
+        Success,
+        AlreadyOpen,
+        NoEmployee,
+        NoRows,
+        ConcurrentOpenInProgress,
+        Failed
     }
 
     public sealed class StartShiftCommand
@@ -22,8 +42,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
     public sealed class StartShiftResult
     {
         public bool Success { get; init; }
+        public StartShiftStatus Status { get; init; } = StartShiftStatus.Failed;
         public string ErrorMessage { get; init; }
+        public bool AlreadyOpen => Status == StartShiftStatus.AlreadyOpen;
+        public bool ConcurrentOpenInProgress => Status == StartShiftStatus.ConcurrentOpenInProgress;
         public int? ShiftId { get; init; }
+        public int? ExistingShiftId { get; init; }
+        public int? ExistingTabStart { get; init; }
+        public DateTime? ExistingDateStart { get; init; }
         public DateTime? ShiftStartTime { get; init; }
     }
 
@@ -32,14 +58,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         public int ShiftId { get; init; }
         public int TabEnd { get; init; }
         public decimal MinHours { get; init; } = 12m;
-        public List<KnitterPZVModel> CurrentRows { get; init; } = new();
+        public string UserName { get; init; } = "";
     }
 
     public sealed class CloseShiftResult
     {
         public bool Success { get; init; }
+        public CloseShiftStatus Status { get; init; } = CloseShiftStatus.Failed;
         public string ErrorMessage { get; init; }
         public bool HasUnfinishedOperations { get; init; }
+        public bool AlreadyClosed => Status == CloseShiftStatus.AlreadyClosed;
+        public bool NotFound => Status == CloseShiftStatus.NotFound;
+        public bool Deleted => Status == CloseShiftStatus.Deleted;
+        public bool ConcurrentCloseInProgress => Status == CloseShiftStatus.ConcurrentCloseInProgress;
         public List<int> UnfinishedPzvIds { get; init; } = new();
     }
 }

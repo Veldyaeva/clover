@@ -153,7 +153,7 @@ namespace SewingProduction.Features.UserDistribution
 
                 int roleId = row["RoleID"] != DBNull.Value ? Convert.ToInt32(row["RoleID"]) : 0;
 
-                DataTable allUsers = await _data.GetUsersWithRolesInfo(roleId, _user.CreatorID);
+                DataTable allUsers = await _data.GetUsersWithRolesInfo(roleId, _user.UserId);
                 var onlyOwners = allUsers.Clone();
                 foreach (var r in allUsers.Select("HasRole = true"))
                     onlyOwners.ImportRow(r);

@@ -1,4 +1,4 @@
-using DevExpress.XtraGrid.Views.Grid;
+﻿using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using System;
@@ -80,7 +80,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         var myDataAnn = workDivisionGridView.GetRow(workDivisionGridView.FocusedRowHandle) as MyDataANN;
                         if (myDataAnn != null)
                         {
-                            selectedAnn = await _artNormService.GetArtNormDataById(myDataAnn.AnnID);
+                            selectedAnn = await _teamWorkService.LoadWorkDivisionAsync(myDataAnn.AnnID);
                         }
                     }
                 }
@@ -165,7 +165,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                     if (annId > 0)
                     {
-                        var nzpData = await _artNormService.GetNzpWithPztCounts(annId);
+                        var nzpData = await _articlesQueryService.LoadNzpAsync(annId);
                         if (workDivisionGridView.Name == "ANNgridView")
                         {
                             _nzpListWd?.BulkLoad(nzpData ?? new List<NZPByKoddRt>());

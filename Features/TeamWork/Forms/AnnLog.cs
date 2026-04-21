@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SewingProduction.Features.TeamWork.Services;
 using SewingProduction.Services;
 using SewingProduction.Helpers;
 using DevExpress.XtraGrid.Views.Grid;
@@ -36,6 +37,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             InitializeComponent();
             this.Load += AnnLog_Load;
 
+			var databaseServices = TeamWorkDependencyFactory.CreateDatabaseServices();
             _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
             _logger = new FileLogger();

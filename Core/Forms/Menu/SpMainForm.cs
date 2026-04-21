@@ -1,5 +1,6 @@
 ﻿using DevExpress.LookAndFeel;
 using DevExpress.XtraBars;
+using DevExpress.XtraReports.UI;
 using DevExpress.XtraTabbedMdi;
 using ExchangeApp.Forms;
 using Microsoft.AspNet.Identity;
@@ -7,10 +8,10 @@ using Microsoft.Extensions.DependencyInjection;
 using SewingProduction.Core;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Features.Articul;
+using SewingProduction.Features.Articul.Reports;
 using SewingProduction.Features.CuttingProduction.Forms;
 using SewingProduction.Features.KnittingProduction.Forms;
 using SewingProduction.Features.Sprav;
-using SewingProduction.Features.Sprav.Forms;
 using SewingProduction.Features.Sprav.Forms;
 using SewingProduction.Features.Tabel.Forms;
 using SewingProduction.Features.TeamWork.Forms;
@@ -218,6 +219,13 @@ namespace SewingProduction
         private void карточкаРасчетаToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
             OpenForm(new CardByNom(_user), e.Item);
+        }
+        #endregion
+        #region Отчеты
+        private void barBtnPublicArticul_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var report = new PrintPublicArticul();
+            report.ShowPreviewDialog(); 
         }
         #endregion
         #region Табель

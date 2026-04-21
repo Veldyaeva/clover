@@ -1,4 +1,4 @@
-using DevExpress.CodeParser;
+﻿using DevExpress.CodeParser;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
@@ -30,19 +30,21 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// Загрузка вкладки "Список РТ"
         /// </summary>
         /// <returns></returns>
-        private async Task LoadWorkDivisions(CancellationToken ct)
+        private async Task LoadWorkDivisions(CancellationToken ct, bool loadRelatedData = true)
         {
             try
             {
                 ANNgridControl?.BeginUpdate();
                 ct.ThrowIfCancellationRequested();
                 // Получаем данные
-                var fioList = await _artNormService.GetRelDesigner();
+                var reloadResult = await _teamWorkService.LoadWorkDivisionsWithFocusAsync();
                 ct.ThrowIfCancellationRequested();
 
+                var fioList = reloadResult.Designers ?? new List<FioModel>();
                 ArtNormN.FioSource = fioList;
+                _cachedFioData = fioList.Count > 0 ? new List<FioModel>(fioList) : _cachedFioData;
 
-                var data = await _artNormService.GetArtNormData();
+                var data = reloadResult.Data;
                 ct.ThrowIfCancellationRequested();
 
                 if (data == null || data.Count == 0)
@@ -81,7 +83,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // Устанавливаем привязки после позиции
                 BindTextFields();
-                Task bindingsTask = InitializeBindingsAsync();
+                InitializeBindings();
 
                 await _logger.LogEventAsync("Данные загружены успешно", "LoadData");
                 // Включаем обновление UI
@@ -111,7 +113,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     await _logger.LogErrorAsync(ex, "LoadWorkDivisions: failed to resolve targetAnnId");
                 }
 
-                if (targetAnnId > 0)
+                if (loadRelatedData && targetAnnId > 0)
                     await LoadRelatedData(targetAnnId);
             }
             catch (OperationCanceledException)
@@ -174,36 +176,47 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// Устанавливаем источники данных для связанных гридов
         /// </summary>
         /// <returns></returns>
-        private async Task InitializeBindingsAsync()
+        private void InitializeBindings()
         {
             try
             {
-                var normRaszTask = Task.Run(() =>
+                if (_normRaszListTW == null)
                 {
                     _normRaszListTW = new BindingList<NormRasz>();
                     _normRaszBindingSourceTW = new BindingSource { DataSource = _normRaszListTW };
-                });
-                var normRaskTask = Task.Run(() =>
+                }
+                else if (_normRaszBindingSourceTW == null)
+                {
+                    _normRaszBindingSourceTW = new BindingSource { DataSource = _normRaszListTW };
+                }
+
+                if (_normRaskListTW == null)
                 {
                     _normRaskListTW = new BindingList<NormRask>();
                     _normRaskBindingSourceTW = new BindingSource { DataSource = _normRaskListTW };
-                });
-                var normKontTask = Task.Run(() =>
+                }
+                else if (_normRaskBindingSourceTW == null)
+                {
+                    _normRaskBindingSourceTW = new BindingSource { DataSource = _normRaskListTW };
+                }
+
+                if (_normKontListTW == null)
                 {
                     _normKontListTW = new BindingList<NormKont>();
                     _normKontBindingSourceTW = new BindingSource { DataSource = _normKontListTW };
-                });
-
-                await Task.WhenAll(normRaszTask, normRaskTask, normKontTask);
+                }
+                else if (_normKontBindingSourceTW == null)
+                {
+                    _normKontBindingSourceTW = new BindingSource { DataSource = _normKontListTW };
+                }
 
                 gridControlRaszTW.DataSource = _normRaszBindingSourceTW;
                 gridControlRaskrTW.DataSource = _normRaskBindingSourceTW;
                 gridControlKontTW.DataSource = _normKontBindingSourceTW;
 
             }
-            catch (Exception ex)
+            catch
             {
-                await _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок");
                 throw;
             }
         }
@@ -363,6 +376,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (selectedRow == null)
                 {
                     ButtonUnbindWd.Enabled = false;
+                    RefreshCurrentWorksUxState();
                     return;
                 }
 
@@ -370,6 +384,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 int pzt = selectedRow.PZTCount;
 
                 ButtonUnbindWd.Enabled = (nzp <= 0 || pzt <= 0);
+                RefreshCurrentWorksUxState();
             }
             catch (Exception ex)
             {
@@ -378,6 +393,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     await _logger.LogErrorAsync(ex, "Ошибка при обновлении статуса кнопки отвязки НЗП");
                 }
                 ButtonUnbindWd.Enabled = false;
+                RefreshCurrentWorksUxState();
             }
         }
         /// <summary>
@@ -656,15 +672,16 @@ namespace SewingProduction.Features.TeamWork.Forms
                 AnnID = 0
             };
 
-            int newId = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newItem);
-            if (newId <= 0)
+            var draftResult = await _teamWorkService.CreateWorkDivisionDraftAsync(newItem);
+            if (!draftResult.Success || draftResult.NewAnnId <= 0)
             {
-                MessageBox.Show("Ошибка сохранения в БД!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                await _logger.LogWarningAsync("Ошибка при вставке новой записи в таблицу Ann", "ButtonPreliminaryWd_Click");
+                MessageBox.Show(draftResult.Error ?? "Ошибка сохранения в БД!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await _logger.LogWarningAsync("Ошибка при создании черновика РТ", "ButtonPreliminaryWd_Click");
                 return;
             }
 
-            newItem.AnnID = newId;
+            int newId = draftResult.NewAnnId;
+            newItem = draftResult.DraftAnn ?? newItem;
             _bindingList.Add(newItem);
             _bindingSource.ResetBindings(false);
             ANNgridControl.RefreshDataSource();
@@ -749,13 +766,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     _bindingList.Remove(newItem);
                     _bindingSource.Remove(newItem);
-                    await _artNormService.DeleteByAnnId(TableNames.Ann, newItem.AnnID);
-                    if (teamWork_AdvanceTW.IsRaszInserted)
-                        await _artNormService.DeleteByAnnId(TableNames.Rasz, newItem.AnnID);
-                    if (teamWork_AdvanceTW.IsRaskInserted)
-                        await _artNormService.DeleteByAnnId(TableNames.Rask, newItem.AnnID);
-                    if (teamWork_AdvanceTW.IsKontInserted)
-                        await _artNormService.DeleteByAnnId(TableNames.Kont, newItem.AnnID);
+                    await _teamWorkService.RollbackDraftAsync(newItem.AnnID);
 
                     _bindingSource.ResetBindings(false);
                     ANNgridControl.RefreshDataSource();
@@ -878,7 +889,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 var myDataAnn = gridView.GetRow(rowHandle) as MyDataANN;
                 if (myDataAnn != null)
-                    selectedItem = await _artNormService.GetArtNormDataById(myDataAnn.AnnID);
+                    selectedItem = await _teamWorkService.LoadWorkDivisionAsync(myDataAnn.AnnID);
             }
             if (selectedItem == null) return;
 
@@ -942,15 +953,17 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Добавляем в нужный список, если это второй грид
                 list.Add(itemToAdd);
 
-                // Сохраняем в базе
-                newRecord.AnnID = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newRecord);
-                if (newRecord.AnnID <= 0)
+                // Сохраняем в базе через application-layer orchestrator
+                var draftResult = await _teamWorkService.CreateWorkDivisionDraftAsync(newRecord);
+                if (!draftResult.Success || draftResult.NewAnnId <= 0)
                 {
                     MessageBox.Show("Не удалось сохранить копию записи в базе данных.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     await _logger.LogErrorAsync(new Exception("InsertEntityAsync вернул 0 или отрицательное значение"), "Ошибка при сохранении копии записи");
                     list.Remove(itemToAdd); // удаляем из списка если база не сохранила
                     return null;
                 }
+
+                newRecord = draftResult.DraftAnn ?? newRecord;
 
                 // Если это gridView_wdToBind — обновляем MyDataANN с актуальным AnnID
                 if (forMyDataAnnView)
@@ -1117,13 +1130,15 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 _bindingList.Add(newRecord);
 
-                newRecord.AnnID = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newRecord);
-                if (newRecord.AnnID <= 0)
+                var draftResult = await _teamWorkService.CreateWorkDivisionDraftAsync(newRecord);
+                if (!draftResult.Success || draftResult.NewAnnId <= 0)
                 {
                     MessageBox.Show("Не удалось сохранить копию записи в базе данных.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     await _logger.LogErrorAsync(new Exception("InsertEntityAsync вернул 0 или отрицательное значение"), "Ошибка при сохранении копии записи");
                     return null;
                 }
+
+                newRecord = draftResult.DraftAnn ?? newRecord;
 
                 return newRecord;
             }

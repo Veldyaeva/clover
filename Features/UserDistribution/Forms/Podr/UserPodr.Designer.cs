@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserPodr));
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             customGridControlPodr = new SewingProduction.Core.Class.CustomGridControl();
             gridViewPodr = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -114,8 +115,9 @@
             gridViewPodr.RowClick += gridViewPodr_RowClick;
             gridViewPodr.CustomDrawGroupRow += gridViewPodr_CustomDrawGroupRow;
             gridViewPodr.CellValueChanged += gridViewPodr_CellValueChanged;
+            gridViewPodr.CellValueChanging += gridViewPodr_CellValueChanging;
             gridViewPodr.KeyDown += gridViewPodr_KeyDown;
-            gridViewPodr.DoubleClick += gridViewPodr_DoubleClick; 
+            gridViewPodr.DoubleClick += gridViewPodr_DoubleClick;
             // 
             // IsSelectedPodr
             // 
@@ -318,6 +320,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1203, 629);
             Controls.Add(layoutControl1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "UserPodr";
             Text = "Администрирование табеля";
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();

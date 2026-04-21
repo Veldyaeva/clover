@@ -91,6 +91,8 @@ namespace SewingProduction
             xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(components);
             miniToolStrip = new System.Windows.Forms.MenuStrip();
             barButtonItemExchangeApp = new BarButtonItem();
+            barSubReports = new BarSubItem();
+            barBtnPublicArticul = new BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)popupMenu1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)xtraTabbedMdiManager1).BeginInit();
@@ -123,6 +125,37 @@ namespace SewingProduction
             bar1.FloatLocation = new Point(834, 136);
             bar1.FloatSize = new Size(46, 100);
             bar1.LinksPersistInfo.AddRange(new LinkPersistInfo[] { new LinkPersistInfo(barSubMenu), new LinkPersistInfo(barSubSpr), new LinkPersistInfo(barSubProduction), new LinkPersistInfo(barBtnTeamWork), new LinkPersistInfo(barBtnArticle), new LinkPersistInfo(barBtnCalcCard), new LinkPersistInfo(barBtnTimesheet), new LinkPersistInfo(barButtonItemScreen), new LinkPersistInfo(barBtnAt), new LinkPersistInfo(barBtnQuestion), new LinkPersistInfo(skinBarSubItem2), new LinkPersistInfo(skinDropDownButtonItem2), new LinkPersistInfo(skinPaletteDropDownButtonItem2), new LinkPersistInfo(barButtonItemExchangeApp) });
+            bar1.OptionsBar.AllowCollapse = true;
+            bar1.OptionsBar.AllowQuickCustomization = false;
+            bar1.OptionsBar.DisableClose = true;
+            bar1.OptionsBar.DistanceBetweenItems = 3;
+            bar1.OptionsBar.ExpandAnimationDuration = 1;
+            bar1.OptionsBar.MultiLine = true;
+            bar1.OptionsBar.UseWholeRow = true;
+            bar1.Text = "Main menu";
+            // 
+            // barManager1_1
+            // 
+            barManager1.Bars.AddRange(new Bar[] { bar1 });
+            barManager1.DockControls.Add(barDockControlTop);
+            barManager1.DockControls.Add(barDockControlBottom);
+            barManager1.DockControls.Add(barDockControlLeft);
+            barManager1.DockControls.Add(barDockControlRight);
+            barManager1.Form = this;
+            barManager1.HideIfNoRight = true;
+            barManager1.Items.AddRange(new BarItem[] { skinBarSubItem1, skinDropDownButtonItem1, skinPaletteDropDownButtonItem1, skinBarSubItem2, skinDropDownButtonItem2, skinPaletteDropDownButtonItem2, barSubMenu, barBtnProfile, barBtnSettings, barBtnAbout, barBtnHelp, barSubSpr, barSubEquipment, barBtnEqInTeams, barBtnEqDirectory, barBtnEqTypes, barBtnClassMatrix, barBtnOperationTypes, barSubTeamsShop, barBtnTeams, barBtnShops, barBtnProdTypes, barBtnCalcCard1, barBtnWorkers, barBtnTariffs, barBtnNacenki, barBtnModelsMark, barSubDefects, barBtnSockDefects, barSubProduction, barSubKnitting, barBtnOperPlan, barBtnMasterDesk1, barBtnKnitterDesk, barBtnAnalytics, barSubSewing, barBtnMasterDesk, barBtnCutShop, barBtnTeamWork, barBtnArticle, barBtnCalcCard, barBtnTimesheet, barBtnQuestion, barBtnAt, barButtonItemSteamMasterWorkTable, barButtonItemCutMasterWorkTable, barButtonItemScreen, barSubReports, barBtnPublicArticul });
+            barManager1.MaxItemId = 51;
+            barManager1.SkipDevExpressSkinItems = true;
+			// 
+            // bar1_1
+            // 
+            bar1.BarName = "Main menu";
+            bar1.DockCol = 0;
+            bar1.DockRow = 0;
+            bar1.DockStyle = BarDockStyle.Top;
+            bar1.FloatLocation = new Point(834, 136);
+            bar1.FloatSize = new Size(46, 100);
+            bar1.LinksPersistInfo.AddRange(new LinkPersistInfo[] { new LinkPersistInfo(barSubMenu), new LinkPersistInfo(barSubSpr), new LinkPersistInfo(barSubProduction), new LinkPersistInfo(barBtnTeamWork), new LinkPersistInfo(barBtnArticle), new LinkPersistInfo(barBtnCalcCard), new LinkPersistInfo(barBtnTimesheet), new LinkPersistInfo(barButtonItemScreen), new LinkPersistInfo(barBtnAt), new LinkPersistInfo(barBtnQuestion), new LinkPersistInfo(skinBarSubItem2), new LinkPersistInfo(skinDropDownButtonItem2), new LinkPersistInfo(skinPaletteDropDownButtonItem2), new LinkPersistInfo(barSubReports) });
             bar1.OptionsBar.AllowCollapse = true;
             bar1.OptionsBar.AllowQuickCustomization = false;
             bar1.OptionsBar.DisableClose = true;
@@ -589,6 +622,19 @@ namespace SewingProduction
             barButtonItemExchangeApp.Id = 49;
             barButtonItemExchangeApp.Name = "barButtonItemExchangeApp";
             barButtonItemExchangeApp.ItemClick += barButtonItemExchangeApp_ItemClick;
+            // barSubReports
+            // 
+            barSubReports.Caption = "Отчеты";
+            barSubReports.Id = 49;
+            barSubReports.LinksPersistInfo.AddRange(new LinkPersistInfo[] { new LinkPersistInfo(barBtnPublicArticul) });
+            barSubReports.Name = "barSubReports";
+            // 
+            // barBtnPublicArticul
+            // 
+            barBtnPublicArticul.Caption = "Опубликованные артикулы";
+            barBtnPublicArticul.Id = 50;
+            barBtnPublicArticul.Name = "barBtnPublicArticul";
+            barBtnPublicArticul.ItemClick += barBtnPublicArticul_ItemClick;
             // 
             // SpMainForm
             // 
@@ -682,7 +728,12 @@ namespace SewingProduction
         private BarButtonItem barButtonItemSteamMasterWorkTable;
         private BarButtonItem barButtonItemCutMasterWorkTable;
         private BarButtonItem barButtonItemScreen;
+
         private BarButtonItem barButtonItemBrigObject;
         private BarButtonItem barButtonItemExchangeApp;
+
+        private BarSubItem barSubReports;
+        private BarButtonItem barBtnPublicArticul;
+
     }
 }

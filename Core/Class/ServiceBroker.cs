@@ -20,6 +20,8 @@ namespace SewingProduction
     /// </summary>
     public sealed class ServiceBroker
     {
+        private const int NotificationTimeoutSeconds = 3600;
+
         public event Func<string, string?, Task>? Changed;
 
         private Task RaiseChangedAsync(string table, string? changedFieldsCsv)
@@ -31,6 +33,7 @@ namespace SewingProduction
         private SqlConnection? _connection;
         private SqlCommand? _command;
         private SqlDependency? _dependency;
+        private Guid? _subscriptionClientConnectionId;
 
         private bool _flagStartListening;
         private bool _brokerStopped;
@@ -177,10 +180,12 @@ namespace SewingProduction
 
                 _connection = new SqlConnection(_connectionString);
                 await _connection.OpenAsync(ct).ConfigureAwait(false);
+                var clientConnectionId = _connection.ClientConnectionId;
+                _subscriptionClientConnectionId = clientConnectionId;
 
                 Debug.WriteLine(
-                    $"[ServiceBroker:{_brokerId}] Connection opened: owner={OwnerName}, table={table}, clientConnectionId={_connection.ClientConnectionId}");
-                _connectionContext[_connection.ClientConnectionId] =
+                    $"[ServiceBroker:{_brokerId}] Connection opened: owner={OwnerName}, table={table}, clientConnectionId={clientConnectionId}");
+                _connectionContext[clientConnectionId] =
                     $"owner={OwnerName}, table={table}, brokerId={_brokerId}";
 
                 _command = _connection.CreateCommand();
@@ -188,7 +193,9 @@ namespace SewingProduction
                 _command.CommandType = CommandType.Text;
                 _command.CommandTimeout = 120; // больше времени на регистрацию QN при нагрузке
 
-                _dependency = new SqlDependency(_command);
+                _command.Notification = null;
+
+                _dependency = new SqlDependency(_command, null, NotificationTimeoutSeconds);
                 _dependency.OnChange -= OnDependencyChange;
                 _dependency.OnChange += OnDependencyChange;
 
@@ -200,10 +207,17 @@ namespace SewingProduction
                     }
                 }
 
+                try { _command.Notification = null; } catch { }
+                try { _command.Dispose(); } catch { }
+                try { _connection.Close(); } catch { }
+                try { _connection.Dispose(); } catch { }
+                _command = null;
+                _connection = null;
+
                 _isListening = true;
 
                 Debug.WriteLine(
-                    $"[ServiceBroker:{_brokerId}] Listening started: owner={OwnerName}, table={table}, clientConnectionId={_connection.ClientConnectionId}, state={_connection.State}");
+                    $"[ServiceBroker:{_brokerId}] Listening started: owner={OwnerName}, table={table}, clientConnectionId={clientConnectionId}, timeoutSeconds={NotificationTimeoutSeconds}");
             }
             catch (SqlException ex)
             {
@@ -244,7 +258,7 @@ namespace SewingProduction
 
         private void SafeStopListeningInternal()
         {
-            var cid = _connection?.ClientConnectionId;
+            var cid = _connection?.ClientConnectionId ?? _subscriptionClientConnectionId;
             try
             {
                 if (_dependency != null)
@@ -286,6 +300,7 @@ namespace SewingProduction
             _dependency = null;
             _command = null;
             _connection = null;
+            _subscriptionClientConnectionId = null;
             _isListening = false;
         }
 
