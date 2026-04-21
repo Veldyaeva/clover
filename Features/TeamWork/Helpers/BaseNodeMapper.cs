@@ -1,4 +1,4 @@
-using SewingProduction.Features.TeamWork.Models;
+﻿using SewingProduction.Features.TeamWork.Models;
 using SewingProduction.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +14,8 @@ namespace SewingProduction.Features.TeamWork.Helpers
 
             return new BaseNodeDefinition
             {
-                Name = name?.Trim() ?? string.Empty,
-                Description = description?.Trim() ?? string.Empty,
+                Name = StringNormalizer.TrimOrEmpty(name),
+                Description = StringNormalizer.TrimOrEmpty(description),
                 Operations = DeduplicateOperations(normalizedOperations).ToList()
             };
         }
@@ -134,7 +134,7 @@ namespace SewingProduction.Features.TeamWork.Helpers
                 .ThenBy(x => x.N1) ?? Enumerable.Empty<NormRasz>();
         }
 
-        private static BaseNodeOperationDefinition MapOperation(NormRasz operation)
+        public static BaseNodeOperationDefinition MapOperation(NormRasz operation)
         {
             return new BaseNodeOperationDefinition
             {

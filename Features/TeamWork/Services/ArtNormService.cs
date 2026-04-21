@@ -49,7 +49,7 @@ namespace SewingProduction.Services
                     if (prop != null && !System.Attribute.IsDefined(prop, typeof(System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute)))
                         return prop;
 
-                    columnName = columnName.ToLower();
+                    columnName = StringNormalizer.NormalizeLowerInvariant(columnName);
 
                     if (columnName == "grup") return type.GetProperty(nameof(ArtNormN.grup));
                     if (columnName == "sek_shv") return type.GetProperty(nameof(ArtNormN.SekShv));
@@ -121,7 +121,7 @@ namespace SewingProduction.Services
         public async Task<List<ArtNormN>> GetArtNormData()
         {
             string query = @" select 
-                   AnnID, kod, trim(grup) grup, TRIM(articul) articul, trim(mod) mod, size_label, sek, sek_shv, sek_vyaz5, sek_vyaz6, sek_vyaz7, sek_vyaz10, sek_vyaz12, sek_vyazo,
+                   AnnID, kod, grup, articul, mod, size_label, sek, sek_shv, sek_vyaz5, sek_vyaz6, sek_vyaz7, sek_vyaz10, sek_vyaz12, sek_vyazo,
                     sek_vyaz, sek_vyaz14, sek_vyaz70, sek_vyaz71, sek_vyaz72, sek_vyaz62, sek_vyaz18, sek_vyaz57, sek_kr, seb, 
                     slogn, komment, annRecommendation as Reco, data_sozd, data_obn, diz, constr, status_ann.name AS statusText, status, parentId,
                     annDateDel, annCompDel, annDateAdd, annCompAdd, arh
@@ -188,7 +188,7 @@ namespace SewingProduction.Services
             {//            SUBSTRING(kod,1,7) AS kod, 
                 string query = @"
         SELECT 
-                annId, grup,  TRIM(articul) articul, mod,size_label, sek, seb, sek_vyaz, 
+                annId, grup, articul, mod, size_label, sek, seb, sek_vyaz, 
             data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
             sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_vyaz18, sek_vyaz57, sek_kr, slogn, komment, annRecommendation as Reco,
             data_sozd, diz, constr, annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId
@@ -247,7 +247,7 @@ namespace SewingProduction.Services
         {
             string query = @"
                 SELECT  
-                    v.annId, trim(v.grup) grup, trim(v.articul) articul, trim(v.mod) mod, v.size_label, v.sek, v.sek_vyaz,
+                    v.annId, v.grup, v.articul, v.mod, v.size_label, v.sek, v.sek_vyaz,
                     v.data_obn, v.sek_shv, sa.name AS statusText, v.status, v.sek_vyazo, v.sek_vyaz5, 
                     v.sek_vyaz7, v.sek_vyaz12, v.sek_vyaz10, v.sek_vyaz6, v.sek_kr, v.slogn, v.komment, v.annRecommendation, 
                     v.data_sozd, v.diz, v.constr, v.data_obn as dateUpdate, v.annDateDel, v.annCompDel, v.annDateAdd, v.annCompAdd, v.arh, v.parentId
@@ -280,7 +280,7 @@ namespace SewingProduction.Services
         public async Task<List<MyDataANN>> GetArtNormDataByArticul(string artPrefix)
         {
             string query = @"SELECT 
-                annId, trim(grup) grup, trim(articul) articul, trim(mod) mod, size_label, sek, sek_vyaz, data_obn, sek_shv, 
+                annId, grup, articul, mod, size_label, sek, sek_vyaz, data_obn, sek_shv, 
                 status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, 
                 sek_kr, slogn, komment, annRecommendation, data_sozd, diz, constr,
                 annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId
@@ -297,6 +297,48 @@ namespace SewingProduction.Services
             {
                 var result = await connection.QueryAsync<MyDataANN>(query, parameters);
                 return result.ToList();
+            }
+        }
+
+        public async Task<List<MyDataANN>> GetArtNormDataByArticulPatterns(IEnumerable<string> artPrefixes)
+        {
+            var prefixes = (artPrefixes ?? Enumerable.Empty<string>())
+                .Where(prefix => !string.IsNullOrWhiteSpace(prefix))
+                .Select(prefix => prefix.Trim())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToArray();
+
+            if (prefixes.Length == 0)
+            {
+                return new List<MyDataANN>();
+            }
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@StatusArchive", (int)Status.Archive);
+
+            var conditions = new List<string>();
+            for (int i = 0; i < prefixes.Length; i++)
+            {
+                string parameterName = $"ArtPattern{i}";
+                conditions.Add($"articul LIKE @{parameterName}");
+                parameters.Add(parameterName, prefixes[i] + "%");
+            }
+
+            string query = $@"SELECT 
+                annId, grup, articul, mod, size_label, sek, sek_vyaz, data_obn, sek_shv, 
+                status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, 
+                sek_kr, slogn, komment, annRecommendation, data_sozd, diz, constr,
+                annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId
+                FROM artNormNView 
+                WHERE status <> @StatusArchive AND ({string.Join(" OR ", conditions)})";
+
+            using (var connection = _dbHelper.GetConnection())
+            {
+                var result = await connection.QueryAsync<MyDataANN>(query, parameters);
+                return result
+                    .GroupBy(item => item.AnnID)
+                    .Select(group => group.First())
+                    .ToList();
             }
         }
 
@@ -374,7 +416,7 @@ namespace SewingProduction.Services
                 using (var connection = _dbHelper.GetConnection())
                 {
                     string query = @"SELECT 
- nr.AnnId, nr.N, nr.N1,nr.razryd, Trim(nr.Text) text,
+ nr.AnnId, nr.N, nr.N1,nr.razryd, nr.Text text,
     nr.Sek, nr.Seb, nr.Kod, 
     nr.kod_o AS Kod_o,       
     nr.kod_ob AS KodOb,   
@@ -433,7 +475,7 @@ WHERE nr.annId = @annId";
             using (var connection = _dbHelper.GetConnection())
             {
                 string query = @"SELECT 
- nr.AnnId, nr.N, nr.N1,nr.razryd, trim(nr.Text) text,
+ nr.AnnId, nr.N, nr.N1,nr.razryd, nr.Text text,
     nr.Sek, nr.Seb, nr.Kod, 
     nr.kod_o AS Kod_o,       
     nr.kod_ob AS KodOb,   
@@ -443,7 +485,7 @@ WHERE nr.annId = @annId";
     nr.nrDateAdd, nr.nrCompAdd, nr.nrDateDel, nr.nrCompDel,
     kp.text_proizv as TextProizv,
     pv.text_vyaz as TextVyaz,
-    trim(ob.text_ob) as TextOb
+    ob.text_ob as TextOb
 FROM dbo.normraszview nr
 LEFT JOIN kod_proizv kp ON nr.kod_proizv = kp.kod_proizv
 LEFT JOIN podr_vyaz pv ON nr.kod_podr = pv.kod_vyaz
@@ -491,7 +533,7 @@ WHERE nr.annId = @annId";
             try
             {
                 string query = @"SELECT 
-                            nr.AnnId, nr.N, nr.N1,nr.razryd, trim(nr.Text) text,
+                            nr.AnnId, nr.N, nr.N1,nr.razryd, nr.Text text,
                             nr.Sek, nr.Seb, nr.Kod, 
                             nr.kod_o AS Kod_o,       
                             nr.kod_ob AS KodOb,   
@@ -501,7 +543,7 @@ WHERE nr.annId = @annId";
                             nr.nrDateAdd, nr.nrCompAdd, nr.nrDateDel, nr.nrCompDel,
                             kp.text_proizv as TextProizv,
                             pv.text_vyaz as TextVyaz,
-                            trim(ob.text_ob) as TextOb
+                            ob.text_ob as TextOb
                         FROM dbo.normraszview nr
                         LEFT JOIN kod_proizv kp ON nr.kod_proizv = kp.kod_proizv
                         LEFT JOIN podr_vyaz pv ON nr.kod_podr = pv.kod_vyaz
@@ -530,7 +572,7 @@ WHERE nr.annId = @annId";
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = "SELECT id, AnnId, kod_o, Trim(Text) as TextRask, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, trim(Obor) Obor FROM norm_rask WHERE annId = @annId";
+                    string query = "SELECT id, AnnId, kod_o, Text as TextRask, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
                     //var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } }, cancellationToken: ct);
                     //return result.ToList();
                     var list = await connection.QueryAsync<NormRask>(
@@ -550,7 +592,7 @@ WHERE nr.annId = @annId";
             using (
                 var connection = _dbHelper.GetConnection())
             {
-                string query = "SELECT id, AnnId, kod_o, Trim(Text) as TextRask, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, trim(Obor) Obor, spec FROM norm_rask WHERE annId = @annId";
+                string query = "SELECT id, AnnId, kod_o, Text as TextRask, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor, spec FROM norm_rask WHERE annId = @annId";
                 //var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } }, cancellationToken: ct);
                 //return result.ToList();
                 var list = await connection.QueryAsync<NormRask>(
@@ -571,7 +613,7 @@ WHERE nr.annId = @annId";
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = "SELECT AnnId, kod_o, Trim(Text) text, razryd, Sek, nkId FROM norm_kont WHERE annId = @annId";
+                    string query = "SELECT AnnId, kod_o, Text text, razryd, Sek, nkId FROM norm_kont WHERE annId = @annId";
                     //return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
                     var result = await connection.QueryAsync<NormKont>(query, new Dictionary<string, object> { { "@annId", annId } });
                     return result.ToList();
@@ -582,7 +624,7 @@ WHERE nr.annId = @annId";
         {
             using (var connection = _dbHelper.GetConnection())
             {
-                string query = "SELECT AnnId, kod_o, Trim(Text) text, razryd, Sek, nkId FROM norm_kont WHERE annId = @annId";
+                string query = "SELECT AnnId, kod_o, Text text, razryd, Sek, nkId FROM norm_kont WHERE annId = @annId";
                 //return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
                 var result = await connection.QueryAsync<NormKont>(query, new Dictionary<string, object> { { "@annId", annId } });
                 return result.ToList();
@@ -620,9 +662,6 @@ WHERE nr.annId = @annId";
         }
         public async Task<List<NZPByKoddRt>> GetNzpWithPztCounts(int annId)
         {
-            List<NZPByKoddRt> nzpList;
-            Dictionary<int, int> pztCounts;
-
             using (var connection = _dbHelper.GetConnection())
             {
                 var nzpResult = await connection.QueryAsync<NZPByKoddRt>(
@@ -630,29 +669,11 @@ WHERE nr.annId = @annId";
                     new { xAnnID = annId },
                     commandType: CommandType.StoredProcedure,
                     commandTimeout: 120);
-                nzpList = nzpResult.ToList();
-
-                var pztResult = await connection.QueryAsync<(int annId, int PztCount)>(
-                    "dbo.GetPztCountsByKoddRT",
-                    new { xAnnID = annId },
-                    commandType: CommandType.StoredProcedure,
-                    commandTimeout: 120);
-                pztCounts = pztResult.ToDictionary(x => x.annId, x => x.PztCount);
+                return nzpResult.ToList();
             }
-
-            // Объединение результатов
-            foreach (var row in nzpList)
-            {
-                if (pztCounts.TryGetValue(row.annId, out int count))
-                    row.PZTCount = count;
-            }
-
-            return nzpList;
         }
         public async Task<List<NZPByKoddRt>> GetNzpWithPztCounts(int annId, CancellationToken ct)
         {
-            List<NZPByKoddRt> nzpList;
-            Dictionary<int, int> pztCounts;
             try
             {
                 ct.ThrowIfCancellationRequested();
@@ -664,29 +685,12 @@ WHERE nr.annId = @annId";
                     var nzpResult = await connection.QueryAsync<NZPByKoddRt>(new CommandDefinition(
                         "dbo.GetNZPByKoddRT", new { xAnnID = annId }, commandType: CommandType.StoredProcedure,
                         commandTimeout: 240, cancellationToken: ct));
-                    nzpList = nzpResult.ToList();
-                //    await _logger.LogEventAsync($"GetNZPByKoddRT: {t1.ElapsedMilliseconds} ms, rows={nzpList.Count}");
+                    var nzpList = nzpResult.ToList();
                     Debug.WriteLine($"GetNZPByKoddRT: {t1.ElapsedMilliseconds} ms, rows={nzpList.Count}");
                     ct.ThrowIfCancellationRequested();
-
-                    var t2 = Stopwatch.StartNew();
-                    var pztResult = await connection.QueryAsync<(int annId, int PztCount)>(new CommandDefinition(
-                        "dbo.GetPztCountsByKoddRT", new { xAnnID = annId }, commandType: CommandType.StoredProcedure,
-                        commandTimeout: 240, cancellationToken: ct));
-                    pztCounts = pztResult.ToDictionary(x => x.annId, x => x.PztCount);
-                //    await _logger.LogEventAsync($"GetPztCountsByKoddRT: {t2.ElapsedMilliseconds} ms, rows={pztCounts.Count}");
-                    Debug.WriteLine($"GetPztCountsByKoddRT: {t2.ElapsedMilliseconds} ms, rows={pztCounts.Count}");
+                    Debug.WriteLine($"GetNzpWithPztCounts total: {sw.ElapsedMilliseconds} ms");
+                    return nzpList;
                 }
-              //  await _logger.LogEventAsync($"GetNzpWithPztCounts total: {sw.ElapsedMilliseconds} ms");
-                Debug.WriteLine($"GetNzpWithPztCounts total: {sw.ElapsedMilliseconds} ms");
-                // Объединение результатов
-                foreach (var row in nzpList)
-                {
-                    if (pztCounts.TryGetValue(row.annId, out int count))
-                        row.PZTCount = count;
-                }
-
-                return nzpList;
             }
             catch (Exception ex)
             {

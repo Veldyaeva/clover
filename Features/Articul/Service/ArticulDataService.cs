@@ -45,7 +45,7 @@ namespace SewingProduction.Features.Articul.Service
                 var bb = await _dbService.GetListAsync<SpArtPreviewModel>(query, new { });
                 var ret = new BindingList<SpArtPreviewModel>(bb);
                 bb = null;
-                return ret;
+                return ret; 
             }
             catch (Exception ex)
             {

@@ -122,11 +122,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                                 formattedText.AppendLine();
 
                                 formattedText.AppendLine("🔸 Часть 1:");
-                                formattedText.AppendLine(parts[0].Trim());
+                                formattedText.AppendLine(StringNormalizer.TrimOrEmpty(parts[0]));
                                 formattedText.AppendLine();
 
                                 formattedText.AppendLine("🔸 Часть 2:");
-                                formattedText.Append(parts[1].Trim());
+                                formattedText.Append(StringNormalizer.TrimOrEmpty(parts[1]));
 
                                 textBoxBuffer.Text = formattedText.ToString();
                             }

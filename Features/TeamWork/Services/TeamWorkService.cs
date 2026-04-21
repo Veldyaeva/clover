@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -17,18 +17,18 @@ namespace SewingProduction.Features.TeamWork.Services
     /// </summary>
     public class TeamWorkOrchestrator : ITeamWorkOrchestrator
     {
-        private readonly ArtNormRepository _artNormService;
-        private readonly DbService _dbService;
-        private readonly DatabaseHelper _dbHelper;
-        private readonly IJabberSender _jabberSender;
+        private readonly ITeamWorkRepository _repository;
+        private readonly ITeamWorkUnitOfWork _unitOfWork;
+        private readonly ITeamWorkTransactionBoundary _transactionBoundary;
+        private readonly ITeamWorkNotificationService _notificationService;
         private readonly ILogger _logger;
 
-        public TeamWorkOrchestrator(ArtNormRepository artNormService, DbService dbService, DatabaseHelper dbHelper, IJabberSender jabberSender, ILogger logger)
+        public TeamWorkOrchestrator(ITeamWorkRepository repository, ITeamWorkUnitOfWork unitOfWork, ITeamWorkTransactionBoundary transactionBoundary, ITeamWorkNotificationService notificationService, ILogger logger)
         {
-            _artNormService = artNormService;
-            _dbService = dbService;
-            _dbHelper = dbHelper;
-            _jabberSender = jabberSender;
+            _repository = repository;
+            _unitOfWork = unitOfWork;
+            _transactionBoundary = transactionBoundary;
+            _notificationService = notificationService;
             _logger = logger;
         }
 
@@ -42,7 +42,11 @@ namespace SewingProduction.Features.TeamWork.Services
                 await _logger.LogEventAsync($"LoadWorkDivisionsWithFocus: Начало загрузки с сохранением AnnID: {currentAnnId}", "TeamWorkOrchestrator");
 
                 // Загружаем данные
-                var workDivisions = await _artNormService.GetArtNormData();
+                var designersTask = _repository.GetDesignersAsync();
+                var workDivisionsTask = _repository.GetWorkDivisionsAsync();
+                await Task.WhenAll(designersTask, workDivisionsTask);
+                var designers = await designersTask;
+                var workDivisions = await workDivisionsTask;
 
                 // Ищем позицию для восстановления фокуса
                 int? focusRowHandle = null;
@@ -57,6 +61,7 @@ namespace SewingProduction.Features.TeamWork.Services
 
                 return new TeamWorkReloadResult
                 {
+                    Designers = designers,
                     Data = workDivisions,
                     FocusAnnId = currentAnnId,
                     FocusRowHandle = focusRowHandle,
@@ -67,6 +72,24 @@ namespace SewingProduction.Features.TeamWork.Services
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при загрузке данных с сохранением фокуса");
                 return new TeamWorkReloadResult { Success = false, Error = ex.Message };
+            }
+        }
+
+        public async Task<ArtNormN> LoadWorkDivisionAsync(int annId)
+        {
+            if (annId <= 0)
+            {
+                return null;
+            }
+
+            try
+            {
+                return await _repository.GetWorkDivisionAsync(annId);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё Р Рў AnnID={annId}");
+                return null;
             }
         }
 
@@ -86,19 +109,7 @@ namespace SewingProduction.Features.TeamWork.Services
                 await _logger.LogEventAsync($"RefreshRelatedData: Обновление связанных данных для AnnID: {annId}", "TeamWorkOrchestrator");
 
                 // Загружаем связанные данные асинхронно
-                var normRaskTask = _artNormService.GetRelatedNormRask(annId);
-                var normKontTask = _artNormService.GetRelatedNormKont(annId);
-                var normRaszTask = _artNormService.GetRelatedNormRasz(annId);
-
-                await Task.WhenAll(normRaskTask, normKontTask, normRaszTask);
-
-                return new RelatedDataResult
-                {
-                    NormRask = await normRaskTask,
-                    NormKont = await normKontTask,
-                    NormRasz = await normRaszTask,
-                    Success = true
-                };
+                return await _repository.GetRelatedDataAsync(annId);
             }
             catch (Exception ex)
             {
@@ -127,7 +138,11 @@ namespace SewingProduction.Features.TeamWork.Services
                 draft.dateCreate = DateTime.Now;
                 draft.dateUpdate = null;
 
-                int newAnnId = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, draft);
+                int newAnnId = 0;
+                await _transactionBoundary.ExecuteInTransactionAsync(async () =>
+                {
+                    newAnnId = await _unitOfWork.CreateDraftAsync(draft);
+                });
                 if (newAnnId <= 0)
                 {
                     return new DuplicateDraftResult
@@ -151,6 +166,73 @@ namespace SewingProduction.Features.TeamWork.Services
             }
         }
 
+        public async Task<DuplicateDraftResult> CreateWorkDivisionDraftAsync(ArtNormN draft)
+        {
+            if (draft == null)
+            {
+                return new DuplicateDraftResult { Success = false, Error = "Р§РµСЂРЅРѕРІРёРє Р Рў РЅРµ Р·Р°РґР°РЅ." };
+            }
+
+            try
+            {
+                draft.AnnID = 0;
+                int newAnnId = 0;
+                await _transactionBoundary.ExecuteInTransactionAsync(async () =>
+                {
+                    newAnnId = await _unitOfWork.CreateDraftAsync(draft);
+                });
+                if (newAnnId <= 0)
+                {
+                    return new DuplicateDraftResult
+                    {
+                        Success = false,
+                        Error = "РћС€РёР±РєР° РїСЂРё СЃРѕР·РґР°РЅРёРё С‡РµСЂРЅРѕРІРёРєР° Р Рў РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С…."
+                    };
+                }
+
+                draft.AnnID = newAnnId;
+                return new DuplicateDraftResult
+                {
+                    Success = true,
+                    NewAnnId = newAnnId,
+                    DraftAnn = draft
+                };
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "РћС€РёР±РєР° РІ CreateWorkDivisionDraftAsync");
+                return new DuplicateDraftResult { Success = false, Error = ex.Message };
+            }
+        }
+
+        public async Task<BindArticleResult> BindArticleAsync(MyDataANN selectedAnn, MyDataART selectedArt)
+        {
+            if (selectedAnn == null || selectedArt == null)
+            {
+                return new BindArticleResult
+                {
+                    Success = false,
+                    Error = "Не удалось определить выбранные артикул и разделение труда."
+                };
+            }
+
+            try
+            {
+                await _transactionBoundary.ExecuteInTransactionAsync(async () =>
+                {
+                    await _unitOfWork.BindArticleAsync(selectedAnn, selectedArt);
+                });
+
+                await _logger.LogEventAsync("Привязка завершена", $"Артикул {selectedArt.kodd_rt} привязан к РТ {selectedAnn.AnnID}");
+                return new BindArticleResult { Success = true };
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка привязки артикула {selectedArt?.kodd_rt} к РТ {selectedAnn?.AnnID}");
+                return new BindArticleResult { Success = false, Error = ex.Message };
+            }
+        }
+
         /// <summary>
         /// Откатывает созданный черновик РТ и связанные с ним нормы.
         /// </summary>
@@ -160,8 +242,10 @@ namespace SewingProduction.Features.TeamWork.Services
 
             try
             {
-                await _artNormService.DeleteRelatedNormTables(annId);
-                await _artNormService.DeleteByAnnId(TableNames.Ann, annId);
+                await _transactionBoundary.ExecuteInTransactionAsync(async () =>
+                {
+                    await _unitOfWork.RollbackDraftAsync(annId);
+                });
                 return true;
             }
             catch (Exception ex)
@@ -190,27 +274,19 @@ namespace SewingProduction.Features.TeamWork.Services
             int totalAffectedRows = 0;
             try
             {
-                foreach (var nzpItem in items)
+                await _transactionBoundary.ExecuteInTransactionAsync(async () =>
                 {
-                    string kod = nzpItem.kodd.ToString();
-                    int annIdNzpRow = nzpItem.annId;
-                    string articul = nzpItem.articul?.TrimEnd(' ') ?? string.Empty;
-
-                    await _logger.LogEventAsync($"Отвязка артикула KOD: {kod}, articul: {articul}, AnnID: {annIdNzpRow}", "UnbindArticles");
-
-                    var parameters = new Dictionary<string, object>
+                    foreach (var nzpItem in items)
                     {
-                        { "@annID", annIdNzpRow },
-                        { "@kod", kod },
-                        { "@art", articul }
-                    };
+                        string kod = nzpItem.kodd.ToString();
+                        int annIdNzpRow = nzpItem.annId;
+                        string articul = StringNormalizer.TrimEndOrEmpty(nzpItem.articul, ' ');
 
-                    await _dbService.UpdateFieldAsync(TableNames.Art, "annId", string.Empty, "left(kod, 7) = @kod AND articul = @art AND annID = @annId", parameters);
-                    await _dbService.UpdateFieldAsync(TableNames.Ann, "size_label", null, TableNames.AnnId, annIdNzpRow);
-                    await _dbService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, "parentId", annIdNzpRow);
-
-                    totalAffectedRows++;
-                }
+                        await _logger.LogEventAsync($"Отвязка артикула KOD: {kod}, articul: {articul}, AnnID: {annIdNzpRow}", "UnbindArticles");
+                        await _unitOfWork.UnbindArticleAsync(annIdNzpRow, kod, articul);
+                        totalAffectedRows++;
+                    }
+                });
 
                 await _logger.LogEventAsync(
                     $"Отвязано {totalAffectedRows} артикулов от РТ. AnnID: {selectedAnn.AnnID}",
@@ -237,19 +313,20 @@ namespace SewingProduction.Features.TeamWork.Services
 
             try
             {
-                var parameters = new Dictionary<string, object> { { "@xAnnID", annId } };
-                await _dbHelper.ExecuteQueryAsync("dbo.updateSebZArticulPsz", parameters, CommandType.StoredProcedure);
-                await _dbService.UpdateFieldAsync(TableNames.Ann, "data_obn", DateTime.Now, TableNames.AnnId, annId);
-                await _dbService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, TableNames.AnnId, annId);
+                var approvedAt = DateTime.Now;
+                await _transactionBoundary.ExecuteInTransactionAsync(async () =>
+                {
+                    await _unitOfWork.MarkApprovedAsync(annId, approvedAt);
+                });
 
-                string diffText = await TryBuildApprovalDiffAsync(annId);
+                string diffText = await TryBuildApprovalDiffAsync(annId, approvedAt);
                 string message = ComposeApprovalMessage(art, diffText);
                 await SendToBrigadesAsync(annId, message);
 
                 return new ApproveWorkDivisionResult
                 {
                     Success = true,
-                    ApprovedAt = DateTime.Now,
+                    ApprovedAt = approvedAt,
                     Status = (int)Status.Actual,
                     StatusText = "Актуальное",
                     Message = message
@@ -291,11 +368,10 @@ namespace SewingProduction.Features.TeamWork.Services
             try
             {
                 int newStatus = hasNzp ? (int)Status.PreliminaryArchive : (int)Status.Archive;
-                await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", newStatus, TableNames.AnnId, sourceAnnId);
-                if (!hasNzp)
+                await _transactionBoundary.ExecuteInTransactionAsync(async () =>
                 {
-                    await _dbService.UpdateFieldAsync("sp_Articul", "annId", newAnnId, "annId", sourceAnnId);
-                }
+                    await _unitOfWork.FinalizeArchAndCopyAsync(sourceAnnId, newAnnId, hasNzp);
+                });
 
                 return new ArchAndCopyFinalizeResult
                 {
@@ -318,15 +394,10 @@ namespace SewingProduction.Features.TeamWork.Services
         {
             try
             {
-                if (oldStatus.HasValue && sourceAnnId > 0)
+                await _transactionBoundary.ExecuteInTransactionAsync(async () =>
                 {
-                    await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", oldStatus.Value, TableNames.AnnId, sourceAnnId);
-                }
-
-                if (newAnnId.HasValue && newAnnId.Value > 0)
-                {
-                    await _artNormService.DeleteByAnnId(TableNames.Ann, newAnnId.Value);
-                }
+                    await _unitOfWork.RollbackArchAndCopyAsync(sourceAnnId, oldStatus, newAnnId);
+                });
 
                 return true;
             }
@@ -357,37 +428,31 @@ namespace SewingProduction.Features.TeamWork.Services
                 return result;
             }
 
-            const string sqlQuery = "UPDATE art_norm_n SET annDateDel = @currentDate, annCompDel = @computerName WHERE annID = @annID";
-
-            foreach (var annId in ids)
+            try
             {
-                try
+                await _transactionBoundary.ExecuteInTransactionAsync(async () =>
                 {
-                    var parameters = new Dictionary<string, object>
+                    foreach (var annId in ids)
                     {
-                        { "@annID", annId },
-                        { "@currentDate", currentDate },
-                        { "@computerName", computerName }
-                    };
-
-                    int affectedRows = await _dbHelper.ExecuteNonQueryWithRowCountAsync(sqlQuery, parameters);
-                    if (affectedRows > 0)
-                    {
-                        result.UpdatedAnnIds.Add(annId);
+                        int affectedRows = await _unitOfWork.MarkForDeletionAsync(annId, currentDate, computerName);
+                        if (affectedRows > 0)
+                        {
+                            result.UpdatedAnnIds.Add(annId);
+                        }
+                        else
+                        {
+                            string error = $"AnnID: {annId} - не удалось обновить в БД";
+                            result.Errors.Add(error);
+                            await _logger.LogErrorAsync(new Exception("affectedRows = 0"), $"Не удалось пометить РТ на удаление. AnnID: {annId}");
+                        }
                     }
-                    else
-                    {
-                        string error = $"AnnID: {annId} - не удалось обновить в БД";
-                        result.Errors.Add(error);
-                        await _logger.LogErrorAsync(new Exception("affectedRows = 0"), $"Не удалось пометить РТ на удаление. AnnID: {annId}");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    string error = $"AnnID: {annId} - {ex.Message}";
-                    result.Errors.Add(error);
-                    await _logger.LogErrorAsync(ex, $"Ошибка при пометке РТ на удаление. AnnID: {annId}");
-                }
+                });
+            }
+            catch (Exception ex)
+            {
+                string error = $"Batch mark for deletion failed - {ex.Message}";
+                result.Errors.Add(error);
+                await _logger.LogErrorAsync(ex, "Ошибка пакетной пометки РТ на удаление.");
             }
 
             result.Success = result.Errors.Count == 0;
@@ -466,7 +531,10 @@ namespace SewingProduction.Features.TeamWork.Services
                     { "@kod", kod }
                 };
 
-                await _dbHelper.ExecuteNonQueryAsync(sqlQuery, parameters);
+                await _transactionBoundary.ExecuteInTransactionAsync(async () =>
+                {
+                    await _unitOfWork.UpdateSpArticulArchAsync(annId, kod, articul);
+                });
                 await _logger.LogEventAsync($"Обновлено поле arch для записей AnnID: {annId}, Артикул: {articul}", "UpdateSpArticulArchAsync");
                 return new SpArticulArchUpdateResult { Success = true };
             }
@@ -479,11 +547,10 @@ namespace SewingProduction.Features.TeamWork.Services
 
         private async Task SendToBrigadesAsync(int annId, string message)
         {
-            var brigades = await _artNormService.GetWorkingBrigs(annId);
-            var brigIds = brigades?.Select(b => b.id_brig).Where(id => id > 0).Distinct().ToArray();
+            var brigIds = await _repository.GetWorkingBrigIdsAsync(annId);
             if (brigIds is { Length: > 0 })
             {
-                await _jabberSender.SendToBrigsAsync(brigIds, message);
+                await _notificationService.NotifyBrigadesAsync(brigIds, message);
                 await _logger.LogEventAsync($"Отправлено '{message}' в {brigIds.Length} бригад(ы) для annId={annId}", "ApproveWorkDivisionAsync");
             }
             else
@@ -492,16 +559,11 @@ namespace SewingProduction.Features.TeamWork.Services
             }
         }
 
-        private async Task<string> TryBuildApprovalDiffAsync(int annId)
+        private async Task<string> TryBuildApprovalDiffAsync(int annId, DateTime approvedAt)
         {
-            var snapSvc = new RtSnapshotService(_dbService, _dbHelper, _logger);
-            if (!await snapSvc.HasPendingAsync(annId))
-                return null;
-
-            var approvedAt = DateTime.Now;
             try
             {
-                return await snapSvc.CompareWithCurrentAsync(annId, approvedAt);
+                return await _repository.TryBuildApprovalDiffAsync(annId, approvedAt);
             }
             catch (Exception ex)
             {
@@ -533,19 +595,22 @@ namespace SewingProduction.Features.TeamWork.Services
                 return result;
             }
 
-            foreach (var annId in ids)
+            try
             {
-                try
+                await _transactionBoundary.ExecuteInTransactionAsync(async () =>
                 {
-                    await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", status, TableNames.AnnId, annId);
-                    result.UpdatedAnnIds.Add(annId);
-                }
-                catch (Exception ex)
-                {
-                    string error = $"AnnID: {annId} - {ex.Message}";
-                    result.Errors.Add(error);
-                    await _logger.LogErrorAsync(ex, $"Ошибка UpdateStatusesAsync для AnnID: {annId}");
-                }
+                    foreach (var annId in ids)
+                    {
+                        await _unitOfWork.UpdateStatusAsync(annId, status);
+                        result.UpdatedAnnIds.Add(annId);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                string error = $"Batch status update failed - {ex.Message}";
+                result.Errors.Add(error);
+                await _logger.LogErrorAsync(ex, "Ошибка пакетного обновления статусов TeamWork.");
             }
             result.Success = result.Errors.Count == 0;
             return result;

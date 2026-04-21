@@ -296,7 +296,7 @@ namespace SewingProduction.Features.Articul
             customLabelKodFurn.Appearance.Options.UseBackColor = true;
             customLabelKodFurn.Appearance.Options.UseFont = true;
             customLabelKodFurn.Appearance.Options.UseTextOptions = true;
-            customLabelKodFurn.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelKodFurn.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelKodFurn.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelKodFurn, 2);
             customLabelKodFurn.Dock = System.Windows.Forms.DockStyle.Right;
@@ -315,7 +315,7 @@ namespace SewingProduction.Features.Articul
             customLabel1.Appearance.Options.UseBackColor = true;
             customLabel1.Appearance.Options.UseFont = true;
             customLabel1.Appearance.Options.UseTextOptions = true;
-            customLabel1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabel1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabel1, 2);
             customLabel1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -334,7 +334,7 @@ namespace SewingProduction.Features.Articul
             customLabelDlin.Appearance.Options.UseBackColor = true;
             customLabelDlin.Appearance.Options.UseFont = true;
             customLabelDlin.Appearance.Options.UseTextOptions = true;
-            customLabelDlin.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelDlin.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelDlin.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelDlin, 2);
             customLabelDlin.Dock = System.Windows.Forms.DockStyle.Right;
@@ -353,7 +353,7 @@ namespace SewingProduction.Features.Articul
             customLabelTimePlet.Appearance.Options.UseBackColor = true;
             customLabelTimePlet.Appearance.Options.UseFont = true;
             customLabelTimePlet.Appearance.Options.UseTextOptions = true;
-            customLabelTimePlet.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelTimePlet.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelTimePlet.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelTimePlet, 2);
             customLabelTimePlet.Dock = System.Windows.Forms.DockStyle.Right;
@@ -372,7 +372,7 @@ namespace SewingProduction.Features.Articul
             customLabelNormP.Appearance.Options.UseBackColor = true;
             customLabelNormP.Appearance.Options.UseFont = true;
             customLabelNormP.Appearance.Options.UseTextOptions = true;
-            customLabelNormP.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelNormP.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelNormP.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelNormP, 2);
             customLabelNormP.Dock = System.Windows.Forms.DockStyle.Right;
@@ -491,7 +491,7 @@ namespace SewingProduction.Features.Articul
             customLabelPrizn.Appearance.Options.UseBackColor = true;
             customLabelPrizn.Appearance.Options.UseFont = true;
             customLabelPrizn.Appearance.Options.UseTextOptions = true;
-            customLabelPrizn.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelPrizn.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelPrizn.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelPrizn, 2);
             customLabelPrizn.Dock = System.Windows.Forms.DockStyle.Right;
@@ -510,7 +510,7 @@ namespace SewingProduction.Features.Articul
             customLabelTM.Appearance.Options.UseBackColor = true;
             customLabelTM.Appearance.Options.UseFont = true;
             customLabelTM.Appearance.Options.UseTextOptions = true;
-            customLabelTM.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelTM.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelTM.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelTM, 2);
             customLabelTM.Dock = System.Windows.Forms.DockStyle.Right;
@@ -677,7 +677,7 @@ namespace SewingProduction.Features.Articul
             customLabelArt.Appearance.Options.UseBackColor = true;
             customLabelArt.Appearance.Options.UseFont = true;
             customLabelArt.Appearance.Options.UseTextOptions = true;
-            customLabelArt.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelArt.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelArt.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelArt, 2);
             customLabelArt.Dock = System.Windows.Forms.DockStyle.Right;
@@ -696,7 +696,7 @@ namespace SewingProduction.Features.Articul
             customLabelGOST.Appearance.Options.UseBackColor = true;
             customLabelGOST.Appearance.Options.UseFont = true;
             customLabelGOST.Appearance.Options.UseTextOptions = true;
-            customLabelGOST.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelGOST.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelGOST.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelGOST, 2);
             customLabelGOST.Dock = System.Windows.Forms.DockStyle.Right;
@@ -715,7 +715,7 @@ namespace SewingProduction.Features.Articul
             customLabelModel.Appearance.Options.UseBackColor = true;
             customLabelModel.Appearance.Options.UseFont = true;
             customLabelModel.Appearance.Options.UseTextOptions = true;
-            customLabelModel.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelModel.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelModel.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelModel, 2);
             customLabelModel.Dock = System.Windows.Forms.DockStyle.Right;
@@ -734,7 +734,7 @@ namespace SewingProduction.Features.Articul
             customLabelGroup.Appearance.Options.UseBackColor = true;
             customLabelGroup.Appearance.Options.UseFont = true;
             customLabelGroup.Appearance.Options.UseTextOptions = true;
-            customLabelGroup.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelGroup.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelGroup.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelGroup, 2);
             customLabelGroup.Dock = System.Windows.Forms.DockStyle.Right;
@@ -753,7 +753,7 @@ namespace SewingProduction.Features.Articul
             customLabelRazm.Appearance.Options.UseBackColor = true;
             customLabelRazm.Appearance.Options.UseFont = true;
             customLabelRazm.Appearance.Options.UseTextOptions = true;
-            customLabelRazm.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelRazm.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelRazm.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             tableLayoutPanel1.SetColumnSpan(customLabelRazm, 2);
             customLabelRazm.Dock = System.Windows.Forms.DockStyle.Right;
@@ -830,7 +830,7 @@ namespace SewingProduction.Features.Articul
             customLabelKod.Appearance.Options.UseBackColor = true;
             customLabelKod.Appearance.Options.UseFont = true;
             customLabelKod.Appearance.Options.UseTextOptions = true;
-            customLabelKod.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            customLabelKod.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabelKod.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelKod.Dock = System.Windows.Forms.DockStyle.Right;
             customLabelKod.Location = new System.Drawing.Point(209, 68);

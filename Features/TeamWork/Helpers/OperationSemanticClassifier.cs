@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using SewingProduction.Models;
 
 namespace SewingProduction.Features.TeamWork.Helpers
 {
@@ -105,7 +106,7 @@ namespace SewingProduction.Features.TeamWork.Helpers
                 return null;
             }
 
-            string candidate = string.Join(" ", tokens.Skip(1).Take(3)).Trim();
+            string candidate = StringNormalizer.TrimOrEmpty(string.Join(" ", tokens.Skip(1).Take(3)));
             return string.IsNullOrWhiteSpace(candidate) ? null : ToSentenceCase(candidate);
         }
 
@@ -116,22 +117,12 @@ namespace SewingProduction.Features.TeamWork.Helpers
 
         private static string Normalize(string value)
         {
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                return string.Empty;
-            }
-
-            return Regex.Replace(value.Trim().ToLowerInvariant(), @"\s+", " ");
+            return StringNormalizer.NormalizeWhitespaceLowerInvariant(value);
         }
 
         private static string ToSentenceCase(string value)
         {
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                return value;
-            }
-
-            return char.ToUpper(value[0]) + value.Substring(1);
+            return StringNormalizer.ToSentenceCase(value);
         }
     }
 }

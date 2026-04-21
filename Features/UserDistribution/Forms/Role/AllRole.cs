@@ -190,7 +190,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 }
                 else if (e.RelationIndex == 1)
                 {
-                    DataTable users = await _allRoleDataService.GetUsersWithRolesInfo(selectedRoleId, _user.CreatorID);
+                    DataTable users = await _allRoleDataService.GetUsersWithRolesInfo(selectedRoleId, _user.UserId);
                     e.ChildList = users.DefaultView;
                 }
             };
@@ -485,9 +485,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
         public async Task<int> InsertRoles(string eRoleName, string eDescription, int CreatorID)
         {
             string query = $@"
-                INSERT INTO Roles (RoleName,Description,CreatorID)
-                OUTPUT INSERTED.RoleID
-                VALUES (@RoleName,@Description,@CreatorID)";
+                INSERT INTO Roles (RoleName, Description, CreatorID)
+                VALUES (@RoleName, @Description, @CreatorID);
+
+                SELECT CAST(SCOPE_IDENTITY() AS INT); ";
             var result = await _dbHelper.ExecuteScalarAsync(query, new Dictionary<string, object>
             {
                 { "@RoleName", eRoleName },
