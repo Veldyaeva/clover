@@ -67,8 +67,7 @@ namespace SewingProduction.Features.Articul.Forms
 
         private async void CreateArticulMatr_Load(object sender, EventArgs e)
         {
-
-            LoadOrRefreshData();
+            await LoadOrRefreshData();
 
             articulControl1.BindTo(_bsDetails);
             articulControl1.IsReadOnly = true;
@@ -82,7 +81,7 @@ namespace SewingProduction.Features.Articul.Forms
             SetPermisions();
 
         }
-        private async void LoadOrRefreshData()
+        private async Task LoadOrRefreshData()
         {
             //загрузка данных для отображения в гриде
             gridViewArtMatr.ShowLoadingPanel();
@@ -298,24 +297,7 @@ namespace SewingProduction.Features.Articul.Forms
             }
 
         }
-        private void repositoryItemSearchLookUpEdit2_CloseUp(object sender, DevExpress.XtraEditors.Controls.CloseUpEventArgs e)
-        {
-            try
-            {
-                if (!e.AcceptValue) return; // если пользователь отменил выбор, не обновляем данные
-
-                // сохраняем текущее редактирование, чтобы получить актуальное значение 
-                var view = gridViewArtMatrEdit;
-                view.PostEditor();
-                view.UpdateCurrentRow();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogErrorAsync(ex, "Ошибка при изменении госта (repositoryItemSearchLookUpEdit2_CloseUp)");
-                throw;
-            }
-        }
-
+        
         private async void gridViewArtMatrEdit_DoubleClick(object sender, EventArgs e)
         {
 
@@ -380,14 +362,6 @@ namespace SewingProduction.Features.Articul.Forms
         {
             try
             {
-                //var view = gridArtMatr.FocusedView as GridView;
-                //var currentRow = null as CreateArticulMatrModel ;
-
-                //if (view.SelectedRowsCount == 1)
-                //{
-                //    int rowHandle = view.GetSelectedRows()[0];
-                //    currentRow = view.GetRow(rowHandle) as CreateArticulMatrModel;
-                //}
 
                 articulControl1.ClearComparisonHighlight();   //очищаем подсветку сравнения при смене артикула в матрице, чтобы не было "висячей" подсветки от предыдущего сравнения
                 ArticulControlBindingHelper.ClearDetails(_bsDetails);// очищаем детали от предыдущего сравнения
@@ -523,27 +497,27 @@ namespace SewingProduction.Features.Articul.Forms
                 .ToList();
         }
 
-        private void btnSelectModel_Click(object sender, EventArgs e)
+        private async void btnSelectModel_Click(object sender, EventArgs e)
         {
             var curMatr = _bindingSourceArtMatr.Current as CreateArticulMatrModel;// получаем текущую выбранную строку из матрицы
             if (curMatr == null)
                 return;
             //все совпало
-            // if (_lastCompareResult) { 
+            if (_lastCompareResult) { 
             using (AppendArticul f = new AppendArticul(CurrentUser.User, curMatr.Nn))
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {
-                    LoadOrRefreshData();
+                    await LoadOrRefreshData();
                 }
             }
 
-            //}
+            }
 
 
         }
 
-        private void btnAddModel_Click(object sender, EventArgs e)
+        private async void btnAddModel_Click(object sender, EventArgs e)
         {
             var curMatr = _bindingSourceArtMatr.Current as CreateArticulMatrModel;// получаем текущую выбранную строку из матрицы
             if (curMatr == null)
@@ -557,7 +531,7 @@ namespace SewingProduction.Features.Articul.Forms
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {
-                    LoadOrRefreshData();
+                    await LoadOrRefreshData();
                 }
 
                 //if (f.ShowDialog() == DialogResult.OK)

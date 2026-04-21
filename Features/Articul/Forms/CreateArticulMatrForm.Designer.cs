@@ -523,7 +523,6 @@
             repositoryItemSearchLookUpEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             repositoryItemSearchLookUpEdit2.Name = "repositoryItemSearchLookUpEdit2";
             repositoryItemSearchLookUpEdit2.PopupView = repositoryItemSearchLookUpEdit2View;
-            repositoryItemSearchLookUpEdit2.CloseUp += repositoryItemSearchLookUpEdit2_CloseUp;
             repositoryItemSearchLookUpEdit2.BeforePopup += repositoryItemSearchLookUpEdit2_BeforePopup;
             // 
             // repositoryItemSearchLookUpEdit2View
