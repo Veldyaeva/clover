@@ -48,13 +48,13 @@ namespace SewingProduction.Features.TeamWork.Services
     {
         private readonly ArtNormRepository _artNormRepository;
         private readonly DbService _dbService;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly ILogger _logger;
 
         public TeamWorkRepositoryAdapter(
             ArtNormRepository artNormRepository,
             DbService dbService,
-            DatabaseHelper dbHelper,
+            DatabaseHelperSQL dbHelper,
             ILogger logger)
         {
             _artNormRepository = artNormRepository;
@@ -110,12 +110,12 @@ namespace SewingProduction.Features.TeamWork.Services
     {
         private readonly ArtNormRepository _artNormRepository;
         private readonly DbService _dbService;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
 
         public TeamWorkUnitOfWorkAdapter(
             ArtNormRepository artNormRepository,
             DbService dbService,
-            DatabaseHelper dbHelper)
+            DatabaseHelperSQL dbHelper)
         {
             _artNormRepository = artNormRepository;
             _dbService = dbService;
@@ -230,9 +230,9 @@ namespace SewingProduction.Features.TeamWork.Services
 
     public sealed class TeamWorkTransactionBoundaryAdapter : ITeamWorkTransactionBoundary
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
 
-        public TeamWorkTransactionBoundaryAdapter(DatabaseHelper dbHelper)
+        public TeamWorkTransactionBoundaryAdapter(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper;
         }
