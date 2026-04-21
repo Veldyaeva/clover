@@ -226,7 +226,7 @@ namespace SewingProduction.Features.Articul.Service
                 {
                     PropertyName = nameof(SpArticulPreviewModel.Tkb),
                     ExpectedValue = row.Tkb,
-                    DisplayName = "ТКБ"
+                    DisplayName = "Полотно"
                 },
                 new()
                 {
@@ -237,13 +237,13 @@ namespace SewingProduction.Features.Articul.Service
                 new()
                 {
                     PropertyName = nameof(SpArticulPreviewModel.AssortName),
-                    ExpectedValue = row.Kod_v, 
+                    ExpectedValue = row.AssortName, 
                     DisplayName = "Ассортимент"
                 },
                 new()
                 {
-                    PropertyName = nameof(SpArticulPreviewModel.Grup),//Ag_id),
-                    ExpectedValue = row.Grup,//.Ag_id,
+                    PropertyName = nameof(SpArticulPreviewModel.Ag_id),
+                    ExpectedValue = row.Ag_id,
                     DisplayName = "Группа"
                 },
                 new()

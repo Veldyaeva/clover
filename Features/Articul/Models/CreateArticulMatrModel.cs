@@ -32,12 +32,13 @@ namespace SewingProduction.Features.Articul.Models
         /// сезон
         /// </summary>
         public string Tsn_name { get; set; }
-        //товарная группа
+        /// <summary>
+        /// товарная группа
+        /// </summary>
         public int Men_int { get; set; }
-        public string Grupmen_name { get; set; }
-        //название сезона
-        public string Tsn_name { get; set; } 
-        //идентификатор сезона
+        /// <summary>
+        /// идентификатор сезона
+        /// </summary>
         public int Baza { get; set; }
         /// <summary>
         /// блок
@@ -76,7 +77,7 @@ namespace SewingProduction.Features.Articul.Models
         /// <summary>
         /// ассортимент
         /// </summary>
-        public string Kod_v { get; set; }
+        public int Kod_v { get; set; }
         public string AssortName { get; set; }
         public string Tat_name { get; set; }
         /// <summary>
@@ -141,11 +142,10 @@ namespace SewingProduction.Features.Articul.Models
         /// гост
         /// </summary>
         public int Id_gost { get; set; }
-        /// <summary>
-        /// ткань
-        /// </summary>
-        public string Grup { get; set; }
         public string GostName { get; set; }
+        /// <summary>
+        /// Полотно
+        /// </summary>
         public string Tkb {  get; set; }
         public DateTime? DateCertificationApproval { get; set; }
 
