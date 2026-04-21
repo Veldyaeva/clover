@@ -523,6 +523,7 @@
             repositoryItemSearchLookUpEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             repositoryItemSearchLookUpEdit2.Name = "repositoryItemSearchLookUpEdit2";
             repositoryItemSearchLookUpEdit2.PopupView = repositoryItemSearchLookUpEdit2View;
+            repositoryItemSearchLookUpEdit2.CloseUp += repositoryItemSearchLookUpEdit2_CloseUp;
             repositoryItemSearchLookUpEdit2.BeforePopup += repositoryItemSearchLookUpEdit2_BeforePopup;
             // 
             // repositoryItemSearchLookUpEdit2View
@@ -896,9 +897,9 @@
             pictureBoxMatrix.Font = new System.Drawing.Font("Arial", 10F);
             pictureBoxMatrix.ForeColor = System.Drawing.SystemColors.ControlText;
             pictureBoxMatrix.ImagePath = null;
-            pictureBoxMatrix.Location = new System.Drawing.Point(2, 326);
+            pictureBoxMatrix.Location = new System.Drawing.Point(2, 330);
             pictureBoxMatrix.Name = "pictureBoxMatrix";
-            pictureBoxMatrix.Size = new System.Drawing.Size(264, 348);
+            pictureBoxMatrix.Size = new System.Drawing.Size(264, 344);
             pictureBoxMatrix.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             pictureBoxMatrix.TabIndex = 7;
             pictureBoxMatrix.TabStop = false;
@@ -907,9 +908,9 @@
             // 
             btnAddModel.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             btnAddModel.Appearance.Options.UseFont = true;
-            btnAddModel.Location = new System.Drawing.Point(1116, 327);
+            btnAddModel.Location = new System.Drawing.Point(1121, 331);
             btnAddModel.Name = "btnAddModel";
-            btnAddModel.Size = new System.Drawing.Size(199, 23);
+            btnAddModel.Size = new System.Drawing.Size(197, 22);
             btnAddModel.StyleController = customLayoutControl1;
             btnAddModel.TabIndex = 6;
             btnAddModel.Text = "Добавить новую модель ";
@@ -919,9 +920,9 @@
             // 
             btnSelectModel.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             btnSelectModel.Appearance.Options.UseFont = true;
-            btnSelectModel.Location = new System.Drawing.Point(822, 327);
+            btnSelectModel.Location = new System.Drawing.Point(829, 331);
             btnSelectModel.Name = "btnSelectModel";
-            btnSelectModel.Size = new System.Drawing.Size(290, 23);
+            btnSelectModel.Size = new System.Drawing.Size(288, 22);
             btnSelectModel.StyleController = customLayoutControl1;
             btnSelectModel.TabIndex = 5;
             btnSelectModel.Text = "Выбрать модель для стыковки";
@@ -930,10 +931,10 @@
             // gridArtCompare
             // 
             gridArtCompare.Font = new System.Drawing.Font("Arial", 10F);
-            gridArtCompare.Location = new System.Drawing.Point(276, 326);
+            gridArtCompare.Location = new System.Drawing.Point(280, 330);
             gridArtCompare.MainView = gridViewArtCompare;
             gridArtCompare.Name = "gridArtCompare";
-            gridArtCompare.Size = new System.Drawing.Size(536, 348);
+            gridArtCompare.Size = new System.Drawing.Size(535, 344);
             gridArtCompare.TabIndex = 4;
             gridArtCompare.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewArtCompare });
             // 
@@ -999,9 +1000,9 @@
             // articulControl1
             // 
             articulControl1.IsReadOnly = true;
-            articulControl1.Location = new System.Drawing.Point(822, 354);
+            articulControl1.Location = new System.Drawing.Point(829, 357);
             articulControl1.Name = "articulControl1";
-            articulControl1.Size = new System.Drawing.Size(948, 320);
+            articulControl1.Size = new System.Drawing.Size(941, 317);
             articulControl1.TabIndex = 2;
             // 
             // Root
@@ -1024,80 +1025,80 @@
             // 
             // simpleSeparator1
             // 
-            simpleSeparator1.Location = new System.Drawing.Point(820, 324);
+            simpleSeparator1.Location = new System.Drawing.Point(827, 328);
             simpleSeparator1.Name = "simpleSeparator1";
-            simpleSeparator1.Size = new System.Drawing.Size(952, 1);
+            simpleSeparator1.Size = new System.Drawing.Size(945, 1);
             // 
             // layoutControlItem2
             // 
             layoutControlItem2.Control = articulControl1;
-            layoutControlItem2.Location = new System.Drawing.Point(820, 352);
+            layoutControlItem2.Location = new System.Drawing.Point(827, 355);
             layoutControlItem2.MinSize = new System.Drawing.Size(5, 5);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new System.Drawing.Size(952, 324);
+            layoutControlItem2.Size = new System.Drawing.Size(945, 321);
             layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem2.TextVisible = false;
             // 
             // layoutControlItem3
             // 
             layoutControlItem3.Control = gridArtCompare;
-            layoutControlItem3.Location = new System.Drawing.Point(274, 324);
+            layoutControlItem3.Location = new System.Drawing.Point(278, 328);
             layoutControlItem3.MinSize = new System.Drawing.Size(104, 24);
             layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new System.Drawing.Size(540, 352);
+            layoutControlItem3.Size = new System.Drawing.Size(539, 348);
             layoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem3.TextVisible = false;
             // 
             // emptySpaceItem2
             // 
-            emptySpaceItem2.Location = new System.Drawing.Point(1317, 325);
+            emptySpaceItem2.Location = new System.Drawing.Point(1320, 329);
             emptySpaceItem2.Name = "emptySpaceItem2";
-            emptySpaceItem2.Size = new System.Drawing.Size(455, 27);
+            emptySpaceItem2.Size = new System.Drawing.Size(452, 26);
             // 
             // layoutControlItem4
             // 
             layoutControlItem4.Control = btnSelectModel;
-            layoutControlItem4.Location = new System.Drawing.Point(820, 325);
+            layoutControlItem4.Location = new System.Drawing.Point(827, 329);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new System.Drawing.Size(294, 27);
+            layoutControlItem4.Size = new System.Drawing.Size(292, 26);
             layoutControlItem4.TextVisible = false;
             // 
             // layoutControlItem5
             // 
             layoutControlItem5.Control = btnAddModel;
-            layoutControlItem5.Location = new System.Drawing.Point(1114, 325);
+            layoutControlItem5.Location = new System.Drawing.Point(1119, 329);
             layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new System.Drawing.Size(203, 27);
+            layoutControlItem5.Size = new System.Drawing.Size(201, 26);
             layoutControlItem5.TextVisible = false;
             // 
             // splitterItem1
             // 
             splitterItem1.Location = new System.Drawing.Point(0, 318);
             splitterItem1.Name = "splitterItem1";
-            splitterItem1.Size = new System.Drawing.Size(1772, 6);
+            splitterItem1.Size = new System.Drawing.Size(1772, 10);
             // 
             // layoutControlItem6
             // 
             layoutControlItem6.Control = pictureBoxMatrix;
-            layoutControlItem6.Location = new System.Drawing.Point(0, 324);
+            layoutControlItem6.Location = new System.Drawing.Point(0, 328);
             layoutControlItem6.MinSize = new System.Drawing.Size(104, 24);
             layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new System.Drawing.Size(268, 352);
+            layoutControlItem6.Size = new System.Drawing.Size(268, 348);
             layoutControlItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem6.Text = "PictMatrix";
             layoutControlItem6.TextVisible = false;
             // 
             // splitterItem2
             // 
-            splitterItem2.Location = new System.Drawing.Point(814, 324);
+            splitterItem2.Location = new System.Drawing.Point(817, 328);
             splitterItem2.Name = "splitterItem2";
-            splitterItem2.Size = new System.Drawing.Size(6, 352);
+            splitterItem2.Size = new System.Drawing.Size(10, 348);
             // 
             // splitterItem3
             // 
-            splitterItem3.Location = new System.Drawing.Point(268, 324);
+            splitterItem3.Location = new System.Drawing.Point(268, 328);
             splitterItem3.Name = "splitterItem3";
-            splitterItem3.Size = new System.Drawing.Size(6, 352);
+            splitterItem3.Size = new System.Drawing.Size(10, 348);
             // 
             // CreateArticulMatrForm
             // 

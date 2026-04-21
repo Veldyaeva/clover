@@ -163,7 +163,7 @@ namespace SewingProduction.Features.Articul.Forms
             gcCertDateCertificationApproval.FieldName = nameof(CreateArticulMatrModel.DateCertificationApproval);
             //запрет редактирования полей, которые не должны редактироваться напрямую пользователем, а заполняются через выбор из справочника и/или автоматически
             gcCertDateCertificationApproval.OptionsColumn.AllowEdit = false;
-
+            //перечень моделей для стыковки gridViewArtCompare
             gcKoddCompare.FieldName = nameof(SpArtPreviewModel.Kodd);
             gcGrupCompare.FieldName = nameof(SpArtPreviewModel.Grup);
             gcArticulCompare.FieldName = nameof(SpArtPreviewModel.Articul);
@@ -297,6 +297,23 @@ namespace SewingProduction.Features.Articul.Forms
                 throw;
             }
 
+        }
+        private void repositoryItemSearchLookUpEdit2_CloseUp(object sender, DevExpress.XtraEditors.Controls.CloseUpEventArgs e)
+        {
+            try
+            {
+                if (!e.AcceptValue) return; // если пользователь отменил выбор, не обновляем данные
+
+                // сохраняем текущее редактирование, чтобы получить актуальное значение 
+                var view = gridViewArtMatrEdit;
+                view.PostEditor();
+                view.UpdateCurrentRow();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при изменении госта (repositoryItemSearchLookUpEdit2_CloseUp)");
+                throw;
+            }
         }
 
         private async void gridViewArtMatrEdit_DoubleClick(object sender, EventArgs e)
@@ -511,8 +528,8 @@ namespace SewingProduction.Features.Articul.Forms
             var curMatr = _bindingSourceArtMatr.Current as CreateArticulMatrModel;// получаем текущую выбранную строку из матрицы
             if (curMatr == null)
                 return;
-
-
+            //все совпало
+            // if (_lastCompareResult) { 
             using (AppendArticul f = new AppendArticul(CurrentUser.User, curMatr.Nn))
             {
                 if (f.ShowDialog() == DialogResult.OK)
@@ -520,6 +537,10 @@ namespace SewingProduction.Features.Articul.Forms
                     LoadOrRefreshData();
                 }
             }
+
+            //}
+
+
         }
 
         private void btnAddModel_Click(object sender, EventArgs e)
@@ -546,5 +567,7 @@ namespace SewingProduction.Features.Articul.Forms
                 //}
             }
         }
+
+        
     }
 }

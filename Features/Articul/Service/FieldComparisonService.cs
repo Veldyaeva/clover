@@ -242,8 +242,8 @@ namespace SewingProduction.Features.Articul.Service
                 },
                 new()
                 {
-                    PropertyName = nameof(SpArticulPreviewModel.Grup),//Ag_id),
-                    ExpectedValue = row.Grup,//.Ag_id,
+                    PropertyName = nameof(SpArticulPreviewModel.Ag_id),//Ag_id),
+                    ExpectedValue = row.Ag_id,//.Ag_id,
                     DisplayName = "Группа"
                 },
                 new()
