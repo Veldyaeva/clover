@@ -40,6 +40,7 @@
             gcRazmMatrix = new DevExpress.XtraGrid.Columns.GridColumn();
             gcKod = new DevExpress.XtraGrid.Columns.GridColumn();
             gcRazm = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             txtPo = new CustomTextBoxEx();
             txtKod = new CustomTextBoxEx();
             txtAssort = new CustomTextBoxEx();
@@ -80,7 +81,6 @@
             layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
-            repositoryItemLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             ((System.ComponentModel.ISupportInitialize)txtArticul.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customLayoutControl1).BeginInit();
             customLayoutControl1.SuspendLayout();
@@ -88,6 +88,7 @@
             ((System.ComponentModel.ISupportInitialize)gridViewNabor).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewRazm).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtPo.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtKod.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtAssort.Properties).BeginInit();
@@ -127,7 +128,6 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem11).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit1).BeginInit();
             SuspendLayout();
             // 
             // txtArticul
@@ -244,6 +244,12 @@
             gcRazm.VisibleIndex = 3;
             gcRazm.Width = 259;
             // 
+            // repositoryItemLookUpEdit1
+            // 
+            repositoryItemLookUpEdit1.AutoHeight = false;
+            repositoryItemLookUpEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemLookUpEdit1.Name = "repositoryItemLookUpEdit1";
+            // 
             // txtPo
             // 
             txtPo.Location = new System.Drawing.Point(411, 2);
@@ -265,6 +271,7 @@
             txtKod.Size = new System.Drawing.Size(251, 22);
             txtKod.StyleController = customLayoutControl1;
             txtKod.TabIndex = 0;
+            txtKod.Validating += txtKod_Validating;
             // 
             // txtAssort
             // 
@@ -628,12 +635,6 @@
             layoutControlItem11.Size = new System.Drawing.Size(338, 26);
             layoutControlItem11.TextVisible = false;
             // 
-            // repositoryItemLookUpEdit1
-            // 
-            repositoryItemLookUpEdit1.AutoHeight = false;
-            repositoryItemLookUpEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            repositoryItemLookUpEdit1.Name = "repositoryItemLookUpEdit1";
-            // 
             // AppendArticul
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -651,6 +652,7 @@
             ((System.ComponentModel.ISupportInitialize)gridViewNabor).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridRazm).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewRazm).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit1).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtPo.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtKod.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtAssort.Properties).EndInit();
@@ -690,7 +692,6 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem11).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit1).EndInit();
             ResumeLayout(false);
         }
 

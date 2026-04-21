@@ -74,7 +74,7 @@ namespace SewingProduction.Features.Articul.Forms
             txtGrup.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.Grup), true);
             txtTkb.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.Tkb), true);
             txtAssort.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.AssortName), true);
-            
+
 
         }
 
@@ -133,6 +133,16 @@ namespace SewingProduction.Features.Articul.Forms
             }
         }
 
+        private void txtKod_Validating(object sender, CancelEventArgs e)
+        {
+            string input = txtKod.Text;
+            if (input.Length < 8)
+            {
+                e.Cancel = true;  // Останавливаем выход из поля
+                MessageBox.Show("Значение должно содержать не менее 8 символов.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtKod.Focus();
+            }
+        }
     }
 
 }

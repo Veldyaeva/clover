@@ -41,7 +41,7 @@ namespace SewingProduction.Features.Articul.Models
         public int Stra { get; set; }
         public int P_pres { get; set; }
         public int P { get; set; }
-        public string Mod_v { get; set; }
+        //public string Mod_v { get; set; }
         public int V { get; set; }
         public short Kruj { get; set; }
         public string Tkan { get; set; }
