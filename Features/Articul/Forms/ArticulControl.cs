@@ -1,4 +1,4 @@
-using DevExpress.XtraEditors;
+﻿using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.DXErrorProvider;
 using SewingProduction.Features.Articul.Models;
@@ -34,7 +34,11 @@ namespace SewingProduction.Features.Articul.Forms
 
         private readonly Dictionary<Control, Color> _originalBackColors = new();
         private readonly Dictionary<Control, Color> _originalForeColors = new();
+        private readonly Dictionary<Control, Color> _originalEditorBackColors = new();
+        private readonly Dictionary<Control, Color> _originalEditorBorderColors = new();
         private readonly Dictionary<Control, bool> _originalUseForeColors = new();
+        private readonly Dictionary<Control, bool> _originalUseBackColors = new();
+        private readonly Dictionary<Control, bool> _originalUseBorderColors = new();
         private readonly Dictionary<Control, (CheckBoxStyle Style, Color Checked, Color Unchecked, Color Grayed)> _originalCheckBoxStyles = new();
         private readonly FieldComparisonService _comparisonService = new();
         private bool _comparisonMapBuilt;
@@ -136,6 +140,18 @@ namespace SewingProduction.Features.Articul.Forms
                     _originalUseForeColors[c] = ce.Properties.Appearance.Options.UseForeColor;
                 }
 
+                if (!_originalEditorBackColors.ContainsKey(c))
+                {
+                    _originalEditorBackColors[c] = ce.Properties.Appearance.BackColor;
+                    _originalUseBackColors[c] = ce.Properties.Appearance.Options.UseBackColor;
+                }
+
+                if (!_originalEditorBorderColors.ContainsKey(c))
+                {
+                    _originalEditorBorderColors[c] = ce.Properties.Appearance.BorderColor;
+                    _originalUseBorderColors[c] = ce.Properties.Appearance.Options.UseBorderColor;
+                }
+
                 if (!_originalCheckBoxStyles.ContainsKey(c))
                 {
                     _originalCheckBoxStyles[c] = (
@@ -146,8 +162,12 @@ namespace SewingProduction.Features.Articul.Forms
                 }
 
                 ce.Properties.Appearance.ForeColor = Color.Red;
+                ce.Properties.Appearance.BackColor = Color.MistyRose;
+                ce.Properties.Appearance.BorderColor = Color.Red;
                 ce.ForeColor = Color.Red;
                 ce.Properties.Appearance.Options.UseForeColor = true;
+                ce.Properties.Appearance.Options.UseBackColor = true;
+                ce.Properties.Appearance.Options.UseBorderColor = true;
                 ce.Properties.CheckBoxOptions.Style = CheckBoxStyle.SvgCheckBox1;
                 ce.Properties.CheckBoxOptions.SvgColorChecked = Color.Red;
                 ce.Properties.CheckBoxOptions.SvgColorUnchecked = Color.Red;
@@ -201,6 +221,30 @@ namespace SewingProduction.Features.Articul.Forms
                 {
                     ce.Properties.Appearance.Options.UseForeColor = use;
                     _originalUseForeColors.Remove(c);
+                }
+
+                if (_originalEditorBackColors.TryGetValue(c, out var back))
+                {
+                    ce.Properties.Appearance.BackColor = back;
+                    _originalEditorBackColors.Remove(c);
+                }
+
+                if (_originalUseBackColors.TryGetValue(c, out var useBack))
+                {
+                    ce.Properties.Appearance.Options.UseBackColor = useBack;
+                    _originalUseBackColors.Remove(c);
+                }
+
+                if (_originalEditorBorderColors.TryGetValue(c, out var border))
+                {
+                    ce.Properties.Appearance.BorderColor = border;
+                    _originalEditorBorderColors.Remove(c);
+                }
+
+                if (_originalUseBorderColors.TryGetValue(c, out var useBorder))
+                {
+                    ce.Properties.Appearance.Options.UseBorderColor = useBorder;
+                    _originalUseBorderColors.Remove(c);
                 }
 
                 if (_originalCheckBoxStyles.TryGetValue(c, out var originalStyle))

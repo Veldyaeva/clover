@@ -253,6 +253,9 @@
     <Compile Update="Features\TeamWork\Forms\TeamWork.Articles.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.BaseNodes.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork.Bootstrap.cs">
       <SubType>Form</SubType>
     </Compile>

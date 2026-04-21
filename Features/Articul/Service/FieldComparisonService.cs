@@ -1,4 +1,4 @@
-using DevExpress.CodeParser;
+﻿using DevExpress.CodeParser;
 using SewingProduction.Features.Articul.Models;
 using System;
 using System.Collections.Generic;
@@ -225,7 +225,7 @@ namespace SewingProduction.Features.Articul.Service
                 new()
                 {
                     PropertyName = nameof(SpArticulPreviewModel.Tkb),
-                    ExpectedValue = row.Tb_id,
+                    ExpectedValue = row.Tkb,
                     DisplayName = "ТКБ"
                 },
                 new()
@@ -237,7 +237,7 @@ namespace SewingProduction.Features.Articul.Service
                 new()
                 {
                     PropertyName = nameof(SpArticulPreviewModel.AssortName),
-                    ExpectedValue = row.Text_mo,
+                    ExpectedValue = row.Kod_v, 
                     DisplayName = "Ассортимент"
                 },
                 new()
