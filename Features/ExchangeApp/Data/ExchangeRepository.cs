@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using DevExpress.XtraEditors;
 using ExchangeApp.Models;
 using Npgsql;
 using NpgsqlTypes;
@@ -9,9 +10,11 @@ using SewingProduction.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ExchangeApp.Data
 {
@@ -33,7 +36,16 @@ namespace ExchangeApp.Data
         private NpgsqlConnection CreateConnection()
         {
             //return new NpgsqlConnection(_connectionString);
-            return new NpgsqlConnection(_dbHelperPG.GetConnection().ToString());
+            try
+            {
+                //return new NpgsqlConnection(_dbHelperPG.GetConnection().ToString());
+                return new NpgsqlConnection(_dbHelperPG.GetConnectionString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка в CreateConnection");
+                throw;
+            }
         }
 
         public async Task<List<CompanyItem>> GetCompaniesAsync()
@@ -319,92 +331,199 @@ namespace ExchangeApp.Data
             //return result;
         }
 
+        //public async Task<long> RunAktFurnPrimaryAsync(int companyId, DateTime dateFrom, DateTime dateTo, string userName)
+        //{
+        //    await using var cn = CreateConnection();
+        //    await cn.OpenAsync();
+
+        //    await using var tx = await cn.BeginTransactionAsync();
+
+        //    try
+        //    {
+        //        const string sql = "CALL exchange1c.usp_export_akt_furn_data(@p_date_from, @p_date_to, @p_firm_id, @p_created_by, 'primary', NULL, @p_export_batch_id OUTPUT)";
+
+        //        await using var cmd = new NpgsqlCommand(sql, cn, tx);
+        //        cmd.Parameters.AddWithValue("p_date_from", dateFrom.Date);
+        //        cmd.Parameters.AddWithValue("p_date_to", dateTo.Date);
+        //        cmd.Parameters.AddWithValue("p_firm_id", companyId);
+        //        cmd.Parameters.AddWithValue("p_created_by", userName ?? Environment.UserName);
+
+        //        var outParam = new NpgsqlParameter("p_export_batch_id", NpgsqlTypes.NpgsqlDbType.Bigint)
+        //        {
+        //            Direction = ParameterDirection.Output
+        //        };
+        //        cmd.Parameters.Add(outParam);
+
+        //        await cmd.ExecuteNonQueryAsync();
+        //        await tx.CommitAsync();
+
+        //        return outParam.Value != DBNull.Value ? Convert.ToInt64(outParam.Value) : 0;
+        //    }
+        //    catch (NpgsqlException ex)
+        //    {
+        //        MessageBox.Show($"{ex.Message} Ошибка SQL при получении данных GetPzvCheck");
+        //        await tx.RollbackAsync();
+        //        throw;
+        //    }
+        //    //await using var cn = CreateConnection();
+        //    //await cn.OpenAsync();
+
+        //    //await using var tx = await cn.BeginTransactionAsync();
+
+        //    //try
+        //    //{
+        //    //    // Из-за особенностей CALL + INOUT в Npgsql надежнее сделать DO-блок и вернуть значение через SELECT.
+        //    //    const string sql = @"
+        //    //        do $$
+        //    //        declare
+        //    //            v_batch_id bigint;
+        //    //        begin
+        //    //            call exchange1c.usp_export_akt_furn_data(
+        //    //                p_date_from => @p_date_from,
+        //    //                p_date_to => @p_date_to,
+        //    //                p_firm_id => @p_company_id,
+        //    //                p_created_by => @p_user_name,
+        //    //                p_reason => 'primary',
+        //    //                p_base_export_batch_id => null,
+        //    //                p_export_batch_id => v_batch_id
+        //    //            );
+
+        //    //            create temporary table if not exists tmp_export_result(batch_id bigint) on commit drop;
+        //    //            truncate table tmp_export_result;
+        //    //            insert into tmp_export_result(batch_id) values (v_batch_id);
+        //    //        end $$;
+
+        //    //        select batch_id from tmp_export_result limit 1;";
+
+        //    //    await using var cmd = new NpgsqlCommand(sql, cn, tx);
+        //    //    cmd.Parameters.AddWithValue("p_date_from", dateFrom.Date);
+        //    //    cmd.Parameters.AddWithValue("p_date_to", dateTo.Date);
+        //    //    cmd.Parameters.AddWithValue("p_company_id", companyId);
+        //    //    cmd.Parameters.AddWithValue("p_user_name", userName ?? Environment.UserName);
+
+        //    //    var result = await cmd.ExecuteScalarAsync();
+        //    //    await tx.CommitAsync();
+
+        //    //    return Convert.ToInt64(result);
+        //    //}
+        //    //catch (NpgsqlException ex)
+        //    //{
+        //    //    MessageBox.Show($"{ex} Ошибка SQL при получении данных GetPzvCheck");
+        //    //    throw;
+        //    //}
+        //    //catch
+        //    //{
+        //    //    await tx.RollbackAsync();
+        //    //    throw;
+        //    //}
+        //}
         public async Task<long> RunAktFurnPrimaryAsync(int companyId, DateTime dateFrom, DateTime dateTo, string userName)
         {
+            // Важно: используем уровень изоляции Read Committed или Serializable
             await using var cn = CreateConnection();
             await cn.OpenAsync();
 
-            await using var tx = await cn.BeginTransactionAsync();
+            // Используем уровень изоляции по умолчанию (Read Committed)
+            await using var tx = await cn.BeginTransactionAsync(System.Data.IsolationLevel.ReadCommitted);
 
             try
             {
-                // Из-за особенностей CALL + INOUT в Npgsql надежнее сделать DO-блок и вернуть значение через SELECT.
-                const string sql = @"
-                    do $$
-                    declare
-                        v_batch_id bigint;
-                    begin
-                        call exchange1c.usp_export_akt_furn_data(
-                            p_date_from => @p_date_from,
-                            p_date_to => @p_date_to,
-                            p_firm_id => @p_company_id,
-                            p_created_by => @p_user_name,
-                            p_reason => 'primary',
-                            p_base_export_batch_id => null,
-                            p_export_batch_id => v_batch_id
-                        );
-
-                        create temporary table if not exists tmp_export_result(batch_id bigint) on commit drop;
-                        truncate table tmp_export_result;
-                        insert into tmp_export_result(batch_id) values (v_batch_id);
-                    end $$;
-
-                    select batch_id from tmp_export_result limit 1;";
-
+                const string sql = "CALL exchange1c.usp_export_akt_furn_data(@p_date_from, @p_date_to, @p_firm_id, @p_created_by, 'primary', NULL, @p_export_batch_id)";
+                // Используйте ExecuteScalarAsync с явным указанием типов параметров
                 await using var cmd = new NpgsqlCommand(sql, cn, tx);
-                cmd.Parameters.AddWithValue("p_date_from", dateFrom.Date);
-                cmd.Parameters.AddWithValue("p_date_to", dateTo.Date);
-                cmd.Parameters.AddWithValue("p_company_id", companyId);
-                cmd.Parameters.AddWithValue("p_user_name", userName ?? Environment.UserName);
+                cmd.Parameters.Add(new NpgsqlParameter("p_date_from", NpgsqlTypes.NpgsqlDbType.Date) { Value = dateFrom.Date });
+                cmd.Parameters.Add(new NpgsqlParameter("p_date_to", NpgsqlTypes.NpgsqlDbType.Date) { Value = dateTo.Date });
+                //cmd.Parameters.Add(new NpgsqlParameter("p_company_id", NpgsqlTypes.NpgsqlDbType.Integer) { Value = companyId });
+                cmd.Parameters.Add(new NpgsqlParameter("p_firm_id", NpgsqlTypes.NpgsqlDbType.Integer) { Value = companyId });
+                //cmd.Parameters.Add(new NpgsqlParameter("p_user_name", NpgsqlTypes.NpgsqlDbType.Text) { Value = userName ?? Environment.UserName });
+                cmd.Parameters.Add(new NpgsqlParameter("p_created_by", NpgsqlTypes.NpgsqlDbType.Varchar) { Value = userName ?? Environment.UserName });
 
-                var result = await cmd.ExecuteScalarAsync();
+                var outParam = new NpgsqlParameter("p_export_batch_id", NpgsqlTypes.NpgsqlDbType.Bigint)
+                {
+                    Direction = ParameterDirection.InputOutput,
+                    Value = DBNull.Value
+                };
+                cmd.Parameters.Add(outParam);
+
+                await cmd.ExecuteNonQueryAsync();
                 await tx.CommitAsync();
 
-                return Convert.ToInt64(result);
+                // Получаем значение из выходного параметра
+                long result = cmd.Parameters["p_export_batch_id"].Value != DBNull.Value
+                    ? Convert.ToInt64(cmd.Parameters["p_export_batch_id"].Value)
+                    : 0;
+
+                return result;
             }
-            catch
+            catch (PostgresException ex) when (ex.SqlState == "23503")
+            {
+                // Специфичная обработка ошибки внешнего ключа
+                await tx.RollbackAsync();
+
+                // Логируем детали
+                var errorMsg = $"Ошибка внешнего ключа при вызове usp_export_akt_furn_data\n" +
+                              $"CompanyId: {companyId}\n" +
+                              $"DateFrom: {dateFrom:yyyy-MM-dd}\n" +
+                              $"DateTo: {dateTo:yyyy-MM-dd}\n" +
+                              $"UserName: {userName}\n" +
+                              $"Detail: {ex.Detail}\n" +
+                              $"Message: {ex.MessageText}";
+
+                MessageBox.Show(errorMsg, "Ошибка внешнего ключа");
+                throw;
+            }
+            catch (PostgresException ex)
             {
                 await tx.RollbackAsync();
+                MessageBox.Show($"PostgreSQL ошибка: {ex.SqlState} - {ex.MessageText}\n\n{ex.Detail}", "Ошибка БД");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                await tx.RollbackAsync();
+                MessageBox.Show($"Общая ошибка: {ex.Message}", "Ошибка");
                 throw;
             }
         }
 
         public async Task<long> RunAktFurnByRequestAsync(int companyId, ExportRunMode mode, IReadOnlyCollection<long> documentIds, string userName)
         {
-            if (documentIds == null || documentIds.Count == 0)
-                throw new ArgumentException("Не переданы документы для догрузки/перевыгрузки.", nameof(documentIds));
-
-            string requestType = mode switch
-            {
-                ExportRunMode.Delta => "delta",
-                ExportRunMode.Reexport => "reexport",
-                _ => throw new InvalidOperationException("Для первичной выгрузки используйте RunAktFurnPrimaryAsync.")
-            };
-
-            await using var cn = CreateConnection();
-            await cn.OpenAsync();
-
-            await using var tx = await cn.BeginTransactionAsync();
-
             try
             {
-                long requestId;
+                if (documentIds == null || documentIds.Count == 0)
+                    throw new ArgumentException("Не переданы документы для догрузки/перевыгрузки.", nameof(documentIds));
 
-                // 1. Создаем request
-                const string createRequestSql = @"
+                string requestType = mode switch
+                {
+                    ExportRunMode.Delta => "delta",
+                    ExportRunMode.Reexport => "reexport",
+                    _ => throw new InvalidOperationException("Для первичной выгрузки используйте RunAktFurnPrimaryAsync.")
+                };
+
+                await using var cn = CreateConnection();
+                await cn.OpenAsync();
+
+                await using var tx = await cn.BeginTransactionAsync();
+
+                try
+                {
+                    long requestId;
+
+                    // 1. Создаем request
+                    const string createRequestSql = @"
                     do $$
                     declare
                         v_request_id bigint;
                     begin
                         call exchange1c.usp_create_export_request_for_documents(
-                            p_export_type_code => 'akt_furn',
-                            p_request_type => @p_request_type,
-                            p_source_company_id => @p_company_id,
-                            p_created_by => @p_user_name,
-                            p_document_ids => @p_document_ids,
-                            p_base_export_batch_id => null,
-                            p_comment => @p_comment,
-                            p_export_request_id => v_request_id
+                            'akt_furn',
+                            @p_request_type,
+                            @p_company_id,
+                            @p_user_name,
+                            @p_document_ids,
+                            null,
+                            @p_comment,
+                            @p_export_request_id
                         );
 
                         create temporary table if not exists tmp_request_result(request_id bigint) on commit drop;
@@ -414,29 +533,65 @@ namespace ExchangeApp.Data
 
                     select request_id from tmp_request_result limit 1;";
 
-                await using (var cmd = new NpgsqlCommand(createRequestSql, cn, tx))
-                {
-                    cmd.Parameters.AddWithValue("p_request_type", requestType);
-                    cmd.Parameters.AddWithValue("p_company_id", companyId);
-                    cmd.Parameters.AddWithValue("p_user_name", userName ?? Environment.UserName);
-                    cmd.Parameters.AddWithValue("p_document_ids", documentIds.ToArray());
-                    cmd.Parameters.AddWithValue("p_comment", mode == ExportRunMode.Delta
-                        ? "Догрузка документов из интерфейса"
-                        : "Перевыгрузка документов из интерфейса");
 
-                    var result = await cmd.ExecuteScalarAsync();
-                    requestId = Convert.ToInt64(result);
-                }
+                    /*
+                     * call exchange1c.usp_create_export_request_for_documents(
+                            p_export_type_code => 'akt_furn',
+                            p_request_type => @p_request_type,
+                            p_source_company_id => @p_company_id,
+                            p_created_by => @p_user_name,
+                            p_document_ids => @p_document_ids,
+                            p_base_export_batch_id => null,
+                            p_comment => @p_comment,
+                            p_export_request_id => v_request_id
+                        );
+                     */
 
-                // 2. Формируем пакет по request
-                const string runRequestSql = @"
+                    await using (var cmd = new NpgsqlCommand(createRequestSql, cn, tx))
+                    {
+                        //cmd.Parameters.AddWithValue("p_request_type", requestType);
+                        //cmd.Parameters.AddWithValue("p_company_id", companyId);
+                        //cmd.Parameters.AddWithValue("p_user_name", userName ?? Environment.UserName);
+                        //cmd.Parameters.AddWithValue("p_document_ids", documentIds.ToArray());
+                        //cmd.Parameters.AddWithValue("p_comment", mode == ExportRunMode.Delta
+                        //    ? "Догрузка документов из интерфейса"
+                        //    : "Перевыгрузка документов из интерфейса");
+
+                        //var result = await cmd.ExecuteScalarAsync();
+                        //requestId = Convert.ToInt64(result);
+
+                        cmd.Parameters.Add(new NpgsqlParameter("p_request_type", NpgsqlTypes.NpgsqlDbType.Varchar) { Value = requestType });
+                        cmd.Parameters.Add(new NpgsqlParameter("p_company_id", NpgsqlTypes.NpgsqlDbType.Integer) { Value = companyId });
+                        cmd.Parameters.Add(new NpgsqlParameter("p_user_name", NpgsqlTypes.NpgsqlDbType.Varchar ) { Value = userName ?? Environment.UserName });
+                        cmd.Parameters.Add(new NpgsqlParameter("p_company_id", NpgsqlTypes.NpgsqlDbType.Array) { Value = documentIds.ToArray() });
+                        cmd.Parameters.Add(new NpgsqlParameter("p_comment", NpgsqlTypes.NpgsqlDbType.Varchar) { Value = mode == ExportRunMode.Delta
+                            ? "Догрузка документов из интерфейса"
+                            : "Перевыгрузка документов из интерфейса"
+                        });
+                        var outParam = new NpgsqlParameter("p_export_batch_id", NpgsqlTypes.NpgsqlDbType.Bigint)
+                        {
+                            Direction = ParameterDirection.InputOutput,
+                            Value = DBNull.Value
+                        };
+                        cmd.Parameters.Add(outParam);
+
+                        await cmd.ExecuteNonQueryAsync();
+                        // Получаем значение из выходного параметра
+                        requestId = cmd.Parameters["p_export_batch_id"].Value != DBNull.Value
+                            ? Convert.ToInt64(cmd.Parameters["p_export_batch_id"].Value)
+                            : 0;
+
+                    }
+
+                    // 2. Формируем пакет по request
+                    const string runRequestSql = @"
                     do $$
                     declare
                         v_batch_id bigint;
                     begin
                         call exchange1c.usp_export_akt_furn_by_request(
-                            p_export_request_id => @p_request_id,
-                            p_created_by => @p_user_name,
+                            @p_request_id,
+                            @p_user_name,
                             p_export_batch_id => v_batch_id
                         );
 
@@ -447,22 +602,52 @@ namespace ExchangeApp.Data
 
                     select batch_id from tmp_batch_result limit 1;";
 
-                long batchId;
-                await using (var cmd = new NpgsqlCommand(runRequestSql, cn, tx))
-                {
-                    cmd.Parameters.AddWithValue("p_request_id", requestId);
-                    cmd.Parameters.AddWithValue("p_user_name", userName ?? Environment.UserName);
+                    long batchId;
+                    await using (var cmd = new NpgsqlCommand(runRequestSql, cn, tx))
+                    {
+                        //cmd.Parameters.AddWithValue("p_request_id", requestId);
+                        //cmd.Parameters.AddWithValue("p_user_name", userName ?? Environment.UserName);
 
-                    var result = await cmd.ExecuteScalarAsync();
-                    batchId = Convert.ToInt64(result);
+                        cmd.Parameters.Add(new NpgsqlParameter("p_request_id", NpgsqlTypes.NpgsqlDbType.Varchar) { Value = requestId });
+                        cmd.Parameters.Add(new NpgsqlParameter("p_user_name", NpgsqlTypes.NpgsqlDbType.Varchar) { Value = userName ?? Environment.UserName });
+                        
+                        var outParam = new NpgsqlParameter("p_export_batch_id", NpgsqlTypes.NpgsqlDbType.Bigint)
+                        {
+                            Direction = ParameterDirection.InputOutput,
+                            Value = DBNull.Value
+                        };
+                        cmd.Parameters.Add(outParam);
+
+                        //await cmd.ExecuteNonQueryAsync();
+
+                        await cmd.ExecuteNonQueryAsync();
+
+                        // Получаем значение из выходного параметра
+                        batchId = cmd.Parameters["p_export_batch_id"].Value != DBNull.Value
+                            ? Convert.ToInt64(cmd.Parameters["p_export_batch_id"].Value)
+                            : 0;
+
+                        //var result = await cmd.ExecuteScalarAsync();
+                        //batchId = Convert.ToInt64(result);
+                    }
+
+                    await tx.CommitAsync();
+                    return batchId;
                 }
-
-                await tx.CommitAsync();
-                return batchId;
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка выполнения RunAktFurnByRequestAsync");
+                    throw;
+                }
+                catch
+                {
+                    await tx.RollbackAsync();
+                    throw;
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                await tx.RollbackAsync();
+                MessageBox.Show(ex.Message, "Ошибка выполнения RunAktFurnByRequestAsync ___");
                 throw;
             }
         }

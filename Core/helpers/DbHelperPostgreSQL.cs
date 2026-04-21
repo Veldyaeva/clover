@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Dapper;
 using Npgsql;
 using SewingProduction.Core.Class.Settings;
@@ -20,6 +21,7 @@ namespace SewingProduction.Helpers
         private static string _globalConnectionString;
         private NpgsqlTransaction _currentTransaction;
         private NpgsqlConnection _currentConnection;
+        public string GetConnectionString() => _connectionString;
 
         public DataBaseHelperPostgreSQL(string _serv)
         {
@@ -77,15 +79,23 @@ namespace SewingProduction.Helpers
 
         public NpgsqlConnection GetConnection()
         {
-            var connection = new NpgsqlConnection(_connectionString);
-
-            // Открываем соединение сразу, чтобы вызывающий код мог выполнять bulk-операции без задержек
-            if (connection.State != ConnectionState.Open)
+            try
             {
-                connection.Open();
-            }
+                var connection = new NpgsqlConnection(_connectionString);
 
-            return connection;
+                // Открываем соединение сразу, чтобы вызывающий код мог выполнять bulk-операции без задержек
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                return connection;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка в GetConnection");
+                throw;
+            }
         }
 
         #region async

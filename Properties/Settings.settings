@@ -57,8 +57,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="CleverPGConnectionString" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Host=192.168.251.2; Port=5432; Database=clever; Username=sa; Password=kf,bhbyn;
-</Value>
+      <Value Profile="(Default)">Host=192.168.251.2; Port=5432; Database=clever; Username=sa; Password=kf,bhbyn;;Include Error Detail=true;</Value>
     </Setting>
   </Settings>
 </SettingsFile>
