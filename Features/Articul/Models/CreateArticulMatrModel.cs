@@ -32,6 +32,13 @@ namespace SewingProduction.Features.Articul.Models
         /// сезон
         /// </summary>
         public string Tsn_name { get; set; }
+        //товарная группа
+        public int Men_int { get; set; }
+        public string Grupmen_name { get; set; }
+        //название сезона
+        public string Tsn_name { get; set; } 
+        //идентификатор сезона
+        public int Baza { get; set; }
         /// <summary>
         /// блок
         /// </summary>
@@ -48,7 +55,7 @@ namespace SewingProduction.Features.Articul.Models
         /// артикул
         /// </summary>
         public string Articul { get; set; }
-        
+        public string MatrixGrupName { get; set; }
         public DateTime? DatePublic { get; set; }
         /// <summary>
         /// торговая марка
@@ -70,6 +77,7 @@ namespace SewingProduction.Features.Articul.Models
         /// ассортимент
         /// </summary>
         public string Kod_v { get; set; }
+        public string AssortName { get; set; }
         public string Tat_name { get; set; }
         /// <summary>
         /// тип принта при печати на принтере, сейчас почти не используется
@@ -136,6 +144,8 @@ namespace SewingProduction.Features.Articul.Models
         /// <summary>
         /// ткань
         /// </summary>
+        public string Grup { get; set; }
+        public string GostName { get; set; }
         public string Tkb {  get; set; }
         public DateTime? DateCertificationApproval { get; set; }
 

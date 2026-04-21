@@ -54,7 +54,7 @@ namespace SewingProduction.Features.Articul.Forms
                 if (kv.Key != null && kv.Value != null)
                     _propertyToControl[kv.Value.Name] = kv.Key;
             }
-
+            /*
             RegisterSeries("txbNorm_t", "Norm_t");
             RegisterSeries("txbTkanSeb_t", "Seb_t");
             RegisterSeries("txbBrak", "Brak_t");
@@ -62,6 +62,7 @@ namespace SewingProduction.Features.Articul.Forms
             RegisterSeries("txbKfKach", "Kf_tkan_kach");
             RegisterSeries("txbOpis_t", "Opis_t");
             RegisterSeries("tkb", "Tkb");
+            */
             _propertyToControl[nameof(SpArticulPreviewModel.Ag_id)] = txbGrup;
         }
 

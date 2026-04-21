@@ -41,6 +41,7 @@ namespace SewingProduction.Features.Articul.Forms
         private DatabaseHelper _dbHelper;
         private DbService _dbService;
         private static BulkHelper _bulkHelper;
+        
 
         //private ArticulDataService _articulDataService;
         private ArticulEditAdvanceService _articulEdAdvDataService;
@@ -480,6 +481,11 @@ namespace SewingProduction.Features.Articul.Forms
                         var props = bs.CurrencyManager?.GetItemProperties();
                         if (props == null)
                             throw new InvalidOperationException("BindingSource не инициализирован");
+                        
+                        var propTag = edit.Tag as String;
+                        if (propTag == "NO")
+                            continue;
+                        
                         // удаление префикса txt или txb controlName.Substring(3);
                         string propName = edit.Name.Length > 3 ? edit.Name[3..] : edit.Name;
 

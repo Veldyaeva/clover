@@ -2,9 +2,15 @@
 using DevExpress.CodeParser;
 using DevExpress.Utils.Gesture;
 using DevExpress.Xpo.DB.Helpers;
+using DevExpress.Xpo.Logger.Transport;
+using DevExpress.XtraEditors;
+using DevExpress.XtraMap.Drawing.DirectD3D9;
 using DevExpress.XtraScheduler.Native;
 using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
+using Org.BouncyCastle.Crypto;
+using SewingProduction.Core.Class;
 using SewingProduction.Core.Models;
+using SewingProduction.Features.Articul;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
@@ -18,6 +24,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SewingProduction.Features.Articul.Service
 {
@@ -58,6 +65,52 @@ namespace SewingProduction.Features.Articul.Service
                 return null;
             }
         }
+        public async Task<List<CreateArticulMatrModel>> GetMatrForNNAsync(string nn)
+        {
+            try
+            {
+                using var connection = _dbHelper.GetConnection();
+                var result = await connection.QueryAsync<CreateArticulMatrModel>(
+                    "dbo.spCreateArticulMatr",
+                    param: new { nn = nn },
+                    transaction: null,
+                    commandType: CommandType.StoredProcedure,
+                    commandTimeout: 120 //в секундах
+                    );
+
+                return result.AsList();
+            }
+            catch (SqlException ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetMatrForNNAsync");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetMatrForNNAsync");
+                return null;
+            }
+        }
+
+        public async Task<BindingList<SpArticulPreviewModel>> GetPreviewArticulAsync(string nn)
+        {
+            try
+            {
+                var listnn = await GetMatrForNNAsync(nn);
+
+                var result = listnn
+                    .Select(x => ArticulMapper.ToArticulModel(x))
+                    .ToList();
+
+                return new BindingList<SpArticulPreviewModel>(result);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetPreviewArticulAsync");
+                return null;
+            }
+        }
+
         public async Task<CreateArticulMatrModel> GetStatusForArticulAsync(string nn, int idgost, int agid )
         {
             try
@@ -87,7 +140,7 @@ namespace SewingProduction.Features.Articul.Service
             try
             {
                 string query = "SELECT  id_gost,name_gost,opi_gost FROM dbo.gost where ust = 0 order by id_gost";
-                return new BindingList<GostModel>(await _dbService.GetListAsync<GostModel>(query, new { }));
+                return new BindingList<GostModel>(await _dbService.GetListAsync<GostModel>(query, new {  }));
             }
             catch (Exception ex)
             {
@@ -140,5 +193,67 @@ namespace SewingProduction.Features.Articul.Service
 
         }
 
+        public async Task<BindingList<PlanRazmSetkaModel>> GetMatrPlanRazm(string nn,string kod, string po )
+        {
+            if (String.IsNullOrEmpty(kod) || !char.IsDigit(kod.Last()))
+            {
+                XtraMessageBox.Show("Укажите новый код изделия", "Подтверждение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return null;
+            }
+            try
+            {
+                string query = "SELECT nn, razm_ind, razm_matr, rost FROM view_matrPlanRazm where  nn = @nn ";
+                var list = await _dbService.GetListAsync<PlanRazmSetkaModel>(query, new { nn });
+                
+                int lastind = kod.Last() - '0';
+
+                foreach (var el in list)
+                {
+                    el.Kod = kod.Substring(0,7) + lastind.ToString();
+                    lastind ++;
+                    el.Po = po;
+                }
+
+                return new BindingList<PlanRazmSetkaModel>(list);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetMatrPlanRazm");
+                return null;
+            }
+        }
     }
+
+
+
+    public static class ArticulMapper
+    {
+        public static SpArticulPreviewModel ToArticulModel(CreateArticulMatrModel x)
+        {
+            return new SpArticulPreviewModel
+            {
+                Articul = x.Articul,
+                Mod = x.Article,
+                Baza = x.Baza,// сезон
+                SeasonName = x.Tsn_name,
+                Grupp = x.Men_int,
+                GrupMenName = x.Grupmen_name,
+                TmName = x.Tm_name,
+                Kle = x.Kle,//ТМ sp 
+                Sost = x.Sost,
+                Sost2 = x.Sost2,
+                Sost3 = x.Sost3,
+                Kruj = x.Kruj,
+                Id_gost = x.Id_gost,//ГОСТ
+                Gost = x.GostName,
+                Ag_id = x.Ag_id,// группа по ГОСТ
+                Grup = x.Grup,
+                Tkb = x.Tkb,
+                Kod_v = x.Kod_v,//код ассортимента
+                AssortName = x.AssortName
+
+            };
+        }
+    }
+
 }

@@ -107,7 +107,7 @@
             customSimpleButtonPermissions = new SewingProduction.Core.Class.CustomSimpleButton();
             customLayoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
             pictureBoxMatrix = new SewingProduction.Core.Class.CustomPictureBox();
-            customSimpleButton1 = new SewingProduction.Core.Class.CustomSimpleButton();
+            btnAddModel = new SewingProduction.Core.Class.CustomSimpleButton();
             btnSelectModel = new SewingProduction.Core.Class.CustomSimpleButton();
             gridArtCompare = new SewingProduction.Core.Class.CustomGridControl();
             gridViewArtCompare = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -466,7 +466,7 @@
             // 
             // gcCertSost2
             // 
-            gcCertSost2.Caption = "Состав: Отделка";
+            gcCertSost2.Caption = "Состав: Подклад";
             gcCertSost2.Name = "gcCertSost2";
             gcCertSost2.OptionsColumn.AllowEdit = false;
             gcCertSost2.OptionsColumn.ReadOnly = true;
@@ -476,7 +476,7 @@
             // 
             // gcCertSost3
             // 
-            gcCertSost3.Caption = "Состав: Подклад";
+            gcCertSost3.Caption = "Состав: Отделка";
             gcCertSost3.Name = "gcCertSost3";
             gcCertSost3.OptionsColumn.AllowEdit = false;
             gcCertSost3.OptionsColumn.ReadOnly = true;
@@ -831,7 +831,7 @@
             // 
             // gcSost2
             // 
-            gcSost2.Caption = "Состав: Отделка";
+            gcSost2.Caption = "Состав: Подклад";
             gcSost2.Name = "gcSost2";
             gcSost2.OptionsColumn.AllowEdit = false;
             gcSost2.Visible = true;
@@ -840,7 +840,7 @@
             // 
             // gcSost3
             // 
-            gcSost3.Caption = "Состав: Подклад";
+            gcSost3.Caption = "Состав: Отделка";
             gcSost3.Name = "gcSost3";
             gcSost3.OptionsColumn.AllowEdit = false;
             gcSost3.Visible = true;
@@ -875,7 +875,7 @@
             // customLayoutControl1
             // 
             customLayoutControl1.Controls.Add(pictureBoxMatrix);
-            customLayoutControl1.Controls.Add(customSimpleButton1);
+            customLayoutControl1.Controls.Add(btnAddModel);
             customLayoutControl1.Controls.Add(btnSelectModel);
             customLayoutControl1.Controls.Add(gridArtCompare);
             customLayoutControl1.Controls.Add(articulControl1);
@@ -903,16 +903,17 @@
             pictureBoxMatrix.TabIndex = 7;
             pictureBoxMatrix.TabStop = false;
             // 
-            // customSimpleButton1
+            // btnAddModel
             // 
-            customSimpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton1.Appearance.Options.UseFont = true;
-            customSimpleButton1.Location = new System.Drawing.Point(1116, 327);
-            customSimpleButton1.Name = "customSimpleButton1";
-            customSimpleButton1.Size = new System.Drawing.Size(199, 23);
-            customSimpleButton1.StyleController = customLayoutControl1;
-            customSimpleButton1.TabIndex = 6;
-            customSimpleButton1.Text = "Добавить новую модель ";
+            btnAddModel.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            btnAddModel.Appearance.Options.UseFont = true;
+            btnAddModel.Location = new System.Drawing.Point(1116, 327);
+            btnAddModel.Name = "btnAddModel";
+            btnAddModel.Size = new System.Drawing.Size(199, 23);
+            btnAddModel.StyleController = customLayoutControl1;
+            btnAddModel.TabIndex = 6;
+            btnAddModel.Text = "Добавить новую модель ";
+            btnAddModel.Click += btnAddModel_Click;
             // 
             // btnSelectModel
             // 
@@ -924,6 +925,7 @@
             btnSelectModel.StyleController = customLayoutControl1;
             btnSelectModel.TabIndex = 5;
             btnSelectModel.Text = "Выбрать модель для стыковки";
+            btnSelectModel.Click += btnSelectModel_Click;
             // 
             // gridArtCompare
             // 
@@ -1062,7 +1064,7 @@
             // 
             // layoutControlItem5
             // 
-            layoutControlItem5.Control = customSimpleButton1;
+            layoutControlItem5.Control = btnAddModel;
             layoutControlItem5.Location = new System.Drawing.Point(1114, 325);
             layoutControlItem5.Name = "layoutControlItem5";
             layoutControlItem5.Size = new System.Drawing.Size(203, 27);
@@ -1239,7 +1241,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcArhCompare;
         private Core.Class.CustomSimpleButton btnSelectModel;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
-        private Core.Class.CustomSimpleButton customSimpleButton1;
+        private Core.Class.CustomSimpleButton btnAddModel;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
         private DevExpress.XtraLayout.SplitterItem splitterItem1;

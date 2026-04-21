@@ -6,6 +6,8 @@ using SewingProduction.Core.Services;
 using SewingProduction.Features.Articul.Helpers;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
+using SewingProduction.Features.UserDistribution.Class;
+using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
@@ -50,6 +52,7 @@ namespace SewingProduction.Features.Articul.Forms
 
             InitializeComponent();
 
+            _user = user;
 
             _bindingSourceArtMatr = new BindingSource { };
             _bindingSourceArticulCompare = new BindingSource { };
@@ -63,6 +66,23 @@ namespace SewingProduction.Features.Articul.Forms
         }
 
         private async void CreateArticulMatr_Load(object sender, EventArgs e)
+        {
+
+            LoadOrRefreshData();
+
+            articulControl1.BindTo(_bsDetails);
+            articulControl1.IsReadOnly = true;
+
+            InitializeBindings();
+            BindGost();
+            BindGostGrupp();
+
+            //в зависимости от прав пользователя - разрешаем или запрещаем редактирование грида 
+            _isEditing = customSimpleButtonPermissions.Visible;
+            SetPermisions();
+
+        }
+        private async void LoadOrRefreshData()
         {
             //загрузка данных для отображения в гриде
             gridViewArtMatr.ShowLoadingPanel();
@@ -79,20 +99,8 @@ namespace SewingProduction.Features.Articul.Forms
             gridViewArtMatr.HideLoadingPanel();
             gridViewArtMatrEdit.HideLoadingPanel();
 
-            articulControl1.BindTo(_bsDetails);
-            articulControl1.IsReadOnly = true;
-
-
-
-            InitializeBindings();
-            BindGost();
-            BindGostGrupp();
-
-            //в зависимости от прав пользователя - разрешаем или запрещаем редактирование грида 
-            _isEditing = customSimpleButtonPermissions.Visible;
-            SetPermisions();
-
         }
+
         /// <summary>
         /// в зависимости от прав пользователя - разрешаем или запрещаем редактирование грида 
         /// </summary>
@@ -435,7 +443,7 @@ namespace SewingProduction.Features.Articul.Forms
             {
                 var matrixRow = _bindingSourceArtMatr.Current as CreateArticulMatrModel;// получаем текущую выбранную строку из матрицы, с которой будем сравнивать
                 var compareRow = _bindingSourceArticulCompare.Current as SpArtPreviewModel;// получаем текущую выбранную строку из грида сравнения, с которой будем сравнивать
-                
+
 
                 articulControl1.ClearComparisonHighlight();// очищаем предыдущую подсветку сравнения, чтобы не было "висячей" подсветки от предыдущего сравнения
 
@@ -467,7 +475,7 @@ namespace SewingProduction.Features.Articul.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message.ToString() +"213");
+                MessageBox.Show(ex.Message.ToString() + "213");
                 _lastCompareResult = false;
             }
 
@@ -496,6 +504,47 @@ namespace SewingProduction.Features.Articul.Forms
                     }
                     : item)
                 .ToList();
+        }
+
+        private void btnSelectModel_Click(object sender, EventArgs e)
+        {
+            var curMatr = _bindingSourceArtMatr.Current as CreateArticulMatrModel;// получаем текущую выбранную строку из матрицы
+            if (curMatr == null)
+                return;
+
+
+            using (AppendArticul f = new AppendArticul(CurrentUser.User, curMatr.Nn))
+            {
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    LoadOrRefreshData();
+                }
+            }
+        }
+
+        private void btnAddModel_Click(object sender, EventArgs e)
+        {
+            var curMatr = _bindingSourceArtMatr.Current as CreateArticulMatrModel;// получаем текущую выбранную строку из матрицы
+            if (curMatr == null)
+                return;
+            var currArt = _bindingSourceArticulCompare.Current as SpArtPreviewModel;// получаем текущую выбранную строку из грида сравнения
+            if (currArt == null)
+                return;
+
+
+            using (AppendArticul f = new AppendArticul(CurrentUser.User, curMatr.Nn, currArt.Kod))
+            {
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    LoadOrRefreshData();
+                }
+
+                //if (f.ShowDialog() == DialogResult.OK)
+                //{
+                //    await RefreshArtPreviewAsync();
+                //    LogSuccess("Создан новый артикул через форму EditArticul.", nameof(csButtonNew_Click));
+                //}
+            }
         }
     }
 }
