@@ -1,4 +1,7 @@
-﻿using SewingProduction.Core.Models;
+﻿using DevExpress.XtraEditors.ButtonsPanelControl;
+using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraLayout;
+using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
 using SewingProduction.Features.UserDistribution.Helpers;
@@ -16,44 +19,47 @@ namespace SewingProduction.Features.Articul.Forms
 {
     public partial class AppendArticul : CustomForm
     {
-        private int _typeCreate = 0;
+        private int _typeCreate;
         private string _nn;
         private string _kod;
         private BindingSource _bindingSourceArticul = new BindingSource();
-
+        private BindingSource _bindingSourceRazms = new BindingSource();
         private CreateArticulMatrService _createArticulMatrService = new CreateArticulMatrService();
+        private ArticulEditAdvanceService _articulEdAdvDataService = new ArticulEditAdvanceService();
+        private readonly ILogger _logger = new FileLogger();
 
         public AppendArticul(UserClass user) : base(user)
         {
             InitializeComponent();
+            gridRazm.DataSource = _bindingSourceRazms;
+
         }
 
         public AppendArticul(UserClass user, string nn) : this(user)
         {
-           // InitializeComponent();
             // 0 - создание,1 - стыковка
             _typeCreate = 0;
             _nn = nn;
-            
         }
         public AppendArticul(UserClass user, string nn, string kod) : this(user)
         {
-            //InitializeComponent();
+
             // 0 - создание,1 - стыковка
             _typeCreate = 1;
             _nn = nn;
             _kod = kod;
-            
         }
 
         private async void AppendArticul_Load(object sender, EventArgs e)
         {
             _bindingSourceArticul.DataSource = await _createArticulMatrService.GetPreviewArticulAsync(_nn);
             InitializeBindings();
-
+            BindGostRazm();
         }
         private void InitializeBindings()
         {
+            txtKod.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.Kod), true);
+            txtPo.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.Po), true);
             txtArticul.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.Articul), true);
             txtMod.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.Mod), true);
             txtSeason.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.SeasonName), true);
@@ -68,7 +74,66 @@ namespace SewingProduction.Features.Articul.Forms
             txtGrup.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.Grup), true);
             txtTkb.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.Tkb), true);
             txtAssort.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.AssortName), true);
+            
 
         }
+
+        private async Task CreateRazm()
+        {
+            _bindingSourceArticul.EndEdit();
+            var kod = (_bindingSourceArticul.Current as SpArticulPreviewModel).Kod;
+            var po = (_bindingSourceArticul.Current as SpArticulPreviewModel).Po;
+
+            _bindingSourceRazms.DataSource = null;
+            _bindingSourceRazms.DataSource = await _createArticulMatrService.GetMatrPlanRazm(_nn, kod, po);
+
+        }
+
+        private async void layoutControlGroup1_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
+        {
+            if (sender is LayoutControlGroup group && e.Button is GroupBoxButton button)
+            {
+                string tag = button.Tag?.ToString() ?? string.Empty;
+
+                switch (tag)
+                {
+                    case "lcg1AddSize":
+                        await CreateRazm();
+                        break;
+
+                    default:
+
+                        break;
+                }
+            }
+        }
+        private async void BindGostRazm()
+        {
+            try
+            {
+                var idgost = (_bindingSourceArticul.Current as SpArticulPreviewModel).Id_gost;
+                var ri = repositoryItemLookUpEdit1;
+                ri.DataSource = await _articulEdAdvDataService.GetGostRazmByIDAsync(idgost);
+                ri.DisplayMember = nameof(GostRazmerNabViewModel.Razm);
+                ri.ValueMember = nameof(GostRazmerNabViewModel.Razm);
+                // Колонки выпадающего списка (по желанию)
+                ri.Columns.Clear();
+                ri.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Razm", "Название"));
+
+                ri.NullText = ""; // что показывать, если значение null
+                ri.ShowHeader = false;
+                ri.ShowFooter = false;
+                ri.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor; // запрет ввода, только выбор
+                ri.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок размера ГОСТ");
+                throw;
+            }
+        }
+
     }
+
 }
+

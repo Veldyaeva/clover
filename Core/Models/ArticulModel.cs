@@ -64,22 +64,20 @@ namespace SewingProduction.Core.Models
         public int Arh { get => _arh; set => SetField(ref _arh, value); }
         public int? Annid { get; set; }
 
-        public string Kod { get; set; }
+        private string _kod;
+        public string Kod { get=>_kod;set => SetField(ref _kod, value);}
+        private string _po;
+        public string Po {get => _po;set => SetField(ref _po, value);}
+
         private string _grup;
-        public string Grup { get=>_grup;
-            set => SetField(ref _grup, value);
-        }
+        public string Grup { get=>_grup;set => SetField(ref _grup, value);}
         private int _ag_id;
         public int Ag_id{get => _ag_id; set=> SetField(ref _ag_id, value); }
 
         private string _articul;
-        public string Articul { get=>_articul; 
-            set => SetField(ref _articul, value);
-        }
+        public string Articul { get=>_articul; set => SetField(ref _articul, value);}
         private string _mod;
-        public string Mod { get=>_mod;
-            set => SetField(ref _mod, value);
-        }
+        public string Mod { get=>_mod; set => SetField(ref _mod, value);}
         private string _razm;
         public string Razm { get=>_razm;
             set => SetField(ref _razm, value);
@@ -142,11 +140,8 @@ namespace SewingProduction.Core.Models
         public decimal Kat_n { get; set; }
         public decimal Seb_n { get; set; }
 
+
         
-        
-        
-        
-        public string Po { get; set; }
         public decimal Seb_z_s { get; set; }
         public int Sek_vyaz5 { get; set; }
         public int Sek_vyaz7 { get; set; }
@@ -607,8 +602,8 @@ namespace SewingProduction.Core.Models
             get => _seb_rekom;
             set => SetField(ref _seb_rekom, value);
         }
-        private decimal _calc_seb_rekom;
-        public decimal Calc_seb_rekom
+        [NotMapped] private decimal? _calc_seb_rekom;
+        [NotMapped] public decimal? Calc_seb_rekom
         {
             get => _calc_seb_rekom;
             set => SetField(ref _calc_seb_rekom, value);

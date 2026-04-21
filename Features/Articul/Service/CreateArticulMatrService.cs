@@ -3,10 +3,12 @@ using DevExpress.CodeParser;
 using DevExpress.Utils.Gesture;
 using DevExpress.Xpo.DB.Helpers;
 using DevExpress.Xpo.Logger.Transport;
+using DevExpress.XtraEditors;
 using DevExpress.XtraMap.Drawing.DirectD3D9;
 using DevExpress.XtraScheduler.Native;
 using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using Org.BouncyCastle.Crypto;
+using SewingProduction.Core.Class;
 using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul;
 using SewingProduction.Features.Articul.Models;
@@ -22,6 +24,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SewingProduction.Features.Articul.Service
 {
@@ -137,7 +140,7 @@ namespace SewingProduction.Features.Articul.Service
             try
             {
                 string query = "SELECT  id_gost,name_gost,opi_gost FROM dbo.gost where ust = 0 order by id_gost";
-                return new BindingList<GostModel>(await _dbService.GetListAsync<GostModel>(query, new { }));
+                return new BindingList<GostModel>(await _dbService.GetListAsync<GostModel>(query, new {  }));
             }
             catch (Exception ex)
             {
@@ -190,7 +193,39 @@ namespace SewingProduction.Features.Articul.Service
 
         }
 
+        public async Task<BindingList<PlanRazmSetkaModel>> GetMatrPlanRazm(string nn,string kod, string po )
+        {
+            if (String.IsNullOrEmpty(kod) || !char.IsDigit(kod.Last()))
+            {
+                XtraMessageBox.Show("Укажите новый код изделия", "Подтверждение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return null;
+            }
+            try
+            {
+                string query = "SELECT nn, razm_ind, razm_matr, rost FROM view_matrPlanRazm where  nn = @nn ";
+                var list = await _dbService.GetListAsync<PlanRazmSetkaModel>(query, new { nn });
+                
+                int lastind = kod.Last() - '0';
+
+                foreach (var el in list)
+                {
+                    el.Kod = kod.Substring(0,7) + lastind.ToString();
+                    lastind ++;
+                    el.Po = po;
+                }
+
+                return new BindingList<PlanRazmSetkaModel>(list);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetMatrPlanRazm");
+                return null;
+            }
+        }
     }
+
+
+
     public static class ArticulMapper
     {
         public static SpArticulPreviewModel ToArticulModel(CreateArticulMatrModel x)
