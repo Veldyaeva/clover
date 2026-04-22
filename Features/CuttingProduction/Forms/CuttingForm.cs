@@ -10,6 +10,7 @@ using System.ServiceModel.Channels;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.Charts.Native;
+using DevExpress.CodeParser;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
@@ -625,8 +626,14 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             {
                 MessageBox.Show("Текстильное производство печатать только на готовое изделие, на чехол не надо!");
                 return;
-            }
-            string nomVyazAndRask = str.nom_zad?.ToString() ?? string.Empty;
+            }      
+
+            string nom = str.nom?.ToString() ?? string.Empty;
+			var printSewn = new PrintSewn(nom, nomZad, "0");
+			printSewn.ShowDialog();
+			return;
+
+			string nomVyazAndRask = str.nom_zad?.ToString() ?? string.Empty;
 
             string lNom = str.nom?.ToString() ?? string.Empty;
             string lNomN = str.nom_n?.ToString() ?? string.Empty;
@@ -654,7 +661,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
                 }
 
                 string printModel = rows.Count > 0 ? rows[rows.Count - 1].mod : string.Empty;
-                var printSewn = new PrintSewn(lKod, rows[rows.Count - 1].mod, razmKol);
+                //var printSewn = new PrintSewn(lKod, rows[rows.Count - 1].mod, razmKol);
                 printSewn.ShowDialog();
             }
             else
@@ -695,7 +702,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
                 string printModel = rows.Count > 0
                     ? (typeMod == 0 ? rows[rows.Count - 1].mod_k : rows[rows.Count - 1].mod)
                     : string.Empty;
-                var printSewn = new PrintSewn(lKod, typeMod == 0 ? rows[rows.Count - 1].mod_k : rows[rows.Count - 1].mod, razmKol);
+                //var printSewn = new PrintSewn(lKod, typeMod == 0 ? rows[rows.Count - 1].mod_k : rows[rows.Count - 1].mod, razmKol);
                 printSewn.ShowDialog();
             }
 

@@ -7,9 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraReports.UI;
+using SewingProduction.Core.Class;
 using SewingProduction.Core.Models;
 using SewingProduction.Core.services;
+using SewingProduction.Features.CardByNom.Models;
+using SewingProduction.Features.CuttingProduction.Models;
 using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Report;
 
 namespace SewingProduction.Core.Forms
 {
@@ -20,18 +25,28 @@ namespace SewingProduction.Core.Forms
         private List<PrintSewnRazmKolRow> _printSewnRazmKolRow;
         private readonly PrintSewnDataService _printSewnDataService = new PrintSewnDataService();
         private List<PrintSewnBlVshRow> _blVshRows = new List<PrintSewnBlVshRow>();
-        public PrintSewn(UserClass user) : base(user)
+		private string _nom;
+		private string _nomZad;
+		private string _proizvType;
+		public PrintSewn(UserClass user) : base(user)
         {
             InitializeComponent();
-        }
-        public PrintSewn(string kod, string model, List<PrintSewnRazmKolRow> printSewnRazmKolRow)
-        {
-            _kod = kod;
-            _model = model;
-            _printSewnRazmKolRow = printSewnRazmKolRow;
-            InitializeComponent();
-        }
-        private async void PrintSewn_Load(object sender, EventArgs e)
+		}
+		public PrintSewn(string kod, string model, List<PrintSewnRazmKolRow> printSewnRazmKolRow)
+		{
+			_kod = kod;
+			_model = model;
+			_printSewnRazmKolRow = printSewnRazmKolRow;
+			InitializeComponent();
+		}
+		public PrintSewn(string nom, string nomZad, string proizvType)
+		{
+			_nom = nom;
+			_nomZad = nomZad;
+			_proizvType = proizvType;
+			InitializeComponent();
+		}
+		private async void PrintSewn_Load(object sender, EventArgs e)
         {
             try
             {
@@ -39,10 +54,6 @@ namespace SewingProduction.Core.Forms
                 gridControlBlVsh.DataSource = null;
 
                 gridControlRazmKol.DataSource = _printSewnRazmKolRow;
-
-                bool ok = await PrnVshivAllAsync();
-                if (!ok)
-                    return;
 
                 gridControlBlVsh.DataSource = _blVshRows;
             }
@@ -238,192 +249,45 @@ namespace SewingProduction.Core.Forms
 
             return razm.Substring(index);
         }
-        #region широкие ЭЙС, Клевер (новый)
+		#region широкие ЭЙС, Клевер (новый)
 
-        private int _torgMarkaPer = 1;
-        private string _typeVsh = string.Empty;
-        private string _razmSymbol = "v";
-        private string _symbolImage = string.Empty;
-        private string _nameVsh = string.Empty;
-        private string _nomVyazAndRask = string.Empty;
-        private async void customSimpleButtonACE_Click(object sender, EventArgs e)
-        {
-            bool ok = await PrnVshivAllAsync();
-            if (!ok) return;
+		private void customSimpleButtonACE_Click(object sender, EventArgs e)
+		{
+            VshivkiReport report1 = new VshivkiReport();
+            requestParameters(report1);
+            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            reportPrintTool1.ShowPreviewDialog();
 
-            if (_blVshRows == null || _blVshRows.Count == 0)
-            {
-                MessageBox.Show("Нет данных для печати.");
-                return;
-            }
-
-            var distinctSost = _blVshRows
-                .Select(x => new
-                {
-                    Sost = x.Sost?.Trim() ?? string.Empty,
-                    Sost2 = x.Sost2?.Trim() ?? string.Empty,
-                    Sost3 = x.Sost3?.Trim() ?? string.Empty
-                })
-                .Distinct()
-                .ToList();
-
-            if (distinctSost.Count > 1)
-            {
-                MessageBox.Show("Внимание! Разный состав для одной модели! Печать невозможна!");
-                return;
-            }
-
-            var pechCheck = _blVshRows
-                .Select(x => GetKod7(x.Kod))
-                .Where(x => !string.IsNullOrWhiteSpace(x))
-                .Distinct()
-                .ToList();
-
-            if (pechCheck.Count > 1)
-            {
-                int? psaIdOsn = await _printSewnDataService.GetPsaIdOsnByNomAsync(_nomVyazAndRask);
-                if (psaIdOsn.HasValue && psaIdOsn.Value != 0)
-                {
-                    MessageBox.Show("Печатать по кнопке 'Комплекты'");
-                    return;
-                }
-            }
-
-            if (!string.IsNullOrWhiteSpace(_nomVyazAndRask) && _nomVyazAndRask.StartsWith("32"))
-            {
-                MessageBox.Show("Печать по кнопке Вшивки для текстиля ЭЙС (130x50)!");
-                return;
-            }
-
-            string firstKod7 = pechCheck.FirstOrDefault() ?? string.Empty;
-            if (!string.IsNullOrWhiteSpace(firstKod7))
-            {
-                bool isNabor = await _printSewnDataService.IsNaborOdezhdyAsync(firstKod7);
-                if (isNabor)
-                {
-                    MessageBox.Show("Это набор одежды! Печать по другой кнопке");
-                    return;
-                }
-            }
-
-            var firstRow = _blVshRows[0];
-
-            if (firstRow.IdGost == 216)
-            {
-                MessageBox.Show("Спецодежда! Печать по кнопке Спецодежда!");
-                return;
-            }
-
-            _torgMarkaPer = await _printSewnDataService.GetOsUseTmAsync(_nomVyazAndRask);
-
-            _typeVsh = "_double2";
-            _razmSymbol = "v";
-            _symbolImage = BuildSymbolImage(_razmSymbol, firstRow.Symbol);
-
-            if (firstRow.Articul == "1Ф1686" ||
-                firstRow.Articul == "1Ф1673" ||
-                firstRow.Articul == "1В576" ||
-                firstRow.Articul == "1Ф1798" ||
-                firstRow.Articul == "1В298" ||
-                firstRow.Articul == "1Ф1808" ||
-                firstRow.Articul == "1М448")
-            {
-                _razmSymbol = "w";
-                _nameVsh = "vshivka_big1_17" + _typeVsh + ".frx";
-
-                await PrintCurrentTemplateAsync(_nameVsh);
-                return;
-            }
-
-            if (firstRow.Articul == "1Ю176" || firstRow.Articul == "1Р112")
-            {
-                _razmSymbol = "w";
-                _nameVsh = "vshivka_big_zam1_17" + _typeVsh + ".frx";
-
-                await PrintCurrentTemplateAsync(_nameVsh);
-                return;
-            }
-
-            if (firstRow.Articul == "1А68")
-            {
-                _nameVsh = "vshivka_big_zam2_17" + _typeVsh + ".frx";
-
-                await PrintCurrentTemplateAsync(_nameVsh);
-                return;
-            }
-
-            if (firstRow.Articul == "1Ф1780" || firstRow.Articul == "1Ф1781")
-            {
-                _nameVsh = "vshivka_big2_17" + _typeVsh + ".frx";
-
-                await PrintCurrentTemplateAsync(_nameVsh);
-                return;
-            }
-
-            _razmSymbol = "w";
-            _symbolImage = BuildSymbolImage(_razmSymbol, firstRow.Symbol);
-
-            if (HasMstrFields())
-                _nameVsh = "vshivka_big3_17" + _typeVsh + "_1.frx";
-            else
-                _nameVsh = "vshivka_big3_17" + _typeVsh + ".frx";
-
-            await PrintCurrentTemplateAsync(_nameVsh);
-
-            int? nn = await _printSewnDataService.GetPlanSezonNnByNomAsync(_nomVyazAndRask);
-            if (!nn.HasValue)
-                return;
-
-            bool hasKomplJoin = await _printSewnDataService.HasKomplJoinVshivkiAsync(nn.Value);
-            if (hasKomplJoin)
-            {
-                MessageBox.Show(
-                    "Напечатан " +
-                    (firstRow.Grup ?? string.Empty).Split(' ').FirstOrDefault()?.ToUpper() +
-                    Environment.NewLine + Environment.NewLine +
-                    "Нажмите ОК для печати 2-го экземпляра вшивок для Комплекта/Пижамы");
-
-                await PrintCurrentTemplateAsync(_nameVsh);
-            }
-        }
-        private string GetKod7(string kod)
-        {
-            if (string.IsNullOrWhiteSpace(kod))
-                return string.Empty;
-
-            string value = kod.Trim();
-            return value.Length <= 7 ? value : value.Substring(0, 7);
-        }
-        private string BuildSymbolImage(string razmSymbol, string symbol)
-        {
-            string pathZnak = @"\\dbfsv\ace\prog\proizv_set\znak\";
-            return System.IO.Path.Combine(pathZnak, $"{razmSymbol}{symbol}.JPG");
-        }
-        private bool HasMstrFields()
-        {
-            return _blVshRows.Any();
-        }
-        private Task PrintCurrentTemplateAsync(string reportName)
-        {
-            MessageBox.Show($"Выбран шаблон печати: {reportName}");
-            return Task.CompletedTask;
-        }
-        #endregion
-        #region Комплекты
+            VshivkiReportHol report2 = new VshivkiReportHol();
+			requestParameters(report2);
+			ReportPrintTool reportPrintTool2 = new ReportPrintTool(report2);
+			reportPrintTool2.ShowPreviewDialog();
+		}
+		private void requestParameters(XtraReport report)
+		{
+			report.RequestParameters = false;
+			report.Parameters["_nomZad"].Value = _nomZad;
+			report.Parameters["_nomZad"].Visible = false;
+			report.Parameters["_nom"].Value = _nom;
+			report.Parameters["_nom"].Visible = false;
+			report.Parameters["_proizvType"].Value = _proizvType;
+			report.Parameters["_proizvType"].Visible = false;
+		}
+		#endregion
+		#region Комплекты  
+		private void customSimpleButtonKompl_Click(object sender, EventArgs e)
+		{
+		}
 
         #endregion
-        #region Набор одежды
-
-        #endregion
-        private void customSimpleButtonKompl_Click(object sender, EventArgs e)
-        {
-
-        }
+        #region Набор одежды 
 
         private void customSimpleButtonNabor_Click(object sender, EventArgs e)
         {
 
         }
+
+        #endregion
 
     }
 }

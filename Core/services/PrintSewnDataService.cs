@@ -179,9 +179,12 @@ namespace SewingProduction.Core.services
         {
             if (string.IsNullOrWhiteSpace(kod))
                 return null;
-
+            
             string query = @"
-            SELECT distinct dbo.fn_AddSpaceToComposition(sost) as sost, sost as sost1, dbo.fn_AddSpaceToComposition(sost2) as sost2, dbo.fn_AddSpaceToComposition(sost3) as sost3 
+            SELECT distinct dbo.fn_AddSpaceToComposition(sost) as sost, 
+            sost as sost1, 
+            dbo.fn_AddSpaceToComposition(sost2) as sost2, 
+            dbo.fn_AddSpaceToComposition(sost3) as sost3 
             FROM [gtin].[kompl_normalized] kk 
 			left join view_sp_articul sp on kod_k = sp.kod 
             WHERE kod_n = @kod";

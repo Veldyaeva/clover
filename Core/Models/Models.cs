@@ -53,7 +53,7 @@ namespace SewingProduction.Core.Models
         public int Id_gost { get; set; }
         public int Id_svyz { get; set; }
         public int Arh { get; set; }
-        public int Ag_tnved { get; set; }
+        public string Ag_tnved { get; set; }
         public int Ag_tk_id { get; set; }
     }
     public class TmModel

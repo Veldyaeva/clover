@@ -469,6 +469,9 @@
     <Compile Update="Report\PZVCurrentMachineAssignmentReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
+    <Compile Update="Report\VshivkiReportHol.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Core\Forms\SettingsForm.resx">
