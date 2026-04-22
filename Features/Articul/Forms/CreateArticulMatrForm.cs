@@ -504,7 +504,7 @@ namespace SewingProduction.Features.Articul.Forms
             if (_lastCompareResult)
             {
                 // проверки перед выбором модели 
-                ArticulComparisonService objArticulChecks = new ArticulComparisonService(curMatr.Nn, curCompareRow.Kod);
+                ArticulComparisonService objArticulChecks = new ArticulComparisonService(curMatr.Nn, curCompareRow);
                 
                 if (await objArticulChecks.CanLinkArticul())
                 {
@@ -517,6 +517,8 @@ namespace SewingProduction.Features.Articul.Forms
                         }
                     }
                 }
+
+                objArticulChecks = null;
             }
             else
             {

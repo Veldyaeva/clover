@@ -121,7 +121,6 @@ namespace SewingProduction.Features.Articul.Service
                 await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetFileEskizForKod");
                 return null;
             }
-
         }
 
 
