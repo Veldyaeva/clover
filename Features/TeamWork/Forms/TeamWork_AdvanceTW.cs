@@ -102,6 +102,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             _ = _logger.LogErrorAsync(ex ?? new Exception("Suppressed exception"), $"Suppressed: {context}");
         }
         private static List<FioModel> _cachedFioData;
+        private static List<FioModel> _cachedKnitConstrFioData;
+        private readonly BindingSource _knitConstrBindingSource = new BindingSource();
         private bool _isCustomEditFormOpen = false;
         private bool _okPressed = false;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -457,6 +459,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             _controlToArtNormProperty[dateCreate] = artType.GetProperty(nameof(ArtNormN.dateCreate));
             _controlToArtNormProperty[designerComboBox] = artType.GetProperty(nameof(ArtNormN.Diz));
             _controlToArtNormProperty[constructorComboBox] = artType.GetProperty(nameof(ArtNormN.Constr));
+            _controlToArtNormProperty[knitConstrComboBox] = artType.GetProperty(nameof(ArtNormN.KnitConstr));
 
             nameTextBox.TextChanged += HandleAnnDataChange;
             groupTextBox.TextChanged += HandleAnnDataChange;
@@ -467,6 +470,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             dateCreate.ValueChanged += HandleAnnDataChange;
             designerComboBox.EditValueChanged += HandleAnnDataChange;
             constructorComboBox.EditValueChanged += HandleAnnDataChange;
+            knitConstrComboBox.EditValueChanged += HandleAnnDataChange;
         }
 
         // Общий обработчик изменений данных ANN
@@ -527,6 +531,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // if (control == dateUpdate) return nameof(ArtNormN.dateUpdate);
             if (control == designerComboBox) return nameof(ArtNormN.Diz);
             if (control == constructorComboBox) return nameof(ArtNormN.Constr);
+            if (control == knitConstrComboBox) return nameof(ArtNormN.KnitConstr);
             return null;
         }
 
@@ -1398,9 +1403,11 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 designerComboBox.DataBindings.Clear();
                 constructorComboBox.DataBindings.Clear();
+                knitConstrComboBox.DataBindings.Clear();
 
                 designerComboBox.DataBindings.Add("EditValue", bindingSource1, nameof(ArtNormN.Diz), true, DataSourceUpdateMode.OnPropertyChanged);
                 constructorComboBox.DataBindings.Add("EditValue", bindingSource1, nameof(ArtNormN.Constr), true, DataSourceUpdateMode.OnPropertyChanged);
+                knitConstrComboBox.DataBindings.Add("EditValue", bindingSource1, nameof(ArtNormN.KnitConstr), true, DataSourceUpdateMode.OnPropertyChanged);
 
                 // Подписки на RowStyle/FocusedRowChanged — один раз
                 if (!_rowStyleHandlersAttached)
@@ -1634,6 +1641,20 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
                 }
 
+                if (_cachedKnitConstrFioData == null)
+                {
+                    var knitConstrData = await _dataService.LoadKnitConstructorsAsync();
+                    if (knitConstrData != null && knitConstrData.Count > 0)
+                    {
+                        _cachedKnitConstrFioData = new List<FioModel>(knitConstrData);
+                        await _logger.LogEventAsync("FIO конструкторов-программистов загружено и закешировано", "LoadAndBindFioListsAsync");
+                    }
+                    else
+                    {
+                        await _logger.LogEventAsync("Пустой список FIO конструкторов-программистов", "LoadAndBindFioListsAsync");
+                    }
+                }
+
                 // Обновляем данные в существующих источниках привязки
                 await this.InvokeAsync(() =>
                 {
@@ -1642,9 +1663,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                     {
                         designerBindingSource.DataSource = new List<FioModel>(_cachedFioData);
                         constructorBindingSource.DataSource = new List<FioModel>(_cachedFioData);
+                        _knitConstrBindingSource.DataSource = new List<FioModel>(_cachedKnitConstrFioData ?? new List<FioModel>());
 
                         _gridHelper.ConfigureComboBox(designerComboBox, designerBindingSource);
                         _gridHelper.ConfigureComboBox(constructorComboBox, constructorBindingSource);
+                        _gridHelper.ConfigureComboBox(knitConstrComboBox, _knitConstrBindingSource);
                     }
                     finally
                     {

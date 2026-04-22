@@ -81,7 +81,7 @@ namespace SewingProduction.Features.TeamWork.Services
             var annQuery = @"
                 SELECT 
                     annId, grup, articul, mod, size_label, status_ann.name AS statusText, komment,
-                    data_sozd, diz, constr
+                    data_sozd, diz, constr, knitConstr
                 FROM ArtNormNView 
                 JOIN status_ann ON status = status_id
                 WHERE annId = @annId";
@@ -147,7 +147,8 @@ namespace SewingProduction.Features.TeamWork.Services
             //        new[] {
             //        nameof(ArtNormN.Kod), nameof(ArtNormN.Articul), nameof(ArtNormN.grup),
             //        nameof(ArtNormN.Mod), nameof(ArtNormN.Sek), nameof(ArtNormN.Komment),
-            //        nameof(ArtNormN.Reco), nameof(ArtNormN.Diz), nameof(ArtNormN.Constr)
+            //        nameof(ArtNormN.Reco), nameof(ArtNormN.Diz), nameof(ArtNormN.Constr),
+            //        nameof(ArtNormN.KnitConstr)
             //        });
             //}
 

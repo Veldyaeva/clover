@@ -53,6 +53,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private BindingList<NormKont> _normKontListTW;
         private BindingSource _normKontBindingSourceTW;
         private static List<FioModel> _cachedFioData;
+        private static List<FioModel> _cachedKnitConstrFioData;
         private List<FioModel> fioList;
         private BindingList<MyDataANN> _preArchList;
         private BindingSource _preArchBindingSource;
