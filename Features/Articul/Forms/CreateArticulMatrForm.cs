@@ -435,13 +435,9 @@ namespace SewingProduction.Features.Articul.Forms
                 var matrixRow = _bindingSourceArtMatr.Current as CreateArticulMatrModel;// получаем текущую выбранную строку из матрицы, с которой будем сравнивать
                 var compareRow = _bindingSourceArticulCompare.Current as SpArtPreviewModel;// получаем текущую выбранную строку из грида сравнения, с которой будем сравнивать
 
-
                 articulControl1.ClearComparisonHighlight();// очищаем предыдущую подсветку сравнения, чтобы не было "висячей" подсветки от предыдущего сравнения
 
                 string kod = compareRow?.Kod;// извлекаем код артикула для загрузки деталей, если строка выбрана, или null, если строка не выбрана
-
-                //SpArticulPreviewModel comparePreview = await _articulDataService.GetByKodAsync(kod);
-
 
                 if (matrixRow == null || compareRow == null || string.IsNullOrWhiteSpace(compareRow.Kod))// если не выбрана строка для сравнения или в выбранной строке нет кода артикула для сравнения, очищаем детали и выходим из метода, так как нечего сравнивать
                 {
@@ -502,19 +498,30 @@ namespace SewingProduction.Features.Articul.Forms
             var curMatr = _bindingSourceArtMatr.Current as CreateArticulMatrModel;// получаем текущую выбранную строку из матрицы
             if (curMatr == null)
                 return;
-            //все совпало
-            if (_lastCompareResult) { 
-            using (AppendArticul f = new AppendArticul(CurrentUser.User, curMatr.Nn))
+
+            var curCompareRow = _bindingSourceArticulCompare.Current as SpArtPreviewModel;
+            //все совпало по выбранной модели
+            if (_lastCompareResult)
             {
-                if (f.ShowDialog() == DialogResult.OK)
+                // проверки перед выбором модели 
+                ArticulComparisonService objArticulChecks = new ArticulComparisonService(curMatr.Nn, curCompareRow.Kod);
+                
+                if (await objArticulChecks.CanLinkArticul())
                 {
-                    await LoadOrRefreshData();
+
+                    using (AppendArticul f = new AppendArticul(CurrentUser.User, curMatr.Nn, curCompareRow.Kodd))
+                    {
+                        if (f.ShowDialog() == DialogResult.OK)
+                        {
+                            await LoadOrRefreshData();
+                        }
+                    }
                 }
             }
-
+            else
+            {
+                MessageBox.Show("Текущий артикул матрицы и выбранный артикул не совпадают. Пожалуйста, выберите другой артикул для стыковки или создайте новый.", "Несовпадение артикулов", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
-
         }
 
         private async void btnAddModel_Click(object sender, EventArgs e)

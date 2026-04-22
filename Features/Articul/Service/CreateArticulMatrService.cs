@@ -222,6 +222,26 @@ namespace SewingProduction.Features.Articul.Service
                 return null;
             }
         }
+
+        public async Task<string> GetCheckArticulKomplsCompareAsync(string nn, string kod) 
+        {
+            string query = "select dbo.checkArticulKomplsCompare (@nn, @kod)";
+            return await _dbService.GetFirstOrDefaultAsync<string>(query, new { nn, kod });
+        }
+
+        public async Task<int> GetGostArh( string kod)
+        {
+            string query = @"select g.ust from gost g
+                inner join sp_articul sp on g.id_gost = sp.id_gost 
+                where sp.kod =  @kod)";
+            var res = await _dbService.GetFirstOrDefaultAsync<string>(query, new { kod });
+            if (res == null && int.Parse(res) > 0)
+            {
+                return 1;
+            }
+            return 0;
+        }
+
     }
 
 
