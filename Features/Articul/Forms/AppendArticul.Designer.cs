@@ -81,6 +81,8 @@
             layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
+            customSimpleButton1 = new SewingProduction.Core.Class.CustomSimpleButton();
+            customSimpleButton2 = new SewingProduction.Core.Class.CustomSimpleButton();
             ((System.ComponentModel.ISupportInitialize)txtArticul.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customLayoutControl1).BeginInit();
             customLayoutControl1.SuspendLayout();
@@ -635,11 +637,33 @@
             layoutControlItem11.Size = new System.Drawing.Size(338, 26);
             layoutControlItem11.TextVisible = false;
             // 
+            // customSimpleButton1
+            // 
+            customSimpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customSimpleButton1.Appearance.Options.UseFont = true;
+            customSimpleButton1.Location = new System.Drawing.Point(394, 645);
+            customSimpleButton1.Name = "customSimpleButton1";
+            customSimpleButton1.Size = new System.Drawing.Size(75, 25);
+            customSimpleButton1.TabIndex = 2;
+            customSimpleButton1.Text = "customSimpleButton1";
+            // 
+            // customSimpleButton2
+            // 
+            customSimpleButton2.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customSimpleButton2.Appearance.Options.UseFont = true;
+            customSimpleButton2.Location = new System.Drawing.Point(540, 645);
+            customSimpleButton2.Name = "customSimpleButton2";
+            customSimpleButton2.Size = new System.Drawing.Size(75, 25);
+            customSimpleButton2.TabIndex = 3;
+            customSimpleButton2.Text = "customSimpleButton2";
+            // 
             // AppendArticul
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1159, 694);
+            Controls.Add(customSimpleButton2);
+            Controls.Add(customSimpleButton1);
             Controls.Add(customLayoutControl1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "AppendArticul";
@@ -749,5 +773,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcKod;
         private DevExpress.XtraGrid.Columns.GridColumn gcRazm;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit1;
+        private Core.Class.CustomSimpleButton customSimpleButton1;
+        private Core.Class.CustomSimpleButton customSimpleButton2;
     }
 }

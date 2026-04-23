@@ -75,7 +75,6 @@ namespace SewingProduction.Features.Articul.Forms
             txtTkb.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.Tkb), true);
             txtAssort.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.AssortName), true);
 
-
         }
 
         private async Task CreateRazm()

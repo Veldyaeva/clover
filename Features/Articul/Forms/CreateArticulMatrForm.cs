@@ -118,6 +118,8 @@ namespace SewingProduction.Features.Articul.Forms
             gcCertTb_id.FieldName = nameof(CreateArticulMatrModel.Tb_id);
             gcMod.FieldName = nameof(CreateArticulMatrModel.Mod);
             gcCertMod.FieldName = nameof(CreateArticulMatrModel.Mod);
+            gcFoundMod.FieldName = nameof(CreateArticulMatrModel.FoundMod);
+            gcCertFoundMod.FieldName = nameof(CreateArticulMatrModel.FoundMod);
             gcArticul.FieldName = nameof(CreateArticulMatrModel.Articul);
             gcCertArticul.FieldName = nameof(CreateArticulMatrModel.Articul);
             gcTm_name.FieldName = nameof(CreateArticulMatrModel.Tm_name);
@@ -504,9 +506,9 @@ namespace SewingProduction.Features.Articul.Forms
             if (_lastCompareResult)
             {
                 // проверки перед выбором модели 
-                ArticulComparisonService objArticulChecks = new ArticulComparisonService(curMatr.Nn, curCompareRow);
-                
-                if (await objArticulChecks.CanLinkArticul())
+                ArticulComparisonService objArticulChecks = new ArticulComparisonService(curMatr, curCompareRow);
+                var canLink = await objArticulChecks.canLinkArticul();
+                if (canLink.IsSuccess)
                 {
 
                     using (AppendArticul f = new AppendArticul(CurrentUser.User, curMatr.Nn, curCompareRow.Kodd))
@@ -517,7 +519,11 @@ namespace SewingProduction.Features.Articul.Forms
                         }
                     }
                 }
-
+                else
+                {
+                    MessageBox.Show(@$"Невозможно выбрать эту модель для стыковки: 
+                        {canLink.ErrorMessage}", "Проверка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
                 objArticulChecks = null;
             }
             else

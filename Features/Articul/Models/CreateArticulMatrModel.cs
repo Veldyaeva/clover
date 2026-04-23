@@ -25,6 +25,10 @@ namespace SewingProduction.Features.Articul.Models
         /// </summary>
         public string RepeatArticle { get; set; }
         /// <summary>
+        /// найденная модель по модели с учетом исключения FromAceToCle
+        /// </summary>
+        public string FoundMod { get; set; }
+        /// <summary>
         /// менеджер
         /// </summary>
         public string Grupmen_name { get; set; }

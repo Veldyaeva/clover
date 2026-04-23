@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using DevExpress.CodeParser;
+using DevExpress.Utils;
 using DevExpress.Utils.Gesture;
 using DevExpress.Xpo.DB.Helpers;
 using DevExpress.Xpo.Logger.Transport;
@@ -82,7 +83,7 @@ namespace SewingProduction.Features.Articul.Service
             }
             catch (SqlException ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetMatrForNNAsync");
+                await _logger.LogErrorAsync(ex, $"SQL Ошибка при получении данных GetMatrForNNAsync");
                 return null;
             }
             catch (Exception ex)
@@ -91,7 +92,48 @@ namespace SewingProduction.Features.Articul.Service
                 return null;
             }
         }
+        //public async Task<string> FoundExistArticle(string foundArticle, string foundMod, string foundNN, string foundTm, string foundSost)
+        //{
+        //    try
+        //    {
+        //        var param = new DynamicParameters();
+        //        param.Add("@foundArticle", foundArticle);
+        //        param.Add("@foundMod", foundMod);
+        //        param.Add("@foundNN", foundNN);
+        //        param.Add("@foundTm", foundTm);
+        //        param.Add("@foundSost", foundSost);
+        //        //возвращаемый параметр для получения результата из хранимой процедуры
+        //        param.Add("@res", dbType: DbType.String, direction: ParameterDirection.ReturnValue, size: 200);
 
+        //        using var connection = _dbHelper.GetConnection();
+        //        var result = await connection.QueryAsync<CreateArticulMatrModel>(
+        //            "dbo.spFoundExistArticle",
+        //            param,
+        //            transaction: null,
+        //            commandType: CommandType.StoredProcedure,
+        //            commandTimeout: 120 //в секундах
+        //            );
+
+        //        string resultValue = param.Get<string>("@res");
+        //        return resultValue;
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        await _logger.LogErrorAsync(ex, $"SQL Ошибка при получении данных foundExistArticle");
+        //        return null;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await _logger.LogErrorAsync(ex, $"Ошибка при получении данных foundExistArticle");
+        //        return null;
+        //    }
+        //}
+
+        /// <summary>
+        /// возвращает данные по артикулу по коду матрицы преобразуя данные в модель SpArticulPreviewModel из модели CreateArticulMatrModel
+        /// </summary>
+        /// <param name="nn"></param>
+        /// <returns></returns>
         public async Task<BindingList<SpArticulPreviewModel>> GetPreviewArticulAsync(string nn)
         {
             try
@@ -239,13 +281,20 @@ namespace SewingProduction.Features.Articul.Service
 
         public async Task<int> GetGostArhAsync( string kod)
         {
-            string query = @"select g.ust from gost g 
+            try
+            {
+                string query = @"select g.ust from gost g 
                 inner join sp_articul sp on g.id_gost = sp.id_gost 
                 where sp.kod =  @kod";
             var res = await _dbService.GetFirstOrDefaultAsync<string>(query, new { kod });
             
             return int.TryParse(res, out int result) ? result : 1 ;
-            
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetStatusForArticulAsync");
+                return 1;
+            }
 
         }
 
