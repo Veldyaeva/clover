@@ -23,9 +23,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
     public class KnitterRepository : IKnitterRepository
     {
         private readonly DbService _dbService;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
 
-        public KnitterRepository(DatabaseHelper dbHelper)
+        public KnitterRepository(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
             _dbService = new DbService(dbHelper);

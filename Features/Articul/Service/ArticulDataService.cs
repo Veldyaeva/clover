@@ -20,7 +20,7 @@ namespace SewingProduction.Features.Articul.Service
 
         public ArticulDataService()
         {
-            _dbService = new DbService(new DatabaseHelper());
+            _dbService = new DbService(new DatabaseHelperSQL());
             //_dbHelper = new DatabaseHelper(); 
         }
 

@@ -20,7 +20,7 @@ namespace SewingProduction.Features.TeamWork.Services
         private readonly ITeamWorkView _view;
         private readonly ILogger _logger;
         private readonly ArtNormRepository _artNormService;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly TWGridHelper _gridHelper;
 
         private readonly BindingList<NormRasz> _rasz;
@@ -50,7 +50,7 @@ namespace SewingProduction.Features.TeamWork.Services
             ITeamWorkView view,
             ILogger logger,
             ArtNormRepository artNormService,
-            DatabaseHelper dbHelper,
+            DatabaseHelperSQL dbHelper,
             TWGridHelper gridHelper,
             GridControl raszGrid,
             GridView raszView,

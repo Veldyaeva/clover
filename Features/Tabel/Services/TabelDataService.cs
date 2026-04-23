@@ -15,10 +15,10 @@ namespace SewingProduction.Features.Tabel.Services
 {
     public class TabelDataService
     {
-        private static DatabaseHelper _dbHelper;
+        private static DatabaseHelperSQL _dbHelper;
         private readonly DbService _dbService;
         private readonly FileLogger _logger = new FileLogger();
-        public TabelDataService(DatabaseHelper dbHelper)
+        public TabelDataService(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
             _dbService = new DbService(_dbHelper);

@@ -31,6 +31,7 @@ namespace SewingProduction.BdContext
         public DateTime data_sozd { get; set; }
         public int diz { get; set; }
         public int constr { get; set; }
+        public int knitConstr { get; set; }
         public DateTime data_obn { get; set; }
         public int sek_vyaz70 { get; set; }
         public int sek_kr { get; set; }

@@ -41,7 +41,7 @@ namespace SewingProduction
         public int fspecrez, uspecrez;
         public string fkodfd, ukodfd;
 
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly GridHelper _gridHelper;
         private readonly CardByNomService _cardByNomService;
         private readonly FurnitService _furnitService;
@@ -132,7 +132,7 @@ namespace SewingProduction
         {
 
             InitializeComponent();
-            _dbHelper = new DatabaseHelper("ace");
+            _dbHelper = new DatabaseHelperSQL("ace");
             _gridHelper = new GridHelper();
             _cardByNomService = new CardByNomService(_dbHelper);
             _furnitService = new FurnitService(_dbHelper);

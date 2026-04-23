@@ -16,7 +16,7 @@ namespace SewingProduction
         {
             try
             {
-                _connectionString = DatabaseHelper.GetGlobalConnectionString();
+                _connectionString = DatabaseHelperSQL.GetGlobalConnectionString();
                 EnsureLogTableExists();
                 CleanupOldLogs();
             }

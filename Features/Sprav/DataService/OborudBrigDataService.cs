@@ -11,8 +11,8 @@ namespace SewingProduction.Features.Sprav.DataService
 
     public class OborudBrigDataService
     {
-        private readonly DatabaseHelper _dbHelper;
-        public OborudBrigDataService(DatabaseHelper dbHelper)
+        private readonly DatabaseHelperSQL _dbHelper;
+        public OborudBrigDataService(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper;
         }

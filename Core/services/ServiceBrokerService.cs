@@ -28,7 +28,7 @@ namespace SewingProduction.Core.services
         private static readonly ConcurrentDictionary<string, ListenInfoCacheEntry> _listenInfoCache =
             new(StringComparer.OrdinalIgnoreCase);
         private static readonly TimeSpan ListenInfoCacheLifetime = TimeSpan.FromMinutes(15);
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly DbService _dbService;
         //    private readonly HybridLogger _logger = new HybridLogger();
         private readonly FileLogger _logger = new FileLogger();
@@ -36,7 +36,7 @@ namespace SewingProduction.Core.services
         private SqlConnection? _connection;
         private SqlCommand? _command;
 
-        public ServiceBrokerService(DatabaseHelper dbHelper)
+        public ServiceBrokerService(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
             _dbService = new DbService(_dbHelper);
@@ -88,7 +88,7 @@ namespace SewingProduction.Core.services
         {
             try
             {
-                var cacheKey = $"{DatabaseHelper.GetGlobalConnectionString()}|{_objectName}";
+                var cacheKey = $"{DatabaseHelperSQL.GetGlobalConnectionString()}|{_objectName}";
                 if (_listenInfoCache.TryGetValue(cacheKey, out var cached) &&
                     (DateTime.UtcNow - cached.CachedAtUtc) <= ListenInfoCacheLifetime)
                 {

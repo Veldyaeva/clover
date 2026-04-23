@@ -25,7 +25,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 {
     public partial class TeamWork : CustomForm
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly DbService _dbService;
         private readonly ArtNormRepository _artNormService; // репозиторий данных
         private readonly JabberSender _jabberSender;
@@ -53,6 +53,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private BindingList<NormKont> _normKontListTW;
         private BindingSource _normKontBindingSourceTW;
         private static List<FioModel> _cachedFioData;
+        private static List<FioModel> _cachedKnitConstrFioData;
         private List<FioModel> fioList;
         private BindingList<MyDataANN> _preArchList;
         private BindingSource _preArchBindingSource;
@@ -104,8 +105,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             ANNgridView.OptionsView.ShowPreview = false;
             ANNgridView.PreviewLineCount = 0;
             DapperMappings.Configure();
+
             var coreServices = TeamWorkDependencyFactory.CreateCoreServices(_logger);
-            _dbHelper = coreServices.DbHelper;
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = coreServices.DbService;
             _artNormService = coreServices.ArtNormRepository;
             _jabberSender = (JabberSender)coreServices.JabberSender;

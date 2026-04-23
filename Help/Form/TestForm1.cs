@@ -31,9 +31,9 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             InitializeComponent();
             _user = user;
-            _testModel1DataService = new TestModel1DataService(new DbService(new DatabaseHelper()));
+            _testModel1DataService = new TestModel1DataService(new DbService(new DatabaseHelperSQL()));
             _tableDataService = new AllTableNameDataService();
-            _columnDataService = new AllColumnNameDataService(new DbService(new DatabaseHelper()), new DatabaseHelper());
+            _columnDataService = new AllColumnNameDataService(new DbService(new DatabaseHelperSQL()), new DatabaseHelperSQL());
             _serviceBrokerForTable1 = new ServiceBroker(this);
             _serviceBrokerForTable2 = new ServiceBroker(this);
             customLabel4.FontSizePermission = customLabel4.Font.Size + 2;
