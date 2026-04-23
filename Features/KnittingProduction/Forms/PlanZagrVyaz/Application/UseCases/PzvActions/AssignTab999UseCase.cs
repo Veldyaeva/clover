@@ -36,6 +36,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application
                 }
                 else
                 {
+                    _validator.ShowValidationMessage(
+                        row,
+                        _validator.ValidateAssignTab,
+                        "Таб 999");
                     row.ErrorSelection = 1;
                     row.SyncSelection = 0;
                 }

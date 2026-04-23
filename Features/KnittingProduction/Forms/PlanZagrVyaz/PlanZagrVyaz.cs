@@ -323,7 +323,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 MutePlanBrokerNotifications,
                 async () => await LoadPlanZagrVyazByZadanySelection());
 
-            _pZVActionValidator = new PzvActionValidator();
+            _pZVActionValidator = new PzvActionValidator(_dbHelper);
 
             var assignKnittingMachine = new AssignKnittingMachineUseCase(
     _pZVActionValidator,

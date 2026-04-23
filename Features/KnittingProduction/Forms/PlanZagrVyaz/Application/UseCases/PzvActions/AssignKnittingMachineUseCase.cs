@@ -44,6 +44,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application
             {
                 if (!_validator.CanAssignKnittingMachine(row))
                 {
+                    _validator.ShowValidationMessage(
+                        row,
+                        _validator.ValidateAssignKnittingMachine,
+                        "Назначение В/М");
                     row.ErrorSelection = 1;
                     row.SyncSelection = 0;
                     continue;
