@@ -141,11 +141,28 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application
 
             return PzvValidationResult.Ok();
         }
+        private int GetPzvIbpvtybkf (PZVOperList row)
+        {
+            if (row == null || row.olPzvID == 0)
+                return 0;
 
+            const string query = @"
+                select pzvKwsID
+                from planZagrVyaz
+                where pzvID = @pzvID";
+
+            object result = _dbHelper.ExecuteScalar<int>(query, new Dictionary<string, object>
+            {
+                ["@pzvID"] = row.olPzvID
+            });
+
+            return result != null ? Convert.ToInt32(result) : 0;
+        }
         private bool IsShiftClosed(PZVOperList row)
         {
-            
-            if (row == null || row.olPzvKwsID == 0)
+
+            //if (row == null || row.olPzvKwsID == 0)
+            if (row == null || GetPzvID(row) == 0)
                 return false;
 
             const string query = @"
@@ -155,7 +172,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application
 
             object result = _dbHelper.ExecuteScalar<DateTime?>(query, new Dictionary<string, object>
             {
-                ["@kwsID"] = row.olPzvKwsID
+                ["@kwsID"] = GetPzvID(row)
             });
 
             return result != null && result != DBNull.Value;
