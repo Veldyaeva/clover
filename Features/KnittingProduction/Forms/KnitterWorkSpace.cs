@@ -22,8 +22,10 @@ using SewingProduction.Core.helpers;
 using SewingProduction.Core.interfaces;
 using SewingProduction.Core.Models;
 using SewingProduction.Core.services;
+using SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application.Validation;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service;
+using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
@@ -122,12 +124,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private readonly KnitterPlanPresenter _planPresenter = new KnitterPlanPresenter();
         private readonly KnitterPlanFocusService _planFocusService;
         private readonly KnitterGridVisualService _gridVisualService;
+        private readonly PzvActionValidator _pzvActionValidator;
         /// <summary>
         /// Список ID незавершённых операций (pzvID) для подсветки красным цветом
         /// </summary>
         private HashSet<int> _unfinishedOperationIds = new HashSet<int>();
-        private CheckBox _adminToggle;
-        private CheckBox _expandNrToggle;
         private RepositoryItemProgressBar? _statusProgressBar;
         private DevExpress.XtraGrid.GridGroupSummaryItem _pzvChasNaznGroupSumItem;
 
@@ -227,6 +228,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 dataLayoutControl1.DataSource = _planBindingSource;
 
                 var dbHelper = new DatabaseHelperSQL();
+                _pzvActionValidator = new PzvActionValidator(dbHelper);
                 IKnitterRepository repo = new KnitterRepository(dbHelper);
                 _orchestrator = new KnitterOrchestrator(repo);
                 _workSpaceService = new KnitterWorkSpaceService(repo, _logger);
@@ -266,8 +268,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 SetupPzvDateStartColumn();
                 SetupIdleTimer();
                 SetupShiftTimer();
-                InitAdminToggle();
-                InitExpandNrToggle();
                 _gridVisualService.Initialize();
                 SetupRowStyling();
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
@@ -293,6 +293,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 InitializeComponent();
                 _sbController = new ServiceBrokerController(this);
                 _sbHub = AppServices.Services.GetRequiredService<IAppServiceBrokerHub>();
+                _pzvActionValidator = new PzvActionValidator(new DatabaseHelperSQL());
                 _orchestrator = orchestrator ?? throw new ArgumentNullException(nameof(orchestrator));
                 _workSpaceService = new KnitterWorkSpaceService(shiftWorkflowGateway ?? throw new ArgumentNullException(nameof(shiftWorkflowGateway)), _logger);
                 InitServiceBrokerIgnoredTables();
@@ -331,8 +332,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 SetupPzvDateStartColumn();
                 SetupIdleTimer();
                 SetupShiftTimer();
-                InitAdminToggle();
-                InitExpandNrToggle();
                 //InitAdminSettingsButton();
                 _gridVisualService.Initialize();
                 SetupBlinkTimers();
@@ -991,6 +990,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         private async Task ApplyPzvDateStartAsync(GridView view)//int rowHandle)
         {
+            if (!ValidateCurrentPzvAction(view, _pzvActionValidator.ValidateStartWork, "Начало операции"))
+                return;
+
             await ApplyPzvDateAsync(
                 view,
                 bandedGridColumn18,
@@ -1219,6 +1221,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (_view == null || rowHandle < 0)
                 return;
 
+            if (!ValidateCurrentPzvAction(_view, _pzvActionValidator.ValidateStopWork, "Завершение операции"))
+                return;
+
             // Получим текущую строку для плейсхолдера (кол-во к выполнению)
             var currentRow = _view.GetRow(rowHandle) as KnitterPZVModel;
 
@@ -1349,6 +1354,35 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // Обновляем статус/процент после завершения операции
             RefreshStatusColumns();
         }
+
+        private bool ValidateCurrentPzvAction(
+            GridView view,
+            Func<PZVOperList, PzvValidationResult> validator,
+            string caption)
+        {
+            var row = view?.GetFocusedRow() as KnitterPZVModel;
+            if (row?.pzvID <= 0)
+                return false;
+
+            return _pzvActionValidator.ShowValidationMessage(MapToPzvOperList(row), validator, caption);
+        }
+
+        private static PZVOperList MapToPzvOperList(KnitterPZVModel row)
+        {
+            return new PZVOperList
+            {
+                olPzvID = row.pzvID,
+                olPzvDateNaznKm = row.pzvDateNaznKm,
+                olPzvTab = row.pzvTab ?? 0,
+                olPzvDateNaznTab = row.pzvDateNaznTab,
+                olPzvDateStart = row.pzvDateStart,
+                olPzvDateEnd = row.pzvDateEnd,
+                olPzvDateMast = row.pzvDateMast,
+                olPzvKwsID = row.pzvKwsID ?? 0,
+                olKodPodr = row.nr_kod_proizv ?? row.pzvDivision ?? 0
+            };
+        }
+
         /// <summary>
         /// Унифицированный метод для установки даты в колонках "Начато"/"Закончено":
         /// - сохраняет дату на сервере (серверное время)
@@ -1465,12 +1499,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _shiftTimer.Interval = 1000; // 1 секунда
             _shiftTimer.Tick += (s, e) =>
             {
-                if (_isShiftRunning && _shiftStartTime.HasValue)
-                {
-                    var elapsed = DateTime.Now - _shiftStartTime.Value;
-                    if (elapsed < TimeSpan.Zero) elapsed = TimeSpan.Zero;
-                    simpleLabelItem1.Text = $"Смена: {elapsed:hh\\:mm\\:ss}";
-                }
+                UpdateShiftDisplay();
             };
 
             _shiftStateSyncTimer.Interval = 15000;
@@ -1581,32 +1610,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         #region adminToggle
-        private void InitAdminToggle()
+        private async void AdminToggle_CheckedChanged(object sender, EventArgs e)
         {
-            _adminToggle = new CheckBox
-            {
-                Text = "Админ режим",
-                AutoSize = true,
-                Anchor = AnchorStyles.Top | AnchorStyles.Right,
-                Location = new Point(this.ClientSize.Width - 130, 5)
-            };
-            Controls.Add(_adminToggle);
-            _adminToggle.BringToFront();
-            _adminToggle.CheckedChanged += async (s, e) => await ReloadCurrentTabAsync();
+            await ReloadCurrentTabAsync();
         }
 
-        private void InitExpandNrToggle()
+        private async void ExpandNrToggle_CheckedChanged(object sender, EventArgs e)
         {
-            _expandNrToggle = new CheckBox
-            {
-                Text = "Все операции",
-                AutoSize = true,
-                Anchor = AnchorStyles.Top | AnchorStyles.Right,
-                Location = new Point(this.ClientSize.Width - 130, 20)
-            };
-            Controls.Add(_expandNrToggle);
-            _expandNrToggle.BringToFront();
-            _expandNrToggle.CheckedChanged += async (s, e) => await ReloadCurrentTabAsync();
+            await ReloadCurrentTabAsync();
         }
 
         private void InitAdminSettingsButton()
@@ -2166,19 +2177,39 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (isRunning && shiftStart.HasValue)
             {
                 simpleButton2.Text = "Закончить смену";
-                var elapsed = DateTime.Now - shiftStart.Value;
-                if (elapsed < TimeSpan.Zero) elapsed = TimeSpan.Zero;
-                simpleLabelItem1.Text = $"Смена: {elapsed:hh\\:mm\\:ss}";
                 _shiftTimer.Start();
             }
             else
             {
                 _shiftTimer.Stop();
                 simpleButton2.Text = "Начать смену";
-                simpleLabelItem1.Text = " ";
             }
 
+            UpdateShiftDisplay();
             ApplyShiftEditMode(isRunning);
+        }
+
+        private void UpdateShiftDisplay()
+        {
+            if (_currentShiftId.HasValue)
+            {
+                if (_isShiftRunning && _shiftStartTime.HasValue)
+                {
+                    var elapsed = DateTime.Now - _shiftStartTime.Value;
+                    if (elapsed < TimeSpan.Zero)
+                        elapsed = TimeSpan.Zero;
+
+                    simpleLabelItem1.Text = $"№ смены: {_currentShiftId}  {elapsed:hh\\:mm\\:ss}";
+                }
+                else
+                {
+                    simpleLabelItem1.Text = $"№ смены: {_currentShiftId}";
+                }
+
+                return;
+            }
+
+            simpleLabelItem1.Text = "№ смены: -";
         }
 
         /// <summary>
@@ -2248,6 +2279,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 RefreshFooterSummaries();
                 _currentLoadedTab = tab;
+                UpdateShiftDisplay();
                 _planFocusService.Restore(focusSnap, preferDetailId);
             }
 
