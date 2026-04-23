@@ -141,7 +141,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application
 
             return PzvValidationResult.Ok();
         }
-        private int GetPzvIbpvtybkf (PZVOperList row)
+        private int GetPzvID (PZVOperList row)
         {
             if (row == null || row.olPzvID == 0)
                 return 0;
