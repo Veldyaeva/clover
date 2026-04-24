@@ -25,7 +25,7 @@ namespace SewingProduction.Features.TeamWork.Forms
     public partial class Log : Form, IAnnLogView
     {
         private IAnnLogPresenter _presenter;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly DbService _dbService;
         private readonly ILogger _logger;
         private int _annId;
@@ -37,9 +37,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             InitializeComponent();
             this.Load += AnnLog_Load;
 
-            var databaseServices = TeamWorkDependencyFactory.CreateDatabaseServices();
-            _dbHelper = databaseServices.DbHelper;
-            _dbService = databaseServices.DbService;
+			var databaseServices = TeamWorkDependencyFactory.CreateDatabaseServices();
+            _dbHelper = new DatabaseHelperSQL();
+            _dbService = new DbService(_dbHelper);
             _logger = new FileLogger();
         }
 
@@ -258,12 +258,12 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly IAnnLogView _view;
         private readonly DbService _dbService;
         private readonly ILogger _logger;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly int _annId;
         private readonly LogSourceType _sourceType;
 
         // Принимает зависимости и параметры контекста (AnnID и тип источника)
-        public AnnLogPresenter(IAnnLogView view, DbService dbService, ILogger logger, DatabaseHelper dbHelper, int annId, LogSourceType sourceType)
+        public AnnLogPresenter(IAnnLogView view, DbService dbService, ILogger logger, DatabaseHelperSQL dbHelper, int annId, LogSourceType sourceType)
         {
             _view = view ?? throw new ArgumentNullException(nameof(view));
             _dbService = dbService ?? throw new ArgumentNullException(nameof(dbService));

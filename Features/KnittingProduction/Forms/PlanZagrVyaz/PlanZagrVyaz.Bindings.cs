@@ -126,6 +126,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         gridColumnPlanTotalHoursByKnitMachineKnitClass.FieldName = "knitClass";
                         gridColumnPlanTotalHoursByKnitMachineKmlID.FieldName = "kmlID";
                         #endregion
+                        _lcgHelper.SetButtonsVisible(
+                            layoutControlGroup1,
+                            false,
+                            "lcg1LoadDataFromTSD");
                         break;
                     case 2:
                     case 3:
@@ -138,6 +142,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                             "lcg3HideAll",
                             "lcg3HideAllSeparator",
                             "lcg3ShowAll");
+                        _lcgHelper.SetButtonsVisible(
+                            layoutControlGroup1,
+                            false,
+                            "lcg1CurrKMAssign");
                         #region описание gridViewPlanTotalQuantityByArticul "общее количество по артикулам"
                         layoutControlItemPlanTotalHoursByKnitMachine.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                         layoutControlItemPlanTotalQuantityByArticul.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
@@ -268,6 +276,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //    BeginInvoke(new Action(() => SyncSelectionUpdate()));
                 //};
                 //----------------------------------------
+                gridViewZadanyList.OptionsSelection.EnableAppearanceFocusedCell = false;
+                gridViewZadanyList.OptionsSelection.EnableAppearanceFocusedRow = true;
                 #endregion
 
                 #region описание gridControlRzvPachListByNom "пачки по расчету вяз"

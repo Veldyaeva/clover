@@ -62,6 +62,7 @@ namespace SewingProduction.Features.Articul.Forms
 
             InitializeBindings();
             BindGostRazm();
+            ConfigureControlsByMode();
         }
         private void InitializeBindings()
         {
@@ -84,7 +85,27 @@ namespace SewingProduction.Features.Articul.Forms
             txtRazmNames.DataBindings.Add("Text", _bindingSourceMatr, nameof(CreateArticulMatrModel.RazmNames), true);
 
         }
+        private void ConfigureControlsByMode()
+        {
+                switch (_typeCreate)
+                {
+                    case 0: // Создание
+                        // Настройка для режима создания
+                        break;
+                    case 1: // Стыковка
+                        // Настройка для режима стыковки
 
+                        break;
+                    default:
+                        throw new InvalidOperationException("Недопустимый режим создания артикула.");
+            }
+        }
+        private void AppendArticul_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _bindingSourceArticul.Dispose();
+            _bindingSourceRazms.Dispose();
+            _bindingSourceMatr.Dispose();
+        }
         private async Task CreateRazm()
         {
             _bindingSourceArticul.EndEdit();

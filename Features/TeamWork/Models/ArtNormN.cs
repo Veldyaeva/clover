@@ -18,6 +18,7 @@ namespace SewingProduction.Models
         private int _sek;
         private int _diz;
         private int _constr;
+        private int _knitConstr;
         private string _komment;
         private string _reco;
 
@@ -165,6 +166,13 @@ namespace SewingProduction.Models
             set { if (_constr != value) { _constr = value; OnPropertyChanged(nameof(Constr)); } }
         }
 
+        [Column("knitConstr")]
+        public int KnitConstr
+        {
+            get => _knitConstr;
+            set { if (_knitConstr != value) { _knitConstr = value; OnPropertyChanged(nameof(KnitConstr)); } }
+        }
+
         [Column("data_obn")]
         public DateTime? dateUpdate { get; set; }
 
@@ -221,10 +229,16 @@ namespace SewingProduction.Models
         public static List<FioModel> FioSource { get; set; }
 
         [NotMapped]
+        public static List<FioModel> KnitConstrSource { get; set; }
+
+        [NotMapped]
         public FioModel FioDiz => FioSource?.FirstOrDefault(f => f.Tab == Diz);
 
         [NotMapped]
         public FioModel FioConstr => FioSource?.FirstOrDefault(f => f.Tab == Constr);
+
+        [NotMapped]
+        public FioModel FioKnitConstr => KnitConstrSource?.FirstOrDefault(f => f.Tab == KnitConstr);
 
 
         // Реализация IDataErrorInfo для валидации
@@ -291,6 +305,7 @@ namespace SewingProduction.Models
             //this.dateCreate = source.dateCreate;
             this.Diz = source.Diz;
             this.Constr = source.Constr;
+            this.KnitConstr = source.KnitConstr;
             //this.dateUpdate = source.dateUpdate;
             this.SekKr = source.SekKr;
             this.Slogn = source.Slogn;

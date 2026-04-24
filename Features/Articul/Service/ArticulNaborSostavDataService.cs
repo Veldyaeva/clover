@@ -19,11 +19,11 @@ namespace SewingProduction.Features.Articul.Service
     public class ArticulNaborSostavDataService
     {
         private readonly DbService _dbService;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
 
         public ArticulNaborSostavDataService()
         {
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
         }
         /// <summary>

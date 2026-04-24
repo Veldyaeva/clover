@@ -13,6 +13,7 @@ namespace SewingProduction.Features.TeamWork.Interfaces
         Task<RelatedDataResult> LoadRelatedDataAsync(int annId);
         Task<TeamWorkReferenceDataResult> LoadReferenceDataAsync();
         Task<List<FioModel>> LoadDesignersAsync();
+        Task<List<FioModel>> LoadKnitConstructorsAsync();
         Task<string> GetSpecByOborudKodAsync(int kodOb);
     }
 

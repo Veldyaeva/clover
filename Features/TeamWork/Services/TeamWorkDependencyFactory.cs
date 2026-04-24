@@ -11,7 +11,7 @@ namespace SewingProduction.Features.TeamWork.Services
     {
         public static TeamWorkDatabaseServices CreateDatabaseServices()
         {
-            var dbHelper = new DatabaseHelper();
+            var dbHelper = new DatabaseHelperSQL();
             var dbService = new DbService(dbHelper);
             var artNormRepository = new ArtNormRepository(dbHelper);
 
@@ -52,7 +52,7 @@ namespace SewingProduction.Features.TeamWork.Services
     public class TeamWorkDatabaseServices
     {
         public TeamWorkDatabaseServices(
-            DatabaseHelper dbHelper,
+            DatabaseHelperSQL dbHelper,
             DbService dbService,
             ArtNormRepository artNormRepository)
         {
@@ -61,7 +61,7 @@ namespace SewingProduction.Features.TeamWork.Services
             ArtNormRepository = artNormRepository;
         }
 
-        public DatabaseHelper DbHelper { get; }
+        public DatabaseHelperSQL DbHelper { get; }
         public DbService DbService { get; }
         public ArtNormRepository ArtNormRepository { get; }
     }
@@ -69,7 +69,7 @@ namespace SewingProduction.Features.TeamWork.Services
     public sealed class TeamWorkCoreServices : TeamWorkDatabaseServices
     {
         public TeamWorkCoreServices(
-            DatabaseHelper dbHelper,
+            DatabaseHelperSQL dbHelper,
             DbService dbService,
             ArtNormRepository artNormRepository,
             IJabberSender jabberSender,

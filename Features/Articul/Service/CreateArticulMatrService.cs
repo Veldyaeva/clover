@@ -31,9 +31,9 @@ namespace SewingProduction.Features.Articul.Service
 {
     public class CreateArticulMatrService
     {
-        private readonly DbService _dbService = new DbService(new DatabaseHelper());
+        private readonly DbService _dbService = new DbService(new DatabaseHelperSQL());
         private readonly FileLogger _logger = new FileLogger();
-        private readonly DatabaseHelper _dbHelper = new DatabaseHelper();
+        private readonly DatabaseHelperSQL _dbHelper = new DatabaseHelperSQL();
 
         public CreateArticulMatrService()
         {

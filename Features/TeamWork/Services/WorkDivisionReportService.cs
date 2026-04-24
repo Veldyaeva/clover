@@ -9,10 +9,10 @@ namespace SewingProduction.Features.TeamWork.Services
     public class WorkDivisionReportService
     {
         private readonly ArtNormRepository _artNormService;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly ILogger _logger = new FileLogger();
 
-        public WorkDivisionReportService(ArtNormRepository artNormService, DatabaseHelper dbHelper)
+        public WorkDivisionReportService(ArtNormRepository artNormService, DatabaseHelperSQL dbHelper)
         {
             _artNormService = artNormService;
             _dbHelper = dbHelper;

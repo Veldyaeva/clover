@@ -521,7 +521,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 });
 
                 // 3️ долгий запрос
-                var bs = await _vyazService.GetPlanTotalQuantityByArticul(token);
+                var bs = await _vyazService.GetPlanTotalQuantityByArticul(token, this.vyazPodrKod);
 
                 // если отменили — просто выходим
                 if (token.IsCancellationRequested)

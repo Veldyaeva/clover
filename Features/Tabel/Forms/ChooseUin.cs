@@ -19,7 +19,7 @@ namespace SewingProduction.Features.Tabel.Forms
     public partial class ChooseUin : CustomForm
     {
         public bool ChooseResult = false;
-        private static DatabaseHelper _dbHelper;
+        private static DatabaseHelperSQL _dbHelper;
         private static DbService _dbService;
         private readonly ILogger _logger = new FileLogger();
         private static TabelDataService _tabelDataService;
@@ -34,7 +34,7 @@ namespace SewingProduction.Features.Tabel.Forms
         public ChooseUin(UserClass User, string lastName, string firstName, string middleName, int tabno, string naimenPodr, string nameGroup) : base(User)
         {
             InitializeComponent();
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
             _tabelDataService = new TabelDataService(_dbHelper);
             _lastName = lastName;

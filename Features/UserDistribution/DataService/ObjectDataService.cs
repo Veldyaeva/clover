@@ -10,8 +10,8 @@ namespace SewingProduction.Features.UserDistribution.Models
     public class ObjectDataService
     {
         private readonly DbService _dbService;
-        private readonly DatabaseHelper _dbHelper;
-        public ObjectDataService(DbService dbService, DatabaseHelper dbHelper)
+        private readonly DatabaseHelperSQL _dbHelper;
+        public ObjectDataService(DbService dbService, DatabaseHelperSQL dbHelper)
         {
             _dbService = dbService;
             _dbHelper = dbHelper;

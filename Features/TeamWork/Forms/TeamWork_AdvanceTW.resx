@@ -814,6 +814,12 @@
   <data name="&gt;&gt;emptySpaceItem1.Type" xml:space="preserve">
     <value>DevExpress.XtraLayout.EmptySpaceItem, DevExpress.XtraLayout.v25.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
+  <data name="&gt;&gt;layoutControlItem18.Name" xml:space="preserve">
+    <value>layoutControlItem18</value>
+  </data>
+  <data name="&gt;&gt;layoutControlItem18.Type" xml:space="preserve">
+    <value>DevExpress.XtraLayout.LayoutControlItem, DevExpress.XtraLayout.v25.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
   <data name="&gt;&gt;statusLabelitem.Name" xml:space="preserve">
     <value>statusLabelitem</value>
   </data>
@@ -995,7 +1001,7 @@
     <value>TopLeft</value>
   </data>
   <data name="designerComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 538</value>
+    <value>7, 491</value>
   </data>
   <data name="designerComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1029,13 +1035,13 @@
     <value>TopLeft</value>
   </data>
   <data name="textBoxReco.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 354</value>
+    <value>7, 350</value>
   </data>
   <data name="textBoxReco.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
   </data>
   <data name="textBoxReco.Size" type="System.Drawing.Size, System.Drawing">
-    <value>322, 69</value>
+    <value>322, 26</value>
   </data>
   <data name="textBoxReco.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1059,7 +1065,7 @@
     <value>TopLeft</value>
   </data>
   <data name="constructorComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 493</value>
+    <value>7, 446</value>
   </data>
   <data name="constructorComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1095,7 +1101,7 @@
     <value>TopLeft</value>
   </data>
   <data name="secTimeTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 448</value>
+    <value>7, 401</value>
   </data>
   <data name="secTimeTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1191,7 +1197,7 @@
     <value>TopLeft</value>
   </data>
   <data name="nameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 207</value>
+    <value>7, 202</value>
   </data>
   <data name="nameTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1218,13 +1224,13 @@
     <value>TopLeft</value>
   </data>
   <data name="textBoxKomment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 252</value>
+    <value>7, 247</value>
   </data>
   <data name="textBoxKomment.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
   </data>
   <data name="textBoxKomment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>322, 77</value>
+    <value>322, 78</value>
   </data>
   <data name="textBoxKomment.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1293,7 +1299,7 @@
     <value>TopLeft</value>
   </data>
   <data name="modelTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 162</value>
+    <value>7, 157</value>
   </data>
   <data name="modelTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1320,10 +1326,10 @@
     <value>TopLeft</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 600</value>
+    <value>349, 598</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>452, 289</value>
+    <value>452, 291</value>
   </data>
   <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
@@ -1449,7 +1455,7 @@
     <value>TopLeft</value>
   </data>
   <data name="groupTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 117</value>
+    <value>7, 112</value>
   </data>
   <data name="groupTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1479,7 +1485,7 @@
     <value>TopLeft</value>
   </data>
   <data name="dateCreate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 72</value>
+    <value>7, 67</value>
   </data>
   <data name="dateCreate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1529,7 +1535,7 @@
     <value>TopLeft</value>
   </data>
   <data name="gridControlKont.Location" type="System.Drawing.Point, System.Drawing">
-    <value>815, 803</value>
+    <value>815, 802</value>
   </data>
   <data name="gridColumn20.Caption" xml:space="preserve">
     <value>наименование операции комплектовки</value>
@@ -1628,7 +1634,7 @@
     <value>4, 3, 4, 3</value>
   </data>
   <data name="gridControlKont.Size" type="System.Drawing.Size, System.Drawing">
-    <value>689, 86</value>
+    <value>689, 87</value>
   </data>
   <data name="gridControlKont.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1670,7 +1676,7 @@
     <value>TopLeft</value>
   </data>
   <data name="gridControlRasz.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 51</value>
+    <value>349, 46</value>
   </data>
   <data name="gridViewRasz.Appearance.FocusedRow.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8.25pt, style=Bold</value>
@@ -1712,7 +1718,7 @@
     <value>True</value>
   </data>
   <data name="DisplayNumber.VisibleIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="DisplayNumber.Width" type="System.Int32, mscorlib">
     <value>47</value>
@@ -1754,7 +1760,7 @@
     <value>True</value>
   </data>
   <data name="gridColumn32.VisibleIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="gridColumn32.Width" type="System.Int32, mscorlib">
     <value>358</value>
@@ -1772,7 +1778,7 @@
     <value>True</value>
   </data>
   <data name="gridColumn33.VisibleIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="gridColumn33.Width" type="System.Int32, mscorlib">
     <value>48</value>
@@ -1790,7 +1796,7 @@
     <value>True</value>
   </data>
   <data name="gridColumn37.VisibleIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="gridColumn37.Width" type="System.Int32, mscorlib">
     <value>69</value>
@@ -1808,7 +1814,7 @@
     <value>True</value>
   </data>
   <data name="colspec2.VisibleIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="colspec2.Width" type="System.Int32, mscorlib">
     <value>169</value>
@@ -1847,7 +1853,7 @@
     <value>True</value>
   </data>
   <data name="gridColumn4.VisibleIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="gridColumn4.Width" type="System.Int32, mscorlib">
     <value>179</value>
@@ -1874,7 +1880,7 @@
     <value>True</value>
   </data>
   <data name="Kod_podr.VisibleIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="Kod_podr.Width" type="System.Int32, mscorlib">
     <value>312</value>
@@ -1901,7 +1907,7 @@
     <value>True</value>
   </data>
   <data name="KodOb.VisibleIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="KodOb.Width" type="System.Int32, mscorlib">
     <value>273</value>
@@ -1973,7 +1979,7 @@
     <value>4, 3, 4, 3</value>
   </data>
   <data name="gridControlRasz.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1155, 535</value>
+    <value>1155, 538</value>
   </data>
   <data name="gridControlRasz.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -2015,7 +2021,7 @@
     <value>TopLeft</value>
   </data>
   <data name="gridControlRaskr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>815, 600</value>
+    <value>815, 598</value>
   </data>
   <data name="gridColumn9.ImageOptions.ImageKey" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -2168,7 +2174,7 @@
     <value>4, 3, 4, 3</value>
   </data>
   <data name="gridControlRaskr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>689, 189</value>
+    <value>689, 190</value>
   </data>
   <data name="gridControlRaskr.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -2185,7 +2191,7 @@
   <data name="&gt;&gt;gridControlRaskr.ZOrder" xml:space="preserve">
     <value>23</value>
   </data>
-  <data name="statusLabel.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="statusLabel.Appearance.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 10pt</value>
   </data>
   <data name="statusLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
@@ -2198,7 +2204,7 @@
     <value>4, 0, 4, 0</value>
   </data>
   <data name="statusLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1503, 21</value>
+    <value>1503, 16</value>
   </data>
   <data name="statusLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2222,13 +2228,13 @@
     <value>TopLeft</value>
   </data>
   <data name="textBoxBuffer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 612</value>
+    <value>7, 610</value>
   </data>
   <data name="textBoxBuffer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
   </data>
   <data name="textBoxBuffer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>322, 277</value>
+    <value>322, 279</value>
   </data>
   <data name="textBoxBuffer.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -2255,7 +2261,7 @@
     <value>TopLeft</value>
   </data>
   <data name="buffer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 578</value>
+    <value>7, 576</value>
   </data>
   <data name="buffer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -2304,6 +2310,30 @@
   </data>
   <data name="&gt;&gt;tableLayoutPanel4layoutControl1ConvertedLayoutlayoutControl1ConvertedLayout.ZOrder" xml:space="preserve">
     <value>27</value>
+  </data>
+  <data name="knitConstrComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 536</value>
+  </data>
+  <data name="knitConstrComboBox.Properties.Buttons" type="DevExpress.XtraEditors.Controls.ButtonPredefines, DevExpress.Utils.v25.2">
+    <value>Combo</value>
+  </data>
+  <data name="knitConstrComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>322, 20</value>
+  </data>
+  <data name="knitConstrComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;knitConstrComboBox.Name" xml:space="preserve">
+    <value>knitConstrComboBox</value>
+  </data>
+  <data name="&gt;&gt;knitConstrComboBox.Type" xml:space="preserve">
+    <value>DevExpress.XtraEditors.LookUpEdit, DevExpress.XtraEditors.v25.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;knitConstrComboBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3layoutControl1ConvertedLayout</value>
+  </data>
+  <data name="&gt;&gt;knitConstrComboBox.ZOrder" xml:space="preserve">
+    <value>28</value>
   </data>
   <data name="tableLayoutPanel3layoutControl1ConvertedLayout.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -2563,6 +2593,15 @@
   <data name="layoutControlItem16.Text" xml:space="preserve">
     <value>конструктор</value>
   </data>
+  <data name="layoutControlItem18.AppearanceItemCaption.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 11pt</value>
+  </data>
+  <data name="layoutControlItem18.CustomizationFormText" xml:space="preserve">
+    <value>конструктор-программист</value>
+  </data>
+  <data name="layoutControlItem18.Text" xml:space="preserve">
+    <value>конструктор-программист</value>
+  </data>
   <data name="layoutControlGroup1.Text" xml:space="preserve">
     <value> </value>
   </data>
@@ -2598,17 +2637,17 @@
   </data>
   <data name="layoutControlGroup10.CustomHeaderButtons6" type="DevExpress.Utils.SuperToolTip, DevExpress.Utils.v25.2" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFpEZXZFeHByZXNzLlV0aWxzLnYyNS4yLCBWZXJzaW9uPTI1
-        LjIuNC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI4OGQxNzU0ZDcwMGU0OWEM
-        AwAAAFlEZXZFeHByZXNzLkRhdGEudjI1LjIsIFZlcnNpb249MjUuMi40LjAsIEN1bHR1cmU9bmV1
-        dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUBAAAAHURldkV4cHJlc3MuVXRp
-        bHMuU3VwZXJUb29sVGlwBQAAAA1BbGxvd0h0bWxUZXh0EUZpeGVkVG9vbFRpcFdpZHRoCkl0ZW1z
-        Q291bnQJaXRlbVR5cGUwBWl0ZW0wBAAABAQfRGV2RXhwcmVzcy5VdGlscy5EZWZhdWx0Qm9vbGVh
-        bgMAAAABCCVEZXZFeHByZXNzLlV0aWxzLlN1cGVyVG9vbFRpcEl0ZW1UeXBlAgAAACVEZXZFeHBy
-        ZXNzLlV0aWxzLlRvb2xUaXBTZXBhcmF0b3JJdGVtAgAAAAIAAAAF/P///x9EZXZFeHByZXNzLlV0
-        aWxzLkRlZmF1bHRCb29sZWFuAQAAAAd2YWx1ZV9fAAgDAAAAAgAAAAABAAAABfv///8lRGV2RXhw
-        cmVzcy5VdGlscy5TdXBlclRvb2xUaXBJdGVtVHlwZQEAAAAHdmFsdWVfXwAIAgAAAAIAAAAJBgAA
-        AAUGAAAAJURldkV4cHJlc3MuVXRpbHMuVG9vbFRpcFNlcGFyYXRvckl0ZW0AAAAAAgAAAAs=
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFpEZXZFeHByZXNzLlV0aWxzLnYyNS4yLCBWZXJzaW9uPTI1LjIu
+        NS4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI4OGQxNzU0ZDcwMGU0OWEMAwAAAFlE
+        ZXZFeHByZXNzLkRhdGEudjI1LjIsIFZlcnNpb249MjUuMi41LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVi
+        bGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUBAAAAHURldkV4cHJlc3MuVXRpbHMuU3VwZXJUb29s
+        VGlwBQAAAA1BbGxvd0h0bWxUZXh0EUZpeGVkVG9vbFRpcFdpZHRoCkl0ZW1zQ291bnQJaXRlbVR5cGUw
+        BWl0ZW0wBAAABAQfRGV2RXhwcmVzcy5VdGlscy5EZWZhdWx0Qm9vbGVhbgMAAAABCCVEZXZFeHByZXNz
+        LlV0aWxzLlN1cGVyVG9vbFRpcEl0ZW1UeXBlAgAAACVEZXZFeHByZXNzLlV0aWxzLlRvb2xUaXBTZXBh
+        cmF0b3JJdGVtAgAAAAIAAAAF/P///x9EZXZFeHByZXNzLlV0aWxzLkRlZmF1bHRCb29sZWFuAQAAAAd2
+        YWx1ZV9fAAgDAAAAAgAAAAABAAAABfv///8lRGV2RXhwcmVzcy5VdGlscy5TdXBlclRvb2xUaXBJdGVt
+        VHlwZQEAAAAHdmFsdWVfXwAIAgAAAAIAAAAJBgAAAAUGAAAAJURldkV4cHJlc3MuVXRpbHMuVG9vbFRp
+        cFNlcGFyYXRvckl0ZW0AAAAAAgAAAAs=
 </value>
   </data>
   <data name="layoutControlGroup10.CustomHeaderButtons7" type="System.Boolean, mscorlib">
@@ -2696,6 +2735,114 @@
     <value />
   </data>
   <data name="layoutControlGroup10.CustomHeaderButtons35" type="System.Int32, mscorlib">
+    <value>-1</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons36" xml:space="preserve">
+    <value>Добавить операцию</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons37" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons38" type="DevExpress.XtraBars.Docking2010.ButtonStyle, DevExpress.Utils.v25.2">
+    <value>PushButton</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons39" xml:space="preserve">
+    <value>Добавить новую операцию в текущий RT</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons40" type="System.Int32, mscorlib">
+    <value>-1</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons41" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons42" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons43" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons44" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons45" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons46" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons47" type="System.Int32, mscorlib">
+    <value>-1</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons48" xml:space="preserve">
+    <value>Добавить базовый узел</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons49" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons50" type="DevExpress.XtraBars.Docking2010.ButtonStyle, DevExpress.Utils.v25.2">
+    <value>PushButton</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons51" xml:space="preserve">
+    <value>Вставить сохраненный базовый узел в операции NormRasz</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons52" type="System.Int32, mscorlib">
+    <value>-1</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons53" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons54" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons55" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons56" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons57" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons58" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons59" type="System.Int32, mscorlib">
+    <value>-1</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons60" xml:space="preserve">
+    <value>Сохранить как базовый узел</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons61" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons62" type="DevExpress.XtraBars.Docking2010.ButtonStyle, DevExpress.Utils.v25.2">
+    <value>PushButton</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons63" xml:space="preserve">
+    <value>Сохранить выбранные операции как базовый узел</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons64" type="System.Int32, mscorlib">
+    <value>-1</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons65" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons66" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons67" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons68" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons69" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons70" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="layoutControlGroup10.CustomHeaderButtons71" type="System.Int32, mscorlib">
     <value>-1</value>
   </data>
   <data name="gridControlRaszitem.ImageOptions.ImageKey" type="System.Resources.ResXNullRef, System.Windows.Forms">

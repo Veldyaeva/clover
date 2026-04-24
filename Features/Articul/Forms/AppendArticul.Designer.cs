@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions2 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions1 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppendArticul));
             txtArticul = new CustomTextBoxEx();
             customLayoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
+            txtRazmNames = new CustomTextBoxEx();
             gridNabor = new SewingProduction.Core.Class.CustomGridControl();
             gridViewNabor = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridRazm = new SewingProduction.Core.Class.CustomGridControl();
@@ -81,13 +82,13 @@
             layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             customSimpleButton1 = new SewingProduction.Core.Class.CustomSimpleButton();
             customSimpleButton2 = new SewingProduction.Core.Class.CustomSimpleButton();
-            txtRazmNames = new CustomTextBoxEx();
-            layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)txtArticul.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customLayoutControl1).BeginInit();
             customLayoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)txtRazmNames.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridNabor).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewNabor).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridRazm).BeginInit();
@@ -132,7 +133,6 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem11).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)txtRazmNames.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).BeginInit();
             SuspendLayout();
             // 
@@ -177,6 +177,17 @@
             customLayoutControl1.Size = new System.Drawing.Size(1159, 576);
             customLayoutControl1.TabIndex = 1;
             customLayoutControl1.Text = "customLayoutControl1";
+            // 
+            // txtRazmNames
+            // 
+            txtRazmNames.Location = new System.Drawing.Point(111, 367);
+            txtRazmNames.Name = "txtRazmNames";
+            txtRazmNames.ObjectName = null;
+            txtRazmNames.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtRazmNames.Properties.Appearance.Options.UseFont = true;
+            txtRazmNames.Size = new System.Drawing.Size(409, 22);
+            txtRazmNames.StyleController = customLayoutControl1;
+            txtRazmNames.TabIndex = 20;
             // 
             // gridNabor
             // 
@@ -471,8 +482,8 @@
             // 
             // layoutControlGroup1
             // 
-            buttonImageOptions2.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions2.Image");
-            layoutControlGroup1.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Создать", true, buttonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "lcg1AddSize", -1) });
+            buttonImageOptions1.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions1.Image");
+            layoutControlGroup1.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Создать", true, buttonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "lcg1AddSize", -1) });
             layoutControlGroup1.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.BeforeText;
             layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem19 });
             layoutControlGroup1.Location = new System.Drawing.Point(535, 0);
@@ -642,6 +653,16 @@
             layoutControlItem11.Size = new System.Drawing.Size(338, 26);
             layoutControlItem11.TextVisible = false;
             // 
+            // layoutControlItem15
+            // 
+            layoutControlItem15.Control = txtRazmNames;
+            layoutControlItem15.CustomizationFormText = "Размеры матрицы";
+            layoutControlItem15.Location = new System.Drawing.Point(0, 336);
+            layoutControlItem15.Name = "layoutControlItem15";
+            layoutControlItem15.Size = new System.Drawing.Size(519, 26);
+            layoutControlItem15.Text = "Размеры матрицы";
+            layoutControlItem15.TextSize = new System.Drawing.Size(94, 13);
+            // 
             // customSimpleButton1
             // 
             customSimpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -662,27 +683,6 @@
             customSimpleButton2.TabIndex = 3;
             customSimpleButton2.Text = "customSimpleButton2";
             // 
-            // txtRazmNames
-            // 
-            txtRazmNames.Location = new System.Drawing.Point(111, 367);
-            txtRazmNames.Name = "txtRazmNames";
-            txtRazmNames.ObjectName = null;
-            txtRazmNames.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtRazmNames.Properties.Appearance.Options.UseFont = true;
-            txtRazmNames.Size = new System.Drawing.Size(409, 22);
-            txtRazmNames.StyleController = customLayoutControl1;
-            txtRazmNames.TabIndex = 20;
-            // 
-            // layoutControlItem15
-            // 
-            layoutControlItem15.Control = txtRazmNames;
-            layoutControlItem15.CustomizationFormText = "Размеры матрицы";
-            layoutControlItem15.Location = new System.Drawing.Point(0, 336);
-            layoutControlItem15.Name = "layoutControlItem15";
-            layoutControlItem15.Size = new System.Drawing.Size(519, 26);
-            layoutControlItem15.Text = "Размеры матрицы";
-            layoutControlItem15.TextSize = new System.Drawing.Size(94, 13);
-            // 
             // AppendArticul
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -694,10 +694,12 @@
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "AppendArticul";
             Text = "AppendArticul";
+            FormClosing += AppendArticul_FormClosing;
             Load += AppendArticul_Load;
             ((System.ComponentModel.ISupportInitialize)txtArticul.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)customLayoutControl1).EndInit();
             customLayoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)txtRazmNames.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridNabor).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewNabor).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridRazm).EndInit();
@@ -742,7 +744,6 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem11).EndInit();
-            ((System.ComponentModel.ISupportInitialize)txtRazmNames.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).EndInit();
             ResumeLayout(false);
         }

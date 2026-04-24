@@ -8,8 +8,8 @@ namespace SewingProduction.Features.Sprav
 {
     public class EditFioDataService
     {
-        private readonly DatabaseHelper _dbHelper;
-        public EditFioDataService(DatabaseHelper dbHelper)
+        private readonly DatabaseHelperSQL _dbHelper;
+        public EditFioDataService(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper;
         }

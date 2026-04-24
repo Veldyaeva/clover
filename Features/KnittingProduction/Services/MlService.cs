@@ -15,7 +15,7 @@ namespace SewingProduction.Features.KnittingProduction.Services
     /// </summary>
     public class MlService
     {
-        private static DatabaseHelper _dbHelper;
+        private static DatabaseHelperSQL _dbHelper;
         private readonly DbService _dbService;
         //    private readonly HybridLogger _logger = new HybridLogger();
         private readonly FileLogger _logger = new FileLogger();
@@ -24,7 +24,7 @@ namespace SewingProduction.Features.KnittingProduction.Services
         /// Инициализирует новый экземпляр dbService.
         /// </summary>
         /// <param name="dbHelper">Помощник для работы с базой данных.</param>
-        public MlService(DatabaseHelper dbHelper)
+        public MlService(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
             _dbService = new DbService(_dbHelper);

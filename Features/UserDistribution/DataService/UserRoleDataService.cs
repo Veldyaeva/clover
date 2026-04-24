@@ -13,11 +13,11 @@ namespace SewingProduction.Features.UserDistribution.Models
     public class UserRoleDataService
     {
         private readonly DbService _dbService;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
 
         public UserRoleDataService()
         {
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
         }
         public async Task<int> AssignRoleAsync(int userId, int roleId)
