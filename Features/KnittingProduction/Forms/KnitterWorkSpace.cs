@@ -159,6 +159,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private Button _adminSettingsButton;
         private CancellationTokenSource? _sbCts;
         private int _serviceBrokerShutdownStarted;
+        private int? _lastLocallyClosedShiftId;
+        private DateTime _lastLocalShiftCloseSuppressUntilUtc;
         
         /// <summary>
         /// Флаг активной смены.
@@ -539,6 +541,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     }
 
                     _sbController.MuteTable(KnitWorkingShiftTable, ShiftBrokerSelfMute);
+                    var closingShiftId = _currentShiftId;
                     var res = await _workSpaceService.CloseShiftAsync(new CloseShiftCommand
                     {
                         ShiftId = _currentShiftId.Value,
@@ -592,6 +595,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     await LoadPlanForTabAsync(tabEnd, forceReload: true);
                     await RefreshFioListAsync();
                     ApplyShiftUi(false, null, null);
+                    RememberLocalShiftClose(closingShiftId);
                     return;
                 }
 
@@ -2591,6 +2595,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (!IsMatchingBrokerTable(tableName, KnitWorkingShiftTable))
                 return false;
 
+            if (_sbController.Helper?.IsMutedTable(KnitWorkingShiftTable) == true
+                || _sbController.Helper?.IsMutedTable(tableName) == true)
+            {
+                LogSuccess("Игнорируем локальное broker-обновление смены (self-mute).", nameof(HandleShiftBrokerUpdateAsync));
+                return true;
+            }
+
             var previousShiftId = _currentShiftId;
             var previousTab = _currentLoadedTab;
 
@@ -2624,10 +2635,40 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (_currentShiftId.HasValue && _currentShiftId.Value == previousShiftId.Value)
                 return;
 
+            if (IsLocallyClosedShift(previousShiftId.Value))
+            {
+                LogSuccess(
+                    $"Игнорируем broker-событие закрытия для локально закрытой смены {previousShiftId.Value}.",
+                    nameof(HandleRemoteShiftClosedByBrokerAsync));
+                return;
+            }
+
             LogWarning(
                 $"Смена {previousShiftId.Value} закрыта вне текущей формы. Текущий табель: {previousTab.Value}.",
                 nameof(HandleRemoteShiftClosedByBrokerAsync));
             _ = ShowRemoteShiftClosedSplashAsync();
+        }
+
+        private void RememberLocalShiftClose(int? shiftId)
+        {
+            if (!shiftId.HasValue || shiftId.Value <= 0)
+                return;
+
+            _lastLocallyClosedShiftId = shiftId.Value;
+            _lastLocalShiftCloseSuppressUntilUtc = DateTime.UtcNow.Add(ShiftBrokerSelfMute + ShiftBrokerSelfMute);
+        }
+
+        private bool IsLocallyClosedShift(int shiftId)
+        {
+            if (!_lastLocallyClosedShiftId.HasValue || _lastLocallyClosedShiftId.Value != shiftId)
+                return false;
+
+            if (DateTime.UtcNow <= _lastLocalShiftCloseSuppressUntilUtc)
+                return true;
+
+            _lastLocallyClosedShiftId = null;
+            _lastLocalShiftCloseSuppressUntilUtc = default;
+            return false;
         }
 
         private static bool IsShiftEndBrokerUpdate(string? fieldsChangedCsv)
