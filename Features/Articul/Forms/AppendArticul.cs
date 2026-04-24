@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraEditors.ButtonsPanelControl;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraLayout;
+using DevExpress.XtraMap.Drawing;
 using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
@@ -27,6 +28,8 @@ namespace SewingProduction.Features.Articul.Forms
         private BindingSource _bindingSourceMatr = new BindingSource();
         private CreateArticulMatrService _createArticulMatrService = new CreateArticulMatrService();
         private ArticulEditAdvanceService _articulEdAdvDataService = new ArticulEditAdvanceService();
+        private ArticulDataService _articulDataService = new ArticulDataService();
+
         private readonly ILogger _logger = new FileLogger();
 
         public AppendArticul(UserClass user) : base(user)
@@ -53,12 +56,15 @@ namespace SewingProduction.Features.Articul.Forms
         private async void AppendArticul_Load(object sender, EventArgs e)
         {
             var curMatrTask = _createArticulMatrService.GetMatrForNNAsync(_nn);
-            var curArticulTask = _createArticulMatrService.GetPreviewArticulAsync(_nn);
-
+            // пока без пометки, не знаю понадобится ли в этом варианте
+            //var curArticulTask = _createArticulMatrService.GetPreviewArticulAsync(_nn, _kod, "");
+            var curArticulTask = _articulDataService.GetByKodAsync( _kod);
             await Task.WhenAll(curMatrTask, curArticulTask);
            
             _bindingSourceMatr.DataSource = new BindingList<CreateArticulMatrModel>(curMatrTask.Result); 
             _bindingSourceArticul.DataSource = curArticulTask.Result;
+
+
 
             InitializeBindings();
             BindGostRazm();
@@ -83,19 +89,39 @@ namespace SewingProduction.Features.Articul.Forms
             txtTkb.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.Tkb), true);
             txtAssort.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.AssortName), true);
             txtRazmNames.DataBindings.Add("Text", _bindingSourceMatr, nameof(CreateArticulMatrModel.RazmNames), true);
+            
+            //всегда не активно
+            chkKruj.Enabled = false; 
+
 
         }
-        private void ConfigureControlsByMode()
+        private async Task ConfigureControlsByMode()
         {
                 switch (_typeCreate)
                 {
                     case 0: // Создание
                         // Настройка для режима создания
                         break;
-                    case 1: // Стыковка
-                        // Настройка для режима стыковки
+                    case 1: // Настройка для режима стыковки
 
-                        break;
+                        txtKod.Enabled = false; 
+                        txtPo.Enabled = false;
+                        btnAccept.Text = "Применить";
+                    //неактивный грид с размерами 
+                    foreach (DevExpress.XtraGrid.Columns.GridColumn column in gridViewRazm.Columns)
+                        {
+                            column.OptionsColumn.ReadOnly = true;
+                            column.OptionsColumn.AllowEdit = false;
+                        }
+
+                        _bindingSourceRazms.DataSource = null;
+                        
+
+                        var curArt = _bindingSourceArticul.Current as SpArticulPreviewModel;
+                        _bindingSourceRazms.DataSource = await _createArticulMatrService.GetArticulRazmAsync(curArt.Kodd);
+                    
+
+                    break;
                     default:
                         throw new InvalidOperationException("Недопустимый режим создания артикула.");
             }
@@ -171,6 +197,12 @@ namespace SewingProduction.Features.Articul.Forms
         /// <param name="e"></param>
         private void txtKod_Validating(object sender, CancelEventArgs e)
         {
+            if (!txtKod.Enabled || !txtKod.Visible )
+            {
+                e.Cancel = false;
+                return;
+            }
+
             string input = txtKod.Text;
             if (input.Length < 8)
             {
@@ -179,6 +211,7 @@ namespace SewingProduction.Features.Articul.Forms
                 txtKod.Focus();
             }
         }
+
     }
 
 }

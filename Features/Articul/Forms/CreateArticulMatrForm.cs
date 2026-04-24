@@ -512,7 +512,7 @@ namespace SewingProduction.Features.Articul.Forms
                 if (canLink.IsSuccess)
                 {
 
-                    using (AppendArticul f = new AppendArticul(CurrentUser.User, curMatr.Nn, curCompareRow.Kodd))
+                    using (AppendArticul f = new AppendArticul(CurrentUser.User, curMatr.Nn, curCompareRow.Kod))
                     {
                         if (f.ShowDialog() == DialogResult.OK)
                         {

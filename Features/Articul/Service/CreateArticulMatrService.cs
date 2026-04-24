@@ -134,7 +134,7 @@ namespace SewingProduction.Features.Articul.Service
         /// </summary>
         /// <param name="nn"></param>
         /// <returns></returns>
-        public async Task<BindingList<SpArticulPreviewModel>> GetPreviewArticulAsync(string nn)
+        public async Task<BindingList<SpArticulPreviewModel>> GetPreviewArticulAsync(string nn, string kod, string po )
         {
             try
             {
@@ -143,6 +143,12 @@ namespace SewingProduction.Features.Articul.Service
                 var result = listnn
                     .Select(x => ArticulMapper.ToArticulModel(x))
                     .ToList();
+
+                foreach (var item in result)
+                {
+                    item.Kod = kod;
+                    item.Po = po;
+                }
 
                 return new BindingList<SpArticulPreviewModel>(result);
             }
@@ -265,6 +271,19 @@ namespace SewingProduction.Features.Articul.Service
             }
         }
 
+        public async Task<BindingList<PlanRazmSetkaModel>> GetArticulRazmAsync(string kodd)
+        {
+            try
+            {
+                string query = "select kod, po, razm from View_sp_articul where kodd = @kodd";
+                return new BindingList<PlanRazmSetkaModel>(await _dbService.GetListAsync<PlanRazmSetkaModel>(query, new { kodd }));
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetArticulRazmAsync");
+                return null;
+            }
+        }
         public async Task<string> GetCheckArticulKomplsCompareAsync(string nn, string kod) 
         {
             try
