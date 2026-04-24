@@ -57,8 +57,9 @@ namespace SewingProduction.Features.Articul.Service
 
                 //наличие состава (в kompl) для артикула 
                 var checkKomplTask = checkArticulKompls(_nn, _kod);
+                var checkGostArhTask = checkGostArh();
 
-                var results = await Task.WhenAll(checkKomplTask);
+                var results = await Task.WhenAll(checkKomplTask, checkGostArhTask);
 
                 if (results.All(x => x.IsSuccess))
                     return CheckResult.Success();
@@ -90,10 +91,20 @@ namespace SewingProduction.Features.Articul.Service
         {
             if (_curCompareArticul.Arh == 1)
             {
-                //MessageBox.Show("Архивный артикул", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return CheckResult.Fail("Архивный артикул");
             }
             return CheckResult.Success();
+        }
+        private async Task<CheckResult> checkGostArh()
+        {
+            int result = await _createArticulMatrService.GetGostArhAsync(_kod);
+
+            if (result == 1)
+                return CheckResult.Fail("Архивный ГОСТ");
+
+            return CheckResult.Success();
+
+            
         }
         /// <summary>
         /// проверка на повторный артикул, если в базе уже есть артикула с таким же кодом, то нужно состыковать новый с существующим, а не создавать новый
@@ -101,21 +112,24 @@ namespace SewingProduction.Features.Articul.Service
         /// <returns></returns>
         private CheckResult checkRepeatArticle()
         {
-            if (!string.IsNullOrEmpty(_curCompareMatr.RepeatArticle) || !string.Equals(_curCompareMatr.RepeatArticle.Trim() , _curCompareArticul.Articul.Trim()) )
+            if (!string.IsNullOrEmpty(_curCompareMatr.RepeatArticle) )
             {
-                return CheckResult.Fail($"Повторный артикул, состыкуйте с существующим {_curCompareMatr.RepeatArticle}");
+                if (!string.Equals(_curCompareMatr.RepeatArticle.Trim(), _curCompareArticul.Articul.Trim()))
+                    return CheckResult.Fail($"Повторный артикул, состыкуйте с существующим {_curCompareMatr.RepeatArticle}");
             }
             return CheckResult.Success();
         }
         private CheckResult checkFoundMod() 
         {
-            if (!string.IsNullOrEmpty(_curCompareMatr.FoundMod) || !string.Equals(_curCompareMatr.FoundMod.Trim(), _curCompareArticul.Mod.Trim()))
+            if (!string.IsNullOrEmpty(_curCompareMatr.FoundMod) && !string.Equals(_curCompareMatr.FoundMod.Trim(), _curCompareArticul.Mod.Trim()))
             {
                 return CheckResult.Fail($"Швейная модель уже создана в справочнике с торговым артикулом: {_curCompareMatr.FoundMod}");
             }
 
             return CheckResult.Success();
         }
+
+
 
 
     }

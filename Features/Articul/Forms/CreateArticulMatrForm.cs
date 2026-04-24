@@ -508,6 +508,7 @@ namespace SewingProduction.Features.Articul.Forms
                 // проверки перед выбором модели 
                 ArticulComparisonService objArticulChecks = new ArticulComparisonService(curMatr, curCompareRow);
                 var canLink = await objArticulChecks.canLinkArticul();
+
                 if (canLink.IsSuccess)
                 {
 

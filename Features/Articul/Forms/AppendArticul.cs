@@ -24,6 +24,7 @@ namespace SewingProduction.Features.Articul.Forms
         private string _kod;
         private BindingSource _bindingSourceArticul = new BindingSource();
         private BindingSource _bindingSourceRazms = new BindingSource();
+        private BindingSource _bindingSourceMatr = new BindingSource();
         private CreateArticulMatrService _createArticulMatrService = new CreateArticulMatrService();
         private ArticulEditAdvanceService _articulEdAdvDataService = new ArticulEditAdvanceService();
         private readonly ILogger _logger = new FileLogger();
@@ -43,7 +44,6 @@ namespace SewingProduction.Features.Articul.Forms
         }
         public AppendArticul(UserClass user, string nn, string kod) : this(user)
         {
-
             // 0 - создание,1 - стыковка
             _typeCreate = 1;
             _nn = nn;
@@ -52,7 +52,14 @@ namespace SewingProduction.Features.Articul.Forms
 
         private async void AppendArticul_Load(object sender, EventArgs e)
         {
-            _bindingSourceArticul.DataSource = await _createArticulMatrService.GetPreviewArticulAsync(_nn);
+            var curMatrTask = _createArticulMatrService.GetMatrForNNAsync(_nn);
+            var curArticulTask = _createArticulMatrService.GetPreviewArticulAsync(_nn);
+
+            await Task.WhenAll(curMatrTask, curArticulTask);
+           
+            _bindingSourceMatr.DataSource = new BindingList<CreateArticulMatrModel>(curMatrTask.Result); 
+            _bindingSourceArticul.DataSource = curArticulTask.Result;
+
             InitializeBindings();
             BindGostRazm();
         }
@@ -74,6 +81,7 @@ namespace SewingProduction.Features.Articul.Forms
             txtGrup.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.Grup), true);
             txtTkb.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.Tkb), true);
             txtAssort.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.AssortName), true);
+            txtRazmNames.DataBindings.Add("Text", _bindingSourceMatr, nameof(CreateArticulMatrModel.RazmNames), true);
 
         }
 
@@ -87,7 +95,11 @@ namespace SewingProduction.Features.Articul.Forms
             _bindingSourceRazms.DataSource = await _createArticulMatrService.GetMatrPlanRazm(_nn, kod, po);
 
         }
-
+        /// <summary>
+        /// обработчик нажатия на кнопки заголовка группы 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void layoutControlGroup1_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
         {
             if (sender is LayoutControlGroup group && e.Button is GroupBoxButton button)
@@ -131,7 +143,11 @@ namespace SewingProduction.Features.Articul.Forms
                 throw;
             }
         }
-
+        /// <summary>
+        /// проверка на минимальную длину кода артикула при попытке покинуть поле ввода
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtKod_Validating(object sender, CancelEventArgs e)
         {
             string input = txtKod.Text;
