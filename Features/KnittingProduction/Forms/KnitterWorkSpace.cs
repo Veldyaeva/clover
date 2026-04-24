@@ -906,19 +906,26 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             BandedGridColumn dateStart = bandedGridColumn18;
             advBandedGridView1.CustomRowCellEdit += (s, e) =>
             {
+                GridView view = (GridView)PlanZagrVyazGridControl.FocusedView;
+                var currentRow = view?.GetRow(e.RowHandle) as KnitterPZVModel;
+                bool isCurrentTabRow =
+                    currentRow != null &&
+                    _currentLoadedTab.HasValue &&
+                    currentRow.pzvTab.HasValue &&
+                    currentRow.pzvTab.Value == _currentLoadedTab.Value;
+
                 if (e.Column != null && e.Column.FieldName == dateStart.FieldName)
                 {
                     var cellValue = e.CellValue;
                     bool isEmpty = cellValue == null ||
                                    cellValue == DBNull.Value ||
                                    (cellValue is DateTime dt && dt == DateTime.MinValue);
-                    e.RepositoryItem = isEmpty ? _pzvDateStartButtonEdit : _pzvDateStartTextEdit;
+                    e.RepositoryItem = isEmpty && isCurrentTabRow ? _pzvDateStartButtonEdit : _pzvDateStartTextEdit;
                 }
                 // Закончено
                 if (e.Column != null && e.Column.FieldName == bandedGridColumn19.FieldName)
                 {
                     // Кнопка "Завершить" показывается ТОЛЬКО если дата начала заполнена и дата окончания пуста
-                    GridView view = (GridView)PlanZagrVyazGridControl.FocusedView;
                     var startValue = view.GetRowCellValue(e.RowHandle, bandedGridColumn18);//advBandedGridView1.GetRowCellValue(e.RowHandle, bandedGridColumn18);
                     bool hasStart = !(startValue == null ||
                                       startValue == DBNull.Value ||
@@ -929,7 +936,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                                       endValue == DBNull.Value ||
                                       (endValue is DateTime edt && edt == DateTime.MinValue);
 
-                    e.RepositoryItem = (hasStart && isEndEmpty) ? _pzvDateEndButtonEdit : _pzvDateEndTextEdit;
+                    e.RepositoryItem = (hasStart && isEndEmpty && isCurrentTabRow) ? _pzvDateEndButtonEdit : _pzvDateEndTextEdit;
                 }
             };
             advBandedGridView1.CustomColumnDisplayText -= AdvBandedGridView1_CustomColumnDisplayText;
@@ -1363,6 +1370,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             var row = view?.GetFocusedRow() as KnitterPZVModel;
             if (row?.pzvID <= 0)
                 return false;
+
+            if (_currentLoadedTab.HasValue)
+            {
+                if (!row.pzvTab.HasValue || row.pzvTab.Value != _currentLoadedTab.Value)
+                {
+                    XtraMessageBox.Show(
+                        this,
+                        "Можно выполнять действие только по операциям, назначенным на текущий табельный номер.",
+                        caption,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return false;
+                }
+            }
 
             return _pzvActionValidator.ShowValidationMessage(MapToPzvOperList(row), validator, caption);
         }
@@ -2002,6 +2023,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     return;
                 }
 
+                if (_currentLoadedTab.HasValue && row?.pzvTab.HasValue == true && row.pzvTab.Value != _currentLoadedTab.Value)
+                {
+                    e.Appearance.BackColor = Color.WhiteSmoke;
+                    e.Appearance.BackColor2 = Color.GhostWhite;
+                    e.Appearance.ForeColor = Color.DimGray;
+                    e.Appearance.Options.UseForeColor = true;
+                    e.HighPriority = true;
+                    return;
+                }
+
                 // Подсветка фокусной строки (только если не незавершённая)
                 if (e.RowHandle == view.FocusedRowHandle)
                 {
@@ -2036,6 +2067,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     e.Appearance.BackColor = Color.LightCoral;
                     e.Appearance.BackColor2 = Color.LightCoral;
+                    e.HighPriority = true;
+                    return;
+                }
+
+                if (_currentLoadedTab.HasValue && row?.pzvTab.HasValue == true && row.pzvTab.Value != _currentLoadedTab.Value)
+                {
+                    e.Appearance.BackColor = Color.WhiteSmoke;
+                    e.Appearance.BackColor2 = Color.GhostWhite;
+                    e.Appearance.ForeColor = Color.DimGray;
+                    e.Appearance.Options.UseForeColor = true;
                     e.HighPriority = true;
                     return;
                 }
