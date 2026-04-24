@@ -1,11 +1,14 @@
-﻿using DevExpress.XtraGrid.Views.Base;
+﻿using DevExpress.XtraEditors.ButtonsPanelControl;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraReports.UI;
 using Newtonsoft.Json;
 using SewingProduction.Core.helpers;
 using SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application.Contexts;
 using SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application.Routing;
 using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Helpers;
+using SewingProduction.Report;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,6 +16,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Formatting = Newtonsoft.Json.Formatting;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
@@ -392,62 +396,100 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
-                int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+                //int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
 
-                switch (buttonIndex)
+                //switch (buttonIndex)
+                //{
+                //    case 0:
+                //        //Debug.WriteLine(ButtonPreliminaryWd.Enabled + " " + ButtonPreliminaryWd.Visible);
+                //        MessageBox.Show("Просмотр работы к подтверждению");
+                //        break;
+                //    case 2:
+                //        //Debug.WriteLine(ButtonEditWd.Enabled + " " + ButtonEditWd.Visible);
+                //        MessageBox.Show("История по операции");
+                //        break;
+                //    case 4:
+                //        //Debug.WriteLine(customSimpleButton1.Enabled + " " + customSimpleButton1.Visible);
+                //        MessageBox.Show("Выгрузить операции в XLS");
+                //        break;
+                //    case 6:
+                //        //Debug.WriteLine(ButtonArchAndCopyWd.Enabled + " " + ButtonArchAndCopyWd.Visible);
+                //        //MessageBox.Show("Загрузить операции");
+                //        gridViewRzvPachListByNom.FocusedColumn = gridViewRzvPachListByNom.Columns["data_paln"];
+                //        gridViewRzvPachListByNom.FocusedColumn = gridViewRzvPachListByNom.Columns["SyncSelection"];
+                //        gridViewPZVOperList.ShowLoadingPanel();
+                //        await LoadPlanZagrVyazByZadanySelection();
+                //        gridViewPZVOperList.HideLoadingPanel();
+                //        //await GridOverlayLoader.RunTaskWithOverlayAsync(
+                //        //    gridControlPZVOperList,
+                //        //    LoadPlanZagrVyazByZadanySelection
+                //        //    , CancellationToken.None
+                //        //    );
+                //        break;
+                //    case 8:
+                //        gridViewPZVOperList.ShowLoadingPanel();
+                //        ClearSelectedPachList();
+                //        gridViewPZVOperList.HideLoadingPanel();
+                //        //await GridOverlayLoader.RunTaskWithOverlayAsync(
+                //        //    gridControlPZVOperList,
+                //        //    ClearSelectedPachList
+                //        //    , CancellationToken.None
+                //        //    );
+                //        break;
+                //    case 10:
+                //        _pZVOperListByPachListBindingSource.Clear();
+                //        gridViewRzvPachListByNom.FocusedColumn = gridViewRzvPachListByNom.Columns["data_paln"];
+                //        gridViewRzvPachListByNom.FocusedColumn = gridViewRzvPachListByNom.Columns["SyncSelection"];
+                        
+                //        gridViewPZVOperList.ShowLoadingPanel();
+                //        await LoadPlanZagrVyazByZadanySelection();
+                //        gridViewPZVOperList.HideLoadingPanel();
+                //        //await GridOverlayLoader.RunTaskWithOverlayAsync(
+                //        //    gridControlPZVOperList,
+                //        //    LoadPlanZagrVyazByZadanySelection
+                //        //    , CancellationToken.None
+                //        //    );
+                //        break;
+                //}
+
+                string buttonTag = (e.Button as GroupBoxButton)?.Tag.ToString();
+                switch (buttonTag)
                 {
-                    case 0:
-                        //Debug.WriteLine(ButtonPreliminaryWd.Enabled + " " + ButtonPreliminaryWd.Visible);
+                    case "lcg6ViewOperToConfirm":
                         MessageBox.Show("Просмотр работы к подтверждению");
                         break;
-                    case 2:
-                        //Debug.WriteLine(ButtonEditWd.Enabled + " " + ButtonEditWd.Visible);
+                    case "lcg6OperHistory":
                         MessageBox.Show("История по операции");
                         break;
-                    case 4:
+                    case "lcg6OperListPrint":
                         //Debug.WriteLine(customSimpleButton1.Enabled + " " + customSimpleButton1.Visible);
-                        MessageBox.Show("Выгрузить операции в XLS");
+                        MessageBox.Show("Печать списка операций");
                         break;
-                    case 6:
-                        //Debug.WriteLine(ButtonArchAndCopyWd.Enabled + " " + ButtonArchAndCopyWd.Visible);
-                        //MessageBox.Show("Загрузить операции");
+                    case "lcg6OperListLoad":
                         gridViewRzvPachListByNom.FocusedColumn = gridViewRzvPachListByNom.Columns["data_paln"];
                         gridViewRzvPachListByNom.FocusedColumn = gridViewRzvPachListByNom.Columns["SyncSelection"];
                         gridViewPZVOperList.ShowLoadingPanel();
                         await LoadPlanZagrVyazByZadanySelection();
                         gridViewPZVOperList.HideLoadingPanel();
-                        //await GridOverlayLoader.RunTaskWithOverlayAsync(
-                        //    gridControlPZVOperList,
-                        //    LoadPlanZagrVyazByZadanySelection
-                        //    , CancellationToken.None
-                        //    );
                         break;
-                    case 8:
+                    case "lcg6OperListClear":
                         gridViewPZVOperList.ShowLoadingPanel();
                         ClearSelectedPachList();
+                        gridViewPZVOperList.ClearColumnsFilter();
                         gridViewPZVOperList.HideLoadingPanel();
-                        //await GridOverlayLoader.RunTaskWithOverlayAsync(
-                        //    gridControlPZVOperList,
-                        //    ClearSelectedPachList
-                        //    , CancellationToken.None
-                        //    );
                         break;
-                    case 10:
+                    case "lcg6OperListRefresh":
                         _pZVOperListByPachListBindingSource.Clear();
                         gridViewRzvPachListByNom.FocusedColumn = gridViewRzvPachListByNom.Columns["data_paln"];
                         gridViewRzvPachListByNom.FocusedColumn = gridViewRzvPachListByNom.Columns["SyncSelection"];
-                        
+
                         gridViewPZVOperList.ShowLoadingPanel();
                         await LoadPlanZagrVyazByZadanySelection();
                         gridViewPZVOperList.HideLoadingPanel();
-                        //await GridOverlayLoader.RunTaskWithOverlayAsync(
-                        //    gridControlPZVOperList,
-                        //    LoadPlanZagrVyazByZadanySelection
-                        //    , CancellationToken.None
-                        //    );
                         break;
                 }
-                Debug.WriteLine($"layoutControlGroup6_CustomButtonClick completed for button index {buttonIndex}");
+//                Debug.WriteLine($"layoutControlGroup6_CustomButtonClick completed for button index {buttonIndex}");
+                Debug.WriteLine($"layoutControlGroup6_CustomButtonClick completed for button tag {buttonTag}");
             }
             catch (Exception ex)
             {

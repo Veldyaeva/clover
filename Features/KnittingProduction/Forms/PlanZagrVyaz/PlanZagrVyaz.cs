@@ -6186,7 +6186,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     }
                     catch (Exception ex)
                     {
-                        await _logger.LogErrorAsync(ex, $"Ошибка печати накладной");
+                        await _logger.LogErrorAsync(ex, $"Ошибка печати назначений на В/М");
                     }
                     break;
                 case "lcg1LoadDataFromTSD":
