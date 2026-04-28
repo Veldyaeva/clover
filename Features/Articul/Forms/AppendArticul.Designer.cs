@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions3 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions1 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppendArticul));
             txtArticul = new CustomTextBoxEx();
             customLayoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
@@ -521,8 +521,8 @@
             // 
             // layoutControlGroup1
             // 
-            buttonImageOptions3.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions3.Image");
-            layoutControlGroup1.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Создать", true, buttonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "lcg1AddSize", -1) });
+            buttonImageOptions1.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions1.Image");
+            layoutControlGroup1.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Создать", true, buttonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "lcg1AddSize", -1) });
             layoutControlGroup1.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.BeforeText;
             layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem19 });
             layoutControlGroup1.Location = new System.Drawing.Point(535, 0);
@@ -711,6 +711,7 @@
             btnAccept.Size = new System.Drawing.Size(164, 25);
             btnAccept.TabIndex = 1;
             btnAccept.Text = "Добавить в справочник";
+            btnAccept.Click += btnAccept_Click;
             // 
             // btnCancel
             // 

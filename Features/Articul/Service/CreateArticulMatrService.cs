@@ -134,22 +134,24 @@ namespace SewingProduction.Features.Articul.Service
         /// </summary>
         /// <param name="nn"></param>
         /// <returns></returns>
-        public async Task<BindingList<SpArticulPreviewModel>> GetPreviewArticulAsync(string nn, string kod, string po )
+        public async Task<BindingList<SpArticulPreviewModel>> GetPreviewArticulAsync(string nn, string kod )
         {
+            var _articulDataService = new ArticulDataService();
             try
             {
-                var listnn = await GetMatrForNNAsync(nn);
+                //SpArticulPreviewModel
+                var curArticulTask = _articulDataService.GetByKodAsync(kod);
+                //CreateArticulMatrModel
+                var listnnTask = GetMatrForNNAsync(nn);
+
+                await Task.WhenAll(curArticulTask, listnnTask);
+
+                var listnn = await listnnTask;
+                var curArt = await curArticulTask;
 
                 var result = listnn
-                    .Select(x => ArticulMapper.ToArticulModel(x))
+                    .Select(x => ArticulMapper.ToArticulModel(x, curArt))
                     .ToList();
-
-                foreach (var item in result)
-                {
-                    item.Kod = kod;
-                    item.Po = po;
-                }
-
                 return new BindingList<SpArticulPreviewModel>(result);
             }
             catch (Exception ex)
@@ -157,6 +159,13 @@ namespace SewingProduction.Features.Articul.Service
                 await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetPreviewArticulAsync");
                 return null;
             }
+            finally
+            {
+                _articulDataService = null;
+            }
+
+
+
         }
 
         public async Task<CreateArticulMatrModel> GetStatusForArticulAsync(string nn, int idgost, int agid )
@@ -297,7 +306,20 @@ namespace SewingProduction.Features.Articul.Service
                 return "Ошибка при получении данных dbo.checkArticulKomplsCompare";
             }
         }
-
+        public async Task<bool> HasNzpForArticul (string kodd)
+        {
+            
+                try
+            {
+                string query = "select dbo.checkHasNzpForArticul(@kodd)";
+                return await _dbService.GetFirstOrDefaultAsync<bool>(query, new { kodd});
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных HasNzpForArticul");
+                return false;
+            }
+        }
         public async Task<int> GetGostArhAsync( string kod)
         {
             try
@@ -317,35 +339,43 @@ namespace SewingProduction.Features.Articul.Service
 
         }
 
+
+
+
     }
 
 
 
     public static class ArticulMapper
     {
-        public static SpArticulPreviewModel ToArticulModel(CreateArticulMatrModel x)
+        public static SpArticulPreviewModel ToArticulModel(CreateArticulMatrModel matrArt, SpArticulPreviewModel curArt)
         {
             return new SpArticulPreviewModel
             {
-                Articul = x.Articul,
-                Mod = x.Article,
-                Baza = x.Baza,// сезон
-                SeasonName = x.Tsn_name,
-                Grupp = x.Men_int,
-                GrupMenName = x.Grupmen_name,
-                TmName = x.Tm_name,
-                Kle = x.Kle,//ТМ sp 
-                Sost = x.Sost,
-                Sost2 = x.Sost2,
-                Sost3 = x.Sost3,
-                Kruj = x.Kruj,
-                Id_gost = x.Id_gost,//ГОСТ
-                Gost = x.GostName,
-                Ag_id = x.Ag_id,// группа по ГОСТ
-                Grup = x.Grup,
-                Tkb = x.Tkb,
-                Kod_v = x.Kod_v,//код ассортимента
-                AssortName = x.AssortName
+                Kod = curArt.Kod,
+                Po = curArt.Po,
+                Kodd = curArt.Kodd,
+                Articul = matrArt.Articul,
+                Mod = matrArt.Article,
+                Baza = matrArt.Baza,// сезон
+                SeasonName = matrArt.Tsn_name,
+                Grupp = matrArt.Men_int,
+                GrupMenName = matrArt.Grupmen_name,
+                TmName = matrArt.Tm_name,
+                Kle = matrArt.Kle,//ТМ sp 
+                Sost = matrArt.Sost,
+                Sost2 = matrArt.Sost2,
+                Sost3 = matrArt.Sost3,
+                Kruj = matrArt.Kruj,
+                Id_gost = matrArt.Id_gost,//ГОСТ
+                Gost = matrArt.GostName,
+                Ag_id = matrArt.Ag_id,// группа по ГОСТ
+                Grup = matrArt.Grup,
+                Tkb = matrArt.Tkb,
+                Kod_v = matrArt.Kod_v,//код ассортимента
+                AssortName = matrArt.AssortName
+
+
 
             };
         }

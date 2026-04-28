@@ -50,13 +50,20 @@ namespace SewingProduction.Features.Articul.Service
                         Control = null // Здесь можно добавить логику для определения связанного UI-контрола, если необходимо
                     };
 
-                    // Для подсветки учитываем все расхождения
+                        // Для подсветки учитываем все расхождения
                     result.Mismatches.Add(mismatch);
 
+
+
                     // Для итогового совпадения игнорируем "подсветить-но-не-валидировать" поля (например, Сезон)
-                    if (!IsHighlightOnlyField(item.PropertyName))
-                        result.SignificantMismatches.Add(mismatch);
-                }
+                    if (!IsHighlightOnlyField(item.PropertyName) && !IsHighlightOnlyFieldSost(item.PropertyName) )
+                        result.SignificantMismatches.Add(mismatch); 
+
+                    // для состава будет доп проверка, помечаем его для этого 
+                    if (IsHighlightOnlyFieldSost(item.PropertyName))
+                        result.ComplicateMismatches.Add(mismatch);
+
+                    }
 
                 return result;
             }
@@ -88,6 +95,10 @@ namespace SewingProduction.Features.Articul.Service
 
         private static bool IsHighlightOnlyField(string propertyName) =>
             string.Equals(propertyName, nameof(SpArticulPreviewModel.SeasonName), StringComparison.OrdinalIgnoreCase);
+
+        private static bool IsHighlightOnlyFieldSost(string propertyName) => 
+            string.Equals(propertyName, nameof(SpArticulPreviewModel.Sost), StringComparison.OrdinalIgnoreCase);
+
 
         private static bool AreEqualWithRules(FieldComparisonItem item, object? left, object? right)
         {
@@ -185,9 +196,16 @@ namespace SewingProduction.Features.Articul.Service
     {
         // Подсветка ошибок делается по `Mismatches`,
         // а результат "совпало/не совпало" игнорирует часть полей (сезон).
-        public bool IsMatch => SignificantMismatches.Count == 0;
+        public bool  IsMatch { get => SignificantMismatches.Count == 0; set;}
+        // несовпадения
         public List<FieldMismatch> Mismatches { get; } = new();
+        // важные  к проверке
         public List<FieldMismatch> SignificantMismatches { get; } = new();
+        /// <summary>
+        /// дополнительная проверка при сравнении
+        /// </summary>
+        public List<FieldMismatch> ComplicateMismatches { get; } = new();
+
     }
     /// <summary>
     /// Построитель списка полей для сравнения модели CreateArticulMatrModel с моделью SpArticulPreviewModel.

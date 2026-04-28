@@ -43,7 +43,8 @@ namespace SewingProduction.Features.Articul.Forms
 
         private readonly BindingSource _bsDetails = new(); // источник для деталей
 
-        private bool _lastCompareResult;
+        private ComparisonResult _comparisonResult;
+
 
         public CreateArticulMatrForm(UserClass user) : base(user)
         {
@@ -396,7 +397,7 @@ namespace SewingProduction.Features.Articul.Forms
             ArticulControlBindingHelper.ClearDetails(_bsDetails);// очищаем предыдущие детали, чтобы не было "висячих" данных от предыдущего сравнения, пока загружаются новые детали
             articulControl1.ClearImage();
             //          _bsDetails.DataSource = await _articulDataService.GetByKodAsync(kod);
-            await CompareSelectedArticulAsync();// загружаем детали для выбранного артикула сравнения и выполняем сравнение с текущим артикулом матрицы, результат сравнения сохраняем в поле _lastCompareResult, чтобы при сохранении матрицы знать, нужно ли сохранять изменения или нет
+            await CompareSelectedArticulAsync();// загружаем детали для выбранного артикула сравнения и выполняем сравнение с текущим артикулом матрицы, результат сравнения сохраняем в поле _comparisonResult, чтобы при сохранении матрицы знать, нужно ли сохранять изменения или нет
             gridViewArtCompare.HideLoadingPanel();// скрываем индикатор загрузки после завершения загрузки деталей и сравнения
         }
 
@@ -445,7 +446,7 @@ namespace SewingProduction.Features.Articul.Forms
                 {
                     ArticulControlBindingHelper.ClearDetails(_bsDetails);// очищаем детали, чтобы не было "висячих" данных от предыдущего сравнения, так как нет артикула для сравнения
                     articulControl1.ClearImage();
-                    _lastCompareResult = false;
+                    _comparisonResult = null;
                     return;
                 }
 
@@ -460,12 +461,15 @@ namespace SewingProduction.Features.Articul.Forms
                 var compareItems = BuildComparisonItems(matrixRow);// создаем список полей для сравнения на основе текущей строки матрицы, который будет использоваться в articulControl1 для сравнения и подсветки различий
                 var result = articulControl1.CompareAndHighlight(compareItems);// выполняем сравнение и подсветку различий в articulControl1, результат сравнения сохраняем в переменной result, которая содержит информацию о том, совпадают ли артикулы полностью (IsMatch) и какие поля отличаются (Mismatches)
                                                                                // тут можно сохранить флаг в поле формы
-                _lastCompareResult = result.IsMatch;// сохраняем результат сравнения в поле формы, чтобы при сохранении матрицы знать, нужно ли сохранять изменения или нет, так как если артикулы совпадают полностью, то сохранять изменения не нужно, так как они не изменились по сравнению с выбранным артикулом сравнения
+                _comparisonResult = result;// сохраняем результат сравнения в поле формы, чтобы при сохранении матрицы знать, нужно ли сохранять изменения или нет, так как если артикулы совпадают полностью, то сохранять изменения не нужно, так как они не изменились по сравнению с выбранным артикулом сравнения
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString() + "213");
-                _lastCompareResult = false;
+
+                _comparisonResult = null;
+
             }
 
         }
@@ -500,18 +504,32 @@ namespace SewingProduction.Features.Articul.Forms
             var curMatr = _bindingSourceArtMatr.Current as CreateArticulMatrModel;// получаем текущую выбранную строку из матрицы
             if (curMatr == null)
                 return;
+            
 
             var curCompareRow = _bindingSourceArticulCompare.Current as SpArtPreviewModel;
+            ArticulComparisonValidator objArticulChecks = new ArticulComparisonValidator(curMatr, curCompareRow);
+
+            // проверка  при расхождении в составе
+            if (_comparisonResult.ComplicateMismatches.Count>0)
+            {
+                var canChSost = await objArticulChecks.canChangeArticulSost();
+                if (!canChSost.IsSuccess)
+                {
+                    MessageBox.Show(@$"Невозможно выбрать эту модель для стыковки: 
+                        {canChSost.ErrorMessage}", "Проверка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    objArticulChecks = null;
+                    return;
+                }
+            }
+
             //все совпало по выбранной модели
-            if (_lastCompareResult)
+            if (_comparisonResult.IsMatch)
             {
                 // проверки перед выбором модели 
-                ArticulComparisonService objArticulChecks = new ArticulComparisonService(curMatr, curCompareRow);
                 var canLink = await objArticulChecks.canLinkArticul();
 
                 if (canLink.IsSuccess)
                 {
-
                     using (AppendArticul f = new AppendArticul(CurrentUser.User, curMatr.Nn, curCompareRow.Kod))
                     {
                         if (f.ShowDialog() == DialogResult.OK)

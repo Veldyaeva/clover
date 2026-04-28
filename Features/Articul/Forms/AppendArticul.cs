@@ -5,6 +5,7 @@ using DevExpress.XtraMap.Drawing;
 using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
+using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using SewingProduction.Features.UserDistribution.Helpers;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace SewingProduction.Features.Articul.Forms
         private int _typeCreate;
         private string _nn;
         private string _kod;
+        
         private BindingSource _bindingSourceArticul = new BindingSource();
         private BindingSource _bindingSourceRazms = new BindingSource();
         private BindingSource _bindingSourceMatr = new BindingSource();
@@ -41,13 +43,13 @@ namespace SewingProduction.Features.Articul.Forms
 
         public AppendArticul(UserClass user, string nn) : this(user)
         {
-            // 0 - создание,1 - стыковка
+            // 0 - создание
             _typeCreate = 0;
             _nn = nn;
         }
         public AppendArticul(UserClass user, string nn, string kod) : this(user)
         {
-            // 0 - создание,1 - стыковка
+            // 1 - стыковка
             _typeCreate = 1;
             _nn = nn;
             _kod = kod;
@@ -57,11 +59,12 @@ namespace SewingProduction.Features.Articul.Forms
         {
             var curMatrTask = _createArticulMatrService.GetMatrForNNAsync(_nn);
             // пока без пометки, не знаю понадобится ли в этом варианте
-            //var curArticulTask = _createArticulMatrService.GetPreviewArticulAsync(_nn, _kod, "");
-            var curArticulTask = _articulDataService.GetByKodAsync( _kod);
+            var curArticulTask = _createArticulMatrService.GetPreviewArticulAsync(_nn, _kod);
+            //var curArticulTask = _articulDataService.GetByKodAsync(_kod);
+
             await Task.WhenAll(curMatrTask, curArticulTask);
-           
-            _bindingSourceMatr.DataSource = new BindingList<CreateArticulMatrModel>(curMatrTask.Result); 
+
+            _bindingSourceMatr.DataSource = new BindingList<CreateArticulMatrModel>(curMatrTask.Result);
             _bindingSourceArticul.DataSource = curArticulTask.Result;
 
 
@@ -89,41 +92,41 @@ namespace SewingProduction.Features.Articul.Forms
             txtTkb.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.Tkb), true);
             txtAssort.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.AssortName), true);
             txtRazmNames.DataBindings.Add("Text", _bindingSourceMatr, nameof(CreateArticulMatrModel.RazmNames), true);
-            
+
             //всегда не активно
-            chkKruj.Enabled = false; 
+            chkKruj.Enabled = false;
 
 
         }
         private async Task ConfigureControlsByMode()
         {
-                switch (_typeCreate)
-                {
-                    case 0: // Создание
+            switch (_typeCreate)
+            {
+                case 0: // Создание
                         // Настройка для режима создания
-                        break;
-                    case 1: // Настройка для режима стыковки
+                    break;
+                case 1: // Настройка для режима стыковки
 
-                        txtKod.Enabled = false; 
-                        txtPo.Enabled = false;
-                        btnAccept.Text = "Применить";
+                    txtKod.Enabled = false;
+                    txtPo.Enabled = false;
+                    btnAccept.Text = "Применить";
                     //неактивный грид с размерами 
                     foreach (DevExpress.XtraGrid.Columns.GridColumn column in gridViewRazm.Columns)
-                        {
-                            column.OptionsColumn.ReadOnly = true;
-                            column.OptionsColumn.AllowEdit = false;
-                        }
+                    {
+                        column.OptionsColumn.ReadOnly = true;
+                        column.OptionsColumn.AllowEdit = false;
+                    }
 
-                        _bindingSourceRazms.DataSource = null;
-                        
+                    _bindingSourceRazms.DataSource = null;
 
-                        var curArt = _bindingSourceArticul.Current as SpArticulPreviewModel;
-                        _bindingSourceRazms.DataSource = await _createArticulMatrService.GetArticulRazmAsync(curArt.Kodd);
-                    
+
+                    var curArt = _bindingSourceArticul.Current as SpArticulPreviewModel;
+                    _bindingSourceRazms.DataSource = await _createArticulMatrService.GetArticulRazmAsync(curArt.Kodd);
+
 
                     break;
-                    default:
-                        throw new InvalidOperationException("Недопустимый режим создания артикула.");
+                default:
+                    throw new InvalidOperationException("Недопустимый режим создания артикула.");
             }
         }
         private void AppendArticul_FormClosing(object sender, FormClosingEventArgs e)
@@ -197,7 +200,7 @@ namespace SewingProduction.Features.Articul.Forms
         /// <param name="e"></param>
         private void txtKod_Validating(object sender, CancelEventArgs e)
         {
-            if (!txtKod.Enabled || !txtKod.Visible )
+            if (!txtKod.Enabled || !txtKod.Visible)
             {
                 e.Cancel = false;
                 return;
@@ -212,6 +215,23 @@ namespace SewingProduction.Features.Articul.Forms
             }
         }
 
+        private async void btnAccept_Click(object sender, EventArgs e)
+        {
+            var validator = new AppendArticulValidator(_bindingSourceArticul.Current as SpArticulPreviewModel);
+            
+            var canLink = await validator.checkBeforPublish();
+            
+            var listRazm = (List<PlanRazmSetkaModel>)_bindingSourceRazms.DataSource;
+            canLink = validator.checkKod(listRazm);
+
+            if (canLink.IsSuccess)
+            {
+                MessageBox.Show("Проверка прошла успешно. Артикул можно создать/стыковать.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+
+            validator = null;
+        }
     }
 
 }

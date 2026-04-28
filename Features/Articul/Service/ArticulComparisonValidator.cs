@@ -12,13 +12,13 @@ using System.Windows.Forms;
 
 namespace SewingProduction.Features.Articul.Service
 {
-    public sealed class ArticulComparisonService
+    public sealed class ArticulComparisonValidator
     {
         private string _kod;
         private string _nn;
         private SpArtPreviewModel _curCompareArticul;
         private CreateArticulMatrModel _curCompareMatr;
-
+        private bool _isRepeat = false;
 
         //private readonly DbService _dbService = new DbService(new DatabaseHelper());
         //private readonly DatabaseHelper _dbHelper;
@@ -26,7 +26,7 @@ namespace SewingProduction.Features.Articul.Service
         private CreateArticulMatrService _createArticulMatrService = new CreateArticulMatrService();
 
 
-        public ArticulComparisonService(CreateArticulMatrModel curMatr, SpArtPreviewModel curArt)
+        public ArticulComparisonValidator(CreateArticulMatrModel curMatr, SpArtPreviewModel curArt)
         {
             _curCompareArticul = curArt;
             _curCompareMatr = curMatr;
@@ -58,6 +58,7 @@ namespace SewingProduction.Features.Articul.Service
                 //наличие состава (в kompl) для артикула 
                 var checkKomplTask = checkArticulKompls(_nn, _kod);
                 var checkGostArhTask = checkGostArh();
+                
 
                 var results = await Task.WhenAll(checkKomplTask, checkGostArhTask);
 
@@ -74,6 +75,25 @@ namespace SewingProduction.Features.Articul.Service
                 return CheckResult.Fail("Исключение в CanLinkArticul");
             }
         }
+        public async Task<CheckResult>canChangeArticulSost() {
+
+            if (_isRepeat)
+            {
+                MessageBox.Show("Внимание! Артикул ранее сдавался с другим составом!");
+            }
+            var res = await checkNZP();
+
+            if (!res.IsSuccess)
+            {
+                return CheckResult.Fail("По артикулу есть незавершенное производство! Нельзя заменить состав!");
+            }
+            else
+            {
+                return CheckResult.Success();
+            }
+
+        }
+        public bool isRepeat() { return _isRepeat; }
         private async Task<CheckResult> checkArticulKompls(string nn, string kod) 
         {
             string result = await _createArticulMatrService.GetCheckArticulKomplsCompareAsync(nn, kod);
@@ -104,8 +124,16 @@ namespace SewingProduction.Features.Articul.Service
 
             return CheckResult.Success();
 
-            
         }
+        private async Task<CheckResult>checkNZP() {
+            bool result = await _createArticulMatrService.HasNzpForArticul(_curCompareArticul.Kodd);
+            if (result )
+                return CheckResult.Fail("По артикулу есть незавершенное производство! Нельзя заменить состав!");
+
+            return CheckResult.Success();
+        }
+
+
         /// <summary>
         /// проверка на повторный артикул, если в базе уже есть артикула с таким же кодом, то нужно состыковать новый с существующим, а не создавать новый
         /// </summary>
@@ -114,6 +142,7 @@ namespace SewingProduction.Features.Articul.Service
         {
             if (!string.IsNullOrEmpty(_curCompareMatr.RepeatArticle) )
             {
+                _isRepeat = true;
                 if (!string.Equals(_curCompareMatr.RepeatArticle.Trim(), _curCompareArticul.Articul.Trim()))
                     return CheckResult.Fail($"Повторный артикул, состыкуйте с существующим {_curCompareMatr.RepeatArticle}");
             }
