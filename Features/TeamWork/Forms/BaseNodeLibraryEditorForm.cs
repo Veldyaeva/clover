@@ -19,6 +19,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly BaseNodeLibraryService _libraryService;
         private readonly List<BaseNodeDefinition> _nodes = new List<BaseNodeDefinition>();
         private readonly int? _preferredNodeId;
+        private readonly Action<int> _openSourceArticle;
         private readonly BaseNodePreviewPanel _previewPanel;
         private BaseNodeDefinition _workingNode;
         private bool _updatingFilters;
@@ -34,10 +35,15 @@ namespace SewingProduction.Features.TeamWork.Forms
             : null;
         public int? SelectedBaseNodeId => SelectedNode?.BaseNodeId;
 
-        public BaseNodeLibraryEditorForm(UserClass User, BaseNodeLibraryService libraryService, int? preferredNodeId = null):base(User)
+        public BaseNodeLibraryEditorForm(
+            UserClass User,
+            BaseNodeLibraryService libraryService,
+            int? preferredNodeId = null,
+            Action<int> openSourceArticle = null):base(User)
         {
             _libraryService = libraryService ?? throw new ArgumentNullException(nameof(libraryService));
             _preferredNodeId = preferredNodeId;
+            _openSourceArticle = openSourceArticle;
 
             InitializeComponent();
             _previewPanel = BaseNodePreviewHelper.Create(previewPanel, previewSourceLabel, previewImageStatusLabel, previewPictureBox);
@@ -321,6 +327,12 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void PreviewSourceLabel_Click(object sender, EventArgs e)
         {
+            if (TryOpenSourceArticle())
+            {
+                Close();
+                return;
+            }
+
             CopyRtCodeToClipboard();
         }
 
@@ -346,6 +358,19 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
+        private bool TryOpenSourceArticle()
+        {
+            if (_openSourceArticle == null || _workingNode?.SourceAnnId == null)
+                return false;
+
+            var sourceAnnId = _workingNode.SourceAnnId.Value;
+            if (sourceAnnId <= 0)
+                return false;
+
+            _openSourceArticle(sourceAnnId);
+            return true;
+        }
+
         private void UpdateRtCodeCopyState(string sourceRtCode, string nodeCode)
         {
             string sourceArticul = StringNormalizer.TrimOrEmpty(_workingNode?.SourceArticul);
@@ -353,13 +378,23 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (string.IsNullOrWhiteSpace(codeToCopy))
                 codeToCopy = StringNormalizer.TrimOrEmpty(nodeCode);
 
-            string tooltip = string.IsNullOrWhiteSpace(codeToCopy)
-                ? (string.IsNullOrWhiteSpace(sourceArticul)
-                    ? "Источник не задан"
-                    : $"Артикул: {sourceArticul}")
-                : string.IsNullOrWhiteSpace(sourceArticul)
-                    ? $"RT-код: {codeToCopy}. Кликните, чтобы скопировать"
-                    : $"Артикул: {sourceArticul}. RT-код: {codeToCopy}. Кликните, чтобы скопировать RT-код";
+            string tooltip;
+            if (_openSourceArticle != null && _workingNode?.SourceAnnId > 0)
+            {
+                tooltip = string.IsNullOrWhiteSpace(sourceArticul)
+                    ? $"RT-код: {codeToCopy}. Кликните, чтобы открыть исходный РТ"
+                    : $"Артикул: {sourceArticul}. RT-код: {codeToCopy}. Кликните, чтобы открыть исходный РТ";
+            }
+            else
+            {
+                tooltip = string.IsNullOrWhiteSpace(codeToCopy)
+                    ? (string.IsNullOrWhiteSpace(sourceArticul)
+                        ? "Источник не задан"
+                        : $"Артикул: {sourceArticul}")
+                    : string.IsNullOrWhiteSpace(sourceArticul)
+                        ? $"RT-код: {codeToCopy}. Кликните, чтобы скопировать"
+                        : $"Артикул: {sourceArticul}. RT-код: {codeToCopy}. Кликните, чтобы скопировать RT-код";
+            }
 
             previewToolTip.SetToolTip(previewSourceLabel, tooltip);
             previewToolTip.SetToolTip(nodeCodeValueLabel, tooltip);

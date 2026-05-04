@@ -67,7 +67,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application
                 row.olPzvKwsID = shift.kwsID;
                 row.olPzvKolNazn = row.olKol;
                 row.olPzvChasNazn = row.olPzvNChasi;
-                row.olPzvSekNazn = row.olSekEd;
+                row.olPzvSekNazn = row.olSekEd * row.olPzvKolNazn;
             }, ct);
 
             return OperationResult.Ok();

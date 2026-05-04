@@ -1,6 +1,7 @@
 ﻿
 CREATE PROCEDURE dbo.PZV_AdjustNotStartedBeforeShiftEnd
     @KwsId INT,
+    @Tab INT,
     @MinHours DECIMAL(18,2) = 12.0,
     @UserName sysname = NULL  -- чтобы писать кто закрыл
 AS
@@ -18,6 +19,8 @@ BEGIN
 
    IF ISNULL(@KwsId,0) = 0
         THROW 50001, 'Смена не открыта', 1;
+    IF ISNULL(@Tab,0) = 0
+        THROW 50001, 'Не задан табельный номер для анализа смены', 1;
     IF @MinHours IS NULL OR @MinHours <= 0
         SET @MinHours = 12.0;
     DECLARE @now datetime = GETDATE();
@@ -52,6 +55,7 @@ BEGIN
         INTO #ShiftRows
         FROM dbo.planZagrVyaz p
         WHERE p.pzvKwsID = @KwsId
+          AND p.pzvTab = @Tab
           AND p.pzvKmlID IS NOT NULL;
 
         CREATE CLUSTERED INDEX IX__ShiftRows__Kml ON #ShiftRows(pzvKmlID, pzvID);

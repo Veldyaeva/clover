@@ -156,6 +156,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                     e.Value = fio.Fio;
             };
 
+            knitConstrTextBox.DataBindings.Clear();
+            knitConstrTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.FioKnitConstr), true, DataSourceUpdateMode.Never);
+            knitConstrTextBox.DataBindings["Text"].Format += (s, e) =>
+            {
+                if (e.Value is FioModel fio)
+                    e.Value = fio.Fio;
+            };
+
             commentRichTextBox.DataBindings.Clear();
             commentRichTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Komment), false);
 
@@ -420,6 +428,22 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
                 // Устанавливаем общий источник для модели ArtNormN
                 ArtNormN.FioSource = _cachedFioData;
+
+                if (_cachedKnitConstrFioData == null)
+                {
+                    var knitConstrData = await _artNormService.GetRelKnitConstructors();
+                    if (knitConstrData != null && knitConstrData.Count > 0)
+                    {
+                        _cachedKnitConstrFioData = new List<FioModel>(knitConstrData);
+                        await _logger.LogEventAsync("FIO конструкторов-программистов загружено и закешировано", "LoadAndBindFioListsAsync");
+                    }
+                    else
+                    {
+                        await _logger.LogEventAsync("Пустой список FIO конструкторов-программистов", "LoadAndBindFioListsAsync");
+                    }
+                }
+
+                ArtNormN.KnitConstrSource = _cachedKnitConstrFioData;
                 _bindingSource.DataSource = _bindingList;
                 _bindingSource.ResetBindings(false);
             }

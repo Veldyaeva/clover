@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -44,7 +44,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                     return Failure(lockResult.Status, lockResult.ErrorMessage);
                 }
 
-                var unfinished = (await tx.GetUnfinishedOperationIdsForShiftAsync(command.ShiftId).ConfigureAwait(false))
+                var unfinished = (await tx.GetUnfinishedOperationIdsForShiftAsync(command.ShiftId, command.TabEnd).ConfigureAwait(false))
                     .Where(id => id > 0)
                     .Distinct()
                     .ToList();
@@ -63,6 +63,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
                 await tx.AdjustNotStartedBeforeShiftEndAsync(
                         command.ShiftId,
+                        command.TabEnd,
                         command.MinHours,
                         command.UserName ?? string.Empty)
                     .ConfigureAwait(false);

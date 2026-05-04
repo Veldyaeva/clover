@@ -31,8 +31,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public int? pzvKol { get; set; }
         public int pzvSek { get; set; }
         public int pzvSekNazn { get; set; }
+        public DateTime? pzvDateNaznKm { get; set; }
+        public DateTime? pzvDateNaznTab { get; set; }
         public DateTime? pzvDateStart { get; set; }
         public DateTime? pzvDateEnd { get; set; }
+        public DateTime? pzvDateMast { get; set; }
         public int pzvKolNazn { get; set; }
         public decimal pzvChasNazn { get; set; }
         public decimal? pzvNChasi { get; set; } // факт. часы из БД

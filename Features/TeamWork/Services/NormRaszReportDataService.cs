@@ -27,10 +27,12 @@ namespace SewingProduction.Features.TeamWork.Services
 SELECT
     ann.*,
     diz.fio AS fio_diz,
-    constr.fio AS fio_constr
+    constr.fio AS fio_constr,
+    knitConstr.fio AS fio_knitConstr
 FROM artNormNView ann
 LEFT JOIN fio diz ON diz.tab = ann.diz
 LEFT JOIN fio constr ON constr.tab = ann.constr
+LEFT JOIN fio knitConstr ON knitConstr.tab = ann.knitConstr
 WHERE ann.annID = @annId", parameters);
 
             EnsureColumn(header, "tb_Id", typeof(string));

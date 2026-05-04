@@ -16,12 +16,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
     {
         Task<ShiftOpenLockResult> TryAcquireZoneOpenShiftLockAsync(int? kmaId);
         Task<ShiftCloseLockResult> TryAcquireShiftCloseLockAsync(int shiftId);
-        Task<IReadOnlyList<int>> GetUnfinishedOperationIdsForShiftAsync(int shiftId);
+        Task<IReadOnlyList<int>> GetUnfinishedOperationIdsForShiftAsync(int shiftId, int tab);
         Task UpdatePzvTabAsync(IEnumerable<int> pzvIds, int tab);
         Task<int> StartWorkingShiftAsync(int tabStart, int? kmaId, string kmaNum, int? kmsId = 0);
         Task UpdatePzvKwsIdAsync(IEnumerable<int> pzvIds, int kwsId);
         Task<IReadOnlyList<PzvSplitResult>> SplitPzvByModeAsync(int pzvId, int mode, int qtyFact);
-        Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(int shiftId, decimal minHours, string userName = "");
+        Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(int shiftId, int tab, decimal minHours, string userName = "");
         Task<ShiftEndResult> TryEndWorkingShiftAsync(int shiftId, int tabEnd);
         Task CommitAsync();
     }
