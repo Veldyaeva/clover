@@ -17,7 +17,7 @@ namespace SewingProduction.Features.Tabel.Forms
 {
     public partial class ChoosePrich : CustomForm
     {
-        private static DatabaseHelper _dbHelper;
+        private static DatabaseHelperSQL _dbHelper;
         private static DbService _dbService;
         private readonly ILogger _logger = new FileLogger();
         private static TabelDataService _tabelDataService;
@@ -27,7 +27,7 @@ namespace SewingProduction.Features.Tabel.Forms
         string _fio;
         public ChoosePrich(UserClass user,int id, int tabno, string fio) : base(user)
         {
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
             _tabelDataService = new TabelDataService(_dbHelper);
             _PrichIncludeList = new List<PrichInclude>();

@@ -78,6 +78,8 @@ namespace SewingProduction.Features.TeamWork.Services
 
         public Task<List<FioModel>> LoadDesignersAsync() => _artNormService.GetRelDesigner();
 
+        public Task<List<FioModel>> LoadKnitConstructorsAsync() => _artNormService.GetRelKnitConstructors();
+
         public Task<string> GetSpecByOborudKodAsync(int kodOb) => _artNormService.GetSpecByOborudKod(kodOb);
     }
 }

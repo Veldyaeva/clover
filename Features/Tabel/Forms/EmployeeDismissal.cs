@@ -15,7 +15,7 @@ namespace SewingProduction.Features.Tabel.Forms
 {
     public partial class EmployeeDismissal : CustomForm
     {
-        private static DatabaseHelper _dbHelper;
+        private static DatabaseHelperSQL _dbHelper;
         private static DbService _dbService;
         private readonly ILogger _logger = new FileLogger();
         private static TabelDataService _tabelDataService;

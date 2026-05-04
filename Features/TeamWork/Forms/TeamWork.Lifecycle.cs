@@ -109,7 +109,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             var annGridState = GridViewRefreshStateHelper.Capture(ANNgridView, "AnnID");
 
-            await LoadWorkDivisions(ct);
+            await LoadWorkDivisions(ct, loadRelatedData: false);
             RestoreGridViewRefreshState(ANNgridView, annGridState);
 
             int restoredAnnId = GridViewRefreshStateHelper.GetFocusedIntValue(ANNgridView, "AnnID");

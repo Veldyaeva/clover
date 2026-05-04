@@ -103,6 +103,12 @@
     <Compile Update="Features\CardByNom\Forms\NomLookUp.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\ExchangeApp\Forms\FrmExchangeManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\ExchangeApp\Forms\FrmExchangeManager.UIConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\KnittingProduction\Forms\KnitterWorkSpace.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -244,6 +250,9 @@
     <Compile Update="Features\TeamWork\Forms\BaseNodeLibraryEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\TeamWork\Forms\BaseNodeOperationEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\TeamWork\Forms\BaseNodeSaveForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -254,6 +263,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork.Articles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.BaseNodes.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork.Bootstrap.cs">

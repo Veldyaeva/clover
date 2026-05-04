@@ -28,7 +28,7 @@ namespace SewingProduction.Features.TeamWork.Operations
 
         private readonly ArtNormRepository _artNormService;
         private readonly ITeamWorkView _form;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly ILogger _logger;
 
         private readonly BindingList<NormRasz> _normRaszList;
@@ -40,7 +40,7 @@ namespace SewingProduction.Features.TeamWork.Operations
         public BufferImportService(
             ArtNormRepository artNormService,
             ITeamWorkView form,
-            DatabaseHelper dbHelper,
+            DatabaseHelperSQL dbHelper,
             ILogger logger,
             BindingList<NormRasz> normRaszList,
             BindingSource bindingSource,

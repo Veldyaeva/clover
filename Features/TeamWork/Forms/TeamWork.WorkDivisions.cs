@@ -30,7 +30,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// Загрузка вкладки "Список РТ"
         /// </summary>
         /// <returns></returns>
-        private async Task LoadWorkDivisions(CancellationToken ct)
+        private async Task LoadWorkDivisions(CancellationToken ct, bool loadRelatedData = true)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // Устанавливаем привязки после позиции
                 BindTextFields();
-                Task bindingsTask = InitializeBindingsAsync();
+                InitializeBindings();
 
                 await _logger.LogEventAsync("Данные загружены успешно", "LoadData");
                 // Включаем обновление UI
@@ -113,7 +113,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     await _logger.LogErrorAsync(ex, "LoadWorkDivisions: failed to resolve targetAnnId");
                 }
 
-                if (targetAnnId > 0)
+                if (loadRelatedData && targetAnnId > 0)
                     await LoadRelatedData(targetAnnId);
             }
             catch (OperationCanceledException)
@@ -156,6 +156,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                     e.Value = fio.Fio;
             };
 
+            knitConstrTextBox.DataBindings.Clear();
+            knitConstrTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.FioKnitConstr), true, DataSourceUpdateMode.Never);
+            knitConstrTextBox.DataBindings["Text"].Format += (s, e) =>
+            {
+                if (e.Value is FioModel fio)
+                    e.Value = fio.Fio;
+            };
+
             commentRichTextBox.DataBindings.Clear();
             commentRichTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Komment), false);
 
@@ -176,36 +184,47 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// Устанавливаем источники данных для связанных гридов
         /// </summary>
         /// <returns></returns>
-        private async Task InitializeBindingsAsync()
+        private void InitializeBindings()
         {
             try
             {
-                var normRaszTask = Task.Run(() =>
+                if (_normRaszListTW == null)
                 {
                     _normRaszListTW = new BindingList<NormRasz>();
                     _normRaszBindingSourceTW = new BindingSource { DataSource = _normRaszListTW };
-                });
-                var normRaskTask = Task.Run(() =>
+                }
+                else if (_normRaszBindingSourceTW == null)
+                {
+                    _normRaszBindingSourceTW = new BindingSource { DataSource = _normRaszListTW };
+                }
+
+                if (_normRaskListTW == null)
                 {
                     _normRaskListTW = new BindingList<NormRask>();
                     _normRaskBindingSourceTW = new BindingSource { DataSource = _normRaskListTW };
-                });
-                var normKontTask = Task.Run(() =>
+                }
+                else if (_normRaskBindingSourceTW == null)
+                {
+                    _normRaskBindingSourceTW = new BindingSource { DataSource = _normRaskListTW };
+                }
+
+                if (_normKontListTW == null)
                 {
                     _normKontListTW = new BindingList<NormKont>();
                     _normKontBindingSourceTW = new BindingSource { DataSource = _normKontListTW };
-                });
-
-                await Task.WhenAll(normRaszTask, normRaskTask, normKontTask);
+                }
+                else if (_normKontBindingSourceTW == null)
+                {
+                    _normKontBindingSourceTW = new BindingSource { DataSource = _normKontListTW };
+                }
 
                 gridControlRaszTW.DataSource = _normRaszBindingSourceTW;
                 gridControlRaskrTW.DataSource = _normRaskBindingSourceTW;
                 gridControlKontTW.DataSource = _normKontBindingSourceTW;
 
             }
-            catch (Exception ex)
+            catch
             {
-                await _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок");
                 throw;
             }
         }
@@ -409,6 +428,22 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
                 // Устанавливаем общий источник для модели ArtNormN
                 ArtNormN.FioSource = _cachedFioData;
+
+                if (_cachedKnitConstrFioData == null)
+                {
+                    var knitConstrData = await _artNormService.GetRelKnitConstructors();
+                    if (knitConstrData != null && knitConstrData.Count > 0)
+                    {
+                        _cachedKnitConstrFioData = new List<FioModel>(knitConstrData);
+                        await _logger.LogEventAsync("FIO конструкторов-программистов загружено и закешировано", "LoadAndBindFioListsAsync");
+                    }
+                    else
+                    {
+                        await _logger.LogEventAsync("Пустой список FIO конструкторов-программистов", "LoadAndBindFioListsAsync");
+                    }
+                }
+
+                ArtNormN.KnitConstrSource = _cachedKnitConstrFioData;
                 _bindingSource.DataSource = _bindingList;
                 _bindingSource.ResetBindings(false);
             }

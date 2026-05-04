@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SewingProduction.Features.TeamWork.Forms
@@ -18,6 +19,10 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly List<BaseNodeDefinition> _nodes;
         private readonly BaseNodePreviewPanel _previewPanel;
         private bool _updatingFilters;
+        private IReadOnlyList<BaseNodeMetadataItem> _nodeTypes = Array.Empty<BaseNodeMetadataItem>();
+        private IReadOnlyList<BaseNodeMetadataItem> _nodeGroups = Array.Empty<BaseNodeMetadataItem>();
+        private IReadOnlyList<BaseNodeMetadataItem> _productCategories = Array.Empty<BaseNodeMetadataItem>();
+
 
         public BaseNodeDefinition SelectedNode => nodeCardsListView.SelectedItems.Count > 0
             ? nodeCardsListView.SelectedItems[0].Tag as BaseNodeDefinition
@@ -47,7 +52,51 @@ namespace SewingProduction.Features.TeamWork.Forms
                 positionComboBox.Items.Add(point);
             }
 
-            BindData(defaultAfterN);
+            //  BindData(defaultAfterN);
+            Shown += async (_, __) =>
+            {
+                await LoadMetadataAsync();
+                BindData(defaultAfterN);
+            };
+        }
+
+        private async Task LoadMetadataAsync()
+        {
+            if (_libraryService == null)
+            {
+                _nodeTypes = BaseNodeMetadataOptions.NodeTypes;
+                _nodeGroups = BaseNodeMetadataOptions.NodeGroups;
+                _productCategories = BuildFallbackProductCategories();
+                PopulateFilterValuesFromMetadata();
+                return;
+            }
+
+            try
+            {
+                var nodeTypes = await _libraryService.GetNodeTypesAsync();
+                var nodeGroups = await _libraryService.GetNodeGroupsAsync();
+                var productCategories = await _libraryService.GetProductCategoriesAsync();
+
+                _nodeTypes = nodeTypes != null && nodeTypes.Count > 0
+                    ? nodeTypes
+                    : BaseNodeMetadataOptions.NodeTypes;
+
+                _nodeGroups = nodeGroups != null && nodeGroups.Count > 0
+                    ? nodeGroups
+                    : BaseNodeMetadataOptions.NodeGroups;
+
+                _productCategories = productCategories != null && productCategories.Count > 0
+                    ? productCategories
+                    : BuildFallbackProductCategories();
+            }
+            catch
+            {
+                _nodeTypes = BaseNodeMetadataOptions.NodeTypes;
+                _nodeGroups = BaseNodeMetadataOptions.NodeGroups;
+                _productCategories = BuildFallbackProductCategories();
+            }
+
+            PopulateFilterValuesFromMetadata();
         }
 
         private void BindData(int? defaultAfterN, int? preferredNodeId = null)
@@ -107,14 +156,18 @@ namespace SewingProduction.Features.TeamWork.Forms
             int chapters = node.Operations.Select(x => x.SourceN).Distinct().Count();
             string description = string.IsNullOrWhiteSpace(node.Description) ? "Без описания" : StringNormalizer.TrimOrEmpty(node.Description);
             string sourceCode = string.IsNullOrWhiteSpace(node.SourceRtCode) ? "-" : node.SourceRtCode;
+            string sourceArticul = string.IsNullOrWhiteSpace(node.SourceArticul) ? "-" : node.SourceArticul;
             string productKind = string.IsNullOrWhiteSpace(GetProductKindValue(node)) ? "-" : GetProductKindValue(node);
             string productCategory = string.IsNullOrWhiteSpace(node.ProductCategory) ? "-" : node.ProductCategory;
             string nodeGroup = string.IsNullOrWhiteSpace(node.NodeGroup) ? "-" : node.NodeGroup;
+            string nodeSubgroup = string.IsNullOrWhiteSpace(node.NodeGroupDetail) ? "-" : node.NodeGroupDetail;
             detailsLabel.Text =
                 $"РТ: {sourceCode}{Environment.NewLine}" +
-                $"Класс изделия: {productKind}{Environment.NewLine}" +
+                $"Артикул: {sourceArticul}{Environment.NewLine}" +
+                $"Тип узла: {productKind}{Environment.NewLine}" +
                 $"Категория: {productCategory}{Environment.NewLine}" +
                 $"Группа: {nodeGroup}{Environment.NewLine}" +
+                $"Уточнение: {nodeSubgroup}{Environment.NewLine}" +
                 $"Операций: {chapters}. Подопераций: {node.Operations.Count}.{Environment.NewLine}" +
                 description;
         }
@@ -174,9 +227,9 @@ namespace SewingProduction.Features.TeamWork.Forms
         private void ApplyNodeFilter(int? preferredNodeId)
         {
             string filter = StringNormalizer.TrimOrEmpty(searchTextBox?.Text);
-            PopulateFilterValues();
+          //  PopulateFilterValues();
 
-            string productKind = StringNormalizer.TrimOrEmpty(nodeTypeFilterComboBox.SelectedItem?.ToString());
+            string productKind = StringNormalizer.TrimOrEmpty(productKindFilterComboBox.SelectedItem?.ToString());
             string productCategory = StringNormalizer.TrimOrEmpty(productCategoryFilterComboBox.SelectedItem?.ToString());
             string nodeGroup = StringNormalizer.TrimOrEmpty(nodeGroupFilterComboBox.SelectedItem?.ToString());
 
@@ -202,7 +255,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         ImageKey = imageKey
                     };
 
-                    item.SubItems.Add($"РТ: {(string.IsNullOrWhiteSpace(node.SourceRtCode) ? "-" : node.SourceRtCode)}");
+                    item.SubItems.Add(BuildNodeSourceSubtitle(node));
                     item.SubItems.Add(BuildNodeCardSubtitle(node));
                     nodeCardsListView.Items.Add(item);
                 }
@@ -240,14 +293,19 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private void PopulateFilterValues()
+        //private void PopulateFilterValues()
+        private void PopulateFilterValuesFromMetadata()
         {
             _updatingFilters = true;
             try
             {
-                PopulateFilterComboBox(nodeTypeFilterComboBox, _nodes.Where(node => node != null).Select(GetProductKindValue));
-                PopulateFilterComboBox(productCategoryFilterComboBox, _nodes.Where(node => node != null).Select(node => node.ProductCategory));
-                PopulateFilterComboBox(nodeGroupFilterComboBox, _nodes.Where(node => node != null).Select(node => node.NodeGroup));
+                //                PopulateFilterComboBox(productKindFilterComboBox, _nodes.Where(node => node != null).Select(GetProductKindValue));
+                //                PopulateFilterComboBox(productCategoryFilterComboBox, _nodes.Where(node => node != null).Select(node => node.ProductCategory));
+                //                PopulateFilterComboBox(nodeGroupFilterComboBox, _nodes.Where(node => node != null).Select(node => node.NodeGroup));
+                PopulateFilterComboBox(productKindFilterComboBox, _nodeTypes.Select(x => x.Name));
+                PopulateFilterComboBox(productCategoryFilterComboBox, _productCategories.Select(x => x.Name));
+                PopulateFilterComboBox(nodeGroupFilterComboBox, _nodeGroups.Select(x => x.Name));
+
             }
             finally
             {
@@ -283,7 +341,21 @@ namespace SewingProduction.Features.TeamWork.Forms
                 : string.Empty;
         }
 
-        private static bool MatchesNodeFilter(
+        private static IReadOnlyList<BaseNodeMetadataItem> BuildFallbackProductCategories()
+        {
+            return BaseNodeMetadataOptions.ProductCategories
+                .Select((name, index) => new BaseNodeMetadataItem
+                {
+                    Id = index + 1,
+                    Code = $"PC_{index + 1}",
+                    Name = name,
+                    SortOrder = (index + 1) * 10
+                })
+                .OrderBy(x => x.SortOrder)
+                .ThenBy(x => x.Name)
+                .ToList();
+        }
+private static bool MatchesNodeFilter(
             BaseNodeDefinition node,
             string filter,
             string productKind,
@@ -308,24 +380,62 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (string.IsNullOrWhiteSpace(filter))
                 return true;
 
-            return StringNormalizer.TrimOrEmpty(node.Name)
+            string haystack = string.Join(" ", new[]
+            {
+                node.DisplayName,
+                node.Name,
+                node.NodeCode,
+                node.SourceArticul,
+                node.SourceRtCode,
+                node.NodeGroup,
+                node.NodeGroupDetail,
+                node.NodeType,
+                node.ProductCategory,
+                node.Description
+            });
+
+            return StringNormalizer.TrimOrEmpty(haystack)
                 .Contains(filter, StringComparison.CurrentCultureIgnoreCase);
         }
 
+        //private static string GetProductKindValue(BaseNodeDefinition node)
+        //{
+        //    return StringNormalizer.TrimOrEmpty(node?.ProductKind) switch
+        //    {
+        //        { Length: > 0 } value => value,
+        //        _ => StringNormalizer.TrimOrEmpty(node?.NodeType)
+        //    };
+        //}
         private static string GetProductKindValue(BaseNodeDefinition node)
         {
-            return StringNormalizer.TrimOrEmpty(node?.ProductKind) switch
-            {
-                { Length: > 0 } value => value,
-                _ => StringNormalizer.TrimOrEmpty(node?.NodeType)
-            };
+            return StringNormalizer.TrimOrEmpty(node?.NodeType);
         }
-
         private static string BuildNodeCardSubtitle(BaseNodeDefinition node)
         {
             string productCategory = string.IsNullOrWhiteSpace(node?.ProductCategory) ? "Без категории" : node.ProductCategory;
             string nodeGroup = string.IsNullOrWhiteSpace(node?.NodeGroup) ? "Без группы" : node.NodeGroup;
-            return $"{productCategory} • {nodeGroup}";
+            string detail = string.IsNullOrWhiteSpace(node?.NodeGroupDetail) ? string.Empty : $" • {node.NodeGroupDetail}";
+            return $"{productCategory} • {nodeGroup}{detail}";
+        }
+
+        private static string BuildNodeSourceSubtitle(BaseNodeDefinition node)
+        {
+            if (!string.IsNullOrWhiteSpace(node?.SourceArticul) && !string.IsNullOrWhiteSpace(node?.SourceRtCode))
+            {
+                return $"Арт.: {node.SourceArticul} • РТ: {node.SourceRtCode}";
+            }
+
+            if (!string.IsNullOrWhiteSpace(node?.SourceArticul))
+            {
+                return $"Арт.: {node.SourceArticul}";
+            }
+
+            if (!string.IsNullOrWhiteSpace(node?.SourceRtCode))
+            {
+                return $"РТ: {node.SourceRtCode}";
+            }
+
+            return "Источник: -";
         }
 
         private static Image CreateNodeCardImage(string imagePath)

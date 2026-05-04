@@ -48,7 +48,7 @@ namespace SewingProduction.Features.Tabel.Forms
     {
 
         private string currentMG;
-        private static DatabaseHelper _dbHelper;
+        private static DatabaseHelperSQL _dbHelper;
         private static DbService _dbService;
         private readonly ILogger _logger = new FileLogger();
         private static TabelDataService _tabelDataService;
@@ -88,7 +88,7 @@ namespace SewingProduction.Features.Tabel.Forms
         public TabelMain(UserClass user) : base(user)
         {
             InitializeComponent();
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
             _tabelDataService = new TabelDataService(_dbHelper);
             currentMG = GetCurrentMg();

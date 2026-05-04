@@ -30,13 +30,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // создаем первый CTS для начальной загрузки,
                 // чтобы его можно было отменить при закрытии формы / смене вкладки
                 var ct = StartNewLoadToken();
-                await LoadWorkDivisions(ct);
+                await LoadWorkDivisions(ct, loadRelatedData: _lastFocusedAnnId <= 0);
                 // После загрузки восстановим фокус, если есть сохраненный AnnID
                 if (_lastFocusedAnnId > 0)
                 {
                     await RestoreFocusAsync(_lastFocusedAnnId);
                 }
                 InitHeaderButtonTags();
+                InitializeMainBaseNodeActions();
 
                 // Инициализируем переменную состояния кнопки "показать все"
                 var showAllButton = FindButtonByTag(layoutControlGroup14, "bind:show-all");

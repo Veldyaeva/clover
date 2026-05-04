@@ -10,9 +10,9 @@ namespace SewingProduction.Features.UserDistribution.Models
     public class AllColumnNameDataService
     {
         private readonly DbService _dbService;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
 
-        public AllColumnNameDataService(DbService dbService, DatabaseHelper dbHelper)
+        public AllColumnNameDataService(DbService dbService, DatabaseHelperSQL dbHelper)
         {
             _dbService = dbService;
             _dbHelper = dbHelper;

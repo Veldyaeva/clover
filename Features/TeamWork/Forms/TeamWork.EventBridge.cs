@@ -370,6 +370,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (printButtonPlus.Enabled && printButtonPlus.Visible)
                         printButtonPlus_Click(null, null);
                     break;
+                case "wd:edit-base-nodes":
+                    OpenBaseNodeLibraryEditor();
+                    break;
             }
         }
 

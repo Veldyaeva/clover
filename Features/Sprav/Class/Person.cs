@@ -61,7 +61,7 @@ namespace SewingProduction.Features.Sprav
         /// </summary>
         /// <param name="xTab">табельный</param>
         /// <param name="dbHelper"></param>
-        public bool LoadData(string xTab, DatabaseHelper dbHelper)
+        public bool LoadData(string xTab, DatabaseHelperSQL dbHelper)
         {
             _editFioDataService = new EditFioDataService(dbHelper);
             System.Data.DataTable tableList = _editFioDataService.GetFioAndSpFirmsAndSpisok1c(xTab);
@@ -155,7 +155,7 @@ namespace SewingProduction.Features.Sprav
         {
             _editFioDataService.UpdateFioPerson(_p);
         }
-        public void InsertPerson(Person _p, DatabaseHelper dbHelper)
+        public void InsertPerson(Person _p, DatabaseHelperSQL dbHelper)
         {
             _editFioDataService = new EditFioDataService(dbHelper);
             _editFioDataService.InsertFioPerson(_p);

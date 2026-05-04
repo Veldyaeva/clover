@@ -38,7 +38,7 @@ namespace SewingProduction.Features.Articul.Forms
 {
     public partial class ArticulEditAdvance : CustomForm
     {
-        private DatabaseHelper _dbHelper;
+        private DatabaseHelperSQL _dbHelper;
         private DbService _dbService;
         private static BulkHelper _bulkHelper;
 
@@ -68,7 +68,7 @@ namespace SewingProduction.Features.Articul.Forms
 
         public ArticulEditAdvance(UserClass user, string kodd, string articul) : base(user)
         {
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
             _bulkHelper = new BulkHelper();
 

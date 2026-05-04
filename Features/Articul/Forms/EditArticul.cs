@@ -18,7 +18,7 @@ namespace SewingProduction.Features.Articul
         public EditArticul(UserClass user, string kodArtSQL = null) : base(user)
         {
             InitializeComponent();
-            DatabaseHelper dbHelper = new DatabaseHelper();
+            DatabaseHelperSQL dbHelper = new DatabaseHelperSQL();
             _artNewDataService = new ArtNewDataService(dbHelper);
            // ThemeManager.UpdateTheme(this);
             kodSQL = kodArtSQL;

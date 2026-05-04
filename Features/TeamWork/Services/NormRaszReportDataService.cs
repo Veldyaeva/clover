@@ -9,11 +9,11 @@ namespace SewingProduction.Features.TeamWork.Services
 {
     public sealed class NormRaszReportDataService
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
 
-        public NormRaszReportDataService(DatabaseHelper dbHelper = null)
+        public NormRaszReportDataService(DatabaseHelperSQL dbHelper = null)
         {
-            _dbHelper = dbHelper ?? new DatabaseHelper();
+            _dbHelper = dbHelper ?? new DatabaseHelperSQL();
         }
 
         public NormRaszPreparedData Load(int annId)
@@ -27,10 +27,12 @@ namespace SewingProduction.Features.TeamWork.Services
 SELECT
     ann.*,
     diz.fio AS fio_diz,
-    constr.fio AS fio_constr
+    constr.fio AS fio_constr,
+    knitConstr.fio AS fio_knitConstr
 FROM artNormNView ann
 LEFT JOIN fio diz ON diz.tab = ann.diz
 LEFT JOIN fio constr ON constr.tab = ann.constr
+LEFT JOIN fio knitConstr ON knitConstr.tab = ann.knitConstr
 WHERE ann.annID = @annId", parameters);
 
             EnsureColumn(header, "tb_Id", typeof(string));

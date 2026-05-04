@@ -24,7 +24,7 @@ namespace SewingProduction.Services
     // Canonical file for further extensions: Services/ArtNormRepository.cs.
     public partial class ArtNormRepository
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         //    private readonly HybridLogger _logger = new HybridLogger();
         private readonly FileLogger _logger = new FileLogger();
         private readonly DbService _dbService;
@@ -34,7 +34,7 @@ namespace SewingProduction.Services
         /// Инициализирует новый экземпляр сервиса
         /// </summary>
         /// <param name="dbHelper">Помощник для работы с базой данных.</param>
-        public ArtNormRepository(DatabaseHelper dbHelper)
+        public ArtNormRepository(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
             _dbService = new DbService(_dbHelper);
@@ -123,7 +123,7 @@ namespace SewingProduction.Services
             string query = @" select 
                    AnnID, kod, grup, articul, mod, size_label, sek, sek_shv, sek_vyaz5, sek_vyaz6, sek_vyaz7, sek_vyaz10, sek_vyaz12, sek_vyazo,
                     sek_vyaz, sek_vyaz14, sek_vyaz70, sek_vyaz71, sek_vyaz72, sek_vyaz62, sek_vyaz18, sek_vyaz57, sek_kr, seb, 
-                    slogn, komment, annRecommendation as Reco, data_sozd, data_obn, diz, constr, status_ann.name AS statusText, status, parentId,
+                    slogn, komment, annRecommendation as Reco, data_sozd, data_obn, diz, constr, knitConstr, status_ann.name AS statusText, status, parentId,
                     annDateDel, annCompDel, annDateAdd, annCompAdd, arh
              FROM ArtNormNView JOIN status_ann ON status = status_id";
 
@@ -191,7 +191,7 @@ namespace SewingProduction.Services
                 annId, grup, articul, mod, size_label, sek, seb, sek_vyaz, 
             data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
             sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_vyaz18, sek_vyaz57, sek_kr, slogn, komment, annRecommendation as Reco,
-            data_sozd, diz, constr, annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId
+            data_sozd, diz, constr, knitConstr, annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId
         FROM ArtNormNView 
                             JOIN status_ann ON status = status_id
                             WHERE annId = @annId";
@@ -250,7 +250,7 @@ namespace SewingProduction.Services
                     v.annId, v.grup, v.articul, v.mod, v.size_label, v.sek, v.sek_vyaz,
                     v.data_obn, v.sek_shv, sa.name AS statusText, v.status, v.sek_vyazo, v.sek_vyaz5, 
                     v.sek_vyaz7, v.sek_vyaz12, v.sek_vyaz10, v.sek_vyaz6, v.sek_kr, v.slogn, v.komment, v.annRecommendation, 
-                    v.data_sozd, v.diz, v.constr, v.data_obn as dateUpdate, v.annDateDel, v.annCompDel, v.annDateAdd, v.annCompAdd, v.arh, v.parentId
+                    v.data_sozd, v.diz, v.constr, v.knitConstr, v.data_obn as dateUpdate, v.annDateDel, v.annCompDel, v.annDateAdd, v.annCompAdd, v.arh, v.parentId
                 FROM ArtNormNView v
                 JOIN status_ann sa ON v.status = sa.status_id 
                 WHERE v.status != 3"; // Статус "архивное"
@@ -282,7 +282,7 @@ namespace SewingProduction.Services
             string query = @"SELECT 
                 annId, grup, articul, mod, size_label, sek, sek_vyaz, data_obn, sek_shv, 
                 status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, 
-                sek_kr, slogn, komment, annRecommendation, data_sozd, diz, constr,
+                sek_kr, slogn, komment, annRecommendation, data_sozd, diz, constr, knitConstr,
                 annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId
                 FROM artNormNView 
                 WHERE status <> @StatusArchive AND articul LIKE @ArtPattern";
@@ -297,6 +297,48 @@ namespace SewingProduction.Services
             {
                 var result = await connection.QueryAsync<MyDataANN>(query, parameters);
                 return result.ToList();
+            }
+        }
+
+        public async Task<List<MyDataANN>> GetArtNormDataByArticulPatterns(IEnumerable<string> artPrefixes)
+        {
+            var prefixes = (artPrefixes ?? Enumerable.Empty<string>())
+                .Where(prefix => !string.IsNullOrWhiteSpace(prefix))
+                .Select(prefix => prefix.Trim())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToArray();
+
+            if (prefixes.Length == 0)
+            {
+                return new List<MyDataANN>();
+            }
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@StatusArchive", (int)Status.Archive);
+
+            var conditions = new List<string>();
+            for (int i = 0; i < prefixes.Length; i++)
+            {
+                string parameterName = $"ArtPattern{i}";
+                conditions.Add($"articul LIKE @{parameterName}");
+                parameters.Add(parameterName, prefixes[i] + "%");
+            }
+
+            string query = $@"SELECT 
+                annId, grup, articul, mod, size_label, sek, sek_vyaz, data_obn, sek_shv, 
+                status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, 
+                sek_kr, slogn, komment, annRecommendation, data_sozd, diz, constr, knitConstr,
+                annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId
+                FROM artNormNView 
+                WHERE status <> @StatusArchive AND ({string.Join(" OR ", conditions)})";
+
+            using (var connection = _dbHelper.GetConnection())
+            {
+                var result = await connection.QueryAsync<MyDataANN>(query, parameters);
+                return result
+                    .GroupBy(item => item.AnnID)
+                    .Select(group => group.First())
+                    .ToList();
             }
         }
 
@@ -620,9 +662,6 @@ WHERE nr.annId = @annId";
         }
         public async Task<List<NZPByKoddRt>> GetNzpWithPztCounts(int annId)
         {
-            List<NZPByKoddRt> nzpList;
-            Dictionary<int, int> pztCounts;
-
             using (var connection = _dbHelper.GetConnection())
             {
                 var nzpResult = await connection.QueryAsync<NZPByKoddRt>(
@@ -630,29 +669,11 @@ WHERE nr.annId = @annId";
                     new { xAnnID = annId },
                     commandType: CommandType.StoredProcedure,
                     commandTimeout: 120);
-                nzpList = nzpResult.ToList();
-
-                var pztResult = await connection.QueryAsync<(int annId, int PztCount)>(
-                    "dbo.GetPztCountsByKoddRT",
-                    new { xAnnID = annId },
-                    commandType: CommandType.StoredProcedure,
-                    commandTimeout: 120);
-                pztCounts = pztResult.ToDictionary(x => x.annId, x => x.PztCount);
+                return nzpResult.ToList();
             }
-
-            // Объединение результатов
-            foreach (var row in nzpList)
-            {
-                if (pztCounts.TryGetValue(row.annId, out int count))
-                    row.PZTCount = count;
-            }
-
-            return nzpList;
         }
         public async Task<List<NZPByKoddRt>> GetNzpWithPztCounts(int annId, CancellationToken ct)
         {
-            List<NZPByKoddRt> nzpList;
-            Dictionary<int, int> pztCounts;
             try
             {
                 ct.ThrowIfCancellationRequested();
@@ -664,29 +685,12 @@ WHERE nr.annId = @annId";
                     var nzpResult = await connection.QueryAsync<NZPByKoddRt>(new CommandDefinition(
                         "dbo.GetNZPByKoddRT", new { xAnnID = annId }, commandType: CommandType.StoredProcedure,
                         commandTimeout: 240, cancellationToken: ct));
-                    nzpList = nzpResult.ToList();
-                //    await _logger.LogEventAsync($"GetNZPByKoddRT: {t1.ElapsedMilliseconds} ms, rows={nzpList.Count}");
+                    var nzpList = nzpResult.ToList();
                     Debug.WriteLine($"GetNZPByKoddRT: {t1.ElapsedMilliseconds} ms, rows={nzpList.Count}");
                     ct.ThrowIfCancellationRequested();
-
-                    var t2 = Stopwatch.StartNew();
-                    var pztResult = await connection.QueryAsync<(int annId, int PztCount)>(new CommandDefinition(
-                        "dbo.GetPztCountsByKoddRT", new { xAnnID = annId }, commandType: CommandType.StoredProcedure,
-                        commandTimeout: 240, cancellationToken: ct));
-                    pztCounts = pztResult.ToDictionary(x => x.annId, x => x.PztCount);
-                //    await _logger.LogEventAsync($"GetPztCountsByKoddRT: {t2.ElapsedMilliseconds} ms, rows={pztCounts.Count}");
-                    Debug.WriteLine($"GetPztCountsByKoddRT: {t2.ElapsedMilliseconds} ms, rows={pztCounts.Count}");
+                    Debug.WriteLine($"GetNzpWithPztCounts total: {sw.ElapsedMilliseconds} ms");
+                    return nzpList;
                 }
-              //  await _logger.LogEventAsync($"GetNzpWithPztCounts total: {sw.ElapsedMilliseconds} ms");
-                Debug.WriteLine($"GetNzpWithPztCounts total: {sw.ElapsedMilliseconds} ms");
-                // Объединение результатов
-                foreach (var row in nzpList)
-                {
-                    if (pztCounts.TryGetValue(row.annId, out int count))
-                        row.PZTCount = count;
-                }
-
-                return nzpList;
             }
             catch (Exception ex)
             {
@@ -750,6 +754,21 @@ WHERE nr.annId = @annId";
             }
         }
 
+        public async Task<List<FioModel>> GetRelKnitConstructors()
+        {
+            string query = @"
+SELECT *
+FROM fio
+WHERE (rab LIKE '%технолог%' AND mast = 2 AND ftabn = 71 AND gr = 8 AND datau IS NULL)
+   OR tab = 10948";
+
+            using (var connection = _dbHelper.GetConnection())
+            {
+                var result = await connection.QueryAsync<FioModel>(query);
+                return result.ToList();
+            }
+        }
+
 
         public async Task DeleteRelatedNormTables(int annId)
         {
@@ -769,11 +788,11 @@ WHERE nr.annId = @annId";
 
     public sealed class JabberSender : IJabberSender
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         //    private readonly HybridLogger _logger = new HybridLogger();
         private readonly FileLogger _logger = new FileLogger();
         private readonly DbService _dbService;
-        public JabberSender(DatabaseHelper dbHelper)
+        public JabberSender(DatabaseHelperSQL dbHelper)
        => _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
         public async Task SendToBrigsAsync(IEnumerable<int> brigIds, string message, int idType = 14, int tester = 63)
         {

@@ -33,7 +33,7 @@ namespace SewingProduction.Features.Tabel.Forms
         private string _dop;
         private readonly string _dLetters;
         private readonly string _dNumber;
-        private static DatabaseHelper _dbHelper;
+        private static DatabaseHelperSQL _dbHelper;
         private static DbService _dbService;
         private readonly ILogger _logger = new FileLogger();
         private static TabelDataService _tabelDataService;
@@ -55,7 +55,7 @@ namespace SewingProduction.Features.Tabel.Forms
             _dLetters = ExtractLettersRegex(d);
             _dNumber = ExtractNumber(d);
             InitializeComponent();
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
             _tabelDataService = new TabelDataService(_dbHelper);
             _WorkTypesList = new List<WorkTypes>();

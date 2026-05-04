@@ -20,7 +20,7 @@ namespace SewingProduction.Features.Tabel.Forms
     public partial class EmployeeTransfer : CustomForm
     {
         public bool EmployeeResult { get; private set; }
-        private static DatabaseHelper _dbHelper;
+        private static DatabaseHelperSQL _dbHelper;
         private static DbService _dbService;
         private readonly ILogger _logger = new FileLogger();
         private static TabelDataService _tabelDataService;
@@ -34,7 +34,7 @@ namespace SewingProduction.Features.Tabel.Forms
         public EmployeeTransfer(UserClass User, string fio, string naimenGr,  int currentId, int idGroup, string currentMg,int tab) : base(User)
         {
             InitializeComponent();
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
             _tabelDataService = new TabelDataService(_dbHelper);
             _fio = fio;
