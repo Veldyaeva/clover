@@ -163,9 +163,6 @@ namespace SewingProduction.Features.Articul.Service
             {
                 _articulDataService = null;
             }
-
-
-
         }
 
         public async Task<CreateArticulMatrModel> GetStatusForArticulAsync(string nn, int idgost, int agid )
@@ -374,7 +371,6 @@ namespace SewingProduction.Features.Articul.Service
                 Tkb = matrArt.Tkb,
                 Kod_v = matrArt.Kod_v,//код ассортимента
                 AssortName = matrArt.AssortName
-
 
 
             };

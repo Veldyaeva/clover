@@ -53,17 +53,20 @@ namespace SewingProduction.Features.Articul.Service
                         // Для подсветки учитываем все расхождения
                     result.Mismatches.Add(mismatch);
 
-
-
                     // Для итогового совпадения игнорируем "подсветить-но-не-валидировать" поля (например, Сезон)
-                    if (!IsHighlightOnlyField(item.PropertyName) && !IsHighlightOnlyFieldSost(item.PropertyName) )
-                        result.SignificantMismatches.Add(mismatch); 
+                    if (!IsHighlightOnlyField(item.PropertyName) && !IsComplicateField(item.PropertyName))
+                        result.SignificantMismatches.Add(mismatch);
+
 
                     // для состава будет доп проверка, помечаем его для этого 
-                    if (IsHighlightOnlyFieldSost(item.PropertyName))
+                    if (IsComplicateField(item.PropertyName))
                         result.ComplicateMismatches.Add(mismatch);
 
-                    }
+                    // перечень полей, с расхождениямми которых мы соглашаемся и в дальнейшем переписываем их значениями новыми из матрицы
+                    if (IsAcceptMismatchesField(item.PropertyName))
+                        result.AcceptableMismatches.Add(mismatch);
+
+                }
 
                 return result;
             }
@@ -95,10 +98,21 @@ namespace SewingProduction.Features.Articul.Service
 
         private static bool IsHighlightOnlyField(string propertyName) =>
             string.Equals(propertyName, nameof(SpArticulPreviewModel.SeasonName), StringComparison.OrdinalIgnoreCase);
-
-        private static bool IsHighlightOnlyFieldSost(string propertyName) => 
+        
+        // сложное к проверке поле состав, где должно выполнятся еще ряд условий
+        private static bool IsComplicateField(string propertyName) => 
             string.Equals(propertyName, nameof(SpArticulPreviewModel.Sost), StringComparison.OrdinalIgnoreCase);
 
+        // перечень полей, с расхождениямми которых мы соглашаемся и в дальнейшем переписываем их значениями новыми из матрицы
+        // !!!на sost наложены дополнительные ограничения!!!!
+        private static readonly HashSet<string> AcceptMismatchesFields = new(StringComparer.OrdinalIgnoreCase)
+        {
+            nameof(SpArticulPreviewModel.Sost),
+            nameof(SpArticulPreviewModel.SeasonName),
+        };
+
+        private static bool IsAcceptMismatchesField(string propertyName) =>
+            AcceptMismatchesFields.Contains(propertyName);
 
         private static bool AreEqualWithRules(FieldComparisonItem item, object? left, object? right)
         {
@@ -196,7 +210,7 @@ namespace SewingProduction.Features.Articul.Service
     {
         // Подсветка ошибок делается по `Mismatches`,
         // а результат "совпало/не совпало" игнорирует часть полей (сезон).
-        public bool  IsMatch { get => SignificantMismatches.Count == 0; set;}
+        public bool  IsMatch { get => SignificantMismatches.Count == 0;}
         // несовпадения
         public List<FieldMismatch> Mismatches { get; } = new();
         // важные  к проверке
@@ -205,6 +219,8 @@ namespace SewingProduction.Features.Articul.Service
         /// дополнительная проверка при сравнении
         /// </summary>
         public List<FieldMismatch> ComplicateMismatches { get; } = new();
+
+        public List<FieldMismatch> AcceptableMismatches { get; } = new();
 
     }
     /// <summary>
@@ -286,13 +302,13 @@ namespace SewingProduction.Features.Articul.Service
                 {
                     PropertyName = nameof(SpArticulPreviewModel.Sost2),
                     ExpectedValue = row.Sost2,
-                    DisplayName = "Отделка"
+                    DisplayName = "Подклад / наполнитель"
                 },
                 new()
                 {
                     PropertyName = nameof(SpArticulPreviewModel.Sost3),
                     ExpectedValue = row.Sost3,
-                    DisplayName = "Подклад / наполнитель"
+                    DisplayName = "Отделка"
                 },
                 new()
                 {

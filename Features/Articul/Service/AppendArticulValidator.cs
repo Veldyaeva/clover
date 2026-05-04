@@ -1,11 +1,12 @@
-﻿using SewingProduction.Helpers;
+﻿using SewingProduction.Features.Articul.Models;
+using SewingProduction.Helpers;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SewingProduction.Features.Articul.Models;
 
 namespace SewingProduction.Features.Articul.Service
 {
@@ -41,7 +42,7 @@ namespace SewingProduction.Features.Articul.Service
         /// <summary>
         /// проврка на совпадение кодов размеров и вновь созданного кода
         /// </summary>
-        public CheckResult checkKod(IReadOnlyList<PlanRazmSetkaModel> items)
+        public CheckResult checkKod(IEnumerable<PlanRazmSetkaModel> items)
         {
             string checkkod = _newArt.Kod.Substring(0, 7);
             

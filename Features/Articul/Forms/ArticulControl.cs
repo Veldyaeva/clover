@@ -89,7 +89,7 @@ namespace SewingProduction.Features.Articul.Forms
             return start < name.Length ? name.Substring(start) : null;
         }
 
-        public ComparisonResult CompareAndHighlight(IEnumerable<FieldComparisonItem> items)
+        public async Task<ComparisonResult> CompareAndHighlight(IEnumerable<FieldComparisonItem> items)
         {
             var result = new ComparisonResult();
             try
@@ -107,7 +107,8 @@ namespace SewingProduction.Features.Articul.Forms
             }
             catch (Exception ex)
             {
-                _=SafeLogAsync(() => _logger.LogErrorAsync(ex, $"{LoggerContext}.CompareAndHighlight"));
+                //_=SafeLogAsync(() => _logger.LogErrorAsync(ex, $"{LoggerContext}.CompareAndHighlight"));
+                await _logger.LogErrorAsync(ex, $"{LoggerContext}.CompareAndHighlight");
                 return result;
             }
             return result;

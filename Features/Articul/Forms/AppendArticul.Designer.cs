@@ -733,7 +733,7 @@
             Controls.Add(customLayoutControl1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "AppendArticul";
-            Text = "AppendArticul";
+            Text = "Стыковка артикула";
             FormClosing += AppendArticul_FormClosing;
             Load += AppendArticul_Load;
             ((System.ComponentModel.ISupportInitialize)txtArticul.Properties).EndInit();

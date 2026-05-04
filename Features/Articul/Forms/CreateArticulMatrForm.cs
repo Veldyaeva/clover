@@ -459,8 +459,8 @@ namespace SewingProduction.Features.Articul.Forms
                 ArticulControlBindingHelper.SetDetails(_bsDetails, details);// устанавливаем источник данных для деталей, которые отображаются в articulControl1
 
                 var compareItems = BuildComparisonItems(matrixRow);// создаем список полей для сравнения на основе текущей строки матрицы, который будет использоваться в articulControl1 для сравнения и подсветки различий
-                var result = articulControl1.CompareAndHighlight(compareItems);// выполняем сравнение и подсветку различий в articulControl1, результат сравнения сохраняем в переменной result, которая содержит информацию о том, совпадают ли артикулы полностью (IsMatch) и какие поля отличаются (Mismatches)
-                                                                               // тут можно сохранить флаг в поле формы
+                var result = await articulControl1.CompareAndHighlight(compareItems);// выполняем сравнение и подсветку различий в articulControl1, результат сравнения сохраняем в переменной result, которая содержит информацию о том, совпадают ли артикулы полностью (IsMatch) и какие поля отличаются (Mismatches)
+                                                                                // тут можно сохранить флаг в поле формы
                 _comparisonResult = result;// сохраняем результат сравнения в поле формы, чтобы при сохранении матрицы знать, нужно ли сохранять изменения или нет, так как если артикулы совпадают полностью, то сохранять изменения не нужно, так как они не изменились по сравнению с выбранным артикулом сравнения
 
             }
@@ -530,7 +530,7 @@ namespace SewingProduction.Features.Articul.Forms
 
                 if (canLink.IsSuccess)
                 {
-                    using (AppendArticul f = new AppendArticul(CurrentUser.User, curMatr.Nn, curCompareRow.Kod))
+                    using (AppendArticul f = new AppendArticul(CurrentUser.User, curMatr.Nn, curCompareRow.Kod, _comparisonResult))
                     {
                         if (f.ShowDialog() == DialogResult.OK)
                         {
@@ -561,7 +561,7 @@ namespace SewingProduction.Features.Articul.Forms
                 return;
 
 
-            using (AppendArticul f = new AppendArticul(CurrentUser.User, curMatr.Nn, currArt.Kod))
+            using (AppendArticul f = new AppendArticul(CurrentUser.User, curMatr.Nn))
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {

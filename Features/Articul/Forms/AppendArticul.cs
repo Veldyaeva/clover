@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraEditors.ButtonsPanelControl;
+﻿using DevExpress.ChartRangeControlClient.Core;
+using DevExpress.XtraEditors.ButtonsPanelControl;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraLayout;
 using DevExpress.XtraMap.Drawing;
@@ -16,6 +17,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using BindingSource = System.Windows.Forms.BindingSource;
+using ToolTip = System.Windows.Forms.ToolTip;
+
 
 namespace SewingProduction.Features.Articul.Forms
 {
@@ -24,13 +29,15 @@ namespace SewingProduction.Features.Articul.Forms
         private int _typeCreate;
         private string _nn;
         private string _kod;
-        
+        private ComparisonResult _comparisonResult;
+
+
         private BindingSource _bindingSourceArticul = new BindingSource();
         private BindingSource _bindingSourceRazms = new BindingSource();
         private BindingSource _bindingSourceMatr = new BindingSource();
         private CreateArticulMatrService _createArticulMatrService = new CreateArticulMatrService();
         private ArticulEditAdvanceService _articulEdAdvDataService = new ArticulEditAdvanceService();
-        private ArticulDataService _articulDataService = new ArticulDataService();
+        private readonly ToolTip _toolTip = new();
 
         private readonly ILogger _logger = new FileLogger();
 
@@ -38,7 +45,6 @@ namespace SewingProduction.Features.Articul.Forms
         {
             InitializeComponent();
             gridRazm.DataSource = _bindingSourceRazms;
-
         }
 
         public AppendArticul(UserClass user, string nn) : this(user)
@@ -47,12 +53,13 @@ namespace SewingProduction.Features.Articul.Forms
             _typeCreate = 0;
             _nn = nn;
         }
-        public AppendArticul(UserClass user, string nn, string kod) : this(user)
+        public AppendArticul(UserClass user, string nn, string kod, ComparisonResult comparisonResult) : this(user)
         {
             // 1 - стыковка
             _typeCreate = 1;
             _nn = nn;
             _kod = kod;
+            _comparisonResult = comparisonResult;
         }
 
         private async void AppendArticul_Load(object sender, EventArgs e)
@@ -67,11 +74,13 @@ namespace SewingProduction.Features.Articul.Forms
             _bindingSourceMatr.DataSource = new BindingList<CreateArticulMatrModel>(curMatrTask.Result);
             _bindingSourceArticul.DataSource = curArticulTask.Result;
 
-
-
             InitializeBindings();
             BindGostRazm();
-            ConfigureControlsByMode();
+
+            await ConfigureControlsByMode();
+
+            HighlightMismatches(this, _comparisonResult.Mismatches);
+
         }
         private void InitializeBindings()
         {
@@ -220,18 +229,61 @@ namespace SewingProduction.Features.Articul.Forms
             var validator = new AppendArticulValidator(_bindingSourceArticul.Current as SpArticulPreviewModel);
             
             var canLink = await validator.checkBeforPublish();
-            
-            var listRazm = (List<PlanRazmSetkaModel>)_bindingSourceRazms.DataSource;
+
+            var listRazm = (BindingList<PlanRazmSetkaModel>)_bindingSourceRazms.DataSource;
+
             canLink = validator.checkKod(listRazm);
 
             if (canLink.IsSuccess)
             {
+                
+                
                 MessageBox.Show("Проверка прошла успешно. Артикул можно создать/стыковать.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             }
 
             validator = null;
         }
+
+        public void HighlightMismatches(Control parent,IEnumerable<FieldMismatch> mismatches)
+        {
+            var mismatchMap = mismatches
+                .ToDictionary(x => x.PropertyName, StringComparer.OrdinalIgnoreCase);
+
+            foreach (Control control in GetAllControls(parent))
+            {
+                // сброс подсветки не нужно
+                //control.BackColor = SystemColors.Window;
+
+                foreach (Binding binding in control.DataBindings)
+                {
+                    string propertyName = binding.BindingMemberInfo.BindingField;
+
+                    if (mismatchMap.TryGetValue(propertyName, out var mismatch))
+                    {
+                        control.BackColor = Color.MistyRose;
+
+                        var tooltipText =
+                            $"Ожидалось: {mismatch.ExpectedDisplayValue ?? mismatch.ExpectedValue ?? ""}\n" +
+                            $"Фактически: {mismatch.ActualValue ?? ""}";
+
+                        _toolTip.SetToolTip(control, tooltipText);
+                        break;
+                    }
+                }
+            }
+        }
+
+        private static IEnumerable<Control> GetAllControls(Control parent)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                yield return control;
+
+                foreach (var child in GetAllControls(control))
+                    yield return child;
+            }
+        }
+
     }
 
 }

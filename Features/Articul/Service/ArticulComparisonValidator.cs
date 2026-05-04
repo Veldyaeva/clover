@@ -126,6 +126,7 @@ namespace SewingProduction.Features.Articul.Service
 
         }
         private async Task<CheckResult>checkNZP() {
+            
             bool result = await _createArticulMatrService.HasNzpForArticul(_curCompareArticul.Kodd);
             if (result )
                 return CheckResult.Fail("По артикулу есть незавершенное производство! Нельзя заменить состав!");
