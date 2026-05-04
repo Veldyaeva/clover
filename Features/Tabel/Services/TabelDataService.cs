@@ -107,7 +107,9 @@ namespace SewingProduction.Features.Tabel.Services
                     if (idGroup == 19)
                     {
 
-                        string query = $"select tnid,t_n, naimen from tab_n where tnid in(select podrID from userPodr where userId =  {idUser} and podrTableId = {idGroup}) order by tnid";
+                        string query = $"select tnid,t_n, naimen from tab_n " +
+                            $"left join brig on brig.id_brig = tab_n.id_brig" +
+                            $" where tnid in(select podrID from userPodr where userId =  {idUser} and podrTableId = {idGroup}) and isnull(brig.arh,0) = 0 order by tnid";
 
                         var result = await connection.QueryAsync<SpPodr>(query, new Dictionary<string, object> { });
                         return result.ToList();
@@ -259,7 +261,7 @@ namespace SewingProduction.Features.Tabel.Services
 
             return _isCountTabel;
         }
-    
+
         public async Task<List<Spisok1c>> GetSpisok1cAsync(string lastName, string firstName, string middleName)
         {
             try
@@ -280,7 +282,7 @@ namespace SewingProduction.Features.Tabel.Services
                 _logger.LogErrorAsync(ex, $"Ошибка при получении данных spPodr");
                 return null;
             }
-            
+
         }
         public DateTime? GetDateReadOnlyDd(string mg)
         {
@@ -292,14 +294,14 @@ namespace SewingProduction.Features.Tabel.Services
                 {
                     string query = $"select tsl_dateTo from tabel_sp_lock where tsl_tsltID=1 and tsl_mg='{mg}'";
 
-                    TableResult =  _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { });
+                    TableResult = _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { });
                     if (TableResult.Rows.Count == 0)
                     {
                         _dateTime = null;
                     }
                     else
                     {
-                       _dateTime = Convert.ToDateTime(TableResult.Rows[0]["tsl_dateTo"]);
+                        _dateTime = Convert.ToDateTime(TableResult.Rows[0]["tsl_dateTo"]);
                     }
                     return _dateTime;
                 }
@@ -398,7 +400,7 @@ namespace SewingProduction.Features.Tabel.Services
                     if (idGroup == 19)
                     {
 
-                        string query = $"select tnid,t_n, naimen from tab_n order by naimen";
+                        string query = $"select tnid,t_n,naimen,id_brig from tab_n order by naimen";
 
                         var result = await connection.QueryAsync<SpPodr>(query, new Dictionary<string, object> { });
                         return result.ToList();
@@ -424,5 +426,81 @@ namespace SewingProduction.Features.Tabel.Services
                 return null;
             }
         }
+        public async Task<List<Brig>> GetBrigsAsync()
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"select brig,br,nn,id_brig from brig order by brig";
+
+                    var result = await connection.QueryAsync<Brig>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, $"Ошибка при получении данных spPodr");
+                return null;
+            }
+        }
+        public async Task<List<SpPodr>> GetSpPodrAsync(int idGroup)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    if (idGroup == 19)
+                    {
+
+                        string query = $"select tnid,t_n,naimen,id_brig from tab_n order by tnid";
+
+                        var result = await connection.QueryAsync<SpPodr>(query, new Dictionary<string, object> { });
+                        return result.ToList();
+                    }
+                    if (idGroup == 20)
+                    {
+                        string query = $"select gr as tnid, naimen from zlgr  order by gr";
+
+                        var result = await connection.QueryAsync<SpPodr>(query, new Dictionary<string, object> { });
+                        return result.ToList();
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, $"Ошибка при получении данных spPodr");
+                return null;
+            }
+        }
+        public async Task<List<OtklParsecOrion>> GetOtklParsecOrion(int idGr,string mg,int groupId,int OrionTag)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"exec [GetReportTimeSheetOtkl] {idGr},'{mg}',{groupId},{OrionTag}";
+
+                    var result = await connection.QueryAsync<OtklParsecOrion>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, $"Ошибка при получении данных spPodr");
+                return null;
+            }
+        }
+            
     }
 }

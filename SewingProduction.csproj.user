@@ -214,6 +214,9 @@
     <Compile Update="Features\Tabel\Forms\EmployeeTransfer .cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\Tabel\Forms\OtklTabel.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\Tabel\Forms\OtvlRab.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,6 +227,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Tabel\Forms\TabelMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Tabel\Forms\TabNEdit.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Tabel\Reports\Blank.cs">
@@ -464,6 +470,9 @@
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\PZVCurrentMachineAssignmentReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\TimeSheetOtklReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
   </ItemGroup>

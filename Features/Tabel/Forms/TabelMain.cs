@@ -214,6 +214,8 @@ namespace SewingProduction.Features.Tabel.Forms
             lookUpEditGr.Properties.DataSource = _spPodr;
             lookUpEditGr.Properties.DisplayMember = "naimen";
             lookUpEditGr.Properties.ValueMember = "tnid";
+            lookUpEditGr.Properties.Columns.Clear();
+            lookUpEditGr.Properties.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("naimen", "Подразделение"));
             lookUpEditGroup.Properties.DataSource = new BindingSource(workTypes, null);
             lookUpEditGroup.Properties.DisplayMember = "Value";
             lookUpEditGroup.Properties.ValueMember = "Key";
@@ -815,7 +817,7 @@ namespace SewingProduction.Features.Tabel.Forms
 
                 string query = $"update tabel_sp set {fieldName} = {value},tsPlPart = 0 where id = {id}";
                 _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { });
-                using (var prichIskl = new ChoosePrich(id, tabno, fio))
+                using (var prichIskl = new ChoosePrich(base.User, id, tabno, fio))
                 {
                     //Point mousePosition = Control.MousePosition;
                     //calculator.StartPosition = FormStartPosition.Manual;
@@ -1045,6 +1047,10 @@ namespace SewingProduction.Features.Tabel.Forms
 
         private void lookUpEditGroup_EditValueChanged(object sender, EventArgs e)
         {
+            lookUpEditGroupEditValueChanged();
+        }
+        public void lookUpEditGroupEditValueChanged()
+        {
             _timeSheetBindingSource.Clear();
             _timeSheetBindingSource.ResetBindings(false);
             int grId = Convert.ToInt32(lookUpEditGroup.EditValue);
@@ -1207,7 +1213,7 @@ namespace SewingProduction.Features.Tabel.Forms
             string naimen = lookUpEditGr.Text;
             int idGr = (int)lookUpEditGr.EditValue;
             int idGroup = (int)lookUpEditGroup.EditValue;
-            using (var Employee = new EmployeeTransfer(fio, naimen, idCurrent, idGroup, currentMG, tab))
+            using (var Employee = new EmployeeTransfer(base.User, fio, naimen, idCurrent, idGroup, currentMG, tab))
             {
                 if (Employee.ShowDialog() == DialogResult.OK)
                 {
@@ -1429,6 +1435,76 @@ namespace SewingProduction.Features.Tabel.Forms
                 mainForm.OpenForm(new TabelLock(CurrentUser.User));
             }
 
+        }
+
+        private void customSimpleButton8_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int grId = Convert.ToInt32(lookUpEditGroup.EditValue);
+                if (grId > 0)
+                {
+                    using (var formEdit = new TabNEdit(CurrentUser.User, grId))
+                    {
+                        Point cursorPos = Cursor.Position;
+                        Point safePosition = CalculateSafePosition(
+                            cursorPos,
+                            formEdit.Size);
+
+                        formEdit.StartPosition = FormStartPosition.Manual;
+                        formEdit.Location = safePosition;
+                        if (formEdit.ShowDialog() == DialogResult.OK)
+                        {
+                            lookUpEditGroupEditValueChanged();
+
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Выберите группу!");
+                }
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void customSimpleButton9_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int groupId = Convert.ToInt32(lookUpEditGroup.EditValue);
+                int grId = Convert.ToInt32(lookUpEditGr.EditValue);
+                if (grId > 0 && groupId > 0)
+                {
+                    using (var otklTab = new OtklTabel(CurrentUser.User, grId, currentMG, groupId, 0, _spPodr))
+                    {
+                        Point cursorPos = Cursor.Position;
+                        Point safePosition = CalculateSafePosition(
+                            cursorPos,
+                            otklTab.Size);
+
+                        otklTab.StartPosition = FormStartPosition.Manual;
+                        otklTab.Location = safePosition;
+                        if (otklTab.ShowDialog() == DialogResult.OK)
+                        {
+                            lookUpEditGroupEditValueChanged();
+
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Выберите группу или подразделение!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
         }
     }
 }
