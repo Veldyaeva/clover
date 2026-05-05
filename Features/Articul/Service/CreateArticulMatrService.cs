@@ -194,6 +194,7 @@ namespace SewingProduction.Features.Articul.Service
             try
             {
                 string query = "SELECT  id_gost,name_gost,opi_gost FROM dbo.gost where ust = 0 order by id_gost";
+
                 return new BindingList<GostModel>(await _dbService.GetListAsync<GostModel>(query, new {  }));
             }
             catch (Exception ex)
@@ -207,7 +208,9 @@ namespace SewingProduction.Features.Articul.Service
         {
             try
             {
-                string query = "SELECT id_gost, ag_id, ag_name_sokr,n_i FROM View_GostGrupIzd order by id_gost,n_i ";
+            
+                string query = "SELECT * FROM view_gost_grup_metadata ";
+
                 return await _dbService.GetListAsync<GostGrupIzdViewModel>(query, new { });
 
             }
@@ -333,12 +336,7 @@ namespace SewingProduction.Features.Articul.Service
                 await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetStatusForArticulAsync");
                 return 1;
             }
-
         }
-
-
-
-
     }
 
 

@@ -187,6 +187,17 @@ namespace SewingProduction.Features.Articul.Service
         private static bool IsNumeric(object value) =>
             value is byte or sbyte or short or ushort or int or uint or long or ulong
             or float or double or decimal;
+
+        public static IEnumerable<Control> GetAllControls(Control parent)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                yield return control;
+
+                foreach (var child in GetAllControls(control))
+                    yield return child;
+            }
+        }
     }
     public sealed class FieldComparisonItem
     {

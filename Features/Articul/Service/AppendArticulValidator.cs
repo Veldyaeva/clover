@@ -25,16 +25,17 @@ namespace SewingProduction.Features.Articul.Service
             {
                 return CheckResult.Fail($"Заполните ГОСТ!");
             }
-            
-            if (string.IsNullOrEmpty(_newArt.Mod) )
+
+            if (string.IsNullOrEmpty(_newArt.Mod))
             {
                 return CheckResult.Fail($"Заполните Торговую модель!");
             }
-            
+
             if (string.IsNullOrEmpty(_newArt.Articul))
             {
                 return CheckResult.Fail($"Заполните Артикул");
             }
+
 
 
             return CheckResult.Success();
@@ -42,10 +43,26 @@ namespace SewingProduction.Features.Articul.Service
         /// <summary>
         /// проврка на совпадение кодов размеров и вновь созданного кода
         /// </summary>
+        public async Task<CheckResult> CheckRazmKod(IEnumerable<PlanRazmSetkaModel> items)
+        {
+
+            var chKod = checkKod(items);
+            if (!chKod.IsSuccess)
+                return chKod;
+            var chDoubleKod = checkDoubleKod(items);
+            if (!chDoubleKod.IsSuccess)
+                return chDoubleKod;
+            var chDoubleKodInDB = await checkDoubleKodInDB(items);
+            if (!chDoubleKodInDB.IsSuccess)
+                return chDoubleKodInDB;
+
+            return CheckResult.Success();
+
+        }
         public CheckResult checkKod(IEnumerable<PlanRazmSetkaModel> items)
         {
             string checkkod = _newArt.Kod.Substring(0, 7);
-            
+
             bool allStartWithKod = !string.IsNullOrEmpty(checkkod) &&
                         items.All(x =>
                            !string.IsNullOrEmpty(x.Kod) &&
@@ -57,6 +74,27 @@ namespace SewingProduction.Features.Articul.Service
 
             return CheckResult.Success();
         }
-
+        public CheckResult checkDoubleKod(IEnumerable<PlanRazmSetkaModel> items)
+        {
+            var doublekods = items.GroupBy(x => x.Kod)
+                         .Where(g => g.Count() > 1)
+                         .Select(g => g.Key);
+            if (doublekods.Any())
+            {
+                return CheckResult.Fail($"Задвоен код в размерном ряде! код:{string.Join(", ", doublekods)}");
+            }
+            return CheckResult.Success();
+        }
+        public async Task<CheckResult> checkDoubleKodInDB(IEnumerable<PlanRazmSetkaModel> items)
+        {
+            var doublekods = items.Select(x => x.Kod).ToList();
+            string query = "SELECT COUNT(*) FROM dbo.sp_articul WHERE kod IN @kods";
+            int count = await _dbService.GetFirstOrDefaultAsync<int>(query, new { kods = doublekods });
+            if (count > 0)
+            {
+                return CheckResult.Fail($"В справочнике уже есть артикулы с такими кодами!");
+            }
+            return CheckResult.Success();
+        }
     }
 }

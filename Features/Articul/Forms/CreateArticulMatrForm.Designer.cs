@@ -501,7 +501,8 @@
             repositoryItemSearchLookUpEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             repositoryItemSearchLookUpEdit1.Name = "repositoryItemSearchLookUpEdit1";
             repositoryItemSearchLookUpEdit1.PopupView = repositoryItemSearchLookUpEdit1View;
-            repositoryItemSearchLookUpEdit1.CloseUp += repositoryItemSearchLookUpEdit1_CloseUp;
+            
+            repositoryItemSearchLookUpEdit1.BeforePopup += repositoryItemSearchLookUpEdit1_BeforePopup;
             // 
             // repositoryItemSearchLookUpEdit1View
             // 
@@ -525,7 +526,8 @@
             repositoryItemSearchLookUpEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             repositoryItemSearchLookUpEdit2.Name = "repositoryItemSearchLookUpEdit2";
             repositoryItemSearchLookUpEdit2.PopupView = repositoryItemSearchLookUpEdit2View;
-            repositoryItemSearchLookUpEdit2.BeforePopup += repositoryItemSearchLookUpEdit2_BeforePopup;
+            repositoryItemSearchLookUpEdit1.CloseUp += repositoryItemSearchLookUpEdit2_CloseUp;
+
             // 
             // repositoryItemSearchLookUpEdit2View
             // 

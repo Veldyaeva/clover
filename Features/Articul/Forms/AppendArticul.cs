@@ -11,6 +11,7 @@ using SewingProduction.Features.UserDistribution.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -227,21 +228,47 @@ namespace SewingProduction.Features.Articul.Forms
         private async void btnAccept_Click(object sender, EventArgs e)
         {
             var validator = new AppendArticulValidator(_bindingSourceArticul.Current as SpArticulPreviewModel);
-            
+            try
+            {
             var canLink = await validator.checkBeforPublish();
-
-            var listRazm = (BindingList<PlanRazmSetkaModel>)_bindingSourceRazms.DataSource;
-
-            canLink = validator.checkKod(listRazm);
 
             if (canLink.IsSuccess)
             {
-                
-                
-                MessageBox.Show("Проверка прошла успешно. Артикул можно создать/стыковать.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                switch (_typeCreate)
+                {
+                    case 0: // Создание
+                        var listRazm = (BindingList<PlanRazmSetkaModel>)_bindingSourceRazms.DataSource;
+
+                            // проверки для кодов размеров в режиме создания
+                            canLink = await validator.CheckRazmKod(listRazm);
+
+                        break;
+                    case 1: // Настройка для режима стыковки
+                        break;
+
+                }
             }
 
-            validator = null;
+                if (canLink.IsSuccess)
+                {
+                    MessageBox.Show("Проверка прошла успешно. Артикул можно создать/стыковать.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(@$"Невозможно выбрать эту модель для стыковки: {canLink.ErrorMessage}", "Проверка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при проверке артикула перед публикацией");
+                MessageBox.Show("Произошла ошибка при проверке артикула. Пожалуйста, попробуйте снова.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                validator = null;
+            }
+            
         }
 
         public void HighlightMismatches(Control parent,IEnumerable<FieldMismatch> mismatches)
@@ -249,7 +276,7 @@ namespace SewingProduction.Features.Articul.Forms
             var mismatchMap = mismatches
                 .ToDictionary(x => x.PropertyName, StringComparer.OrdinalIgnoreCase);
 
-            foreach (Control control in GetAllControls(parent))
+            foreach (Control control in FieldComparisonService.GetAllControls(parent))
             {
                 // сброс подсветки не нужно
                 //control.BackColor = SystemColors.Window;
@@ -273,16 +300,6 @@ namespace SewingProduction.Features.Articul.Forms
             }
         }
 
-        private static IEnumerable<Control> GetAllControls(Control parent)
-        {
-            foreach (Control control in parent.Controls)
-            {
-                yield return control;
-
-                foreach (var child in GetAllControls(control))
-                    yield return child;
-            }
-        }
 
     }
 

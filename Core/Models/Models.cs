@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DevExpress.Skins.SolidColorHelper;
 
 namespace SewingProduction.Core.Models
 {
@@ -32,9 +35,12 @@ namespace SewingProduction.Core.Models
         public int Ag_id { get; set; }
         public string Ag_name_sokr { get; set; }
         public string Ag_tnved { get; set; } //gost_sv_pict.ag_tnved
-        public string N_i { get; set; } //articul_grup.ag_naimen
-        public string N_g { get; set; } //gost_vid_cheloveka.name_vid
+        public string N_i { get; set; } //articul_grup.ag_naimen полное название группы 
+        public string N_g { get; set; } //gost_vid_cheloveka.name_vid 
         public int Tk_id { get; set; }
+        public string Care_instructions { get; set; } // описание по уходу 
+        public string CareImagePath { get; set; } = ""; // картинка с символами по уходу 
+        
     }
     public class GostRazmerNabViewModel
     {
