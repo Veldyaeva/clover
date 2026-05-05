@@ -23,7 +23,7 @@ namespace SewingProduction.Features.Tabel.Forms
 {
     public partial class OtklTabel : CustomForm
     {
-        private static DatabaseHelper _dbHelper;
+        private static DatabaseHelperSQL _dbHelper;
         private static DbService _dbService;
         private readonly ILogger _logger = new FileLogger();
         private static TabelDataService _tabelDataService;
@@ -37,7 +37,7 @@ namespace SewingProduction.Features.Tabel.Forms
         public OtklTabel(UserClass User, int idGr, string mg, int groupId, int OrionTag, BindingSource spisokGr) : base(User)
         {
             InitializeComponent();
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
             _tabelDataService = new TabelDataService(_dbHelper);
             _idGr = idGr;
