@@ -1,5 +1,7 @@
-﻿
-CREATE PROCEDURE dbo.PZV_AdjustNotStartedBeforeShiftEnd
+﻿USE ACE
+GO
+
+ALTER PROCEDURE dbo.PZV_AdjustNotStartedBeforeShiftEnd
     @KwsId INT,
     @Tab INT,
     @MinHours DECIMAL(18,2) = 12.0,
@@ -90,7 +92,8 @@ BEGIN
             SUM(FactHours) AS FactSum
         INTO #FactByMachine
         FROM #ShiftRows
-        WHERE pzvDateStart IS NOT NULL
+     --   WHERE pzvDateStart IS NOT NULL
+     WHERE pzvDateEnd IS NOT NULL
         GROUP BY pzvKmlID;
 
         CREATE UNIQUE CLUSTERED INDEX IX__FactByMachine ON #FactByMachine(pzvKmlID);
@@ -196,8 +199,28 @@ BEGIN
         --    - если FactSum >= MinHours => UNASSIGN
         --    - если FactSum <  MinHours => STORNO (через PZV_Split mode=2)
         -------------------------------------------------------------------
+SELECT
+    r.pzvID,
+    r.pzvKmlID,
+    r.FactSum,
+    r.NeedHours,
+    r.AssignedHours,
+    r.RunningAssigned,
+    CASE 
+        WHEN k.pzvID IS NOT NULL AND r.FactSum < @MinHours THEN 'KEEP_STORNO'
+        WHEN k.pzvID IS NULL AND r.FactSum < @MinHours THEN 'UNASSIGN_EXCESS'
+        WHEN r.FactSum >= @MinHours THEN 'UNASSIGN_FACT_OK'
+        ELSE 'UNKNOWN'
+    END AS PlannedAction
+FROM #Ranked r
+LEFT JOIN #Keep k ON k.pzvID = r.pzvID
+ORDER BY r.pzvKmlID, r.RunningAssigned, r.pzvID;
 
-        /* 6.1) UNASSIGN: FactSum >= MinHours */
+
+
+        /* 6.1) UNASSIGN: FactSum >= MinHours
+           - если факт по машине >= MinHours: снимаем все неначатые
+           - если факт < MinHours: снимаем только лишние неначатые, которые НЕ вошли в #Keep */
         UPDATE p
         SET
             p.pzvTab = 0,
@@ -217,8 +240,9 @@ BEGIN
         FROM dbo.planZagrVyaz p
         JOIN #NotStarted ns ON ns.pzvID = p.pzvID
         LEFT JOIN #Keep k ON k.pzvID = p.pzvID
-        WHERE k.pzvID IS NULL
-          AND ns.FactSum >= @MinHours
+        WHERE-- k.pzvID IS NULL ?????????????????          AND 
+          (ns.FactSum >= @MinHours
+          OR (ns.FactSum < @MinHours AND k.pzvID IS NULL))
           -- safety: вдруг строка уже стала начатой (гонка) — не трогаем
           AND p.pzvDateStart IS NULL
           AND p.pzvDateEnd IS NULL
@@ -243,7 +267,7 @@ BEGIN
         FROM #NotStarted ns
         LEFT JOIN #Keep k ON k.pzvID = ns.pzvID
         JOIN dbo.planZagrVyaz p WITH (UPDLOCK, HOLDLOCK) ON p.pzvID = ns.pzvID
-        WHERE k.pzvID IS NULL
+        WHERE k.pzvID IS NOT NULL
           AND ns.FactSum < @MinHours
           AND p.pzvDateStart IS NULL
           AND p.pzvDateEnd IS NULL
@@ -366,4 +390,5 @@ BEGIN
         THROW 51000, @msg, 1;
     END CATCH
 END
+
 GO
