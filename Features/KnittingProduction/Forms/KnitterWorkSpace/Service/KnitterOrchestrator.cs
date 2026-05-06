@@ -1,4 +1,4 @@
-using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
+﻿using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
@@ -21,8 +21,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
         public Task<List<FioModel>> GetFioListAsync() => _uiGateway.GetFioListAsync();
 
-        public Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, int? kmaId, bool onlyUnassigned, bool expandAssignedByNrId, decimal maxHours, bool includeFinished = false) =>
-            _uiGateway.GetPlanByTabAsync(tab, kwsId, kmaId, onlyUnassigned, expandAssignedByNrId, maxHours, includeFinished);
+        public Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, int? kmaId, bool expandAssignedByNrId, decimal maxHours, bool includeFinished = false) =>
+            _uiGateway.GetPlanByTabAsync(tab, kwsId, kmaId, expandAssignedByNrId, maxHours, includeFinished);
 
         public Task<string> GetFioByTabAsync(int tab) => _uiGateway.GetFioByTabAsync(tab);
 

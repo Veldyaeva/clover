@@ -36,16 +36,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// </summary>
         /// <param name="tab">Табельный номер сотрудника.</param>
         /// <returns>Список укороченной модели <see cref="KnitterPZVModel"/> для отображения.</returns>
-        public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab)
-        {
-            // Базовый путь всегда через SP4: закрытая смена, только неназначенные, без завершённых, лимит 25 часов
-            return await GetPlanByTabAsync(tab, kwsId: 0, kmaId: null, onlyUnassigned: true, expandAssignedByNrId: false, maxHours: 25m);
-        }
+        //public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab)
+        //{
+        //    // Базовый путь всегда через SP4: закрытая смена, только неназначенные, без завершённых, лимит 25 часов
+        //    return await GetPlanByTabAsync(tab, kwsId: 0, kmaId: null, onlyUnassigned: true, expandAssignedByNrId: false, maxHours: 25m);
+        //}
 
         /// <summary>
-        /// 
+        /// Возвращает список записей плана загрузки вязальщика по табельному номеру.
+        /// Базовый путь всегда через SP: закрытая смена, только неназначенные, без завершённых, лимит X часов
         /// </summary>
-        /// <param name="tab"></param>
+        /// <param name="tab">Табельный номер сотрудника</param>
         /// <param name="kwsId"></param>
         /// <param name="kmaId"></param>
         /// <param name="onlyUnassigned"></param>
@@ -54,7 +55,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// <param name="includeFinished"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, int? kmaId, bool onlyUnassigned, bool expandAssignedByNrId, decimal maxHours, bool includeFinished = false)
+        public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, int? kmaId, bool expandAssignedByNrId, decimal maxHours, bool includeFinished = false)
         {
             try
             {
@@ -68,7 +69,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 // SP возвращает два набора: 1) назначенные/родственные; 2) кандидаты
                 // !!!! при закрытой смене (kwsId = 0/null) использовать второй набор (кандидаты) -- и переставлять местави часы и кол назн и факт --не нужно переставлять
                 using (var grid = await connection.QueryMultipleAsync(
-                  "dbo.GetPlanZagrVyazNorm_ByTab3",
+                  "dbo.GetPlanZagrVyazNorm_ByTab1",
                     new
                     {
                         tab,
@@ -76,7 +77,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                         OnlyActive = 1,
                         KwsId = kwsId,
                         KmaId = kmaId,
-                        OnlyUnassigned = onlyUnassigned ? 1 : 0,
+                       // OnlyUnassigned = onlyUnassigned ? 1 : 0,
                         ExpandAssignedByNrId = expandAssignedByNrId ? 1 : 0,
                         IncludeFinished = includeFinished ? 1 : 0
                     },
@@ -268,7 +269,7 @@ where kwsmlKmlID in @ids
             }
             catch (Exception ex)
             {
-                throw new Exception($"GetPlanByTabAsync failed (tab={tab}, kwsId={kwsId}, onlyUnassigned={onlyUnassigned}, expandAssignedByNrId={expandAssignedByNrId}, maxHours={maxHours})", ex);
+                throw new Exception($"GetPlanByTabAsync failed (tab={tab}, kwsId={kwsId}, expandAssignedByNrId={expandAssignedByNrId}, maxHours={maxHours})", ex);
             }
         }
 

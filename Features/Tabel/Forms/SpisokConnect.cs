@@ -208,7 +208,7 @@ namespace SewingProduction.Features.Tabel.Forms
                 if (valueVerif1c == 1)
                 {
                     MessageBox.Show("Увязка с 1с не требуется!");
-                    //return;
+                    return;
                 }
                 using (var chooseForm = new ChooseUin(_user,lastName, firstName, middleName, tabno, naimenPodr, nameGroup))
                 {

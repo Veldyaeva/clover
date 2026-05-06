@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraEditors;
 using SewingProduction.Features.Tabel.Models;
 using SewingProduction.Features.Tabel.Services;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 using System;
@@ -30,7 +31,7 @@ namespace SewingProduction.Features.Tabel.Forms
         int _idGroup;
         string _currentMg;
         int _tab;
-        public EmployeeTransfer(string fio, string naimenGr,  int currentId, int idGroup, string currentMg,int tab)
+        public EmployeeTransfer(UserClass User, string fio, string naimenGr,  int currentId, int idGroup, string currentMg,int tab) : base(User)
         {
             InitializeComponent();
             _dbHelper = new DatabaseHelperSQL();
@@ -45,7 +46,10 @@ namespace SewingProduction.Features.Tabel.Forms
            
 
         }
-
+        public EmployeeTransfer(UserClass User) : base(User)
+        {
+            InitializeComponent();
+        }
         private async void EmployeeTransfer_Load(object sender, EventArgs e)
         {
             _spPodr = new BindingSource { DataSource = await _tabelDataService.GetzlPodrAsync()};

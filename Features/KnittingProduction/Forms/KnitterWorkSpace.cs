@@ -73,7 +73,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// Список SQL-объектов для отслеживания через ServiceBroker.
         /// </summary>
         private static readonly IReadOnlyList<string> _sbObjects =
-            new[] { "GetPlanZagrVyazNorm_ByTab3", "knitWorkingShiftNewCurrentSmen_view" };
+            new[] { "GetPlanZagrVyazNorm_ByTab1", "knitWorkingShiftNewCurrentSmen_view" };
         public IReadOnlyList<string> ServiceBrokerObjects => _sbObjects;
         /// <summary>
         /// Приоритеты обновления объектов (чем выше число, тем выше приоритет).
@@ -81,7 +81,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private static readonly IReadOnlyDictionary<string, int> _sbPriorities =
     new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
     {
-        { "GetPlanZagrVyazNorm_ByTab3", 10 },
+        { "GetPlanZagrVyazNorm_ByTab1", 10 },
         { "knitWorkingShiftNewCurrentSmen_view", 10 }
     };
         public IReadOnlyDictionary<string, int> RefreshPriorities => _sbPriorities;
@@ -94,7 +94,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             _ignoredServiceBrokerTables.UnionWith(new[]
             {
-                // GetPlanZagrVyazNorm_ByTab3 traverses broad reference/view dependencies.
+                // GetPlanZagrVyazNorm_ByTab1 traverses broad reference/view dependencies.
                 // Keep broker focused on operational plan/shift data and ignore static/reference sources.
                 "dbo.fio",
                 "dbo.gr_rab_dn",
@@ -1645,39 +1645,39 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             await ReloadCurrentTabAsync();
         }
 
-        private void InitAdminSettingsButton()
-        {
-            _adminSettingsButton = new Button
-            {
-                Text = "Админка",
-                AutoSize = true,
-                Anchor = AnchorStyles.Top | AnchorStyles.Right,
-                Location = new Point(this.ClientSize.Width - 220, 5)
-            };
-            Controls.Add(_adminSettingsButton);
-            _adminSettingsButton.BringToFront();
-            _adminSettingsButton.Click += (s, e) => ShowAdminSettingsDialog();
-        }
+        //private void InitAdminSettingsButton()
+        //{
+        //    _adminSettingsButton = new Button
+        //    {
+        //        Text = "Админка",
+        //        AutoSize = true,
+        //        Anchor = AnchorStyles.Top | AnchorStyles.Right,
+        //        Location = new Point(this.ClientSize.Width - 220, 5)
+        //    };
+        //    Controls.Add(_adminSettingsButton);
+        //    _adminSettingsButton.BringToFront();
+        //    _adminSettingsButton.Click += (s, e) => ShowAdminSettingsDialog();
+        //}
         #endregion
 
-        private void SetupStatusColumn()
-        {
-            // Индикатор в колонке статуса: часы факт / часы назначено
-            _statusProgressBar = new RepositoryItemProgressBar
-            {
-                Minimum = 0,
-                Maximum = 100,
-                ShowTitle = true,
-                PercentView = true
-            };
+        //private void SetupStatusColumn()
+        //{
+        //    // Индикатор в колонке статуса: часы факт / часы назначено
+        //    _statusProgressBar = new RepositoryItemProgressBar
+        //    {
+        //        Minimum = 0,
+        //        Maximum = 100,
+        //        ShowTitle = true,
+        //        PercentView = true
+        //    };
 
-            gridColumn8.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
-            gridColumn8.UnboundExpression = string.Empty;
-            gridColumn8.ColumnEdit = _statusProgressBar;
+        //    gridColumn8.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
+        //    gridColumn8.UnboundExpression = string.Empty;
+        //    gridColumn8.ColumnEdit = _statusProgressBar;
 
-            bandedGridView3.CustomUnboundColumnData -= BandedGridView3_CustomUnboundColumnData;
-            bandedGridView3.CustomUnboundColumnData += BandedGridView3_CustomUnboundColumnData;
-        }
+        //    bandedGridView3.CustomUnboundColumnData -= BandedGridView3_CustomUnboundColumnData;
+        //    bandedGridView3.CustomUnboundColumnData += BandedGridView3_CustomUnboundColumnData;
+        //}
 
         /// <summary>
         /// Настраивает подсветку текущей строки для bandedGridView3 и advBandedGridView1
@@ -2283,15 +2283,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             SetViewState(advBandedGridView1);
         }
 
-        private (int? kwsId, bool onlyUnassigned, decimal maxHours, bool expandByNr, bool includeFinished) GetCurrentPlanQueryOptions()
+        private (int? kwsId, decimal maxHours, bool expandByNr, bool includeFinished) GetCurrentPlanQueryOptions()
         {
             bool isAdmin = _adminToggle?.Checked == true;
             bool isShiftOpen = _isShiftRunning && _currentShiftId.HasValue;
 
             return (
                 kwsId: isShiftOpen ? _currentShiftId : 0,
-                onlyUnassigned: !isShiftOpen && !_showAllAssignedWhenClosed,
-                maxHours: isShiftOpen ? 240m : _maxHoursClosedShift,
+               // onlyUnassigned: !isShiftOpen && !_showAllAssignedWhenClosed,
+                maxHours: isShiftOpen ? 14 : _maxHoursClosedShift,
                 expandByNr: _expandNrToggle?.Checked == true,
                 includeFinished: isAdmin);
         }
@@ -2361,7 +2361,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 tab,
                 options.kwsId,
                 _currentKmaId,
-                options.onlyUnassigned,
+              //  options.onlyUnassigned,
                 options.expandByNr,
                 options.maxHours,
                 includeFinished: options.includeFinished);
@@ -2474,7 +2474,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     LogSuccess($"Получен сигнал обновления для объекта {objectName}.", nameof(RestartDataByObjectNameAsync));
 
                     // Если это наша хранимая процедура плана - перезагружаем план
-                    if (string.Equals(objectName, "GetPlanZagrVyazNorm_ByTab3", StringComparison.OrdinalIgnoreCase)
+                    if (string.Equals(objectName, "GetPlanZagrVyazNorm_ByTab1", StringComparison.OrdinalIgnoreCase)
                         || string.Equals(objectName, "knitWorkingShiftNewCurrentSmen_view", StringComparison.OrdinalIgnoreCase))
                     {
                         if (_currentLoadedTab.HasValue)
