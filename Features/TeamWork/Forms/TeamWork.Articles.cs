@@ -1,4 +1,4 @@
-using DevExpress.XtraGrid.Views.Base;
+﻿using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.helpers;
 using SewingProduction.Helpers;
@@ -6,14 +6,12 @@ using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -23,123 +21,268 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private bool _isUnchecking = false;
 
-        /// <summary>
-        /// Загрузка вкладки "текущие работы" (MyDataAnn)
-        /// </summary>
-        private async Task CurrentWorks_Load(CancellationToken cancellationToken = default)
+        private async Task WithArticlesFocusedRowHandlersSuspendedAsync(Func<Task> action)
         {
-            cancellationToken.ThrowIfCancellationRequested();
-            // Отписываемся от событий ПЕРЕД загрузкой
-            if (this.gridView_unboundArts != null)
+            if (action == null)
             {
-                this.gridView_unboundArts.FocusedRowChanged -= gridView_unboundArts_FocusedRowChanged;
+                return;
             }
-            if (this.gridView_wdToBind != null)
+
+            if (gridView_unboundArts != null)
             {
-                this.gridView_wdToBind.FocusedRowChanged -= gridViewWdToBind_FocusedRowChanged;
+                gridView_unboundArts.FocusedRowChanged -= gridView_unboundArts_FocusedRowChanged;
+            }
+
+            if (gridView_wdToBind != null)
+            {
+                gridView_wdToBind.FocusedRowChanged -= gridViewWdToBind_FocusedRowChanged;
             }
 
             try
             {
-                cancellationToken.ThrowIfCancellationRequested();
-                Task preArchTask = PreArchLoad(cancellationToken);
-                Task archTask = ArchLoad(cancellationToken);
-
-                // Загружаем основные данные
-                await MyDataArtLoad(cancellationToken);
-                await MyDataAnnLoad(cancellationToken);
-
-                await Task.WhenAll(preArchTask, archTask);
-
-                TWGridHelper.sortGridView(normRaszTab);
-                //TWGridHelper.sortGridView(gridViewRaskr);
-                //TWGridHelper.sortGridView(gridViewKont);
-
-
-                // Load NormRasz and NormRask data for the Articles tab using the dedicated BindingList and BindingSource
-                if (this.gridView_wdToBind != null && gridView_wdToBind.RowCount > 0 && gridView_wdToBind.FocusedRowHandle >= 0)
+                await action();
+            }
+            finally
+            {
+                if (gridView_unboundArts != null)
                 {
-                    int initialAnnId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, gridView_wdToBind.FocusedRowHandle, "AnnId", 0);
-                    List<NormRasz> raszData = new List<NormRasz>();
-                    List<NormRask> raskData = new List<NormRask>();
-                    List<NormKont> kontData = new List<NormKont>();
-                    if (initialAnnId > 0)
-                    {
-                        raszData = await _artNormService.GetRelatedNormRasz(initialAnnId);
-                        raskData = await _artNormService.GetRelatedNormRask(initialAnnId);
-                        kontData = await _artNormService.GetRelatedNormKont(initialAnnId);
-                    }
+                    gridView_unboundArts.FocusedRowChanged += gridView_unboundArts_FocusedRowChanged;
+                }
 
-                    // Load NormRasz data
-                    _normRaszListArticles.Clear();
-                    if (raszData != null)
-                    {
-                        foreach (var item in raszData)
-                        {
-                            _normRaszListArticles.Add(item);
-                        }
-                    }
-                    _normRaszBindingSourceArticles.ResetBindings(false);
+                if (gridView_wdToBind != null)
+                {
+                    gridView_wdToBind.FocusedRowChanged += gridViewWdToBind_FocusedRowChanged;
+                }
+            }
+        }
 
-                    // Load NormRask data
-                    if (_normRaskListArticles != null)
-                    {
-                        _normRaskListArticles.Clear();
-                        if (raskData != null)
-                        {
-                            foreach (var item in raskData)
-                            {
-                                _normRaskListArticles.Add(item);
-                            }
-                        }
-                    }
-                    _normRaskBindingSourceArticles?.ResetBindings(false);
+        private Task CurrentWorks_Load(CancellationToken cancellationToken = default)
+        {
+            return InitializeCurrentWorksTabAsync(cancellationToken);
+        }
 
-                    // Load NormKont data
-                    if (_normKontListArticles != null)
-                    {
-                        _normKontListArticles.Clear();
-                        if (kontData != null)
-                        {
-                            foreach (var item in kontData)
-                            {
-                                _normKontListArticles.Add(item);
-                            }
-                        }
-                    }
-                    _normKontBindingSourceArticles?.ResetBindings(false);
+        private async Task InitializeCurrentWorksTabAsync(CancellationToken cancellationToken = default)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            showAllWD = false;
+            var showAllButton = FindButtonByTag(layoutControlGroup14, "bind:show-all");
+            if (showAllButton != null && showAllButton.Checked)
+            {
+                showAllButton.Checked = false;
+            }
+
+            await WithArticlesFocusedRowHandlersSuspendedAsync(async () =>
+            {
+                await LoadCurrentWorksArchiveDataAsync(cancellationToken);
+                await MyDataArtLoad(cancellationToken);
+
+                EnsureFocusedUnboundArtRowSelected();
+                string focusedArticul = GetFocusedUnboundArticul();
+                int focusedKod = GetFocusedUnboundArtKod();
+                if (!string.IsNullOrWhiteSpace(focusedArticul) || focusedKod > 0)
+                {
+                    await RefreshArticlesWorkDivisionsByArticulAsync(focusedArticul, clearWdFilters: false, cancellationToken);
                 }
                 else
-                {
-                    // Если нет выбранных строк в gridView_wdToBind - очищаем все связанные данные
-                    if (_normRaszListArticles is not null) _normRaszListArticles.Clear();
-                    if (_normRaszBindingSourceArticles is not null) _normRaszBindingSourceArticles.ResetBindings(false);
-                    if (_normRaskListArticles is not null) _normRaskListArticles.Clear();
-                    if (_normRaskBindingSourceArticles is not null) _normRaskBindingSourceArticles.ResetBindings(false);
-                    if (_normKontListArticles is not null) _normKontListArticles.Clear();
-                    if (_normKontBindingSourceArticles is not null) _normKontBindingSourceArticles.ResetBindings(false);
-                    await ClearWdToBindRelatedData();
-                }
-
-                // Проверяем gridView_unboundArts и очищаем данные если нет выбранных строк
-                if (this.gridView_unboundArts == null || gridView_unboundArts.RowCount == 0 || gridView_unboundArts.FocusedRowHandle < 0)
                 {
                     await ClearUnboundArtsRelatedData();
                 }
 
+                TWGridHelper.sortGridView(normRaszTab);
+                await SeedArticlesDetailsForCurrentSelectionAsync(cancellationToken);
+
+                RefreshCurrentWorksUxState();
                 _articlesTabInitialized = true;
-            }
-            finally
+            });
+        }
+
+        private async Task RefreshCurrentWorksTabAsync(CancellationToken cancellationToken = default)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            string focusedArticul = GetFocusedUnboundArticul();
+            int focusedKod = GetFocusedUnboundArtKod();
+
+            await WithArticlesFocusedRowHandlersSuspendedAsync(async () =>
             {
-                // Подписываемся на события ПОСЛЕ загрузки
-                if (this.gridView_unboundArts != null)
+                await LoadCurrentWorksArchiveDataAsync(cancellationToken);
+                await MyDataArtLoad(cancellationToken);
+
+                if (!string.IsNullOrWhiteSpace(focusedArticul) || focusedKod > 0)
                 {
-                    this.gridView_unboundArts.FocusedRowChanged += gridView_unboundArts_FocusedRowChanged;
+                    await RefreshArticlesWorkDivisionsByArticulAsync(focusedArticul, clearWdFilters: false, cancellationToken);
                 }
-                if (this.gridView_wdToBind != null)
+                else
                 {
-                    this.gridView_wdToBind.FocusedRowChanged += gridViewWdToBind_FocusedRowChanged;
+                    await MyDataAnnLoad(cancellationToken);
                 }
+
+                TWGridHelper.sortGridView(normRaszTab);
+                RefreshCurrentWorksUxState();
+                _articlesTabInitialized = true;
+            });
+        }
+
+        private async Task LoadCurrentWorksArchiveDataAsync(CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            Task preArchTask = PreArchLoad(cancellationToken);
+            Task archTask = ArchLoad(cancellationToken);
+            await Task.WhenAll(preArchTask, archTask);
+        }
+
+        private string GetFocusedUnboundArticul()
+        {
+            if (gridView_unboundArts?.FocusedRowHandle < 0)
+            {
+                return string.Empty;
+            }
+
+            return StringNormalizer.TrimEndOrEmpty(
+                CommonFunctions.GetRowCellValueOrDefault<string>(gridView_unboundArts, gridView_unboundArts.FocusedRowHandle, "Articul", string.Empty),
+                ' ');
+        }
+
+        private int GetFocusedUnboundArtKod()
+        {
+            if (gridView_unboundArts?.FocusedRowHandle < 0)
+            {
+                return 0;
+            }
+
+            string kod = CommonFunctions.GetRowCellValueOrDefault<string>(gridView_unboundArts, gridView_unboundArts.FocusedRowHandle, "kodd_rt", string.Empty);
+            return int.TryParse(kod, out int result) ? result : 0;
+        }
+
+        private void EnsureFocusedUnboundArtRowSelected()
+        {
+            if (gridView_unboundArts == null || gridView_unboundArts.DataRowCount <= 0 || gridView_unboundArts.FocusedRowHandle >= 0)
+            {
+                return;
+            }
+
+            int firstVisibleRow = gridView_unboundArts.GetVisibleRowHandle(0);
+            if (gridView_unboundArts.IsValidRowHandle(firstVisibleRow))
+            {
+                gridView_unboundArts.FocusedRowHandle = firstVisibleRow;
+            }
+        }
+
+        private int GetFocusedWdToBindAnnId()
+        {
+            if (gridView_wdToBind?.FocusedRowHandle < 0)
+            {
+                return 0;
+            }
+
+            return CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, gridView_wdToBind.FocusedRowHandle, "AnnID", 0);
+        }
+
+        private async Task RefreshArticlesWorkDivisionsByArticulAsync(string articul, bool clearWdFilters, CancellationToken cancellationToken = default)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            if (gridView_wdToBind != null && clearWdFilters && !showAllWD)
+            {
+                gridView_wdToBind.ActiveFilter.Clear();
+                gridView_wdToBind.ActiveFilterString = string.Empty;
+            }
+
+            string normalizedArticul = StringNormalizer.TrimEndOrEmpty(articul, ' ');
+            var recommendedWorksTask = LoadWorksbyArt(normalizedArticul);
+            var loadWorksTask = showAllWD ? LoadWorksbyArt(string.Empty) : recommendedWorksTask;
+
+            var list = await loadWorksTask;
+            SetRecommendedAnnIds(await recommendedWorksTask);
+
+            ApplyArticlesWorkDivisionList(list);
+            FocusFirstRecommendedWorkDivision();
+        }
+
+        private void ApplyArticlesWorkDivisionList(IReadOnlyCollection<MyDataANN> list)
+        {
+            if (_myDataAnnBindingSource != null && _myDataAnnList != null)
+            {
+                _myDataAnnList.Clear();
+                if (list != null && list.Count > 0)
+                {
+                    _myDataAnnList.RaiseListChangedEvents = false;
+                    try
+                    {
+                        foreach (var item in list)
+                        {
+                            _myDataAnnList.Add(item);
+                        }
+                    }
+                    finally
+                    {
+                        _myDataAnnList.RaiseListChangedEvents = true;
+                    }
+                }
+
+                _myDataAnnBindingSource.ResetBindings(false);
+            }
+            else
+            {
+                gridControl_wdToBind.DataSource = list?.ToList();
+            }
+
+            gridView_wdToBind?.RefreshData();
+            gridControl_wdToBind?.RefreshDataSource();
+        }
+
+        private async Task SeedArticlesDetailsForCurrentSelectionAsync(CancellationToken cancellationToken = default)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            await RefreshUnboundArtImageAsync(GetFocusedUnboundArtKod());
+
+            int annId = GetFocusedWdToBindAnnId();
+            if (annId <= 0)
+            {
+                await ClearWdToBindRelatedData();
+                RefreshCurrentWorksUxState();
+                return;
+            }
+
+            if (gridView_wdToBind?.GetRow(gridView_wdToBind.FocusedRowHandle) is MyDataANN selectedItem)
+            {
+                textEdit1.Text = StringNormalizer.TrimEndOrEmpty(selectedItem.mod, ' ');
+                textEdit2.Text = StringNormalizer.TrimEndOrEmpty(selectedItem.Articul, ' ');
+                textEdit3.Text = StringNormalizer.TrimEndOrEmpty(selectedItem.grup, ' ');
+            }
+
+            var imageTask = LoadGridImage(pictureBox2, annId: annId);
+            var raszTask = RefreshNormRaszForArticlesTab(annId, cancellationToken);
+            var raskTask = RefreshNormRaskForArticlesTab(annId, cancellationToken);
+            var kontTask = RefreshNormKontForArticlesTab(annId, cancellationToken);
+            var nzpTask = LoadNZPForArticlesTab(annId, cancellationToken);
+
+            await Task.WhenAll(imageTask, raszTask, raskTask, kontTask, nzpTask);
+            cancellationToken.ThrowIfCancellationRequested();
+            RefreshCurrentWorksUxState();
+        }
+
+        private async Task RefreshUnboundArtImageAsync(int kodInt)
+        {
+            if (kodInt > 0)
+            {
+                await LoadGridImage(pictureBox3, kod: kodInt);
+                return;
+            }
+
+            if (pictureBox3 == null)
+            {
+                return;
+            }
+
+            if (pictureBox3.InvokeRequired)
+            {
+                pictureBox3.Invoke((MethodInvoker)(() => pictureBox3.Image = null));
+            }
+            else
+            {
+                pictureBox3.Image = null;
             }
         }
 
@@ -156,16 +299,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
                 }
 
-                string query =// "SELECT DISTINCT SUBSTRING(sa.kod,1,7) as kod, sa.grup, sa.articul, sa.mod, sa.annId " +
-                //    "FROM sp_articul sa " +
-                //    "   left join kompl k on sa.kod = k.kod_k " +
-                //    "WHERE sa.annID IS NULL and k.kod_k is null";//
-                                                                 "SELECT * FROM articulListGroupBySizeLabel where annId is null or annId = 0";
+
                 await GridOverlayLoader.LoadListAsync(
                     gridControl_unboundArts,
                     _myDataArtList,
                     _myDataArtBindingSource,
-                    async _ => await _dbService.GetListAsync<MyDataART>(query, null),
+                    async _ => await _articlesQueryService.LoadUnboundArticlesAsync(),
                     cancellationToken);
 
                 await _logger.LogEventAsync($"Загружено {_myDataArtList.Count} записей MyDataART.", "MyDataArtLoad");
@@ -193,7 +332,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
                 }
 
-                int kod = GetCurrentKodFromDataSource();
                 bool loadAll = FindButtonByTag(layoutControlGroup14, "bind:show-all").Checked;
                 //loadAll = layoutControlGroup14.CustomHeaderButtons[6].Properties.Checked;
                 await GridOverlayLoader.LoadListAsync(
@@ -202,13 +340,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _myDataAnnBindingSource,
                     async _ =>
                     {
-                        var data = await _artNormService.GetArtNormDataCurrent(loadAll);
-                        if (data != null)
-                        {
-                            foreach (var item in data)
-                                item.Stat = StatusHelper.GetStatusText(item.Status);
-                        }
-                        return data ?? new List<MyDataANN>();
+                        return await _articlesQueryService.LoadCurrentWorkDivisionsAsync(loadAll);
                     },
                     cancellationToken);
             }
@@ -219,29 +351,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        /// <summary>
-        /// Получает значение Kod из текущего элемента источника данных _myDataArtBindingSource.
-        /// </summary>
-        /// <returns>Значение Kod или 0, если текущий элемент не найден или Kod не может быть преобразован в число.</returns>
-        private int GetCurrentKodFromDataSource()
-        {
-            if (_myDataArtBindingSource != null && _myDataArtBindingSource.Current != null)
-            {
-                var currentItem = _myDataArtBindingSource.Current as MyDataART;
-                if (currentItem != null)
-                {
-                    if (int.TryParse(currentItem.kodd_rt, out int kodValue))
-                    {
-                        return kodValue;
-                    }
-                    else
-                    {
-                        _logger.LogEventAsync($"Не удалось преобразовать Kod '{currentItem.kodd_rt}' в число.", "GetCurrentKodFromDataSource").ConfigureAwait(false);
-                    }
-                }
-            }
-            return 0;
-        }
 
         /// <summary>
         /// Загружает список разделений труда (РТ) для указанного артикула или кода.
@@ -253,68 +362,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                List<MyDataANN> relatedData = new List<MyDataANN>();
-                bool loadAll = string.IsNullOrEmpty(articul);//showAllWD;
-                ////loadAll = layoutControlGroup14.CustomHeaderButtons[6].Properties.Checked;
-
-                // Если включен чекбокс "Загрузить все"
-                if (loadAll)
-                {
-                    return await _artNormService.GetArtNormDataCurrent(true);
-                }
-
-                // Загружаем все данные параллельно
-                var tasks = new List<Task<List<MyDataANN>>>();
-
-                // Загружаем данные по коду
-                //tasks.Add(_artNormService.GetArtNormDataCurrent(false));
-
-                // Если артикул не пустой, добавляем задачи для поиска по артикулу
-                if (!string.IsNullOrEmpty(articul))
-                {
-                    // Ищем по полному артикулу
-                    tasks.Add(_artNormService.GetArtNormDataByArticul(articul));
-
-                    // Ищем по артикулу без дефиса
-                    string artWithoutDash = articul.Replace("-", "");
-                    if (artWithoutDash != articul)
-                    {
-                        tasks.Add(_artNormService.GetArtNormDataByArticul(artWithoutDash));
-                    }
-
-                    // Если артикул содержит дефис, ищем по его первой части
-                    int dashIndex = articul.IndexOf("-");
-                    if (dashIndex > 0)
-                    {
-                        string artPrefix = articul.Substring(0, dashIndex);
-                        tasks.Add(_artNormService.GetArtNormDataByArticul(artPrefix));
-                    }
-                }
-
-                // Ждем завершения всех задач
-                var results = await Task.WhenAll(tasks);
-
-                // Объединяем результаты
-                foreach (var result in results)
-                {
-                    if (result != null)
-                    {
-                        relatedData.AddRange(result);
-                    }
-                }
-
-                // Удаляем дубликаты по AnnId используя Dictionary для быстрого поиска
-                var uniqueData = new Dictionary<int, MyDataANN>();
-                foreach (var item in relatedData)
-                {
-                    if (!uniqueData.ContainsKey(item.AnnID))
-                    {
-                        uniqueData[item.AnnID] = item;
-                    }
-                }
-
-                await _logger.LogEventAsync($"Успешная загрузка РТ для артикула {articul}", "LoadWorksbyArt");
-                return uniqueData.Values.ToList();
+                return await _articlesQueryService.LoadWorkDivisionsByArticulAsync(articul);
             }
             catch (Exception ex)
             {
@@ -332,12 +380,20 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// <param name="e"></param>
         private async void gridViewWdToBind_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
+            if (_isRestoringGridState)
+            {
+                return;
+            }
+
             var view = sender as GridView;// gridView_wdToBind; 
             if (view == null)
             {
                 await ClearWdToBindRelatedData();
+                RefreshCurrentWorksUxState();
                 return;
             }
+
+            RefreshCurrentWorksUxState();
 
             //// Отменяем предыдущие операции загрузки для Articles tab
             //var oldCts = Interlocked.Exchange(ref _loadCts, new CancellationTokenSource());
@@ -349,38 +405,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             try
             {
                 int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
-                var selectedItem = view.GetRow(e.FocusedRowHandle) as MyDataANN;
-                if (selectedItem != null)
-                {
-                    textEdit1.Text = StringNormalizer.TrimEndOrEmpty(selectedItem.mod, ' ');
-                    textEdit2.Text = StringNormalizer.TrimEndOrEmpty(selectedItem.Articul, ' ');
-                    textEdit3.Text = StringNormalizer.TrimEndOrEmpty(selectedItem.grup, ' ');
-                }
-                // Если строка не выбрана или AnnID невалидный - очищаем данные
                 if (e.FocusedRowHandle < 0 || annId <= 0)
                 {
                     await ClearWdToBindRelatedData();
+                    RefreshCurrentWorksUxState();
                     return;
                 }
 
-                //1.Сначала загружаем изображение(быстрая операция)
-                await LoadGridImage(pictureBox2, annId: annId);
-
-                // 2. Затем загружаем основные данные
-                token.ThrowIfCancellationRequested();
-
-         //       await _logger.LogEventAsync($"gridViewWdToBind_FocusedRowChanged: Starting to load data for annId={annId}", "gridViewWdToBind_FocusedRowChanged");
-
-                // Обновляем NormRasz для customGridControl3
-                await RefreshNormRaszForArticlesTab(annId, token);
-                await RefreshNormRaskForArticlesTab(annId, token);
-                await RefreshNormKontForArticlesTab(annId, token);
-
-         //       await _logger.LogEventAsync($"gridViewWdToBind_FocusedRowChanged: Finished loading NormRasz and NormRask for annId={annId}", "gridViewWdToBind_FocusedRowChanged");
-
-                // 3. Загрузка данных НЗП только для выбранной строки
-                token.ThrowIfCancellationRequested();
-                await LoadNZPForArticlesTab(annId, token);
+                await SeedArticlesDetailsForCurrentSelectionAsync(token);
             }
             catch (OperationCanceledException)
             {
@@ -391,6 +423,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 await _logger.LogErrorAsync(ex, $"Ошибка при смене выбранной строки в gridViewWdToBind (RowHandle: {e.FocusedRowHandle})");
                 // В случае ошибки очищаем данные
                 await ClearWdToBindRelatedData();
+                RefreshCurrentWorksUxState();
             }
         }
 
@@ -413,7 +446,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 customGridControl3,
                 _normRaszListArticles,
                 _normRaszBindingSourceArticles,
-                async token => annId > 0 ? await _artNormService.GetRelatedNormRasz(annId) : Enumerable.Empty<NormRasz>(),
+                async token => await _articlesQueryService.LoadNormRaszAsync(annId, token),
                 cancellationToken);
         }
 
@@ -431,7 +464,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 customGridControl2,
                 _normRaskListArticles,
                 _normRaskBindingSourceArticles,
-                async token => annId > 0 ? await _artNormService.GetRelatedNormRask(annId, token) : Enumerable.Empty<NormRask>(),
+                async token => await _articlesQueryService.LoadNormRaskAsync(annId, token),
                 cancellationToken);
         }
 
@@ -449,7 +482,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGridControl1,
             _normKontListArticles,
             _normKontBindingSourceArticles,
-            async token => annId > 0 ? await _artNormService.GetRelatedNormKont(annId, token) : Enumerable.Empty<NormKont>(),
+            async token => await _articlesQueryService.LoadNormKontAsync(annId, token),
             cancellationToken);
     }
 
@@ -474,7 +507,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 gridControlNZP,
                 _nzpListArt,
                 _nzpByKoddRtSourceArt,
-                async token => annId > 0 ? await _artNormService.GetNzpWithPztCounts(annId, token) : Enumerable.Empty<NZPByKoddRt>(),
+                async token => await _articlesQueryService.LoadNzpAsync(annId, token),
                 cancellationToken); 
             Debug.WriteLine($"LoadNZPForArticlesTab DB/load: {swDb.ElapsedMilliseconds} ms");
 
@@ -499,7 +532,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     gridControlPreArch,
                     _preArchList,
                     _preArchBindingSource,
-                    async _ => await _dbService.GetListAsync<MyDataANN>(query, null),
+                    async _ => await _articlesQueryService.LoadPreArchiveAsync(),
                     cancellationToken);
 
                 await _logger.LogEventAsync($"Загружено {_preArchList.Count} записей в предварительный архив.", "PreArchLoad");
@@ -535,13 +568,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _archBindingSource,
                     async _ =>
                     {
-                        var data = await _dbService.GetListAsync<ArtNormN>(query, null);
-                        if (data != null)
-                        {
-                            foreach (var item in data)
-                                item.StatusText = StatusHelper.GetStatusText(item.Status);
-                        }
-                        return data ?? new List<ArtNormN>();
+                        return await _articlesQueryService.LoadArchiveAsync();
                     },
                     cancellationToken);
 
@@ -681,11 +708,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                     selectedAnnRow.mod = selectedArtRow.mod;
                 }
                 selectedAnnRow.size_label = selectedArtRow.size_label;
-                // Обновляем annId в базе данных
-                _artNormService.UpdateAnnIdinArticul(selectedAnnRow.AnnID, selectedArtRow.kodd, selectedArtRow.kodd_rt, selectedArtRow.Articul);
-                selectedArtRow.BindedArt = selectedAnnRow.Articul;//заполняем в артикуле из РТ
+                // Выполняем команду привязки через application-layer orchestrator
+                var bindResult = await _teamWorkService.BindArticleAsync(selectedAnnRow, selectedArtRow);
+                if (!bindResult.Success)
+                {
+                    MessageBox.Show(bindResult.Error ?? "Ошибка при привязке артикула.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
-                await _dbService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, selectedAnnRow);
+                selectedArtRow.BindedArt = selectedAnnRow.Articul;//заполняем в артикуле из РТ
                 // Обновляем UI:
                 if (artDataSource != null && selectedArtRow != null)
                 {
@@ -696,6 +727,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                     // 2. Удаляем артикул из списка доступных для gridView7
                     artDataSource.Remove(selectedArtRow);
+                    RefreshCurrentWorksUxState();
                 }
                 else
                 {
@@ -705,17 +737,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                     gridControl_binded?.RefreshDataSource();
                     gridControl_wdToBind?.RefreshDataSource();
                 }
-                // Вызываем процедуру updateSebZArticulPsz для обновления данных во всех справочниках
-                var parameters = new Dictionary<string, object>
-                {
-                    { "@xAnnID", selectedAnnRow.AnnID }
-                };
-                await _dbHelper.ExecuteQueryAsync(
-    "dbo.updateSebZArticulPsz",
-    parameters,
-    CommandType.StoredProcedure
-);
-                await _logger.LogEventAsync("Привязка завершена", $"Артикул {selectedArtRow.kodd_rt} привязан к РТ {selectedAnnRow.AnnID}");
                 MessageBox.Show("Привязка успешно выполнена.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -736,181 +757,48 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (gv_unbound_Arts == null)
             {
                 await ClearUnboundArtsRelatedData();
+                RefreshCurrentWorksUxState();
                 return;
             }
 
             // Если строка не выбрана - очищаем все связанные данные
+            RefreshCurrentWorksUxState();
+
             if (e.FocusedRowHandle < 0)
             {
                 await ClearUnboundArtsRelatedData();
+                RefreshCurrentWorksUxState();
                 return;
             }
 
             try
             {
-                // При смене строки очищаем фильтры gridView_wdToBind и снимаем галку showAllWD
-                if (gridView_wdToBind != null)
-                {
-                    gridView_wdToBind.ActiveFilter.Clear();
-                    gridView_wdToBind.ActiveFilterString = string.Empty;
-                }
-
-                // Обновляем состояние кнопки и переменной showAllWD
-                var showAllButton = FindButtonByTag(layoutControlGroup14, "bind:show-all");
-                if (showAllButton != null)
-                {
-                    showAllButton.Checked = false;
-                    showAllWD = false;
-                }
-
-                // Получаем данные из текущей строки
                 string kod = CommonFunctions.GetRowCellValueOrDefault<string>(gv_unbound_Arts, e.FocusedRowHandle, "kodd_rt", "");
                 string articul = StringNormalizer.TrimEndOrEmpty(CommonFunctions.GetRowCellValueOrDefault<string>(gv_unbound_Arts, e.FocusedRowHandle, "Articul", ""), ' ');
 
                 if (!int.TryParse(kod, out int kodInt))
                 {
                     await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kod}' в число", "gridView_unboundArts_FocusedRowChanged_Internal");
-                    kodInt = 0; // Устанавливаем 0 для дальнейшей обработки
+                    kodInt = 0;
                 }
 
-                // Если нет артикула и кода - очищаем данные
                 if (string.IsNullOrEmpty(articul) && kodInt <= 0)
                 {
                     await ClearUnboundArtsRelatedData();
                     return;
                 }
 
-                // Загружаем данные параллельно
-                var loadWorksTask = LoadWorksbyArt(articul);
-                var loadRaszTask = Task.Run(async () =>
-                {
-                    if (gridView_wdToBind.FocusedRowHandle >= 0)
-                    {
-                        int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, gridView_wdToBind.FocusedRowHandle, "AnnId", 0);
-                        return annId > 0 ? await _artNormService.GetRelatedNormRasz(annId) : new List<NormRasz>();
-                    }
-                    return new List<NormRasz>();
-                });
-                var loadRaskTask = Task.Run(async () =>
-                {
-                    if (gridView_wdToBind.FocusedRowHandle >= 0)
-                    {
-                        int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, gridView_wdToBind.FocusedRowHandle, "AnnId", 0);
-                        return annId > 0 ? await _artNormService.GetRelatedNormRask(annId) : new List<NormRask>();
-                    }
-                    return new List<NormRask>();
-                });
-                var loadKontTask = Task.Run(async () =>
-                {
-                    if (gridView_wdToBind.FocusedRowHandle >= 0)
-                    {
-                        int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, gridView_wdToBind.FocusedRowHandle, "AnnId", 0);
-                        return annId > 0 ? await _artNormService.GetRelatedNormKont(annId) : new List<NormKont>();
-                    }
-                    return new List<NormKont>();
-                });
-
-                // Ждем загрузку данных
-                var list = await loadWorksTask;
-
-                // Обновляем основной список данных
-                if (_myDataAnnBindingSource != null)
-                {
-                    _myDataAnnList.Clear();
-                    if (list != null && list.Count > 0)
-                    {
-                        // Отключаем уведомления на время добавления элементов
-                        _myDataAnnList.RaiseListChangedEvents = false;
-                        try
-                        {
-                            foreach (var item in list)
-                            {
-                                _myDataAnnList.Add(item);
-                            }
-                        }
-                        finally
-                        {
-                            // Включаем уведомления обратно
-                            _myDataAnnList.RaiseListChangedEvents = true;
-                        }
-                    }
-                    _myDataAnnBindingSource.ResetBindings(false);
-                }
-                else
-                {
-                    gridControl_wdToBind.DataSource = list;
-                }
-
-                // Обновляем UI один раз после всех изменений данных
-                gridView_wdToBind.RefreshData();
-                gridControl_wdToBind.RefreshDataSource();
-
-                // Обновляем customGridControl3 using _normRaszListArticles and _normRaszBindingSourceArticles
-                var raszList = await loadRaszTask;
-                if (_normRaszListArticles != null)
-                {
-                    _normRaszListArticles.Clear();
-                    if (raszList != null)
-                    {
-                        foreach (var item in raszList)
-                        {
-                            _normRaszListArticles.Add(item);
-                        }
-                    }
-                }
-                _normRaszBindingSourceArticles?.ResetBindings(false);
-
-                var raskList = await loadRaskTask;
-                if (_normRaskListArticles != null)
-                {
-                    _normRaskListArticles.Clear();
-                    if (raskList != null)
-                    {
-                        foreach (var item in raskList)
-                        {
-                            _normRaskListArticles.Add(item);
-                        }
-                    }
-                }
-                _normRaskBindingSourceArticles?.ResetBindings(false);
-
-                var kontList = await loadKontTask;
-                if (_normKontListArticles != null)
-                {
-                    _normKontListArticles.Clear();
-                    if (kontList != null)
-                    {
-                        foreach (var item in kontList)
-                        {
-                            _normKontListArticles.Add(item);
-                        }
-                    }
-                }
-                _normKontBindingSourceArticles?.ResetBindings(false);
-
-                // Загружаем или очищаем изображение
-                if (kodInt > 0)
-                {
-                    await LoadGridImage(pictureBox3, kod: kodInt);
-                }
-                else
-                {
-                    // Очищаем картинку если нет кода
-                    if (pictureBox3.InvokeRequired)
-                    {
-                        pictureBox3.Invoke((MethodInvoker)(() => pictureBox3.Image = null));
-                    }
-                    else
-                    {
-                        pictureBox3.Image = null;
-                    }
-                }
+                await WithArticlesFocusedRowHandlersSuspendedAsync(() =>
+                    RefreshArticlesWorkDivisionsByArticulAsync(articul, clearWdFilters: true));
+                await SeedArticlesDetailsForCurrentSelectionAsync();
+                RefreshCurrentWorksUxState();
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка в gridView_unboundArts_FocusedRowChanged_Internal");
                 // В случае ошибки очищаем данные
                 await ClearUnboundArtsRelatedData();
+                RefreshCurrentWorksUxState();
             }
         }
 
@@ -981,6 +869,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Обновляем UI
                 gridView_wdToBind?.RefreshData();
                 gridControl_wdToBind?.RefreshDataSource();
+                SetRecommendedAnnIds(Array.Empty<MyDataANN>());
 
                 // Очищаем норм расценки
                 if (_normRaszListArticles != null && _normRaszBindingSourceArticles != null)
@@ -1014,6 +903,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                         pictureBox3.Image = null;
                     }
                 }
+
+                RefreshCurrentWorksUxState();
             }
             catch (Exception ex)
             {
@@ -1075,6 +966,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // Обновляем UI
                 gridControlNZP?.RefreshDataSource();
+                RefreshCurrentWorksUxState();
                 await UpdateUnboundButtonStatusBasedOnNZP(); // Обновить состояние кнопки
             }
             catch (Exception ex)
@@ -1244,4 +1136,6 @@ namespace SewingProduction.Features.TeamWork.Forms
 
     }
 }
+
+
 

@@ -36,7 +36,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             }
             _passwordHasher = new PasswordHasher();
 
-            DatabaseHelper dbHelper = new DatabaseHelper("ace");
+            DatabaseHelperSQL dbHelper = new DatabaseHelperSQL("ace");
             _loginFormDataService = new LoginFormDataService(dbHelper);
 
             this.Shown += LoginForm_Shown;
@@ -179,8 +179,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
 
     public class LoginFormDataService
     {
-        private readonly DatabaseHelper _dbHelper;
-        public LoginFormDataService(DatabaseHelper dbHelper)
+        private readonly DatabaseHelperSQL _dbHelper;
+        public LoginFormDataService(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper;
         }

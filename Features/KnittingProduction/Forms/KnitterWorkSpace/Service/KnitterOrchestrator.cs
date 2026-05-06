@@ -1,4 +1,4 @@
-using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
+﻿using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
@@ -21,8 +21,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
         public Task<List<FioModel>> GetFioListAsync() => _uiGateway.GetFioListAsync();
 
-        public Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, int? kmaId, bool onlyUnassigned, bool expandAssignedByNrId, decimal maxHours, bool includeFinished = false) =>
-            _uiGateway.GetPlanByTabAsync(tab, kwsId, kmaId, onlyUnassigned, expandAssignedByNrId, maxHours, includeFinished);
+        public Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, int? kmaId, bool expandAssignedByNrId, decimal maxHours, bool includeFinished = false) =>
+            _uiGateway.GetPlanByTabAsync(tab, kwsId, kmaId, expandAssignedByNrId, maxHours, includeFinished);
 
         public Task<string> GetFioByTabAsync(int tab) => _uiGateway.GetFioByTabAsync(tab);
 
@@ -33,5 +33,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         public Task<(int? kmaId, string kmaNum)> GetZoneByTabAsync(int tab) => _uiGateway.GetZoneByTabAsync(tab);
 
         public Task<(int? shiftId, DateTime? dateStart)> GetOpenShiftByTabAsync(int tab) => _uiGateway.GetOpenShiftByTabAsync(tab);
+
+        public Task<(int? shiftId, int? tabStart, DateTime? dateStart)> GetOpenShiftByZoneAsync(int kmaId) => _uiGateway.GetOpenShiftByZoneAsync(kmaId);
     }
 }

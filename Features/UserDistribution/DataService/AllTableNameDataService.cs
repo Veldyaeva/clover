@@ -11,11 +11,11 @@ namespace SewingProduction.Features.UserDistribution.Models
     public class AllTableNameDataService
     {
         private readonly DbService _dbService;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
 
         public AllTableNameDataService()
         {
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
         }
 

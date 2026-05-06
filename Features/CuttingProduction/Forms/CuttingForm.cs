@@ -24,7 +24,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
 {
     public partial class CuttingForm : CustomForm
     {
-        private static DatabaseHelper _dbHelper;
+        private static DatabaseHelperSQL _dbHelper;
         private static DbService _dbService;
         private readonly ILogger _logger = new FileLogger();
         private readonly CuttingService _cuttingService;
@@ -35,7 +35,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
         public CuttingForm()
         {
             InitializeComponent();
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
             _cuttingService = new CuttingService(_dbHelper);
             _loadingScreen = new LoadingScreen();

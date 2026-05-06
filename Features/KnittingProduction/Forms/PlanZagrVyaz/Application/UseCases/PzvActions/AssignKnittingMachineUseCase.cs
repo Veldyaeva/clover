@@ -19,12 +19,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application
     {
         private readonly PzvActionValidator _validator;
         private readonly IPzvBulkUpdateService _bulkUpdateService;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
 
         public AssignKnittingMachineUseCase(
             PzvActionValidator validator,
             IPzvBulkUpdateService bulkUpdateService,
-            DatabaseHelper dbHelper)
+            DatabaseHelperSQL dbHelper)
         {
             _validator = validator;
             _bulkUpdateService = bulkUpdateService;
@@ -44,6 +44,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application
             {
                 if (!_validator.CanAssignKnittingMachine(row))
                 {
+                    _validator.ShowValidationMessage(
+                        row,
+                        _validator.ValidateAssignKnittingMachine,
+                        "Назначение В/М");
                     row.ErrorSelection = 1;
                     row.SyncSelection = 0;
                     continue;

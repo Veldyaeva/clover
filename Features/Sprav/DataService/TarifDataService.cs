@@ -13,9 +13,9 @@ namespace SewingProduction.Features.Sprav.DataService
     public class TarifDataService
     {
         private readonly DbService _dbService;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
 
-        public TarifDataService(DbService dbService, DatabaseHelper dbHelper)
+        public TarifDataService(DbService dbService, DatabaseHelperSQL dbHelper)
         {
             _dbService = dbService;
             _dbHelper = dbHelper;

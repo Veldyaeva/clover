@@ -1,4 +1,4 @@
-using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
+﻿using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System;
@@ -30,6 +30,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 pzvArticul = parent.pzvArticul,
                 pzvKmlID = parent.pzvKmlID,
                 kmlNumber = parent.kmlNumber,
+                pzvDateNaznKm = parent.pzvDateNaznKm,
                 koefObServ = parent.koefObServ,
                 name_class = parent.name_class,
                 pzvNomZad = parent.pzvNomZad,
@@ -48,6 +49,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 pzvDateEnd = parent.pzvDateEnd,
                 pzvKolNazn = parent.pzvKolNazn,
                 pzvTab = parent.pzvTab,
+                pzvDateNaznTab = parent.pzvDateNaznTab,
+                pzvKwsID = parent.pzvKwsID,                
                 n_pach = parent.n_pach,
                 razm = parent.razm,
                 nrN = nr?.nrN,

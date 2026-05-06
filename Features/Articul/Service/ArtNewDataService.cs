@@ -9,9 +9,9 @@ namespace SewingProduction.Features.Articul
 {
     public class ArtNewDataService
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly DbService _dbService;
-        public ArtNewDataService(DatabaseHelper dbHelper)
+        public ArtNewDataService(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper;
             _dbService = new DbService(_dbHelper);

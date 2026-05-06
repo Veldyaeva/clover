@@ -13,11 +13,11 @@ namespace SewingProduction.Features.UserDistribution.DataService
     public class ShareUserDataService
     {
         private readonly DbService _dbService;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
 
         public ShareUserDataService()
         {
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
         }
 

@@ -61,7 +61,7 @@ namespace SewingProduction.form
             bool servBrok = true)
         {
             InitializeComponent();
-            var dbHelper = new DatabaseHelper();
+            var dbHelper = new DatabaseHelperSQL();
             _spravAllDataService = new SpravAllDataService(dbHelper);
             _sbHub = AppServices.Services.GetRequiredService<IAppServiceBrokerHub>();
             _servBrok = servBrok;
@@ -93,7 +93,7 @@ namespace SewingProduction.form
         public SpravForAll()
         {
             InitializeComponent();
-            var dbHelper = new DatabaseHelper();
+            var dbHelper = new DatabaseHelperSQL();
             _spravAllDataService = new SpravAllDataService(dbHelper);
             _sbHub = AppServices.Services?.GetService<IAppServiceBrokerHub>() ?? new AppServiceBrokerHub();
             fieldsQueryListSQL = new List<string>();
@@ -456,9 +456,9 @@ namespace SewingProduction.form
 
     public class SpravAllDataService
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         public string _tableString { set; get; }
-        public SpravAllDataService(DatabaseHelper dbHelper)
+        public SpravAllDataService(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper;
         }

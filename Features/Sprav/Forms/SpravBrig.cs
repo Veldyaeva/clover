@@ -33,7 +33,7 @@ namespace SewingProduction.form
         public SpravBrig(UserClass user, string tableSQL, string rusNameTableSQL) : base(user)
         {
             InitializeComponent();
-            DatabaseHelper dbHelper = new DatabaseHelper();
+            DatabaseHelperSQL dbHelper = new DatabaseHelperSQL();
             _spravBrigDataService = new SpravBrigDataService(dbHelper);
             _sbHub = AppServices.Services?.GetService<IAppServiceBrokerHub>() ?? new AppServiceBrokerHub();
          //   ThemeManager.UpdateTheme(this);
@@ -48,7 +48,7 @@ namespace SewingProduction.form
         public SpravBrig()
         {
             InitializeComponent();
-            DatabaseHelper dbHelper = new DatabaseHelper();
+            DatabaseHelperSQL dbHelper = new DatabaseHelperSQL();
             _spravBrigDataService = new SpravBrigDataService(dbHelper);
             _sbHub = AppServices.Services?.GetService<IAppServiceBrokerHub>() ?? new AppServiceBrokerHub();
         }

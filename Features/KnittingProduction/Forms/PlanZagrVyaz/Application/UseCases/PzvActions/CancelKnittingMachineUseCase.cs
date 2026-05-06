@@ -33,6 +33,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application
                 }
                 else
                 {
+                    _validator.ShowValidationMessage(
+                        row,
+                        _validator.ValidateCancelKnittingMachine,
+                        "Отмена назначения В/М");
                     row.ErrorSelection = 1;
                     row.SyncSelection = 0;
                 }

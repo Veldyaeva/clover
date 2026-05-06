@@ -22,7 +22,7 @@ namespace SewingProduction.Features.Sprav.Forms
         public EditTarif(UserClass user) : base(user)
         {
             InitializeComponent();
-            var dbHelper = new DatabaseHelper();
+            var dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(dbHelper);
             _tarifService = new TarifDataService(_dbService, dbHelper);
             _user = user;
