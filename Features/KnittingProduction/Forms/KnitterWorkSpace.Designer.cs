@@ -627,7 +627,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridView3.OptionsView.ShowColumnHeaders = false;
             bandedGridView3.OptionsView.ShowFooter = true;
             bandedGridView3.OptionsView.ShowGroupPanel = false;
-            bandedGridView3.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridColumn1, DevExpress.Data.ColumnSortOrder.Ascending) });
+            bandedGridView3.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridColumn4, DevExpress.Data.ColumnSortOrder.Ascending), new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridColumn1, DevExpress.Data.ColumnSortOrder.Descending) });
             // 
             // gridBand30
             // 
@@ -646,6 +646,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumn1.FieldName = "kmlNumber";
             gridColumn1.Name = "gridColumn1";
             gridColumn1.OptionsColumn.AllowEdit = false;
+            gridColumn1.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.True;
             gridColumn1.OptionsColumn.ReadOnly = true;
             gridColumn1.Visible = true;
             gridColumn1.Width = 138;
@@ -706,6 +707,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumn4.FieldName = "pzvNomZad";
             gridColumn4.Name = "gridColumn4";
             gridColumn4.OptionsColumn.AllowEdit = false;
+            gridColumn4.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.True;
             gridColumn4.OptionsColumn.ReadOnly = true;
             gridColumn4.Visible = true;
             gridColumn4.Width = 168;
@@ -906,7 +908,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // FioGridLookUpEdit
             // 
-            FioGridLookUpEdit.Enabled = false;
             FioGridLookUpEdit.Location = new System.Drawing.Point(302, 12);
             FioGridLookUpEdit.Name = "FioGridLookUpEdit";
             FioGridLookUpEdit.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
@@ -1006,7 +1007,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // _adminToggle
             // 
             _adminToggle.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            _adminToggle.Enabled = false;
             _adminToggle.Location = new System.Drawing.Point(1219, 12);
             _adminToggle.Name = "_adminToggle";
             _adminToggle.Size = new System.Drawing.Size(98, 20);
@@ -1019,7 +1019,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // _expandNrToggle
             // 
             _expandNrToggle.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            _expandNrToggle.Enabled = false;
             _expandNrToggle.Location = new System.Drawing.Point(1219, 36);
             _expandNrToggle.Name = "_expandNrToggle";
             _expandNrToggle.Size = new System.Drawing.Size(98, 20);

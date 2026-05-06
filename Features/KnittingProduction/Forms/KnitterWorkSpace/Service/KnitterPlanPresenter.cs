@@ -119,7 +119,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                     bindingSource.DataSource = new BindingList<KnitterPZVModel>(masterData);
                 }
 
-                //
+                DisableMasterViewColumnSorting(masterView3);
                 masterView3.MasterRowGetRelationCount -= Master_MasterRowGetRelationCount;
                 masterView3.MasterRowGetRelationName -= Master_MasterRowGetRelationName;
                 masterView3.MasterRowGetChildList -= Master_MasterRowGetChildList;
@@ -148,67 +148,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
             if (rows == null || rows.Count == 0)
                 return new List<KnitterPZVModel>();
 
-            var normalRows = rows
-                .Where(r => !IsManualWorkMachine(r.kmlNumber))
-                .OrderBy(r => GetMachineSortNumber(r.kmlNumber))
-                .ThenBy(r => NormalizeTaskKey(r.pzvNomZad))
+            return rows
+                .OrderBy(r => GetTaskSortBucket(r.pzvNomZad))
+                .ThenBy(r => GetTaskSortNumber(r.pzvNomZad))
+                .ThenBy(r => NormalizeTaskKey(r.pzvNomZad), StringComparer.OrdinalIgnoreCase)
+                .ThenBy(r => IsManualWorkMachine(r.kmlNumber) ? 1 : 0)
+                .ThenBy(r => GetMachineSortNumber(r.kmlNumber))
                 .ThenBy(r => NormalizeMachineKey(r.kmlNumber), StringComparer.OrdinalIgnoreCase)
                 .ToList();
-
-            var manualRowsByTask = rows
-                .Where(r => IsManualWorkMachine(r.kmlNumber))
-                .GroupBy(r => NormalizeTaskKey(r.pzvNomZad))
-                .ToDictionary(
-                    g => g.Key,
-                    g => g
-                        .OrderBy(r => NormalizeTaskKey(r.pzvNomZad))
-                        .ThenBy(r => NormalizeMachineKey(r.kmlNumber), StringComparer.OrdinalIgnoreCase)
-                        .ToList());
-
-            // Для каждого задания ищем последнюю позицию среди обычных машин.
-            var lastNormalIndexByTask = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-
-            for (int i = 0; i < normalRows.Count; i++)
-            {
-                var taskKey = NormalizeTaskKey(normalRows[i].pzvNomZad);
-                if (!string.IsNullOrEmpty(taskKey))
-                    lastNormalIndexByTask[taskKey] = i;
-            }
-
-            var result = new List<KnitterPZVModel>(rows.Count);
-            var insertedManualTasks = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
-            for (int i = 0; i < normalRows.Count; i++)
-            {
-                var row = normalRows[i];
-                result.Add(row);
-
-                var taskKey = NormalizeTaskKey(row.pzvNomZad);
-
-                if (string.IsNullOrEmpty(taskKey))
-                    continue;
-
-                if (!lastNormalIndexByTask.TryGetValue(taskKey, out var lastIndex))
-                    continue;
-
-                // РР вставляем после последней обычной строки этого задания.
-                if (i == lastIndex && manualRowsByTask.TryGetValue(taskKey, out var manualRows))
-                {
-                    result.AddRange(manualRows);
-                    insertedManualTasks.Add(taskKey);
-                }
-            }
-
-            // РР без совпадающего задания — в конец.
-            var orphanManualRows = manualRowsByTask
-                .Where(kv => !insertedManualTasks.Contains(kv.Key))
-                .OrderBy(kv => kv.Key, StringComparer.OrdinalIgnoreCase)
-                .SelectMany(kv => kv.Value)
-                .ToList();
-
-            result.AddRange(orphanManualRows);
-
-            return result;
         }
 
         private static bool IsManualWorkMachine(string kmlNumber)
@@ -233,11 +180,38 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
             if (IsManualWorkMachine(kmlNumber))
                 return int.MaxValue;
 
-            var digits = new string(kmlNumber.Where(char.IsDigit).ToArray());
-
-            return int.TryParse(digits, out var number)
+            return TryGetSortNumber(kmlNumber, out var number)
                 ? number
                 : int.MaxValue - 1;
+        }
+
+        private static int GetTaskSortBucket(string taskNum)
+        {
+            return TryGetSortNumber(taskNum, out _)
+                ? 0
+                : 1;
+        }
+
+        private static int GetTaskSortNumber(string taskNum)
+        {
+            return TryGetSortNumber(taskNum, out var number)
+                ? number
+                : int.MaxValue;
+        }
+
+        private static bool TryGetSortNumber(string value, out int number)
+        {
+            number = 0;
+
+            if (string.IsNullOrWhiteSpace(value))
+                return false;
+
+            var trimmed = value.Trim();
+            if (int.TryParse(trimmed, out number))
+                return true;
+
+            var digits = new string(trimmed.Where(char.IsDigit).ToArray());
+            return !string.IsNullOrEmpty(digits) && int.TryParse(digits, out number);
         }
 
         private static string NormalizeTaskKey(string taskNum)
@@ -255,6 +229,27 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         }
         private static string MasterKey(KnitterPZVModel m) =>
     $"{KnitterPlanUtils.NormalizeTaskNum(m.pzvNomZad)}|{KnitterPlanUtils.NormalizeMachineKey(m.kmlNumber)}";
+
+        private static void DisableMasterViewColumnSorting(BandedGridView masterView)
+        {
+            if (masterView == null)
+                return;
+
+            masterView.BeginSort();
+            try
+            {
+                masterView.SortInfo.Clear();
+                foreach (DevExpress.XtraGrid.Columns.GridColumn column in masterView.Columns)
+                {
+                    column.SortOrder = DevExpress.Data.ColumnSortOrder.None;
+                    column.SortIndex = -1;
+                }
+            }
+            finally
+            {
+                masterView.EndSort();
+            }
+        }
 
         private static void ApplyMasterDelta(BindingList<KnitterPZVModel> target, List<KnitterPZVModel> fresh)
         {
@@ -291,25 +286,36 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 {
                     target.Add(f);
                 }
-            //}
-            //// ВАЖНО: переставляем строки под порядок fresh.
-            //for (int desiredIndex = 0; desiredIndex < fresh.Count; desiredIndex++)
-            //{
-            //    var desiredKey = MasterKey(fresh[desiredIndex]);
-
-            //    var currentIndex = -1;
-            //    for (int i = desiredIndex; i < target.Count; i++)
-            //    {
-            //        if (MasterKey(target[i]) == desiredKey)
-            //        {
-            //            currentIndex = i;
-            //            break;
-            //        }
-            //    }
-
-            //    if (currentIndex >= 0 && currentIndex != desiredIndex)
-            //        target.Move(currentIndex, desiredIndex);
             }
+
+            // ВАЖНО: переставляем строки под порядок fresh, иначе Grid останется в старом порядке.
+            for (int desiredIndex = 0; desiredIndex < fresh.Count; desiredIndex++)
+            {
+                var desiredKey = MasterKey(fresh[desiredIndex]);
+                var currentIndex = -1;
+
+                for (int i = desiredIndex; i < target.Count; i++)
+                {
+                    if (MasterKey(target[i]) == desiredKey)
+                    {
+                        currentIndex = i;
+                        break;
+                    }
+                }
+
+                if (currentIndex >= 0 && currentIndex != desiredIndex)
+                    MoveItem(target, currentIndex, desiredIndex);
+            }
+        }
+
+        private static void MoveItem(BindingList<KnitterPZVModel> target, int fromIndex, int toIndex)
+        {
+            if (target == null || fromIndex == toIndex || fromIndex < 0 || toIndex < 0 || fromIndex >= target.Count || toIndex >= target.Count)
+                return;
+
+            var item = target[fromIndex];
+            target.RemoveAt(fromIndex);
+            target.Insert(toIndex, item);
         }
 
 
