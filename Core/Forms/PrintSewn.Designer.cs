@@ -31,10 +31,6 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintSewn));
 			customHeaderLabel1 = new SewingProduction.Core.Class.CustomHeaderLabel();
 			customLayoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
-			gridControlBlVsh = new SewingProduction.Core.Class.CustomGridControl();
-			gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
-			gridControlRazmKol = new SewingProduction.Core.Class.CustomGridControl();
-			gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
 			customSimpleButtonNabor = new SewingProduction.Core.Class.CustomSimpleButton();
 			customSimpleButtonKompl = new SewingProduction.Core.Class.CustomSimpleButton();
 			customSimpleButtonACE = new SewingProduction.Core.Class.CustomSimpleButton();
@@ -47,17 +43,12 @@
 			emptySpaceItem6 = new DevExpress.XtraLayout.EmptySpaceItem();
 			emptySpaceItem7 = new DevExpress.XtraLayout.EmptySpaceItem();
 			emptySpaceItem8 = new DevExpress.XtraLayout.EmptySpaceItem();
-			layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-			layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
 			emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
 			emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
 			emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
+			emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
 			((System.ComponentModel.ISupportInitialize)customLayoutControl1).BeginInit();
 			customLayoutControl1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)gridControlBlVsh).BeginInit();
-			((System.ComponentModel.ISupportInitialize)gridView2).BeginInit();
-			((System.ComponentModel.ISupportInitialize)gridControlRazmKol).BeginInit();
-			((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
 			((System.ComponentModel.ISupportInitialize)Root).BeginInit();
 			((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
 			((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
@@ -67,11 +58,10 @@
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem6).BeginInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem7).BeginInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem8).BeginInit();
-			((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
-			((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem3).BeginInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem4).BeginInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem5).BeginInit();
+			((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
 			SuspendLayout();
 			// 
 			// customHeaderLabel1
@@ -91,8 +81,6 @@
 			// 
 			// customLayoutControl1
 			// 
-			customLayoutControl1.Controls.Add(gridControlBlVsh);
-			customLayoutControl1.Controls.Add(gridControlRazmKol);
 			customLayoutControl1.Controls.Add(customSimpleButtonNabor);
 			customLayoutControl1.Controls.Add(customSimpleButtonKompl);
 			customLayoutControl1.Controls.Add(customHeaderLabel1);
@@ -105,40 +93,6 @@
 			customLayoutControl1.Size = new System.Drawing.Size(617, 497);
 			customLayoutControl1.TabIndex = 2;
 			customLayoutControl1.Text = "customLayoutControl1";
-			// 
-			// gridControlBlVsh
-			// 
-			gridControlBlVsh.Font = new System.Drawing.Font("Arial", 10F);
-			gridControlBlVsh.Location = new System.Drawing.Point(312, 185);
-			gridControlBlVsh.MainView = gridView2;
-			gridControlBlVsh.Name = "gridControlBlVsh";
-			gridControlBlVsh.Size = new System.Drawing.Size(293, 300);
-			gridControlBlVsh.TabIndex = 5;
-			gridControlBlVsh.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView2 });
-			// 
-			// gridView2
-			// 
-			gridView2.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-			gridView2.Appearance.FocusedRow.Options.UseFont = true;
-			gridView2.GridControl = gridControlBlVsh;
-			gridView2.Name = "gridView2";
-			// 
-			// gridControlRazmKol
-			// 
-			gridControlRazmKol.Font = new System.Drawing.Font("Arial", 10F);
-			gridControlRazmKol.Location = new System.Drawing.Point(12, 185);
-			gridControlRazmKol.MainView = gridView1;
-			gridControlRazmKol.Name = "gridControlRazmKol";
-			gridControlRazmKol.Size = new System.Drawing.Size(296, 300);
-			gridControlRazmKol.TabIndex = 4;
-			gridControlRazmKol.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
-			// 
-			// gridView1
-			// 
-			gridView1.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-			gridView1.Appearance.FocusedRow.Options.UseFont = true;
-			gridView1.GridControl = gridControlRazmKol;
-			gridView1.Name = "gridView1";
 			// 
 			// customSimpleButtonNabor
 			// 
@@ -180,7 +134,7 @@
 			// 
 			Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
 			Root.GroupBordersVisible = false;
-			Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem4, emptySpaceItem2, emptySpaceItem6, emptySpaceItem7, emptySpaceItem8, layoutControlItem5, layoutControlItem6 });
+			Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem4, emptySpaceItem2, emptySpaceItem6, emptySpaceItem7, emptySpaceItem8, emptySpaceItem1 });
 			Root.Name = "Root";
 			Root.Size = new System.Drawing.Size(617, 497);
 			Root.TextVisible = false;
@@ -250,22 +204,6 @@
 			emptySpaceItem8.Name = "emptySpaceItem8";
 			emptySpaceItem8.Size = new System.Drawing.Size(597, 21);
 			// 
-			// layoutControlItem5
-			// 
-			layoutControlItem5.Control = gridControlRazmKol;
-			layoutControlItem5.Location = new System.Drawing.Point(0, 173);
-			layoutControlItem5.Name = "layoutControlItem5";
-			layoutControlItem5.Size = new System.Drawing.Size(300, 304);
-			layoutControlItem5.TextVisible = false;
-			// 
-			// layoutControlItem6
-			// 
-			layoutControlItem6.Control = gridControlBlVsh;
-			layoutControlItem6.Location = new System.Drawing.Point(300, 173);
-			layoutControlItem6.Name = "layoutControlItem6";
-			layoutControlItem6.Size = new System.Drawing.Size(297, 304);
-			layoutControlItem6.TextVisible = false;
-			// 
 			// emptySpaceItem3
 			// 
 			emptySpaceItem3.Location = new System.Drawing.Point(298, 31);
@@ -284,6 +222,12 @@
 			emptySpaceItem5.Name = "emptySpaceItem2";
 			emptySpaceItem5.Size = new System.Drawing.Size(597, 24);
 			// 
+			// emptySpaceItem1
+			// 
+			emptySpaceItem1.Location = new System.Drawing.Point(0, 173);
+			emptySpaceItem1.Name = "emptySpaceItem1";
+			emptySpaceItem1.Size = new System.Drawing.Size(597, 304);
+			// 
 			// PrintSewn
 			// 
 			AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -296,10 +240,7 @@
 			Load += PrintSewn_Load;
 			((System.ComponentModel.ISupportInitialize)customLayoutControl1).EndInit();
 			customLayoutControl1.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)gridControlBlVsh).EndInit();
-			((System.ComponentModel.ISupportInitialize)gridView2).EndInit();
-			((System.ComponentModel.ISupportInitialize)gridControlRazmKol).EndInit();
-			((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
+			customLayoutControl1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)Root).EndInit();
 			((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
 			((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
@@ -309,11 +250,10 @@
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem6).EndInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem7).EndInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem8).EndInit();
-			((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
-			((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem3).EndInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem4).EndInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem5).EndInit();
+			((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
 			ResumeLayout(false);
 		}
 
@@ -336,11 +276,6 @@
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem4;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem5;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem8;
-        private Class.CustomGridControl gridControlBlVsh;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
-        private Class.CustomGridControl gridControlRazmKol;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
-    }
+		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+	}
 }

@@ -185,7 +185,7 @@ namespace SewingProduction.Report
 			this.xrLabel2.CanShrink = true;
 			this.xrLabel2.Dpi = 254F;
 			this.xrLabel2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[sost]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(!IsNullOrEmpty([sost]), [sost], \'\')")});
 			this.xrLabel2.Font = new DevExpress.Drawing.DXFont("Arial", 8F, DevExpress.Drawing.DXFontStyle.Bold);
 			this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(0.0001699882F, 548.0001F);
 			this.xrLabel2.Multiline = true;
@@ -203,7 +203,7 @@ namespace SewingProduction.Report
 			this.xrLabelSost.CanShrink = true;
 			this.xrLabelSost.Dpi = 254F;
 			this.xrLabelSost.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'Состав:\'")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(!IsNullOrEmpty([sost]), \'Состав:\', \'\')\n")});
 			this.xrLabelSost.Font = new DevExpress.Drawing.DXFont("Arial", 9F);
 			this.xrLabelSost.LocationFloat = new DevExpress.Utils.PointFloat(0.0001699882F, 516.0001F);
 			this.xrLabelSost.Multiline = true;
