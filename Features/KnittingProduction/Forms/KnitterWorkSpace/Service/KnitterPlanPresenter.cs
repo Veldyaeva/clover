@@ -1,4 +1,4 @@
-using DevExpress.XtraExport.Helpers;
+﻿using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.BandedGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.helpers;
@@ -104,6 +104,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
                     return master;
                 }).ToList();
+                masterData = SortMachinesWithManualWorkNearTask(masterData);
                 if (bindingSource.DataSource is BindingList<KnitterPZVModel> bl)
                 {
                     ApplyMasterDelta(bl, masterData);
@@ -141,7 +142,117 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                     KnitterPlanUtils.NormalizeMachineKey(row.kmlNumber)),
                 (detailView, groupRowHandle) => detailView.GetGroupRowValue(groupRowHandle)?.ToString() ?? string.Empty);
         }
+        private static List<KnitterPZVModel> SortMachinesWithManualWorkNearTask(
+    List<KnitterPZVModel> rows)
+        {
+            if (rows == null || rows.Count == 0)
+                return new List<KnitterPZVModel>();
 
+            var normalRows = rows
+                .Where(r => !IsManualWorkMachine(r.kmlNumber))
+                .OrderBy(r => GetMachineSortNumber(r.kmlNumber))
+                .ThenBy(r => NormalizeTaskKey(r.pzvNomZad))
+                .ThenBy(r => NormalizeMachineKey(r.kmlNumber), StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            var manualRowsByTask = rows
+                .Where(r => IsManualWorkMachine(r.kmlNumber))
+                .GroupBy(r => NormalizeTaskKey(r.pzvNomZad))
+                .ToDictionary(
+                    g => g.Key,
+                    g => g
+                        .OrderBy(r => NormalizeTaskKey(r.pzvNomZad))
+                        .ThenBy(r => NormalizeMachineKey(r.kmlNumber), StringComparer.OrdinalIgnoreCase)
+                        .ToList());
+
+            // Для каждого задания ищем последнюю позицию среди обычных машин.
+            var lastNormalIndexByTask = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+
+            for (int i = 0; i < normalRows.Count; i++)
+            {
+                var taskKey = NormalizeTaskKey(normalRows[i].pzvNomZad);
+                if (!string.IsNullOrEmpty(taskKey))
+                    lastNormalIndexByTask[taskKey] = i;
+            }
+
+            var result = new List<KnitterPZVModel>(rows.Count);
+            var insertedManualTasks = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+            for (int i = 0; i < normalRows.Count; i++)
+            {
+                var row = normalRows[i];
+                result.Add(row);
+
+                var taskKey = NormalizeTaskKey(row.pzvNomZad);
+
+                if (string.IsNullOrEmpty(taskKey))
+                    continue;
+
+                if (!lastNormalIndexByTask.TryGetValue(taskKey, out var lastIndex))
+                    continue;
+
+                // РР вставляем после последней обычной строки этого задания.
+                if (i == lastIndex && manualRowsByTask.TryGetValue(taskKey, out var manualRows))
+                {
+                    result.AddRange(manualRows);
+                    insertedManualTasks.Add(taskKey);
+                }
+            }
+
+            // РР без совпадающего задания — в конец.
+            var orphanManualRows = manualRowsByTask
+                .Where(kv => !insertedManualTasks.Contains(kv.Key))
+                .OrderBy(kv => kv.Key, StringComparer.OrdinalIgnoreCase)
+                .SelectMany(kv => kv.Value)
+                .ToList();
+
+            result.AddRange(orphanManualRows);
+
+            return result;
+        }
+
+        private static bool IsManualWorkMachine(string kmlNumber)
+        {
+            if (string.IsNullOrWhiteSpace(kmlNumber))
+                return false;
+
+            var s = kmlNumber.Trim().ToUpperInvariant();
+
+            // Кириллица РР и латиница PP — на случай смешанной раскладки.
+            return s == "РР"
+                || s == "PP"
+                || s.StartsWith("РР ")
+                || s.StartsWith("PP ");
+        }
+
+        private static int GetMachineSortNumber(string kmlNumber)
+        {
+            if (string.IsNullOrWhiteSpace(kmlNumber))
+                return int.MaxValue;
+
+            if (IsManualWorkMachine(kmlNumber))
+                return int.MaxValue;
+
+            var digits = new string(kmlNumber.Where(char.IsDigit).ToArray());
+
+            return int.TryParse(digits, out var number)
+                ? number
+                : int.MaxValue - 1;
+        }
+
+        private static string NormalizeTaskKey(string taskNum)
+        {
+            return string.IsNullOrWhiteSpace(taskNum)
+                ? string.Empty
+                : taskNum.Trim();
+        }
+
+        private static string NormalizeMachineKey(string machine)
+        {
+            return string.IsNullOrWhiteSpace(machine)
+                ? string.Empty
+                : machine.Trim();
+        }
         private static string MasterKey(KnitterPZVModel m) =>
     $"{KnitterPlanUtils.NormalizeTaskNum(m.pzvNomZad)}|{KnitterPlanUtils.NormalizeMachineKey(m.kmlNumber)}";
 
@@ -180,6 +291,24 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 {
                     target.Add(f);
                 }
+            //}
+            //// ВАЖНО: переставляем строки под порядок fresh.
+            //for (int desiredIndex = 0; desiredIndex < fresh.Count; desiredIndex++)
+            //{
+            //    var desiredKey = MasterKey(fresh[desiredIndex]);
+
+            //    var currentIndex = -1;
+            //    for (int i = desiredIndex; i < target.Count; i++)
+            //    {
+            //        if (MasterKey(target[i]) == desiredKey)
+            //        {
+            //            currentIndex = i;
+            //            break;
+            //        }
+            //    }
+
+            //    if (currentIndex >= 0 && currentIndex != desiredIndex)
+            //        target.Move(currentIndex, desiredIndex);
             }
         }
 
