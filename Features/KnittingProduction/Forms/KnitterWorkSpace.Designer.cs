@@ -906,6 +906,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // FioGridLookUpEdit
             // 
+            FioGridLookUpEdit.Enabled = false;
             FioGridLookUpEdit.Location = new System.Drawing.Point(302, 12);
             FioGridLookUpEdit.Name = "FioGridLookUpEdit";
             FioGridLookUpEdit.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
@@ -1005,23 +1006,27 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // _adminToggle
             // 
             _adminToggle.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            _adminToggle.Enabled = false;
             _adminToggle.Location = new System.Drawing.Point(1219, 12);
             _adminToggle.Name = "_adminToggle";
             _adminToggle.Size = new System.Drawing.Size(98, 20);
             _adminToggle.TabIndex = 6;
             _adminToggle.Text = "Админ режим";
             _adminToggle.UseVisualStyleBackColor = true;
+            _adminToggle.Visible = false;
             _adminToggle.CheckedChanged += AdminToggle_CheckedChanged;
             // 
             // _expandNrToggle
             // 
             _expandNrToggle.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            _expandNrToggle.Enabled = false;
             _expandNrToggle.Location = new System.Drawing.Point(1219, 36);
             _expandNrToggle.Name = "_expandNrToggle";
             _expandNrToggle.Size = new System.Drawing.Size(98, 20);
             _expandNrToggle.TabIndex = 7;
             _expandNrToggle.Text = "Все операции";
             _expandNrToggle.UseVisualStyleBackColor = true;
+            _expandNrToggle.Visible = false;
             _expandNrToggle.CheckedChanged += ExpandNrToggle_CheckedChanged;
             // 
             // Root
