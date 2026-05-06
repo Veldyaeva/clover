@@ -1083,7 +1083,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             //OpenForm(new KnittingMachinesLoading(xIDVyazClass), sender);
             if (this.MdiParent is SpMainForm mainForm)
             {
-                mainForm.OpenForm(new KnittingMachinesLoading(xIDVyazClass));
+                mainForm.OpenForm(new KnittingMachinesLoading(_user, xIDVyazClass));
             }
         }
 

@@ -101,6 +101,11 @@ namespace SewingProduction.Features.KnittingProduction.Services
                     return result.ToList();
                 }
             }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"{ex.ErrorCode} - {ex.Message}", "Ошибка SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetKnitMachineClassList");

@@ -176,8 +176,9 @@ namespace SewingProduction
         }
         private void рабочийСтолВязальщицыToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            var form = AppServices.Services.GetRequiredService<KnitterWorkSpace>();
-            OpenForm(form, e.Item);
+            //var form = AppServices.Services.GetRequiredService<KnitterWorkSpace>();
+            //OpenForm(form, e.Item);
+            OpenForm(new KnitterWorkSpace(_user), e.Item);
         }
         private void аналитикаToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
