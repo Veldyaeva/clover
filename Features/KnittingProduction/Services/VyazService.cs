@@ -236,6 +236,7 @@ namespace SewingProduction.Features.KnittingProduction.Services
                     string query = $"SELECT * " +
                         $"  FROM planSezonZadKnitMachine " +
                         $"  WHERE pszkmKmlID = {kmlID} " +
+                        $"      AND (CAST(pszkmPlanDateFrom AS DATE) >= CAST(GETDATE() AS DATE) OR CAST(pszkmPlanDateTo AS DATE) >= CAST(GETDATE() AS DATE))" +
                         $"  ORDER BY pszkmYearMonthInt, pszkmPlanDateFrom";
                     var result = await connection.QueryAsync<PlanSezonZadKnitMachine>(query, new Dictionary<string, object> { });
                     return result.ToList();
