@@ -1922,18 +1922,23 @@ namespace SewingProduction
             report1.Parameters["_rzuNom"].Value = selectedRow.Nom;
             report1.Parameters["_isChip"].Value = IsChip;
             report1.Parameters["_isUpak"].Value = 1;
+            report1.Parameters["_proizvType"].Value = customRadioGroup2.SelectedIndex;
+            report1.Parameters["_yearPach"].Value = Convert.ToInt32(tbYearPach.Text);
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
         }
         private void PrintMLRTUpak()
         {
+            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
+            //var selectedRowRas = _rasInfoByPachKodBindingSource.Current as RasInfo;
             int IsChip = Convert.ToInt32(this.cbIsChip.Checked);
             MlRtReport report1 = new MlRtReport();
-            report1.RequestParameters = false;
-            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
             report1.Parameters["_rzuNom"].Value = selectedRow.Nom;
             report1.Parameters["_isChip"].Value = IsChip;
             report1.Parameters["_isUpak"].Value = 1;
+            report1.Parameters["_proizvType"].Value = customRadioGroup2.SelectedIndex;
+            report1.Parameters["_yearPach"].Value = Convert.ToInt32(tbYearPach.Text);
+            report1.RequestParameters = false;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
         }
