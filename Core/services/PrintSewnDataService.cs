@@ -17,10 +17,10 @@ namespace SewingProduction.Core.services
     public class PrintSewnDataService
     {
         private readonly DbService _dbService;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         public PrintSewnDataService()
         {
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
         }
         # region CuttingForm
