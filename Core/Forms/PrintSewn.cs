@@ -27,19 +27,25 @@ namespace SewingProduction.Core.Forms
         private List<PrintSewnBlVshRow> _blVshRows = new List<PrintSewnBlVshRow>();
 		private string _nom;
 		private string _nomZad;
-		private string _proizvType;
+		private int _proizvType = 0;
+		
+		//-- @xProizvType:
+		//-- 0 - raskr_zeh_up
+		//-- 1 - raskr_zeh_vyaz WHEN vsa.grupp NOT IN(10,30,33)
+		//-- 2 - raskr_zeh_vyaz WHEN vsa.grupp IN(10)
+		//-- 3 - raskr_zeh_vyaz WHEN vsa.grupp IN(30, 33)
 		public PrintSewn(UserClass user) : base(user)
         {
             InitializeComponent();
 		}
-		public PrintSewn(string kod, string model, List<PrintSewnRazmKolRow> printSewnRazmKolRow)
+		public PrintSewn(string kod)
 		{
 			_kod = kod;
-			_model = model;
-			_printSewnRazmKolRow = printSewnRazmKolRow;
+			//_model = model; 
+			//_proizvType = proizvType;
 			InitializeComponent();
 		}
-		public PrintSewn(string nom, string nomZad, string proizvType)
+		public PrintSewn(string nom, string nomZad, int proizvType)
 		{
 			_nom = nom;
 			_nomZad = nomZad;
@@ -53,41 +59,67 @@ namespace SewingProduction.Core.Forms
 		#region широкие ЭЙС, Клевер (новый)
 		private void customSimpleButtonACE_Click(object sender, EventArgs e)
 		{
-            VshivkiReport report1 = new VshivkiReport();
-            requestParameters(report1);
-            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
-            reportPrintTool1.ShowPreviewDialog();
-
-            VshivkiReportHol report2 = new VshivkiReportHol();
-			requestParameters(report2);
-			ReportPrintTool reportPrintTool2 = new ReportPrintTool(report2);
-			reportPrintTool2.ShowPreviewDialog();
-		}
-		private void requestParameters(XtraReport report)
-		{
-			report.RequestParameters = false;
-			report.Parameters["_nomZad"].Value = _nomZad;
-			report.Parameters["_nomZad"].Visible = false;
-			report.Parameters["_nom"].Value = _nom;
-			report.Parameters["_nom"].Visible = false;
-			report.Parameters["_proizvType"].Value = _proizvType;
-			report.Parameters["_proizvType"].Visible = false;
+			createReport(0);
 		}
 		#endregion
 		#region Комплекты  
 		private void customSimpleButtonKompl_Click(object sender, EventArgs e)
 		{
+			createReport(1);
+		}
+		#endregion
+		#region Набор одежды 
+		private void customSimpleButtonNabor_Click(object sender, EventArgs e)
+		{
+			createReport(2);
+		}
+		#endregion	  
+		private void createReport(int _izdType = 0)
+		{
+			VshivkiReport report1 = new VshivkiReport();
+			requestParameters(report1, _izdType);
+			ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+			reportPrintTool1.ShowPreviewDialog();
+
+			VshivkiReportHol report2 = new VshivkiReportHol();
+			requestParameters(report2, _izdType);
+			ReportPrintTool reportPrintTool2 = new ReportPrintTool(report2);
+			reportPrintTool2.ShowPreviewDialog();
+		}
+		private void requestParameters(XtraReport report, int _izdType)
+		{
+			report.RequestParameters = false;
+
+			SetParameter(report, "_nomZad", null);
+			SetParameter(report, "_nom", null);
+			SetParameter(report, "_proizvType", null);
+			SetParameter(report, "_izdType", null);
+			SetParameter(report, "_kod", null);
+
+			if (!string.IsNullOrWhiteSpace(_kod))
+			{
+				SetParameter(report, "_kod", _kod);
+				//SetParameter(report, "_proizvType", _proizvType);	//по коду сам решит, какой тип производства
+				SetParameter(report, "_izdType", _izdType);
+			}
+			else if (!string.IsNullOrWhiteSpace(_nomZad) && !string.IsNullOrWhiteSpace(_nom))
+			{
+				SetParameter(report, "_nomZad", _nomZad);
+				SetParameter(report, "_nom", int.Parse(_nom));
+				SetParameter(report, "_proizvType", _proizvType);
+				SetParameter(report, "_izdType", _izdType);
+			}
+			//MessageBox.Show($"_kod={_kod}\n_nom={_nom}\n_nomZad={_nomZad}\n_proizvType={_proizvType}\n_izdType={_izdType}");
 		}
 
-        #endregion
-        #region Набор одежды 
+		private void SetParameter(XtraReport report, string name, object value)
+		{
+			var p = report.Parameters[name];
+			if (p == null)
+				return;
 
-        private void customSimpleButtonNabor_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        #endregion
-
-    }
+			p.Value = value;
+			p.Visible = false;
+		}
+	}
 }

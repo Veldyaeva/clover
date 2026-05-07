@@ -1,4 +1,6 @@
-﻿namespace SewingProduction.Report
+﻿using DevExpress.DataAccess.Sql;
+
+namespace SewingProduction.Report
 {
 	partial class VshivkiReportHol
 	{
@@ -33,7 +35,15 @@
 			DevExpress.DataAccess.Sql.QueryParameter queryParameter1 = new DevExpress.DataAccess.Sql.QueryParameter();
 			DevExpress.DataAccess.Sql.QueryParameter queryParameter2 = new DevExpress.DataAccess.Sql.QueryParameter();
 			DevExpress.DataAccess.Sql.QueryParameter queryParameter3 = new DevExpress.DataAccess.Sql.QueryParameter();
+			DevExpress.DataAccess.Sql.QueryParameter queryParameter4 = new DevExpress.DataAccess.Sql.QueryParameter();
+			DevExpress.DataAccess.Sql.QueryParameter queryParameter5 = new DevExpress.DataAccess.Sql.QueryParameter();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VshivkiReportHol));
+			DevExpress.DataAccess.Sql.StoredProcQuery storedProcQuery2 = new DevExpress.DataAccess.Sql.StoredProcQuery();
+			DevExpress.DataAccess.Sql.QueryParameter queryParameter6 = new DevExpress.DataAccess.Sql.QueryParameter();
+			DevExpress.DataAccess.Sql.QueryParameter queryParameter7 = new DevExpress.DataAccess.Sql.QueryParameter();
+			DevExpress.DataAccess.Sql.QueryParameter queryParameter8 = new DevExpress.DataAccess.Sql.QueryParameter();
+			DevExpress.DataAccess.Sql.QueryParameter queryParameter9 = new DevExpress.DataAccess.Sql.QueryParameter();
+			DevExpress.DataAccess.Sql.QueryParameter queryParameter10 = new DevExpress.DataAccess.Sql.QueryParameter();
 			this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
 			this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
 			this.Detail = new DevExpress.XtraReports.UI.DetailBand();
@@ -51,6 +61,9 @@
 			this._nomZad = new DevExpress.XtraReports.Parameters.Parameter();
 			this._nom = new DevExpress.XtraReports.Parameters.Parameter();
 			this._proizvType = new DevExpress.XtraReports.Parameters.Parameter();
+			this.sqlDataSource2 = new DevExpress.DataAccess.Sql.SqlDataSource(this.components);
+			this._izdType = new DevExpress.XtraReports.Parameters.Parameter();
+			this._kod = new DevExpress.XtraReports.Parameters.Parameter();
 			((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
 			// 
 			// TopMargin
@@ -151,17 +164,26 @@
 			this.sqlDataSource1.Name = "sqlDataSource1";
 			storedProcQuery1.Name = "getVshivkiInfo";
 			queryParameter1.Name = "@xNomZad";
-			queryParameter1.Type = typeof(string);
+			queryParameter1.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter1.Value = new DevExpress.DataAccess.Expression("?_nomZad", typeof(string));
 			queryParameter2.Name = "@xNom";
-			queryParameter2.Type = typeof(int);
-			queryParameter2.ValueInfo = "0";
+			queryParameter2.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter2.Value = new DevExpress.DataAccess.Expression("?_nom", typeof(int));
 			queryParameter3.Name = "@xProizvType";
-			queryParameter3.Type = typeof(int);
-			queryParameter3.ValueInfo = "0";
+			queryParameter3.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter3.Value = new DevExpress.DataAccess.Expression("?_proizvType", typeof(int));
+			queryParameter4.Name = "@xIzdType";
+			queryParameter4.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter4.Value = new DevExpress.DataAccess.Expression("?_izdType", typeof(int));
+			queryParameter5.Name = "@xKod";
+			queryParameter5.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter5.Value = new DevExpress.DataAccess.Expression("?_kod", typeof(string));
 			storedProcQuery1.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
             queryParameter1,
             queryParameter2,
-            queryParameter3});
+			queryParameter3,
+			queryParameter4,
+			queryParameter5});
 			storedProcQuery1.StoredProcName = "getVshivkiInfo";
 			this.sqlDataSource1.Queries.AddRange(new DevExpress.DataAccess.Sql.SqlQuery[] {
             storedProcQuery1});
@@ -222,11 +244,13 @@
 			// 
 			// _nomZad
 			// 
+			this._nomZad.AllowNull = true;
 			this._nomZad.Description = "nom_Zad";
 			this._nomZad.Name = "_nomZad";
 			// 
 			// _nom
 			// 
+			this._nom.AllowNull = true;
 			this._nom.Description = "nom";
 			this._nom.Name = "_nom";
 			this._nom.Type = typeof(int);
@@ -234,10 +258,56 @@
 			// 
 			// _proizvType
 			// 
+			this._proizvType.AllowNull = true;
 			this._proizvType.Description = "proizvType";
 			this._proizvType.Name = "_proizvType";
 			this._proizvType.Type = typeof(int);
 			this._proizvType.ValueInfo = "0";
+			// 
+			// sqlDataSource2
+			// 
+			this.sqlDataSource2.ConnectionName = "SewingProduction.Properties.Settings.ACEConnectionString";
+			this.sqlDataSource2.Name = "sqlDataSource2";
+			storedProcQuery2.Name = "getVshivkiInfo";
+			queryParameter6.Name = "@xNomZad";
+			queryParameter6.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter6.Value = new DevExpress.DataAccess.Expression("", typeof(string));
+			queryParameter7.Name = "@xNom";
+			queryParameter7.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter7.Value = new DevExpress.DataAccess.Expression("0", typeof(int));
+			queryParameter8.Name = "@xProizvType";
+			queryParameter8.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter8.Value = new DevExpress.DataAccess.Expression("0", typeof(int));
+			queryParameter9.Name = "@xIzdType";
+			queryParameter9.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter9.Value = new DevExpress.DataAccess.Expression("0", typeof(int));
+			queryParameter10.Name = "@xKod";
+			queryParameter10.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter10.Value = new DevExpress.DataAccess.Expression("", typeof(string));
+			storedProcQuery2.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
+            queryParameter6,
+            queryParameter7,
+            queryParameter8,
+            queryParameter9,
+            queryParameter10});
+			storedProcQuery2.StoredProcName = "getVshivkiInfo";
+			this.sqlDataSource2.Queries.AddRange(new DevExpress.DataAccess.Sql.SqlQuery[] {
+            storedProcQuery2});
+			this.sqlDataSource2.ResultSchemaSerializable = resources.GetString("sqlDataSource2.ResultSchemaSerializable");
+			// 
+			// _izdType
+			// 
+			this._izdType.AllowNull = true;
+			this._izdType.Description = "izdType";
+			this._izdType.Name = "_izdType";
+			this._izdType.Type = typeof(int);
+			this._izdType.ValueInfo = "0";
+			// 
+			// _kod
+			// 
+			this._kod.AllowNull = true;
+			this._kod.Description = "kod";
+			this._kod.Name = "_kod";
 			// 
 			// VshivkiReportHol
 			// 
@@ -246,7 +316,8 @@
             this.BottomMargin,
             this.Detail});
 			this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
-            this.sqlDataSource1});
+            this.sqlDataSource1,
+            this.sqlDataSource2});
 			this.DataMember = "getVshivkiInfo";
 			this.DataSource = this.sqlDataSource1;
 			this.Dpi = 25.4F;
@@ -258,11 +329,15 @@
 			this.ParameterPanelLayoutItems.AddRange(new DevExpress.XtraReports.Parameters.ParameterPanelLayoutItem[] {
             new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._nomZad, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
             new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._nom, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
-            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._proizvType, DevExpress.XtraReports.Parameters.Orientation.Horizontal)});
+            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._proizvType, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
+            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._izdType, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
+            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._kod, DevExpress.XtraReports.Parameters.Orientation.Horizontal)});
 			this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this._nomZad,
             this._nom,
-            this._proizvType});
+            this._proizvType,
+            this._izdType,
+            this._kod});
 			this.ReportUnit = DevExpress.XtraReports.UI.ReportUnit.Millimeters;
 			this.SnapGridSize = 2.5F;
 			this.StyleSheet.AddRange(new DevExpress.XtraReports.UI.XRControlStyle[] {
@@ -295,5 +370,8 @@
 		private DevExpress.XtraReports.Parameters.Parameter _nomZad;
 		private DevExpress.XtraReports.Parameters.Parameter _nom;
 		private DevExpress.XtraReports.Parameters.Parameter _proizvType;
+		private DevExpress.DataAccess.Sql.SqlDataSource sqlDataSource2;
+		private DevExpress.XtraReports.Parameters.Parameter _izdType;
+		private DevExpress.XtraReports.Parameters.Parameter _kod;
 	}
 }

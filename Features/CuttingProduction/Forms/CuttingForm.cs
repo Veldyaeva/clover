@@ -629,83 +629,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             }      
 
             string nom = str.nom?.ToString() ?? string.Empty;
-			var printSewn = new PrintSewn(nom, nomZad, "0");
+			var printSewn = new PrintSewn(nom, nomZad, 0);
 			printSewn.ShowDialog();
 			return;
-
-			string nomVyazAndRask = str.nom_zad?.ToString() ?? string.Empty;
-
-            string lNom = str.nom?.ToString() ?? string.Empty;
-            string lNomN = str.nom_n?.ToString() ?? string.Empty;
-            string lKod = str.kod?.ToString() ?? string.Empty;
-            string lKodK = str.kod_k?.ToString() ?? string.Empty;
-
-            List<PrintSewnRazmKolRow> razmKol = new List<PrintSewnRazmKolRow>();
-            bool hasKombProv = await printSewnDataService.HasKombProvAsync(lKod);
-
-            if (string.IsNullOrWhiteSpace(lKodK) || hasKombProv)
-            {
-                var rows = await printSewnDataService.GetPachKodRZU(lNom, lNomN, lKod);
-                foreach (var row in rows)
-                {
-                    await printSewnDataService.UpdRZUvsh(row.pach_kod);
-
-                    razmKol.Add(new PrintSewnRazmKolRow
-                    {
-                        Kod = row.kod ?? string.Empty,
-                        Articul = row.articul ?? string.Empty,
-                        Mod = row.mod ?? string.Empty,
-                        Razm = row.razm ?? string.Empty,
-                        Kol = row.kol
-                    });
-                }
-
-                string printModel = rows.Count > 0 ? rows[rows.Count - 1].mod : string.Empty;
-                //var printSewn = new PrintSewn(lKod, rows[rows.Count - 1].mod, razmKol);
-                printSewn.ShowDialog();
-            }
-            else
-            {
-                int typeMod = 0;
-                var checkMatrix = await printSewnDataService.GetCheckMatrix(nomZad);
-
-                if (checkMatrix != null && checkMatrix.Count > 0)
-                {
-                    int tkId = checkMatrix[0].Tk_id;
-                    int tTypeUp = checkMatrix[0].T_typeUp;
-
-                    if (tkId == 3 && tTypeUp == 3)
-                        typeMod = 1;
-                }
-
-                var rows = await printSewnDataService.GetPachKodRZU(lNom, lNomN, lKod, lKodK);
-
-                foreach (var row in rows)
-                {
-                    await printSewnDataService.UpdRZUvsh(row.pach_kod);
-
-                    if (row.articul == "3П4" || row.articul == "3П7" || row.articul == "3П6")
-                        continue;
-
-                    razmKol.Add(new PrintSewnRazmKolRow
-                    {
-                        Kod = row.kod_k ?? string.Empty,
-                        Articul = row.articul_k ?? string.Empty,
-                        Mod = typeMod == 0
-                            ? row.mod_k ?? string.Empty
-                            : row.mod ?? string.Empty,
-                        Razm = row.razm ?? string.Empty,
-                        Kol = row.kol
-                    });
-                }
-
-                string printModel = rows.Count > 0
-                    ? (typeMod == 0 ? rows[rows.Count - 1].mod_k : rows[rows.Count - 1].mod)
-                    : string.Empty;
-                //var printSewn = new PrintSewn(lKod, typeMod == 0 ? rows[rows.Count - 1].mod_k : rows[rows.Count - 1].mod, razmKol);
-                printSewn.ShowDialog();
-            }
-
         }
         #endregion
     }

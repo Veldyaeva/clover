@@ -43,10 +43,10 @@
 			emptySpaceItem6 = new DevExpress.XtraLayout.EmptySpaceItem();
 			emptySpaceItem7 = new DevExpress.XtraLayout.EmptySpaceItem();
 			emptySpaceItem8 = new DevExpress.XtraLayout.EmptySpaceItem();
+			emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
 			emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
 			emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
 			emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
-			emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
 			((System.ComponentModel.ISupportInitialize)customLayoutControl1).BeginInit();
 			customLayoutControl1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)Root).BeginInit();
@@ -58,10 +58,10 @@
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem6).BeginInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem7).BeginInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem8).BeginInit();
+			((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem3).BeginInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem4).BeginInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem5).BeginInit();
-			((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
 			SuspendLayout();
 			// 
 			// customHeaderLabel1
@@ -204,6 +204,12 @@
 			emptySpaceItem8.Name = "emptySpaceItem8";
 			emptySpaceItem8.Size = new System.Drawing.Size(597, 21);
 			// 
+			// emptySpaceItem1
+			// 
+			emptySpaceItem1.Location = new System.Drawing.Point(0, 173);
+			emptySpaceItem1.Name = "emptySpaceItem1";
+			emptySpaceItem1.Size = new System.Drawing.Size(597, 304);
+			// 
 			// emptySpaceItem3
 			// 
 			emptySpaceItem3.Location = new System.Drawing.Point(298, 31);
@@ -222,12 +228,6 @@
 			emptySpaceItem5.Name = "emptySpaceItem2";
 			emptySpaceItem5.Size = new System.Drawing.Size(597, 24);
 			// 
-			// emptySpaceItem1
-			// 
-			emptySpaceItem1.Location = new System.Drawing.Point(0, 173);
-			emptySpaceItem1.Name = "emptySpaceItem1";
-			emptySpaceItem1.Size = new System.Drawing.Size(597, 304);
-			// 
 			// PrintSewn
 			// 
 			AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -240,7 +240,6 @@
 			Load += PrintSewn_Load;
 			((System.ComponentModel.ISupportInitialize)customLayoutControl1).EndInit();
 			customLayoutControl1.ResumeLayout(false);
-			customLayoutControl1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)Root).EndInit();
 			((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
 			((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
@@ -250,10 +249,10 @@
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem6).EndInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem7).EndInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem8).EndInit();
+			((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem3).EndInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem4).EndInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem5).EndInit();
-			((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
 			ResumeLayout(false);
 		}
 
