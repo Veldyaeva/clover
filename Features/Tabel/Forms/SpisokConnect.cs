@@ -28,7 +28,7 @@ namespace SewingProduction.Features.Tabel.Forms
 {
     public partial class SpisokConnect : CustomForm
     {
-        private static DatabaseHelper _dbHelper;
+        private static DatabaseHelperSQL _dbHelper;
         private static DbService _dbService;
         private readonly ILogger _logger = new FileLogger();
         private BindingSource _spisokBindingSource;
@@ -42,7 +42,7 @@ namespace SewingProduction.Features.Tabel.Forms
         public SpisokConnect()
         {
             InitializeComponent();
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
             _tabelDataService = new TabelDataService(_dbHelper);
             _spisokNewBindingSource = new BindingSource();
@@ -208,9 +208,9 @@ namespace SewingProduction.Features.Tabel.Forms
                 if (valueVerif1c == 1)
                 {
                     MessageBox.Show("Увязка с 1с не требуется!");
-                    //return;
+                    return;
                 }
-                using (var chooseForm = new ChooseUin(lastName, firstName, middleName, tabno, naimenPodr, nameGroup))
+                using (var chooseForm = new ChooseUin(_user,lastName, firstName, middleName, tabno, naimenPodr, nameGroup))
                 {
                     //Point mousePosition = Control.MousePosition;
                     //calculator.StartPosition = FormStartPosition.Manual;

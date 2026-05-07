@@ -34,7 +34,7 @@ namespace SewingProduction.Features.Articul
 {
     public partial class Articul : CustomForm
     {
-        private readonly DatabaseHelper _dbHelperAce;
+        private readonly DatabaseHelperSQL _dbHelperAce;
 
         private readonly DbService _dbService;
         private UserClass _currentUser;
@@ -82,7 +82,7 @@ namespace SewingProduction.Features.Articul
 
         public Articul(UserClass user) : base(user)
         {
-            _dbHelperAce = new DatabaseHelper();
+            _dbHelperAce = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelperAce);
             InitializeComponent();
             InitialiseEmptyZero();

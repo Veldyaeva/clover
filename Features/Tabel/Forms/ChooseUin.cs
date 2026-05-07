@@ -1,6 +1,7 @@
 ﻿using DevExpress.CodeParser;
 using SewingProduction.Features.Tabel.Models;
 using SewingProduction.Features.Tabel.Services;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 using System;
@@ -18,7 +19,7 @@ namespace SewingProduction.Features.Tabel.Forms
     public partial class ChooseUin : CustomForm
     {
         public bool ChooseResult = false;
-        private static DatabaseHelper _dbHelper;
+        private static DatabaseHelperSQL _dbHelper;
         private static DbService _dbService;
         private readonly ILogger _logger = new FileLogger();
         private static TabelDataService _tabelDataService;
@@ -30,10 +31,10 @@ namespace SewingProduction.Features.Tabel.Forms
         string _nameGroup;
         int _tabno;
 
-        public ChooseUin(string lastName, string firstName, string middleName, int tabno, string naimenPodr, string nameGroup)
+        public ChooseUin(UserClass User, string lastName, string firstName, string middleName, int tabno, string naimenPodr, string nameGroup) : base(User)
         {
             InitializeComponent();
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
             _tabelDataService = new TabelDataService(_dbHelper);
             _lastName = lastName;
@@ -42,6 +43,10 @@ namespace SewingProduction.Features.Tabel.Forms
             _naimenPodr = naimenPodr;
             _nameGroup = nameGroup;
             _tabno = tabno;
+        }
+        public ChooseUin(UserClass User) : base(User)
+        {
+            InitializeComponent();
         }
 
         private async void ChooseUin_Load(object sender, EventArgs e)

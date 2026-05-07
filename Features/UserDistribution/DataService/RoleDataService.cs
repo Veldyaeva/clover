@@ -14,11 +14,11 @@ namespace SewingProduction.Features.UserDistribution.Models
     public class RoleDataService
     {
         private readonly DbService _dbService;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
 
         public RoleDataService()
         {
-            _dbHelper = new DatabaseHelper("ace");
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
         }
         public async Task<List<RoleModel>> GetListRolesAsync(UserClass user)

@@ -40,7 +40,7 @@ namespace SewingProduction.form
         public OborudBrig(UserClass user) : base(user)
         {
             InitializeComponent();
-            DatabaseHelper dbHelper = new DatabaseHelper();
+            DatabaseHelperSQL dbHelper = new DatabaseHelperSQL();
             _oborudBrigDataService = new OborudBrigDataService(dbHelper);
             _sbHub = AppServices.Services?.GetService<IAppServiceBrokerHub>() ?? new AppServiceBrokerHub();
             //  ThemeManager.UpdateTheme(this);

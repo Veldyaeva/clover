@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -18,8 +18,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         {
             _targetControl = targetControl ?? throw new ArgumentNullException(nameof(targetControl));
             _defaultBackColor = targetControl.BackColor;
-            MorningTime = new TimeSpan(8, 0, 0);
-            EveningTime = new TimeSpan(20, 0, 0);
+            MorningTime = new TimeSpan(15, 0, 0);
+            EveningTime = new TimeSpan(16, 0, 0);
         }
 
         public TimeSpan MorningTime { get; set; }

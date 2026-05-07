@@ -206,10 +206,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\AppIcons\favicon.ico" />
-    <Content Include="Resources\cat-cat-rainbow.gif" />
-    <EmbeddedResource Include="Resources\cat_square.gif">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
     <Content Include="Resources\loading_dude.gif" />
   </ItemGroup>
 
@@ -231,6 +227,7 @@
     <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.WebForms" Version="150.1652.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="NLog" Version="6.1.2" />
+    <PackageReference Include="Npgsql" Version="10.0.2" />
     <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.2" />
   </ItemGroup>
 
@@ -267,6 +264,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Update="Resources\cat_square.gif">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\free-icon-cursor-6825137.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
@@ -278,6 +278,7 @@
     <Folder Include="Core\Models\Prorabotki\" />
     <Folder Include="Core\Models\Raskr\" />
     <Folder Include="Core\Models\Vyaz\" />
+    <Folder Include="Features\ExchangeApp\UIConfig\" />
     <Folder Include="Features\KnittingProduction\Forms\PlanZagrVyaz\NotUsed\" />
     <Folder Include="Features\SockProduction\Models\" />
     <Folder Include="Features\SockProduction\Services\" />

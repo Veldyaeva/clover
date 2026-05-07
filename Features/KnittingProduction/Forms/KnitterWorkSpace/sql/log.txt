@@ -1,0 +1,449 @@
+﻿14:38:11:552	[PermissionHelper] customGroupBoxFast: Просмотр=False, Редактор=True
+14:38:11:552	[Доступ Control] Объект: listBoxFast, Просмотр: False, Редактор: True
+14:38:11:552	[PermissionHelper] listBoxFast: Просмотр=False, Редактор=True
+14:38:11:552	[Доступ Control] Объект: customGroupBoxRole, Просмотр: False, Редактор: True
+14:38:11:552	[PermissionHelper] customGroupBoxRole: Просмотр=False, Редактор=True
+14:38:11:552	[Доступ Control] Объект: customButtonRolePodr, Просмотр: False, Редактор: True
+14:38:11:552	[Доступ SimpleButton] customButtonRolePodr: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:11:552	[Доступ Control] Объект: customButtonUserRole2, Просмотр: False, Редактор: True
+14:38:11:552	[Доступ SimpleButton] customButtonUserRole2: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:11:552	[Доступ Control] Объект: customButtonAllRole, Просмотр: False, Редактор: True
+14:38:11:552	[Доступ SimpleButton] customButtonAllRole: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:11:552	[Доступ Control] Объект: customButtonRoleFormObject, Просмотр: False, Редактор: True
+14:38:11:552	[Доступ SimpleButton] customButtonRoleFormObject: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:11:552	[Доступ Control] Объект: customGroupBoxUser, Просмотр: False, Редактор: True
+14:38:11:552	[PermissionHelper] customGroupBoxUser: Просмотр=False, Редактор=True
+14:38:11:552	[Доступ Control] Объект: customButtonUserRole, Просмотр: False, Редактор: True
+14:38:11:552	[Доступ SimpleButton] customButtonUserRole: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:11:552	[Доступ Control] Объект: customButtonShareUser, Просмотр: False, Редактор: True
+14:38:11:552	[Доступ SimpleButton] customButtonShareUser: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:11:552	[Доступ Control] Объект: customButtonAllRpofile, Просмотр: False, Редактор: True
+14:38:11:552	[Доступ SimpleButton] customButtonAllRpofile: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:11:552	[Доступ Control] Объект: customButtonUserHierarchy, Просмотр: False, Редактор: True
+14:38:11:552	[Доступ SimpleButton] customButtonUserHierarchy: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:11:552	[Доступ Control] Объект: customGroupBoxMaster, Просмотр: False, Редактор: True
+14:38:11:552	[PermissionHelper] customGroupBoxMaster: Просмотр=False, Редактор=True
+14:38:11:552	[Доступ Control] Объект: customButtonMr, Просмотр: False, Редактор: True
+14:38:11:552	[Доступ SimpleButton] customButtonMr: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:11:552	[Доступ Control] Объект: customButtonAllDistribution, Просмотр: False, Редактор: True
+14:38:11:552	[Доступ SimpleButton] customButtonAllDistribution: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:11:552	[Доступ Control] Объект: customGroupBox2, Просмотр: False, Редактор: True
+14:38:11:552	[PermissionHelper] customGroupBox2: Просмотр=False, Редактор=True
+14:38:11:552	[Доступ Control] Объект: customButtonRoleFormObject2, Просмотр: False, Редактор: True
+14:38:11:552	[Доступ SimpleButton] customButtonRoleFormObject2: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:11:552	[Доступ Control] Объект: customButtonAdminForm, Просмотр: False, Редактор: True
+14:38:11:552	[Доступ SimpleButton] customButtonAdminForm: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:11:552	[Доступ Control] Объект: customButtonAdminSprav, Просмотр: False, Редактор: True
+14:38:11:552	[Доступ SimpleButton] customButtonAdminSprav: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:11:552	[Доступ Control] Объект: customButtonSpravTable, Просмотр: False, Редактор: True
+14:38:11:552	[Доступ SimpleButton] customButtonSpravTable: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:11:552	[Доступ Control] Объект: customGroupBox1, Просмотр: False, Редактор: True
+14:38:11:552	[PermissionHelper] customGroupBox1: Просмотр=False, Редактор=True
+14:38:11:552	[Доступ Control] Объект: customButtonRolePodr2, Просмотр: False, Редактор: True
+14:38:11:552	[Доступ SimpleButton] customButtonRolePodr2: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:11:552	[Доступ Control] Объект: customButtonUserPodr, Просмотр: False, Редактор: True
+14:38:11:552	[Доступ SimpleButton] customButtonUserPodr: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:12:302	"SewingProduction.exe" (CoreCLR: clrhost). Загружено "D:\Work\SewingProduction_Solution\sewingproduction\bin\Debug\net8.0-windows7.0\Dapper.dll". 
+14:38:12:302	[PlanZagrVyaz] SetupGridNaryadZadanyEvents completed
+14:38:13:806	[PlanZagrVyaz] InitObjectRestartMap initialized with keys: GetSmenZadanyVyaz, knitWorkingShiftNewCurrentSmen_view, GetPlanZagrVyazByPachList
+14:38:14:804	[Доступ Control] Объект: layoutControl1, Просмотр: False, Редактор: True
+14:38:14:804	[PermissionHelper] layoutControl1: Просмотр=False, Редактор=True
+14:38:14:804	[Доступ Control] Объект: gridControlPlanTotalQuantityByArticul, Просмотр: False, Редактор: True
+14:38:14:804	[Доступ Control] Объект: textBoxPzvYearPachSearch, Просмотр: False, Редактор: True
+14:38:14:804	[PermissionHelper] textBoxPzvYearPachSearch: Просмотр=False, Редактор=True
+14:38:14:804	[Доступ Control] Объект: textBoxPzvNPachSearch, Просмотр: False, Редактор: True
+14:38:14:804	[PermissionHelper] textBoxPzvNPachSearch: Просмотр=False, Редактор=True
+14:38:14:804	[Доступ Control] Объект: textBoxPzvNomSearch, Просмотр: False, Редактор: True
+14:38:14:804	[PermissionHelper] textBoxPzvNomSearch: Просмотр=False, Редактор=True
+14:38:14:804	[Доступ Control] Объект: textBoxPzvNomZadSearch, Просмотр: False, Редактор: True
+14:38:14:804	[PermissionHelper] textBoxPzvNomZadSearch: Просмотр=False, Редактор=True
+14:38:14:804	[Доступ Control] Объект: gridControlSmenZadany, Просмотр: False, Редактор: True
+14:38:14:804	[Доступ Control] Объект: customTabControl2, Просмотр: False, Редактор: True
+14:38:14:804	[PermissionHelper] customTabControl2: Просмотр=False, Редактор=True
+14:38:14:804	[Доступ Control] Объект: layoutControl2, Просмотр: False, Редактор: True
+14:38:14:804	[PermissionHelper] layoutControl2: Просмотр=False, Редактор=True
+14:38:14:804	[Доступ Control] Объект: buttonCancelWorkStopExecution, Просмотр: False, Редактор: True
+14:38:14:804	[Доступ SimpleButton] buttonCancelWorkStopExecution: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:14:804	[Доступ Control] Объект: buttonWorkStopExecution, Просмотр: False, Редактор: True
+14:38:14:804	[Доступ SimpleButton] buttonWorkStopExecution: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:14:804	[Доступ Control] Объект: buttonCancelWorkStartExecution, Просмотр: False, Редактор: True
+14:38:14:804	[Доступ SimpleButton] buttonCancelWorkStartExecution: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:14:804	[Доступ Control] Объект: buttonWorkStartExecution, Просмотр: False, Редактор: True
+14:38:14:804	[Доступ SimpleButton] buttonWorkStartExecution: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:14:804	[Доступ Control] Объект: gridControlNormRasz, Просмотр: False, Редактор: True
+14:38:14:804	[Доступ Control] Объект: gridControlArtNormN, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ Control] Объект: textBoxOlPzvNrID, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] textBoxOlPzvNrID: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: buttonMasterCancelConfirmation, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ SimpleButton] buttonMasterCancelConfirmation: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:15:052	[Доступ Control] Объект: buttonTabCanelWorkAssignment, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ SimpleButton] buttonTabCanelWorkAssignment: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:15:052	[Доступ Control] Объект: buttonKnittingMachineCancelWorkAssignment, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ SimpleButton] buttonKnittingMachineCancelWorkAssignment: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:15:052	[Доступ Control] Объект: textBoxOlNomOper, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] textBoxOlNomOper: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: buttonTabWorkAssignment, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ SimpleButton] buttonTabWorkAssignment: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:15:052	[Доступ Control] Объект: textBoxOlPzvUpdDate, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] textBoxOlPzvUpdDate: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: buttonTab999WorkAssignment, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ SimpleButton] buttonTab999WorkAssignment: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:15:052	[Доступ Control] Объект: buttonKnittingMachineWorkAssignment, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ SimpleButton] buttonKnittingMachineWorkAssignment: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:15:052	[Доступ Control] Объект: buttonMasterConfirmation, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ SimpleButton] buttonMasterConfirmation: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:15:052	[Доступ Control] Объект: customTextBoxEx1, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] customTextBoxEx1: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: textBoxOlPzvAnnID, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] textBoxOlPzvAnnID: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: textBoxOlPzvNom, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] textBoxOlPzvNom: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: textBoxOlPzvIDMlOp, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] textBoxOlPzvIDMlOp: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: textBoxOlPzvID, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] textBoxOlPzvID: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: layoutControl3, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] layoutControl3: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: customCheckBox1, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] customCheckBox1: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: customSimpleButton4, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ Control] Объект: customSimpleButton5, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ Control] Объект: gridControlMlOp, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ Control] Объект: customSimpleButton6, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ Control] Объект: textBoxJson, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] textBoxJson: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: layoutControl2, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] layoutControl2: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: buttonCancelWorkStopExecution, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ SimpleButton] buttonCancelWorkStopExecution: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:15:052	[Доступ Control] Объект: buttonWorkStopExecution, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ SimpleButton] buttonWorkStopExecution: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:15:052	[Доступ Control] Объект: buttonCancelWorkStartExecution, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ SimpleButton] buttonCancelWorkStartExecution: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:15:052	[Доступ Control] Объект: buttonWorkStartExecution, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ SimpleButton] buttonWorkStartExecution: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:15:052	[Доступ Control] Объект: gridControlNormRasz, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ Control] Объект: gridControlArtNormN, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ Control] Объект: textBoxOlPzvNrID, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] textBoxOlPzvNrID: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: buttonMasterCancelConfirmation, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ SimpleButton] buttonMasterCancelConfirmation: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:15:052	[Доступ Control] Объект: buttonTabCanelWorkAssignment, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ SimpleButton] buttonTabCanelWorkAssignment: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:15:052	[Доступ Control] Объект: buttonKnittingMachineCancelWorkAssignment, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ SimpleButton] buttonKnittingMachineCancelWorkAssignment: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:15:052	[Доступ Control] Объект: textBoxOlNomOper, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] textBoxOlNomOper: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: buttonTabWorkAssignment, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ SimpleButton] buttonTabWorkAssignment: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:15:052	[Доступ Control] Объект: textBoxOlPzvUpdDate, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] textBoxOlPzvUpdDate: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: buttonTab999WorkAssignment, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ SimpleButton] buttonTab999WorkAssignment: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:15:052	[Доступ Control] Объект: buttonKnittingMachineWorkAssignment, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ SimpleButton] buttonKnittingMachineWorkAssignment: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:15:052	[Доступ Control] Объект: buttonMasterConfirmation, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ SimpleButton] buttonMasterConfirmation: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:15:052	[Доступ Control] Объект: customTextBoxEx1, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] customTextBoxEx1: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: textBoxOlPzvAnnID, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] textBoxOlPzvAnnID: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: textBoxOlPzvNom, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] textBoxOlPzvNom: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: textBoxOlPzvIDMlOp, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] textBoxOlPzvIDMlOp: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: textBoxOlPzvID, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] textBoxOlPzvID: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: layoutControl3, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] layoutControl3: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: customCheckBox1, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] customCheckBox1: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: customSimpleButton4, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ Control] Объект: customSimpleButton5, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ Control] Объект: gridControlMlOp, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ Control] Объект: customSimpleButton6, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ Control] Объект: textBoxJson, Просмотр: False, Редактор: True
+14:38:15:052	[PermissionHelper] textBoxJson: Просмотр=False, Редактор=True
+14:38:15:052	[Доступ Control] Объект: gridControlNaryadZadany, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ Control] Объект: gridControlPZVOperList, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ Control] Объект: gridControlRzvPachListByNom, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ Control] Объект: gridControlZadanyList, Просмотр: False, Редактор: True
+14:38:15:052	[Доступ Control] Объект: gridControlPlanTotalHoursByKnitMachine, Просмотр: False, Редактор: True
+14:38:16:057	[PlanZagrVyaz] InitializeBindingsAsync completed
+14:38:16:057	LOAD: method=SewingProduction.Core.helpers.ServiceBrokerController+<>c__DisplayClass16_0.<InitCoreAsync>b__2, target=SewingProduction.Core.helpers.ServiceBrokerController+<>c__DisplayClass16_0
+14:38:16:301	"SewingProduction.exe" (CoreCLR: clrhost). Загружено "C:\Program Files\dotnet\shared\Microsoft.NETCore.App\8.0.23\System.Diagnostics.FileVersionInfo.dll". Загрузка символов отключена параметром включения и исключения.
+14:38:19:305	[ServiceBrokerHelper] Source loaded: object=GetSmenZadanyVyaz, rows=13
+14:38:19:305	LOAD: method=SewingProduction.Core.helpers.ServiceBrokerController+<>c__DisplayClass16_0.<InitCoreAsync>b__2, target=SewingProduction.Core.helpers.ServiceBrokerController+<>c__DisplayClass16_0
+14:38:19:305	[ServiceBrokerHelper] Source loaded: object=knitWorkingShiftNewCurrentSmen_view, rows=8
+14:38:19:305	LOAD: method=SewingProduction.Core.helpers.ServiceBrokerController+<>c__DisplayClass16_0.<InitCoreAsync>b__2, target=SewingProduction.Core.helpers.ServiceBrokerController+<>c__DisplayClass16_0
+14:38:19:305	[ServiceBrokerHelper] Source loaded: object=GetPlanZagrVyazByPachList, rows=11
+14:38:19:305	[ServiceBrokerHelper] Rebuild completed: tables=3, deps=3, objects=3
+14:38:19:579	[ServiceBroker:36b7ebda-0ca2-47ae-9753-5f7b954d2226] StartListening: owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftMachineListNew, fields=kiwsmlLongRep,kwsmlKmlID,kwsmlKodOb,kwsmlKwsID, query=SELECT kiwsmlLongRep,kwsmlKmlID,kwsmlKodOb,kwsmlKwsID FROM [dbo].[knitWorkingShiftMachineListNew]
+14:38:19:579	[ServiceBroker:36b7ebda-0ca2-47ae-9753-5f7b954d2226] Connection opened: owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftMachineListNew, clientConnectionId=4d237008-d643-44dc-b98f-9312129af79c
+14:38:19:579	[ServiceBroker:36b7ebda-0ca2-47ae-9753-5f7b954d2226] Listening started: owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftMachineListNew, clientConnectionId=4d237008-d643-44dc-b98f-9312129af79c, timeoutSeconds=3600
+14:38:19:579	[AppServiceBrokerHub] Listener started: table=dbo.knitWorkingShiftMachineListNew, fields=kiwsmlLongRep,kwsmlKmlID,kwsmlKodOb,kwsmlKwsID, subscribers=1
+14:38:19:579	[ServiceBroker:e4bec13b-7475-4566-b631-55b4b54a7241] StartListening: owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftNew, fields=kwsCompDel,kwsDateDel,kwsDateEnd,kwsDateStart,kwsDel,kwsID,kwsKmaID,kwsKmsID,kwsTabEnd,kwsTabStart, query=SELECT kwsCompDel,kwsDateDel,kwsDateEnd,kwsDateStart,kwsDel,kwsID,kwsKmaID,kwsKmsID,kwsTabEnd,kwsTabStart FROM [dbo].[knitWorkingShiftNew]
+14:38:19:579	[ServiceBroker:e4bec13b-7475-4566-b631-55b4b54a7241] Connection opened: owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftNew, clientConnectionId=60791dda-6ea6-4def-b799-216195dc04cd
+14:38:19:579	[ServiceBroker:e4bec13b-7475-4566-b631-55b4b54a7241] Listening started: owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftNew, clientConnectionId=60791dda-6ea6-4def-b799-216195dc04cd, timeoutSeconds=3600
+14:38:19:579	[AppServiceBrokerHub] Listener started: table=dbo.knitWorkingShiftNew, fields=kwsCompDel,kwsDateDel,kwsDateEnd,kwsDateStart,kwsDel,kwsID,kwsKmaID,kwsKmsID,kwsTabEnd,kwsTabStart, subscribers=1
+14:38:19:579	[ServiceBroker:381e00b1-4868-446d-bc65-2729f0248eae] StartListening: owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.planZagrVyaz, fields=pzvAnnID,pzvArticul,pzvChasNazn,pzvCompAdd,pzvDateAdd,pzvDateEnd,pzvDateMast,pzvDateML,pzvDateMLUt,pzvDateNaznKm,pzvDateNaznTab,pzvDateStart,pzvDivision,pzvGradacia,pzvGsID,pzvID,pzvIdBrig,pzvIDMlOp,pzvIDParent,pzvKmlID,pzvKol,pzvKolNazn,pzvKwsID,pzvMod,pzvNChasi,pzvNom,pzvNomN,pzvNomZad,pzvNrID,pzvRKol,pzvSek,pzvSekNazn,pzvTab,pzvUpdDate,pzvVidPr, query=SELECT pzvAnnID,pzvArticul,pzvChasNazn,pzvCompAdd,pzvDateAdd,pzvDateEnd,pzvDateMast,pzvDateML,pzvDateMLUt,pzvDateNaznKm,pzvDateNaznTab,pzvDateStart,pzvDivision,pzvGradacia,pzvGsID,pzvID,pzvIdBrig,pzvIDMlOp,pzvIDParent,pzvKmlID,pzvKol,pzvKolNazn,pzvKwsID,pzvMod,pzvNChasi,pzvNom,pzvNomN,pzvNomZad,pzvNrID,pzvRKol,pzvSek,pzvSekNazn,pzvTab,pzvUpdDate,pzvVidPr FROM [dbo].[planZagrVyaz]
+14:38:19:579	[ServiceBroker:381e00b1-4868-446d-bc65-2729f0248eae] Connection opened: owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.planZagrVyaz, clientConnectionId=a38a56dc-9d2a-40c2-b8d0-95cb62f3d35e
+14:38:20:338	[ServiceBroker:381e00b1-4868-446d-bc65-2729f0248eae] Listening started: owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.planZagrVyaz, clientConnectionId=a38a56dc-9d2a-40c2-b8d0-95cb62f3d35e, timeoutSeconds=3600
+14:38:20:338	[AppServiceBrokerHub] Listener started: table=dbo.planZagrVyaz, fields=pzvAnnID,pzvArticul,pzvChasNazn,pzvCompAdd,pzvDateAdd,pzvDateEnd,pzvDateMast,pzvDateML,pzvDateMLUt,pzvDateNaznKm,pzvDateNaznTab,pzvDateStart,pzvDivision,pzvGradacia,pzvGsID,pzvID,pzvIdBrig,pzvIDMlOp,pzvIDParent,pzvKmlID,pzvKol,pzvKolNazn,pzvKwsID,pzvMod,pzvNChasi,pzvNom,pzvNomN,pzvNomZad,pzvNrID,pzvRKol,pzvSek,pzvSekNazn,pzvTab,pzvUpdDate,pzvVidPr, subscribers=1
+14:38:20:338	[AppServiceBrokerHub] Subscribe: owner=PlanZagrVyaz:724b94265d9c476fa47897c919fc9901, tables=3
+14:38:20:338	[Доступ TabPage] Вкладка: TabPage1, Просмотр: False, Редактор: True
+14:38:20:338	[Доступ TabPage] TabPage1: Просмотр=False, Редактор=True, PageVisible=True
+14:38:20:338	[Доступ Control] Объект: customSimpleButtonRaszLog, Просмотр: False, Редактор: True
+14:38:20:338	[Доступ Control] Объект: customSimpleButtonAnnLog, Просмотр: False, Редактор: True
+14:38:20:338	[Доступ Control] Объект: ButtonArchAndCopyWd, Просмотр: False, Редактор: True
+14:38:20:338	[Доступ Button] ButtonArchAndCopyWd: Просмотр=False, Редактор=True, VisiblePermission=True, Enabled=True
+14:38:20:338	[Доступ Control] Объект: ButtonDouble, Просмотр: False, Редактор: True
+14:38:20:338	[Доступ Button] ButtonDouble: Просмотр=False, Редактор=True, VisiblePermission=True, Enabled=True
+14:38:20:338	[Доступ Control] Объект: ButtonEditOnlyAdv, Просмотр: False, Редактор: True
+14:38:20:338	[Доступ Button] ButtonEditOnlyAdv: Просмотр=False, Редактор=True, VisiblePermission=True, Enabled=True
+14:38:20:338	[Доступ Control] Объект: ButtonEditWd, Просмотр: False, Редактор: True
+14:38:20:338	[Доступ Button] ButtonEditWd: Просмотр=False, Редактор=True, VisiblePermission=True, Enabled=True
+14:38:20:338	[Доступ Control] Объект: ButtonPreliminaryWd, Просмотр: False, Редактор: True
+14:38:20:338	[Доступ Button] ButtonPreliminaryWd: Просмотр=False, Редактор=True, VisiblePermission=True, Enabled=True
+14:38:20:338	[Доступ Control] Объект: customSimpleButtonDel, Просмотр: False, Редактор: True
+14:38:20:338	[Доступ Control] Объект: customSimpleButtonUpd, Просмотр: False, Редактор: True
+14:38:20:338	[Доступ Control] Объект: customSimpleButtonUnbind, Просмотр: False, Редактор: True
+14:38:20:338	[Доступ Control] Объект: customSimpleButtonArchARTICUL, Просмотр: False, Редактор: True
+14:38:20:338	[Доступ Control] Объект: customSimpleButtonArch, Просмотр: False, Редактор: True
+14:38:20:338	[Доступ Control] Объект: printButtonPlus, Просмотр: False, Редактор: True
+14:38:20:338	[Доступ SimpleButton] printButtonPlus: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:20:338	[Доступ Control] Объект: buffer, Просмотр: False, Редактор: True
+14:38:20:338	[PermissionHelper] buffer: Просмотр=False, Редактор=True
+14:38:20:338	[Доступ Control] Объект: gridControlKontTW, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: GridControlBindedArts, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControlRaskrTW, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControlRaszTW, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: ANNgridControl, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: ButtonCopyWd, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Button] ButtonCopyWd: Просмотр=False, Редактор=True, VisiblePermission=True, Enabled=True
+14:38:20:587	[Доступ Control] Объект: PrintButton, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ SimpleButton] PrintButton: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:20:587	[Доступ Control] Объект: SortBox, Просмотр: False, Редактор: True
+14:38:20:587	[PermissionHelper] SortBox: Просмотр=False, Редактор=True
+14:38:20:587	[Доступ Control] Объект: archiveCheckBox, Просмотр: False, Редактор: True
+14:38:20:587	[PermissionHelper] archiveCheckBox: Просмотр=False, Редактор=True
+14:38:20:587	[Доступ Control] Объект: actualCheckBox, Просмотр: False, Редактор: True
+14:38:20:587	[PermissionHelper] actualCheckBox: Просмотр=False, Редактор=True
+14:38:20:587	[Доступ Control] Объект: preliminaryCheckBox, Просмотр: False, Редактор: True
+14:38:20:587	[PermissionHelper] preliminaryCheckBox: Просмотр=False, Редактор=True
+14:38:20:587	[Доступ TabPage] Вкладка: xtraTabPageArticles, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ TabPage] xtraTabPageArticles: Просмотр=False, Редактор=True, PageVisible=True
+14:38:20:587	[Доступ TabPage] Вкладка: xtraTabPageWorkDivisions, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ TabPage] xtraTabPageWorkDivisions: Просмотр=False, Редактор=True, PageVisible=True
+14:38:20:587	[Доступ Control] Объект: customGridControl2, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: customGridControl1, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControl_binded, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControlNZP, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: customGridControl3, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControl_wdToBind, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControl_unboundArts, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ TabPage] Вкладка: xtraTabPage3, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ TabPage] xtraTabPage3: Просмотр=False, Редактор=True, PageVisible=True
+14:38:20:587	[Доступ Control] Объект: customButton2, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: customCancelButton1, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: customComboBox1, Просмотр: False, Редактор: True
+14:38:20:587	[PermissionHelper] customComboBox1: Просмотр=False, Редактор=True
+14:38:20:587	[Доступ Control] Объект: customButton1, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControlPreArch, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControlArch, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: xtraTabPageWorkDivisions, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ TabPage] xtraTabPageWorkDivisions: Просмотр=False, Редактор=True, PageVisible=True
+14:38:20:587	[Доступ Control] Объект: customGridControl2, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: customGridControl1, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControl_binded, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControlNZP, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: customGridControl3, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControl_wdToBind, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControl_unboundArts, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: xtraTabPage3, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ TabPage] xtraTabPage3: Просмотр=False, Редактор=True, PageVisible=True
+14:38:20:587	[Доступ Control] Объект: customButton2, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: customCancelButton1, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: customComboBox1, Просмотр: False, Редактор: True
+14:38:20:587	[PermissionHelper] customComboBox1: Просмотр=False, Редактор=True
+14:38:20:587	[Доступ Control] Объект: customButton1, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControlPreArch, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControlArch, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: TabPage1, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ TabPage] TabPage1: Просмотр=False, Редактор=True, PageVisible=True
+14:38:20:587	[Доступ Control] Объект: customSimpleButtonRaszLog, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: customSimpleButtonAnnLog, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: ButtonArchAndCopyWd, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Button] ButtonArchAndCopyWd: Просмотр=False, Редактор=True, VisiblePermission=True, Enabled=True
+14:38:20:587	[Доступ Control] Объект: ButtonDouble, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Button] ButtonDouble: Просмотр=False, Редактор=True, VisiblePermission=True, Enabled=True
+14:38:20:587	[Доступ Control] Объект: ButtonEditOnlyAdv, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Button] ButtonEditOnlyAdv: Просмотр=False, Редактор=True, VisiblePermission=True, Enabled=True
+14:38:20:587	[Доступ Control] Объект: ButtonEditWd, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Button] ButtonEditWd: Просмотр=False, Редактор=True, VisiblePermission=True, Enabled=True
+14:38:20:587	[Доступ Control] Объект: ButtonPreliminaryWd, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Button] ButtonPreliminaryWd: Просмотр=False, Редактор=True, VisiblePermission=True, Enabled=True
+14:38:20:587	[Доступ Control] Объект: customSimpleButtonDel, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: customSimpleButtonUpd, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: customSimpleButtonUnbind, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: customSimpleButtonArchARTICUL, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: customSimpleButtonArch, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: printButtonPlus, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ SimpleButton] printButtonPlus: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:20:587	[Доступ Control] Объект: buffer, Просмотр: False, Редактор: True
+14:38:20:587	[PermissionHelper] buffer: Просмотр=False, Редактор=True
+14:38:20:587	[Доступ Control] Объект: gridControlKontTW, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: GridControlBindedArts, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControlRaskrTW, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControlRaszTW, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: ANNgridControl, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: ButtonCopyWd, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Button] ButtonCopyWd: Просмотр=False, Редактор=True, VisiblePermission=True, Enabled=True
+14:38:20:587	[Доступ Control] Объект: PrintButton, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ SimpleButton] PrintButton: Просмотр=False, Редактор=True, Visible=True, Enabled=True
+14:38:20:587	[Доступ Control] Объект: SortBox, Просмотр: False, Редактор: True
+14:38:20:587	[PermissionHelper] SortBox: Просмотр=False, Редактор=True
+14:38:20:587	[Доступ Control] Объект: archiveCheckBox, Просмотр: False, Редактор: True
+14:38:20:587	[PermissionHelper] archiveCheckBox: Просмотр=False, Редактор=True
+14:38:20:587	[Доступ Control] Объект: actualCheckBox, Просмотр: False, Редактор: True
+14:38:20:587	[PermissionHelper] actualCheckBox: Просмотр=False, Редактор=True
+14:38:20:587	[Доступ Control] Объект: preliminaryCheckBox, Просмотр: False, Редактор: True
+14:38:20:587	[PermissionHelper] preliminaryCheckBox: Просмотр=False, Редактор=True
+14:38:20:587	[Доступ Control] Объект: xtraTabPageArticles, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ TabPage] xtraTabPageArticles: Просмотр=False, Редактор=True, PageVisible=True
+14:38:20:587	[Доступ TabPage] Вкладка: xtraTabPageWorkDivisions, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ TabPage] xtraTabPageWorkDivisions: Просмотр=False, Редактор=True, PageVisible=True
+14:38:20:587	[Доступ Control] Объект: customGridControl2, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: customGridControl1, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControl_binded, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControlNZP, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: customGridControl3, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControl_wdToBind, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControl_unboundArts, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ TabPage] Вкладка: xtraTabPage3, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ TabPage] xtraTabPage3: Просмотр=False, Редактор=True, PageVisible=True
+14:38:20:587	[Доступ Control] Объект: customButton2, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: customCancelButton1, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: customComboBox1, Просмотр: False, Редактор: True
+14:38:20:587	[PermissionHelper] customComboBox1: Просмотр=False, Редактор=True
+14:38:20:587	[Доступ Control] Объект: customButton1, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControlPreArch, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControlArch, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: xtraTabPageWorkDivisions, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ TabPage] xtraTabPageWorkDivisions: Просмотр=False, Редактор=True, PageVisible=True
+14:38:20:587	[Доступ Control] Объект: customGridControl2, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: customGridControl1, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControl_binded, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControlNZP, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: customGridControl3, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControl_wdToBind, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControl_unboundArts, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: xtraTabPage3, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ TabPage] xtraTabPage3: Просмотр=False, Редактор=True, PageVisible=True
+14:38:20:587	[Доступ Control] Объект: customButton2, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: customCancelButton1, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: customComboBox1, Просмотр: False, Редактор: True
+14:38:20:587	[PermissionHelper] customComboBox1: Просмотр=False, Редактор=True
+14:38:20:587	[Доступ Control] Объект: customButton1, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControlPreArch, Просмотр: False, Редактор: True
+14:38:20:587	[Доступ Control] Объект: gridControlArch, Просмотр: False, Редактор: True
+14:38:20:587	[KnitterWorkSpace] ctor(IKnitterOrchestrator, IKnitterShiftGateway) start
+14:38:20:837	"SewingProduction.exe" (CoreCLR: clrhost). Загружено "Anonymously Hosted DynamicMethods Assembly". 
+14:38:20:837	"SewingProduction.exe" (CoreCLR: clrhost). Загружено "D:\Work\SewingProduction_Solution\sewingproduction\bin\Debug\net8.0-windows7.0\DevExpress.XtraTreeList.v25.2.dll". Загрузка символов отключена параметром включения и исключения.
+14:38:21:337	[KnitterWorkSpace] Load event start
+14:38:22:097	Вызвано исключение: "System.ComponentModel.WarningException" в DevExpress.XtraEditors.v25.2.dll
+14:38:22:335	[PlanZagrVyaz] Listening tables: dbo.knitWorkingShiftMachineListNew, dbo.knitWorkingShiftNew, dbo.planZagrVyaz
+14:38:22:590	[Доступ Control] Объект: PlanZagrVyazGridControl, Просмотр: False, Редактор: True
+14:38:23:350	LoadPlanTotalHoursByKnitMachineDataAsync completed
+14:38:23:606	LoadZadanyListByMachineNewDataAsync completed
+14:38:23:606	[ApplyChanges] mode=ExcludeOnly, gridView=null, focusedColumnFieldName=, topRowIndex=
+14:38:23:606	[ApplyChanges] Completed
+14:38:23:606	ReloadZadanyForKmlAsync completed for kmlId=237
+14:38:23:606	gridViewPlanTotalHoursByKnitMachine_FocusedRowChanged completed for kmlID=237
+14:38:23:851	LoadRzvPachListByNomNewDataAsync completed
+14:38:23:851	[ApplyChanges] mode=ExcludeOnly, gridView=null, focusedColumnFieldName=, topRowIndex=
+14:38:23:851	[ApplyChanges] Completed
+14:38:23:851	ReloadPachListForZadanyAsync applied changes for nom=9118, nomZad=082501967, gradacia=1
+14:38:24:100	LoadRzvPachListByNomNewDataAsync completed
+14:38:24:100	[ApplyChanges] mode=ExcludeOnly, gridView=null, focusedColumnFieldName=, topRowIndex=
+14:38:24:100	[ApplyChanges] Completed
+14:38:24:100	ReloadPachListForZadanyAsync applied changes for nom=9118, nomZad=082501967, gradacia=1
+14:38:24:100	advBandedGridViewSmenZadany_FocusedRowChanged triggered for new focused row handle 0
+14:38:24:100	SmenZadanyFocusedRowChanged triggered for focused row handle 0
+14:38:24:100	Finished advBandedGridViewSmenZadany_FocusedRowChanged for new focused row handle 0
+14:38:24:100	LoadSmenZadanyVyazDataAsync completed
+14:38:24:100	PlanZagrVyaz_Load completed
+14:38:24:348	LoadKnitWorkingShiftSmenToMoveDataAsync completed with 2 records
+14:38:24:605	LoadNaryadZadanyVyazDataAsync completed
+14:38:24:605	Finished SmenZadanyFocusedRowChanged for focused row handle 0
+14:38:24:605	SetGroupExpandState_NoRecursion completed
+14:38:24:605	ExpandGroupsOnIdle executed
+14:38:29:349	"SewingProduction.exe" (CoreCLR: clrhost). Загружено "C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App\8.0.23\System.Windows.Extensions.dll". Загрузка символов отключена параметром включения и исключения.
+14:38:31:349	LOAD: method=SewingProduction.Core.helpers.ServiceBrokerController+<>c__DisplayClass16_0.<InitCoreAsync>b__2, target=SewingProduction.Core.helpers.ServiceBrokerController+<>c__DisplayClass16_0
+14:38:33:099	[ServiceBrokerHelper] Source loaded: object=GetPlanZagrVyazNorm_ByTab1, rows=15
+14:38:33:099	LOAD: method=SewingProduction.Core.helpers.ServiceBrokerController+<>c__DisplayClass16_0.<InitCoreAsync>b__2, target=SewingProduction.Core.helpers.ServiceBrokerController+<>c__DisplayClass16_0
+14:38:33:099	[ServiceBrokerHelper] Source loaded: object=knitWorkingShiftNewCurrentSmen_view, rows=8
+14:38:33:099	[ServiceBrokerHelper] Rebuild completed: tables=3, deps=3, objects=2
+14:38:33:099	[AppServiceBrokerHub] Subscribe: owner=KnitterWorkSpace:b675b6a5fc564dc1b918f279b7fd868f, tables=3
+14:38:34:853	Вызвано исключение: "System.Data.SqlClient.SqlException" в System.Data.SqlClient.dll
+14:38:34:853	"SewingProduction.exe" (CoreCLR: clrhost). Загружено "C:\Program Files\dotnet\shared\Microsoft.NETCore.App\8.0.23\System.Reflection.Metadata.dll". Загрузка символов отключена параметром включения и исключения.
+14:38:34:853	"SewingProduction.exe" (CoreCLR: clrhost). Загружено "C:\Program Files\dotnet\shared\Microsoft.NETCore.App\8.0.23\System.Collections.Immutable.dll". Загрузка символов отключена параметром включения и исключения.
+14:38:34:853	[SQL-FIRST-CHANCE] Number=-2, State=0, Class=11, Procedure=, Line=0, ClientConnectionId=0993b2fe-aeee-4898-a0df-69602f8fc7cd, ThreadId=5, Message=Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+14:38:34:853	[SQL-FIRST-CHANCE] ServiceBrokerContext=<not found>, ActiveContexts=60791dda-6ea6-4def-b799-216195dc04cd => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftNew, brokerId=e4bec13b-7475-4566-b631-55b4b54a7241 || a38a56dc-9d2a-40c2-b8d0-95cb62f3d35e => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.planZagrVyaz, brokerId=381e00b1-4868-446d-bc65-2729f0248eae || 4d237008-d643-44dc-b98f-9312129af79c => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftMachineListNew, brokerId=36b7ebda-0ca2-47ae-9753-5f7b954d2226
+14:38:34:853	[SQL-FIRST-CHANCE] TopFrame=   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+14:38:34:853	[SQL-FIRST-CHANCE] Errors=[#-2/S0/C11/P:/L:0 -> Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.]
+14:38:34:853	[SQL-FIRST-CHANCE] AppFrame=SewingProduction.Core.Program+<>c__DisplayClass8_0.<RegisterSqlFirstChanceTrace>b__0
+14:38:35:105	Вызвано исключение: "System.Data.SqlClient.SqlException" в System.Data.SqlClient.dll
+14:38:35:105	[SQL-FIRST-CHANCE] Number=-2, State=0, Class=11, Procedure=, Line=0, ClientConnectionId=0993b2fe-aeee-4898-a0df-69602f8fc7cd, ThreadId=5, Message=Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+14:38:35:105	[SQL-FIRST-CHANCE] ServiceBrokerContext=<not found>, ActiveContexts=60791dda-6ea6-4def-b799-216195dc04cd => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftNew, brokerId=e4bec13b-7475-4566-b631-55b4b54a7241 || a38a56dc-9d2a-40c2-b8d0-95cb62f3d35e => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.planZagrVyaz, brokerId=381e00b1-4868-446d-bc65-2729f0248eae || 4d237008-d643-44dc-b98f-9312129af79c => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftMachineListNew, brokerId=36b7ebda-0ca2-47ae-9753-5f7b954d2226
+14:38:35:105	[SQL-FIRST-CHANCE] TopFrame=at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+14:38:35:105	[SQL-FIRST-CHANCE] Errors=[#-2/S0/C11/P:/L:0 -> Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.]
+14:38:35:105	[SQL-FIRST-CHANCE] AppFrame=SewingProduction.Core.Program+<>c__DisplayClass8_0.<RegisterSqlFirstChanceTrace>b__0
+14:38:35:105	Вызвано исключение: "System.Data.SqlClient.SqlException" в System.Data.SqlClient.dll
+14:38:35:105	[SQL-FIRST-CHANCE] Number=2714, State=3, Class=16, Procedure=SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e, Line=1, ClientConnectionId=1b09d693-ab77-41a4-9b12-fa61cfd68204, ThreadId=5, Message=В базе данных уже существует объект с именем "SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e".
+14:38:35:105	[SQL-FIRST-CHANCE] ServiceBrokerContext=<not found>, ActiveContexts=60791dda-6ea6-4def-b799-216195dc04cd => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftNew, brokerId=e4bec13b-7475-4566-b631-55b4b54a7241 || a38a56dc-9d2a-40c2-b8d0-95cb62f3d35e => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.planZagrVyaz, brokerId=381e00b1-4868-446d-bc65-2729f0248eae || 4d237008-d643-44dc-b98f-9312129af79c => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftMachineListNew, brokerId=36b7ebda-0ca2-47ae-9753-5f7b954d2226
+14:38:35:105	[SQL-FIRST-CHANCE] TopFrame=   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+14:38:35:105	[SQL-FIRST-CHANCE] Errors=[#2714/S3/C16/P:SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e/L:1 -> В базе данных уже существует объект с именем "SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e".]
+14:38:35:105	[SQL-FIRST-CHANCE] AppFrame=SewingProduction.Core.Program+<>c__DisplayClass8_0.<RegisterSqlFirstChanceTrace>b__0
+14:38:35:105	Вызвано исключение: "System.Data.SqlClient.SqlException" в System.Data.SqlClient.dll
+14:38:35:105	[SQL-FIRST-CHANCE] Number=2714, State=3, Class=16, Procedure=SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e, Line=1, ClientConnectionId=1b09d693-ab77-41a4-9b12-fa61cfd68204, ThreadId=5, Message=В базе данных уже существует объект с именем "SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e".
+14:38:35:105	[SQL-FIRST-CHANCE] ServiceBrokerContext=<not found>, ActiveContexts=60791dda-6ea6-4def-b799-216195dc04cd => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftNew, brokerId=e4bec13b-7475-4566-b631-55b4b54a7241 || a38a56dc-9d2a-40c2-b8d0-95cb62f3d35e => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.planZagrVyaz, brokerId=381e00b1-4868-446d-bc65-2729f0248eae || 4d237008-d643-44dc-b98f-9312129af79c => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftMachineListNew, brokerId=36b7ebda-0ca2-47ae-9753-5f7b954d2226
+14:38:35:105	[SQL-FIRST-CHANCE] TopFrame=at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+14:38:35:105	[SQL-FIRST-CHANCE] Errors=[#2714/S3/C16/P:SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e/L:1 -> В базе данных уже существует объект с именем "SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e".]
+14:38:35:105	[SQL-FIRST-CHANCE] AppFrame=SewingProduction.Core.Program+<>c__DisplayClass8_0.<RegisterSqlFirstChanceTrace>b__0
+14:38:35:105	Вызвано исключение: "System.Data.SqlClient.SqlException" в System.Data.SqlClient.dll
+14:38:35:105	[SQL-FIRST-CHANCE] Number=2714, State=3, Class=16, Procedure=SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e, Line=1, ClientConnectionId=1b09d693-ab77-41a4-9b12-fa61cfd68204, ThreadId=5, Message=В базе данных уже существует объект с именем "SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e".
+14:38:35:105	[SQL-FIRST-CHANCE] ServiceBrokerContext=<not found>, ActiveContexts=60791dda-6ea6-4def-b799-216195dc04cd => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftNew, brokerId=e4bec13b-7475-4566-b631-55b4b54a7241 || a38a56dc-9d2a-40c2-b8d0-95cb62f3d35e => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.planZagrVyaz, brokerId=381e00b1-4868-446d-bc65-2729f0248eae || 4d237008-d643-44dc-b98f-9312129af79c => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftMachineListNew, brokerId=36b7ebda-0ca2-47ae-9753-5f7b954d2226
+14:38:35:105	[SQL-FIRST-CHANCE] TopFrame=at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+14:38:35:105	[SQL-FIRST-CHANCE] Errors=[#2714/S3/C16/P:SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e/L:1 -> В базе данных уже существует объект с именем "SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e".]
+14:38:35:105	[SQL-FIRST-CHANCE] AppFrame=SewingProduction.Core.Program+<>c__DisplayClass8_0.<RegisterSqlFirstChanceTrace>b__0
+14:39:05:104	Вызвано исключение: "System.Data.SqlClient.SqlException" в System.Data.SqlClient.dll
+14:39:05:104	[SQL-FIRST-CHANCE] Number=-2, State=0, Class=11, Procedure=, Line=0, ClientConnectionId=1b09d693-ab77-41a4-9b12-fa61cfd68204, ThreadId=9, Message=Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+14:39:05:104	[SQL-FIRST-CHANCE] ServiceBrokerContext=<not found>, ActiveContexts=60791dda-6ea6-4def-b799-216195dc04cd => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftNew, brokerId=e4bec13b-7475-4566-b631-55b4b54a7241 || a38a56dc-9d2a-40c2-b8d0-95cb62f3d35e => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.planZagrVyaz, brokerId=381e00b1-4868-446d-bc65-2729f0248eae || 4d237008-d643-44dc-b98f-9312129af79c => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftMachineListNew, brokerId=36b7ebda-0ca2-47ae-9753-5f7b954d2226
+14:39:05:104	[SQL-FIRST-CHANCE] TopFrame=   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+14:39:05:104	[SQL-FIRST-CHANCE] Errors=[#-2/S0/C11/P:/L:0 -> Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.]
+14:39:05:104	[SQL-FIRST-CHANCE] AppFrame=SewingProduction.Core.Program+<>c__DisplayClass8_0.<RegisterSqlFirstChanceTrace>b__0
+14:39:05:104	Вызвано исключение: "System.Data.SqlClient.SqlException" в System.Data.SqlClient.dll
+14:39:05:104	[SQL-FIRST-CHANCE] Number=-2, State=0, Class=11, Procedure=, Line=0, ClientConnectionId=1b09d693-ab77-41a4-9b12-fa61cfd68204, ThreadId=9, Message=Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+14:39:05:104	[SQL-FIRST-CHANCE] ServiceBrokerContext=<not found>, ActiveContexts=60791dda-6ea6-4def-b799-216195dc04cd => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftNew, brokerId=e4bec13b-7475-4566-b631-55b4b54a7241 || a38a56dc-9d2a-40c2-b8d0-95cb62f3d35e => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.planZagrVyaz, brokerId=381e00b1-4868-446d-bc65-2729f0248eae || 4d237008-d643-44dc-b98f-9312129af79c => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftMachineListNew, brokerId=36b7ebda-0ca2-47ae-9753-5f7b954d2226
+14:39:05:104	[SQL-FIRST-CHANCE] TopFrame=at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+14:39:05:104	[SQL-FIRST-CHANCE] Errors=[#-2/S0/C11/P:/L:0 -> Timeout expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.]
+14:39:05:104	[SQL-FIRST-CHANCE] AppFrame=SewingProduction.Core.Program+<>c__DisplayClass8_0.<RegisterSqlFirstChanceTrace>b__0
+14:39:05:104	Вызвано исключение: "System.Data.SqlClient.SqlException" в System.Data.SqlClient.dll
+14:39:05:104	[SQL-FIRST-CHANCE] Number=2714, State=3, Class=16, Procedure=SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e, Line=1, ClientConnectionId=c34cab11-ed37-43cb-9b37-83974b8a18b1, ThreadId=9, Message=В базе данных уже существует объект с именем "SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e".
+14:39:05:104	[SQL-FIRST-CHANCE] ServiceBrokerContext=<not found>, ActiveContexts=60791dda-6ea6-4def-b799-216195dc04cd => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftNew, brokerId=e4bec13b-7475-4566-b631-55b4b54a7241 || a38a56dc-9d2a-40c2-b8d0-95cb62f3d35e => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.planZagrVyaz, brokerId=381e00b1-4868-446d-bc65-2729f0248eae || 4d237008-d643-44dc-b98f-9312129af79c => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftMachineListNew, brokerId=36b7ebda-0ca2-47ae-9753-5f7b954d2226
+14:39:05:104	[SQL-FIRST-CHANCE] TopFrame=   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+14:39:05:104	[SQL-FIRST-CHANCE] Errors=[#2714/S3/C16/P:SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e/L:1 -> В базе данных уже существует объект с именем "SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e".]
+14:39:05:104	[SQL-FIRST-CHANCE] AppFrame=SewingProduction.Core.Program+<>c__DisplayClass8_0.<RegisterSqlFirstChanceTrace>b__0
+14:39:05:104	Вызвано исключение: "System.Data.SqlClient.SqlException" в System.Data.SqlClient.dll
+14:39:05:104	[SQL-FIRST-CHANCE] Number=2714, State=3, Class=16, Procedure=SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e, Line=1, ClientConnectionId=c34cab11-ed37-43cb-9b37-83974b8a18b1, ThreadId=9, Message=В базе данных уже существует объект с именем "SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e".
+14:39:05:104	[SQL-FIRST-CHANCE] ServiceBrokerContext=<not found>, ActiveContexts=60791dda-6ea6-4def-b799-216195dc04cd => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftNew, brokerId=e4bec13b-7475-4566-b631-55b4b54a7241 || a38a56dc-9d2a-40c2-b8d0-95cb62f3d35e => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.planZagrVyaz, brokerId=381e00b1-4868-446d-bc65-2729f0248eae || 4d237008-d643-44dc-b98f-9312129af79c => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftMachineListNew, brokerId=36b7ebda-0ca2-47ae-9753-5f7b954d2226
+14:39:05:104	[SQL-FIRST-CHANCE] TopFrame=at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+14:39:05:104	[SQL-FIRST-CHANCE] Errors=[#2714/S3/C16/P:SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e/L:1 -> В базе данных уже существует объект с именем "SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e".]
+14:39:05:104	[SQL-FIRST-CHANCE] AppFrame=SewingProduction.Core.Program+<>c__DisplayClass8_0.<RegisterSqlFirstChanceTrace>b__0
+14:39:05:104	Вызвано исключение: "System.Data.SqlClient.SqlException" в System.Data.SqlClient.dll
+14:39:05:104	[SQL-FIRST-CHANCE] Number=2714, State=3, Class=16, Procedure=SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e, Line=1, ClientConnectionId=c34cab11-ed37-43cb-9b37-83974b8a18b1, ThreadId=9, Message=В базе данных уже существует объект с именем "SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e".
+14:39:05:104	[SQL-FIRST-CHANCE] ServiceBrokerContext=<not found>, ActiveContexts=60791dda-6ea6-4def-b799-216195dc04cd => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftNew, brokerId=e4bec13b-7475-4566-b631-55b4b54a7241 || a38a56dc-9d2a-40c2-b8d0-95cb62f3d35e => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.planZagrVyaz, brokerId=381e00b1-4868-446d-bc65-2729f0248eae || 4d237008-d643-44dc-b98f-9312129af79c => owner=SewingProduction.Core.services.AppServiceBrokerHub, table=dbo.knitWorkingShiftMachineListNew, brokerId=36b7ebda-0ca2-47ae-9753-5f7b954d2226
+14:39:05:104	[SQL-FIRST-CHANCE] TopFrame=at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+14:39:05:104	[SQL-FIRST-CHANCE] Errors=[#2714/S3/C16/P:SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e/L:1 -> В базе данных уже существует объект с именем "SqlQueryNotificationStoredProcedure-7eeef5cb-74be-4814-a20e-d3bd7bf1dd7e".]
+14:39:05:104	[SQL-FIRST-CHANCE] AppFrame=SewingProduction.Core.Program+<>c__DisplayClass8_0.<RegisterSqlFirstChanceTrace>b__0

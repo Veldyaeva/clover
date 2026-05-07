@@ -40,7 +40,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 {
     public partial class PlanZagrVyazCheck : CustomForm//, IThemeable
     {
-        private static DatabaseHelper _dbHelper;
+        private static DatabaseHelperSQL _dbHelper;
         private static DbService _dbService;
         private static BulkHelper _bulkHelper;
         private static GridHelper _gridHelper;
@@ -62,7 +62,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         public PlanZagrVyazCheck()
         {
             InitializeComponent();
-            _dbHelper = new DatabaseHelper("ace");
+            _dbHelper = new DatabaseHelperSQL("ace");
             _dbService = new DbService(_dbHelper);
             _bulkHelper = new BulkHelper();
             _gridHelper = new GridHelper();

@@ -22,7 +22,7 @@ namespace SewingProduction.Services
     /// </summary>
     public class DbService
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         //    private readonly HybridLogger _logger = new HybridLogger(); //убрала пока гибридный логгер, не хочу писать в базу
         private readonly FileLogger _logger = new FileLogger();
         private readonly BulkHelper _bulkHelper = new BulkHelper();
@@ -31,7 +31,7 @@ namespace SewingProduction.Services
         /// Инициализирует новый экземпляр dbService.
         /// </summary>
         /// <param name="dbHelper">Помощник для работы с базой данных.</param>
-        public DbService(DatabaseHelper dbHelper)
+        public DbService(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
 

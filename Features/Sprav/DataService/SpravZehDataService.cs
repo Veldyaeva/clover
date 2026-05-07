@@ -10,8 +10,8 @@ namespace SewingProduction.Features.Sprav.DataService
 {
     public class SpravZehDataService
     {
-        private readonly DatabaseHelper _dbHelper;
-        public SpravZehDataService(DatabaseHelper dbHelper)
+        private readonly DatabaseHelperSQL _dbHelper;
+        public SpravZehDataService(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper;
         }

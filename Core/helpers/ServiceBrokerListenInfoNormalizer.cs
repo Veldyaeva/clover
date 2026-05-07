@@ -22,6 +22,11 @@ namespace SewingProduction.Core.helpers
                 ["dbo.knitWorkingShiftMachineListNew"] = new[]
                 {
                     "kiwsmlLongRep","kwsmlKmlID","kwsmlKodOb","kwsmlKwsID"
+                },
+                ["dbo.knitWorkingShiftNew"] = new[]
+                {
+                    "kwsID","kwsTabStart","kwsTabEnd","kwsKmaID","kwsKmsID","kwsDateStart","kwsDateEnd",
+                    "kwsDateDel","kwsDel","kwsCompDel"
                 }
             };
 

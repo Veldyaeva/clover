@@ -1,4 +1,4 @@
-using DevExpress.XtraBars.Docking2010;
+﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors.ButtonsPanelControl;
 using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Features.TeamWork.Models;
@@ -75,7 +75,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 var insertionPoints = BuildBaseNodeInsertionPoints();
-                using var form = new BaseNodeInsertForm(nodes, insertionPoints, _lastFocusedRaszOperation?.N, _baseNodeLibraryService);
+                using var form = new BaseNodeInsertForm(User, nodes, insertionPoints, _lastFocusedRaszOperation?.N, _baseNodeLibraryService);
                 if (form.ShowDialog(this) != DialogResult.OK || form.SelectedNode == null || form.SelectedInsertionPoint == null)
                 {
                     return;
@@ -104,43 +104,22 @@ namespace SewingProduction.Features.TeamWork.Forms
                 var operations = GetOperationsForBaseNodeSave();
                 if (operations.Count == 0)
                 {
-                    MessageBox.Show(this, "Выберите операции в NormRasz или установите фокус на главе, которую нужно сохранить как базовый узел.", "Базовые узлы", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, "Выберите операции в NormRasz или установите фокус на операции, которую нужно сохранить как базовый узел.", "Базовые узлы", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
-                string defaultName = BuildDefaultBaseNodeName(operations);
+                string sourceRtCode = StringNormalizer.TrimOrEmpty((_currentAnnData ?? CreatedAnn)?.Kod);
+                string defaultName = BuildDefaultBaseNodeName(operations, sourceRtCode);
                 var defaults = BaseNodeMetadataSuggester.Suggest(_currentAnnData ?? CreatedAnn, operations);
-                using var form = new BaseNodeSaveForm(operations, defaultName, defaults);
+                defaults.SourceImagePath = await _artNormService.GetImage(annId: (_currentAnnData ?? CreatedAnn)?.AnnID);
+                using var form = new BaseNodeSaveForm(User, operations, defaultName, defaults, _baseNodeLibraryService);
                 if (form.ShowDialog(this) != DialogResult.OK || form.ResultNode == null)
                 {
                     return;
                 }
 
-                var existing = (await _baseNodeLibraryService
-                    .GetAllAsync())
-                    .FirstOrDefault(node => string.Equals(node.Name, form.ResultNode.Name, StringComparison.CurrentCultureIgnoreCase));
-
-                if (existing != null)
-                {
-                    var overwriteResult = MessageBox.Show(
-                        this,
-                        $"Базовый узел \"{existing.Name}\" уже существует. Перезаписать его?",
-                        "Базовые узлы",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Question,
-                        MessageBoxDefaultButton.Button2);
-
-                    if (overwriteResult != DialogResult.Yes)
-                    {
-                        return;
-                    }
-
-                    form.ResultNode.BaseNodeId = existing.BaseNodeId;
-                    form.ResultNode.Id = existing.Id;
-                    form.ResultNode.CreatedAtUtc = existing.CreatedAtUtc;
-                }
-
                 var savedNode = await _baseNodeLibraryService.SaveAsync(form.ResultNode);
+                ClearBaseNodeSelection();
                 _ = _logger.LogEventAsync($"Сохранен базовый узел \"{savedNode.Name}\" ({savedNode.Operations.Count} операций)", "SaveSelectionAsBaseNode");
                 _ = ShowStatusMessage($"Базовый узел \"{savedNode.Name}\" сохранен", 3000, Color.DarkGreen);
             }
@@ -181,6 +160,26 @@ namespace SewingProduction.Features.TeamWork.Forms
                 .ToList() ?? new List<NormRasz>();
         }
 
+        private void ClearBaseNodeSelection()
+        {
+            if (gridViewRasz == null)
+            {
+                return;
+            }
+
+            try
+            {
+                // После создания базового узла очищаем checkbox-выделение,
+                // чтобы схема RT не оставалась помеченной уже сохраненными операциями.
+                gridViewRasz.ClearSelection();
+                gridViewRasz.RefreshData();
+            }
+            catch (Exception ex)
+            {
+                LogSuppressedException("ClearBaseNodeSelection", ex);
+            }
+        }
+
         private List<BaseNodeInsertionPoint> BuildBaseNodeInsertionPoints()
         {
             var points = new List<BaseNodeInsertionPoint>
@@ -208,7 +207,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     {
                         Key = $"after:{group.Key}",
                         AfterN = group.Key,
-                        Label = string.IsNullOrWhiteSpace(text) ? $"После главы №{group.Key}" : $"После главы №{group.Key} - {text}"
+                        Label = string.IsNullOrWhiteSpace(text) ? $"После операции №{group.Key}" : $"После операции №{group.Key} - {text}"
                     };
                 });
 
@@ -286,19 +285,23 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private string BuildDefaultBaseNodeName(IReadOnlyList<NormRasz> operations)
+        private string BuildDefaultBaseNodeName(IReadOnlyList<NormRasz> operations, string sourceRtCode = null)
         {
+            string prefix = string.IsNullOrWhiteSpace(sourceRtCode)
+                ? string.Empty
+                : $"РТ {sourceRtCode} - ";
+
             if (operations == null || operations.Count == 0)
             {
-                return "Новый базовый узел";
+                return prefix + "Новый базовый узел";
             }
 
             if (operations.Count == 1)
             {
-                return $"Узел {operations[0].DisplayNumber}";
+                return $"{prefix}узел {operations[0].DisplayNumber}";
             }
 
-            return $"Узел {operations.First().DisplayNumber}-{operations.Last().DisplayNumber}";
+            return $"{prefix}узел {operations.First().DisplayNumber}-{operations.Last().DisplayNumber}";
         }
     }
 }

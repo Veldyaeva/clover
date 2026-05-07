@@ -12,7 +12,7 @@ namespace SewingProduction.Features.Articul.Service
 
         public GrupMenDataService()
         {
-            _dbService = new DbService(new DatabaseHelper());
+            _dbService = new DbService(new DatabaseHelperSQL());
         }
 
         public async Task<List<GrupMenModel>> GetAllAsync()

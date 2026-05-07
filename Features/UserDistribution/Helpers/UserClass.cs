@@ -12,7 +12,7 @@ namespace SewingProduction.Features.UserDistribution.Helpers
     public class UserClass
     {
         private readonly UserClassDataService _userClassDataService;
-        DatabaseHelper dbHelper = new DatabaseHelper("ace");
+        DatabaseHelperSQL dbHelper = new DatabaseHelperSQL();
         public int UserId { get; set; }
         public string UserName { get; set; } = string.Empty;
         public int CreatorID { get; set; }
@@ -127,8 +127,8 @@ namespace SewingProduction.Features.UserDistribution.Helpers
     }
     public class UserClassDataService
     {
-        private readonly DatabaseHelper _dbHelper;
-        public UserClassDataService(DatabaseHelper dbHelper)
+        private readonly DatabaseHelperSQL _dbHelper;
+        public UserClassDataService(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper;
         }

@@ -16,7 +16,7 @@ namespace SewingProduction.Features.Tabel.Services
 
         public TabelLockDataService()
         {
-            _dbService = new DbService(new DatabaseHelper());
+            _dbService = new DbService(new DatabaseHelperSQL());
         }
         public async Task<List<TabelSpLockModel>> GetTabelSpLock()
         {

@@ -1,4 +1,4 @@
-using DevExpress.XtraBars.Docking2010;
+﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Models;
@@ -39,11 +39,87 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewNZP_FocusedRowChanged_Internal(sender, e);
         }
 
+        private void ApplyAnnGridKitSearchFilter(GridView gridView)
+        {
+            if (gridView == null || _isUpdatingAnnGridKitFilter)
+            {
+                return;
+            }
+
+            string searchText = StringNormalizer.TrimOrEmpty(gridView.FindFilterText);
+            bool shouldUseKitFilter = toggleSwitchKit?.IsOn == true && !string.IsNullOrEmpty(searchText);
+
+            string targetFilter = string.Empty;
+            if (shouldUseKitFilter)
+            {
+                var parsedArticle = ParseKitArticle(searchText);
+                if (parsedArticle.HasValidComponents)
+                {
+                    targetFilter = BuildKitArticleFilter(parsedArticle.Component1, parsedArticle.Component2);
+                }
+            }
+
+            if (string.IsNullOrEmpty(targetFilter))
+            {
+                if (!_annGridKitFilterActive)
+                {
+                    return;
+                }
+
+                _isUpdatingAnnGridKitFilter = true;
+                try
+                {
+                    _annGridKitFilterActive = false;
+                    gridView.ActiveFilterString = string.Empty;
+                }
+                finally
+                {
+                    _isUpdatingAnnGridKitFilter = false;
+                }
+
+                return;
+            }
+
+            if (_annGridKitFilterActive && string.Equals(gridView.ActiveFilterString, targetFilter, StringComparison.Ordinal))
+            {
+                return;
+            }
+
+            _isUpdatingAnnGridKitFilter = true;
+            try
+            {
+                _annGridKitFilterActive = true;
+                gridView.ActiveFilterString = targetFilter;
+            }
+            finally
+            {
+                _isUpdatingAnnGridKitFilter = false;
+            }
+        }
+
+        private static string BuildKitArticleFilter(string component1, string component2)
+        {
+            string escapedComponent1 = EscapeGridFilterValue(component1);
+            string escapedComponent2 = EscapeGridFilterValue(component2);
+
+            return $"([Articul] LIKE '%{escapedComponent1}%') OR ([Articul] LIKE '%{escapedComponent2}%')";
+        }
+
+        private static string EscapeGridFilterValue(string value)
+        {
+            return StringNormalizer.TrimOrEmpty(value).Replace("'", "''");
+        }
+
         /// <summary>
         /// Обрабатывает смену строки в неувязанных артикулах
         /// </summary>
         private async void gridView_unboundArts_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
+            if (_isRestoringGridState)
+            {
+                return;
+            }
+
             gridView_unboundArts_FocusedRowChanged_Internal(sender, e);
         }
 
@@ -54,6 +130,10 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void ANNgridView_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
+            if (_isRestoringGridState)
+            {
+                return;
+            }
             try
             {
                 if (e.FocusedRowHandle >= 0 && ANNgridView.GetRow(e.FocusedRowHandle) is ArtNormN row)
@@ -79,7 +159,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (gridView == null) return;
 
                 if (!IsHandleCreated) return;
-                BeginInvoke((MethodInvoker)RefreshAnnGridSearchVisualState);
+                BeginInvoke((MethodInvoker)(() =>
+                {
+                    ApplyAnnGridKitSearchFilter(gridView);
+                    RefreshAnnGridSearchVisualState();
+                }));
             }
             catch (Exception ex)
             {
@@ -285,6 +369,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                 case "wd:print-plus":
                     if (printButtonPlus.Enabled && printButtonPlus.Visible)
                         printButtonPlus_Click(null, null);
+                    break;
+                case "wd:edit-base-nodes":
+                    OpenBaseNodeLibraryEditor();
                     break;
             }
         }

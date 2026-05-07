@@ -106,6 +106,12 @@
     <Compile Update="Features\CardByNom\Forms\NomLookUp.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\ExchangeApp\Forms\FrmExchangeManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\ExchangeApp\Forms\FrmExchangeManager.UIConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\KnittingProduction\Forms\KnitterWorkSpace.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -217,6 +223,9 @@
     <Compile Update="Features\Tabel\Forms\EmployeeTransfer .cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\Tabel\Forms\OtklTabel.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\Tabel\Forms\OtvlRab.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -227,6 +236,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Tabel\Forms\TabelMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Tabel\Forms\TabNEdit.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Tabel\Reports\Blank.cs">
@@ -241,6 +253,9 @@
     <Compile Update="Features\TeamWork\Forms\BaseNodeLibraryEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\TeamWork\Forms\BaseNodeOperationEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\TeamWork\Forms\BaseNodeSaveForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -251,6 +266,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork.Articles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.BaseNodes.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork.Bootstrap.cs">
@@ -470,6 +488,9 @@
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\VshivkiReportHol.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\TimeSheetOtklReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
   </ItemGroup>

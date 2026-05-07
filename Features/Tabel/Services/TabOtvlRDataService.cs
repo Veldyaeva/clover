@@ -17,7 +17,7 @@ namespace SewingProduction.Features.Tabel.Services
 
         public TabOtvlRDataService()
         {
-            _dbService = new DbService(new DatabaseHelper());
+            _dbService = new DbService(new DatabaseHelperSQL());
         }
         public async Task<List<TabOtvlRModel>> GetByMgGrTabAsync(int gr, int tab)
         {

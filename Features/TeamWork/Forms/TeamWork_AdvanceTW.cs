@@ -1,4 +1,4 @@
-using Dapper;
+﻿using Dapper;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Base;
@@ -44,7 +44,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly ITeamWorkUIService _uiService;
         private readonly ITeamWorkValidationService _validationService;
         private int _bufferWorkDivision;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly TWGridHelper _gridHelper = new TWGridHelper();
         private readonly LayoutControlGroupHelper _layoutControlGroupHelper = new LayoutControlGroupHelper();
         private int _newAnnId = -1;
@@ -62,6 +62,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private bool _listChangedHandlersAttached = false;
         private bool _rowStyleHandlersAttached = false;
         private bool _focusedRowHandlersAttached = false;
+        private bool _updatingEmployeeBindings = false;
 
 
         private BindingList<NormRasz> _normRaszList;
@@ -101,6 +102,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             _ = _logger.LogErrorAsync(ex ?? new Exception("Suppressed exception"), $"Suppressed: {context}");
         }
         private static List<FioModel> _cachedFioData;
+        private static List<FioModel> _cachedKnitConstrFioData;
+        private readonly BindingSource _knitConstrBindingSource = new BindingSource();
         private bool _isCustomEditFormOpen = false;
         private bool _okPressed = false;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -199,15 +202,16 @@ namespace SewingProduction.Features.TeamWork.Forms
             // Группировка по основному номеру операции (N)
             ConfigureRaszGrouping();
 
-            _dbHelper = new DatabaseHelper();
-            _dbService = new DbService(_dbHelper);
-            _artNormService = new ArtNormRepository(_dbHelper);
+            var databaseServices = TeamWorkDependencyFactory.CreateDatabaseServices();
+            _dbHelper = new DatabaseHelperSQL();
+            _dbService = databaseServices.DbService;
+            _artNormService = databaseServices.ArtNormRepository;
             _baseNodeLibraryService = new BaseNodeLibraryService(_dbHelper, _logger);
             // Инициализируем сервисы декомпозиции (пока без DI контейнера)
             // Адаптеры для интерфейсов до внедрения DI
-            _dataService = new TeamWorkDataServiceAdapter(_artNormService, _dbService);
-            _uiService = new TeamWorkUIServiceAdapter(this);
-            _validationService = new TeamWorkValidationServiceAdapter();
+            _dataService = new TeamWorkDataService(_artNormService, _dbService);
+            _uiService = new TeamWorkUIService(this);
+            _validationService = new TeamWorkValidationService();
          //   ThemeManager.UpdateTheme(this);
 
             if (!oldId.HasValue)
@@ -455,6 +459,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             _controlToArtNormProperty[dateCreate] = artType.GetProperty(nameof(ArtNormN.dateCreate));
             _controlToArtNormProperty[designerComboBox] = artType.GetProperty(nameof(ArtNormN.Diz));
             _controlToArtNormProperty[constructorComboBox] = artType.GetProperty(nameof(ArtNormN.Constr));
+            _controlToArtNormProperty[knitConstrComboBox] = artType.GetProperty(nameof(ArtNormN.KnitConstr));
 
             nameTextBox.TextChanged += HandleAnnDataChange;
             groupTextBox.TextChanged += HandleAnnDataChange;
@@ -465,6 +470,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             dateCreate.ValueChanged += HandleAnnDataChange;
             designerComboBox.EditValueChanged += HandleAnnDataChange;
             constructorComboBox.EditValueChanged += HandleAnnDataChange;
+            knitConstrComboBox.EditValueChanged += HandleAnnDataChange;
         }
 
         // Общий обработчик изменений данных ANN
@@ -525,6 +531,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // if (control == dateUpdate) return nameof(ArtNormN.dateUpdate);
             if (control == designerComboBox) return nameof(ArtNormN.Diz);
             if (control == constructorComboBox) return nameof(ArtNormN.Constr);
+            if (control == knitConstrComboBox) return nameof(ArtNormN.KnitConstr);
             return null;
         }
 
@@ -1196,7 +1203,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 if (_bufferWorkDivision > 0)
                 {
-                    var annData = await _artNormService.GetArtNormDataById(_bufferWorkDivision);
+                    var annData = await _dataService.LoadAnnDataAsync(_bufferWorkDivision);
                     if (annData != null)
                     {
                         this.Invoke((MethodInvoker)(() =>
@@ -1285,9 +1292,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 AttachChangeHandlers();
-                kodProizvList = await _dbService.GetListAsync<KodProizvModel>("SELECT kod_proizv, text_proizv FROM kod_proizv", null);
-                podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("SELECT kod_vyaz, text_vyaz, kod_proizv FROM podr_vyaz", null);
-                oborudShvList = await _dbService.GetListAsync<OborudShvModel>("SELECT kod_ob, text_ob FROM spOborudShv", null);
+                var referenceData = await _dataService.LoadReferenceDataAsync();
+                kodProizvList = referenceData.KodProizv;
+                podrVyazList = referenceData.PodrVyaz;
+                oborudShvList = referenceData.OborudShv;
 
                 repositoryItemLookUpEdit_kodProizv.DataSource = kodProizvList;
                 repositoryItemLookUpEdit_kodProizv.DisplayMember = "text_proizv";
@@ -1319,7 +1327,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         }
 
                         // 3) Подтягиваем spec
-                        var spec = await _artNormService.GetSpecByOborudKod(newKodOb);
+                        var spec = await _dataService.GetSpecByOborudKodAsync(newKodOb);
                         if (!string.IsNullOrEmpty(spec))
                         {
                             gridViewRasz.SetFocusedRowCellValue("Spec", spec);
@@ -1395,9 +1403,11 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 designerComboBox.DataBindings.Clear();
                 constructorComboBox.DataBindings.Clear();
+                knitConstrComboBox.DataBindings.Clear();
 
                 designerComboBox.DataBindings.Add("EditValue", bindingSource1, nameof(ArtNormN.Diz), true, DataSourceUpdateMode.OnPropertyChanged);
                 constructorComboBox.DataBindings.Add("EditValue", bindingSource1, nameof(ArtNormN.Constr), true, DataSourceUpdateMode.OnPropertyChanged);
+                knitConstrComboBox.DataBindings.Add("EditValue", bindingSource1, nameof(ArtNormN.KnitConstr), true, DataSourceUpdateMode.OnPropertyChanged);
 
                 // Подписки на RowStyle/FocusedRowChanged — один раз
                 if (!_rowStyleHandlersAttached)
@@ -1428,7 +1438,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                     int sourceAnnId = _sourceAnnIdToCopyDetailsFrom.Value;
 
                     // Используем CloneUtils.CloneList для автоматического сброса ID
-                    var raszToCopy = await _artNormService.GetRelatedNormRasz(sourceAnnId);
+                    var relatedData = await _dataService.LoadRelatedDataAsync(sourceAnnId);
+                    var raszToCopy = relatedData.NormRasz ?? new List<NormRasz>();
                     var clonedRasz = CloneUtils.CloneList(raszToCopy, _currentAnnData.AnnID, "nrId", false);
 
                     // Дополнительная проверка - убеждаемся, что все ID сброшены
@@ -1448,7 +1459,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         _normRaszList.Clear();
                         _normRaszList.BulkLoad(clonedRasz);
 
-                        var raskToCopy = await _artNormService.GetRelatedNormRask(sourceAnnId);
+                        var raskToCopy = relatedData.NormRask ?? new List<NormRask>();
                         var clonedRask = CloneUtils.CloneList(raskToCopy, _currentAnnData.AnnID, "id", false);
 
                         // Дополнительная проверка для NormRask
@@ -1463,7 +1474,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         _normRaskList.Clear();
                         _normRaskList.BulkLoad(clonedRask);
 
-                        var kontToCopy = await _artNormService.GetRelatedNormKont(sourceAnnId);
+                        var kontToCopy = relatedData.NormKont ?? new List<NormKont>();
                         var clonedKont = CloneUtils.CloneList(kontToCopy, _currentAnnData.AnnID, "nkId", false);
 
                         // Дополнительная проверка для NormKont
@@ -1617,7 +1628,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 if (_cachedFioData == null)
                 {
-                    var fioData = await _artNormService.GetRelDesigner();
+                    var fioData = await _dataService.LoadDesignersAsync();
                     if (fioData != null && fioData.Count > 0)
                     {
                         _cachedFioData = new List<FioModel>(fioData);
@@ -1630,14 +1641,38 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
                 }
 
+                if (_cachedKnitConstrFioData == null)
+                {
+                    var knitConstrData = await _dataService.LoadKnitConstructorsAsync();
+                    if (knitConstrData != null && knitConstrData.Count > 0)
+                    {
+                        _cachedKnitConstrFioData = new List<FioModel>(knitConstrData);
+                        await _logger.LogEventAsync("FIO конструкторов-программистов загружено и закешировано", "LoadAndBindFioListsAsync");
+                    }
+                    else
+                    {
+                        await _logger.LogEventAsync("Пустой список FIO конструкторов-программистов", "LoadAndBindFioListsAsync");
+                    }
+                }
+
                 // Обновляем данные в существующих источниках привязки
                 await this.InvokeAsync(() =>
                 {
-                    designerBindingSource.DataSource = new List<FioModel>(_cachedFioData);
-                    constructorBindingSource.DataSource = new List<FioModel>(_cachedFioData);
+                    _updatingEmployeeBindings = true;
+                    try
+                    {
+                        designerBindingSource.DataSource = new List<FioModel>(_cachedFioData);
+                        constructorBindingSource.DataSource = new List<FioModel>(_cachedFioData);
+                        _knitConstrBindingSource.DataSource = new List<FioModel>(_cachedKnitConstrFioData ?? new List<FioModel>());
 
-                    _gridHelper.ConfigureComboBox(designerComboBox, designerBindingSource);
-                    _gridHelper.ConfigureComboBox(constructorComboBox, constructorBindingSource);
+                        _gridHelper.ConfigureComboBox(designerComboBox, designerBindingSource);
+                        _gridHelper.ConfigureComboBox(constructorComboBox, constructorBindingSource);
+                        _gridHelper.ConfigureComboBox(knitConstrComboBox, _knitConstrBindingSource);
+                    }
+                    finally
+                    {
+                        _updatingEmployeeBindings = false;
+                    }
                 });
             }
             catch (Exception ex)
@@ -2754,6 +2789,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// </summary>
         private async void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (_updatingEmployeeBindings)
+            {
+                return;
+            }
+
             if (sender is DevExpress.XtraEditors.LookUpEdit lookUpEdit && lookUpEdit.EditValue != null && lookUpEdit.EditValue != DBNull.Value)
             {
                 try
@@ -3126,7 +3166,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
             foreach (var id in bufferIdsToUse)
             {
-                var raszList = await _artNormService.GetRelatedNormRasz(id);
+                var relatedData = await _dataService.LoadRelatedDataAsync(id);
+                var raszList = relatedData.NormRasz ?? new List<NormRasz>();
                 if (raszList == null) continue;
                 int partMaxN = raszList.Select(x => x.N).DefaultIfEmpty(0).Max();
                 int offset = currentMaxN; // 0 для первой группы, далее — накопленный максимум

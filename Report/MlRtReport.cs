@@ -1,12 +1,17 @@
-﻿using System.ComponentModel;
+﻿using DevExpress.XtraReports.UI;
+using System.ComponentModel;
 
 namespace SewingProduction
 {
     public partial class MlRtReport : SewingProduction.Report.ConnectedXtraReport
+    //public partial class MlRtReport : DevExpress.XtraReports.UI.XtraReport
     {
         public MlRtReport()
         {
             InitializeComponent();
+
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                return;
             UseCurrentConnection();
         }
 
@@ -17,6 +22,8 @@ namespace SewingProduction
 
         private void PrintMlRtReport_BeforePrint(object sender, CancelEventArgs e)
         {
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                return;
             this.xrSubreport1.CanShrink = true;
         }
 

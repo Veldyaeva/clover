@@ -1,4 +1,15 @@
-﻿using System;
+﻿using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Views.Layout;
+using SewingProduction.Extensions;
+using SewingProduction.Features.KnittingProduction.Models;
+using SewingProduction.Features.KnittingProduction.Services;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Helpers;
+using SewingProduction.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -7,22 +18,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Repository;
-using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Views.Base;
-using DevExpress.XtraGrid.Views.Layout;
-using SewingProduction.Extensions;
-using SewingProduction.Features.KnittingProduction.Models;
-using SewingProduction.Features.KnittingProduction.Services;
-using SewingProduction.Helpers;
-using SewingProduction.Services;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
     public partial class KnittingMachinesLoading : CustomForm
     {
-        private static DatabaseHelper _dbHelper;
+        private static DatabaseHelperSQL _dbHelper;
         private static DbService _dbService;
         private static BulkHelper _bulkHelper;
         private readonly ILogger _logger = new FileLogger();
@@ -61,10 +62,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         //private BindingSource _knitMachineAreaListViewBindingSource;
         //private List<KnitMachineAreaListView> knitMachineAreaListViewData = new List<KnitMachineAreaListView>();
 
-        public KnittingMachinesLoading(int classID)
+        public KnittingMachinesLoading(UserClass User, int classID) : base(User)
         {
             InitializeComponent();
-            _dbHelper = new DatabaseHelper("ace");
+            _dbHelper = new DatabaseHelperSQL("ace");
             _dbService = new DbService(_dbHelper);
             _vyazService = new VyazService(_dbHelper);
             _bulkHelper = new BulkHelper();
@@ -80,6 +81,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             //MessageBox.Show($"{сomboBoxKnitMachineClassList.SelectedValue}");
             //}
             сomboBoxKnitMachineClassList.Refresh();
+        }
+        public KnittingMachinesLoading(UserClass User) : base(User)
+        {
+            InitializeComponent();
         }
         // Функция конвертации HTML в RTF (используем RichTextBox)
         private string ConvertHtmlToRtf(string html)
@@ -1423,7 +1428,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 xKmlID = 0;
                 xKmlNumber = "";
             }
-            KnittingMachinesUnitLoading KML = new KnittingMachinesUnitLoading(xKmlID, xKmlNumber);
+            KnittingMachinesUnitLoading KML = new KnittingMachinesUnitLoading(_user, xKmlID, xKmlNumber);
 
             DialogResult result = KML.ShowDialog();
             // Обработка результата, возвращенного модальной формой

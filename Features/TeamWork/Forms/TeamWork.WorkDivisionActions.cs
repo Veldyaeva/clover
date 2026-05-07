@@ -1,4 +1,4 @@
-using DevExpress.XtraGrid.Views.Grid;
+﻿using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Features.TeamWork.Models;
 using SewingProduction.Helpers;
@@ -44,7 +44,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 var selectedMyDataAnn = gridView.GetRow(rowHandle) as MyDataANN;
                 if (selectedMyDataAnn == null) return;
                 int annId = selectedMyDataAnn.AnnID;
-                selectedAnnToDuplicate = await _artNormService.GetArtNormDataById(annId);
+                selectedAnnToDuplicate = await _teamWorkService.LoadWorkDivisionAsync(annId);
                 if (selectedAnnToDuplicate == null) return;
             }
             if (selectedAnnToDuplicate == null)
