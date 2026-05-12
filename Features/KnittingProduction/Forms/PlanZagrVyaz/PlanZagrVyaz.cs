@@ -528,8 +528,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                     ["knitWorkingShiftNewCurrentSmen_view"] = async () =>
                     {
-                        SmenZadanyFocusedRowChanged(advBandedGridViewSmenZadany, advBandedGridViewSmenZadany.FocusedRowHandle); // наряд-задание ВЗП
-                        SmenZadanyFocusedRowChanged(gridViewSmenZadanyOtp, gridViewSmenZadanyOtp.FocusedRowHandle); // наряд-задание Отп, РЦ
+                        switch (vyazPodrKod)
+                        {
+                            case 1:
+                                SmenZadanyFocusedRowChanged(advBandedGridViewSmenZadany, advBandedGridViewSmenZadany.FocusedRowHandle); // наряд-задание ВЗП
+                                break;
+                            case 2:
+                            case 3:
+                                SmenZadanyFocusedRowChanged(gridViewSmenZadanyOtp, gridViewSmenZadanyOtp.FocusedRowHandle); // наряд-задание Отп, РЦ
+                                break;
+                        }
                     },
 
                     ["GetPlanZagrVyazByPachList"] = async () =>
