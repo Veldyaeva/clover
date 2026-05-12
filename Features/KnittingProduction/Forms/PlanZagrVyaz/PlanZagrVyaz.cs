@@ -517,11 +517,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                             case 1:
                                 advBandedGridViewSmenZadany.TopRowIndex = xTopRowIndex;
                                 advBandedGridViewSmenZadany.FocusedRowHandle = xFocusedRowHandle;
+                                SmenZadanyFocusedRowChanged(advBandedGridViewSmenZadany, advBandedGridViewSmenZadany.FocusedRowHandle); // наряд-задание ВЗП
                                 break;
                             case 2:
                             case 3:
                                 gridViewSmenZadanyOtp.TopRowIndex = xTopRowIndex;
                                 gridViewSmenZadanyOtp.FocusedRowHandle = xFocusedRowHandle;
+                                SmenZadanyFocusedRowChanged(gridViewSmenZadanyOtp, gridViewSmenZadanyOtp.FocusedRowHandle); // наряд-задание Отп, РЦ
                                 break;
                         }
                     },
