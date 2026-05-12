@@ -1,0 +1,178 @@
+using SewingProduction.Interfaces;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace SewingProduction.Features.TeamWork.Models
+{
+    public sealed class ThreadNormRow : INewable, IModifiable, IDeletable, INotifyPropertyChanged
+    {
+        private int _id;
+        private string _men = string.Empty;
+        private int _tg_id_n;
+        private int _ta_id;
+        private decimal _norm;
+        private string _kod_dr = string.Empty;
+        private string _kod3 = string.Empty;
+        private string _kod_art = string.Empty;
+        private DateTime? _date_change;
+
+        public int id
+        {
+            get => _id;
+            set => SetField(ref _id, value);
+        }
+
+        public string men
+        {
+            get => _men;
+            set => SetField(ref _men, value ?? string.Empty);
+        }
+
+        public int tg_id_n
+        {
+            get => _tg_id_n;
+            set => SetField(ref _tg_id_n, value);
+        }
+
+        public int ta_id
+        {
+            get => _ta_id;
+            set => SetField(ref _ta_id, value);
+        }
+
+        public decimal norm
+        {
+            get => _norm;
+            set => SetField(ref _norm, value);
+        }
+
+        public string kod_dr
+        {
+            get => _kod_dr;
+            set => SetField(ref _kod_dr, value ?? string.Empty);
+        }
+
+        public string kod3
+        {
+            get => _kod3;
+            set => SetField(ref _kod3, value ?? string.Empty);
+        }
+
+        public string kod_art
+        {
+            get => _kod_art;
+            set => SetField(ref _kod_art, value ?? string.Empty);
+        }
+
+        public DateTime? date_change
+        {
+            get => _date_change;
+            set => SetField(ref _date_change, value);
+        }
+
+        public string men_name { get; set; } = string.Empty;
+        public int TC_ID { get; set; }
+        public string TC_ClassName { get; set; } = string.Empty;
+        public int TG_ID { get; set; }
+        public string TG_GroupName { get; set; } = string.Empty;
+        public string TCAT_CategoryName { get; set; } = string.Empty;
+        public string TAT_Name { get; set; } = string.Empty;
+        public string ThreadDisplay { get; set; } = string.Empty;
+
+        public bool approved
+        {
+            get => date_change.HasValue;
+            set
+            {
+                if (value)
+                {
+                    date_change = date_change ?? DateTime.Now;
+                }
+                else
+                {
+                    date_change = null;
+                }
+            }
+        }
+
+        public bool IsNew { get; set; }
+        public bool IsModified { get; set; }
+        public bool IsDeleted { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public ThreadNormRow CloneForCopy()
+        {
+            return new ThreadNormRow
+            {
+                id = 0,
+                men = men,
+                tg_id_n = tg_id_n,
+                ta_id = ta_id,
+                norm = norm,
+                kod_dr = kod_dr,
+                kod3 = kod3,
+                kod_art = kod_art,
+                date_change = null,
+                men_name = men_name,
+                TC_ID = TC_ID,
+                TC_ClassName = TC_ClassName,
+                TG_ID = TG_ID,
+                TG_GroupName = TG_GroupName,
+                TCAT_CategoryName = TCAT_CategoryName,
+                TAT_Name = TAT_Name,
+                ThreadDisplay = ThreadDisplay,
+                IsNew = true,
+                IsModified = true
+            };
+        }
+
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (Equals(field, value))
+            {
+                return;
+            }
+
+            field = value;
+            if (!IsNew)
+            {
+                IsModified = true;
+            }
+
+            OnPropertyChanged(propertyName);
+        }
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (propertyName == nameof(date_change))
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(approved)));
+            }
+        }
+    }
+
+    public sealed class ThreadMaterialOption
+    {
+        public string kod_dr { get; set; } = string.Empty;
+        public string kod3 { get; set; } = string.Empty;
+        public string kod_art { get; set; } = string.Empty;
+        public string displayText { get; set; } = string.Empty;
+    }
+
+    public sealed class ThreadAssortModel
+    {
+        public int TAT_ID { get; set; }
+        public string TAT_Name { get; set; } = string.Empty;
+    }
+
+    public sealed class ThreadCategoryOption
+    {
+        public int TCAT_ID { get; set; }
+        public string TCAT_CategoryName { get; set; } = string.Empty;
+        public string TG_GroupName { get; set; } = string.Empty;
+        public string TC_ClassName { get; set; } = string.Empty;
+    }
+}

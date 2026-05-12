@@ -36,6 +36,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     await RestoreFocusAsync(_lastFocusedAnnId);
                 }
+                InitializeThreadNormsButton();
                 InitHeaderButtonTags();
                 InitializeMainBaseNodeActions();
 
