@@ -432,7 +432,7 @@ namespace SewingProduction.Services
             if (exists != null)
             {
                 // обновление
-                await UpdateEntityAsync(tableName, keyFieldName, entity);
+                await UpdateEntityAsync(tableName, keyFieldName, entity, true);
                 return keyId;
             }
             else

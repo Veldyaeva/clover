@@ -4,21 +4,31 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.IO;
 using System.Linq;
+using System.ServiceModel.Channels;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.Charts.Native;
+using DevExpress.CodeParser;
+using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
-using System.IO;
-using System.ServiceModel.Channels;
-using SewingProduction.Features.KnittingProduction.Forms;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.Class;
+using SewingProduction.Core.Forms;
+using SewingProduction.Core.Models;
+using SewingProduction.Core.services;
+using SewingProduction.Extensions;
+using SewingProduction.Features.CuttingProduction.Models;
+using SewingProduction.Features.CuttingProduction.Services;
+using SewingProduction.Features.KnittingProduction.Forms;
+using SewingProduction.Features.Tabel.Forms;
+using SewingProduction.Features.UserDistribution.Class;
+using SewingProduction.Features.UserDistribution.Forms;
+using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
-using SewingProduction.Features.CuttingProduction.Services;
-using SewingProduction.Features.CuttingProduction.Models;
-using SewingProduction.Extensions;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Columns;
 
 namespace SewingProduction.Features.CuttingProduction.Forms
 {
@@ -32,6 +42,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
         private BindingList<raskrZehUpView> _rzuBindingList;
         private BindingSource _rzuBindingSource;
         private LoadingScreen _loadingScreen;
+
         public CuttingForm()
         {
             InitializeComponent();
@@ -588,5 +599,40 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             GC.WaitForPendingFinalizers();
             GC.Collect();*/
         }
+        #region Вшивка
+        PrintSewnDataService printSewnDataService = new PrintSewnDataService();
+        private async void customButtonSewn_Click(object sender, EventArgs e)
+        {
+            var str = gridViewRzu.GetFocusedRow() as raskrZehUpView;
+            if (str == null)
+                return;
+
+            string nomZad = str.nom_zad?.ToString() ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(nomZad))
+            {
+                MessageBox.Show("Не найден номер задания.");
+                return;
+            }
+
+            bool notPrintVsh = await printSewnDataService.GetNotPrintVshAsync(nomZad);
+            if (notPrintVsh)
+            {
+                MessageBox.Show("На изделие не нужно печатать вшивки!");
+                return;
+            }
+
+            string articul = str.articul?.ToString() ?? string.Empty;
+            if (nomZad.StartsWith("32") && articul.StartsWith("7"))
+            {
+                MessageBox.Show("Текстильное производство печатать только на готовое изделие, на чехол не надо!");
+                return;
+            }      
+
+            string nom = str.nom?.ToString() ?? string.Empty;
+			var printSewn = new PrintSewn(nom, nomZad, 0);
+			printSewn.ShowDialog();
+			return;
+        }
+        #endregion
     }
 }

@@ -89,6 +89,18 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
+                // 👉 подтверждение для Tab 999
+                if (action == PzvActionType.AssignTab999)
+                {
+                    var mResult = MessageBox.Show(
+                        "Назначить табельный номер 999 на все выбранные операции?\n\nВы уверены?",
+                        "Подтверждение",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+
+                    if (mResult != DialogResult.Yes)
+                        return;
+                }
                 PzvSelectionContext context = action switch
                 {
                     PzvActionType.AssignKnittingMachine => _contextBuilder.BuildForPzvActionsWithShift(),

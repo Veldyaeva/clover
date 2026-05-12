@@ -1,18 +1,3 @@
-using DevExpress.XtraEditors.ButtonsPanelControl;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraLayout;
-using DevExpress.XtraReports.UI;
-using SewingProduction.Core.Class;
-using SewingProduction.Core.helpers;
-using SewingProduction.Features.Articul.Forms;
-using SewingProduction.Features.Articul.Helpers;
-using SewingProduction.Features.Articul.Models;
-using SewingProduction.Features.Articul.Service;
-using SewingProduction.Features.UserDistribution.Class;
-using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.Helpers;
-using SewingProduction.Report;
-using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +7,24 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraEditors.ButtonsPanelControl;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraLayout;
+using DevExpress.XtraReports.UI;
+using SewingProduction.Core.Class;
+using SewingProduction.Core.Forms;
+using SewingProduction.Core.helpers;
+using SewingProduction.Core.services;
+using SewingProduction.Features.Articul.Forms;
+using SewingProduction.Features.Articul.Helpers;
+using SewingProduction.Features.Articul.Models;
+using SewingProduction.Features.Articul.Service;
+using SewingProduction.Features.CuttingProduction.Models;
+using SewingProduction.Features.UserDistribution.Class;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Helpers;
+using SewingProduction.Report;
+using SewingProduction.Services;
 using BindingSource = System.Windows.Forms.BindingSource;
 using DataTable = System.Data.DataTable;
 
@@ -844,8 +847,21 @@ namespace SewingProduction.Features.Articul
 
         private void customSimpleButton7_Click(object sender, EventArgs e)
         {
+			var str = bsPreview.Current as SpArtPreviewModel;
+			if (str == null)
+				return;
 
-        }
+			string kod = str.Kod?.ToString() ?? string.Empty;
+			if (string.IsNullOrWhiteSpace(kod))
+			{
+				MessageBox.Show("Не найден код.");
+				return;
+			}
+
+			var printSewn = new PrintSewn(kod);
+			printSewn.ShowDialog();
+			return;
+		}
 
         #region headerButtons
         /// <summary>
