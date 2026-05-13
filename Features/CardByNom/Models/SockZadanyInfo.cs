@@ -54,7 +54,10 @@ namespace SewingProduction.Features.CardByNom.Models
         public int kolDefects { get; set; }
         [NotMapped]
         public string ko { get; set; }
-
+        [NotMapped] string razmList { get; set; }
+        [NotMapped] int sekVyaz { get; set; }
+        [NotMapped] decimal hoursVyaz { get; set; }
+        [NotMapped] int sekVyazEdPlan { get; set; }
     }
 
     public class SockZadanySmenList
@@ -140,6 +143,9 @@ namespace SewingProduction.Features.CardByNom.Models
                 }
             }
         }
+        [NotMapped] int kzKolManual { get; set; }
+        [NotMapped] int sekVyaz { get; set; }
+        [NotMapped] int sekVyazEdPlan { get; set; }
     }
 
     public class SockServiceList
