@@ -203,20 +203,20 @@ namespace SewingProduction.Features.TeamWork.Forms
                 .Where(result => !string.IsNullOrWhiteSpace(result.error))
                 .ToList();
 
-            if (invalid.Count > 0)
-            {
-                MessageBox.Show(invalid[0].error, "Валидация", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-            if (!ValidateDuplicates())
-            {
-                MessageBox.Show(
-                    "В справочнике есть дублирующиеся нормы ниток. Сохранение невозможно.",
-                    "Проверка норм ниток",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-                return false;
-            }
+            //if (invalid.Count > 0)
+            //{
+            //    MessageBox.Show(invalid[0].error, "Валидация", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return false;
+            //}
+            //if (!ValidateDuplicates())
+            //{
+            //    MessageBox.Show(
+            //        "В справочнике есть дублирующиеся нормы ниток. Сохранение невозможно.",
+            //        "Проверка норм ниток",
+            //        MessageBoxButtons.OK,
+            //        MessageBoxIcon.Warning);
+            //    return false;
+            //}
             var changedRows = _rows.Where(x => x.IsNew || x.IsModified).ToList();
             if (changedRows.Count == 0)
             {
