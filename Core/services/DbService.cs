@@ -1,4 +1,4 @@
-using Dapper;
+﻿using Dapper;
 using DevExpress.Mvvm.Native;
 using SewingProduction.Core.Models;
 using SewingProduction.Helpers;
@@ -442,7 +442,42 @@ namespace SewingProduction.Services
             }
         }
 
-        
+        public async Task<int> SaveEntityAsync<T>(
+    string tableName,
+    string keyFieldName,
+    T entity,
+    bool skipNullOnUpdate)
+        {
+            var keyProperty = typeof(T).GetProperty(keyFieldName);
+            if (keyProperty == null)
+                throw new Exception($"Ключевое поле {keyFieldName} не найдено в объекте {typeof(T).Name}");
+
+            var keyValue = keyProperty.GetValue(entity);
+
+            if (keyValue == null || (keyValue is int val && val == 0))
+                return await InsertEntityAsync(tableName, keyFieldName, entity);
+
+            int keyId = Convert.ToInt32(keyValue);
+
+            var filters = new Dictionary<string, object> { { keyFieldName, keyId } };
+            var exists = await SelectOneFieldAsync<int?>(
+                tableName,
+                keyFieldName,
+                filters);
+
+            if (exists != null)
+            {
+                await UpdateEntityAsync(
+                    tableName,
+                    keyFieldName,
+                    entity,
+                    UseNull: skipNullOnUpdate);
+
+                return keyId;
+            }
+
+            throw new Exception($"Запись {tableName}.{keyFieldName}={keyId} не найдена.");
+        }
         /*public async Task SaveListAsync<T>(BindingList<T> list, string tableName, string keyFieldName, List<int> deletedIds)
     where T : class, INewable, new()
         {

@@ -1,6 +1,7 @@
-using SewingProduction.Interfaces;
+﻿using SewingProduction.Interfaces;
 using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 
 namespace SewingProduction.Features.TeamWork.Models
@@ -71,16 +72,15 @@ namespace SewingProduction.Features.TeamWork.Models
             set => SetField(ref _date_change, value);
         }
 
-        public string men_name { get; set; } = string.Empty;
-        public int TC_ID { get; set; }
-        public string TC_ClassName { get; set; } = string.Empty;
-        public int TG_ID { get; set; }
-        public string TG_GroupName { get; set; } = string.Empty;
-        public string TCAT_CategoryName { get; set; } = string.Empty;
-        public string TAT_Name { get; set; } = string.Empty;
-        public string ThreadDisplay { get; set; } = string.Empty;
-
-        public bool approved
+        [NotMapped] public string men_name { get; set; } = string.Empty;
+        [NotMapped] public int TC_ID { get; set; }
+        [NotMapped] public string TC_ClassName { get; set; } = string.Empty;
+        [NotMapped] public int TG_ID { get; set; }
+        [NotMapped] public string TG_GroupName { get; set; } = string.Empty;
+        [NotMapped] public string TCAT_CategoryName { get; set; } = string.Empty;
+        [NotMapped] public string TAT_Name { get; set; } = string.Empty;
+        [NotMapped] public string ThreadDisplay { get; set; } = string.Empty;
+        [NotMapped] public bool approved
         {
             get => date_change.HasValue;
             set
@@ -96,9 +96,9 @@ namespace SewingProduction.Features.TeamWork.Models
             }
         }
 
-        public bool IsNew { get; set; }
-        public bool IsModified { get; set; }
-        public bool IsDeleted { get; set; }
+        [NotMapped] public bool IsNew { get; set; }
+        [NotMapped] public bool IsModified { get; set; }
+        [NotMapped] public bool IsDeleted { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -151,6 +151,35 @@ namespace SewingProduction.Features.TeamWork.Models
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(approved)));
             }
+        }
+    }
+    public sealed class ThreadNormDbRow
+    {
+        public int id { get; set; }
+        public string men { get; set; }
+        public int tg_id_n { get; set; }
+        public int ta_id { get; set; }
+        public decimal norm { get; set; }
+        public string kod_dr { get; set; }
+        public string kod3 { get; set; }
+        public string kod_art { get; set; }
+        public DateTime? date_change { get; set; }
+        
+
+        public static ThreadNormDbRow ToDbRow(ThreadNormRow row)
+        {
+            return new ThreadNormDbRow
+            {
+                id = row.id,
+                men = row.men,
+                tg_id_n = row.tg_id_n,
+                ta_id = row.ta_id,
+                norm = row.norm,
+                kod_dr = row.kod_dr,
+                kod3 = row.kod3,
+                kod_art = row.kod_art,
+                date_change = row.date_change
+            };
         }
     }
 
