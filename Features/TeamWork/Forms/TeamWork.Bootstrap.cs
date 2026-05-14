@@ -36,9 +36,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     await RestoreFocusAsync(_lastFocusedAnnId);
                 }
-                InitializeThreadNormsButton();
                 InitHeaderButtonTags();
-                InitializeMainBaseNodeActions();
 
                 // Инициализируем переменную состояния кнопки "показать все"
                 var showAllButton = FindButtonByTag(layoutControlGroup14, "bind:show-all");

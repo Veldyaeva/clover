@@ -1,4 +1,4 @@
-using DevExpress.XtraBars.Docking2010;
+﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors.ButtonsPanelControl;
 using SewingProduction.Features.TeamWork.Services;
 using System;
@@ -11,34 +11,34 @@ namespace SewingProduction.Features.TeamWork.Forms
     {
         private const string EditBaseNodesButtonTag = "wd:edit-base-nodes";
 
-        private void InitializeMainBaseNodeActions()
-        {
-            if (layoutControlGroup8?.CustomHeaderButtons == null)
-                return;
+        //private void InitializeMainBaseNodeActions()
+        //{
+        //    if (layoutControlGroup8?.CustomHeaderButtons == null)
+        //        return;
 
-            bool exists = layoutControlGroup8.CustomHeaderButtons
-                .OfType<GroupBoxButton>()
-                .Any(button => string.Equals(button.Tag as string, EditBaseNodesButtonTag, StringComparison.OrdinalIgnoreCase)
-                            || string.Equals(button.Caption, "Редактировать узлы", StringComparison.OrdinalIgnoreCase));
+        //    bool exists = layoutControlGroup8.CustomHeaderButtons
+        //        .OfType<GroupBoxButton>()
+        //        .Any(button => string.Equals(button.Tag as string, EditBaseNodesButtonTag, StringComparison.OrdinalIgnoreCase)
+        //                    || string.Equals(button.Caption, "Редактировать узлы", StringComparison.OrdinalIgnoreCase));
 
-            if (exists)
-                return;
+        //    if (exists)
+        //        return;
 
-            layoutControlGroup8.CustomHeaderButtons.Add(new GroupBoxButton(
-                "Редактировать узлы",
-                true,
-                new ButtonImageOptions(),
-                ButtonStyle.PushButton,
-                "Открыть редактор библиотеки базовых узлов",
-                -1,
-                true,
-                null,
-                true,
-                false,
-                true,
-                EditBaseNodesButtonTag,
-                -1));
-        }
+        //    layoutControlGroup8.CustomHeaderButtons.Add(new GroupBoxButton(
+        //        "Редактировать узлы",
+        //        true,
+        //        new ButtonImageOptions(),
+        //        ButtonStyle.PushButton,
+        //        "Открыть редактор библиотеки базовых узлов",
+        //        -1,
+        //        true,
+        //        null,
+        //        true,
+        //        false,
+        //        true,
+        //        EditBaseNodesButtonTag,
+        //        -1));
+        //}
 
         private void OpenBaseNodeLibraryEditor()
         {

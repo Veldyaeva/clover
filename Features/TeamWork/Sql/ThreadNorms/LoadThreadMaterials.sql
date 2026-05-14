@@ -1,4 +1,4 @@
-SELECT
+﻿SELECT
     RTRIM(dr.kod_dr) AS kod_dr,
     ISNULL((
         SELECT TOP (1) RTRIM(drm.kod)

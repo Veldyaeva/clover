@@ -373,9 +373,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                 case "wd:edit-base-nodes":
                     OpenBaseNodeLibraryEditor();
                     break;
-                case "wd:thread-norms":
-                    OpenThreadNormsForm();
-                    break;
+                //case "wd:thread-norms":
+                //    OpenThreadNormsForm();
+                //    break;
             }
         }
 
