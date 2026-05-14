@@ -38,7 +38,7 @@ namespace SewingProduction.Report.subreport
             DevExpress.XtraReports.UI.XRSummary xrSummary2 = new DevExpress.XtraReports.UI.XRSummary();
             DevExpress.XtraReports.UI.XRSummary xrSummary3 = new DevExpress.XtraReports.UI.XRSummary();
             DevExpress.XtraReports.UI.XRSummary xrSummary4 = new DevExpress.XtraReports.UI.XRSummary();
-            this._nomZad = new DevExpress.XtraReports.Parameters.Parameter();
+            this._nomZadany = new DevExpress.XtraReports.Parameters.Parameter();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.pageInfo1 = new DevExpress.XtraReports.UI.XRPageInfo();
@@ -118,14 +118,14 @@ namespace SewingProduction.Report.subreport
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
-            // _nomZad
+            // _nomZadany
             // 
-            this._nomZad.Description = "NomZad";
-            this._nomZad.Name = "_nomZad";
+            this._nomZadany.Description = "NomZadany";
+            this._nomZadany.Name = "_nomZadany";
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("102505474", null));
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("102506476", null));
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("102603168", null));
-            this._nomZad.ValueSourceSettings = staticListLookUpSettings1;
+            this._nomZadany.ValueSourceSettings = staticListLookUpSettings1;
             // 
             // TopMargin
             // 
@@ -883,7 +883,7 @@ namespace SewingProduction.Report.subreport
             storedProcQuery1.Name = "GetKnitZadanyBySmen_view";
             queryParameter1.Name = "@xNomZad";
             queryParameter1.Type = typeof(global::DevExpress.DataAccess.Expression);
-            queryParameter1.Value = new DevExpress.DataAccess.Expression("?_nomZad", typeof(string));
+            queryParameter1.Value = new DevExpress.DataAccess.Expression("?_nomZadany", typeof(string));
             storedProcQuery1.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
             queryParameter1});
             storedProcQuery1.StoredProcName = "GetKnitZadanyBySmen_view";
@@ -1070,9 +1070,9 @@ namespace SewingProduction.Report.subreport
             this.PageHeightF = 850F;
             this.PageWidthF = 1100F;
             this.ParameterPanelLayoutItems.AddRange(new DevExpress.XtraReports.Parameters.ParameterPanelLayoutItem[] {
-            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._nomZad, DevExpress.XtraReports.Parameters.Orientation.Horizontal)});
+            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._nomZadany, DevExpress.XtraReports.Parameters.Orientation.Horizontal)});
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
-            this._nomZad});
+            this._nomZadany});
             this.StyleSheet.AddRange(new DevExpress.XtraReports.UI.XRControlStyle[] {
             this.Title,
             this.DetailCaption1,
@@ -1089,7 +1089,7 @@ namespace SewingProduction.Report.subreport
 
         #endregion
 
-        private DevExpress.XtraReports.Parameters.Parameter _nomZad;
+        private DevExpress.XtraReports.Parameters.Parameter _nomZadany;
         private DevExpress.XtraReports.UI.TopMarginBand TopMargin;
         private DevExpress.XtraReports.UI.BottomMarginBand BottomMargin;
         private DevExpress.XtraReports.UI.XRPageInfo pageInfo1;

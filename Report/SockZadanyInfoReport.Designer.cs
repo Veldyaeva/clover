@@ -836,7 +836,7 @@ namespace SewingProduction.Report
             // 
             this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 303.2646F);
             this.xrSubreport1.Name = "xrSubreport1";
-            this.xrSubreport1.ParameterBindings.Add(new DevExpress.XtraReports.UI.ParameterBinding("_nomZad", this._nomZadany));
+            this.xrSubreport1.ParameterBindings.Add(new DevExpress.XtraReports.UI.ParameterBinding("_nomZadany", this._nomZadany));
             this.xrSubreport1.ReportSource = new SewingProduction.Report.subreport.KnitZadanyBySmenReport();
             this.xrSubreport1.SizeF = new System.Drawing.SizeF(1060F, 23F);
             // 
