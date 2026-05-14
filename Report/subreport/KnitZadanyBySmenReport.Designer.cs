@@ -306,7 +306,7 @@ namespace SewingProduction.Report.subreport
             // 
             this.xrTableCell8.Multiline = true;
             this.xrTableCell8.Name = "xrTableCell8";
-            this.xrTableCell8.Text = "Итого, час";
+            this.xrTableCell8.Text = "Рабочее время, час";
             this.xrTableCell8.Weight = 0.96199183984239467D;
             // 
             // xrTableCell3
