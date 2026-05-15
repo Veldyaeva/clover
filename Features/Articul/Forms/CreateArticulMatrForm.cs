@@ -229,7 +229,8 @@ namespace SewingProduction.Features.Articul.Forms
                 //колонка с картинкой 
                 var pictureEdit = new RepositoryItemPictureEdit
                 {
-                    SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom
+                    SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom,
+                    NullText = ""
                 };
 
 
@@ -250,8 +251,6 @@ namespace SewingProduction.Features.Articul.Forms
                 view.OptionsSelection.EnableAppearanceFocusedCell = false;
                 view.OptionsSelection.EnableAppearanceFocusedRow = true;
 
-
-
                 view.Columns.Clear();
 
                 view.Columns.AddVisible(nameof(GostGrupIzdViewModel.Ag_id), "ID");
@@ -259,17 +258,19 @@ namespace SewingProduction.Features.Articul.Forms
                 view.Columns.AddVisible(nameof(GostGrupIzdViewModel.Ag_name_sokr), "Сокращенное назв.");
                 view.Columns.AddVisible(nameof(GostGrupIzdViewModel.Care_instructions), "Инструкции по уходу");
 
-
+                #region описание картинки
                 var imageCol =  view.Columns.AddVisible("Picture", "Символы по уходы");
                 imageCol.UnboundType = DevExpress.Data.UnboundColumnType.Object;
                 imageCol.ColumnEdit = pictureEdit;
-                imageCol.Width = 150;
+                imageCol.Width = 190;
                 imageCol.OptionsColumn.AllowEdit = false;
 
-                view.RowHeight = 45;
+                view.RowHeight = 48;
+                view.OptionsView.RowAutoHeight = true;
 
                 view.CustomUnboundColumnData -= View_CustomUnboundColumnData;
                 view.CustomUnboundColumnData += View_CustomUnboundColumnData;
+                #endregion
 
                 view.RefreshData();
 
@@ -290,9 +291,16 @@ namespace SewingProduction.Features.Articul.Forms
             if (!e.IsGetData || e.Column.FieldName != "Picture")
                 return;
 
-            var view = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
-            var row = view.GetRow(e.ListSourceRowIndex) as GostGrupIzdViewModel;
+            //var view = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
+            //var row = view.GetRow(e.ListSourceRowIndex) as GostGrupIzdViewModel;
+            if (e.ListSourceRowIndex < 0)
+                return;
 
+            var list = repositoryItemSearchLookUpEdit2.DataSource as IList<GostGrupIzdViewModel>;
+            if (list == null || e.ListSourceRowIndex >= list.Count)
+                return;
+
+            var row = list[e.ListSourceRowIndex];
             e.Value = GetImage(row?.CareImagePath);
         }
         private Image? GetImage(string? path)
@@ -306,10 +314,11 @@ namespace SewingProduction.Features.Articul.Forms
             byte[] bytes = File.ReadAllBytes(path); // файл не блокируется
 
             using var ms = new MemoryStream(bytes);
+            //Делает полноценную копию картинки, можно безопасно закрыть stream, файл не блокируется
             using var original = Image.FromStream(ms);
 
-            var image = new Bitmap(original, new Size(32, 32));
-
+            //var image = new Bitmap(original, new Size(160, 32)); -- задавался определенный размер картинки, убрала 
+            var image = new Bitmap(original);
             _imageCache[path] = image;
             return image;
         }
