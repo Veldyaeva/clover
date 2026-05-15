@@ -9,7 +9,9 @@ ALTER PROCEDURE dbo.PZV_AdjustNotStartedBeforeShiftEnd
 AS
 BEGIN
     SET NOCOUNT ON;
-  SET XACT_ABORT ON;
+    DECLARE @hadXactAbortOn bit = CASE WHEN (16384 & @@OPTIONS) = 16384 THEN 1 ELSE 0 END;
+    IF (@hadXactAbortOn = 1)
+        SET XACT_ABORT OFF;
     /*
       Правила:
       - факт по машине = SUM(pzvNChasi) по строкам текущей смены, где операция начата (pzvDateStart IS NOT NULL)
@@ -34,7 +36,6 @@ BEGIN
     IF OBJECT_ID('tempdb..#Keep')        IS NOT NULL DROP TABLE #Keep;
 
         BEGIN TRY
-        BEGIN TRAN;
 
         -------------------------------------------------------------------
         -- 1) База по строкам смены (фиксируем снимок и берём блокировки)
@@ -274,9 +275,8 @@ ORDER BY r.pzvKmlID, r.RunningAssigned, r.pzvID;
           AND ISNULL(p.pzvTab,0) <> 0
           AND p.pzvKwsID = @KwsId;
 
-        /* Важно: PZV_Split сама открывает транзакцию.
-           Внутри нашей транзакции это будет вложенная (savepoint) — норм.
-           Главное — фиксированный набор @toStorno и блокировка строк уже есть. */
+        /* PZV_Split сама защищает одну pzv-строку.
+           Здесь держим только фиксированный набор @toStorno, без общей транзакции на всю смену. */
         DECLARE @pzvId int;
 
         DECLARE c CURSOR LOCAL FAST_FORWARD FOR
@@ -344,7 +344,10 @@ ORDER BY r.pzvKmlID, r.RunningAssigned, r.pzvID;
         FROM #Ranked r
         JOIN #Keep k ON k.pzvID = r.pzvID;
 
-        COMMIT;
+        IF (@hadXactAbortOn = 1)
+            SET XACT_ABORT ON;
+        ELSE
+            SET XACT_ABORT OFF;
 
 --    UPDATE p
 --    SET
@@ -385,9 +388,12 @@ ORDER BY r.pzvKmlID, r.RunningAssigned, r.pzvID;
 
     END TRY
     BEGIN CATCH
-        IF @@TRANCOUNT > 0 ROLLBACK;
-        DECLARE @msg nvarchar(4000) = ERROR_MESSAGE();
-        THROW 51000, @msg, 1;
+        IF (@hadXactAbortOn = 1)
+            SET XACT_ABORT ON;
+        ELSE
+            SET XACT_ABORT OFF;
+
+        THROW;
     END CATCH
 END
 

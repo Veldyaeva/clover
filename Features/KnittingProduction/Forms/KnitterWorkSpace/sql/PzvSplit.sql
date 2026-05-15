@@ -7,13 +7,29 @@
 AS
 BEGIN
   SET NOCOUNT ON;
-  SET XACT_ABORT ON;
 
+  DECLARE @entryTranCount int = @@TRANCOUNT;
+  DECLARE @startedTran bit = 0;
+  DECLARE @hadXactAbortOn bit = CASE WHEN (16384 & @@OPTIONS) = 16384 THEN 1 ELSE 0 END;
   DECLARE @rc int;
   DECLARE @now datetime = GETDATE();
 
   BEGIN TRY
-    BEGIN TRAN;
+    IF (@entryTranCount = 0)
+    BEGIN
+      IF (@hadXactAbortOn = 0)
+        SET XACT_ABORT ON;
+
+      BEGIN TRAN;
+      SET @startedTran = 1;
+    END
+    ELSE
+    BEGIN
+      IF (@hadXactAbortOn = 1)
+        SET XACT_ABORT OFF;
+
+      SAVE TRAN PZV_Split_Save;
+    END
 
     --------------------------------------------------------------------
     -- 1) Читаем базовую строку под блокировкой
@@ -405,16 +421,37 @@ BEGIN
     THROW 50006, N'Неизвестный режим разделения.', 1;
 
 __FINISH:
-    COMMIT;
+    IF (@startedTran = 1)
+      COMMIT;
+
+    IF (@hadXactAbortOn = 1)
+      SET XACT_ABORT ON;
+    ELSE
+      SET XACT_ABORT OFF;
 
     SELECT Kind, Id AS NewPzvId
     FROM @NewRows;
 
   END TRY
   BEGIN CATCH
-    IF @@TRANCOUNT > 0 ROLLBACK;
-    DECLARE @msg nvarchar(4000) = ERROR_MESSAGE();
-    THROW 51000, @msg, 1;
+    IF (XACT_STATE() = 1)
+    BEGIN
+      IF (@startedTran = 1 AND @@TRANCOUNT > 0)
+        ROLLBACK TRAN;
+      ELSE IF (@startedTran = 0 AND @@TRANCOUNT > 0)
+        ROLLBACK TRAN PZV_Split_Save;
+    END
+    ELSE IF (XACT_STATE() = -1 AND @startedTran = 1 AND @@TRANCOUNT > 0)
+    BEGIN
+      ROLLBACK TRAN;
+    END
+
+    IF (@hadXactAbortOn = 1)
+      SET XACT_ABORT ON;
+    ELSE
+      SET XACT_ABORT OFF;
+
+    THROW;
   END CATCH
 END
 GO
