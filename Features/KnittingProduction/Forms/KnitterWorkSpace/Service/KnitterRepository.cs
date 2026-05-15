@@ -474,7 +474,7 @@ WHERE pzvID = @pzvId;
         public async Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(
             int shiftId,
             int tab,
-            decimal minHours,
+        //    decimal minHours,
             string userName = "")
         {
             if (shiftId <= 0)
@@ -482,8 +482,8 @@ WHERE pzvID = @pzvId;
             if (tab <= 0)
                 throw new ArgumentOutOfRangeException(nameof(tab));
 
-            if (minHours <= 0)
-                minHours = 12m;
+            //if (minHours <= 0)
+            //    minHours = 12m;
 
             try
             {
@@ -492,7 +492,7 @@ WHERE pzvID = @pzvId;
                 var parameters = new DynamicParameters();
                 parameters.Add("@KwsId", shiftId, DbType.Int32);
                 parameters.Add("@Tab", tab, DbType.Int32);
-                parameters.Add("@MinHours", minHours, DbType.Decimal);
+                //parameters.Add("@MinHours", minHours, DbType.Decimal);
                 parameters.Add("@UserName", userName ?? string.Empty, DbType.String);
 
                 using var multi = await connection.QueryMultipleAsync(
@@ -506,7 +506,8 @@ WHERE pzvID = @pzvId;
             }
             catch (Exception ex)
             {
-                throw new Exception($"AdjustNotStartedBeforeShiftEnd failed (kwsId={shiftId}, minHours={minHours})", ex);
+                //throw new Exception($"AdjustNotStartedBeforeShiftEnd failed (kwsId={shiftId}, minHours={minHours})", ex);
+                throw new Exception($"AdjustNotStartedBeforeShiftEnd failed (kwsId={shiftId})", ex);
             }
         }
         public async Task<int> StartWorkingShiftAsync(int tabStart, int? kmaId, string kmaNum, int? kmsId = 0)
@@ -932,15 +933,15 @@ WHERE mlv.kmlKmaID = @kmaId;";
             return ids;
         }
 
-        private static async Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(System.Data.SqlClient.SqlConnection connection, IDbTransaction transaction, int kwsId, int tab, decimal minHours, string userName = "")
+        private static async Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(System.Data.SqlClient.SqlConnection connection, IDbTransaction transaction, int kwsId, int tab, /*decimal minHours, */ string userName = "")
         {
-            if (minHours <= 0)
-                minHours = 12m;
+            //if (minHours <= 0)
+            //    minHours = 12m;
 
             var parameters = new DynamicParameters();
             parameters.Add("@KwsId", kwsId, DbType.Int32);
             parameters.Add("@Tab", tab, DbType.Int32);
-            parameters.Add("@MinHours", minHours, DbType.Decimal);
+            //parameters.Add("@MinHours", minHours, DbType.Decimal);
             parameters.Add("@UserName", userName ?? string.Empty, DbType.String);
 
             using (var multi = await connection.QueryMultipleAsync(
@@ -1070,8 +1071,8 @@ WHERE pzvID IN @ids";
             public Task<IReadOnlyList<PzvSplitResult>> SplitPzvByModeAsync(int pzvId, int mode, int qtyFact) =>
                 KnitterRepository.SplitPzvByModeAsync(_connection, _transaction, pzvId, mode, qtyFact);
 
-            public Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(int shiftId, int tab, decimal minHours, string userName = "") =>
-                KnitterRepository.AdjustNotStartedBeforeShiftEndAsync(_connection, _transaction, shiftId, tab, minHours, userName);
+            public Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(int shiftId, int tab, string userName = "") =>
+                KnitterRepository.AdjustNotStartedBeforeShiftEndAsync(_connection, _transaction, shiftId, tab, /*minHours,*/ userName);
 
             public Task<ShiftEndResult> TryEndWorkingShiftAsync(int shiftId, int tabEnd) =>
                 KnitterRepository.TryEndWorkingShiftAsync(_connection, _transaction, shiftId, tabEnd);

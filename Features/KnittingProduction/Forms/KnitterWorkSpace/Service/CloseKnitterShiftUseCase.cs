@@ -64,7 +64,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 await tx.AdjustNotStartedBeforeShiftEndAsync(
                         command.ShiftId,
                         command.TabEnd,
-                        command.MinHours,
+                       // command.MinHours,
                         command.UserName ?? string.Empty)
                     .ConfigureAwait(false);
 
