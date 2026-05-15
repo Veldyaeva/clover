@@ -2288,7 +2288,8 @@ namespace SewingProduction
                     //MessageBox.Show("Печать");
                     SockZadanyInfoReport report1 = new SockZadanyInfoReport();
                     report1.RequestParameters = false;
-                    report1.Parameters["_nomZadany"].Value = tbNomZad.Text;
+                    //report1.Parameters["_nomZadany"].Value = tbNomZad.Text;
+                    report1.Parameters["_nomZadany"].Value = tbPsaNomZad.Text;
                     ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
                     reportPrintTool1.ShowPreviewDialog();
                     //tbNomZad.Text
