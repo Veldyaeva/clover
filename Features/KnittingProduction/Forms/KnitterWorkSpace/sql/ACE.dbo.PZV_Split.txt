@@ -1,0 +1,481 @@
+﻿CREATE PROCEDURE dbo.PZV_Split
+  @pzvId int,
+  @mode int,         -- 1 = уточнение факт, 2 = сторно/деление, 3 = предв. деление
+  @qtyFact int,      -- mode 1: факт; mode 3: первая часть; mode 2: обычно 0
+  @userName sysname = NULL,
+  @gradacia bit = 0
+AS
+BEGIN
+  SET NOCOUNT ON;
+  SET XACT_ABORT ON;
+
+  DECLARE @rc int;
+  DECLARE @now datetime = GETDATE();
+
+  BEGIN TRY
+    BEGIN TRAN;
+
+    --------------------------------------------------------------------
+    -- 1) Читаем базовую строку под блокировкой
+    --------------------------------------------------------------------
+    DECLARE
+      @plannedNazn int,
+      @qty int,
+      @remaining int,
+      @plannedHours decimal(18,2),
+      @sek int,
+      @sekNazn int,
+      @remainingHours decimal(18,2),
+      @dateStart datetime,
+      @dateEnd datetime,
+      @dateNaznTab datetime,
+      @tab int;
+
+    DECLARE @NewRows TABLE (Kind sysname NULL, Id int NOT NULL);
+
+    DECLARE @Base TABLE
+    (
+      pzvID int NOT NULL,
+      pzvMod nvarchar(50) NULL,
+      pzvArticul nvarchar(25) NULL,
+      pzvKmlID int NULL,
+      pzvNomN int NULL,
+      pzvVidPr char(2) NULL,
+      pzvIDMlOp int NULL,
+      pzvNrID int NULL,
+      pzvIdBrig int NULL,
+      pzvDateML datetime NULL,
+      pzvDateMLUt datetime NULL,
+      pzvGsID int NULL,
+      pzvNomZad nvarchar(10) NULL,
+      pzvAnnID int NULL,
+      pzvNom int NULL,
+      pzvRKol int NULL,
+      pzvSek int NULL,
+      pzvTab int NULL,
+      pzvKwsID int NULL,
+      pzvKol int NULL,
+      pzvKolNazn int NULL,
+      pzvNChasi decimal(6,2) NULL,
+      pzvDateStart datetime NULL,
+      pzvDateEnd datetime NULL,
+      pzvDateNaznTab datetime NULL,
+      pzvDateNaznKm datetime NULL
+    );
+
+    INSERT @Base
+    (
+      pzvID,pzvMod,pzvArticul,pzvKmlID,pzvNomN,pzvVidPr,pzvIDMlOp,pzvNrID,pzvIdBrig,pzvDateML,pzvDateMLUt,pzvGsID,
+      pzvNomZad,pzvAnnID,pzvNom,pzvRKol,pzvKol,pzvKolNazn,pzvNChasi,pzvDateStart,pzvDateEnd,
+      pzvSek,pzvTab,pzvKwsID,pzvDateNaznTab,pzvDateNaznKm
+    )
+    SELECT
+      pzvID,pzvMod,pzvArticul,pzvKmlID,pzvNomN,pzvVidPr,pzvIDMlOp,pzvNrID,pzvIdBrig,pzvDateML,pzvDateMLUt,pzvGsID,
+      pzvNomZad,pzvAnnID,pzvNom,pzvRKol,pzvKol,pzvKolNazn,pzvNChasi,pzvDateStart,pzvDateEnd,
+      pzvSek,pzvTab,pzvKwsID,pzvDateNaznTab,pzvDateNaznKm
+    FROM dbo.planZagrVyaz WITH (UPDLOCK, HOLDLOCK)
+    WHERE pzvID = @pzvId;
+
+    IF NOT EXISTS (SELECT 1 FROM @Base)
+      BEGIN
+        -- TODO сообщ в битрикс
+        THROW 50000, N'Строка pzvId не найдена', 1;
+      END
+
+    SELECT
+      @tab = pzvTab,
+      @dateStart = pzvDateStart,
+      @dateEnd = pzvDateEnd,
+      @dateNaznTab = pzvDateNaznTab,
+      @sek = ISNULL(pzvSek,0),
+      @plannedHours = ISNULL(pzvNChasi,0),
+      @plannedNazn = CASE WHEN ISNULL(pzvTab,0)=0 THEN ISNULL(pzvKol,0) ELSE ISNULL(pzvKolNazn,0) END,
+      @qty         = CASE WHEN ISNULL(pzvTab,0)=0 THEN ISNULL(pzvKol,0) ELSE ISNULL(pzvKolNazn,0) END
+    FROM @Base;
+
+    IF (@qty IS NULL OR @qty < 0)
+      BEGIN
+        -- TODO сообщ в битрикс
+        THROW 50001, N'Некорректный план: pzvKolNazn/pzvKol.', 1;
+      END
+
+    SET @remaining = @plannedNazn - ISNULL(@qtyFact,0);
+    SET @plannedHours   = CAST(ROUND((ISNULL(@qtyFact,0) * ISNULL(@sek,0)) / 3600.0, 2) AS decimal(18,2));
+    SET @remainingHours = CAST(ROUND((ISNULL(@remaining,0) * ISNULL(@sek,0)) / 3600.0, 2) AS decimal(18,2));
+    SET @sekNazn = @sek * @qty;
+
+    --------------------------------------------------------------------
+    -- MODE 1: завершение с фактом 
+    --------------------------------------------------------------------
+    IF (@mode = 1)
+    BEGIN
+      IF (ISNULL(@tab,0) = 0)
+        BEGIN 
+          -- TODO сообщ в битрикс
+          THROW 50002, N'Операция не назначена на табельный. Обратитесь к мастеру', 1;
+        END
+
+      IF (@dateStart IS NULL)
+        BEGIN 
+          -- TODO сообщ в битрикс
+          THROW 50002, N'Некорректные даты: дата начала операции не заполнена', 1;
+        END
+      IF (@qtyFact IS NULL OR @qtyFact < 0 OR @qtyFact > @qty)
+        BEGIN 
+          -- TODO сообщ в битрикс
+          THROW 50003, N'Факт должен быть в диапазоне [0..план]', 1;
+        END
+      UPDATE p
+      SET
+        p.pzvKol      = @qtyFact,
+        p.pzvKolNazn  = @qtyFact,
+        p.pzvDateEnd  = ISNULL(p.pzvDateEnd, @now),
+        p.pzvUpdDate  = @now,
+        p.pzvNChasi   = @plannedHours,
+        p.pzvSekNazn  = @sek * @qtyFact,
+        p.pzvChasNazn = @plannedHours
+      FROM dbo.planZagrVyaz p
+      WHERE p.pzvID = @pzvId
+        AND ISNULL(p.pzvTab,0) > 0
+        AND p.pzvDateStart IS NOT NULL
+        AND p.pzvDateEnd IS NULL;
+
+      SET @rc = @@ROWCOUNT;
+      IF (@rc = 0)
+          BEGIN 
+             -- TODO сообщ в битрикс
+             THROW 50010, N'Повторное завершение запрещено: операция уже закрыта/не начата/не назначена.', 1;
+          END
+
+      IF (@remaining < 0)
+         BEGIN 
+            -- TODO сообщ в битрикс
+            THROW 50004, N'Остаток меньше нуля', 1;
+         END
+
+      IF (@remaining > 0)
+      BEGIN
+        INSERT dbo.planZagrVyaz
+        (
+          pzvDivision,
+          pzvMod, pzvArticul, pzvKmlID, pzvNomN, pzvVidPr, pzvIDMlOp, pzvNrID, pzvIdBrig, pzvDateML, pzvDateMLUt, pzvGsID,
+          pzvNomZad, pzvAnnID, pzvNom, pzvRKol,
+          pzvKolNazn, pzvSekNazn, pzvChasNazn,
+          pzvKol, pzvSek, pzvNChasi,
+          pzvTab, pzvKwsID,
+          pzvDateStart, pzvDateEnd, pzvDateNaznTab, pzvDateNaznKm,
+          pzvDateAdd, pzvUpdDate, pzvIDParent
+        )
+        OUTPUT 'Remainder', inserted.pzvID INTO @NewRows
+        SELECT
+          1,
+          b.pzvMod, b.pzvArticul, b.pzvKmlID, b.pzvNomN, b.pzvVidPr, b.pzvIDMlOp, b.pzvNrID, b.pzvIdBrig, b.pzvDateML, b.pzvDateMLUt, b.pzvGsID,
+          b.pzvNomZad, b.pzvAnnID, b.pzvNom, b.pzvRKol,
+          @remaining, b.pzvSek * @remaining, @remainingHours,
+          @remaining, b.pzvSek, @remainingHours,
+          b.pzvTab, b.pzvKwsID,
+          NULL, NULL, b.pzvDateNaznTab, b.pzvDateNaznKm,
+          @now, @now, @pzvId
+        FROM @Base b;
+      END
+
+      INSERT INTO @NewRows(Kind, Id) VALUES (N'FinishedFact', @pzvId);
+
+      GOTO __FINISH;
+    END
+
+    --------------------------------------------------------------------
+    --  Режим 2: назначено на таб, но не выполнено 
+    -- - отрицательная строка назначения 
+    -- - остаток без таб 
+    --------------------------------------------------------------------
+    IF (@mode = 2)
+    BEGIN
+              INSERT INTO [global].planeta.dbo.Jabber_Messager (Jabber_Body, Jabber_To) VALUES ('exec PZV_split ' + CHAR(13) + CHAR(10) + 'Mode 2 !' 
+                  + ' ' + HOST_NAME(), 'veldyaevao@clever-dev.ru');
+
+      -- 1) начато, но не завершено => нельзя
+      IF (@dateStart IS NOT NULL AND @dateEnd IS NULL)
+       BEGIN 
+          -- TODO сообщ в битрикс
+          INSERT INTO [global].planeta.dbo.Jabber_Messager (Jabber_Body, Jabber_To) VALUES ('exec PZV_split ' + CHAR(13) + CHAR(10) + 'Операция начата, но не завершена. Деление/сторно запрещено!' 
+                  + ' ' + HOST_NAME(), 'veldyaevao@clever-dev.ru');
+          THROW 50006, N'Операция начата, но не завершена. Деление/сторно запрещено.', 1;
+       END
+      -- 2) конец без начала => битые даты
+      IF (@dateStart IS NULL AND @dateEnd IS NOT NULL)
+        BEGIN 
+          -- TODO сообщ в битрикс
+          INSERT INTO [global].planeta.dbo.Jabber_Messager (Jabber_Body, Jabber_To) VALUES ('exec PZV_split ' + CHAR(13) + CHAR(10) + 'Некорректные даты: pzvDateEnd заполнена при пустой pzvDateStart!' 
+                  + ' ' + HOST_NAME(), 'veldyaevao@clever-dev.ru');
+          THROW 50006, N'Некорректные даты: pzvDateEnd заполнена при пустой pzvDateStart.', 1;
+        END
+      ----------------------------------------------------------------
+      -- A) СТОРНО при tab>0:
+      --    - если даты есть => берём их
+      --    - если дат нет  => ставим now/now (это нужно для завершения смены)
+      ----------------------------------------------------------------
+      IF (ISNULL(@tab,0) > 0)
+        BEGIN
+          DECLARE @s datetime = @dateStart;
+          DECLARE @e datetime = @dateEnd;
+  
+          IF (@s IS NULL AND @e IS NULL)
+            BEGIN
+              SET @s = @now;
+              SET @e = @now;
+    
+              -- атомарно фиксируем даты, чтобы вторым потоком не повторить сторно
+              UPDATE p
+              SET p.pzvDateStart = @s,
+                  p.pzvDateEnd   = @e,
+                  p.pzvUpdDate   = @now
+              FROM dbo.planZagrVyaz p
+              WHERE p.pzvID = @pzvId
+                AND ISNULL(p.pzvTab,0) > 0
+                AND p.pzvDateStart IS NULL
+                AND p.pzvDateEnd IS NULL;
+    
+              SET @rc = @@ROWCOUNT;
+              IF (@rc = 0)
+                 BEGIN 
+                    -- TODO сообщ в битрикс
+          INSERT INTO [global].planeta.dbo.Jabber_Messager (Jabber_Body, Jabber_To) VALUES ('exec PZV_split ' + CHAR(13) + CHAR(10) + 'Не удалось сторнировать: операция уже изменилась (начата/закрыта/разназначена)!' 
+                  + ' ' + HOST_NAME(), 'veldyaevao@clever-dev.ru');                    
+                    THROW 50011, N'Не удалось сторнировать: операция уже изменилась (начата/закрыта/разназначена).', 1;
+                 END
+            END
+--          ELSE
+--            BEGIN
+--              -- даты уже были: просто гейт на конкурентность
+--              UPDATE p
+--              SET p.pzvUpdDate = @now
+--              FROM dbo.planZagrVyaz p
+--              WHERE p.pzvID = @pzvId
+--                AND ISNULL(p.pzvTab,0) > 0
+--                AND NOT (p.pzvDateStart IS NULL OR p.pzvDateEnd IS NULL);
+--    
+--              SET @rc = @@ROWCOUNT;
+--              IF (@rc = 0)
+--                THROW 50011, N'Состояние операции изменилось. Повторите действие.', 1;
+--            END
+            ELSE
+            BEGIN
+              IF EXISTS(SELECT * 
+                          FROM dbo.planZagrVyaz p
+                          WHERE p.pzvID = @pzvId
+                            AND ISNULL(p.pzvTab,0) > 0
+                            AND NOT (p.pzvDateStart IS NULL OR p.pzvDateEnd IS NULL))
+                BEGIN
+                  -- TODO сообщ в битрикс
+                            INSERT INTO [global].planeta.dbo.Jabber_Messager (Jabber_Body, Jabber_To) VALUES ('exec PZV_split ' + CHAR(13) + CHAR(10) + 'Состояние операции изменилось' 
+                  + ' ' + HOST_NAME(), 'veldyaevao@clever-dev.ru');    
+                  THROW 50011, N'Состояние операции изменилось. Повторите действие.', 1;
+                END
+            END
+          -- Negative (сторно) на том же таб
+          INSERT dbo.planZagrVyaz
+          (
+            pzvDivision,
+            pzvMod, pzvArticul, pzvKmlID, pzvNomN, pzvVidPr, pzvIDMlOp, pzvNrID, pzvIdBrig,
+            pzvDateNaznKm, pzvDateNaznTab, pzvDateML, pzvDateMLUt, pzvGsID,
+            pzvNomZad, pzvAnnID, pzvNom, pzvRKol,
+            pzvKol, pzvSek, pzvNChasi,
+            pzvKolNazn, pzvChasNazn, pzvSekNazn,
+            pzvTab, pzvKwsID,
+            pzvDateStart, pzvDateEnd,
+            pzvDateAdd, pzvUpdDate, pzvIDParent
+          )
+          OUTPUT N'Negative', inserted.pzvID INTO @NewRows
+          SELECT
+            1,
+            b.pzvMod, b.pzvArticul, b.pzvKmlID, b.pzvNomN, b.pzvVidPr, b.pzvIDMlOp, b.pzvNrID, b.pzvIdBrig,
+            b.pzvDateNaznKm, b.pzvDateNaznTab, b.pzvDateML, b.pzvDateMLUt, b.pzvGsID,
+            b.pzvNomZad, b.pzvAnnID, b.pzvNom, b.pzvRKol,
+            0-@remaining, b.pzvSek, -@remainingHours,
+            @remaining, @remainingHours, b.pzvSek * @remaining,
+            b.pzvTab, b.pzvKwsID,
+            @s, @e,
+            @now, @now, @pzvId
+          FROM @Base b;
+  
+          -- Remainder без таб (остаток)
+          INSERT dbo.planZagrVyaz
+          (
+            pzvDivision,
+            pzvMod, pzvArticul, pzvKmlID, pzvNomN, pzvVidPr, pzvIDMlOp, pzvNrID, pzvIdBrig,
+            pzvDateML, pzvDateMLUt, pzvGsID,
+            pzvNomZad, pzvAnnID, pzvNom, pzvRKol,
+            pzvKol, pzvSek, pzvNChasi,
+            pzvKolNazn, pzvSekNazn, pzvChasNazn,
+            pzvTab, pzvKwsID,
+            pzvDateStart, pzvDateEnd, pzvDateNaznTab, pzvDateNaznKm,
+            pzvDateAdd, pzvUpdDate, pzvIDParent
+          )
+          OUTPUT N'Remainder', inserted.pzvID INTO @NewRows
+          SELECT
+            1,
+            b.pzvMod, b.pzvArticul, b.pzvKmlID, b.pzvNomN, b.pzvVidPr, b.pzvIDMlOp, b.pzvNrID, b.pzvIdBrig,
+            b.pzvDateML, b.pzvDateMLUt, b.pzvGsID,
+            b.pzvNomZad, b.pzvAnnID, b.pzvNom, b.pzvRKol,
+            @remaining, b.pzvSek, @remainingHours,
+            @remaining, b.pzvSek * @remaining, @remainingHours,
+            0, 0,
+            NULL, NULL, NULL, b.pzvDateNaznKm,
+            @now, @now, @pzvId
+          FROM @Base b;
+  
+          INSERT INTO @NewRows(Kind, Id) VALUES (N'UnassignWithNegative', @pzvId);
+  
+          GOTO __FINISH;
+        END
+
+      ----------------------------------------------------------------
+      -- B) ПРОСТОЕ ДЕЛЕНИЕ: tab=0 и дат нет
+      ----------------------------------------------------------------
+      IF (@dateStart IS NULL AND @dateEnd IS NULL AND ISNULL(@tab,0) = 0)
+      BEGIN
+        IF (@qtyFact IS NULL OR @qtyFact <= 0)
+          BEGIN
+            INSERT INTO [global].planeta.dbo.Jabber_Messager (Jabber_Body, Jabber_To) VALUES ('exec PZV_split ' + CHAR(13) + CHAR(10) + 'Не задана первая часть' 
+                            + ' ' + HOST_NAME(), 'veldyaevao@clever-dev.ru');    
+                    THROW 50007, N'Не задана первая часть', 1;
+          END
+        IF (@remaining < 0)
+          BEGIN
+            INSERT INTO [global].planeta.dbo.Jabber_Messager (Jabber_Body, Jabber_To) VALUES ('exec PZV_split ' + CHAR(13) + CHAR(10) + 'Первая часть превышает плановое количество' 
+                            + ' ' + HOST_NAME(), 'veldyaevao@clever-dev.ru');  
+            THROW 50008, N'Первая часть превышает плановое количество', 1;
+          END
+
+        UPDATE p
+        SET p.pzvKol = @qtyFact,
+            p.pzvKolNazn = 0,
+            p.pzvSekNazn = 0,
+            p.pzvChasNazn = 0,
+            p.pzvNChasi   = CAST(ROUND(@qtyFact * @sek / 3600.0, 2) AS decimal(18,2)),
+            p.pzvUpdDate = @now
+        FROM dbo.planZagrVyaz p
+        WHERE p.pzvID = @pzvId
+          AND p.pzvDateStart IS NULL
+          AND p.pzvDateEnd IS NULL
+          AND ISNULL(p.pzvTab,0) = 0;
+
+        SET @rc = @@ROWCOUNT;
+        IF (@rc = 0)
+          BEGIN
+            INSERT INTO [global].planeta.dbo.Jabber_Messager (Jabber_Body, Jabber_To) VALUES ('exec PZV_split ' + CHAR(13) + CHAR(10) + 'Состояние операции изменилось. Повторите действие' 
+                            + ' ' + HOST_NAME(), 'veldyaevao@clever-dev.ru');
+            THROW 50011, N'Состояние операции изменилось. Повторите действие.', 1;
+          END
+
+        INSERT dbo.planZagrVyaz
+        (
+          pzvDivision,
+          pzvMod, pzvArticul, pzvKmlID, pzvNomN, pzvVidPr, pzvIDMlOp, pzvNrID, pzvIdBrig,
+          pzvDateML, pzvDateMLUt, pzvGsID,
+          pzvNomZad, pzvAnnID, pzvNom, pzvRKol,
+          pzvKol, pzvSek, pzvKolNazn, pzvNChasi, pzvChasNazn,
+          pzvGradacia,
+          pzvTab, pzvKwsID,
+          pzvDateStart, pzvDateEnd,
+          pzvDateNaznTab, pzvDateNaznKm,
+          pzvDateAdd, pzvUpdDate, pzvIDParent
+        )
+        OUTPUT N'Part2', inserted.pzvID INTO @NewRows
+        SELECT
+          1,
+          b.pzvMod, b.pzvArticul, b.pzvKmlID, b.pzvNomN, b.pzvVidPr, b.pzvIDMlOp, b.pzvNrID, b.pzvIdBrig,
+          b.pzvDateML, b.pzvDateMLUt, b.pzvGsID,
+          b.pzvNomZad, b.pzvAnnID, b.pzvNom, b.pzvRKol,
+          @remaining, b.pzvSek, 0, CAST(ROUND(@qtyFact * @sek / 3600.0, 2) AS decimal(18,2)),0,
+          @gradacia,
+          NULL, 0,
+          NULL, NULL,
+          NULL, NULL,
+          @now, @now, @pzvId
+        FROM @Base b;
+
+        GOTO __FINISH;
+      END;
+
+      INSERT INTO [global].planeta.dbo.Jabber_Messager (Jabber_Body, Jabber_To) VALUES ('exec PZV_split ' + CHAR(13) + CHAR(10) + 'Неконсистентное состояние операции для mode=2' 
+                      + ' ' + HOST_NAME(), 'veldyaevao@clever-dev.ru');
+      THROW 50006, N'Неконсистентное состояние операции для mode=2.', 1;
+    END
+
+    --------------------------------------------------------------------
+    -- Режим 3: предварительное деление мастером 
+    --------------------------------------------------------------------
+    IF (@mode = 3)
+    BEGIN
+      IF (@qtyFact IS NULL OR @qtyFact <= 0)
+        THROW 50007, N'Не задано отделяемое количество', 1;
+
+      IF (@remaining < 0)
+        THROW 50008, N'Первая часть превышает плановое количество', 1;
+
+      IF (@dateEnd IS NOT NULL OR @dateStart IS NOT NULL OR @dateNaznTab IS NOT NULL OR ISNULL(@tab,0) > 0)
+        THROW 50009, N'Операция не должна быть назначена на табельный', 1;
+
+      UPDATE p
+      SET p.pzvKol = @qtyFact,
+          p.pzvKolNazn = 0,
+          p.pzvSekNazn = 0,
+          p.pzvNChasi = CAST(ROUND(@qtyFact * @sek / 3600.0, 2) AS decimal(18,2)),
+          p.pzvUpdDate = @now
+      FROM dbo.planZagrVyaz p
+      WHERE p.pzvID = @pzvId
+        AND ISNULL(p.pzvTab,0) = 0
+        AND p.pzvDateNaznTab IS NULL
+        AND p.pzvDateStart IS NULL
+        AND p.pzvDateEnd IS NULL;
+
+      SET @rc = @@ROWCOUNT;
+      IF (@rc = 0)
+        THROW 50012, N'Нельзя предварительно делить: операция уже назначена/начата/закрыта.', 1;
+
+      INSERT dbo.planZagrVyaz
+      (
+        pzvDivision,
+        pzvMod, pzvArticul, pzvKmlID, pzvNomN, pzvVidPr, pzvIDMlOp, pzvNrID, pzvIdBrig,
+        pzvDateML, pzvDateMLUt, pzvGsID,
+        pzvNomZad, pzvAnnID, pzvNom, pzvRKol,
+        pzvKol, pzvSek, pzvChasNazn, pzvNChasi, pzvKolNazn, pzvGradacia,
+        pzvTab, pzvKwsID,
+        pzvDateStart, pzvDateEnd,
+        pzvDateNaznTab, pzvDateNaznKm,
+        pzvDateAdd, pzvUpdDate, pzvIDParent
+      )
+      OUTPUT N'Part2', inserted.pzvID INTO @NewRows
+      SELECT
+        1,
+        b.pzvMod, b.pzvArticul, b.pzvKmlID, b.pzvNomN, b.pzvVidPr, b.pzvIDMlOp, b.pzvNrID, b.pzvIdBrig,
+        b.pzvDateML, b.pzvDateMLUt, b.pzvGsID,
+        b.pzvNomZad, b.pzvAnnID, b.pzvNom, b.pzvRKol,
+        @qty-@qtyFact, b.pzvSek, 0, CAST(ROUND((@qty-@qtyFact) * @sek / 3600.0, 2) AS decimal(18,2)), 0, @gradacia,
+        NULL, 0,
+        NULL, NULL,
+        NULL, NULL,
+        @now, @now, @pzvId
+      FROM @Base b;
+
+      GOTO __FINISH;
+    END;
+
+    THROW 50006, N'Неизвестный режим разделения.', 1;
+
+__FINISH:
+    COMMIT;
+
+    SELECT Kind, Id AS NewPzvId
+    FROM @NewRows;
+
+  END TRY
+  BEGIN CATCH
+    IF @@TRANCOUNT > 0 ROLLBACK;
+    DECLARE @msg nvarchar(4000) = ERROR_MESSAGE();
+    THROW 51000, @msg, 1;
+  END CATCH
+END
+GO

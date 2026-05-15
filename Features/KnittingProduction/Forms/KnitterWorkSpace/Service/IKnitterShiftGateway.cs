@@ -10,6 +10,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
     {
         Task<(int? shiftId, int? tabStart, DateTime? dateStart)> GetOpenShiftByZoneAsync(int kmaId);
         Task<IKnitterShiftTransaction> BeginShiftTransactionAsync();
+        Task<IKnitterShiftTransaction> BeginCloseShiftScopeAsync();
     }
 
     public interface IKnitterShiftTransaction : IAsyncDisposable
