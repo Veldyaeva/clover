@@ -18,25 +18,25 @@ using SewingProduction.Report;
 
 namespace SewingProduction.Core.Forms
 {
-    public partial class PrintSewn : CustomForm
-    {
-        private string _kod;
-        private string _model;
-        private List<PrintSewnRazmKolRow> _printSewnRazmKolRow;
-        private readonly PrintSewnDataService _printSewnDataService = new PrintSewnDataService();
-        private List<PrintSewnBlVshRow> _blVshRows = new List<PrintSewnBlVshRow>();
+	public partial class PrintSewn : CustomForm
+	{
+		private string _kod;
+		private string _model;
+		private List<PrintSewnRazmKolRow> _printSewnRazmKolRow;
+		private readonly PrintSewnDataService _printSewnDataService = new PrintSewnDataService();
+		private List<PrintSewnBlVshRow> _blVshRows = new List<PrintSewnBlVshRow>();
 		private string _nom;
 		private string _nomZad;
 		private int _proizvType = 0;
-		
+
 		//-- @xProizvType:
 		//-- 0 - raskr_zeh_up
 		//-- 1 - raskr_zeh_vyaz WHEN vsa.grupp NOT IN(10,30,33)
 		//-- 2 - raskr_zeh_vyaz WHEN vsa.grupp IN(10)
 		//-- 3 - raskr_zeh_vyaz WHEN vsa.grupp IN(30, 33)
 		public PrintSewn(UserClass user) : base(user)
-        {
-            InitializeComponent();
+		{
+			InitializeComponent();
 		}
 		public PrintSewn(string kod)
 		{
@@ -52,9 +52,14 @@ namespace SewingProduction.Core.Forms
 			_proizvType = proizvType;
 			InitializeComponent();
 		}
-		private void PrintSewn_Load(object sender, EventArgs e)
-        {
-        }
+		private async void PrintSewn_Load(object sender, EventArgs e)
+		{
+			customGridControlRzuRzv.DataSource = await _printSewnDataService.GetViewRzuRzv(
+				_nomZad ?? null,
+				_nom ?? null,
+				_kod ?? null
+				);
+		}
 
 		#region широкие ЭЙС, Клевер (новый)
 		private void customSimpleButtonACE_Click(object sender, EventArgs e)
@@ -73,7 +78,7 @@ namespace SewingProduction.Core.Forms
 		{
 			createReport(2);
 		}
-		#endregion	  
+		#endregion
 		private void createReport(int _izdType = 0)
 		{
 			VshivkiReport report1 = new VshivkiReport();
@@ -120,6 +125,26 @@ namespace SewingProduction.Core.Forms
 
 			p.Value = value;
 			p.Visible = false;
+		}
+
+		private void repositoryItemCheckEdit1_CheckedChanged(object sender, EventArgs e)
+		{
+			gridViewRzuRzv.PostEditor();
+			gridViewRzuRzv.UpdateCurrentRow();
+
+		}
+
+		private void gridViewRzuRzv_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+		{
+			if (e.Column != IsSelected)
+				return;
+
+			var row = gridViewRzuRzv.GetRow(e.RowHandle) as ViewRzuRzv;
+			if (row == null)
+				return;
+
+			row.IsSelected = Convert.ToBoolean(e.Value);
+
 		}
 	}
 }

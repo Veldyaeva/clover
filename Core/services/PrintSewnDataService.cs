@@ -8,6 +8,7 @@ using DevExpress.CodeParser;
 using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.CuttingProduction.Models;
+using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
@@ -293,6 +294,21 @@ namespace SewingProduction.Core.services
         public async Task SaveAsync(ArticulModel model)
         {
             await _dbService.SaveEntityAsync("sp_articul", "Kod", model);
-        }
-    }
+		}
+		public async Task<List<ViewRzuRzv>> GetViewRzuRzv(string xNomZad = null, string xNom = null, string xKod = null)
+		{   
+            string query = @"SELECT * FROM View_rzu_rzv_nom_zad vrrnz ";
+            if (xNomZad != null || xNom != null || xKod != null)
+            {
+                query += " WHERE 1=1 ";
+                if (xNomZad != null)
+                    query += " AND vrrnz.nom_zad = @xNomZad";
+                if (xNom != null)
+                    query += " AND vrrnz.nom_pach = @xNom";
+                if (xKod != null)
+                    query += " AND vrrnz.kod_izd = @xKod";
+            }
+			return await _dbService.GetListAsync<ViewRzuRzv>(query, new { xNomZad, xNom, xKod });
+		}
+	}
 }
