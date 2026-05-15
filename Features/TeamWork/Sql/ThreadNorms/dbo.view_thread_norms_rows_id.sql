@@ -1,3 +1,5 @@
+CREATE OR ALTER VIEW dbo.view_thread_norms_rows_id
+AS
 SELECT
     n.id,
     n.men,
@@ -30,6 +32,4 @@ LEFT JOIN global.planeta.dbo.TOVAR_GROUP grp
 LEFT JOIN global.planeta.dbo.TOVAR_CLASS cls
     ON cls.TC_ID = grp.TG_TC_ID
 LEFT JOIN global.planeta.dbo.TOVAR_ASSTYPE assort
-    ON assort.TAT_ID = n.ta_id
-{whereClause}
-ORDER BY n.men, cls.TC_ClassName, grp.TG_GroupName, cat.TCAT_CategoryName, assort.TAT_Name, n.kod_dr;
+    ON assort.TAT_ID = n.ta_id;

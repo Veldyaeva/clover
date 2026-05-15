@@ -1,76 +1,84 @@
-﻿using SewingProduction.Core.Models;
+using SewingProduction.Core.Models;
 using SewingProduction.Features.TeamWork.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace SewingProduction.Features.TeamWork.Services
 {
     internal sealed class ThreadNormsDataService
     {
+        private const string ManagersView = "dbo.view_thread_norms_managers";
+        private const string CategoriesView = "dbo.view_thread_norms_categories";
+        private const string AssortsByGlobalCodeView = "dbo.view_thread_norms_assorts_globalcode";
+        private const string AssortsByIdView = "dbo.view_thread_norms_assorts_id";
+        private const string ThreadMaterialsView = "dbo.view_thread_norms_materials";
+        private const string RowsByGlobalCodeView = "dbo.view_thread_norms_rows_globalcode";
+        private const string RowsByIdView = "dbo.view_thread_norms_rows_id";
+
         private readonly DbService _dbService;
         private readonly ILogger _logger;
-        private readonly ThreadNormsSqlProvider _sqlProvider;
 
-        public ThreadNormsDataService(DbService dbService, ILogger logger, ThreadNormsSqlProvider sqlProvider)
+        public ThreadNormsDataService(DbService dbService, ILogger logger)
         {
             _dbService = dbService ?? throw new ArgumentNullException(nameof(dbService));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _sqlProvider = sqlProvider ?? throw new ArgumentNullException(nameof(sqlProvider));
         }
 
         public Task<List<GrupMenModel>> LoadManagersAsync()
         {
-            return _dbService.GetListAsync<GrupMenModel>(_sqlProvider.Load("LoadManagers.sql"), new { });
+            return _dbService.GetListAsync<GrupMenModel>($@"
+SELECT *
+FROM {ManagersView}
+ORDER BY Men;", new { });
         }
 
         public Task<List<ThreadCategoryOption>> LoadCategoriesAsync()
         {
-            return _dbService.GetListAsync<ThreadCategoryOption>(_sqlProvider.Load("LoadCategories.sql"), new { });
+            return _dbService.GetListAsync<ThreadCategoryOption>($@"
+SELECT *
+FROM {CategoriesView}
+ORDER BY TC_ClassName, TG_GroupName, TCAT_CategoryName;", new { });
         }
 
         public async Task<List<ThreadAssortModel>> LoadAssortsAsync()
         {
             try
             {
-                return await _dbService.GetListAsync<ThreadAssortModel>(_sqlProvider.Load("LoadAssortsByGlobalCode.sql"), new { });
+                return await LoadAssortsInternalAsync(AssortsByGlobalCodeView);
             }
-            catch (Exception ex) when (ex.Message.Contains("GlobalCode", StringComparison.OrdinalIgnoreCase))
+            catch (Exception)
             {
                 await _logger.LogWarningAsync(
-                    "TOVAR_ASSTYPE does not contain TAT_GlobalCode, falling back to TAT_ID.",
+                    "Не удалось загрузить view_thread_norms_assorts_globalcode, использую view_thread_norms_assorts_id.",
                     "ThreadNormsDataService.LoadAssortsAsync");
-                return await _dbService.GetListAsync<ThreadAssortModel>(_sqlProvider.Load("LoadAssortsById.sql"), new { });
+                return await LoadAssortsInternalAsync(AssortsByIdView);
             }
         }
 
         public Task<List<ThreadMaterialOption>> LoadThreadMaterialsAsync()
         {
-            return _dbService.GetListAsync<ThreadMaterialOption>(_sqlProvider.Load("LoadThreadMaterials.sql"), new { });
+            return _dbService.GetListAsync<ThreadMaterialOption>($@"
+SELECT *
+FROM {ThreadMaterialsView}
+ORDER BY SortGroup, SortArticul;", new { });
         }
 
         public async Task<List<ThreadNormRow>> LoadRowsAsync(bool zeroNormOnly)
         {
-            string whereClause = zeroNormOnly ? "WHERE ISNULL(n.norm, 0) = 0" : string.Empty;
             try
             {
-                return await _dbService.GetListAsync<ThreadNormRow>(
-                    _sqlProvider.Load("LoadRowsByGlobalCode.sql").Replace("{whereClause}", whereClause),
-                    new { });
+                return await LoadRowsInternalAsync(RowsByGlobalCodeView, zeroNormOnly);
             }
-            catch (Exception ex) when (ex.Message.Contains("GlobalCode", StringComparison.OrdinalIgnoreCase))
+            catch (Exception)
             {
                 await _logger.LogWarningAsync(
-                    "TOVAR_ASSTYPE does not contain TAT_GlobalCode, falling back to TAT_ID for rows.",
+                    "Не удалось загрузить view_thread_norms_rows_globalcode, использую view_thread_norms_rows_id.",
                     "ThreadNormsDataService.LoadRowsAsync");
-                return await _dbService.GetListAsync<ThreadNormRow>(
-                    _sqlProvider.Load("LoadRowsById.sql").Replace("{whereClause}", whereClause),
-                    new { });
+                return await LoadRowsInternalAsync(RowsByIdView, zeroNormOnly);
             }
         }
 
@@ -83,6 +91,24 @@ namespace SewingProduction.Features.TeamWork.Services
         public Task DeleteAsync(ThreadNormRow row)
         {
             return _dbService.DeleteEntityAsync("cfn.confection_norm_nitki", "id", row);
+        }
+
+        private Task<List<ThreadAssortModel>> LoadAssortsInternalAsync(string viewName)
+        {
+            return _dbService.GetListAsync<ThreadAssortModel>($@"
+SELECT *
+FROM {viewName}
+ORDER BY TAT_ID;", new { });
+        }
+
+        private Task<List<ThreadNormRow>> LoadRowsInternalAsync(string viewName, bool zeroNormOnly)
+        {
+            string whereClause = zeroNormOnly ? "WHERE ISNULL(norm, 0) = 0" : string.Empty;
+            return _dbService.GetListAsync<ThreadNormRow>($@"
+SELECT *
+FROM {viewName}
+{whereClause}
+ORDER BY men, TC_ClassName, TG_GroupName, TCAT_CategoryName, TAT_Name, kod_dr;", new { });
         }
 
         private static void NormalizeRowForSave(ThreadNormDbRow row)

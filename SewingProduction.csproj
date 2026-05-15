@@ -44,13 +44,6 @@
 		</Content>
 	</ItemGroup>
 
-  <ItemGroup>
-    <Content Include="Features\TeamWork\Sql\ThreadNorms\*.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
 	<ItemGroup>
 	  <Compile Remove="Help\Features\Articul\Form\**" />
 	  <Content Remove="Help\Features\Articul\Form\**" />

@@ -1,4 +1,4 @@
-﻿using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.Models;
 using SewingProduction.Features.TeamWork.Models;
@@ -36,7 +36,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             InitializeComponent();
 
             var dbService = new DbService(new DatabaseHelperSQL());
-            _dataService = new ThreadNormsDataService(dbService, _logger, new ThreadNormsSqlProvider());
+            _dataService = new ThreadNormsDataService(dbService, _logger);
             bindingSource.DataSource = _rows;
         }
 
