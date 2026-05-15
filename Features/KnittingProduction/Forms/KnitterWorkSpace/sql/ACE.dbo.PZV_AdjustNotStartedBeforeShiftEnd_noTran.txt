@@ -1,4 +1,4 @@
-﻿USE ACE
+USE ACE
 GO
 
 ALTER PROCEDURE dbo.PZV_AdjustNotStartedBeforeShiftEnd
