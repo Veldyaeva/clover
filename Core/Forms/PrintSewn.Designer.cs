@@ -33,17 +33,14 @@
 			customLayoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
 			customGridControlR = new SewingProduction.Core.Class.CustomGridControl();
 			gridViewR = new DevExpress.XtraGrid.Views.Grid.GridView();
-			gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+			IsSelected = new DevExpress.XtraGrid.Columns.GridColumn();
 			repositoryItemCheckEditPodr = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
 			KodIzd = new DevExpress.XtraGrid.Columns.GridColumn();
 			Articul = new DevExpress.XtraGrid.Columns.GridColumn();
 			Mod = new DevExpress.XtraGrid.Columns.GridColumn();
 			NomZad = new DevExpress.XtraGrid.Columns.GridColumn();
 			NomPach = new DevExpress.XtraGrid.Columns.GridColumn();
-			customGridControlRzuRzv = new SewingProduction.Core.Class.CustomGridControl();
-			gridViewRzuRzv = new DevExpress.XtraGrid.Views.Grid.GridView();
-			IsSelected = new DevExpress.XtraGrid.Columns.GridColumn();
-			repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+			NPach = new DevExpress.XtraGrid.Columns.GridColumn();
 			customSimpleButtonNabor = new SewingProduction.Core.Class.CustomSimpleButton();
 			customSimpleButtonKompl = new SewingProduction.Core.Class.CustomSimpleButton();
 			customSimpleButtonACE = new SewingProduction.Core.Class.CustomSimpleButton();
@@ -56,9 +53,9 @@
 			emptySpaceItem6 = new DevExpress.XtraLayout.EmptySpaceItem();
 			emptySpaceItem7 = new DevExpress.XtraLayout.EmptySpaceItem();
 			emptySpaceItem8 = new DevExpress.XtraLayout.EmptySpaceItem();
-			layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
 			layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
 			emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+			gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
 			emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
 			emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
 			emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
@@ -72,9 +69,6 @@
 			((System.ComponentModel.ISupportInitialize)customGridControlR).BeginInit();
 			((System.ComponentModel.ISupportInitialize)gridViewR).BeginInit();
 			((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditPodr).BeginInit();
-			((System.ComponentModel.ISupportInitialize)customGridControlRzuRzv).BeginInit();
-			((System.ComponentModel.ISupportInitialize)gridViewRzuRzv).BeginInit();
-			((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).BeginInit();
 			((System.ComponentModel.ISupportInitialize)Root).BeginInit();
 			((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
 			((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
@@ -84,7 +78,6 @@
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem6).BeginInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem7).BeginInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem8).BeginInit();
-			((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
 			((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem3).BeginInit();
@@ -110,7 +103,6 @@
 			// customLayoutControl1
 			// 
 			customLayoutControl1.Controls.Add(customGridControlR);
-			customLayoutControl1.Controls.Add(customGridControlRzuRzv);
 			customLayoutControl1.Controls.Add(customSimpleButtonNabor);
 			customLayoutControl1.Controls.Add(customSimpleButtonKompl);
 			customLayoutControl1.Controls.Add(customHeaderLabel1);
@@ -120,18 +112,18 @@
 			customLayoutControl1.Location = new System.Drawing.Point(0, 0);
 			customLayoutControl1.Name = "customLayoutControl1";
 			customLayoutControl1.Root = Root;
-			customLayoutControl1.Size = new System.Drawing.Size(617, 497);
+			customLayoutControl1.Size = new System.Drawing.Size(795, 497);
 			customLayoutControl1.TabIndex = 2;
 			customLayoutControl1.Text = "customLayoutControl1";
 			// 
 			// customGridControlR
 			// 
 			customGridControlR.Font = new System.Drawing.Font("Arial", 10F);
-			customGridControlR.Location = new System.Drawing.Point(12, 311);
+			customGridControlR.Location = new System.Drawing.Point(12, 185);
 			customGridControlR.MainView = gridViewR;
 			customGridControlR.Name = "customGridControlR";
 			customGridControlR.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEditPodr });
-			customGridControlR.Size = new System.Drawing.Size(593, 164);
+			customGridControlR.Size = new System.Drawing.Size(771, 290);
 			customGridControlR.TabIndex = 3;
 			customGridControlR.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewR });
 			// 
@@ -151,21 +143,21 @@
 			gridViewR.Appearance.Row.Options.UseFont = true;
 			gridViewR.Appearance.TopNewRow.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
 			gridViewR.Appearance.TopNewRow.Options.UseFont = true;
-			gridViewR.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn1, KodIzd, Articul, Mod, NomZad, NomPach });
+			gridViewR.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { IsSelected, KodIzd, Articul, Mod, NomZad, NomPach, NPach });
 			gridViewR.GridControl = customGridControlR;
 			gridViewR.Name = "gridViewR";
 			gridViewR.OptionsView.EnableAppearanceEvenRow = true;
 			gridViewR.OptionsView.ShowGroupedColumns = true;
+			gridViewR.RowCellClick += gridViewR_RowCellClick;
 			// 
-			// gridColumn1
+			// IsSelected
 			// 
-			gridColumn1.Caption = "В";
-			gridColumn1.ColumnEdit = repositoryItemCheckEditPodr;
-			gridColumn1.FieldName = "IsSelected";
-			gridColumn1.Name = "gridColumn1";
-			gridColumn1.Visible = true;
-			gridColumn1.VisibleIndex = 0;
-			gridColumn1.Width = 30;
+			IsSelected.Caption = "Выбор";
+			IsSelected.ColumnEdit = repositoryItemCheckEditPodr;
+			IsSelected.FieldName = "IsSelected";
+			IsSelected.Name = "IsSelected";
+			IsSelected.Visible = true;
+			IsSelected.VisibleIndex = 0;
 			// 
 			// repositoryItemCheckEditPodr
 			// 
@@ -223,45 +215,13 @@
 			NomPach.VisibleIndex = 5;
 			NomPach.Width = 128;
 			// 
-			// customGridControlRzuRzv
+			// NPach
 			// 
-			customGridControlRzuRzv.Font = new System.Drawing.Font("Arial", 10F);
-			customGridControlRzuRzv.Location = new System.Drawing.Point(12, 185);
-			customGridControlRzuRzv.MainView = gridViewRzuRzv;
-			customGridControlRzuRzv.Name = "customGridControlRzuRzv";
-			customGridControlRzuRzv.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit1 });
-			customGridControlRzuRzv.Size = new System.Drawing.Size(593, 122);
-			customGridControlRzuRzv.TabIndex = 4;
-			customGridControlRzuRzv.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewRzuRzv });
-			// 
-			// gridViewRzuRzv
-			// 
-			gridViewRzuRzv.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-			gridViewRzuRzv.Appearance.FocusedRow.Options.UseFont = true;
-			gridViewRzuRzv.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { KodIzd, Articul, Mod, NomZad, NomPach, IsSelected });
-			gridViewRzuRzv.GridControl = customGridControlRzuRzv;
-			gridViewRzuRzv.Name = "gridViewRzuRzv";
-			gridViewRzuRzv.OptionsCustomization.AllowFilter = false;
-			gridViewRzuRzv.OptionsView.ShowAutoFilterRow = true;
-			gridViewRzuRzv.OptionsView.ShowGroupPanel = false;
-			gridViewRzuRzv.CellValueChanged += gridViewRzuRzv_CellValueChanged;
-			// 
-			// IsSelected
-			// 
-			IsSelected.Caption = "Выбор";
-			IsSelected.ColumnEdit = repositoryItemCheckEdit1;
-			IsSelected.FieldName = "IsSelected";
-			IsSelected.Name = "IsSelected";
-			IsSelected.Visible = true;
-			IsSelected.VisibleIndex = 0;
-			// 
-			// repositoryItemCheckEdit1
-			// 
-			repositoryItemCheckEdit1.AutoHeight = false;
-			repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
-			repositoryItemCheckEdit1.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-			repositoryItemCheckEdit1.ValueGrayed = false;
-			repositoryItemCheckEdit1.CheckedChanged += repositoryItemCheckEdit1_CheckedChanged;
+			NPach.Caption = "Пачка";
+			NPach.FieldName = "n_pach_nz";
+			NPach.Name = "NPach";
+			NPach.Visible = true;
+			NPach.VisibleIndex = 6;
 			// 
 			// customSimpleButtonNabor
 			// 
@@ -303,9 +263,9 @@
 			// 
 			Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
 			Root.GroupBordersVisible = false;
-			Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem4, emptySpaceItem2, emptySpaceItem6, emptySpaceItem7, emptySpaceItem8, layoutControlItem5, layoutControlItem6, emptySpaceItem1 });
+			Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem4, emptySpaceItem2, emptySpaceItem6, emptySpaceItem7, emptySpaceItem8, layoutControlItem6, emptySpaceItem1 });
 			Root.Name = "Root";
-			Root.Size = new System.Drawing.Size(617, 497);
+			Root.Size = new System.Drawing.Size(795, 497);
 			Root.TextVisible = false;
 			// 
 			// layoutControlItem1
@@ -324,7 +284,7 @@
 			layoutControlItem2.Control = customHeaderLabel1;
 			layoutControlItem2.Location = new System.Drawing.Point(0, 0);
 			layoutControlItem2.Name = "layoutControlItem2";
-			layoutControlItem2.Size = new System.Drawing.Size(597, 31);
+			layoutControlItem2.Size = new System.Drawing.Size(775, 31);
 			layoutControlItem2.TextVisible = false;
 			// 
 			// layoutControlItem3
@@ -353,47 +313,43 @@
 			// 
 			emptySpaceItem2.Location = new System.Drawing.Point(300, 92);
 			emptySpaceItem2.Name = "emptySpaceItem2";
-			emptySpaceItem2.Size = new System.Drawing.Size(297, 40);
+			emptySpaceItem2.Size = new System.Drawing.Size(475, 40);
 			// 
 			// emptySpaceItem6
 			// 
 			emptySpaceItem6.Location = new System.Drawing.Point(300, 132);
 			emptySpaceItem6.Name = "emptySpaceItem6";
-			emptySpaceItem6.Size = new System.Drawing.Size(297, 41);
+			emptySpaceItem6.Size = new System.Drawing.Size(475, 41);
 			// 
 			// emptySpaceItem7
 			// 
 			emptySpaceItem7.Location = new System.Drawing.Point(300, 52);
 			emptySpaceItem7.Name = "emptySpaceItem7";
-			emptySpaceItem7.Size = new System.Drawing.Size(297, 40);
+			emptySpaceItem7.Size = new System.Drawing.Size(475, 40);
 			// 
 			// emptySpaceItem8
 			// 
 			emptySpaceItem8.Location = new System.Drawing.Point(0, 31);
 			emptySpaceItem8.Name = "emptySpaceItem8";
-			emptySpaceItem8.Size = new System.Drawing.Size(597, 21);
-			// 
-			// layoutControlItem5
-			// 
-			layoutControlItem5.Control = customGridControlRzuRzv;
-			layoutControlItem5.Location = new System.Drawing.Point(0, 173);
-			layoutControlItem5.Name = "layoutControlItem5";
-			layoutControlItem5.Size = new System.Drawing.Size(597, 126);
-			layoutControlItem5.TextVisible = false;
+			emptySpaceItem8.Size = new System.Drawing.Size(775, 21);
 			// 
 			// layoutControlItem6
 			// 
 			layoutControlItem6.Control = customGridControlR;
-			layoutControlItem6.Location = new System.Drawing.Point(0, 299);
+			layoutControlItem6.Location = new System.Drawing.Point(0, 173);
 			layoutControlItem6.Name = "layoutControlItem6";
-			layoutControlItem6.Size = new System.Drawing.Size(597, 168);
+			layoutControlItem6.Size = new System.Drawing.Size(775, 294);
 			layoutControlItem6.TextVisible = false;
 			// 
 			// emptySpaceItem1
 			// 
 			emptySpaceItem1.Location = new System.Drawing.Point(0, 467);
 			emptySpaceItem1.Name = "emptySpaceItem1";
-			emptySpaceItem1.Size = new System.Drawing.Size(597, 10);
+			emptySpaceItem1.Size = new System.Drawing.Size(775, 10);
+			// 
+			// gridColumn1
+			// 
+			gridColumn1.Name = "gridColumn1";
 			// 
 			// emptySpaceItem3
 			// 
@@ -466,7 +422,7 @@
 			// 
 			AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			ClientSize = new System.Drawing.Size(617, 497);
+			ClientSize = new System.Drawing.Size(795, 497);
 			Controls.Add(customLayoutControl1);
 			Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
 			Name = "PrintSewn";
@@ -477,9 +433,6 @@
 			((System.ComponentModel.ISupportInitialize)customGridControlR).EndInit();
 			((System.ComponentModel.ISupportInitialize)gridViewR).EndInit();
 			((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditPodr).EndInit();
-			((System.ComponentModel.ISupportInitialize)customGridControlRzuRzv).EndInit();
-			((System.ComponentModel.ISupportInitialize)gridViewRzuRzv).EndInit();
-			((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).EndInit();
 			((System.ComponentModel.ISupportInitialize)Root).EndInit();
 			((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
 			((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
@@ -489,7 +442,6 @@
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem6).EndInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem7).EndInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem8).EndInit();
-			((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
 			((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem3).EndInit();
@@ -518,16 +470,6 @@
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem5;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem8;
 		private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
-		private Class.CustomGridControl customGridControlRzuRzv;
-		private DevExpress.XtraGrid.Views.Grid.GridView gridViewRzuRzv;
-		private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
-		private DevExpress.XtraGrid.Columns.GridColumn KodIzd;
-		private DevExpress.XtraGrid.Columns.GridColumn Articul;
-		private DevExpress.XtraGrid.Columns.GridColumn Mod;
-		private DevExpress.XtraGrid.Columns.GridColumn NomZad;
-		private DevExpress.XtraGrid.Columns.GridColumn NomPach;
-		private DevExpress.XtraGrid.Columns.GridColumn IsSelected;
-		private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
 		private Class.CustomGridControl customGridControlR;
 		private DevExpress.XtraGrid.Views.Grid.GridView gridViewR;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
@@ -538,5 +480,12 @@
 		private DevExpress.XtraGrid.Columns.GridColumn RoleTableID;
 		private DevExpress.XtraGrid.Columns.GridColumn UserRoleID;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+		private DevExpress.XtraGrid.Columns.GridColumn KodIzd;
+		private DevExpress.XtraGrid.Columns.GridColumn Articul;
+		private DevExpress.XtraGrid.Columns.GridColumn Mod;
+		private DevExpress.XtraGrid.Columns.GridColumn NomZad;
+		private DevExpress.XtraGrid.Columns.GridColumn NomPach;
+		private DevExpress.XtraGrid.Columns.GridColumn IsSelected;
+		private DevExpress.XtraGrid.Columns.GridColumn NPach;
 	}
 }

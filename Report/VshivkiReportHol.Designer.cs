@@ -62,8 +62,6 @@ namespace SewingProduction.Report
 			this._nom = new DevExpress.XtraReports.Parameters.Parameter();
 			this._proizvType = new DevExpress.XtraReports.Parameters.Parameter();
 			this.sqlDataSource2 = new DevExpress.DataAccess.Sql.SqlDataSource(this.components);
-			this._izdType = new DevExpress.XtraReports.Parameters.Parameter();
-			this._kod = new DevExpress.XtraReports.Parameters.Parameter();
 			((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
 			// 
 			// TopMargin
@@ -175,15 +173,11 @@ namespace SewingProduction.Report
 			queryParameter4.Name = "@xIzdType";
 			queryParameter4.Type = typeof(global::DevExpress.DataAccess.Expression);
 			queryParameter4.Value = new DevExpress.DataAccess.Expression("?_izdType", typeof(int));
-			queryParameter5.Name = "@xKod";
-			queryParameter5.Type = typeof(global::DevExpress.DataAccess.Expression);
-			queryParameter5.Value = new DevExpress.DataAccess.Expression("?_kod", typeof(string));
 			storedProcQuery1.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
             queryParameter1,
             queryParameter2,
 			queryParameter3,
-			queryParameter4,
-			queryParameter5});
+			queryParameter4});
 			storedProcQuery1.StoredProcName = "getVshivkiInfo";
 			this.sqlDataSource1.Queries.AddRange(new DevExpress.DataAccess.Sql.SqlQuery[] {
             storedProcQuery1});
@@ -295,20 +289,6 @@ namespace SewingProduction.Report
             storedProcQuery2});
 			this.sqlDataSource2.ResultSchemaSerializable = resources.GetString("sqlDataSource2.ResultSchemaSerializable");
 			// 
-			// _izdType
-			// 
-			this._izdType.AllowNull = true;
-			this._izdType.Description = "izdType";
-			this._izdType.Name = "_izdType";
-			this._izdType.Type = typeof(int);
-			this._izdType.ValueInfo = "0";
-			// 
-			// _kod
-			// 
-			this._kod.AllowNull = true;
-			this._kod.Description = "kod";
-			this._kod.Name = "_kod";
-			// 
 			// VshivkiReportHol
 			// 
 			this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -329,15 +309,11 @@ namespace SewingProduction.Report
 			this.ParameterPanelLayoutItems.AddRange(new DevExpress.XtraReports.Parameters.ParameterPanelLayoutItem[] {
             new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._nomZad, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
             new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._nom, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
-            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._proizvType, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
-            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._izdType, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
-            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._kod, DevExpress.XtraReports.Parameters.Orientation.Horizontal)});
+            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._proizvType, DevExpress.XtraReports.Parameters.Orientation.Horizontal)});
 			this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this._nomZad,
             this._nom,
-            this._proizvType,
-            this._izdType,
-            this._kod});
+            this._proizvType});
 			this.ReportUnit = DevExpress.XtraReports.UI.ReportUnit.Millimeters;
 			this.SnapGridSize = 2.5F;
 			this.StyleSheet.AddRange(new DevExpress.XtraReports.UI.XRControlStyle[] {
@@ -371,7 +347,5 @@ namespace SewingProduction.Report
 		private DevExpress.XtraReports.Parameters.Parameter _nom;
 		private DevExpress.XtraReports.Parameters.Parameter _proizvType;
 		private DevExpress.DataAccess.Sql.SqlDataSource sqlDataSource2;
-		private DevExpress.XtraReports.Parameters.Parameter _izdType;
-		private DevExpress.XtraReports.Parameters.Parameter _kod;
 	}
 }
