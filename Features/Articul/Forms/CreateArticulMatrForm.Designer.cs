@@ -63,8 +63,6 @@
             gcCertSost2 = new DevExpress.XtraGrid.Columns.GridColumn();
             gcCertSost3 = new DevExpress.XtraGrid.Columns.GridColumn();
             gcCertidGost = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemSearchLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
-            repositoryItemSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             gcCertAgid = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemSearchLookUpEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
             repositoryItemSearchLookUpEdit2View = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -81,6 +79,8 @@
             repositoryItemCheckEdit7 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             repositoryItemLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             repositoryItemLookUpEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            repositoryItemSearchLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
+            repositoryItemSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridViewArtMatr = new DevExpress.XtraGrid.Views.Grid.GridView();
             gcGrupmen_name = new DevExpress.XtraGrid.Columns.GridColumn();
             gcTsn_name = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -140,8 +140,6 @@
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit14).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridArtMatr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewArtMatrEdit).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit1View).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit2View).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).BeginInit();
@@ -153,6 +151,8 @@
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit1View).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewArtMatr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customLayoutControl1).BeginInit();
             customLayoutControl1.SuspendLayout();
@@ -268,6 +268,7 @@
             gridViewArtMatrEdit.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
             gridViewArtMatrEdit.OptionsView.ShowGroupPanel = false;
             gridViewArtMatrEdit.FocusedRowChanged += gridArtMatr_FocusedRowChanged;
+            gridViewArtMatrEdit.FocusedColumnChanged += gridViewArtMatrEdit_FocusedColumnChanged;
             gridViewArtMatrEdit.DoubleClick += gridViewArtMatrEdit_DoubleClick;
             // 
             // gcCertGrupmen_name
@@ -489,27 +490,12 @@
             // gcCertidGost
             // 
             gcCertidGost.Caption = "Утв. ГОСТ";
-            gcCertidGost.ColumnEdit = repositoryItemSearchLookUpEdit1;
             gcCertidGost.Name = "gcCertidGost";
+            gcCertidGost.OptionsColumn.AllowEdit = false;
+            gcCertidGost.OptionsColumn.ReadOnly = true;
             gcCertidGost.Visible = true;
             gcCertidGost.VisibleIndex = 10;
             gcCertidGost.Width = 55;
-            // 
-            // repositoryItemSearchLookUpEdit1
-            // 
-            repositoryItemSearchLookUpEdit1.AutoHeight = false;
-            repositoryItemSearchLookUpEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            repositoryItemSearchLookUpEdit1.Name = "repositoryItemSearchLookUpEdit1";
-            repositoryItemSearchLookUpEdit1.PopupView = repositoryItemSearchLookUpEdit1View;
-            
-            repositoryItemSearchLookUpEdit1.BeforePopup += repositoryItemSearchLookUpEdit1_BeforePopup;
-            // 
-            // repositoryItemSearchLookUpEdit1View
-            // 
-            repositoryItemSearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            repositoryItemSearchLookUpEdit1View.Name = "repositoryItemSearchLookUpEdit1View";
-            repositoryItemSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            repositoryItemSearchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
             // gcCertAgid
             // 
@@ -526,8 +512,8 @@
             repositoryItemSearchLookUpEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             repositoryItemSearchLookUpEdit2.Name = "repositoryItemSearchLookUpEdit2";
             repositoryItemSearchLookUpEdit2.PopupView = repositoryItemSearchLookUpEdit2View;
-            repositoryItemSearchLookUpEdit1.CloseUp += repositoryItemSearchLookUpEdit2_CloseUp;
-
+            repositoryItemSearchLookUpEdit2.CloseUp += repositoryItemSearchLookUpEdit2_CloseUp;
+            repositoryItemSearchLookUpEdit2.EditValueChanged += repositoryItemSearchLookUpEdit2_EditValueChanged;
             // 
             // repositoryItemSearchLookUpEdit2View
             // 
@@ -642,6 +628,20 @@
             repositoryItemLookUpEdit2.AutoHeight = false;
             repositoryItemLookUpEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             repositoryItemLookUpEdit2.Name = "repositoryItemLookUpEdit2";
+            // 
+            // repositoryItemSearchLookUpEdit1
+            // 
+            repositoryItemSearchLookUpEdit1.AutoHeight = false;
+            repositoryItemSearchLookUpEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemSearchLookUpEdit1.Name = "repositoryItemSearchLookUpEdit1";
+            repositoryItemSearchLookUpEdit1.PopupView = repositoryItemSearchLookUpEdit1View;
+            // 
+            // repositoryItemSearchLookUpEdit1View
+            // 
+            repositoryItemSearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            repositoryItemSearchLookUpEdit1View.Name = "repositoryItemSearchLookUpEdit1View";
+            repositoryItemSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            repositoryItemSearchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
             // gridViewArtMatr
             // 
@@ -1141,8 +1141,6 @@
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit14).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridArtMatr).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewArtMatrEdit).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit1View).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit2).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit2View).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).EndInit();
@@ -1154,6 +1152,8 @@
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit7).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit1).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit1View).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewArtMatr).EndInit();
             ((System.ComponentModel.ISupportInitialize)customLayoutControl1).EndInit();
             customLayoutControl1.ResumeLayout(false);

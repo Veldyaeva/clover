@@ -1,5 +1,7 @@
 using DevExpress.Mvvm.Native;
+using DevExpress.XtraBars.Customization;
 using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using SewingProduction.Core.Models;
@@ -77,7 +79,7 @@ namespace SewingProduction.Features.Articul.Forms
             articulControl1.IsReadOnly = true;
 
             InitializeBindings();
-            BindGost();
+            //BindGost();
             BindGostGrupp();
 
             //в зависимости от прав пользователя - разрешаем или запрещаем редактирование грида 
@@ -178,44 +180,44 @@ namespace SewingProduction.Features.Articul.Forms
 
         }
 
-        private async void BindGost()
-        {
-            try
-            {
-                var ri = repositoryItemSearchLookUpEdit1;
-                ri.DataSource = await _createArticulMatrService.GetGostAsync();
-                ri.DisplayMember = nameof(GostModel.Id_gost);
-                ri.ValueMember = nameof(GostModel.Id_gost);
-                // Колонки выпадающего списка (по желанию)
+        //private async void BindGost()
+        //{
+        //    try
+        //    {
+        //        var ri = repositoryItemSearchLookUpEdit1;
+        //        ri.DataSource = await _createArticulMatrService.GetGostAsync();
+        //        ri.DisplayMember = nameof(GostModel.Id_gost);
+        //        ri.ValueMember = nameof(GostModel.Id_gost);
+        //        // Колонки выпадающего списка (по желанию)
 
-                var view = ri.PopupView as DevExpress.XtraGrid.Views.Grid.GridView;
-                if (view == null)
-                    throw new InvalidOperationException("PopupView не GridView");
-                view.OptionsView.ShowColumnHeaders = true;
-                view.OptionsView.ShowIndicator = false;
-                view.OptionsView.ShowAutoFilterRow = true; // ⭐ фильтр по колонкам
-                view.OptionsBehavior.Editable = false;
-                view.OptionsSelection.EnableAppearanceFocusedCell = false;
-                view.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-                view.Columns.Clear();
+        //        var view = ri.PopupView as DevExpress.XtraGrid.Views.Grid.GridView;
+        //        if (view == null)
+        //            throw new InvalidOperationException("PopupView не GridView");
+        //        view.OptionsView.ShowColumnHeaders = true;
+        //        view.OptionsView.ShowIndicator = false;
+        //        view.OptionsView.ShowAutoFilterRow = true; // ⭐ фильтр по колонкам
+        //        view.OptionsBehavior.Editable = false;
+        //        view.OptionsSelection.EnableAppearanceFocusedCell = false;
+        //        view.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+        //        view.Columns.Clear();
 
-                view.Columns.AddVisible(nameof(GostModel.Id_gost), "ID");
-                view.Columns.AddVisible(nameof(GostModel.Name_gost), "Название");
-                view.Columns.AddVisible(nameof(GostModel.Opi_gost), "Описание");
-                //view.BestFitColumns();
+        //        view.Columns.AddVisible(nameof(GostModel.Id_gost), "ID");
+        //        view.Columns.AddVisible(nameof(GostModel.Name_gost), "Название");
+        //        view.Columns.AddVisible(nameof(GostModel.Opi_gost), "Описание");
+        //        //view.BestFitColumns();
 
-                ri.NullText = ""; // что показывать, если значение null
-                //ri.ShowHeader = false;
-                //ri.ShowFooter = false;
-                ri.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor; // запрет ввода, только выбор
-                ri.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок ГОСТ");
-                throw;
-            }
-        }
+        //        ri.NullText = ""; // что показывать, если значение null
+        //        //ri.ShowHeader = false;
+        //        //ri.ShowFooter = false;
+        //        ri.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor; // запрет ввода, только выбор
+        //        ri.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок ГОСТ");
+        //        throw;
+        //    }
+        //}
         private async void BindGostGrupp()
         {
             try
@@ -233,7 +235,6 @@ namespace SewingProduction.Features.Articul.Forms
                     NullText = ""
                 };
 
-
                 // Колонки выпадающего списка (по желанию)
                 var view = ri.PopupView as DevExpress.XtraGrid.Views.Grid.GridView;
                 if (view == null)
@@ -244,7 +245,6 @@ namespace SewingProduction.Features.Articul.Forms
                 view.OptionsBehavior.Editable = false;
                 view.OptionsSelection.EnableAppearanceFocusedCell = false;
 
-
                 //view.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
                 // Для картинок в popup лучше отключить focus-рамку:  (Если нужно оставить фокус, но не на ячейке с картинкой: view.FocusRectStyle = DrawFocusRectStyle.RowFocus;)
                 view.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.None;
@@ -253,13 +253,14 @@ namespace SewingProduction.Features.Articul.Forms
 
                 view.Columns.Clear();
 
-                view.Columns.AddVisible(nameof(GostGrupIzdViewModel.Ag_id), "ID");
+                view.Columns.AddVisible(nameof(GostGrupIzdViewModel.Id_gost), "Гост");
+                view.Columns.AddVisible(nameof(GostGrupIzdViewModel.Ag_id), "Номер группы");
                 view.Columns.AddVisible(nameof(GostGrupIzdViewModel.N_i), "Название");
                 view.Columns.AddVisible(nameof(GostGrupIzdViewModel.Ag_name_sokr), "Сокращенное назв.");
                 view.Columns.AddVisible(nameof(GostGrupIzdViewModel.Care_instructions), "Инструкции по уходу");
 
                 #region описание картинки
-                var imageCol =  view.Columns.AddVisible("Picture", "Символы по уходы");
+                var imageCol = view.Columns.AddVisible("Picture", "Символы по уходы");
                 imageCol.UnboundType = DevExpress.Data.UnboundColumnType.Object;
                 imageCol.ColumnEdit = pictureEdit;
                 imageCol.Width = 190;
@@ -286,7 +287,7 @@ namespace SewingProduction.Features.Articul.Forms
                 throw;
             }
         }
-        private void View_CustomUnboundColumnData(object sender,DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
+        private void View_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
         {
             if (!e.IsGetData || e.Column.FieldName != "Picture")
                 return;
@@ -338,9 +339,29 @@ namespace SewingProduction.Features.Articul.Forms
                 //скидываем гост при изменении группы, чтобы не было "висячих" гостов
                 currentItem.Id_gost = 0;
 
+                //обновляем значение ГОСТ из выбранной группы
+                var editor = sender as DevExpress.XtraEditors.SearchLookUpEdit;
+                if (editor == null)
+                    return;
+                var viewLookUp = repositoryItemSearchLookUpEdit2.PopupView
+                    as DevExpress.XtraGrid.Views.Grid.GridView;
+
+                if (viewLookUp == null)
+                    return;
+
+                var selectedRow = view.GetFocusedRow() as GostGrupIzdViewModel;
+
+                if (selectedRow == null)
+                    return;
+
+                currentItem.Id_gost = selectedRow.Id_gost;
+
                 view.PostEditor();
+                // когда пользователь изменил значение в гриде
                 view.UpdateCurrentRow();
 
+                // говорит привязанным контролам: “текущий объект изменился, перечитайте его”, Использовать, когда сами изменили объект в коде
+                _bindingSourceArtMatr.ResetCurrentItem();
             }
             catch (Exception ex)
             {
@@ -349,28 +370,28 @@ namespace SewingProduction.Features.Articul.Forms
             }
         }
 
-        private void repositoryItemSearchLookUpEdit1_BeforePopup(object sender, EventArgs e)
-        {
-            try
-            {
-                var editor = gridViewArtMatrEdit.ActiveEditor as DevExpress.XtraEditors.SearchLookUpEdit;
-                if (editor == null)
-                    return;
+        //private void repositoryItemSearchLookUpEdit1_BeforePopup(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        var editor = gridViewArtMatrEdit.ActiveEditor as DevExpress.XtraEditors.SearchLookUpEdit;
+        //        if (editor == null)
+        //            return;
 
-                if (sender == null) return;
+        //        if (sender == null) return;
 
-                var _currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
-                var idGrup = _currentItem.Ag_id;
-                editor.Properties.DataSource = _gostGroupAll
-                    .Where(x => x.Ag_id == idGrup)
-                    .ToList();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogErrorAsync(ex, "Ошибка при открытии выпадающего списка групп ГОСТ");
-                throw;
-            }
-        }
+        //        var _currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
+        //        var idGrup = _currentItem.Ag_id;
+        //        editor.Properties.DataSource = _gostGroupAll
+        //            .Where(x => x.Ag_id == idGrup)
+        //            .ToList();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogErrorAsync(ex, "Ошибка при открытии выпадающего списка групп ГОСТ");
+        //        throw;
+        //    }
+        //}
         private async void gridViewArtMatrEdit_DoubleClick(object sender, EventArgs e)
         {
 
@@ -381,6 +402,7 @@ namespace SewingProduction.Features.Articul.Forms
 
                 Point pt = view.GridControl.PointToClient(Control.MousePosition);
                 GridHitInfo hit = view.CalcHitInfo(pt);
+                // при doubleClick на указанных столбцах произойдет установка или снятие даты утверждения
                 if (hit.InRowCell && (hit.Column == gcCertidGost || hit.Column == gcCertAgid || hit.Column == gcCertDateCertificationApproval) && hit.RowHandle >= 0)
                 {
                     var _currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
@@ -435,7 +457,6 @@ namespace SewingProduction.Features.Articul.Forms
         {
             try
             {
-
                 articulControl1.ClearComparisonHighlight();   //очищаем подсветку сравнения при смене артикула в матрице, чтобы не было "висячей" подсветки от предыдущего сравнения
                 ArticulControlBindingHelper.ClearDetails(_bsDetails);// очищаем детали от предыдущего сравнения
                 articulControl1.ClearImage();
@@ -449,12 +470,50 @@ namespace SewingProduction.Features.Articul.Forms
                 pictureBoxMatrix.ImageLocation = string.IsNullOrWhiteSpace(imagePath) ? null : imagePath;// отображаем эскиз, если он есть, или очищаем картинку, если эскиза нет
 
                 await fillCompareTable();
-
+                UpdateEditPermissionByApprovalDate();
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при загрузке данных для сравнения артикула");
                 throw;
+            }
+        }
+        private async void gridViewArtMatrEdit_FocusedColumnChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedColumnChangedEventArgs e)
+        {
+            try
+            {
+                UpdateEditPermissionByApprovalDate();
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при загрузке данных для сравнения артикула");
+                throw;
+            }
+        }
+        /// <summary>
+        /// установка разрешения редактировать гост и группу по гост при наличии даты утверждения
+        /// </summary>
+        private void UpdateEditPermissionByApprovalDate()
+        {
+            var currentRow = _bindingSourceArtMatr.Current as CreateArticulMatrModel;// получаем текущую выбранную строку из матрицы
+            if (currentRow == null)
+                return;
+            if (gridArtMatr.FocusedView == gridViewArtMatrEdit)
+            {
+                gridViewArtMatrEdit.CloseEditor();
+                //запрещаем редактировать, если есть дата утверждения
+                if (currentRow.DateCertificationApproval != null)
+                {
+                    gcCertAgid.OptionsColumn.AllowEdit = false;
+                    gcCertAgid.OptionsColumn.ReadOnly = true;
+                }
+                else
+                {
+                    gcCertAgid.OptionsColumn.AllowEdit = true;
+                    gcCertAgid.OptionsColumn.ReadOnly = false;
+                }
+                gridViewArtMatrEdit.RefreshData();
+                gridArtMatr.Refresh();
             }
         }
 
@@ -655,5 +714,24 @@ namespace SewingProduction.Features.Articul.Forms
 
             base.OnFormClosed(e);
         }
+
+        private void repositoryItemSearchLookUpEdit2_EditValueChanged(object sender, EventArgs e)
+        {
+            var editor = sender as DevExpress.XtraEditors.SearchLookUpEdit;
+            if (editor == null)
+                return;
+
+            var selectedRow = editor.Properties.GetRowByKeyValue(editor.EditValue)
+                as GostGrupIzdViewModel;
+
+            if (selectedRow == null)
+                return;
+            var _currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
+
+            _currentItem.Id_gost = selectedRow.Id_gost;
+            _bindingSourceArtMatr.ResetCurrentItem();
+        }
+
+        
     }
 }
