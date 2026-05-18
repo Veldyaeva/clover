@@ -546,7 +546,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     {
                         ShiftId = _currentShiftId.Value,
                         TabEnd = tabEnd,
-                        MinHours = 12m,
                         UserName = GetShiftAuditUserName()
                     });
 
