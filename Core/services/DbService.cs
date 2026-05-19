@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using DevExpress.Mvvm.Native;
 using SewingProduction.Core.Models;
+using SewingProduction.Features.Articul.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Interfaces;
 using System;
@@ -199,6 +200,27 @@ namespace SewingProduction.Services
                 throw; // Пробрасываем исключение, чтобы вызывающий код мог его обработать
             }
         }
+        public async Task<T> ExecuteScalarProcedureAsync<T>(string procName, DynamicParameters parameters)
+        {
+            try
+            {
+                using var connection = _dbHelper.GetConnection();
+                var result = await connection.ExecuteScalarAsync<T>(
+                    procName,
+                    parameters,
+                    commandType: CommandType.StoredProcedure
+                    );
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при выполнении процедуры {procName}");
+                throw;
+            }
+        }
+
+
         /// <summary>
         /// выполняет хранимую процедуру с возвратом статуса выполнения
         /// принимает имя процедуры и параметры вида 
@@ -441,7 +463,32 @@ namespace SewingProduction.Services
                 return await InsertEntityAsync(tableName, keyFieldName, entity);
             }
         }
+        public async Task<List<T>> GetListFromProcedureAsync<T>(
+    string procedureName,
+    object parameters = null,
+    int? commandTimeout = null)
+        {
+            try
+            {
+                using var connection = _dbHelper.GetConnection();
 
+                var result = await connection.QueryAsync<T>(
+                    procedureName,
+                    parameters,
+                    commandType: CommandType.StoredProcedure,
+                    commandTimeout: commandTimeout);
+
+                return result.AsList();
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(
+                    ex,
+                    $"Ошибка выполнения процедуры {procedureName}");
+
+                throw;
+            }
+        }
         public async Task<int> SaveEntityAsync<T>(
     string tableName,
     string keyFieldName,

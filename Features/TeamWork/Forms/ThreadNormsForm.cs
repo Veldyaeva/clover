@@ -105,15 +105,49 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _assorts = assortsTask.Result ?? new List<ThreadAssortModel>();
                 _materials = materialsTask.Result ?? new List<ThreadMaterialOption>();
 
-                managerLookup.DataSource = _managers;
+                managerSearchLookUp.DataSource = _managers;
                 categoryLookup.DataSource = _categories;
                 assortLookup.DataSource = _assorts;
-                threadLookup.DataSource = _materials;
+                threadSearchLookUp.DataSource = _materials;
             }
             finally
             {
                 _isLoading = false;
             }
+        }
+
+        private void ConfigureManagerSearchLookupColumns()
+        {
+            if (managerSearchLookUp.PopupView is not GridView popupView)
+            {
+                return;
+            }
+
+            popupView.PopulateColumns();
+
+            foreach (GridColumn column in popupView.Columns)
+            {
+                column.Visible = false;
+            }
+
+            ConfigureManagerSearchLookupColumn(popupView, "Men", "Men", 0, 90);
+            ConfigureManagerSearchLookupColumn(popupView, "Name", "Name", 1, 220);
+        }
+
+        private static void ConfigureManagerSearchLookupColumn(GridView popupView, string fieldName, string caption, int visibleIndex, int width)
+        {
+            var column = popupView.Columns.ColumnByFieldName(fieldName);
+            if (column == null)
+            {
+                return;
+            }
+
+            column.Caption = caption;
+            column.Visible = true;
+            column.VisibleIndex = visibleIndex;
+            column.Width = width;
+            column.OptionsColumn.AllowEdit = false;
+            column.OptionsColumn.ReadOnly = true;
         }
 
         private async Task LoadRowsAsync()

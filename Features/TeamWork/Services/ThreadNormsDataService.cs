@@ -1,10 +1,12 @@
-﻿using SewingProduction.Core.Models;
+﻿using Dapper;
+using SewingProduction.Core.Models;
 using SewingProduction.Features.TeamWork.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
+using System.Runtime.ConstrainedExecution;
 using System.Threading.Tasks;
 
 namespace SewingProduction.Features.TeamWork.Services
@@ -140,8 +142,7 @@ namespace SewingProduction.Features.TeamWork.Services
         {
             return _dbService.GetListAsync<GrupMenModel>(
                 @"SELECT Men, Name
-              FROM dbo.sewing_thread_managers_view
-              ORDER BY Men",
+              FROM dbo.view_grup_men",
                 new { });
         }
 
@@ -172,14 +173,55 @@ namespace SewingProduction.Features.TeamWork.Services
                 new { });
         }
 
-        public Task<List<ThreadNormRow>> LoadRowsAsync(bool zeroNormOnly)
+        public  Task<List<ThreadNormRow>> LoadRowsAsync(bool zeroNormOnly)
         {
+            //return _dbService.GetListAsync<ThreadNormRow>(
+            //    @"SELECT *
+            //  FROM dbo.ThreadNorms_LoadRows
+            //  WHERE (@ZeroNormOnly = 0 OR ISNULL(norm, 0) = 0)
+            //  ORDER BY men, TC_ClassName, TG_GroupName, TCAT_CategoryName, TAT_Name, kod_dr",
+            //    new { ZeroNormOnly = zeroNormOnly ? 1 : 0 });
+            var p = new DynamicParameters();
+            p.Add("@ZeroNormOnly", zeroNormOnly);
+            
             return _dbService.GetListAsync<ThreadNormRow>(
-                @"SELECT *
-              FROM cfn.sewing_thread_norms_view
-              WHERE (@ZeroNormOnly = 0 OR ISNULL(norm, 0) = 0)
-              ORDER BY men, TC_ClassName, TG_GroupName, TCAT_CategoryName, TAT_Name, kod_dr",
-                new { ZeroNormOnly = zeroNormOnly ? 1 : 0 });
+                "dbo.ThreadNorms_LoadRows",
+                p);
+
+        }
+        public async Task<int> SaveAsync(ThreadNormDbRow row)
+        {
+            var p = new DynamicParameters();
+            p.AddDynamicParams(new
+            {
+                row.id,
+                row.men,
+                row.tg_id_n,
+                row.ta_id,
+                row.norm,
+                row.kod_dr,
+                row.kod3,
+                row.kod_art,
+                row.date_change
+            });
+            return await _dbService.ExecuteScalarProcedureAsync<int>(
+                "cfn.ThreadNorms_Save",p
+               );
+        }
+        private async Task<List<ThreadNormRow>> LoadThreadNormRowsAsync(bool zeroNormOnly)
+        {
+            return await _dbService.GetListFromProcedureAsync<ThreadNormRow>(
+                "cfn.ThreadNorms_LoadRows",
+                new { ZeroNormOnly = zeroNormOnly });
+        }
+
+        public Task DeleteAsync(ThreadNormRow row)
+        {
+            var p = new DynamicParameters();
+            p.Add("@id", row.id);
+            return _dbService.ExecuteSpWithStatusAsync(
+                "cfn.ThreadNorms_Delete",
+                p);
         }
     }
 }
