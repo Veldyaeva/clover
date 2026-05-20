@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.LookAndFeel;
 using DevExpress.LookAndFeel;
 using SewingProduction.Core.Class.Settings;
+using SewingProduction.Core.Models;
+using SewingProduction.Core.services;
 using SewingProduction.Features.UserDistribution.Helpers;
 using static SewingProduction.form.SettingsForm;
 
@@ -503,7 +508,7 @@ namespace SewingProduction.form
 
 			MessageBox.Show($"Сброс настроек таблиц завершен. Удалено файлов: {deleted}, папок: {deletedDirs}.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
-		#region принтеры 
+		#region мои принтеры 
 		[DllImport("winspool.drv", CharSet = CharSet.Auto, SetLastError = true)]
 		public static extern bool SetDefaultPrinter(string Name);
 		public class PrinterItem
@@ -535,10 +540,6 @@ namespace SewingProduction.form
 			PrinterSettings printerSettings = new PrinterSettings();
 			return printerSettings.PrinterName;
 		}
-		private void gridControlPrinters_Load(object sender, EventArgs e)
-		{
-			LoadPrinters();
-		}			  
 		private void cButSaveDefoltPrinter_Click(object sender, EventArgs e)
 		{
 			string printerName = comboBoxPrinters.SelectedItem?.ToString() ?? string.Empty;
@@ -559,6 +560,180 @@ namespace SewingProduction.form
 			LoadPrinters();
 		}
 		#endregion
+		#region принтеры 
+		private SettingsDataService _settingsDataService = new SettingsDataService();
+		private BindingList<PrinterParameters> _printerParametersList = new BindingList<PrinterParameters>();
+		private async Task LoadPrinterParameters()
+		{
+			var list = await _settingsDataService.GetPrinterParameters();
+			_printerParametersList = new BindingList<PrinterParameters>(list);
+			gridPrinterParameters.DataSource = _printerParametersList;
+		}
+		private void gridViewPrinterParameters_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+		{
+			LoadPrinterParamDetails();
+		}
+		private void LoadPrinterParamDetails()
+		{
+			var row = gridViewPrinterParameters.GetFocusedRow() as PrinterParameters;
+			if (row == null)
+			{
+				customGridControlParam.DataSource = null;
+				return;
+			}
+
+			var items = PrinterParameters.ParseParamItems(row.param);
+			customGridControlParam.DataSource = items;
+		}
+		private async void customButtonSaveParam_Click(object sender, EventArgs e)
+		{
+			var row = gridViewPrinterParameters.GetFocusedRow() as PrinterParameters;
+			if (row == null)
+			{
+				MessageBox.Show("Не выбрана запись.");
+				return;
+			}
+
+			try
+			{
+				gridViewParam.PostEditor();
+				gridViewParam.UpdateCurrentRow();
+				var _currentParamItems = customGridControlParam.DataSource as List<PrinterParamItem>;
+
+				row.ApplyParamItems(_currentParamItems);
+
+				string param = PrinterParameters.BuildParam(row);
+				row.param = param;
+
+				await _settingsDataService.SaveAsync(row);
+
+				gridViewParam.RefreshData();
+				LoadPrinterParamDetails();
+
+				MessageBox.Show("Параметры сохранены.");
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Ошибка сохранения");
+			}
+		}
+
+		private void customButtonAdd_Click(object sender, EventArgs e)
+		{
+			gridViewPrinterParameters.AddNewRow();
+		}
+
+		private async void customButtonDel_Click(object sender, EventArgs e)
+		{
+			int oldRowHandle = gridViewPrinterParameters.FocusedRowHandle;
+			var row = gridViewPrinterParameters.GetFocusedRow() as PrinterParameters;
+			if (row == null)
+			{
+				MessageBox.Show("Не выбрана запись.");
+				return;
+			}
+
+			var result = MessageBox.Show(
+				"Удалить?",
+				"Настройка принтеров",
+				MessageBoxButtons.YesNo,
+				MessageBoxIcon.Stop,
+				MessageBoxDefaultButton.Button2);
+
+			if (result != DialogResult.Yes)
+				return;
+
+			try
+			{
+				await _settingsDataService.DeleteAsync(row);
+				await LoadPrinterParameters();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Ошибка удаления");
+			}
+
+			gridViewPrinterParameters.FocusedRowHandle = oldRowHandle - 1;
+		}
+
+		private void gridViewPrinterParameters_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
+		{
+			gridViewPrinterParameters.GridControl.BeginInvoke(new Action(() =>
+			{
+				if (gridViewPrinterParameters.IsValidRowHandle(e.RowHandle))
+				{
+					gridViewPrinterParameters.FocusedRowHandle = e.RowHandle;
+					var row = gridViewPrinterParameters.GetFocusedRow() as PrinterParameters;
+					string param = PrinterParameters.BuildParam(row);
+					row.param = param;
+					gridViewPrinterParameters.ShowPopupEditForm();
+				}
+			}));
+
+		}
+
+		private async void gridViewPrinterParameters_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
+		{
+			int oldRowHandle = gridViewPrinterParameters.FocusedRowHandle;
+
+			try
+			{
+				var row = e.Row as PrinterParameters;
+				if (row == null)
+					return;
+
+				row.pp_id = await _settingsDataService.SaveAsync(row);
+
+				await LoadPrinterParameters();
+
+				if (oldRowHandle > 0)
+				{  
+					gridViewPrinterParameters.FocusedRowHandle = oldRowHandle;
+				}
+				else
+				{	
+					gridViewPrinterParameters.FocusedRowHandle = gridViewPrinterParameters.RowCount - 1;
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+				var row = e.Row as PrinterParameters;
+				if (row != null && row.pp_id == 0)
+				{
+					if (gridViewPrinterParameters.IsValidRowHandle(oldRowHandle))
+						gridViewPrinterParameters.DeleteRow(oldRowHandle);
+				}
+				else
+				{
+					await LoadPrinterParameters();
+				}
+			}
+			
+		}
+		#endregion
+
+		private async void tabSettings_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
+		{
+			try
+			{
+				if (e.Page == myPrinterSettings)
+				{
+					LoadPrinters();
+				}
+
+				if (e.Page == allPrinterSettings)
+				{
+					await LoadPrinterParameters();
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Ошибка загрузки");
+			}
+
+		}
 
 	}
 }

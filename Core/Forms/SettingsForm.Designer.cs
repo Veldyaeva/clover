@@ -82,12 +82,39 @@ namespace SewingProduction.form
 			mainSettings = new DevExpress.XtraTab.XtraTabPage();
 			themeSettings = new DevExpress.XtraTab.XtraTabPage();
 			myPrinterSettings = new DevExpress.XtraTab.XtraTabPage();
+			customLabelDefPrint = new CustomLabel();
+			cButSaveDefoltPrinter = new CustomButton();
 			comboBoxPrinters = new CustomComboBox();
 			gridControlPrinters = new CustomGridControl();
 			gridViewPrinters = new DevExpress.XtraGrid.Views.Grid.GridView();
 			allPrinterSettings = new DevExpress.XtraTab.XtraTabPage();
-			cButSaveDefoltPrinter = new CustomButton();
-			customLabelDefPrint = new CustomLabel();
+			customLayoutControl1 = new CustomLayoutControl();
+			customLabel9 = new CustomLabel();
+			customButtonSaveParam = new CustomButton();
+			customButtonAdd = new CustomButton();
+			customButtonDel = new CustomButton();
+			customGridControlParam = new CustomGridControl();
+			gridViewParam = new DevExpress.XtraGrid.Views.Grid.GridView();
+			nameParam = new DevExpress.XtraGrid.Columns.GridColumn();
+			infoParam = new DevExpress.XtraGrid.Columns.GridColumn();
+			gridPrinterParameters = new CustomGridControl();
+			gridViewPrinterParameters = new DevExpress.XtraGrid.Views.Grid.GridView();
+			pp_id = new DevExpress.XtraGrid.Columns.GridColumn();
+			pp_prg_name = new DevExpress.XtraGrid.Columns.GridColumn();
+			nameReport = new DevExpress.XtraGrid.Columns.GridColumn();
+			shortName = new DevExpress.XtraGrid.Columns.GridColumn();
+			preview = new DevExpress.XtraGrid.Columns.GridColumn();
+			printAlias = new DevExpress.XtraGrid.Columns.GridColumn();
+			param = new DevExpress.XtraGrid.Columns.GridColumn();
+			komp_name = new DevExpress.XtraGrid.Columns.GridColumn();
+			sharpName = new DevExpress.XtraGrid.Columns.GridColumn();
+			Root = new DevExpress.XtraLayout.LayoutControlGroup();
+			layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+			layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+			layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+			layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+			layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+			layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
 			((System.ComponentModel.ISupportInitialize)colorPickEditLabel.Properties).BeginInit();
 			contextMenuReset.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)colorPickEditTextBox.Properties).BeginInit();
@@ -105,6 +132,20 @@ namespace SewingProduction.form
 			myPrinterSettings.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)gridControlPrinters).BeginInit();
 			((System.ComponentModel.ISupportInitialize)gridViewPrinters).BeginInit();
+			allPrinterSettings.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)customLayoutControl1).BeginInit();
+			customLayoutControl1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)customGridControlParam).BeginInit();
+			((System.ComponentModel.ISupportInitialize)gridViewParam).BeginInit();
+			((System.ComponentModel.ISupportInitialize)gridPrinterParameters).BeginInit();
+			((System.ComponentModel.ISupportInitialize)gridViewPrinterParameters).BeginInit();
+			((System.ComponentModel.ISupportInitialize)Root).BeginInit();
+			((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
+			((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
+			((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
+			((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
+			((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
+			((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
 			SuspendLayout();
 			// 
 			// customLabelTheme
@@ -662,6 +703,7 @@ namespace SewingProduction.form
 			tabSettings.Size = new System.Drawing.Size(909, 452);
 			tabSettings.TabIndex = 39;
 			tabSettings.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { mainSettings, themeSettings, myPrinterSettings, allPrinterSettings });
+			tabSettings.SelectedPageChanged += tabSettings_SelectedPageChanged;
 			// 
 			// mainSettings
 			// 
@@ -714,6 +756,29 @@ namespace SewingProduction.form
 			myPrinterSettings.Size = new System.Drawing.Size(907, 427);
 			myPrinterSettings.Text = "Мои принтеры";
 			// 
+			// customLabelDefPrint
+			// 
+			customLabelDefPrint.Appearance.Options.UseTextOptions = true;
+			customLabelDefPrint.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			customLabelDefPrint.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+			customLabelDefPrint.Location = new System.Drawing.Point(3, 392);
+			customLabelDefPrint.Name = "customLabelDefPrint";
+			customLabelDefPrint.Size = new System.Drawing.Size(122, 13);
+			customLabelDefPrint.TabIndex = 45;
+			customLabelDefPrint.Text = "Принтер по умолчанию:";
+			customLabelDefPrint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// cButSaveDefoltPrinter
+			// 
+			cButSaveDefoltPrinter.Font = new System.Drawing.Font("Arial", 10F);
+			cButSaveDefoltPrinter.Location = new System.Drawing.Point(290, 386);
+			cButSaveDefoltPrinter.Name = "cButSaveDefoltPrinter";
+			cButSaveDefoltPrinter.Size = new System.Drawing.Size(149, 25);
+			cButSaveDefoltPrinter.TabIndex = 4;
+			cButSaveDefoltPrinter.Text = "Сохранить";
+			cButSaveDefoltPrinter.UseVisualStyleBackColor = true;
+			cButSaveDefoltPrinter.Click += cButSaveDefoltPrinter_Click;
+			// 
 			// comboBoxPrinters
 			// 
 			comboBoxPrinters.Font = new System.Drawing.Font("Arial", 10F);
@@ -733,7 +798,6 @@ namespace SewingProduction.form
 			gridControlPrinters.Size = new System.Drawing.Size(436, 377);
 			gridControlPrinters.TabIndex = 0;
 			gridControlPrinters.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewPrinters });
-			gridControlPrinters.Load += gridControlPrinters_Load;
 			// 
 			// gridViewPrinters
 			// 
@@ -744,29 +808,279 @@ namespace SewingProduction.form
 			// 
 			// allPrinterSettings
 			// 
+			allPrinterSettings.Controls.Add(customLayoutControl1);
 			allPrinterSettings.Name = "allPrinterSettings";
 			allPrinterSettings.Size = new System.Drawing.Size(907, 427);
 			allPrinterSettings.Text = "Администрирование принтеров";
 			// 
-			// cButSaveDefoltPrinter
+			// customLayoutControl1
 			// 
-			cButSaveDefoltPrinter.Font = new System.Drawing.Font("Arial", 10F);
-			cButSaveDefoltPrinter.Location = new System.Drawing.Point(290, 386);
-			cButSaveDefoltPrinter.Name = "cButSaveDefoltPrinter";
-			cButSaveDefoltPrinter.Size = new System.Drawing.Size(149, 25);
-			cButSaveDefoltPrinter.TabIndex = 4;
-			cButSaveDefoltPrinter.Text = "Сохранить";
-			cButSaveDefoltPrinter.UseVisualStyleBackColor = true;
-			cButSaveDefoltPrinter.Click += cButSaveDefoltPrinter_Click;
+			customLayoutControl1.Controls.Add(customLabel9);
+			customLayoutControl1.Controls.Add(customButtonSaveParam);
+			customLayoutControl1.Controls.Add(customButtonAdd);
+			customLayoutControl1.Controls.Add(customButtonDel);
+			customLayoutControl1.Controls.Add(customGridControlParam);
+			customLayoutControl1.Controls.Add(gridPrinterParameters);
+			customLayoutControl1.Font = new System.Drawing.Font("Arial", 10F);
+			customLayoutControl1.Location = new System.Drawing.Point(8, 1);
+			customLayoutControl1.Name = "customLayoutControl1";
+			customLayoutControl1.Root = Root;
+			customLayoutControl1.Size = new System.Drawing.Size(896, 419);
+			customLayoutControl1.TabIndex = 1;
+			customLayoutControl1.Text = "customLayoutControl1";
 			// 
-			// customLabelDefPrint
+			// customLabel9
 			// 
-			customLabelDefPrint.Location = new System.Drawing.Point(3, 392);
-			customLabelDefPrint.Name = "customLabelDefPrint";
-			customLabelDefPrint.Size = new System.Drawing.Size(122, 13);
-			customLabelDefPrint.TabIndex = 45;
-			customLabelDefPrint.Text = "Принтер по умолчанию:";
-			customLabelDefPrint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			customLabel9.Appearance.Options.UseTextOptions = true;
+			customLabel9.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			customLabel9.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+			customLabel9.Location = new System.Drawing.Point(12, 394);
+			customLabel9.Name = "customLabel9";
+			customLabel9.Size = new System.Drawing.Size(298, 13);
+			customLabel9.StyleController = customLayoutControl1;
+			customLabel9.TabIndex = 8;
+			customLabel9.Text = "Для редактирования - двойное нажатие ЛКМ по строке ↑ ";
+			customLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// customButtonSaveParam
+			// 
+			customButtonSaveParam.Font = new System.Drawing.Font("Arial", 10F);
+			customButtonSaveParam.Location = new System.Drawing.Point(685, 270);
+			customButtonSaveParam.Name = "customButtonSaveParam";
+			customButtonSaveParam.Size = new System.Drawing.Size(199, 38);
+			customButtonSaveParam.TabIndex = 7;
+			customButtonSaveParam.Text = "↑ Сохранить";
+			customButtonSaveParam.UseVisualStyleBackColor = true;
+			customButtonSaveParam.Click += customButtonSaveParam_Click;
+			// 
+			// customButtonAdd
+			// 
+			customButtonAdd.Font = new System.Drawing.Font("Arial", 10F);
+			customButtonAdd.Location = new System.Drawing.Point(685, 312);
+			customButtonAdd.Name = "customButtonAdd";
+			customButtonAdd.Size = new System.Drawing.Size(199, 37);
+			customButtonAdd.TabIndex = 6;
+			customButtonAdd.Text = "← Добавить";
+			customButtonAdd.UseVisualStyleBackColor = true;
+			customButtonAdd.Click += customButtonAdd_Click;
+			// 
+			// customButtonDel
+			// 
+			customButtonDel.Font = new System.Drawing.Font("Arial", 10F);
+			customButtonDel.Location = new System.Drawing.Point(685, 353);
+			customButtonDel.Name = "customButtonDel";
+			customButtonDel.Size = new System.Drawing.Size(199, 37);
+			customButtonDel.TabIndex = 5;
+			customButtonDel.Text = "← Удалить";
+			customButtonDel.UseVisualStyleBackColor = true;
+			customButtonDel.Click += customButtonDel_Click;
+			// 
+			// customGridControlParam
+			// 
+			customGridControlParam.Font = new System.Drawing.Font("Arial", 10F);
+			customGridControlParam.Location = new System.Drawing.Point(685, 12);
+			customGridControlParam.MainView = gridViewParam;
+			customGridControlParam.MenuManager = barManager1;
+			customGridControlParam.Name = "customGridControlParam";
+			customGridControlParam.Size = new System.Drawing.Size(199, 254);
+			customGridControlParam.TabIndex = 4;
+			customGridControlParam.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewParam });
+			// 
+			// gridViewParam
+			// 
+			gridViewParam.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+			gridViewParam.Appearance.FocusedRow.Options.UseFont = true;
+			gridViewParam.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { nameParam, infoParam });
+			gridViewParam.GridControl = customGridControlParam;
+			gridViewParam.Name = "gridViewParam";
+			// 
+			// nameParam
+			// 
+			nameParam.Caption = "nameParam";
+			nameParam.FieldName = "nameParam";
+			nameParam.Name = "nameParam";
+			nameParam.Visible = true;
+			nameParam.VisibleIndex = 0;
+			// 
+			// infoParam
+			// 
+			infoParam.Caption = "infoParam";
+			infoParam.FieldName = "infoParam";
+			infoParam.Name = "infoParam";
+			infoParam.Visible = true;
+			infoParam.VisibleIndex = 1;
+			// 
+			// gridPrinterParameters
+			// 
+			gridPrinterParameters.Font = new System.Drawing.Font("Arial", 10F);
+			gridPrinterParameters.Location = new System.Drawing.Point(12, 12);
+			gridPrinterParameters.MainView = gridViewPrinterParameters;
+			gridPrinterParameters.MenuManager = barManager1;
+			gridPrinterParameters.Name = "gridPrinterParameters";
+			gridPrinterParameters.Size = new System.Drawing.Size(669, 378);
+			gridPrinterParameters.TabIndex = 0;
+			gridPrinterParameters.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewPrinterParameters });
+			// 
+			// gridViewPrinterParameters
+			// 
+			gridViewPrinterParameters.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+			gridViewPrinterParameters.Appearance.FocusedRow.Options.UseFont = true;
+			gridViewPrinterParameters.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { pp_id, pp_prg_name, nameReport, shortName, preview, printAlias, param, komp_name, sharpName });
+			gridViewPrinterParameters.GridControl = gridPrinterParameters;
+			gridViewPrinterParameters.Name = "gridViewPrinterParameters";
+			gridViewPrinterParameters.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
+			gridViewPrinterParameters.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
+			gridViewPrinterParameters.OptionsDetail.AllowExpandEmptyDetails = true;
+			gridViewPrinterParameters.OptionsEditForm.EditFormColumnCount = 1;
+			gridViewPrinterParameters.OptionsEditForm.ShowOnDoubleClick = DevExpress.Utils.DefaultBoolean.True;
+			gridViewPrinterParameters.OptionsEditForm.ShowOnF2Key = DevExpress.Utils.DefaultBoolean.True;
+			gridViewPrinterParameters.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
+			gridViewPrinterParameters.OptionsPrint.EnableAppearanceEvenRow = true;
+			gridViewPrinterParameters.OptionsView.EnableAppearanceEvenRow = true;
+			gridViewPrinterParameters.OptionsView.ShowGroupPanel = false;
+			gridViewPrinterParameters.InitNewRow += gridViewPrinterParameters_InitNewRow;
+			gridViewPrinterParameters.FocusedRowChanged += gridViewPrinterParameters_FocusedRowChanged;
+			gridViewPrinterParameters.RowUpdated += gridViewPrinterParameters_RowUpdated;
+			// 
+			// pp_id
+			// 
+			pp_id.Caption = "pp_id";
+			pp_id.FieldName = "pp_id";
+			pp_id.Name = "pp_id";
+			pp_id.OptionsColumn.AllowEdit = false;
+			pp_id.OptionsColumn.ReadOnly = true;
+			pp_id.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+			pp_id.Visible = true;
+			pp_id.VisibleIndex = 0;
+			pp_id.Width = 47;
+			// 
+			// pp_prg_name
+			// 
+			pp_prg_name.Caption = "pp_prg_name";
+			pp_prg_name.FieldName = "pp_prg_name";
+			pp_prg_name.Name = "pp_prg_name";
+			pp_prg_name.Visible = true;
+			pp_prg_name.VisibleIndex = 1;
+			pp_prg_name.Width = 99;
+			// 
+			// nameReport
+			// 
+			nameReport.Caption = "nameReport";
+			nameReport.FieldName = "nameReport";
+			nameReport.Name = "nameReport";
+			nameReport.Visible = true;
+			nameReport.VisibleIndex = 2;
+			nameReport.Width = 99;
+			// 
+			// shortName
+			// 
+			shortName.Caption = "shortName";
+			shortName.FieldName = "shortName";
+			shortName.Name = "shortName";
+			shortName.Visible = true;
+			shortName.VisibleIndex = 3;
+			shortName.Width = 142;
+			// 
+			// preview
+			// 
+			preview.Caption = "preview";
+			preview.FieldName = "preview";
+			preview.Name = "preview";
+			preview.Visible = true;
+			preview.VisibleIndex = 4;
+			preview.Width = 60;
+			// 
+			// printAlias
+			// 
+			printAlias.Caption = "printAlias";
+			printAlias.FieldName = "printAlias";
+			printAlias.Name = "printAlias";
+			printAlias.Visible = true;
+			printAlias.VisibleIndex = 5;
+			printAlias.Width = 66;
+			// 
+			// param
+			// 
+			param.Caption = "param";
+			param.FieldName = "param";
+			param.Name = "param";
+			param.OptionsColumn.AllowEdit = false;
+			param.OptionsColumn.ReadOnly = true;
+			param.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+			// 
+			// komp_name
+			// 
+			komp_name.Caption = "komp_name";
+			komp_name.FieldName = "komp_name";
+			komp_name.Name = "komp_name";
+			komp_name.Visible = true;
+			komp_name.VisibleIndex = 6;
+			komp_name.Width = 131;
+			// 
+			// sharpName
+			// 
+			sharpName.Caption = "sharpName";
+			sharpName.FieldName = "sharpName";
+			sharpName.Name = "sharpName";
+			sharpName.Visible = true;
+			sharpName.VisibleIndex = 7;
+			// 
+			// Root
+			// 
+			Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+			Root.GroupBordersVisible = false;
+			Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem4, layoutControlItem5, layoutControlItem6 });
+			Root.Name = "Root";
+			Root.Size = new System.Drawing.Size(896, 419);
+			Root.TextVisible = false;
+			// 
+			// layoutControlItem1
+			// 
+			layoutControlItem1.Control = gridPrinterParameters;
+			layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+			layoutControlItem1.Name = "layoutControlItem1";
+			layoutControlItem1.Size = new System.Drawing.Size(673, 382);
+			layoutControlItem1.TextVisible = false;
+			// 
+			// layoutControlItem2
+			// 
+			layoutControlItem2.Control = customGridControlParam;
+			layoutControlItem2.Location = new System.Drawing.Point(673, 0);
+			layoutControlItem2.Name = "layoutControlItem2";
+			layoutControlItem2.Size = new System.Drawing.Size(203, 258);
+			layoutControlItem2.TextVisible = false;
+			// 
+			// layoutControlItem3
+			// 
+			layoutControlItem3.Control = customButtonDel;
+			layoutControlItem3.Location = new System.Drawing.Point(673, 341);
+			layoutControlItem3.Name = "layoutControlItem3";
+			layoutControlItem3.Size = new System.Drawing.Size(203, 41);
+			layoutControlItem3.TextVisible = false;
+			// 
+			// layoutControlItem4
+			// 
+			layoutControlItem4.Control = customButtonAdd;
+			layoutControlItem4.Location = new System.Drawing.Point(673, 300);
+			layoutControlItem4.Name = "layoutControlItem4";
+			layoutControlItem4.Size = new System.Drawing.Size(203, 41);
+			layoutControlItem4.TextVisible = false;
+			// 
+			// layoutControlItem5
+			// 
+			layoutControlItem5.Control = customButtonSaveParam;
+			layoutControlItem5.Location = new System.Drawing.Point(673, 258);
+			layoutControlItem5.Name = "layoutControlItem5";
+			layoutControlItem5.Size = new System.Drawing.Size(203, 42);
+			layoutControlItem5.TextVisible = false;
+			// 
+			// layoutControlItem6
+			// 
+			layoutControlItem6.Control = customLabel9;
+			layoutControlItem6.Location = new System.Drawing.Point(0, 382);
+			layoutControlItem6.Name = "layoutControlItem6";
+			layoutControlItem6.Size = new System.Drawing.Size(876, 17);
+			layoutControlItem6.TextVisible = false;
 			// 
 			// SettingsForm
 			// 
@@ -804,6 +1118,20 @@ namespace SewingProduction.form
 			myPrinterSettings.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)gridControlPrinters).EndInit();
 			((System.ComponentModel.ISupportInitialize)gridViewPrinters).EndInit();
+			allPrinterSettings.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)customLayoutControl1).EndInit();
+			customLayoutControl1.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)customGridControlParam).EndInit();
+			((System.ComponentModel.ISupportInitialize)gridViewParam).EndInit();
+			((System.ComponentModel.ISupportInitialize)gridPrinterParameters).EndInit();
+			((System.ComponentModel.ISupportInitialize)gridViewPrinterParameters).EndInit();
+			((System.ComponentModel.ISupportInitialize)Root).EndInit();
+			((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
+			((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
+			((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
+			((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
+			((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
+			((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
 			ResumeLayout(false);
 			PerformLayout();
 		}
@@ -866,5 +1194,32 @@ namespace SewingProduction.form
 		private CustomComboBox comboBoxPrinters;
 		private CustomLabel customLabelDefPrint;
 		private CustomButton cButSaveDefoltPrinter;
+		private CustomGridControl gridPrinterParameters;
+		private DevExpress.XtraGrid.Views.Grid.GridView gridViewPrinterParameters;
+		private DevExpress.XtraGrid.Columns.GridColumn pp_id;
+		private DevExpress.XtraGrid.Columns.GridColumn pp_prg_name;
+		private DevExpress.XtraGrid.Columns.GridColumn nameReport;
+		private DevExpress.XtraGrid.Columns.GridColumn shortName;
+		private DevExpress.XtraGrid.Columns.GridColumn preview;
+		private DevExpress.XtraGrid.Columns.GridColumn printAlias;
+		private DevExpress.XtraGrid.Columns.GridColumn param;
+		private DevExpress.XtraGrid.Columns.GridColumn komp_name;
+		private CustomLayoutControl customLayoutControl1;
+		private CustomGridControl customGridControlParam;
+		private DevExpress.XtraGrid.Views.Grid.GridView gridViewParam;
+		private DevExpress.XtraGrid.Columns.GridColumn nameParam;
+		private DevExpress.XtraGrid.Columns.GridColumn infoParam;
+		private DevExpress.XtraLayout.LayoutControlGroup Root;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+		private DevExpress.XtraGrid.Columns.GridColumn sharpName;
+		private CustomButton customButtonSaveParam;
+		private CustomButton customButtonAdd;
+		private CustomButton customButtonDel;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+		private CustomLabel customLabel9;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
 	}
 }
