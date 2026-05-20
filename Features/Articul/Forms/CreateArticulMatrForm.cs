@@ -50,7 +50,6 @@ namespace SewingProduction.Features.Articul.Forms
 
         private ComparisonResult _comparisonResult;
         private readonly Dictionary<string, Image> _imageCache = new();
-
         public CreateArticulMatrForm(UserClass user) : base(user)
         {
             _dbHelper = new DatabaseHelperSQL();
@@ -84,6 +83,8 @@ namespace SewingProduction.Features.Articul.Forms
 
             //в зависимости от прав пользователя - разрешаем или запрещаем редактирование грида 
             _isEditing = customSimpleButtonPermissions.Visible;
+            //_isEditing = false;
+
             SetPermisions();
 
         }
@@ -166,7 +167,11 @@ namespace SewingProduction.Features.Articul.Forms
 
             //поля уточнения для отд сертификации
             gcCertidGost.FieldName = nameof(CreateArticulMatrModel.Id_gost);
-            gcCertAgid.FieldName = nameof(CreateArticulMatrModel.Ag_id);
+            gcidGost.FieldName = nameof(CreateArticulMatrModel.Id_gost);
+            //CreateArticulMatrModel.Ag_id
+            gcCertAgid.FieldName = nameof(CreateArticulMatrModel.Unic_IdGost_idAg);
+            gcAgid.FieldName = nameof(CreateArticulMatrModel.Unic_IdGost_idAg);
+            
             gcCertDateCertificationApproval.FieldName = nameof(CreateArticulMatrModel.DateCertificationApproval);
             //запрет редактирования полей, которые не должны редактироваться напрямую пользователем, а заполняются через выбор из справочника и/или автоматически
             gcCertDateCertificationApproval.OptionsColumn.AllowEdit = false;
@@ -226,7 +231,8 @@ namespace SewingProduction.Features.Articul.Forms
                 // после выбора госта - фильтрация групп по госту происходит в repositoryItemSearchLookUpEdit2_BeforePopup
                 ri.DataSource = _gostGroupAll;
                 ri.DisplayMember = nameof(GostGrupIzdViewModel.N_i);
-                ri.ValueMember = nameof(GostGrupIzdViewModel.Ag_id);
+                //ri.ValueMember = nameof(GostGrupIzdViewModel.Ag_id);
+                ri.ValueMember = nameof(GostGrupIzdViewModel.Unic_IdGost_idAg);
 
                 //колонка с картинкой 
                 var pictureEdit = new RepositoryItemPictureEdit
@@ -323,51 +329,56 @@ namespace SewingProduction.Features.Articul.Forms
             _imageCache[path] = image;
             return image;
         }
+
+
         private void repositoryItemSearchLookUpEdit2_CloseUp(object sender, DevExpress.XtraEditors.Controls.CloseUpEventArgs e)
         {
-            try
-            {
-                if (!e.AcceptValue) return; // если пользователь отменил выбор, не обновляем данные
+            //try
+            //{
+            //    if (!e.AcceptValue) return; // если пользователь отменил выбор, не обновляем данные
 
-                // сохраняем текущее редактирование, чтобы получить актуальное значение 
-                var view = gridViewArtMatrEdit;
-                view.PostEditor();
-                view.UpdateCurrentRow();
+            //    // сохраняем текущее редактирование, чтобы получить актуальное значение 
+            //    var view = gridViewArtMatrEdit;
+            //    view.PostEditor();
+            //    view.UpdateCurrentRow();
 
-                var currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
+            //    var currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
 
-                //скидываем гост при изменении группы, чтобы не было "висячих" гостов
-                currentItem.Id_gost = 0;
+            //    //скидываем гост при изменении группы, чтобы не было "висячих" гостов
+            //    //currentItem.Id_gost = 0;
 
-                //обновляем значение ГОСТ из выбранной группы
-                var editor = sender as DevExpress.XtraEditors.SearchLookUpEdit;
-                if (editor == null)
-                    return;
-                var viewLookUp = repositoryItemSearchLookUpEdit2.PopupView
-                    as DevExpress.XtraGrid.Views.Grid.GridView;
+            //    ////обновляем значение ГОСТ из выбранной группы
+            //    //var editor = sender as DevExpress.XtraEditors.SearchLookUpEdit;
+            //    //if (editor == null)
+            //    //    return;
 
-                if (viewLookUp == null)
-                    return;
+            //    //var viewLookUp = repositoryItemSearchLookUpEdit2.PopupView
+            //    //    as DevExpress.XtraGrid.Views.Grid.GridView;
 
-                var selectedRow = view.GetFocusedRow() as GostGrupIzdViewModel;
+            //    //if (viewLookUp == null)
+            //    //    return;
 
-                if (selectedRow == null)
-                    return;
+            //    //int rowHandle = viewLookUp.FocusedRowHandle;
 
-                currentItem.Id_gost = selectedRow.Id_gost;
+            //    //var selectedRow = view.GetRow(rowHandle) as GostGrupIzdViewModel;
 
-                view.PostEditor();
-                // когда пользователь изменил значение в гриде
-                view.UpdateCurrentRow();
+            //    //if (selectedRow == null)
+            //    //    return;
 
-                // говорит привязанным контролам: “текущий объект изменился, перечитайте его”, Использовать, когда сами изменили объект в коде
-                _bindingSourceArtMatr.ResetCurrentItem();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogErrorAsync(ex, "Ошибка при изменении группы ГОСТ (CloseUp)");
-                throw;
-            }
+            //    //currentItem.Id_gost = selectedRow.Id_gost;
+
+            //    //view.PostEditor();
+            //    //// когда пользователь изменил значение в гриде
+            //    //view.UpdateCurrentRow();
+
+            //    //// говорит привязанным контролам: “текущий объект изменился, перечитайте его”, Использовать, когда сами изменили объект в коде
+            //    //_bindingSourceArtMatr.ResetCurrentItem();
+            //}
+            //catch (Exception ex)
+            //{
+            //    _logger.LogErrorAsync(ex, "Ошибка при изменении группы ГОСТ (CloseUp)");
+            //    throw;
+            //}
         }
 
         //private void repositoryItemSearchLookUpEdit1_BeforePopup(object sender, EventArgs e)
@@ -380,8 +391,8 @@ namespace SewingProduction.Features.Articul.Forms
 
         //        if (sender == null) return;
 
-        //        var _currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
-        //        var idGrup = _currentItem.Ag_id;
+        //        var currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
+        //        var idGrup = currentItem.Ag_id;
         //        editor.Properties.DataSource = _gostGroupAll
         //            .Where(x => x.Ag_id == idGrup)
         //            .ToList();
@@ -394,7 +405,6 @@ namespace SewingProduction.Features.Articul.Forms
         //}
         private async void gridViewArtMatrEdit_DoubleClick(object sender, EventArgs e)
         {
-
             try
             {
                 var view = sender as GridView;
@@ -420,7 +430,7 @@ namespace SewingProduction.Features.Articul.Forms
                     if (_currentItem.Id_gost == 0 && _currentItem.Ag_id == 0)
                     {
                         MessageBox.Show("Для утверждения необходимо выбрать ГОСТ и группу ГОСТ", "Невозможно утвердить", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        //_currentItem.DateCertificationApproval = null;
+                        //currentItem.DateCertificationApproval = null;
                     }
                     else
                     {
@@ -540,7 +550,6 @@ namespace SewingProduction.Features.Articul.Forms
         {
             try
             {
-                //var currentRow = _bindingSourceArticulCompare.Current as SpArticulPreviewModel;// получаем текущую выбранную строку из грида сравнения
                 await fillCompareTable();
             }
             catch (Exception ex)
@@ -715,21 +724,33 @@ namespace SewingProduction.Features.Articul.Forms
             base.OnFormClosed(e);
         }
 
-        private void repositoryItemSearchLookUpEdit2_EditValueChanged(object sender, EventArgs e)
+        private async void repositoryItemSearchLookUpEdit2_EditValueChanged(object sender, EventArgs e)
         {
-            var editor = sender as DevExpress.XtraEditors.SearchLookUpEdit;
-            if (editor == null)
-                return;
+            try
+            {
+                var editor = sender as DevExpress.XtraEditors.SearchLookUpEdit;
+                if (editor == null)
+                    return;
 
-            var selectedRow = editor.Properties.GetRowByKeyValue(editor.EditValue)
-                as GostGrupIzdViewModel;
+                var selectedRow = editor.Properties.GetRowByKeyValue(editor.EditValue)
+                    as GostGrupIzdViewModel;
 
-            if (selectedRow == null)
-                return;
-            var _currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
+                if (selectedRow == null)
+                    return;
+                var currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
+                if (currentItem == null)
+                    return;
 
-            _currentItem.Id_gost = selectedRow.Id_gost;
-            _bindingSourceArtMatr.ResetCurrentItem();
+                currentItem.Id_gost = selectedRow.Id_gost;
+                currentItem.Ag_id = selectedRow.Ag_id;
+                _bindingSourceArtMatr.ResetCurrentItem();
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при выборе группы ");
+                throw;
+            }
+
         }
 
         

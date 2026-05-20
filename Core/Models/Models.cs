@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -40,7 +41,8 @@ namespace SewingProduction.Core.Models
         public int Tk_id { get; set; }
         public string Care_instructions { get; set; } // описание по уходу 
         public string CareImagePath { get; set; } = ""; // картинка с символами по уходу 
-        
+        [NotMapped] public string Unic_IdGost_idAg => $"{Ag_id}|{Id_gost}"; // уникальное поле для поиска гост + группа по госту
+
     }
     public class GostRazmerNabViewModel
     {

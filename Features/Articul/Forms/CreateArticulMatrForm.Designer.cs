@@ -87,6 +87,8 @@
             gcTb_id = new DevExpress.XtraGrid.Columns.GridColumn();
             gcArticul = new DevExpress.XtraGrid.Columns.GridColumn();
             gcMod = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcRepeatArticle = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcFoundMod = new DevExpress.XtraGrid.Columns.GridColumn();
             gcTm_name = new DevExpress.XtraGrid.Columns.GridColumn();
             gcGrup = new DevExpress.XtraGrid.Columns.GridColumn();
             gcText_mo = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -104,8 +106,8 @@
             gcSost2 = new DevExpress.XtraGrid.Columns.GridColumn();
             gcSost3 = new DevExpress.XtraGrid.Columns.GridColumn();
             gcModMatrix = new DevExpress.XtraGrid.Columns.GridColumn();
-            gcRepeatArticle = new DevExpress.XtraGrid.Columns.GridColumn();
-            gcFoundMod = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcAgid = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcidGost = new DevExpress.XtraGrid.Columns.GridColumn();
             customSimpleButtonPermissions = new SewingProduction.Core.Class.CustomSimpleButton();
             customLayoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
             pictureBoxMatrix = new SewingProduction.Core.Class.CustomPictureBox();
@@ -512,7 +514,6 @@
             repositoryItemSearchLookUpEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             repositoryItemSearchLookUpEdit2.Name = "repositoryItemSearchLookUpEdit2";
             repositoryItemSearchLookUpEdit2.PopupView = repositoryItemSearchLookUpEdit2View;
-            repositoryItemSearchLookUpEdit2.CloseUp += repositoryItemSearchLookUpEdit2_CloseUp;
             repositoryItemSearchLookUpEdit2.EditValueChanged += repositoryItemSearchLookUpEdit2_EditValueChanged;
             // 
             // repositoryItemSearchLookUpEdit2View
@@ -649,7 +650,7 @@
             gridViewArtMatr.Appearance.FocusedRow.Options.UseFont = true;
             gridViewArtMatr.Appearance.HeaderPanel.Options.UseTextOptions = true;
             gridViewArtMatr.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            gridViewArtMatr.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gcGrupmen_name, gcTsn_name, gcTb_id, gcArticul, gcMod, gcTm_name, gcGrup, gcText_mo, gcP, gcPrinter, gcStra, gcBus, gcPpres, gcV, gcKruj, gcTkan, gcSost, gcRazmNames, gcDatePublic, gcSost2, gcSost3, gcModMatrix, gcRepeatArticle, gcFoundMod });
+            gridViewArtMatr.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gcGrupmen_name, gcTsn_name, gcTb_id, gcArticul, gcMod, gcRepeatArticle, gcFoundMod, gcTm_name, gcGrup, gcText_mo, gcP, gcPrinter, gcStra, gcBus, gcPpres, gcV, gcKruj, gcTkan, gcSost, gcRazmNames, gcDatePublic, gcSost2, gcSost3, gcModMatrix, gcAgid, gcidGost });
             gridViewArtMatr.GridControl = gridArtMatr;
             gridViewArtMatr.Name = "gridViewArtMatr";
             gridViewArtMatr.OptionsBehavior.Editable = false;
@@ -670,7 +671,7 @@
             gcGrupmen_name.OptionsColumn.AllowEdit = false;
             gcGrupmen_name.Visible = true;
             gcGrupmen_name.VisibleIndex = 1;
-            gcGrupmen_name.Width = 104;
+            gcGrupmen_name.Width = 95;
             // 
             // gcTsn_name
             // 
@@ -679,7 +680,7 @@
             gcTsn_name.OptionsColumn.AllowEdit = false;
             gcTsn_name.Visible = true;
             gcTsn_name.VisibleIndex = 2;
-            gcTsn_name.Width = 53;
+            gcTsn_name.Width = 48;
             // 
             // gcTb_id
             // 
@@ -688,7 +689,7 @@
             gcTb_id.OptionsColumn.AllowEdit = false;
             gcTb_id.Visible = true;
             gcTb_id.VisibleIndex = 3;
-            gcTb_id.Width = 62;
+            gcTb_id.Width = 56;
             // 
             // gcArticul
             // 
@@ -697,7 +698,7 @@
             gcArticul.OptionsColumn.AllowEdit = false;
             gcArticul.Visible = true;
             gcArticul.VisibleIndex = 4;
-            gcArticul.Width = 61;
+            gcArticul.Width = 55;
             // 
             // gcMod
             // 
@@ -706,7 +707,25 @@
             gcMod.OptionsColumn.AllowEdit = false;
             gcMod.Visible = true;
             gcMod.VisibleIndex = 6;
-            gcMod.Width = 62;
+            gcMod.Width = 56;
+            // 
+            // gcRepeatArticle
+            // 
+            gcRepeatArticle.Caption = "Повторный артикул";
+            gcRepeatArticle.Name = "gcRepeatArticle";
+            gcRepeatArticle.OptionsColumn.AllowEdit = false;
+            gcRepeatArticle.Visible = true;
+            gcRepeatArticle.VisibleIndex = 5;
+            gcRepeatArticle.Width = 59;
+            // 
+            // gcFoundMod
+            // 
+            gcFoundMod.Caption = "Существующая модель";
+            gcFoundMod.Name = "gcFoundMod";
+            gcFoundMod.OptionsColumn.AllowEdit = false;
+            gcFoundMod.Visible = true;
+            gcFoundMod.VisibleIndex = 7;
+            gcFoundMod.Width = 55;
             // 
             // gcTm_name
             // 
@@ -715,7 +734,7 @@
             gcTm_name.OptionsColumn.AllowEdit = false;
             gcTm_name.Visible = true;
             gcTm_name.VisibleIndex = 8;
-            gcTm_name.Width = 33;
+            gcTm_name.Width = 40;
             // 
             // gcGrup
             // 
@@ -723,8 +742,8 @@
             gcGrup.Name = "gcGrup";
             gcGrup.OptionsColumn.AllowEdit = false;
             gcGrup.Visible = true;
-            gcGrup.VisibleIndex = 9;
-            gcGrup.Width = 73;
+            gcGrup.VisibleIndex = 11;
+            gcGrup.Width = 66;
             // 
             // gcText_mo
             // 
@@ -732,8 +751,8 @@
             gcText_mo.Name = "gcText_mo";
             gcText_mo.OptionsColumn.AllowEdit = false;
             gcText_mo.Visible = true;
-            gcText_mo.VisibleIndex = 10;
-            gcText_mo.Width = 61;
+            gcText_mo.VisibleIndex = 12;
+            gcText_mo.Width = 55;
             // 
             // gcP
             // 
@@ -742,7 +761,7 @@
             gcP.Name = "gcP";
             gcP.OptionsColumn.AllowEdit = false;
             gcP.Visible = true;
-            gcP.VisibleIndex = 16;
+            gcP.VisibleIndex = 18;
             gcP.Width = 20;
             // 
             // gcPrinter
@@ -752,8 +771,8 @@
             gcPrinter.Name = "gcPrinter";
             gcPrinter.OptionsColumn.AllowEdit = false;
             gcPrinter.Visible = true;
-            gcPrinter.VisibleIndex = 17;
-            gcPrinter.Width = 21;
+            gcPrinter.VisibleIndex = 19;
+            gcPrinter.Width = 20;
             // 
             // gcStra
             // 
@@ -762,7 +781,7 @@
             gcStra.Name = "gcStra";
             gcStra.OptionsColumn.AllowEdit = false;
             gcStra.Visible = true;
-            gcStra.VisibleIndex = 18;
+            gcStra.VisibleIndex = 20;
             gcStra.Width = 20;
             // 
             // gcBus
@@ -772,7 +791,7 @@
             gcBus.Name = "gcBus";
             gcBus.OptionsColumn.AllowEdit = false;
             gcBus.Visible = true;
-            gcBus.VisibleIndex = 19;
+            gcBus.VisibleIndex = 21;
             gcBus.Width = 20;
             // 
             // gcPpres
@@ -782,8 +801,8 @@
             gcPpres.Name = "gcPpres";
             gcPpres.OptionsColumn.AllowEdit = false;
             gcPpres.Visible = true;
-            gcPpres.VisibleIndex = 20;
-            gcPpres.Width = 23;
+            gcPpres.VisibleIndex = 22;
+            gcPpres.Width = 20;
             // 
             // gcV
             // 
@@ -792,7 +811,7 @@
             gcV.Name = "gcV";
             gcV.OptionsColumn.AllowEdit = false;
             gcV.Visible = true;
-            gcV.VisibleIndex = 21;
+            gcV.VisibleIndex = 23;
             gcV.Width = 20;
             // 
             // gcKruj
@@ -802,8 +821,8 @@
             gcKruj.Name = "gcKruj";
             gcKruj.OptionsColumn.AllowEdit = false;
             gcKruj.Visible = true;
-            gcKruj.VisibleIndex = 22;
-            gcKruj.Width = 23;
+            gcKruj.VisibleIndex = 24;
+            gcKruj.Width = 20;
             // 
             // gcTkan
             // 
@@ -811,8 +830,8 @@
             gcTkan.Name = "gcTkan";
             gcTkan.OptionsColumn.AllowEdit = false;
             gcTkan.Visible = true;
-            gcTkan.VisibleIndex = 11;
-            gcTkan.Width = 159;
+            gcTkan.VisibleIndex = 13;
+            gcTkan.Width = 146;
             // 
             // gcSost
             // 
@@ -820,8 +839,8 @@
             gcSost.Name = "gcSost";
             gcSost.OptionsColumn.AllowEdit = false;
             gcSost.Visible = true;
-            gcSost.VisibleIndex = 12;
-            gcSost.Width = 113;
+            gcSost.VisibleIndex = 14;
+            gcSost.Width = 141;
             // 
             // gcRazmNames
             // 
@@ -829,8 +848,8 @@
             gcRazmNames.Name = "gcRazmNames";
             gcRazmNames.OptionsColumn.AllowEdit = false;
             gcRazmNames.Visible = true;
-            gcRazmNames.VisibleIndex = 15;
-            gcRazmNames.Width = 173;
+            gcRazmNames.VisibleIndex = 17;
+            gcRazmNames.Width = 201;
             // 
             // gcDatePublic
             // 
@@ -838,8 +857,8 @@
             gcDatePublic.Name = "gcDatePublic";
             gcDatePublic.OptionsColumn.AllowEdit = false;
             gcDatePublic.Visible = true;
-            gcDatePublic.VisibleIndex = 24;
-            gcDatePublic.Width = 200;
+            gcDatePublic.VisibleIndex = 26;
+            gcDatePublic.Width = 95;
             // 
             // gcSost2
             // 
@@ -847,8 +866,8 @@
             gcSost2.Name = "gcSost2";
             gcSost2.OptionsColumn.AllowEdit = false;
             gcSost2.Visible = true;
-            gcSost2.VisibleIndex = 13;
-            gcSost2.Width = 83;
+            gcSost2.VisibleIndex = 15;
+            gcSost2.Width = 72;
             // 
             // gcSost3
             // 
@@ -856,32 +875,36 @@
             gcSost3.Name = "gcSost3";
             gcSost3.OptionsColumn.AllowEdit = false;
             gcSost3.Visible = true;
-            gcSost3.VisibleIndex = 14;
-            gcSost3.Width = 94;
+            gcSost3.VisibleIndex = 16;
+            gcSost3.Width = 81;
             // 
             // gcModMatrix
             // 
             gcModMatrix.Caption = "Модель полная";
             gcModMatrix.Name = "gcModMatrix";
+            gcModMatrix.OptionsColumn.AllowEdit = false;
             gcModMatrix.Visible = true;
-            gcModMatrix.VisibleIndex = 23;
-            gcModMatrix.Width = 65;
+            gcModMatrix.VisibleIndex = 25;
+            gcModMatrix.Width = 98;
             // 
-            // gcRepeatArticle
+            // gcAgid
             // 
-            gcRepeatArticle.Caption = "Повторный артикул";
-            gcRepeatArticle.Name = "gcRepeatArticle";
-            gcRepeatArticle.Visible = true;
-            gcRepeatArticle.VisibleIndex = 5;
-            gcRepeatArticle.Width = 65;
+            gcAgid.Caption = "Утв. группа ГОСТ";
+            gcAgid.ColumnEdit = repositoryItemSearchLookUpEdit2;
+            gcAgid.Name = "gcAgid";
+            gcAgid.OptionsColumn.AllowEdit = false;
+            gcAgid.Visible = true;
+            gcAgid.VisibleIndex = 10;
+            gcAgid.Width = 68;
             // 
-            // gcFoundMod
+            // gcidGost
             // 
-            gcFoundMod.Caption = "Существующая модель";
-            gcFoundMod.Name = "gcFoundMod";
-            gcFoundMod.Visible = true;
-            gcFoundMod.VisibleIndex = 7;
-            gcFoundMod.Width = 60;
+            gcidGost.Caption = "Утв. ГОСТ";
+            gcidGost.Name = "gcidGost";
+            gcidGost.OptionsColumn.AllowEdit = false;
+            gcidGost.Visible = true;
+            gcidGost.VisibleIndex = 9;
+            gcidGost.Width = 41;
             // 
             // customSimpleButtonPermissions
             // 
@@ -1277,5 +1300,7 @@
         private DevExpress.XtraLayout.SplitterItem splitterItem3;
         private DevExpress.XtraGrid.Columns.GridColumn gcCertFoundMod;
         private DevExpress.XtraGrid.Columns.GridColumn gcFoundMod;
+        private DevExpress.XtraGrid.Columns.GridColumn gcAgid;
+        private DevExpress.XtraGrid.Columns.GridColumn gcidGost;
     }
 }

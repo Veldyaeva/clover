@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 
-
+ 
 namespace SewingProduction.Features.Articul.Service
 {
     public class ArticulDataService
