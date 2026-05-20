@@ -34,7 +34,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         private RepositoryItemLookUpEdit threadLookup;
         private RepositoryItemCheckEdit approvedCheck;
         private RepositoryItemSpinEdit normEditor;
-        private GridColumn colMen;
         private GridColumn colClassName;
         private GridColumn colGroupName;
         private GridColumn colCategory;
@@ -44,9 +43,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         private GridColumn colApproved;
         private GridColumn colDateChange;
         private GridColumn colId;
-        private GridColumn colKod3;
-        private GridColumn colKodArt;
-        private GridColumn colMenName;
         private GridColumn colTcId;
         private GridColumn colTgId;
         private GridColumn colCategoryName;
@@ -69,27 +65,19 @@ namespace SewingProduction.Features.TeamWork.Forms
             bindingSource = new BindingSource(components);
             gridControl = new CustomGridControl();
             gridView = new GridView();
-            colMen = new GridColumn();
-            managerSearchLookUp = new RepositoryItemSearchLookUpEdit();
-            repositoryItemSearchLookUpEdit1View = new GridView();
             colCategory = new GridColumn();
             categoryLookup = new RepositoryItemLookUpEdit();
-            colClassName = new GridColumn();
             colGroupName = new GridColumn();
+            colClassName = new GridColumn();
             colAssort = new GridColumn();
             assortLookup = new RepositoryItemLookUpEdit();
             colThreadCode = new GridColumn();
-            threadSearchLookUp = new RepositoryItemSearchLookUpEdit();
-            gridView1 = new GridView();
             colNorm = new GridColumn();
             normEditor = new RepositoryItemSpinEdit();
             colApproved = new GridColumn();
             approvedCheck = new RepositoryItemCheckEdit();
             colDateChange = new GridColumn();
             colId = new GridColumn();
-            colKod3 = new GridColumn();
-            colKodArt = new GridColumn();
-            colMenName = new GridColumn();
             colTcId = new GridColumn();
             colTgId = new GridColumn();
             colCategoryName = new GridColumn();
@@ -97,6 +85,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             colThreadDisplay = new GridColumn();
             managerLookup = new RepositoryItemLookUpEdit();
             threadLookup = new RepositoryItemLookUpEdit();
+            managerSearchLookUp = new RepositoryItemSearchLookUpEdit();
+            repositoryItemSearchLookUpEdit1View = new GridView();
+            threadSearchLookUp = new RepositoryItemSearchLookUpEdit();
+            gridView1 = new GridView();
             filterGroup = new CustomRadioGroup();
             addButton = new CustomSimpleButton();
             copyButton = new CustomSimpleButton();
@@ -115,16 +107,16 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((ISupportInitialize)bindingSource).BeginInit();
             ((ISupportInitialize)gridControl).BeginInit();
             ((ISupportInitialize)gridView).BeginInit();
-            ((ISupportInitialize)managerSearchLookUp).BeginInit();
-            ((ISupportInitialize)repositoryItemSearchLookUpEdit1View).BeginInit();
             ((ISupportInitialize)categoryLookup).BeginInit();
             ((ISupportInitialize)assortLookup).BeginInit();
-            ((ISupportInitialize)threadSearchLookUp).BeginInit();
-            ((ISupportInitialize)gridView1).BeginInit();
             ((ISupportInitialize)normEditor).BeginInit();
             ((ISupportInitialize)approvedCheck).BeginInit();
             ((ISupportInitialize)managerLookup).BeginInit();
             ((ISupportInitialize)threadLookup).BeginInit();
+            ((ISupportInitialize)managerSearchLookUp).BeginInit();
+            ((ISupportInitialize)repositoryItemSearchLookUpEdit1View).BeginInit();
+            ((ISupportInitialize)threadSearchLookUp).BeginInit();
+            ((ISupportInitialize)gridView1).BeginInit();
             ((ISupportInitialize)filterGroup.Properties).BeginInit();
             ((ISupportInitialize)topPanel).BeginInit();
             topPanel.SuspendLayout();
@@ -153,7 +145,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridView
             // 
-            gridView.Columns.AddRange(new GridColumn[] { colMen, colCategory, colClassName, colGroupName, colAssort, colThreadCode, colNorm, colApproved, colDateChange, colId, colKod3, colKodArt, colMenName, colTcId, colTgId, colCategoryName, colTatName, colThreadDisplay });
+            gridView.Appearance.FocusedCell.ForeColor = Color.Black;
+            gridView.Appearance.FocusedCell.Options.UseForeColor = true;
+            gridView.Appearance.FocusedRow.ForeColor = Color.Black;
+            gridView.Appearance.FocusedRow.Options.UseForeColor = true;
+            gridView.Columns.AddRange(new GridColumn[] { colCategory, colGroupName, colClassName, colAssort, colThreadCode, colNorm, colApproved, colDateChange, colId, colTcId, colTgId, colCategoryName, colTatName, colThreadDisplay });
             gridView.GridControl = gridControl;
             gridView.Name = "gridView";
             gridView.OptionsNavigation.AutoFocusNewRow = true;
@@ -163,42 +159,17 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView.CellValueChanged += GridView_CellValueChanged;
             gridView.ValidateRow += GridView_ValidateRow;
             // 
-            // colMen
-            // 
-            colMen.Caption = "Менеджер";
-            colMen.ColumnEdit = managerSearchLookUp;
-            colMen.FieldName = "men";
-            colMen.Name = "colMen";
-            colMen.Visible = true;
-            colMen.VisibleIndex = 0;
-            colMen.Width = 90;
-            // 
-            // managerSearchLookUp
-            // 
-            managerSearchLookUp.AutoHeight = false;
-            managerSearchLookUp.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Combo) });
-            managerSearchLookUp.DisplayMember = "Name";
-            managerSearchLookUp.Name = "managerSearchLookUp";
-            managerSearchLookUp.NullText = "[Выберите менеджера]";
-            managerSearchLookUp.PopupView = repositoryItemSearchLookUpEdit1View;
-            managerSearchLookUp.ValueMember = "Men";
-            // 
-            // repositoryItemSearchLookUpEdit1View
-            // 
-            repositoryItemSearchLookUpEdit1View.FocusRectStyle = DrawFocusRectStyle.RowFocus;
-            repositoryItemSearchLookUpEdit1View.Name = "repositoryItemSearchLookUpEdit1View";
-            repositoryItemSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            repositoryItemSearchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
             // colCategory
             // 
             colCategory.Caption = "Категория";
             colCategory.ColumnEdit = categoryLookup;
             colCategory.FieldName = "tg_id_n";
             colCategory.Name = "colCategory";
+            colCategory.OptionsColumn.AllowEdit = false;
+            colCategory.OptionsColumn.ReadOnly = true;
             colCategory.Visible = true;
-            colCategory.VisibleIndex = 1;
-            colCategory.Width = 220;
+            colCategory.VisibleIndex = 0;
+            colCategory.Width = 208;
             // 
             // categoryLookup
             // 
@@ -209,9 +180,21 @@ namespace SewingProduction.Features.TeamWork.Forms
             categoryLookup.NullText = "[Выберите категорию]";
             categoryLookup.PopupFilterMode = PopupFilterMode.Contains;
             categoryLookup.SearchMode = SearchMode.AutoSearch;
+            categoryLookup.ShowDropDown = ShowDropDown.Never;
             categoryLookup.ShowFooter = false;
             categoryLookup.ShowHeader = false;
             categoryLookup.ValueMember = "TCAT_ID";
+            // 
+            // colGroupName
+            // 
+            colGroupName.Caption = "Группа";
+            colGroupName.FieldName = "TG_GroupName";
+            colGroupName.Name = "colGroupName";
+            colGroupName.OptionsColumn.AllowEdit = false;
+            colGroupName.OptionsColumn.ReadOnly = true;
+            colGroupName.Visible = true;
+            colGroupName.VisibleIndex = 1;
+            colGroupName.Width = 170;
             // 
             // colClassName
             // 
@@ -222,18 +205,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colClassName.OptionsColumn.ReadOnly = true;
             colClassName.Visible = true;
             colClassName.VisibleIndex = 2;
-            colClassName.Width = 160;
-            // 
-            // colGroupName
-            // 
-            colGroupName.Caption = "Группа";
-            colGroupName.FieldName = "TG_GroupName";
-            colGroupName.Name = "colGroupName";
-            colGroupName.OptionsColumn.AllowEdit = false;
-            colGroupName.OptionsColumn.ReadOnly = true;
-            colGroupName.Visible = true;
-            colGroupName.VisibleIndex = 3;
-            colGroupName.Width = 180;
+            colClassName.Width = 142;
             // 
             // colAssort
             // 
@@ -242,8 +214,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             colAssort.FieldName = "ta_id";
             colAssort.Name = "colAssort";
             colAssort.Visible = true;
-            colAssort.VisibleIndex = 4;
-            colAssort.Width = 140;
+            colAssort.VisibleIndex = 3;
+            colAssort.Width = 124;
             // 
             // assortLookup
             // 
@@ -260,31 +232,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // colThreadCode
             // 
+            colThreadCode.AppearanceCell.ForeColor = Color.Black;
+            colThreadCode.AppearanceCell.Options.UseForeColor = true;
             colThreadCode.Caption = "Код ниток";
-            colThreadCode.ColumnEdit = threadSearchLookUp;
             colThreadCode.FieldName = "kod_dr";
             colThreadCode.Name = "colThreadCode";
             colThreadCode.Visible = true;
-            colThreadCode.VisibleIndex = 5;
-            colThreadCode.Width = 220;
-            // 
-            // threadSearchLookUp
-            // 
-            threadSearchLookUp.AutoHeight = false;
-            threadSearchLookUp.BestFitMode = BestFitMode.BestFitResizePopup;
-            threadSearchLookUp.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Combo) });
-            threadSearchLookUp.DisplayMember = "displayText";
-            threadSearchLookUp.Name = "threadSearchLookUp";
-            threadSearchLookUp.NullText = "[Выберите нитки]";
-            threadSearchLookUp.PopupView = gridView1;
-            threadSearchLookUp.ValueMember = "kod_dr";
-            // 
-            // gridView1
-            // 
-            gridView1.FocusRectStyle = DrawFocusRectStyle.RowFocus;
-            gridView1.Name = "gridView1";
-            gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
-            gridView1.OptionsView.ShowGroupPanel = false;
+            colThreadCode.VisibleIndex = 4;
+            colThreadCode.Width = 196;
             // 
             // colNorm
             // 
@@ -293,8 +248,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             colNorm.FieldName = "norm";
             colNorm.Name = "colNorm";
             colNorm.Visible = true;
-            colNorm.VisibleIndex = 6;
-            colNorm.Width = 90;
+            colNorm.VisibleIndex = 5;
+            colNorm.Width = 80;
             // 
             // normEditor
             // 
@@ -311,8 +266,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             colApproved.FieldName = "approved";
             colApproved.Name = "colApproved";
             colApproved.Visible = true;
-            colApproved.VisibleIndex = 7;
-            colApproved.Width = 90;
+            colApproved.VisibleIndex = 6;
+            colApproved.Width = 80;
             // 
             // approvedCheck
             // 
@@ -329,28 +284,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             colDateChange.OptionsColumn.AllowEdit = false;
             colDateChange.OptionsColumn.ReadOnly = true;
             colDateChange.Visible = true;
-            colDateChange.VisibleIndex = 8;
-            colDateChange.Width = 110;
+            colDateChange.VisibleIndex = 7;
+            colDateChange.Width = 101;
             // 
             // colId
             // 
             colId.FieldName = "id";
             colId.Name = "colId";
-            // 
-            // colKod3
-            // 
-            colKod3.FieldName = "kod3";
-            colKod3.Name = "colKod3";
-            // 
-            // colKodArt
-            // 
-            colKodArt.FieldName = "kod_art";
-            colKodArt.Name = "colKodArt";
-            // 
-            // colMenName
-            // 
-            colMenName.FieldName = "men_name";
-            colMenName.Name = "colMenName";
             // 
             // colTcId
             // 
@@ -376,6 +316,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             colThreadDisplay.FieldName = "ThreadDisplay";
             colThreadDisplay.Name = "colThreadDisplay";
+            colThreadDisplay.Width = 114;
             // 
             // managerLookup
             // 
@@ -402,6 +343,43 @@ namespace SewingProduction.Features.TeamWork.Forms
             threadLookup.PopupFilterMode = PopupFilterMode.Contains;
             threadLookup.SearchMode = SearchMode.AutoSearch;
             threadLookup.ValueMember = "kod_dr";
+            // 
+            // managerSearchLookUp
+            // 
+            managerSearchLookUp.AutoHeight = false;
+            managerSearchLookUp.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Combo) });
+            managerSearchLookUp.DisplayMember = "Name";
+            managerSearchLookUp.Name = "managerSearchLookUp";
+            managerSearchLookUp.NullText = "[Выберите менеджера]";
+            managerSearchLookUp.PopupView = repositoryItemSearchLookUpEdit1View;
+            managerSearchLookUp.ValueMember = "Men";
+            // 
+            // repositoryItemSearchLookUpEdit1View
+            // 
+            repositoryItemSearchLookUpEdit1View.FocusRectStyle = DrawFocusRectStyle.RowFocus;
+            repositoryItemSearchLookUpEdit1View.Name = "repositoryItemSearchLookUpEdit1View";
+            repositoryItemSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            repositoryItemSearchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // threadSearchLookUp
+            // 
+            threadSearchLookUp.AppearanceFocused.ForeColor = Color.Black;
+            threadSearchLookUp.AppearanceFocused.Options.UseForeColor = true;
+            threadSearchLookUp.AutoHeight = false;
+            threadSearchLookUp.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Combo) });
+            threadSearchLookUp.DisplayMember = "displayText";
+            threadSearchLookUp.Name = "threadSearchLookUp";
+            threadSearchLookUp.NullText = "[Выберите нитки]";
+            threadSearchLookUp.PopupView = gridView1;
+            threadSearchLookUp.ShowDropDown = ShowDropDown.DoubleClick;
+            threadSearchLookUp.ValueMember = "kod_dr";
+            // 
+            // gridView1
+            // 
+            gridView1.FocusRectStyle = DrawFocusRectStyle.RowFocus;
+            gridView1.Name = "gridView1";
+            gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
+            gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // filterGroup
             // 
@@ -562,16 +540,16 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((ISupportInitialize)bindingSource).EndInit();
             ((ISupportInitialize)gridControl).EndInit();
             ((ISupportInitialize)gridView).EndInit();
-            ((ISupportInitialize)managerSearchLookUp).EndInit();
-            ((ISupportInitialize)repositoryItemSearchLookUpEdit1View).EndInit();
             ((ISupportInitialize)categoryLookup).EndInit();
             ((ISupportInitialize)assortLookup).EndInit();
-            ((ISupportInitialize)threadSearchLookUp).EndInit();
-            ((ISupportInitialize)gridView1).EndInit();
             ((ISupportInitialize)normEditor).EndInit();
             ((ISupportInitialize)approvedCheck).EndInit();
             ((ISupportInitialize)managerLookup).EndInit();
             ((ISupportInitialize)threadLookup).EndInit();
+            ((ISupportInitialize)managerSearchLookUp).EndInit();
+            ((ISupportInitialize)repositoryItemSearchLookUpEdit1View).EndInit();
+            ((ISupportInitialize)threadSearchLookUp).EndInit();
+            ((ISupportInitialize)gridView1).EndInit();
             ((ISupportInitialize)filterGroup.Properties).EndInit();
             ((ISupportInitialize)topPanel).EndInit();
             topPanel.ResumeLayout(false);

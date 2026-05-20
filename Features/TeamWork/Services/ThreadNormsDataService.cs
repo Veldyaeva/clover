@@ -142,7 +142,7 @@ namespace SewingProduction.Features.TeamWork.Services
         {
             return _dbService.GetListAsync<GrupMenModel>(
                 @"SELECT Men, Name
-              FROM dbo.view_grup_men",
+              FROM dbo.view_grup_men order by gm_index",
                 new { });
         }
 
@@ -167,7 +167,8 @@ namespace SewingProduction.Features.TeamWork.Services
         public Task<List<ThreadMaterialOption>> LoadThreadMaterialsAsync()
         {
             return _dbService.GetListAsync<ThreadMaterialOption>(
-                @"SELECT kod_dr, kod3, kod_art, displayText
+                //                @"SELECT kod_dr, kod_art, displayText
+                @"SELECT kod_dr, displayText
               FROM dbo.sewing_thread_standards_view
               ORDER BY displayText",
                 new { });

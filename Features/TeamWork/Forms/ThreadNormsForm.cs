@@ -1,3 +1,4 @@
+﻿using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.Models;
@@ -27,7 +28,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private List<GrupMenModel> _managers = new List<GrupMenModel>();
         private List<ThreadCategoryOption> _categories = new List<ThreadCategoryOption>();
         private List<ThreadAssortModel> _assorts = new List<ThreadAssortModel>();
-        private List<ThreadMaterialOption> _materials = new List<ThreadMaterialOption>();
+    //    private List<ThreadMaterialOption> _materials = new List<ThreadMaterialOption>();
         private bool _isLoading;
         private bool _allowCloseWithoutPrompt;
 
@@ -103,12 +104,13 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _managers = managersTask.Result ?? new List<GrupMenModel>();
                 _categories = categoriesTask.Result ?? new List<ThreadCategoryOption>();
                 _assorts = assortsTask.Result ?? new List<ThreadAssortModel>();
-                _materials = materialsTask.Result ?? new List<ThreadMaterialOption>();
+            //    _materials = materialsTask.Result ?? new List<ThreadMaterialOption>();
 
                 managerSearchLookUp.DataSource = _managers;
+                ConfigureManagerSearchLookupColumns();
                 categoryLookup.DataSource = _categories;
                 assortLookup.DataSource = _assorts;
-                threadSearchLookUp.DataSource = _materials;
+             //   threadSearchLookUp.DataSource = _materials;
             }
             finally
             {
@@ -468,8 +470,8 @@ ORDER BY n.men, cls.TC_ClassName, grp.TG_GroupName, cat.TCAT_CategoryName, assor
                     x.tg_id_n,
                     x.ta_id,
                     kod_dr = x.kod_dr?.Trim(),
-                    kod3 = x.kod3?.Trim(),
-                    kod_art = x.kod_art?.Trim()
+                    //kod3 = x.kod3?.Trim(),
+                    //kod_art = x.kod_art?.Trim()
                 })
                 .Where(g => g.Count() > 1)
                 .ToList();
@@ -537,9 +539,9 @@ ORDER BY n.men, cls.TC_ClassName, grp.TG_GroupName, cat.TCAT_CategoryName, assor
 
         private void ApplyDisplayFields(ThreadNormRow row)
         {
-            var manager = _managers.FirstOrDefault(x =>
-                string.Equals((x.Men ?? string.Empty).Trim(), (row.men ?? string.Empty).Trim(), StringComparison.OrdinalIgnoreCase));
-            row.men_name = manager?.Name ?? string.Empty;
+            //var manager = _managers.FirstOrDefault(x =>
+            //    string.Equals((x.Men ?? string.Empty).Trim(), (row.men ?? string.Empty).Trim(), StringComparison.OrdinalIgnoreCase));
+            //row.men_name = manager?.Name ?? string.Empty;
 
             var category = _categories.FirstOrDefault(x => x.TCAT_ID == row.tg_id_n);
             row.TCAT_CategoryName = category?.TCAT_CategoryName ?? string.Empty;
@@ -549,18 +551,18 @@ ORDER BY n.men, cls.TC_ClassName, grp.TG_GroupName, cat.TCAT_CategoryName, assor
             var assort = _assorts.FirstOrDefault(x => x.TAT_ID == row.ta_id);
             row.TAT_Name = assort?.TAT_Name ?? string.Empty;
 
-            var material = _materials.FirstOrDefault(x =>
-                string.Equals(x.kod_dr, row.kod_dr, StringComparison.OrdinalIgnoreCase));
-            if (material != null)
-            {
-                row.kod3 = material.kod3;
-                row.kod_art = material.kod_art;
-                row.ThreadDisplay = material.displayText;
-            }
-            else
-            {
-                row.ThreadDisplay = string.Empty;
-            }
+            //var material = _materials.FirstOrDefault(x =>
+            //    string.Equals(x.kod_dr, row.kod_dr, StringComparison.OrdinalIgnoreCase));
+            //if (material != null)
+            //{
+            //    row.kod3 = material.kod3;
+            //    row.kod_art = material.kod_art;
+            //    row.ThreadDisplay = material.displayText;
+            //}
+            //else
+            //{
+            //    row.ThreadDisplay = string.Empty;
+            //}
         }
 
         private static (ThreadNormRow row, string error) ValidateRow(ThreadNormRow row)
@@ -570,10 +572,10 @@ ORDER BY n.men, cls.TC_ClassName, grp.TG_GroupName, cat.TCAT_CategoryName, assor
                 return (row, "Пустая строка справочника.");
             }
 
-            if (string.IsNullOrWhiteSpace(row.men))
-            {
-                return (row, "Не заполнен менеджер.");
-            }
+            //if (string.IsNullOrWhiteSpace(row.men))
+            //{
+            //    return (row, "Не заполнен менеджер.");
+            //}
 
             if (row.tg_id_n <= 0)
             {
