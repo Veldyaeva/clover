@@ -24,6 +24,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly TWGridHelper _gridHelper = new TWGridHelper();
         private readonly ThreadNormsDataService _dataService;
         private readonly BindingList<ThreadNormRow> _rows = new BindingList<ThreadNormRow>();
+        private List<ThreadAssortModel> _assorts = new List<ThreadAssortModel>();
 
         private bool _isAutoSavingRowChange;
         private bool _isLoading;
@@ -69,6 +70,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView.ShowLoadingPanel();
             try
             {
+                await LoadReferenceDataAsync();
                 await LoadRowsAsync();
             }
             catch (Exception ex)
@@ -83,6 +85,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 gridView.HideLoadingPanel();
             }
+        }
+
+        private async Task LoadReferenceDataAsync()
+        {
+            _assorts = await _dataService.LoadAssortsAsync() ?? new List<ThreadAssortModel>();
+            assortLookup.DataSource = _assorts;
         }
 
         private async Task LoadRowsAsync()
@@ -423,11 +431,15 @@ namespace SewingProduction.Features.TeamWork.Forms
             switch (e.Column.FieldName)
             {
                 //case "tg_id_n":
-                //case "ta_id":
-                //case "kod_dr":
-                //    ApplyDisplayFields(row);
-                //    bindingSource.ResetBindings(false);
-                //    break;
+                case "ta_id":
+                    //case "kod_dr":
+                    //ApplyDisplayFields(row);
+                    //bindingSource.ResetBindings(false);
+                    //break;
+                    var assort = _assorts.FirstOrDefault(x => x.TAT_ID == row.ta_id);
+                    row.TAT_Name = assort?.TAT_Name ?? string.Empty;
+                    bindingSource.ResetBindings(false);
+                    break;
                 case "approved":
                     row.approved = Convert.ToBoolean(e.Value);
                     bindingSource.ResetBindings(false);
@@ -501,6 +513,45 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (gridView.FocusedColumn?.FieldName == nameof(ThreadNormRow.approved))
                 return;
             e.Cancel = true;
+        }
+
+        private async void customSimpleButton1_Click(object sender, EventArgs e)
+        {
+            if (HasPendingChanges())
+            {
+                var result = MessageBox.Show(
+                    "Есть несохранённые изменения. Сохранить перед обновлением данных?",
+                    "Нормы ниток",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question);
+
+                if (result == DialogResult.Cancel)
+                    return;
+
+                if (result == DialogResult.Yes)
+                {
+                    if (!await SaveInternalAsync(showSuccessMessage: false))
+                        return;
+                }
+            }
+            gridView.ShowLoadingPanel();
+            try
+            {
+                await LoadRowsAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Ошибка обновления данных справочника ниток из базы: {ex.Message}",
+                    "Ошибка UI",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            finally
+            {
+                gridView.HideLoadingPanel();
+            }
+
         }
     }
 }

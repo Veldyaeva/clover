@@ -185,4 +185,10 @@ namespace SewingProduction.Features.TeamWork.Models
             };
         }
     }
+
+    public sealed class ThreadAssortModel
+    {
+        public int TAT_ID { get; set; }
+        public string TAT_Name { get; set; } = string.Empty;
+    }
 }

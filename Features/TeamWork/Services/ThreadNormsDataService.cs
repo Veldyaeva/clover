@@ -22,6 +22,15 @@ namespace SewingProduction.Features.TeamWork.Services
             _dbService = dbService;
         }
 
+        public Task<List<ThreadAssortModel>> LoadAssortsAsync()
+        {
+            return _dbService.GetListAsync<ThreadAssortModel>(
+                @"SELECT TAT_ID, TAT_Name
+                  FROM dbo.sewing_thread_assorts_view
+                  ORDER BY TAT_ID",
+                new { });
+        }
+
         public Task<List<ThreadNormRow>> LoadRowsAsync(bool zeroNormOnly)
         {
 
