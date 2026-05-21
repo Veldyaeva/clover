@@ -25,6 +25,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly ThreadNormsDataService _dataService;
         private readonly BindingList<ThreadNormRow> _rows = new BindingList<ThreadNormRow>();
 
+        private bool _isAutoSavingRowChange;
         private bool _isLoading;
         private bool _allowCloseWithoutPrompt;
 
@@ -224,7 +225,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 .Where(x => !x.IsDeleted)
                 .GroupBy(x => new
                 {
-                    men = x.men?.Trim(),
                     x.tg_id_n,
                     x.ta_id,
                     kod_dr = x.kod_dr?.Trim(),
@@ -234,7 +234,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 .Where(g => g.Count() > 1)
                 .ToList();
 
-            if (duplicates.Any())
+            if (duplicates.Count != 0)
             {
                 MessageBox.Show(
                     "В справочнике есть дублирующиеся нормы ниток. Сохранение невозможно.",
@@ -435,6 +435,34 @@ namespace SewingProduction.Features.TeamWork.Forms
                 case "date_change":
                     bindingSource.ResetBindings(false);
                     break;
+            }
+        }
+
+        private async void GridView_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        {
+            if (_isLoading || _isAutoSavingRowChange || e.PrevFocusedRowHandle < 0)
+            {
+                return;
+            }
+
+            if (gridView.GetRow(e.PrevFocusedRowHandle) is not ThreadNormRow previousRow)
+            {
+                return;
+            }
+
+            if (!previousRow.IsNew && !previousRow.IsModified)
+            {
+                return;
+            }
+
+            _isAutoSavingRowChange = true;
+            try
+            {
+                await SaveInternalAsync(showSuccessMessage: false);
+            }
+            finally
+            {
+                _isAutoSavingRowChange = false;
             }
         }
 
