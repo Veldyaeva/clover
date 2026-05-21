@@ -28,10 +28,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         private PanelControl topPanel;
         private PanelControl bottomPanel;
         private FlowLayoutPanel buttonsPanel;
-        private RepositoryItemLookUpEdit managerLookup;
-        private RepositoryItemLookUpEdit categoryLookup;
-        private RepositoryItemLookUpEdit assortLookup;
-        private RepositoryItemLookUpEdit threadLookup;
         private RepositoryItemCheckEdit approvedCheck;
         private RepositoryItemSpinEdit normEditor;
         private GridColumn colClassName;
@@ -66,12 +62,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridControl = new CustomGridControl();
             gridView = new GridView();
             colCategory = new GridColumn();
-            categoryLookup = new RepositoryItemLookUpEdit();
             colGroupName = new GridColumn();
             colClassName = new GridColumn();
             colAssort = new GridColumn();
-            assortLookup = new RepositoryItemLookUpEdit();
             colThreadCode = new GridColumn();
+            gridColumn1 = new GridColumn();
             colNorm = new GridColumn();
             normEditor = new RepositoryItemSpinEdit();
             colApproved = new GridColumn();
@@ -83,12 +78,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             colCategoryName = new GridColumn();
             colTatName = new GridColumn();
             colThreadDisplay = new GridColumn();
-            managerLookup = new RepositoryItemLookUpEdit();
-            threadLookup = new RepositoryItemLookUpEdit();
-            managerSearchLookUp = new RepositoryItemSearchLookUpEdit();
-            repositoryItemSearchLookUpEdit1View = new GridView();
-            threadSearchLookUp = new RepositoryItemSearchLookUpEdit();
-            gridView1 = new GridView();
             filterGroup = new CustomRadioGroup();
             addButton = new CustomSimpleButton();
             copyButton = new CustomSimpleButton();
@@ -96,6 +85,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             saveButton = new CustomSimpleButton();
             closeButton = new CustomSimpleButton();
             topPanel = new PanelControl();
+            customSimpleButton1 = new CustomSimpleButton();
             bottomPanel = new PanelControl();
             buttonsPanel = new FlowLayoutPanel();
             layoutConverter1 = new DevExpress.XtraLayout.Converter.LayoutConverter(components);
@@ -107,16 +97,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((ISupportInitialize)bindingSource).BeginInit();
             ((ISupportInitialize)gridControl).BeginInit();
             ((ISupportInitialize)gridView).BeginInit();
-            ((ISupportInitialize)categoryLookup).BeginInit();
-            ((ISupportInitialize)assortLookup).BeginInit();
             ((ISupportInitialize)normEditor).BeginInit();
             ((ISupportInitialize)approvedCheck).BeginInit();
-            ((ISupportInitialize)managerLookup).BeginInit();
-            ((ISupportInitialize)threadLookup).BeginInit();
-            ((ISupportInitialize)managerSearchLookUp).BeginInit();
-            ((ISupportInitialize)repositoryItemSearchLookUpEdit1View).BeginInit();
-            ((ISupportInitialize)threadSearchLookUp).BeginInit();
-            ((ISupportInitialize)gridView1).BeginInit();
             ((ISupportInitialize)filterGroup.Properties).BeginInit();
             ((ISupportInitialize)topPanel).BeginInit();
             topPanel.SuspendLayout();
@@ -138,7 +120,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridControl.Location = new Point(12, 65);
             gridControl.MainView = gridView;
             gridControl.Name = "gridControl";
-            gridControl.RepositoryItems.AddRange(new RepositoryItem[] { managerLookup, categoryLookup, assortLookup, threadLookup, approvedCheck, normEditor, managerSearchLookUp, threadSearchLookUp });
+            gridControl.RepositoryItems.AddRange(new RepositoryItem[] { approvedCheck, normEditor });
             gridControl.Size = new Size(1240, 628);
             gridControl.TabIndex = 0;
             gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView });
@@ -149,20 +131,21 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView.Appearance.FocusedCell.Options.UseForeColor = true;
             gridView.Appearance.FocusedRow.ForeColor = Color.Black;
             gridView.Appearance.FocusedRow.Options.UseForeColor = true;
-            gridView.Columns.AddRange(new GridColumn[] { colCategory, colGroupName, colClassName, colAssort, colThreadCode, colNorm, colApproved, colDateChange, colId, colTcId, colTgId, colCategoryName, colTatName, colThreadDisplay });
+            gridView.Columns.AddRange(new GridColumn[] { colCategory, colGroupName, colClassName, colAssort, colThreadCode, gridColumn1, colNorm, colApproved, colDateChange, colId, colTcId, colTgId, colCategoryName, colTatName, colThreadDisplay });
             gridView.GridControl = gridControl;
             gridView.Name = "gridView";
+            gridView.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
             gridView.OptionsNavigation.AutoFocusNewRow = true;
             gridView.OptionsView.ShowAutoFilterRow = true;
             gridView.OptionsView.ShowGroupPanel = false;
             gridView.RowCellStyle += GridView_RowCellStyle;
+            gridView.ShowingEditor += GridView_ShowingEditor;
             gridView.CellValueChanged += GridView_CellValueChanged;
             gridView.ValidateRow += GridView_ValidateRow;
             // 
             // colCategory
             // 
             colCategory.Caption = "Категория";
-            colCategory.ColumnEdit = categoryLookup;
             colCategory.FieldName = "tg_id_n";
             colCategory.Name = "colCategory";
             colCategory.OptionsColumn.AllowEdit = false;
@@ -170,20 +153,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             colCategory.Visible = true;
             colCategory.VisibleIndex = 0;
             colCategory.Width = 208;
-            // 
-            // categoryLookup
-            // 
-            categoryLookup.AutoHeight = false;
-            categoryLookup.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Combo) });
-            categoryLookup.DisplayMember = "TCAT_CategoryName";
-            categoryLookup.Name = "categoryLookup";
-            categoryLookup.NullText = "[Выберите категорию]";
-            categoryLookup.PopupFilterMode = PopupFilterMode.Contains;
-            categoryLookup.SearchMode = SearchMode.AutoSearch;
-            categoryLookup.ShowDropDown = ShowDropDown.Never;
-            categoryLookup.ShowFooter = false;
-            categoryLookup.ShowHeader = false;
-            categoryLookup.ValueMember = "TCAT_ID";
             // 
             // colGroupName
             // 
@@ -210,25 +179,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             // colAssort
             // 
             colAssort.Caption = "Ассортимент";
-            colAssort.ColumnEdit = assortLookup;
             colAssort.FieldName = "ta_id";
             colAssort.Name = "colAssort";
             colAssort.Visible = true;
             colAssort.VisibleIndex = 3;
             colAssort.Width = 124;
-            // 
-            // assortLookup
-            // 
-            assortLookup.AutoHeight = false;
-            assortLookup.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Combo) });
-            assortLookup.DisplayMember = "TAT_Name";
-            assortLookup.Name = "assortLookup";
-            assortLookup.NullText = "[Выберите ассортимент]";
-            assortLookup.PopupFilterMode = PopupFilterMode.Contains;
-            assortLookup.SearchMode = SearchMode.AutoSearch;
-            assortLookup.ShowFooter = false;
-            assortLookup.ShowHeader = false;
-            assortLookup.ValueMember = "TAT_ID";
             // 
             // colThreadCode
             // 
@@ -241,6 +196,17 @@ namespace SewingProduction.Features.TeamWork.Forms
             colThreadCode.VisibleIndex = 4;
             colThreadCode.Width = 196;
             // 
+            // gridColumn1
+            // 
+            gridColumn1.Caption = "Артикул";
+            gridColumn1.FieldName = "ThreadArticul";
+            gridColumn1.Name = "gridColumn1";
+            gridColumn1.OptionsColumn.AllowEdit = false;
+            gridColumn1.OptionsColumn.ReadOnly = true;
+            gridColumn1.Visible = true;
+            gridColumn1.VisibleIndex = 5;
+            gridColumn1.Width = 120;
+            // 
             // colNorm
             // 
             colNorm.Caption = "Норма";
@@ -248,7 +214,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colNorm.FieldName = "norm";
             colNorm.Name = "colNorm";
             colNorm.Visible = true;
-            colNorm.VisibleIndex = 5;
+            colNorm.VisibleIndex = 6;
             colNorm.Width = 80;
             // 
             // normEditor
@@ -266,7 +232,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colApproved.FieldName = "approved";
             colApproved.Name = "colApproved";
             colApproved.Visible = true;
-            colApproved.VisibleIndex = 6;
+            colApproved.VisibleIndex = 7;
             colApproved.Width = 80;
             // 
             // approvedCheck
@@ -284,7 +250,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colDateChange.OptionsColumn.AllowEdit = false;
             colDateChange.OptionsColumn.ReadOnly = true;
             colDateChange.Visible = true;
-            colDateChange.VisibleIndex = 7;
+            colDateChange.VisibleIndex = 8;
             colDateChange.Width = 101;
             // 
             // colId
@@ -318,69 +284,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             colThreadDisplay.Name = "colThreadDisplay";
             colThreadDisplay.Width = 114;
             // 
-            // managerLookup
-            // 
-            managerLookup.AutoHeight = false;
-            managerLookup.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Combo) });
-            managerLookup.DisplayMember = "Name";
-            managerLookup.Name = "managerLookup";
-            managerLookup.NullText = "[Выберите менеджера]";
-            managerLookup.PopupFilterMode = PopupFilterMode.Contains;
-            managerLookup.SearchMode = SearchMode.AutoSearch;
-            managerLookup.ShowFooter = false;
-            managerLookup.ShowHeader = false;
-            managerLookup.ValueMember = "Men";
-            // 
-            // threadLookup
-            // 
-            threadLookup.AutoHeight = false;
-            threadLookup.BestFitMode = BestFitMode.BestFitResizePopup;
-            threadLookup.BestFitRowCount = 8;
-            threadLookup.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Combo) });
-            threadLookup.DisplayMember = "displayText";
-            threadLookup.Name = "threadLookup";
-            threadLookup.NullText = "[Выберите нитки]";
-            threadLookup.PopupFilterMode = PopupFilterMode.Contains;
-            threadLookup.SearchMode = SearchMode.AutoSearch;
-            threadLookup.ValueMember = "kod_dr";
-            // 
-            // managerSearchLookUp
-            // 
-            managerSearchLookUp.AutoHeight = false;
-            managerSearchLookUp.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Combo) });
-            managerSearchLookUp.DisplayMember = "Name";
-            managerSearchLookUp.Name = "managerSearchLookUp";
-            managerSearchLookUp.NullText = "[Выберите менеджера]";
-            managerSearchLookUp.PopupView = repositoryItemSearchLookUpEdit1View;
-            managerSearchLookUp.ValueMember = "Men";
-            // 
-            // repositoryItemSearchLookUpEdit1View
-            // 
-            repositoryItemSearchLookUpEdit1View.FocusRectStyle = DrawFocusRectStyle.RowFocus;
-            repositoryItemSearchLookUpEdit1View.Name = "repositoryItemSearchLookUpEdit1View";
-            repositoryItemSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            repositoryItemSearchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
-            // threadSearchLookUp
-            // 
-            threadSearchLookUp.AppearanceFocused.ForeColor = Color.Black;
-            threadSearchLookUp.AppearanceFocused.Options.UseForeColor = true;
-            threadSearchLookUp.AutoHeight = false;
-            threadSearchLookUp.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Combo) });
-            threadSearchLookUp.DisplayMember = "displayText";
-            threadSearchLookUp.Name = "threadSearchLookUp";
-            threadSearchLookUp.NullText = "[Выберите нитки]";
-            threadSearchLookUp.PopupView = gridView1;
-            threadSearchLookUp.ShowDropDown = ShowDropDown.DoubleClick;
-            threadSearchLookUp.ValueMember = "kod_dr";
-            // 
-            // gridView1
-            // 
-            gridView1.FocusRectStyle = DrawFocusRectStyle.RowFocus;
-            gridView1.Name = "gridView1";
-            gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
-            gridView1.OptionsView.ShowGroupPanel = false;
-            // 
             // filterGroup
             // 
             filterGroup.Dock = DockStyle.Left;
@@ -402,6 +305,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             addButton.Size = new Size(57, 22);
             addButton.TabIndex = 0;
             addButton.Text = "Добавить";
+            addButton.Visible = false;
             addButton.Click += AddButton_Click;
             // 
             // copyButton
@@ -413,6 +317,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             copyButton.Size = new Size(93, 22);
             copyButton.TabIndex = 1;
             copyButton.Text = "Добавить копию";
+            copyButton.Visible = false;
             copyButton.Click += CopyButton_Click;
             // 
             // deleteButton
@@ -424,6 +329,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             deleteButton.Size = new Size(51, 22);
             deleteButton.TabIndex = 2;
             deleteButton.Text = "Удалить";
+            deleteButton.Visible = false;
             deleteButton.Click += DeleteButton_Click;
             // 
             // saveButton
@@ -450,11 +356,22 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // topPanel
             // 
+            topPanel.Controls.Add(customSimpleButton1);
             topPanel.Controls.Add(filterGroup);
             topPanel.Location = new Point(12, 12);
             topPanel.Name = "topPanel";
             topPanel.Size = new Size(1240, 49);
             topPanel.TabIndex = 1;
+            // 
+            // customSimpleButton1
+            // 
+            customSimpleButton1.Appearance.Font = new Font("Arial", 10F);
+            customSimpleButton1.Appearance.Options.UseFont = true;
+            customSimpleButton1.Location = new Point(437, 16);
+            customSimpleButton1.Name = "customSimpleButton1";
+            customSimpleButton1.Size = new Size(75, 25);
+            customSimpleButton1.TabIndex = 1;
+            customSimpleButton1.Text = "Обновить";
             // 
             // bottomPanel
             // 
@@ -540,16 +457,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((ISupportInitialize)bindingSource).EndInit();
             ((ISupportInitialize)gridControl).EndInit();
             ((ISupportInitialize)gridView).EndInit();
-            ((ISupportInitialize)categoryLookup).EndInit();
-            ((ISupportInitialize)assortLookup).EndInit();
             ((ISupportInitialize)normEditor).EndInit();
             ((ISupportInitialize)approvedCheck).EndInit();
-            ((ISupportInitialize)managerLookup).EndInit();
-            ((ISupportInitialize)threadLookup).EndInit();
-            ((ISupportInitialize)managerSearchLookUp).EndInit();
-            ((ISupportInitialize)repositoryItemSearchLookUpEdit1View).EndInit();
-            ((ISupportInitialize)threadSearchLookUp).EndInit();
-            ((ISupportInitialize)gridView1).EndInit();
             ((ISupportInitialize)filterGroup.Properties).EndInit();
             ((ISupportInitialize)topPanel).EndInit();
             topPanel.ResumeLayout(false);
@@ -565,15 +474,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((ISupportInitialize)topPanelitem).EndInit();
             ResumeLayout(false);
         }
-        private RepositoryItemSearchLookUpEdit managerSearchLookUp;
-        private GridView repositoryItemSearchLookUpEdit1View;
-        private RepositoryItemSearchLookUpEdit threadSearchLookUp;
-        private GridView gridView1;
         private DevExpress.XtraLayout.Converter.LayoutConverter layoutConverter1;
         private DevExpress.XtraLayout.LayoutControl ThreadNormsFormlayoutControl1ConvertedLayout;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraLayout.LayoutControlItem gridControlitem;
         private DevExpress.XtraLayout.LayoutControlItem bottomPanelitem;
         private DevExpress.XtraLayout.LayoutControlItem topPanelitem;
+        private GridColumn gridColumn1;
+        private CustomSimpleButton customSimpleButton1;
     }
 }

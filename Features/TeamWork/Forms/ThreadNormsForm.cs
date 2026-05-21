@@ -28,13 +28,14 @@ namespace SewingProduction.Features.TeamWork.Forms
         private List<GrupMenModel> _managers = new List<GrupMenModel>();
         private List<ThreadCategoryOption> _categories = new List<ThreadCategoryOption>();
         private List<ThreadAssortModel> _assorts = new List<ThreadAssortModel>();
-    //    private List<ThreadMaterialOption> _materials = new List<ThreadMaterialOption>();
+        private List<ThreadMaterialOption> _materials = new List<ThreadMaterialOption>();
         private bool _isLoading;
         private bool _allowCloseWithoutPrompt;
 
         public ThreadNormsForm(UserClass user) : base(user)
         {
             InitializeComponent();
+            ConfigureEditingMode();
 
             var dbService = new DbService(new DatabaseHelperSQL());
             _dataService = new ThreadNormsDataService(dbService, _logger);
@@ -72,7 +73,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView.ShowLoadingPanel();
             try
             {
-                await LoadReferenceDataAsync();
+              //  await LoadReferenceDataAsync();
                 await LoadRowsAsync();
             }
             catch (Exception ex)
@@ -94,23 +95,25 @@ namespace SewingProduction.Features.TeamWork.Forms
             _isLoading = true;
             try
             {
-                var managersTask = _dataService.LoadManagersAsync();
-                var categoriesTask = _dataService.LoadCategoriesAsync();
-                var assortsTask = _dataService.LoadAssortsAsync();
-                var materialsTask = _dataService.LoadThreadMaterialsAsync();
+                //var managersTask = _dataService.LoadManagersAsync();
+                //var categoriesTask = _dataService.LoadCategoriesAsync();
+                //var assortsTask = _dataService.LoadAssortsAsync();
+                //var materialsTask = _dataService.LoadThreadMaterialsAsync();
 
-                await Task.WhenAll(managersTask, categoriesTask, assortsTask, materialsTask);
+                //await Task.WhenAll(managersTask, categoriesTask, assortsTask, materialsTask);
 
-                _managers = managersTask.Result ?? new List<GrupMenModel>();
-                _categories = categoriesTask.Result ?? new List<ThreadCategoryOption>();
-                _assorts = assortsTask.Result ?? new List<ThreadAssortModel>();
-            //    _materials = materialsTask.Result ?? new List<ThreadMaterialOption>();
+                //_managers = managersTask.Result ?? new List<GrupMenModel>();
+                //_categories = categoriesTask.Result ?? new List<ThreadCategoryOption>();
+                //_assorts = assortsTask.Result ?? new List<ThreadAssortModel>();
+                //_materials = materialsTask.Result ?? new List<ThreadMaterialOption>();
 
-                managerSearchLookUp.DataSource = _managers;
-                ConfigureManagerSearchLookupColumns();
-                categoryLookup.DataSource = _categories;
-                assortLookup.DataSource = _assorts;
-             //   threadSearchLookUp.DataSource = _materials;
+                //managerSearchLookUp.DataSource = _managers;
+                //ConfigureManagerSearchLookupColumns();
+                //categoryLookup.DataSource = _categories;
+                //assortLookup.DataSource = _assorts;
+                //threadLookup.DataSource = _materials;
+                //threadSearchLookUp.DataSource = _materials;
+                //ConfigureThreadSearchLookupColumns();
             }
             finally
             {
@@ -118,23 +121,46 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private void ConfigureManagerSearchLookupColumns()
+        private void ConfigureEditingMode()
         {
-            if (managerSearchLookUp.PopupView is not GridView popupView)
-            {
-                return;
-            }
+            addButton.Visible = false;
+            copyButton.Visible = true;
+            deleteButton.Visible = true;
 
-            popupView.PopulateColumns();
+            colCategory.OptionsColumn.AllowEdit = true;
+            colCategory.OptionsColumn.ReadOnly = false;
+//            categoryLookup.ShowDropDown = DevExpress.XtraEditors.Controls.ShowDropDown.SingleClick;
 
-            foreach (GridColumn column in popupView.Columns)
-            {
-                column.Visible = false;
-            }
+            colAssort.OptionsColumn.AllowEdit = true;
+            colAssort.OptionsColumn.ReadOnly = false;
 
-            ConfigureManagerSearchLookupColumn(popupView, "Men", "Men", 0, 90);
-            ConfigureManagerSearchLookupColumn(popupView, "Name", "Name", 1, 220);
+            colThreadCode.OptionsColumn.AllowEdit = true;
+            colThreadCode.OptionsColumn.ReadOnly = false;
+
+            colApproved.OptionsColumn.AllowEdit = true;
+            colApproved.OptionsColumn.ReadOnly = false;
+
+            colDateChange.OptionsColumn.AllowEdit = true;
+            colDateChange.OptionsColumn.ReadOnly = false;
         }
+
+        //private void ConfigureManagerSearchLookupColumns()
+        //{
+        //    if (managerSearchLookUp.PopupView is not GridView popupView)
+        //    {
+        //        return;
+        //    }
+
+        //    popupView.PopulateColumns();
+
+        //    foreach (GridColumn column in popupView.Columns)
+        //    {
+        //        column.Visible = false;
+        //    }
+
+        //    //ConfigureManagerSearchLookupColumn(popupView, "Men", "Men", 0, 90);
+        //    //ConfigureManagerSearchLookupColumn(popupView, "Name", "Name", 1, 220);
+        //}
 
         private static void ConfigureManagerSearchLookupColumn(GridView popupView, string fieldName, string caption, int visibleIndex, int width)
         {
@@ -151,6 +177,25 @@ namespace SewingProduction.Features.TeamWork.Forms
             column.OptionsColumn.AllowEdit = false;
             column.OptionsColumn.ReadOnly = true;
         }
+
+        //private void ConfigureThreadSearchLookupColumns()
+        //{
+        //    if (threadSearchLookUp.PopupView is not GridView popupView)
+        //    {
+        //        return;
+        //    }
+
+        //    popupView.PopulateColumns();
+
+        //    foreach (GridColumn column in popupView.Columns)
+        //    {
+        //        column.Visible = false;
+        //    }
+
+        //    ConfigureManagerSearchLookupColumn(popupView, "kod_dr", "Код", 0, 90);
+        //    ConfigureManagerSearchLookupColumn(popupView, "articul", "Артикул", 1, 140);
+        //    ConfigureManagerSearchLookupColumn(popupView, "displayText", "Описание", 2, 280);
+        //}
 
         private async Task LoadRowsAsync()
         {
@@ -179,186 +224,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _isLoading = false;
             }
         }
-/*
-        private Task<List<GrupMenModel>> LoadManagersAsync()
-        {
-            const string query = @"
-SELECT DISTINCT
-    RTRIM(men) AS Men,
-    RTRIM(name) AS Name
-FROM dbo.view_grup_men
-WHERE ISNULL(RTRIM(men), '') <> ''
-ORDER BY Men";
-
-            return _dbService.GetListAsync<GrupMenModel>(query, new { });
-        }
-
-        private Task<List<ThreadCategoryOption>> LoadCategoriesAsync()
-        {
-            const string query = @"
-SELECT
-    cat.TCAT_ID,
-    cat.TCAT_CategoryName,
-    grp.TG_GroupName,
-    cls.TC_ClassName
-FROM global.planeta.dbo.TOVAR_CATEGORY cat
-LEFT JOIN global.planeta.dbo.TOVAR_GROUP grp
-    ON grp.TG_ID = cat.TCAT_TG_ID
-LEFT JOIN global.planeta.dbo.TOVAR_CLASS cls
-    ON cls.TC_ID = grp.TG_TC_ID
-ORDER BY cls.TC_ClassName, grp.TG_GroupName, cat.TCAT_CategoryName";
-
-            return _dbService.GetListAsync<ThreadCategoryOption>(query, new { });
-        }
-
-        private async Task<List<ThreadAssortModel>> LoadAssortsAsync()
-        {
-            const string globalCodeQuery = @"
-SELECT
-    TAT_GlobalCode AS TAT_ID,
-    TAT_Name
-FROM global.planeta.dbo.TOVAR_ASSTYPE
-WHERE TAT_GlobalCode <= 4
-ORDER BY TAT_GlobalCode";
-
-            const string idQuery = @"
-SELECT
-    TAT_ID,
-    TAT_Name
-FROM global.planeta.dbo.TOVAR_ASSTYPE
-WHERE TAT_ID <= 4
-ORDER BY TAT_ID";
-
-            try
-            {
-                return await _dbService.GetListAsync<ThreadAssortModel>(globalCodeQuery, new { });
-            }
-            catch (Exception ex) when (ex.Message.Contains("GlobalCode", StringComparison.OrdinalIgnoreCase))
-            {
-                await _logger.LogWarningAsync(
-                    "TOVAR_ASSTYPE не содержит TAT_GlobalCode, использую TAT_ID.",
-                    "ThreadNormsForm.LoadAssortsAsync");
-                return await _dbService.GetListAsync<ThreadAssortModel>(idQuery, new { });
-            }
-        }
-
-        private Task<List<ThreadMaterialOption>> LoadThreadMaterialsAsync()
-        {
-            const string query = @"
-SELECT
-    RTRIM(dr.kod_dr) AS kod_dr,
-    ISNULL((
-        SELECT TOP (1) RTRIM(drm.kod)
-        FROM dbo.dop_ras_mat drm
-        WHERE dr.kod_dr = LEFT(drm.kod, 4)
-          AND ISNULL(drm.kod_art, '') <> ''
-        ORDER BY drm.kod
-    ), '') AS kod3,
-    ISNULL((
-        SELECT TOP (1) RTRIM(drm.kod_art)
-        FROM dbo.dop_ras_mat drm
-        WHERE dr.kod_dr = LEFT(drm.kod, 4)
-          AND ISNULL(drm.kod_art, '') <> ''
-        ORDER BY drm.kod_art
-    ), '') AS kod_art,
-    RTRIM(dr.kod_dr) + ' | ' + RTRIM(dr.gr) + ' | ' + RTRIM(dr.articul) AS displayText
-FROM dbo.dop_ras dr
-WHERE dr.kod_gr = '25'
-ORDER BY dr.gr, dr.articul";
-
-            return _dbService.GetListAsync<ThreadMaterialOption>(query, new { });
-        }
-
-        private async Task<List<ThreadNormRow>> LoadThreadNormRowsAsync(bool zeroNormOnly)
-        {
-            string where = zeroNormOnly ? "WHERE ISNULL(n.norm, 0) = 0" : string.Empty;
-            string queryByGlobalCode = $@"
-SELECT
-    n.id,
-    n.men,
-    menView.name AS men_name,
-    n.tg_id_n,
-    n.ta_id,
-    n.norm,
-    n.kod_dr,
-    n.kod3,
-    n.kod_art,
-    n.date_change,
-    cat.TCAT_CategoryName,
-    grp.TG_ID,
-    grp.TG_GroupName,
-    cls.TC_ID,
-    cls.TC_ClassName,
-    assort.TAT_Name,
-    LTRIM(RTRIM(ISNULL(n.kod3, ''))) +
-        CASE
-            WHEN NULLIF(LTRIM(RTRIM(ISNULL(n.kod_art, ''))), '') IS NULL THEN ''
-            ELSE ' / ' + LTRIM(RTRIM(n.kod_art))
-        END AS ThreadDisplay
-FROM cfn.confection_norm_nitki n
-LEFT JOIN dbo.view_grup_men menView
-    ON menView.men = n.men
-LEFT JOIN global.planeta.dbo.TOVAR_CATEGORY cat
-    ON cat.TCAT_ID = n.tg_id_n
-LEFT JOIN global.planeta.dbo.TOVAR_GROUP grp
-    ON grp.TG_ID = cat.TCAT_TG_ID
-LEFT JOIN global.planeta.dbo.TOVAR_CLASS cls
-    ON cls.TC_ID = grp.TG_TC_ID
-LEFT JOIN global.planeta.dbo.TOVAR_ASSTYPE assort
-    ON assort.TAT_GlobalCode = n.ta_id
-{where}
-ORDER BY n.men, cls.TC_ClassName, grp.TG_GroupName, cat.TCAT_CategoryName, assort.TAT_Name, n.kod_dr";
-
-            string queryById = $@"
-SELECT
-    n.id,
-    n.men,
-    menView.name AS men_name,
-    n.tg_id_n,
-    n.ta_id,
-    n.norm,
-    n.kod_dr,
-    n.kod3,
-    n.kod_art,
-    n.date_change,
-    cat.TCAT_CategoryName,
-    grp.TG_ID,
-    grp.TG_GroupName,
-    cls.TC_ID,
-    cls.TC_ClassName,
-    assort.TAT_Name,
-    LTRIM(RTRIM(ISNULL(n.kod3, ''))) +
-        CASE
-            WHEN NULLIF(LTRIM(RTRIM(ISNULL(n.kod_art, ''))), '') IS NULL THEN ''
-            ELSE ' / ' + LTRIM(RTRIM(n.kod_art))
-        END AS ThreadDisplay
-FROM cfn.confection_norm_nitki n
-LEFT JOIN dbo.view_grup_men menView
-    ON menView.men = n.men
-LEFT JOIN global.planeta.dbo.TOVAR_CATEGORY cat
-    ON cat.TCAT_ID = n.tg_id_n
-LEFT JOIN global.planeta.dbo.TOVAR_GROUP grp
-    ON grp.TG_ID = cat.TCAT_TG_ID
-LEFT JOIN global.planeta.dbo.TOVAR_CLASS cls
-    ON cls.TC_ID = grp.TG_TC_ID
-LEFT JOIN global.planeta.dbo.TOVAR_ASSTYPE assort
-    ON assort.TAT_ID = n.ta_id
-{where}
-ORDER BY n.men, cls.TC_ClassName, grp.TG_GroupName, cat.TCAT_CategoryName, assort.TAT_Name, n.kod_dr";
-
-            try
-            {
-                return await _dbService.GetListAsync<ThreadNormRow>(queryByGlobalCode, new { });
-            }
-            catch (Exception ex) when (ex.Message.Contains("GlobalCode", StringComparison.OrdinalIgnoreCase))
-            {
-                await _logger.LogWarningAsync(
-                    "TOVAR_ASSTYPE не содержит TAT_GlobalCode, использую TAT_ID для загрузки строк.",
-                    "ThreadNormsForm.LoadThreadNormRowsAsync");
-                return await _dbService.GetListAsync<ThreadNormRow>(queryById, new { });
-            }
-        }*/
-
         private void AddRow()
         {
             var row = new ThreadNormRow
@@ -394,6 +259,16 @@ ORDER BY n.men, cls.TC_ClassName, grp.TG_GroupName, cat.TCAT_CategoryName, assor
                 return;
             }
 
+            if (current.approved)
+            {
+                MessageBox.Show(
+                    "Утвержденную строку нельзя изменять или удалять.",
+                    "Справочник норм ниток",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
+
             if (MessageBox.Show("Удалить выбранную строку?", "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
             {
                 return;
@@ -418,20 +293,16 @@ ORDER BY n.men, cls.TC_ClassName, grp.TG_GroupName, cat.TCAT_CategoryName, assor
                 .Where(result => !string.IsNullOrWhiteSpace(result.error))
                 .ToList();
 
-            //if (invalid.Count > 0)
-            //{
-            //    MessageBox.Show(invalid[0].error, "Валидация", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //    return false;
-            //}
-            //if (!ValidateDuplicates())
-            //{
-            //    MessageBox.Show(
-            //        "В справочнике есть дублирующиеся нормы ниток. Сохранение невозможно.",
-            //        "Проверка норм ниток",
-            //        MessageBoxButtons.OK,
-            //        MessageBoxIcon.Warning);
-            //    return false;
-            //}
+            if (invalid.Count > 0)
+            {
+                MessageBox.Show(invalid[0].error, "Валидация", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (!ValidateDuplicates())
+            {
+                return false;
+            }
             var changedRows = _rows.Where(x => x.IsNew || x.IsModified).ToList();
             if (changedRows.Count == 0)
             {
@@ -445,7 +316,6 @@ ORDER BY n.men, cls.TC_ClassName, grp.TG_GroupName, cat.TCAT_CategoryName, assor
 
             foreach (var row in changedRows)
             {
-                ApplyDisplayFields(row);
                 var dbRow = ThreadNormDbRow.ToDbRow(row);
                 row.id = await _dataService.SaveAsync(dbRow);
                 row.IsNew = false;
@@ -532,37 +402,25 @@ ORDER BY n.men, cls.TC_ClassName, grp.TG_GroupName, cat.TCAT_CategoryName, assor
             if (handle >= 0)
             {
                 gridView.FocusedRowHandle = handle;
-                gridView.FocusedColumn = gridView.Columns["men"];
+                if (row.IsNew && row.tg_id_n <= 0)
+                {
+                    gridView.FocusedColumn = gridView.Columns["tg_id_n"];
+                }
+                else if (row.IsNew && row.ta_id <= 0)
+                {
+                    gridView.FocusedColumn = gridView.Columns["ta_id"];
+                }
+                else if (row.IsNew && string.IsNullOrWhiteSpace(row.kod_dr))
+                {
+                    gridView.FocusedColumn = gridView.Columns["kod_dr"];
+                }
+                else
+                {
+                    gridView.FocusedColumn = gridView.Columns["norm"];
+                }
+
                 gridView.ShowEditor();
             }
-        }
-
-        private void ApplyDisplayFields(ThreadNormRow row)
-        {
-            //var manager = _managers.FirstOrDefault(x =>
-            //    string.Equals((x.Men ?? string.Empty).Trim(), (row.men ?? string.Empty).Trim(), StringComparison.OrdinalIgnoreCase));
-            //row.men_name = manager?.Name ?? string.Empty;
-
-            var category = _categories.FirstOrDefault(x => x.TCAT_ID == row.tg_id_n);
-            row.TCAT_CategoryName = category?.TCAT_CategoryName ?? string.Empty;
-            row.TG_GroupName = category?.TG_GroupName ?? string.Empty;
-            row.TC_ClassName = category?.TC_ClassName ?? string.Empty;
-
-            var assort = _assorts.FirstOrDefault(x => x.TAT_ID == row.ta_id);
-            row.TAT_Name = assort?.TAT_Name ?? string.Empty;
-
-            //var material = _materials.FirstOrDefault(x =>
-            //    string.Equals(x.kod_dr, row.kod_dr, StringComparison.OrdinalIgnoreCase));
-            //if (material != null)
-            //{
-            //    row.kod3 = material.kod3;
-            //    row.kod_art = material.kod_art;
-            //    row.ThreadDisplay = material.displayText;
-            //}
-            //else
-            //{
-            //    row.ThreadDisplay = string.Empty;
-            //}
         }
 
         private static (ThreadNormRow row, string error) ValidateRow(ThreadNormRow row)
@@ -571,11 +429,6 @@ ORDER BY n.men, cls.TC_ClassName, grp.TG_GroupName, cat.TCAT_CategoryName, assor
             {
                 return (row, "Пустая строка справочника.");
             }
-
-            //if (string.IsNullOrWhiteSpace(row.men))
-            //{
-            //    return (row, "Не заполнен менеджер.");
-            //}
 
             if (row.tg_id_n <= 0)
             {
@@ -676,7 +529,7 @@ ORDER BY n.men, cls.TC_ClassName, grp.TG_GroupName, cat.TCAT_CategoryName, assor
 
         private void GridView_RowCellStyle(object sender, RowCellStyleEventArgs e)
         {
-            if (e.Column.FieldName is "kod_dr" or "norm")
+            if (e.Column.FieldName is "tg_id_n" or "ta_id" or "kod_dr" or "norm" or "date_change")
             {
                 e.Appearance.BackColor = Color.FromArgb(238, 250, 214);
             }
@@ -697,15 +550,17 @@ ORDER BY n.men, cls.TC_ClassName, grp.TG_GroupName, cat.TCAT_CategoryName, assor
 
             switch (e.Column.FieldName)
             {
-                case "men":
-                case "tg_id_n":
-                case "ta_id":
-                case "kod_dr":
-                    ApplyDisplayFields(row);
-                    bindingSource.ResetBindings(false);
-                    break;
+                //case "tg_id_n":
+                //case "ta_id":
+                //case "kod_dr":
+                //    ApplyDisplayFields(row);
+                //    bindingSource.ResetBindings(false);
+                //    break;
                 case "approved":
                     row.approved = Convert.ToBoolean(e.Value);
+                    bindingSource.ResetBindings(false);
+                    break;
+                case "date_change":
                     bindingSource.ResetBindings(false);
                     break;
             }
@@ -724,6 +579,28 @@ ORDER BY n.men, cls.TC_ClassName, grp.TG_GroupName, cat.TCAT_CategoryName, assor
                 e.Valid = false;
                 e.ErrorText = validation.error;
             }
+        }
+
+        private void GridView_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (gridView.FocusedRowHandle < 0)
+            {
+                return;
+            }
+
+            if (gridView.GetRow(gridView.FocusedRowHandle) is not ThreadNormRow row)
+            {
+                return;
+            }
+
+            if (!row.approved)
+            {
+                return;
+            }
+            // Утверждённую строку нельзя менять, кроме самой галки "Утверждено"
+            if (gridView.FocusedColumn?.FieldName == nameof(ThreadNormRow.approved))
+                return;
+            e.Cancel = true;
         }
     }
 }

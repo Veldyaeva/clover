@@ -72,6 +72,7 @@ namespace SewingProduction.Features.TeamWork.Models
             set => SetField(ref _date_change, value);
         }
 
+
         [NotMapped] public string men_name { get; set; } = string.Empty;
         [NotMapped] public int TC_ID { get; set; }
         [NotMapped] public string TC_ClassName { get; set; } = string.Empty;
@@ -79,6 +80,7 @@ namespace SewingProduction.Features.TeamWork.Models
         [NotMapped] public string TG_GroupName { get; set; } = string.Empty;
         [NotMapped] public string TCAT_CategoryName { get; set; } = string.Empty;
         [NotMapped] public string TAT_Name { get; set; } = string.Empty;
+        [NotMapped] public string ThreadArticul { get; set; } = string.Empty;
         [NotMapped] public string ThreadDisplay { get; set; } = string.Empty;
         [NotMapped] public bool approved
         {
@@ -122,6 +124,7 @@ namespace SewingProduction.Features.TeamWork.Models
                 TG_GroupName = TG_GroupName,
                 TCAT_CategoryName = TCAT_CategoryName,
                 TAT_Name = TAT_Name,
+                ThreadArticul = ThreadArticul,
                 ThreadDisplay = ThreadDisplay,
                 IsNew = true,
                 IsModified = true
@@ -188,6 +191,7 @@ namespace SewingProduction.Features.TeamWork.Models
         public string kod_dr { get; set; } = string.Empty;
         public string kod3 { get; set; } = string.Empty;
         public string kod_art { get; set; } = string.Empty;
+        public string articul { get; set; } = string.Empty;
         public string displayText { get; set; } = string.Empty;
     }
 
