@@ -11,6 +11,7 @@ using DevExpress.XtraReports.UI;
 using SewingProduction.Core.Class;
 using SewingProduction.Core.Models;
 using SewingProduction.Core.services;
+using SewingProduction.Features.Articul.Service;
 using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.CuttingProduction.Models;
 using SewingProduction.Features.UserDistribution.Helpers;
@@ -18,25 +19,25 @@ using SewingProduction.Report;
 
 namespace SewingProduction.Core.Forms
 {
-    public partial class PrintSewn : CustomForm
-    {
-        private string _kod;
-        private string _model;
-        private List<PrintSewnRazmKolRow> _printSewnRazmKolRow;
-        private readonly PrintSewnDataService _printSewnDataService = new PrintSewnDataService();
-        private List<PrintSewnBlVshRow> _blVshRows = new List<PrintSewnBlVshRow>();
+	public partial class PrintSewn : CustomForm
+	{
+		private string _kod;
+		private string _model;
+		private List<PrintSewnRazmKolRow> _printSewnRazmKolRow;
+		private readonly PrintSewnDataService _printSewnDataService = new PrintSewnDataService();
+		private List<PrintSewnBlVshRow> _blVshRows = new List<PrintSewnBlVshRow>();
 		private string _nom;
 		private string _nomZad;
 		private int _proizvType = 0;
-		
+
 		//-- @xProizvType:
 		//-- 0 - raskr_zeh_up
 		//-- 1 - raskr_zeh_vyaz WHEN vsa.grupp NOT IN(10,30,33)
 		//-- 2 - raskr_zeh_vyaz WHEN vsa.grupp IN(10)
 		//-- 3 - raskr_zeh_vyaz WHEN vsa.grupp IN(30, 33)
 		public PrintSewn(UserClass user) : base(user)
-        {
-            InitializeComponent();
+		{
+			InitializeComponent();
 		}
 		public PrintSewn(string kod)
 		{
@@ -52,9 +53,23 @@ namespace SewingProduction.Core.Forms
 			_proizvType = proizvType;
 			InitializeComponent();
 		}
-		private void PrintSewn_Load(object sender, EventArgs e)
-        {
-        }
+		private async void PrintSewn_Load(object sender, EventArgs e)
+		{
+			gridViewR.ShowLoadingPanel();
+			try
+			{
+
+				customGridControlR.DataSource = await _printSewnDataService.GetViewRzuRzv(
+					_nomZad ?? null,
+					_nom ?? null,
+					_kod ?? null
+					);
+			}
+			finally
+			{
+				gridViewR.HideLoadingPanel();
+			}
+		}
 
 		#region широкие ЭЙС, Клевер (новый)
 		private void customSimpleButtonACE_Click(object sender, EventArgs e)
@@ -73,20 +88,38 @@ namespace SewingProduction.Core.Forms
 		{
 			createReport(2);
 		}
-		#endregion	  
-		private void createReport(int _izdType = 0)
+		#endregion
+		private void createReport(int izdType = 0)
 		{
-			VshivkiReport report1 = new VshivkiReport();
-			requestParameters(report1, _izdType);
-			ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
-			reportPrintTool1.ShowPreviewDialog();
+			var selectedRows = GetSelectedRows();
 
-			VshivkiReportHol report2 = new VshivkiReportHol();
-			requestParameters(report2, _izdType);
-			ReportPrintTool reportPrintTool2 = new ReportPrintTool(report2);
-			reportPrintTool2.ShowPreviewDialog();
+			if (selectedRows.Count == 0)
+			{
+				MessageBox.Show("Не выбраны номера для печати.");
+				return;
+			}
+
+			foreach (var row in selectedRows)
+			{
+				string nomZad = row.nom_zad?.ToString() ?? string.Empty;
+				string nom = row.nom_pach?.ToString() ?? string.Empty;
+				int proizvType = row.proizvType ?? 0;
+
+				if (string.IsNullOrWhiteSpace(nomZad) || string.IsNullOrWhiteSpace(nom))
+					continue;
+
+				VshivkiReport report1 = new VshivkiReport();
+				requestParameters(report1, nomZad, nom, proizvType, izdType);
+				ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+				reportPrintTool1.ShowPreviewDialog();
+
+				VshivkiReportHol report2 = new VshivkiReportHol();
+				requestParameters(report2, nomZad, nom, proizvType, izdType);
+				ReportPrintTool reportPrintTool2 = new ReportPrintTool(report2);
+				reportPrintTool2.ShowPreviewDialog();
+			}
 		}
-		private void requestParameters(XtraReport report, int _izdType)
+		private void requestParameters(XtraReport report, string nomZad, string nom, int proizvType, int izdType)
 		{
 			report.RequestParameters = false;
 
@@ -94,24 +127,15 @@ namespace SewingProduction.Core.Forms
 			SetParameter(report, "_nom", null);
 			SetParameter(report, "_proizvType", null);
 			SetParameter(report, "_izdType", null);
-			SetParameter(report, "_kod", null);
 
-			if (!string.IsNullOrWhiteSpace(_kod))
+			if (!string.IsNullOrWhiteSpace(nomZad) && !string.IsNullOrWhiteSpace(nom))
 			{
-				SetParameter(report, "_kod", _kod);
-				//SetParameter(report, "_proizvType", _proizvType);	//по коду сам решит, какой тип производства
-				SetParameter(report, "_izdType", _izdType);
+				SetParameter(report, "_nomZad", nomZad);
+				SetParameter(report, "_nom", Convert.ToInt32(nom));
+				SetParameter(report, "_proizvType", proizvType);
+				SetParameter(report, "_izdType", izdType);
 			}
-			else if (!string.IsNullOrWhiteSpace(_nomZad) && !string.IsNullOrWhiteSpace(_nom))
-			{
-				SetParameter(report, "_nomZad", _nomZad);
-				SetParameter(report, "_nom", int.Parse(_nom));
-				SetParameter(report, "_proizvType", _proizvType);
-				SetParameter(report, "_izdType", _izdType);
-			}
-			//MessageBox.Show($"_kod={_kod}\n_nom={_nom}\n_nomZad={_nomZad}\n_proizvType={_proizvType}\n_izdType={_izdType}");
 		}
-
 		private void SetParameter(XtraReport report, string name, object value)
 		{
 			var p = report.Parameters[name];
@@ -120,6 +144,34 @@ namespace SewingProduction.Core.Forms
 
 			p.Value = value;
 			p.Visible = false;
+		}
+
+		private void gridViewR_RowCellClick(object sender, DevExpress.XtraGrid.Views.Grid.RowCellClickEventArgs e)
+		{
+			if (e.Column != IsSelected || e.RowHandle < 0)
+				return;
+
+			bool currentValue = Convert.ToBoolean(gridViewR.GetRowCellValue(e.RowHandle, IsSelected));
+			gridViewR.SetRowCellValue(e.RowHandle, IsSelected, !currentValue);
+
+			gridViewR.PostEditor();
+			gridViewR.UpdateCurrentRow();
+		}
+		private List<ViewRzuRzv> GetSelectedRows()
+		{
+			var result = new List<ViewRzuRzv>();
+
+			for (int i = 0; i < gridViewR.RowCount; i++)
+			{
+				var row = gridViewR.GetRow(i) as ViewRzuRzv;
+				if (row == null)
+					continue;
+
+				if (row.IsSelected)
+					result.Add(row);
+			}
+
+			return result;
 		}
 	}
 }

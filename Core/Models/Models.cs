@@ -119,5 +119,6 @@ namespace SewingProduction.Core.Models
         public int? IdSvyaz { get; set; }
         public string Kruj { get; set; } = string.Empty;
         public string Symbol { get; set; } = string.Empty;
-    }
+	}
+	
 }
