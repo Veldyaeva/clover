@@ -150,8 +150,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colCategory.Name = "colCategory";
             colCategory.OptionsColumn.AllowEdit = false;
             colCategory.OptionsColumn.ReadOnly = true;
-            colCategory.Visible = true;
-            colCategory.VisibleIndex = 0;
+            colCategory.Visible = false;
             colCategory.Width = 208;
             // 
             // colGroupName
@@ -181,8 +180,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             colAssort.Caption = "Ассортимент";
             colAssort.FieldName = "ta_id";
             colAssort.Name = "colAssort";
-            colAssort.Visible = true;
-            colAssort.VisibleIndex = 3;
+            colAssort.OptionsColumn.AllowEdit = false;
+            colAssort.OptionsColumn.ReadOnly = true;
+            colAssort.Visible = false;
             colAssort.Width = 124;
             // 
             // colThreadCode
@@ -192,20 +192,21 @@ namespace SewingProduction.Features.TeamWork.Forms
             colThreadCode.Caption = "Код ниток";
             colThreadCode.FieldName = "kod_dr";
             colThreadCode.Name = "colThreadCode";
-            colThreadCode.Visible = true;
-            colThreadCode.VisibleIndex = 4;
+            colThreadCode.OptionsColumn.AllowEdit = false;
+            colThreadCode.OptionsColumn.ReadOnly = true;
+            colThreadCode.Visible = false;
             colThreadCode.Width = 196;
             // 
             // gridColumn1
             // 
             gridColumn1.Caption = "Артикул";
-            gridColumn1.FieldName = "ThreadArticul";
+            gridColumn1.FieldName = "ThreadDisplay";
             gridColumn1.Name = "gridColumn1";
             gridColumn1.OptionsColumn.AllowEdit = false;
             gridColumn1.OptionsColumn.ReadOnly = true;
             gridColumn1.Visible = true;
-            gridColumn1.VisibleIndex = 5;
-            gridColumn1.Width = 120;
+            gridColumn1.VisibleIndex = 8;
+            gridColumn1.Width = 220;
             // 
             // colNorm
             // 
@@ -214,7 +215,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colNorm.FieldName = "norm";
             colNorm.Name = "colNorm";
             colNorm.Visible = true;
-            colNorm.VisibleIndex = 6;
+            colNorm.VisibleIndex = 5;
             colNorm.Width = 80;
             // 
             // normEditor
@@ -232,7 +233,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colApproved.FieldName = "approved";
             colApproved.Name = "colApproved";
             colApproved.Visible = true;
-            colApproved.VisibleIndex = 7;
+            colApproved.VisibleIndex = 6;
             colApproved.Width = 80;
             // 
             // approvedCheck
@@ -247,10 +248,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             colDateChange.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             colDateChange.FieldName = "date_change";
             colDateChange.Name = "colDateChange";
-            colDateChange.OptionsColumn.AllowEdit = false;
-            colDateChange.OptionsColumn.ReadOnly = true;
             colDateChange.Visible = true;
-            colDateChange.VisibleIndex = 8;
+            colDateChange.VisibleIndex = 7;
             colDateChange.Width = 101;
             // 
             // colId
@@ -270,19 +269,35 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // colCategoryName
             // 
+            colCategoryName.Caption = "Категория";
             colCategoryName.FieldName = "TCAT_CategoryName";
             colCategoryName.Name = "colCategoryName";
+            colCategoryName.OptionsColumn.AllowEdit = false;
+            colCategoryName.OptionsColumn.ReadOnly = true;
+            colCategoryName.Visible = true;
+            colCategoryName.VisibleIndex = 0;
+            colCategoryName.Width = 208;
             // 
             // colTatName
             // 
+            colTatName.Caption = "Ассортимент";
             colTatName.FieldName = "TAT_Name";
             colTatName.Name = "colTatName";
+            colTatName.OptionsColumn.AllowEdit = false;
+            colTatName.OptionsColumn.ReadOnly = true;
+            colTatName.Visible = true;
+            colTatName.VisibleIndex = 3;
+            colTatName.Width = 124;
             // 
             // colThreadDisplay
             // 
+            colThreadDisplay.Caption = "Нитки";
             colThreadDisplay.FieldName = "ThreadDisplay";
             colThreadDisplay.Name = "colThreadDisplay";
-            colThreadDisplay.Width = 114;
+            colThreadDisplay.OptionsColumn.AllowEdit = false;
+            colThreadDisplay.OptionsColumn.ReadOnly = true;
+            colThreadDisplay.Visible = false;
+            colThreadDisplay.Width = 220;
             // 
             // filterGroup
             // 

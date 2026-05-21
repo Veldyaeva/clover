@@ -25,17 +25,12 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly ThreadNormsDataService _dataService;
         private readonly BindingList<ThreadNormRow> _rows = new BindingList<ThreadNormRow>();
 
-        private List<GrupMenModel> _managers = new List<GrupMenModel>();
-        private List<ThreadCategoryOption> _categories = new List<ThreadCategoryOption>();
-        private List<ThreadAssortModel> _assorts = new List<ThreadAssortModel>();
-        private List<ThreadMaterialOption> _materials = new List<ThreadMaterialOption>();
         private bool _isLoading;
         private bool _allowCloseWithoutPrompt;
 
         public ThreadNormsForm(UserClass user) : base(user)
         {
             InitializeComponent();
-            ConfigureEditingMode();
 
             var dbService = new DbService(new DatabaseHelperSQL());
             _dataService = new ThreadNormsDataService(dbService, _logger);
@@ -73,7 +68,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView.ShowLoadingPanel();
             try
             {
-              //  await LoadReferenceDataAsync();
                 await LoadRowsAsync();
             }
             catch (Exception ex)
@@ -89,113 +83,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 gridView.HideLoadingPanel();
             }
         }
-
-        private async Task LoadReferenceDataAsync()
-        {
-            _isLoading = true;
-            try
-            {
-                //var managersTask = _dataService.LoadManagersAsync();
-                //var categoriesTask = _dataService.LoadCategoriesAsync();
-                //var assortsTask = _dataService.LoadAssortsAsync();
-                //var materialsTask = _dataService.LoadThreadMaterialsAsync();
-
-                //await Task.WhenAll(managersTask, categoriesTask, assortsTask, materialsTask);
-
-                //_managers = managersTask.Result ?? new List<GrupMenModel>();
-                //_categories = categoriesTask.Result ?? new List<ThreadCategoryOption>();
-                //_assorts = assortsTask.Result ?? new List<ThreadAssortModel>();
-                //_materials = materialsTask.Result ?? new List<ThreadMaterialOption>();
-
-                //managerSearchLookUp.DataSource = _managers;
-                //ConfigureManagerSearchLookupColumns();
-                //categoryLookup.DataSource = _categories;
-                //assortLookup.DataSource = _assorts;
-                //threadLookup.DataSource = _materials;
-                //threadSearchLookUp.DataSource = _materials;
-                //ConfigureThreadSearchLookupColumns();
-            }
-            finally
-            {
-                _isLoading = false;
-            }
-        }
-
-        private void ConfigureEditingMode()
-        {
-            addButton.Visible = false;
-            copyButton.Visible = true;
-            deleteButton.Visible = true;
-
-            colCategory.OptionsColumn.AllowEdit = true;
-            colCategory.OptionsColumn.ReadOnly = false;
-//            categoryLookup.ShowDropDown = DevExpress.XtraEditors.Controls.ShowDropDown.SingleClick;
-
-            colAssort.OptionsColumn.AllowEdit = true;
-            colAssort.OptionsColumn.ReadOnly = false;
-
-            colThreadCode.OptionsColumn.AllowEdit = true;
-            colThreadCode.OptionsColumn.ReadOnly = false;
-
-            colApproved.OptionsColumn.AllowEdit = true;
-            colApproved.OptionsColumn.ReadOnly = false;
-
-            colDateChange.OptionsColumn.AllowEdit = true;
-            colDateChange.OptionsColumn.ReadOnly = false;
-        }
-
-        //private void ConfigureManagerSearchLookupColumns()
-        //{
-        //    if (managerSearchLookUp.PopupView is not GridView popupView)
-        //    {
-        //        return;
-        //    }
-
-        //    popupView.PopulateColumns();
-
-        //    foreach (GridColumn column in popupView.Columns)
-        //    {
-        //        column.Visible = false;
-        //    }
-
-        //    //ConfigureManagerSearchLookupColumn(popupView, "Men", "Men", 0, 90);
-        //    //ConfigureManagerSearchLookupColumn(popupView, "Name", "Name", 1, 220);
-        //}
-
-        private static void ConfigureManagerSearchLookupColumn(GridView popupView, string fieldName, string caption, int visibleIndex, int width)
-        {
-            var column = popupView.Columns.ColumnByFieldName(fieldName);
-            if (column == null)
-            {
-                return;
-            }
-
-            column.Caption = caption;
-            column.Visible = true;
-            column.VisibleIndex = visibleIndex;
-            column.Width = width;
-            column.OptionsColumn.AllowEdit = false;
-            column.OptionsColumn.ReadOnly = true;
-        }
-
-        //private void ConfigureThreadSearchLookupColumns()
-        //{
-        //    if (threadSearchLookUp.PopupView is not GridView popupView)
-        //    {
-        //        return;
-        //    }
-
-        //    popupView.PopulateColumns();
-
-        //    foreach (GridColumn column in popupView.Columns)
-        //    {
-        //        column.Visible = false;
-        //    }
-
-        //    ConfigureManagerSearchLookupColumn(popupView, "kod_dr", "Код", 0, 90);
-        //    ConfigureManagerSearchLookupColumn(popupView, "articul", "Артикул", 1, 140);
-        //    ConfigureManagerSearchLookupColumn(popupView, "displayText", "Описание", 2, 280);
-        //}
 
         private async Task LoadRowsAsync()
         {
@@ -224,6 +111,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _isLoading = false;
             }
         }
+
         private void AddRow()
         {
             var row = new ThreadNormRow
@@ -402,23 +290,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (handle >= 0)
             {
                 gridView.FocusedRowHandle = handle;
-                if (row.IsNew && row.tg_id_n <= 0)
-                {
-                    gridView.FocusedColumn = gridView.Columns["tg_id_n"];
-                }
-                else if (row.IsNew && row.ta_id <= 0)
-                {
-                    gridView.FocusedColumn = gridView.Columns["ta_id"];
-                }
-                else if (row.IsNew && string.IsNullOrWhiteSpace(row.kod_dr))
-                {
-                    gridView.FocusedColumn = gridView.Columns["kod_dr"];
-                }
-                else
-                {
-                    gridView.FocusedColumn = gridView.Columns["norm"];
-                }
-
+                gridView.FocusedColumn = gridView.Columns["norm"];
                 gridView.ShowEditor();
             }
         }
@@ -529,7 +401,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void GridView_RowCellStyle(object sender, RowCellStyleEventArgs e)
         {
-            if (e.Column.FieldName is "tg_id_n" or "ta_id" or "kod_dr" or "norm" or "date_change")
+            if (e.Column.FieldName is "norm" or "date_change")
             {
                 e.Appearance.BackColor = Color.FromArgb(238, 250, 214);
             }

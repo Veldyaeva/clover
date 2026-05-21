@@ -185,27 +185,4 @@ namespace SewingProduction.Features.TeamWork.Models
             };
         }
     }
-
-    public sealed class ThreadMaterialOption
-    {
-        public string kod_dr { get; set; } = string.Empty;
-        public string kod3 { get; set; } = string.Empty;
-        public string kod_art { get; set; } = string.Empty;
-        public string articul { get; set; } = string.Empty;
-        public string displayText { get; set; } = string.Empty;
-    }
-
-    public sealed class ThreadAssortModel
-    {
-        public int TAT_ID { get; set; }
-        public string TAT_Name { get; set; } = string.Empty;
-    }
-
-    public sealed class ThreadCategoryOption
-    {
-        public int TCAT_ID { get; set; }
-        public string TCAT_CategoryName { get; set; } = string.Empty;
-        public string TG_GroupName { get; set; } = string.Empty;
-        public string TC_ClassName { get; set; } = string.Empty;
-    }
 }
