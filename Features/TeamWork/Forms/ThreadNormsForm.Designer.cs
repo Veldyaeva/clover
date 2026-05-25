@@ -139,6 +139,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView.ShowingEditor += GridView_ShowingEditor;
             gridView.FocusedRowChanged += GridView_FocusedRowChanged;
             gridView.CellValueChanged += GridView_CellValueChanged;
+            gridView.ValidatingEditor += GridView_ValidatingEditor;
             gridView.ValidateRow += GridView_ValidateRow;
             // 
             // colCategory

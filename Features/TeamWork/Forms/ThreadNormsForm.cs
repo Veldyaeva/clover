@@ -265,6 +265,27 @@ namespace SewingProduction.Features.TeamWork.Forms
             return true;
         }
 
+        private bool HasDuplicateThreadNorm(ThreadNormRow row, int assortId)
+        {
+            if (row == null || assortId <= 0)
+            {
+                return false;
+            }
+
+            var kodDr = NormalizeCode(row.kod_dr);
+            return _rows.Any(x =>
+                !ReferenceEquals(x, row) &&
+                !x.IsDeleted &&
+                x.tg_id_n == row.tg_id_n &&
+                x.ta_id == assortId &&
+                string.Equals(NormalizeCode(x.kod_dr), kodDr, StringComparison.OrdinalIgnoreCase));
+        }
+
+        private static string NormalizeCode(string value)
+        {
+            return value?.Trim() ?? string.Empty;
+        }
+
         private async Task<bool> TryCommitOnCloseAsync()
         {
             if (!HasPendingChanges())
@@ -418,6 +439,45 @@ namespace SewingProduction.Features.TeamWork.Forms
                 case "date_change":
                     bindingSource.ResetBindings(false);
                     break;
+            }
+        }
+
+        private void GridView_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
+        {
+            if (gridView.FocusedColumn?.FieldName != nameof(ThreadNormRow.ta_id))
+            {
+                return;
+            }
+
+            if (gridView.GetFocusedRow() is not ThreadNormRow row)
+            {
+                return;
+            }
+
+            var assortId = ToInt(e.Value);
+            if (!HasDuplicateThreadNorm(row, assortId))
+            {
+                return;
+            }
+
+            e.Valid = false;
+            e.ErrorText = "Такая норма ниток уже есть. Выберите другой ассортимент.";
+        }
+
+        private static int ToInt(object value)
+        {
+            if (value == null || value == DBNull.Value)
+            {
+                return 0;
+            }
+
+            try
+            {
+                return Convert.ToInt32(value);
+            }
+            catch
+            {
+                return 0;
             }
         }
 
