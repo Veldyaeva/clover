@@ -120,6 +120,16 @@
   <metadata name="bindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonImageOptions5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAABx0RVh0VGl0
+        bGUAQXBwb2ludG1lbnRPY2N1cnJlbmNlOz8PoP8AAACoSURBVDhPpZLRDUBAEESpRBHa8a0N2lCDInSj
+        jTNjV9zICofkJebt7WFPlVL6RShLCGUJGuyqQQdmsDq8p2NtkB4JtmAEC+hB4/CejmDp/QZ8Che1F89r
+        AgxQWU2CvWqfO/cD2JuJ1CTY9za5eyKUd3BzPkScBH9FR6btdQ5zFifhbObArrUWcMCdeAnWfBxXdIw8
+        4lp6JNi0n34k7cnDF0JZQijfk6oNuOlRIyXMHYQAAAAASUVORK5CYII=
+</value>
+  </data>
   <metadata name="layoutConverter1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>148, 17</value>
   </metadata>

@@ -1,4 +1,6 @@
 ﻿using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraBars.Docking2010;
+using DevExpress.XtraEditors.ButtonsPanelControl;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.Models;
@@ -28,7 +30,13 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private bool _isAutoSavingRowChange;
         private bool _isLoading;
+        private bool _isSyncingFilterButtons;
+        private bool _zeroNormOnly = true;
         private bool _allowCloseWithoutPrompt;
+
+        private const string HeaderButtonZeroNorm = "thread-norms:zero-norm";
+        private const string HeaderButtonAll = "thread-norms:all";
+        private const string HeaderButtonRefresh = "thread-norms:refresh";
 
         public ThreadNormsForm(UserClass user) : base(user)
         {
@@ -37,6 +45,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             var dbService = new DbService(new DatabaseHelperSQL());
             _dataService = new ThreadNormsDataService(dbService, _logger);
             bindingSource.DataSource = _rows;
+            InitializeHeaderButtons();
         }
 
         private async void ThreadNormsForm_Load(object sender, EventArgs e)
@@ -101,7 +110,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 gridView.CloseEditor();
                 gridView.UpdateCurrentRow();
 
-                var loaded = await _dataService.LoadRowsAsync(filterGroup.SelectedIndex == 0);
+                var loaded = await _dataService.LoadRowsAsync(_zeroNormOnly);
                 _rows.RaiseListChangedEvents = false;
                 _rows.Clear();
 
@@ -340,44 +349,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             BeginInvoke(new MethodInvoker(Close));
         }
 
-        private async void FilterGroup_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (HasPendingChanges())
-            {
-                var result = MessageBox.Show(
-                    "Есть несохранённые изменения. Сохранить перед сменой фильтра?",
-                    "Нормы ниток",
-                    MessageBoxButtons.YesNoCancel,
-                    MessageBoxIcon.Question);
-
-                if (result == DialogResult.Cancel)
-                    return;
-
-                if (result == DialogResult.Yes)
-                {
-                    if (!await SaveInternalAsync(showSuccessMessage: false))
-                        return;
-                }
-            }
-            gridView.ShowLoadingPanel();
-            try
-            {
-                await LoadRowsAsync();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    $"Ошибка обновления данных справочника ниток из базы: {ex.Message}",
-                    "Ошибка UI",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
-            finally
-            {
-                gridView.HideLoadingPanel();
-            }
-        }
-
         private void AddButton_Click(object sender, EventArgs e)
         {
             AddRow();
@@ -517,27 +488,111 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private async void customSimpleButton1_Click(object sender, EventArgs e)
         {
-            if (HasPendingChanges())
+            await ReloadRowsAsync("обновлением данных");
+        }
+
+        private void InitializeHeaderButtons()
+        {
+            SetHeaderButtonTag("В работе", HeaderButtonZeroNorm);
+            SetHeaderButtonTag("Все", HeaderButtonAll);
+            SetHeaderButtonTag("Обновить", HeaderButtonRefresh);
+
+            //    layoutControlGroup2.CustomButtonClick += LayoutControlGroup2_CustomButtonClick;
+            _zeroNormOnly = true;
+            SetFilterControls(_zeroNormOnly);
+        }
+
+        private void SetHeaderButtonTag(string caption, string tag)
+        {
+            var button = layoutControlGroup2.CustomHeaderButtons
+                .OfType<GroupBoxButton>()
+                .FirstOrDefault(x => string.Equals(x.Caption?.Trim(), caption, StringComparison.OrdinalIgnoreCase));
+
+            if (button != null)
             {
-                var result = MessageBox.Show(
-                    "Есть несохранённые изменения. Сохранить перед обновлением данных?",
-                    "Нормы ниток",
-                    MessageBoxButtons.YesNoCancel,
-                    MessageBoxIcon.Question);
-
-                if (result == DialogResult.Cancel)
-                    return;
-
-                if (result == DialogResult.Yes)
-                {
-                    if (!await SaveInternalAsync(showSuccessMessage: false))
-                        return;
-                }
+                button.Tag = tag;
             }
+        }
+
+        private async void LayoutControlGroup2_CustomButtonClick(object sender, BaseButtonEventArgs e)
+        {
+            var tag = (e.Button as GroupBoxButton)?.Tag as string;
+
+            switch (tag)
+            {
+                case HeaderButtonRefresh:
+                    await ReloadRowsAsync("обновлением данных");
+                    break;
+            }
+        }
+
+        private async Task SelectFilterAsync(bool zeroNormOnly)
+        {
+            if (_zeroNormOnly == zeroNormOnly)
+            {
+                SetFilterControls(_zeroNormOnly);
+                return;
+            }
+
+            var previousZeroNormOnly = _zeroNormOnly;
+            if (!await ConfirmPendingChangesAsync("сменой фильтра"))
+            {
+                SetFilterControls(previousZeroNormOnly);
+                return;
+            }
+
+            _zeroNormOnly = zeroNormOnly;
+            SetFilterControls(_zeroNormOnly);
+            await ReloadRowsAsync("сменой фильтра", promptPendingChanges: false);
+        }
+
+        private void SetFilterControls(bool zeroNormOnly)
+        {
+            _isSyncingFilterButtons = true;
+            try
+            {
+                SetHeaderButtonChecked(HeaderButtonZeroNorm, zeroNormOnly);
+                SetHeaderButtonChecked(HeaderButtonAll, !zeroNormOnly);
+            }
+            finally
+            {
+                _isSyncingFilterButtons = false;
+            }
+        }
+
+        private void SetHeaderButtonChecked(string tag, bool isChecked)
+        {
+            var button = layoutControlGroup2.CustomHeaderButtons
+                .OfType<GroupBoxButton>()
+                .FirstOrDefault(x => string.Equals(x.Tag as string, tag, StringComparison.OrdinalIgnoreCase));
+
+            if (button != null && button.Checked != isChecked)
+            {
+                button.Checked = isChecked;
+            }
+        }
+
+        private bool IsHeaderButtonChecked(string tag)
+        {
+            var button = layoutControlGroup2.CustomHeaderButtons
+                .OfType<GroupBoxButton>()
+                .FirstOrDefault(x => string.Equals(x.Tag as string, tag, StringComparison.OrdinalIgnoreCase));
+
+            return button?.Checked == true;
+        }
+
+        private async Task<bool> ReloadRowsAsync(string pendingChangesAction, bool promptPendingChanges = true)
+        {
+            if (promptPendingChanges && !await ConfirmPendingChangesAsync(pendingChangesAction))
+            {
+                return false;
+            }
+
             gridView.ShowLoadingPanel();
             try
             {
                 await LoadRowsAsync();
+                return true;
             }
             catch (Exception ex)
             {
@@ -546,12 +601,85 @@ namespace SewingProduction.Features.TeamWork.Forms
                     "Ошибка UI",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+                return false;
             }
             finally
             {
                 gridView.HideLoadingPanel();
             }
+        }
 
+        private async Task<bool> ConfirmPendingChangesAsync(string action)
+        {
+            if (!HasPendingChanges())
+            {
+                return true;
+            }
+
+            var result = MessageBox.Show(
+                $"Есть несохранённые изменения. Сохранить перед {action}?",
+                "Нормы ниток",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return false;
+            }
+
+            if (result == DialogResult.Yes)
+            {
+                return await SaveInternalAsync(showSuccessMessage: false);
+            }
+
+            return true;
+        }
+
+        private async void layoutControlGroup2_CustomButtonChecked(object sender, BaseButtonEventArgs e)
+        {
+            if (_isSyncingFilterButtons)
+            {
+                return;
+            }
+
+            var tag = (e.Button as GroupBoxButton)?.Tag as string;
+
+            switch (tag)
+            {
+                case HeaderButtonZeroNorm:
+                    await SelectFilterAsync(zeroNormOnly: true);
+                    break;
+                case HeaderButtonAll:
+                    await SelectFilterAsync(zeroNormOnly: false);
+                    break;
+            }
+        }
+
+        private void layoutControlGroup2_CustomButtonUnchecked(object sender, BaseButtonEventArgs e)
+        {
+            if (_isSyncingFilterButtons)
+            {
+                return;
+            }
+
+            var tag = (e.Button as GroupBoxButton)?.Tag as string;
+            if (tag is HeaderButtonZeroNorm or HeaderButtonAll)
+            {
+                BeginInvoke(new MethodInvoker(RestoreFilterSelectionIfNeeded));
+            }
+        }
+
+        private void RestoreFilterSelectionIfNeeded()
+        {
+            if (_isSyncingFilterButtons)
+            {
+                return;
+            }
+
+            if (!IsHeaderButtonChecked(HeaderButtonZeroNorm) && !IsHeaderButtonChecked(HeaderButtonAll))
+            {
+                SetFilterControls(_zeroNormOnly);
+            }
         }
     }
 }

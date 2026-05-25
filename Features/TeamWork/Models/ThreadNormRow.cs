@@ -111,7 +111,7 @@ namespace SewingProduction.Features.TeamWork.Models
                 id = 0,
                 men = men,
                 tg_id_n = tg_id_n,
-                ta_id = ta_id,
+                //ta_id = ta_id,
                 norm = norm,
                 kod_dr = kod_dr,
                // kod3 = kod3,

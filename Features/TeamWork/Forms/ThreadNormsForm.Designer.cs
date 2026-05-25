@@ -19,15 +19,9 @@ namespace SewingProduction.Features.TeamWork.Forms
         private BindingSource bindingSource;
         private CustomGridControl gridControl;
         private GridView gridView;
-        private CustomRadioGroup filterGroup;
         private CustomSimpleButton addButton;
         private CustomSimpleButton copyButton;
         private CustomSimpleButton deleteButton;
-        private CustomSimpleButton saveButton;
-        private CustomSimpleButton closeButton;
-        private PanelControl topPanel;
-        private PanelControl bottomPanel;
-        private FlowLayoutPanel buttonsPanel;
         private RepositoryItemLookUpEdit assortLookup;
         private RepositoryItemCheckEdit approvedCheck;
         private RepositoryItemSpinEdit normEditor;
@@ -59,6 +53,12 @@ namespace SewingProduction.Features.TeamWork.Forms
         private void InitializeComponent()
         {
             components = new Container();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions1 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions2 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions3 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions4 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions5 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(ThreadNormsForm));
             bindingSource = new BindingSource(components);
             gridControl = new CustomGridControl();
             gridView = new GridView();
@@ -80,29 +80,17 @@ namespace SewingProduction.Features.TeamWork.Forms
             colTcId = new GridColumn();
             colTgId = new GridColumn();
             colThreadDisplay = new GridColumn();
-            filterGroup = new CustomRadioGroup();
             addButton = new CustomSimpleButton();
             ThreadNormsFormlayoutControl1ConvertedLayout = new DevExpress.XtraLayout.LayoutControl();
             copyButton = new CustomSimpleButton();
             deleteButton = new CustomSimpleButton();
-            saveButton = new CustomSimpleButton();
-            closeButton = new CustomSimpleButton();
-            customSimpleButton1 = new CustomSimpleButton();
-            bottomPanel = new PanelControl();
-            buttonsPanel = new FlowLayoutPanel();
-            topPanel = new PanelControl();
+            layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            gridControlitem = new DevExpress.XtraLayout.LayoutControlItem();
-            bottomPanelitem = new DevExpress.XtraLayout.LayoutControlItem();
-            topPanelitem = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
-            layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            gridControlitem = new DevExpress.XtraLayout.LayoutControlItem();
             layoutConverter1 = new DevExpress.XtraLayout.Converter.LayoutConverter(components);
             ((ISupportInitialize)bindingSource).BeginInit();
             ((ISupportInitialize)gridControl).BeginInit();
@@ -110,36 +98,26 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((ISupportInitialize)assortLookup).BeginInit();
             ((ISupportInitialize)normEditor).BeginInit();
             ((ISupportInitialize)approvedCheck).BeginInit();
-            ((ISupportInitialize)filterGroup.Properties).BeginInit();
             ((ISupportInitialize)ThreadNormsFormlayoutControl1ConvertedLayout).BeginInit();
             ThreadNormsFormlayoutControl1ConvertedLayout.SuspendLayout();
-            ((ISupportInitialize)bottomPanel).BeginInit();
-            bottomPanel.SuspendLayout();
-            ((ISupportInitialize)topPanel).BeginInit();
-            topPanel.SuspendLayout();
+            ((ISupportInitialize)layoutControlItem6).BeginInit();
             ((ISupportInitialize)layoutControlGroup1).BeginInit();
-            ((ISupportInitialize)gridControlitem).BeginInit();
-            ((ISupportInitialize)bottomPanelitem).BeginInit();
-            ((ISupportInitialize)topPanelitem).BeginInit();
-            ((ISupportInitialize)layoutControlItem1).BeginInit();
-            ((ISupportInitialize)emptySpaceItem1).BeginInit();
             ((ISupportInitialize)emptySpaceItem2).BeginInit();
-            ((ISupportInitialize)layoutControlItem2).BeginInit();
-            ((ISupportInitialize)layoutControlItem3).BeginInit();
             ((ISupportInitialize)layoutControlItem4).BeginInit();
             ((ISupportInitialize)layoutControlItem5).BeginInit();
-            ((ISupportInitialize)layoutControlItem6).BeginInit();
+            ((ISupportInitialize)layoutControlGroup2).BeginInit();
+            ((ISupportInitialize)gridControlitem).BeginInit();
             SuspendLayout();
             // 
             // gridControl
             // 
             gridControl.DataSource = bindingSource;
             gridControl.Font = new Font("Arial", 10F);
-            gridControl.Location = new Point(12, 90);
+            gridControl.Location = new Point(5, 26);
             gridControl.MainView = gridView;
             gridControl.Name = "gridControl";
             gridControl.RepositoryItems.AddRange(new RepositoryItem[] { assortLookup, approvedCheck, normEditor });
-            gridControl.Size = new Size(1240, 633);
+            gridControl.Size = new Size(1254, 704);
             gridControl.TabIndex = 3;
             gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView });
             // 
@@ -323,26 +301,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             colThreadDisplay.OptionsColumn.ReadOnly = true;
             colThreadDisplay.Width = 220;
             // 
-            // filterGroup
-            // 
-            filterGroup.Dock = DockStyle.Left;
-            filterGroup.EditValue = 0;
-            filterGroup.Location = new Point(2, 2);
-            filterGroup.Name = "filterGroup";
-            filterGroup.ObjectName = null;
-            filterGroup.Properties.Items.AddRange(new RadioGroupItem[] { new RadioGroupItem(0, "0 норма"), new RadioGroupItem(1, "Все") });
-            filterGroup.Size = new Size(180, 44);
-            filterGroup.TabIndex = 0;
-            filterGroup.SelectedIndexChanged += FilterGroup_SelectedIndexChanged;
-            // 
             // addButton
             // 
-            addButton.Location = new Point(633, 727);
+            addButton.Location = new Point(12, 727);
             addButton.Margin = new Padding(8, 6, 0, 6);
             addButton.Name = "addButton";
-            addButton.Size = new Size(57, 22);
+            addButton.Size = new Size(113, 22);
             addButton.StyleController = ThreadNormsFormlayoutControl1ConvertedLayout;
-            addButton.TabIndex = 0;
+            addButton.TabIndex = 1;
             addButton.Text = "Добавить";
             addButton.Visible = false;
             addButton.Click += AddButton_Click;
@@ -352,25 +318,22 @@ namespace SewingProduction.Features.TeamWork.Forms
             ThreadNormsFormlayoutControl1ConvertedLayout.Controls.Add(addButton);
             ThreadNormsFormlayoutControl1ConvertedLayout.Controls.Add(copyButton);
             ThreadNormsFormlayoutControl1ConvertedLayout.Controls.Add(deleteButton);
-            ThreadNormsFormlayoutControl1ConvertedLayout.Controls.Add(saveButton);
-            ThreadNormsFormlayoutControl1ConvertedLayout.Controls.Add(closeButton);
-            ThreadNormsFormlayoutControl1ConvertedLayout.Controls.Add(customSimpleButton1);
             ThreadNormsFormlayoutControl1ConvertedLayout.Controls.Add(gridControl);
-            ThreadNormsFormlayoutControl1ConvertedLayout.Controls.Add(bottomPanel);
-            ThreadNormsFormlayoutControl1ConvertedLayout.Controls.Add(topPanel);
             ThreadNormsFormlayoutControl1ConvertedLayout.Dock = DockStyle.Fill;
+            ThreadNormsFormlayoutControl1ConvertedLayout.HiddenItems.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem6 });
             ThreadNormsFormlayoutControl1ConvertedLayout.Location = new Point(0, 0);
             ThreadNormsFormlayoutControl1ConvertedLayout.Name = "ThreadNormsFormlayoutControl1ConvertedLayout";
+            ThreadNormsFormlayoutControl1ConvertedLayout.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(1270, 474, 650, 400);
             ThreadNormsFormlayoutControl1ConvertedLayout.Root = layoutControlGroup1;
             ThreadNormsFormlayoutControl1ConvertedLayout.Size = new Size(1264, 761);
             ThreadNormsFormlayoutControl1ConvertedLayout.TabIndex = 3;
             // 
             // copyButton
             // 
-            copyButton.Location = new Point(694, 727);
+            copyButton.Location = new Point(2, 737);
             copyButton.Margin = new Padding(8, 6, 0, 6);
             copyButton.Name = "copyButton";
-            copyButton.Size = new Size(93, 22);
+            copyButton.Size = new Size(144, 22);
             copyButton.StyleController = ThreadNormsFormlayoutControl1ConvertedLayout;
             copyButton.TabIndex = 4;
             copyButton.Text = "Добавить копию";
@@ -378,169 +341,77 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // deleteButton
             // 
-            deleteButton.Location = new Point(791, 727);
+            deleteButton.Location = new Point(150, 737);
             deleteButton.Margin = new Padding(8, 6, 0, 6);
             deleteButton.Name = "deleteButton";
-            deleteButton.Size = new Size(51, 22);
+            deleteButton.Size = new Size(146, 22);
             deleteButton.StyleController = ThreadNormsFormlayoutControl1ConvertedLayout;
             deleteButton.TabIndex = 5;
             deleteButton.Text = "Удалить";
             deleteButton.Visible = false;
             deleteButton.Click += DeleteButton_Click;
             // 
-            // saveButton
+            // layoutControlItem6
             // 
-            saveButton.Location = new Point(846, 727);
-            saveButton.Margin = new Padding(8, 6, 0, 6);
-            saveButton.Name = "saveButton";
-            saveButton.Size = new Size(62, 22);
-            saveButton.StyleController = ThreadNormsFormlayoutControl1ConvertedLayout;
-            saveButton.TabIndex = 6;
-            saveButton.Text = "Сохранить";
-            saveButton.Click += SaveButton_Click;
-            // 
-            // closeButton
-            // 
-            closeButton.Location = new Point(912, 727);
-            closeButton.Margin = new Padding(8, 6, 0, 6);
-            closeButton.Name = "closeButton";
-            closeButton.Size = new Size(51, 22);
-            closeButton.StyleController = ThreadNormsFormlayoutControl1ConvertedLayout;
-            closeButton.TabIndex = 7;
-            closeButton.Text = "Закрыть";
-            closeButton.Click += CloseButton_Click;
-            // 
-            // customSimpleButton1
-            // 
-            customSimpleButton1.Appearance.Font = new Font("Arial", 10F);
-            customSimpleButton1.Appearance.Options.UseFont = true;
-            customSimpleButton1.Location = new Point(12, 64);
-            customSimpleButton1.Name = "customSimpleButton1";
-            customSimpleButton1.Size = new Size(181, 22);
-            customSimpleButton1.StyleController = ThreadNormsFormlayoutControl1ConvertedLayout;
-            customSimpleButton1.TabIndex = 2;
-            customSimpleButton1.Text = "Обновить";
-            customSimpleButton1.Click += customSimpleButton1_Click;
-            // 
-            // bottomPanel
-            // 
-            bottomPanel.Controls.Add(buttonsPanel);
-            bottomPanel.Location = new Point(12, 727);
-            bottomPanel.Name = "bottomPanel";
-            bottomPanel.Size = new Size(617, 22);
-            bottomPanel.TabIndex = 1;
-            // 
-            // buttonsPanel
-            // 
-            buttonsPanel.Dock = DockStyle.Fill;
-            buttonsPanel.FlowDirection = FlowDirection.RightToLeft;
-            buttonsPanel.Location = new Point(2, 2);
-            buttonsPanel.Name = "buttonsPanel";
-            buttonsPanel.Padding = new Padding(8);
-            buttonsPanel.Size = new Size(613, 18);
-            buttonsPanel.TabIndex = 0;
-            buttonsPanel.WrapContents = false;
-            // 
-            // topPanel
-            // 
-            topPanel.Controls.Add(filterGroup);
-            topPanel.Location = new Point(12, 12);
-            topPanel.Name = "topPanel";
-            topPanel.Size = new Size(181, 48);
-            topPanel.TabIndex = 0;
+            layoutControlItem6.Control = addButton;
+            layoutControlItem6.Location = new Point(0, 715);
+            layoutControlItem6.Name = "layoutControlItem6";
+            layoutControlItem6.Size = new Size(117, 26);
+            layoutControlItem6.TextVisible = false;
             // 
             // layoutControlGroup1
             // 
             layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             layoutControlGroup1.GroupBordersVisible = false;
-            layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { gridControlitem, bottomPanelitem, topPanelitem, layoutControlItem1, emptySpaceItem1, emptySpaceItem2, layoutControlItem2, layoutControlItem3, layoutControlItem4, layoutControlItem5, layoutControlItem6 });
-            layoutControlGroup1.Name = "layoutControlGroup1";
+            layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { emptySpaceItem2, layoutControlItem4, layoutControlItem5, layoutControlGroup2 });
+            layoutControlGroup1.Name = "Root";
+            layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             layoutControlGroup1.Size = new Size(1264, 761);
             layoutControlGroup1.TextVisible = false;
             // 
-            // gridControlitem
-            // 
-            gridControlitem.Control = gridControl;
-            gridControlitem.Location = new Point(0, 78);
-            gridControlitem.Name = "gridControlitem";
-            gridControlitem.Size = new Size(1244, 637);
-            gridControlitem.TextVisible = false;
-            // 
-            // bottomPanelitem
-            // 
-            bottomPanelitem.Control = bottomPanel;
-            bottomPanelitem.Location = new Point(0, 715);
-            bottomPanelitem.Name = "bottomPanelitem";
-            bottomPanelitem.Size = new Size(621, 26);
-            bottomPanelitem.TextVisible = false;
-            // 
-            // topPanelitem
-            // 
-            topPanelitem.Control = topPanel;
-            topPanelitem.Location = new Point(0, 0);
-            topPanelitem.Name = "topPanelitem";
-            topPanelitem.Size = new Size(185, 52);
-            topPanelitem.TextVisible = false;
-            // 
-            // layoutControlItem1
-            // 
-            layoutControlItem1.Control = customSimpleButton1;
-            layoutControlItem1.Location = new Point(0, 52);
-            layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new Size(185, 26);
-            layoutControlItem1.TextVisible = false;
-            // 
-            // emptySpaceItem1
-            // 
-            emptySpaceItem1.Location = new Point(185, 0);
-            emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new Size(1059, 78);
-            // 
             // emptySpaceItem2
             // 
-            emptySpaceItem2.Location = new Point(955, 715);
+            emptySpaceItem2.Location = new Point(298, 735);
             emptySpaceItem2.Name = "emptySpaceItem2";
-            emptySpaceItem2.Size = new Size(289, 26);
-            // 
-            // layoutControlItem2
-            // 
-            layoutControlItem2.Control = closeButton;
-            layoutControlItem2.Location = new Point(900, 715);
-            layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new Size(55, 26);
-            layoutControlItem2.TextVisible = false;
-            // 
-            // layoutControlItem3
-            // 
-            layoutControlItem3.Control = saveButton;
-            layoutControlItem3.Location = new Point(834, 715);
-            layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new Size(66, 26);
-            layoutControlItem3.TextVisible = false;
+            emptySpaceItem2.Size = new Size(966, 26);
             // 
             // layoutControlItem4
             // 
             layoutControlItem4.Control = deleteButton;
-            layoutControlItem4.Location = new Point(779, 715);
+            layoutControlItem4.Location = new Point(148, 735);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new Size(55, 26);
+            layoutControlItem4.Size = new Size(150, 26);
             layoutControlItem4.TextVisible = false;
             // 
             // layoutControlItem5
             // 
             layoutControlItem5.Control = copyButton;
-            layoutControlItem5.Location = new Point(682, 715);
+            layoutControlItem5.Location = new Point(0, 735);
             layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new Size(97, 26);
+            layoutControlItem5.Size = new Size(148, 26);
             layoutControlItem5.TextVisible = false;
             // 
-            // layoutControlItem6
+            // layoutControlGroup2
             // 
-            layoutControlItem6.Control = addButton;
-            layoutControlItem6.Location = new Point(621, 715);
-            layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new Size(61, 26);
-            layoutControlItem6.TextVisible = false;
+            buttonImageOptions5.Image = (Image)resources.GetObject("buttonImageOptions5.Image");
+            layoutControlGroup2.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("в работе", true, buttonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, true, null, true, true, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("   |   ", true, buttonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Все", true, buttonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, true, null, true, true, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("   |   ", true, buttonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Обновить", true, buttonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
+            layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { gridControlitem });
+            layoutControlGroup2.Location = new Point(0, 0);
+            layoutControlGroup2.Name = "layoutControlGroup2";
+            layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            layoutControlGroup2.Size = new Size(1264, 735);
+            layoutControlGroup2.Text = " ";
+            layoutControlGroup2.CustomButtonClick += LayoutControlGroup2_CustomButtonClick;
+            layoutControlGroup2.CustomButtonUnchecked += layoutControlGroup2_CustomButtonUnchecked;
+            layoutControlGroup2.CustomButtonChecked += layoutControlGroup2_CustomButtonChecked;
+            // 
+            // gridControlitem
+            // 
+            gridControlitem.Control = gridControl;
+            gridControlitem.Location = new Point(0, 0);
+            gridControlitem.Name = "gridControlitem";
+            gridControlitem.Size = new Size(1258, 708);
+            gridControlitem.TextVisible = false;
             // 
             // ThreadNormsForm
             // 
@@ -560,42 +431,26 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((ISupportInitialize)assortLookup).EndInit();
             ((ISupportInitialize)normEditor).EndInit();
             ((ISupportInitialize)approvedCheck).EndInit();
-            ((ISupportInitialize)filterGroup.Properties).EndInit();
             ((ISupportInitialize)ThreadNormsFormlayoutControl1ConvertedLayout).EndInit();
             ThreadNormsFormlayoutControl1ConvertedLayout.ResumeLayout(false);
-            ((ISupportInitialize)bottomPanel).EndInit();
-            bottomPanel.ResumeLayout(false);
-            ((ISupportInitialize)topPanel).EndInit();
-            topPanel.ResumeLayout(false);
+            ((ISupportInitialize)layoutControlItem6).EndInit();
             ((ISupportInitialize)layoutControlGroup1).EndInit();
-            ((ISupportInitialize)gridControlitem).EndInit();
-            ((ISupportInitialize)bottomPanelitem).EndInit();
-            ((ISupportInitialize)topPanelitem).EndInit();
-            ((ISupportInitialize)layoutControlItem1).EndInit();
-            ((ISupportInitialize)emptySpaceItem1).EndInit();
             ((ISupportInitialize)emptySpaceItem2).EndInit();
-            ((ISupportInitialize)layoutControlItem2).EndInit();
-            ((ISupportInitialize)layoutControlItem3).EndInit();
             ((ISupportInitialize)layoutControlItem4).EndInit();
             ((ISupportInitialize)layoutControlItem5).EndInit();
-            ((ISupportInitialize)layoutControlItem6).EndInit();
+            ((ISupportInitialize)layoutControlGroup2).EndInit();
+            ((ISupportInitialize)gridControlitem).EndInit();
             ResumeLayout(false);
         }
         private DevExpress.XtraLayout.Converter.LayoutConverter layoutConverter1;
         private DevExpress.XtraLayout.LayoutControl ThreadNormsFormlayoutControl1ConvertedLayout;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraLayout.LayoutControlItem gridControlitem;
-        private DevExpress.XtraLayout.LayoutControlItem bottomPanelitem;
-        private DevExpress.XtraLayout.LayoutControlItem topPanelitem;
         private GridColumn gridColumn1;
-        private CustomSimpleButton customSimpleButton1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
     }
 }

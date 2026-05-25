@@ -67,7 +67,7 @@ namespace SewingProduction.Features.TeamWork.Services
         {
             var p = new DynamicParameters();
             p.Add("@id", row.id);
-            return _dbService.ExecuteSpWithStatusAsync(
+            return _dbService.ExecuteScalarProcedureAsync<int>(
                 "cfn.ThreadNorms_Delete",
                 p);
         }
