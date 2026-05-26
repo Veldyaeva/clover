@@ -385,19 +385,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             await DeleteCurrentRowAsync();
         }
 
-        private async void SaveButton_Click(object sender, EventArgs e)
-        {
-            await SaveInternalAsync(showSuccessMessage: true);
-        }
-
-        private async void CloseButton_Click(object sender, EventArgs e)
-        {
-            if (await TryCommitOnCloseAsync())
-            {
-                _allowCloseWithoutPrompt = true;
-                Close();
-            }
-        }
 
         private void GridView_RowCellStyle(object sender, RowCellStyleEventArgs e)
         {

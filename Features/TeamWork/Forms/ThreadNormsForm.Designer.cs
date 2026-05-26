@@ -15,8 +15,6 @@ namespace SewingProduction.Features.TeamWork.Forms
     internal partial class ThreadNormsForm
     {
         private IContainer components = null;
-
-        private BindingSource bindingSource;
         private CustomGridControl gridControl;
         private GridView gridView;
         private CustomSimpleButton addButton;
@@ -59,8 +57,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions4 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions5 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             ComponentResourceManager resources = new ComponentResourceManager(typeof(ThreadNormsForm));
-            bindingSource = new BindingSource(components);
             gridControl = new CustomGridControl();
+            bindingSource = new BindingSource(components);
             gridView = new GridView();
             colCategory = new GridColumn();
             colCategoryName = new GridColumn();
@@ -73,9 +71,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn1 = new GridColumn();
             colNorm = new GridColumn();
             normEditor = new RepositoryItemSpinEdit();
-            colDateChange = new GridColumn();
             colApproved = new GridColumn();
             approvedCheck = new RepositoryItemCheckEdit();
+            colDateChange = new GridColumn();
             colId = new GridColumn();
             colTcId = new GridColumn();
             colTgId = new GridColumn();
@@ -91,9 +89,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             gridControlitem = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutConverter1 = new DevExpress.XtraLayout.Converter.LayoutConverter(components);
-            ((ISupportInitialize)bindingSource).BeginInit();
             ((ISupportInitialize)gridControl).BeginInit();
+            ((ISupportInitialize)bindingSource).BeginInit();
             ((ISupportInitialize)gridView).BeginInit();
             ((ISupportInitialize)assortLookup).BeginInit();
             ((ISupportInitialize)normEditor).BeginInit();
@@ -127,10 +124,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView.Appearance.FocusedCell.Options.UseForeColor = true;
             gridView.Appearance.FocusedRow.ForeColor = Color.Black;
             gridView.Appearance.FocusedRow.Options.UseForeColor = true;
-            gridView.Columns.AddRange(new GridColumn[] { colCategory, colCategoryName, colGroupName, colClassName, colTatName, colAssort, colThreadCode, gridColumn1, colNorm, colDateChange, colApproved, colId, colTcId, colTgId, colThreadDisplay });
+            gridView.Columns.AddRange(new GridColumn[] { colCategory, colCategoryName, colGroupName, colClassName, colTatName, colAssort, colThreadCode, gridColumn1, colNorm, colApproved, colDateChange, colId, colTcId, colTgId, colThreadDisplay });
             gridView.GridControl = gridControl;
             gridView.Name = "gridView";
-            gridView.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
+            gridView.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDown;
             gridView.OptionsNavigation.AutoFocusNewRow = true;
             gridView.OptionsView.ShowAutoFilterRow = true;
             gridView.OptionsView.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
@@ -139,8 +136,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView.ShowingEditor += GridView_ShowingEditor;
             gridView.FocusedRowChanged += GridView_FocusedRowChanged;
             gridView.CellValueChanged += GridView_CellValueChanged;
-            gridView.ValidatingEditor += GridView_ValidatingEditor;
             gridView.ValidateRow += GridView_ValidateRow;
+            gridView.ValidatingEditor += GridView_ValidatingEditor;
             // 
             // colCategory
             // 
@@ -237,7 +234,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             // colNorm
             // 
             colNorm.Caption = "Норма";
-            colNorm.ColumnEdit = normEditor;
             colNorm.FieldName = "norm";
             colNorm.Name = "colNorm";
             colNorm.Visible = true;
@@ -252,6 +248,21 @@ namespace SewingProduction.Features.TeamWork.Forms
             normEditor.MaxValue = new decimal(new int[] { 999, 0, 0, 0 });
             normEditor.Name = "normEditor";
             // 
+            // colApproved
+            // 
+            colApproved.Caption = "Утверждено";
+            colApproved.ColumnEdit = approvedCheck;
+            colApproved.FieldName = "approved";
+            colApproved.Name = "colApproved";
+            colApproved.Visible = true;
+            colApproved.VisibleIndex = 6;
+            colApproved.Width = 80;
+            // 
+            // approvedCheck
+            // 
+            approvedCheck.AutoHeight = false;
+            approvedCheck.Name = "approvedCheck";
+            // 
             // colDateChange
             // 
             colDateChange.Caption = "Дата";
@@ -260,23 +271,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             colDateChange.FieldName = "date_change";
             colDateChange.Name = "colDateChange";
             colDateChange.Visible = true;
-            colDateChange.VisibleIndex = 6;
+            colDateChange.VisibleIndex = 7;
             colDateChange.Width = 101;
-            // 
-            // colApproved
-            // 
-            colApproved.Caption = "Утверждено";
-            colApproved.ColumnEdit = approvedCheck;
-            colApproved.FieldName = "approved";
-            colApproved.Name = "colApproved";
-            colApproved.Visible = true;
-            colApproved.VisibleIndex = 7;
-            colApproved.Width = 80;
-            // 
-            // approvedCheck
-            // 
-            approvedCheck.AutoHeight = false;
-            approvedCheck.Name = "approvedCheck";
             // 
             // colId
             // 
@@ -426,8 +422,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             Text = "Справочник норм ниток";
             FormClosing += ThreadNormsForm_FormClosing;
             Load += ThreadNormsForm_Load;
-            ((ISupportInitialize)bindingSource).EndInit();
             ((ISupportInitialize)gridControl).EndInit();
+            ((ISupportInitialize)bindingSource).EndInit();
             ((ISupportInitialize)gridView).EndInit();
             ((ISupportInitialize)assortLookup).EndInit();
             ((ISupportInitialize)normEditor).EndInit();
@@ -443,7 +439,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((ISupportInitialize)gridControlitem).EndInit();
             ResumeLayout(false);
         }
-        private DevExpress.XtraLayout.Converter.LayoutConverter layoutConverter1;
         private DevExpress.XtraLayout.LayoutControl ThreadNormsFormlayoutControl1ConvertedLayout;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraLayout.LayoutControlItem gridControlitem;
@@ -453,5 +448,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
+        private BindingSource bindingSource;
     }
 }
