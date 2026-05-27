@@ -167,13 +167,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             foreach (int kodDr in targetKodDrList)
             {
-                bool exists = _rows.Any(x =>
-                    !x.IsDeleted &&
-                    x.tg_id_n == current.tg_id_n &&
-                    x.ta_id == current.ta_id &&
-                    x.kod_dr == kodDr);
-
-                if (exists)
+                if (HasRowsForAllAssorts(current.tg_id_n, kodDr))
                     continue;
 
                 var material = ResolveThreadMaterial(kodDr);
@@ -195,12 +189,29 @@ namespace SewingProduction.Features.TeamWork.Forms
             else
             {
                 MessageBox.Show(
-                    "Для выбранной категории и ассортимента строки 2501 и 2502 уже существуют.",
+                    "Для выбранной категории строки 2501 и 2502 уже созданы для всех доступных ассортиментов.",
                     "Копирование норм ниток",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }
         }
+
+        private bool HasRowsForAllAssorts(int categoryId, int kodDr)
+        {
+            int assortCount = _assorts?.Count ?? 0;
+            if (categoryId <= 0 || kodDr <= 0 || assortCount <= 0)
+            {
+                return false;
+            }
+
+            int existingRowsCount = _rows.Count(x =>
+                !x.IsDeleted &&
+                x.tg_id_n == categoryId &&
+                x.kod_dr == kodDr);
+
+            return existingRowsCount >= assortCount;
+        }
+
         private (string kod3, string kodArt, string displayText) ResolveThreadMaterial(int kodDr)
         {
             var material = FindThreadMaterial(kodDr);
