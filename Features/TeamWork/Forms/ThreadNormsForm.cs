@@ -25,6 +25,8 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly ILogger _logger = new FileLogger();
         private readonly TWGridHelper _gridHelper = new TWGridHelper();
         private readonly ThreadNormsDataService _dataService;
+        private readonly ToolTip _copyNotificationToolTip = new ToolTip();
+        private readonly Dictionary<string, int> _designerVisibleColumns = new Dictionary<string, int>(StringComparer.Ordinal);
         private readonly BindingList<ThreadNormRow> _rows = new BindingList<ThreadNormRow>();
         private List<ThreadAssortModel> _assorts = new List<ThreadAssortModel>();
         private List<ThreadMaterialOption> _materials = new List<ThreadMaterialOption>();
@@ -41,9 +43,13 @@ namespace SewingProduction.Features.TeamWork.Forms
         public ThreadNormsForm(UserClass user) : base(user)
         {
             InitializeComponent();
+            CaptureDesignerVisibleColumns();
 
             var dbService = new DbService(new DatabaseHelperSQL());
             _dataService = new ThreadNormsDataService(dbService, _logger);
+            _copyNotificationToolTip.IsBalloon = true;
+            _copyNotificationToolTip.ToolTipIcon = ToolTipIcon.Info;
+            _copyNotificationToolTip.ToolTipTitle = "Копирование норм ниток";
             bindingSource.DataSource = _rows;
             InitializeHeaderButtons();
         }
@@ -51,7 +57,38 @@ namespace SewingProduction.Features.TeamWork.Forms
         private async void ThreadNormsForm_Load(object sender, EventArgs e)
         {
             _gridHelper.LoadGridViewSettings(gridView, "ThreadNormsGrid.xml");
+            ApplyDesignerColumnVisibility();
             await LoadDataAsync();
+        }
+
+        private void CaptureDesignerVisibleColumns()
+        {
+            _designerVisibleColumns.Clear();
+
+            foreach (GridColumn column in gridView.Columns)
+            {
+                if (!column.Visible || string.IsNullOrWhiteSpace(column.Name))
+                {
+                    continue;
+                }
+
+                _designerVisibleColumns[column.Name] = column.VisibleIndex;
+            }
+        }
+
+        private void ApplyDesignerColumnVisibility()
+        {
+            foreach (GridColumn column in gridView.Columns)
+            {
+                if (_designerVisibleColumns.TryGetValue(column.Name, out int visibleIndex))
+                {
+                    column.Visible = true;
+                    column.VisibleIndex = visibleIndex;
+                    continue;
+                }
+
+                column.Visible = false;
+            }
         }
 
         private void ThreadNormsForm_FormClosing(object sender, FormClosingEventArgs e)
