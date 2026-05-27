@@ -70,7 +70,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             colThreadCode = new GridColumn();
             gridColumn1 = new GridColumn();
             colNorm = new GridColumn();
-            normEditor = new RepositoryItemSpinEdit();
             colApproved = new GridColumn();
             approvedCheck = new RepositoryItemCheckEdit();
             colDateChange = new GridColumn();
@@ -78,6 +77,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colTcId = new GridColumn();
             colTgId = new GridColumn();
             colThreadDisplay = new GridColumn();
+            normEditor = new RepositoryItemSpinEdit();
             addButton = new CustomSimpleButton();
             ThreadNormsFormlayoutControl1ConvertedLayout = new DevExpress.XtraLayout.LayoutControl();
             copyButton = new CustomSimpleButton();
@@ -93,8 +93,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((ISupportInitialize)bindingSource).BeginInit();
             ((ISupportInitialize)gridView).BeginInit();
             ((ISupportInitialize)assortLookup).BeginInit();
-            ((ISupportInitialize)normEditor).BeginInit();
             ((ISupportInitialize)approvedCheck).BeginInit();
+            ((ISupportInitialize)normEditor).BeginInit();
             ((ISupportInitialize)ThreadNormsFormlayoutControl1ConvertedLayout).BeginInit();
             ThreadNormsFormlayoutControl1ConvertedLayout.SuspendLayout();
             ((ISupportInitialize)layoutControlItem6).BeginInit();
@@ -240,14 +240,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             colNorm.VisibleIndex = 5;
             colNorm.Width = 80;
             // 
-            // normEditor
-            // 
-            normEditor.AutoHeight = false;
-            normEditor.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Combo) });
-            normEditor.Mask.EditMask = "0.###";
-            normEditor.MaxValue = new decimal(new int[] { 999, 0, 0, 0 });
-            normEditor.Name = "normEditor";
-            // 
             // colApproved
             // 
             colApproved.Caption = "Утверждено";
@@ -297,6 +289,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             colThreadDisplay.OptionsColumn.AllowEdit = false;
             colThreadDisplay.OptionsColumn.ReadOnly = true;
             colThreadDisplay.Width = 220;
+            // 
+            // normEditor
+            // 
+            normEditor.AutoHeight = false;
+            normEditor.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Combo) });
+            normEditor.Mask.EditMask = "0.###";
+            normEditor.MaxValue = new decimal(new int[] { 999, 0, 0, 0 });
+            normEditor.Name = "normEditor";
             // 
             // addButton
             // 
@@ -426,8 +426,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((ISupportInitialize)bindingSource).EndInit();
             ((ISupportInitialize)gridView).EndInit();
             ((ISupportInitialize)assortLookup).EndInit();
-            ((ISupportInitialize)normEditor).EndInit();
             ((ISupportInitialize)approvedCheck).EndInit();
+            ((ISupportInitialize)normEditor).EndInit();
             ((ISupportInitialize)ThreadNormsFormlayoutControl1ConvertedLayout).EndInit();
             ThreadNormsFormlayoutControl1ConvertedLayout.ResumeLayout(false);
             ((ISupportInitialize)layoutControlItem6).EndInit();

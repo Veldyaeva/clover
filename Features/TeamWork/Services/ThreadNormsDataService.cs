@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using SewingProduction.Core.Models;
+using SewingProduction.Features.TeamWork.Forms;
 using SewingProduction.Features.TeamWork.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
@@ -29,6 +30,20 @@ namespace SewingProduction.Features.TeamWork.Services
                   FROM dbo.sewing_thread_assorts_view
                   ORDER BY TAT_ID",
                 new { });
+        }
+
+        public Task<List<ThreadMaterialOption>> LoadMaterialsAsync()
+        {
+            return _dbService.GetListAsync<ThreadMaterialOption>(
+                @"SELECT
+                      RTRIM(kod_dr) AS kod_dr,
+                      RTRIM(ISNULL(kod3, '')) AS kod3,
+                      RTRIM(ISNULL(kod_art, '')) AS kod_art,
+                      RTRIM(ISNULL(articul, '')) AS displayText
+                  FROM dbo.thread_norms_default
+                  WHERE NULLIF(RTRIM(ISNULL(kod_dr, '')), '') IS NOT NULL
+                  ORDER BY RTRIM(kod_dr)",
+                new { });//RTRIM(kod_dr) + ' | ' + RTRIM(ISNULL(gr, '')) + ' | ' + 
         }
 
         public Task<List<ThreadNormRow>> LoadRowsAsync(bool zeroNormOnly)
