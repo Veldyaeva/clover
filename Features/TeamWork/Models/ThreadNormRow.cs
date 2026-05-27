@@ -13,7 +13,7 @@ namespace SewingProduction.Features.TeamWork.Models
         private int _tg_id_n;
         private int _ta_id;
         private decimal _norm;
-        private string _kod_dr = string.Empty;
+        private int _kod_dr;
         private string _kod3 = string.Empty;
         private string _kod_art = string.Empty;
         private DateTime? _date_change;
@@ -48,10 +48,10 @@ namespace SewingProduction.Features.TeamWork.Models
             set => SetField(ref _norm, value);
         }
 
-        public string kod_dr
+        public int kod_dr
         {
             get => _kod_dr;
-            set => SetField(ref _kod_dr, value ?? string.Empty);
+            set => SetField(ref _kod_dr, value);
         }
 
         public string kod3
@@ -104,18 +104,18 @@ namespace SewingProduction.Features.TeamWork.Models
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ThreadNormRow CloneForCopy()
+        public ThreadNormRow CloneForCopy(int kodDr, string kod3, string kodArt, string threadDisplay)
         {
             return new ThreadNormRow
             {
                 id = 0,
                 men = men,
                 tg_id_n = tg_id_n,
-                //ta_id = ta_id,
+                ta_id = ta_id,
                 norm = norm,
-                kod_dr = kod_dr,
-               // kod3 = kod3,
-               // kod_art = kod_art,
+                kod_dr = kodDr,
+                kod3 = kod3 ?? string.Empty,
+                kod_art = kodArt ?? string.Empty,
                 date_change = null,
                 men_name = men_name,
                 TC_ID = TC_ID,
@@ -124,8 +124,8 @@ namespace SewingProduction.Features.TeamWork.Models
                 TG_GroupName = TG_GroupName,
                 TCAT_CategoryName = TCAT_CategoryName,
                 TAT_Name = TAT_Name,
-                ThreadArticul = ThreadArticul,
-                ThreadDisplay = ThreadDisplay,
+                ThreadDisplay = threadDisplay ?? string.Empty,
+                ThreadArticul = kodArt ?? string.Empty,
                 IsNew = true,
                 IsModified = true
             };
@@ -163,7 +163,7 @@ namespace SewingProduction.Features.TeamWork.Models
         public int tg_id_n { get; set; }
         public int ta_id { get; set; }
         public decimal norm { get; set; }
-        public string kod_dr { get; set; }
+        public int kod_dr { get; set; }
         public string kod3 { get; set; }
         public string kod_art { get; set; }
         public DateTime? date_change { get; set; }

@@ -27,13 +27,13 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly ThreadNormsDataService _dataService;
         private readonly BindingList<ThreadNormRow> _rows = new BindingList<ThreadNormRow>();
         private List<ThreadAssortModel> _assorts = new List<ThreadAssortModel>();
+        private List<ThreadMaterialOption> _materials = new List<ThreadMaterialOption>();
 
         private bool _isAutoSavingRowChange;
         private bool _isLoading;
         private bool _isSyncingFilterButtons;
         private bool _zeroNormOnly = true;
         private bool _allowCloseWithoutPrompt;
-
         private const string HeaderButtonZeroNorm = "thread-norms:zero-norm";
         private const string HeaderButtonAll = "thread-norms:all";
         private const string HeaderButtonRefresh = "thread-norms:refresh";
@@ -100,6 +100,16 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             _assorts = await _dataService.LoadAssortsAsync() ?? new List<ThreadAssortModel>();
             assortLookup.DataSource = _assorts;
+
+            try
+            {
+                _materials = await _dataService.LoadMaterialsAsync() ?? new List<ThreadMaterialOption>();
+            }
+            catch (Exception ex)
+            {
+                _materials = new List<ThreadMaterialOption>();
+                await _logger.LogErrorAsync(ex, "Не удалось загрузить справочник материалов ниток для копирования");
+            }
         }
 
         private async Task LoadRowsAsync()
@@ -152,12 +162,66 @@ namespace SewingProduction.Features.TeamWork.Forms
                 return;
             }
 
-            var copy = current.CloneForCopy();
-            _rows.Add(copy);
-            bindingSource.ResetBindings(false);
-            FocusRow(copy);
-        }
+            var targetKodDrList = new[] { 2501, 2502 };
+            ThreadNormRow lastAdded = null;
 
+            foreach (int kodDr in targetKodDrList)
+            {
+                bool exists = _rows.Any(x =>
+                    !x.IsDeleted &&
+                    x.tg_id_n == current.tg_id_n &&
+                    x.ta_id == current.ta_id &&
+                    x.kod_dr == kodDr);
+
+                if (exists)
+                    continue;
+
+                var material = ResolveThreadMaterial(kodDr);
+
+                var copy = current.CloneForCopy(
+                    kodDr,
+                    material.kod3,
+                    material.kodArt,
+                    material.displayText);
+
+                _rows.Add(copy);
+                lastAdded = copy;
+            }
+            bindingSource.ResetBindings(false);
+            if (lastAdded != null)
+            {
+                FocusRow(lastAdded);
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Для выбранной категории и ассортимента строки 2501 и 2502 уже существуют.",
+                    "Копирование норм ниток",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+        }
+        private (string kod3, string kodArt, string displayText) ResolveThreadMaterial(int kodDr)
+        {
+            var material = FindThreadMaterial(kodDr);
+
+            if (material != null)
+            {
+                return (
+                    material.kod3 ?? string.Empty,
+                    material.kod_art ?? string.Empty,
+                    material.displayText ?? string.Empty
+                );
+            }
+
+            // Страховка, если справочник не загрузился
+            return kodDr switch
+            {
+                2501 => ("2501632", "0242", "2501"),
+                2502 => ("2502443", "0144", "2502"),
+                _ => (string.Empty, string.Empty, kodDr.ToString())
+            };
+        }
         private async Task DeleteCurrentRowAsync()
         {
             if (bindingSource.Current is not ThreadNormRow current)
@@ -244,7 +308,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     x.tg_id_n,
                     x.ta_id,
-                    kod_dr = x.kod_dr?.Trim(),
+                    kod_dr = x.kod_dr,
                     //kod3 = x.kod3?.Trim(),
                     //kod_art = x.kod_art?.Trim()
                 })
@@ -272,13 +336,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                 return false;
             }
 
-            var kodDr = NormalizeCode(row.kod_dr);
+           // var kodDr = NormalizeCode(row.kod_dr);
             return _rows.Any(x =>
                 !ReferenceEquals(x, row) &&
                 !x.IsDeleted &&
                 x.tg_id_n == row.tg_id_n &&
                 x.ta_id == assortId &&
-                string.Equals(NormalizeCode(x.kod_dr), kodDr, StringComparison.OrdinalIgnoreCase));
+                //string.Equals(NormalizeCode(x.kod_dr), kodDr, StringComparison.OrdinalIgnoreCase));
+                x.kod_dr == row.kod_dr);
         }
 
         private static string NormalizeCode(string value)
@@ -350,7 +415,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 return (row, "Не заполнен ассортимент.");
             }
 
-            if (row.norm > 0 && string.IsNullOrWhiteSpace(row.kod_dr))
+            if (row.norm > 0 && row.kod_dr<=0)
             {
                 return (row, "Для нормы больше нуля нужно выбрать код ниток.");
             }
@@ -728,5 +793,17 @@ namespace SewingProduction.Features.TeamWork.Forms
                 SetFilterControls(_zeroNormOnly);
             }
         }
+        private ThreadMaterialOption FindThreadMaterial(int kodDr)
+        {
+            return _materials.FirstOrDefault(x =>
+                int.TryParse(x.kod_dr, out var parsed) && parsed == kodDr);
+        }
+    }
+    public sealed class ThreadMaterialOption
+    {
+        public string kod_dr { get; set; } = string.Empty;
+        public string kod3 { get; set; } = string.Empty;
+        public string kod_art { get; set; } = string.Empty;
+        public string displayText { get; set; } = string.Empty;
     }
 }
