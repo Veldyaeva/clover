@@ -31,6 +31,7 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintSewn));
 			customHeaderLabel1 = new SewingProduction.Core.Class.CustomHeaderLabel();
 			customLayoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
+			customCheckBoxNomPach = new CustomCheckBox();
 			customGridControlR = new SewingProduction.Core.Class.CustomGridControl();
 			gridViewR = new DevExpress.XtraGrid.Views.Grid.GridView();
 			IsSelected = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -55,6 +56,7 @@
 			emptySpaceItem8 = new DevExpress.XtraLayout.EmptySpaceItem();
 			layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
 			emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+			layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
 			gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
 			emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
 			emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
@@ -80,6 +82,7 @@
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem8).BeginInit();
 			((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
+			((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem3).BeginInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem4).BeginInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem5).BeginInit();
@@ -102,6 +105,7 @@
 			// 
 			// customLayoutControl1
 			// 
+			customLayoutControl1.Controls.Add(customCheckBoxNomPach);
 			customLayoutControl1.Controls.Add(customGridControlR);
 			customLayoutControl1.Controls.Add(customSimpleButtonNabor);
 			customLayoutControl1.Controls.Add(customSimpleButtonKompl);
@@ -115,6 +119,16 @@
 			customLayoutControl1.Size = new System.Drawing.Size(795, 497);
 			customLayoutControl1.TabIndex = 2;
 			customLayoutControl1.Text = "customLayoutControl1";
+			// 
+			// customCheckBoxNomPach
+			// 
+			customCheckBoxNomPach.Font = new System.Drawing.Font("Arial", 10F);
+			customCheckBoxNomPach.Location = new System.Drawing.Point(549, 144);
+			customCheckBoxNomPach.Name = "customCheckBoxNomPach";
+			customCheckBoxNomPach.Size = new System.Drawing.Size(234, 20);
+			customCheckBoxNomPach.TabIndex = 4;
+			customCheckBoxNomPach.Text = "Печатать номера пачек";
+			customCheckBoxNomPach.UseVisualStyleBackColor = true;
 			// 
 			// customGridControlR
 			// 
@@ -220,8 +234,6 @@
 			NPach.Caption = "Пачка";
 			NPach.FieldName = "n_pach_nz";
 			NPach.Name = "NPach";
-			NPach.Visible = true;
-			NPach.VisibleIndex = 6;
 			// 
 			// customSimpleButtonNabor
 			// 
@@ -263,7 +275,7 @@
 			// 
 			Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
 			Root.GroupBordersVisible = false;
-			Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem4, emptySpaceItem2, emptySpaceItem6, emptySpaceItem7, emptySpaceItem8, layoutControlItem6, emptySpaceItem1 });
+			Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem4, emptySpaceItem2, emptySpaceItem6, emptySpaceItem7, emptySpaceItem8, layoutControlItem6, emptySpaceItem1, layoutControlItem5 });
 			Root.Name = "Root";
 			Root.Size = new System.Drawing.Size(795, 497);
 			Root.TextVisible = false;
@@ -319,7 +331,7 @@
 			// 
 			emptySpaceItem6.Location = new System.Drawing.Point(300, 132);
 			emptySpaceItem6.Name = "emptySpaceItem6";
-			emptySpaceItem6.Size = new System.Drawing.Size(475, 41);
+			emptySpaceItem6.Size = new System.Drawing.Size(237, 41);
 			// 
 			// emptySpaceItem7
 			// 
@@ -346,6 +358,14 @@
 			emptySpaceItem1.Location = new System.Drawing.Point(0, 467);
 			emptySpaceItem1.Name = "emptySpaceItem1";
 			emptySpaceItem1.Size = new System.Drawing.Size(775, 10);
+			// 
+			// layoutControlItem5
+			// 
+			layoutControlItem5.Control = customCheckBoxNomPach;
+			layoutControlItem5.Location = new System.Drawing.Point(537, 132);
+			layoutControlItem5.Name = "layoutControlItem5";
+			layoutControlItem5.Size = new System.Drawing.Size(238, 41);
+			layoutControlItem5.TextVisible = false;
 			// 
 			// gridColumn1
 			// 
@@ -444,6 +464,7 @@
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem8).EndInit();
 			((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
+			((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem3).EndInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem4).EndInit();
 			((System.ComponentModel.ISupportInitialize)emptySpaceItem5).EndInit();
@@ -487,5 +508,7 @@
 		private DevExpress.XtraGrid.Columns.GridColumn NomPach;
 		private DevExpress.XtraGrid.Columns.GridColumn IsSelected;
 		private DevExpress.XtraGrid.Columns.GridColumn NPach;
+		private CustomCheckBox customCheckBoxNomPach;
+		private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
 	}
 }

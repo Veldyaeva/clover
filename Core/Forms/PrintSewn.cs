@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -45,6 +46,8 @@ namespace SewingProduction.Core.Forms
 			//_model = model; 
 			//_proizvType = proizvType;
 			InitializeComponent();
+			//NomZad.Visible = false;
+			//убираем столбцы номеров заданий и пачек (чтобы передался только код)
 		}
 		public PrintSewn(string nom, string nomZad, int proizvType)
 		{
@@ -52,25 +55,64 @@ namespace SewingProduction.Core.Forms
 			_nomZad = nomZad;
 			_proizvType = proizvType;
 			InitializeComponent();
+			//NomZad.Visible = true;
 		}
 		private async void PrintSewn_Load(object sender, EventArgs e)
 		{
 			gridViewR.ShowLoadingPanel();
 			try
 			{
-
-				customGridControlR.DataSource = await _printSewnDataService.GetViewRzuRzv(
+				var list = await _printSewnDataService.GetViewRzuRzv(
 					_nomZad ?? null,
 					_nom ?? null,
 					_kod ?? null
-					);
+				);
+
+				if (IsOpenByKod())
+				{
+					list = LeaveFirstRowForEachModel(list);
+				}
+
+				customGridControlR.DataSource = list;
+				ConfigureGridView();
 			}
 			finally
 			{
 				gridViewR.HideLoadingPanel();
 			}
 		}
+		private bool IsOpenByKod()
+		{
+			return !string.IsNullOrWhiteSpace(_kod);
+		}
+		//группировка по модели
+		private List<ViewRzuRzv> LeaveFirstRowForEachModel(List<ViewRzuRzv> source)
+		{
+			if (source == null || source.Count == 0)
+				return new List<ViewRzuRzv>();
 
+			return source
+				.OrderBy(x => x.mod ?? string.Empty)
+				.ThenBy(x => x.nom_zad ?? string.Empty)
+				.ThenBy(x => x.nom_pach ?? 0)
+				.GroupBy(x => x.mod ?? string.Empty)
+				.Select(g => g.First())
+				.ToList();
+		}
+		private void ConfigureGridView()
+		{
+			var colNomZad = gridViewR.Columns["nom_zad"];
+			var colNomPach = gridViewR.Columns["nom_pach"];
+
+			if (IsOpenByKod())
+			{
+				if (colNomZad != null)
+					colNomZad.Visible = false; 
+				if (colNomPach != null)
+					colNomPach.Visible = false;
+			}
+
+		}
 		#region широкие ЭЙС, Клевер (новый)
 		private void customSimpleButtonACE_Click(object sender, EventArgs e)
 		{
@@ -103,23 +145,35 @@ namespace SewingProduction.Core.Forms
 			{
 				string nomZad = row.nom_zad?.ToString() ?? string.Empty;
 				string nom = row.nom_pach?.ToString() ?? string.Empty;
+				string kod = row.kod_izd?.ToString() ?? string.Empty;
 				int proizvType = row.proizvType ?? 0;
 
-				if (string.IsNullOrWhiteSpace(nomZad) || string.IsNullOrWhiteSpace(nom))
-					continue;
+				Debug.WriteLine("nomZad " + nomZad);
+				Debug.WriteLine("nom " + nom);
+				Debug.WriteLine("kod " + kod);
+				Debug.WriteLine("_kod " + _kod);
 
 				VshivkiReport report1 = new VshivkiReport();
-				requestParameters(report1, nomZad, nom, proizvType, izdType);
+				if (string.IsNullOrWhiteSpace(_kod))
+					requestParameters(report1, proizvType, izdType, nomZad, nom, "0");
+				else
+					requestParameters(report1, proizvType, izdType, nomZad, "0", kod);
 				ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
 				reportPrintTool1.ShowPreviewDialog();
 
-				VshivkiReportHol report2 = new VshivkiReportHol();
-				requestParameters(report2, nomZad, nom, proizvType, izdType);
-				ReportPrintTool reportPrintTool2 = new ReportPrintTool(report2);
-				reportPrintTool2.ShowPreviewDialog();
+				if (customCheckBoxNomPach.Checked)
+				{
+					VshivkiReportHol report2 = new VshivkiReportHol();
+					if (string.IsNullOrWhiteSpace(kod))
+						requestParameters(report2, proizvType, izdType, nomZad, nom);
+					else
+						requestParameters(report2, proizvType, izdType, kod: kod);
+					ReportPrintTool reportPrintTool2 = new ReportPrintTool(report2);
+					reportPrintTool2.ShowPreviewDialog();
+				}
 			}
 		}
-		private void requestParameters(XtraReport report, string nomZad, string nom, int proizvType, int izdType)
+		private void requestParameters(XtraReport report, int proizvType, int izdType, string nomZad = null, string nom = null, string kod = null)
 		{
 			report.RequestParameters = false;
 
@@ -127,6 +181,7 @@ namespace SewingProduction.Core.Forms
 			SetParameter(report, "_nom", null);
 			SetParameter(report, "_proizvType", null);
 			SetParameter(report, "_izdType", null);
+			SetParameter(report, "_kod", null);
 
 			if (!string.IsNullOrWhiteSpace(nomZad) && !string.IsNullOrWhiteSpace(nom))
 			{
@@ -134,6 +189,7 @@ namespace SewingProduction.Core.Forms
 				SetParameter(report, "_nom", Convert.ToInt32(nom));
 				SetParameter(report, "_proizvType", proizvType);
 				SetParameter(report, "_izdType", izdType);
+				SetParameter(report, "_kod", kod);
 			}
 		}
 		private void SetParameter(XtraReport report, string name, object value)
