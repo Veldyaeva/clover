@@ -226,7 +226,7 @@ namespace SewingProduction
         private void barBtnPublicArticul_ItemClick(object sender, ItemClickEventArgs e)
         {
             var report = new PrintPublicArticul();
-            report.ShowPreviewDialog(); 
+            report.ShowPreviewDialog();
         }
         #endregion
         #region Табель
@@ -410,6 +410,13 @@ namespace SewingProduction
             OpenForm(new FrmExchangeManager(_user), e.Item);
         }
 
+        #region нормы ниток
+        private void barThreadNorm_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenForm(new ThreadNormsForm(_user), e.Item);
+
+        }
+        #endregion
         //private void barButtonTSDAdmin_ItemClick(object sender, ItemClickEventArgs e)
         //{
         //    OpenForm(new TSDAccessManagement(CurrentUser.User), e.Item);

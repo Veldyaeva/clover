@@ -319,6 +319,9 @@
     <Compile Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.UiState.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\TeamWork\Forms\ThreadNormsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\UserDistribution\Forms\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -482,6 +485,9 @@
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\TimeSheetReportSkladi.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\TimeSheetReportZl.cs">
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\VshivkiReport.cs">
