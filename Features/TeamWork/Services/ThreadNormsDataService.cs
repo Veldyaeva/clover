@@ -7,7 +7,9 @@ using SewingProduction.Models;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
-using System.Runtime.ConstrainedExecution;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace SewingProduction.Features.TeamWork.Services
@@ -15,12 +17,18 @@ namespace SewingProduction.Features.TeamWork.Services
 
     internal sealed class ThreadNormsDataService
     {
-        private readonly DbService _dbService;
-        private bool? _threadNormsSaveHasKompNameParameter;
+        private const string ThreadNormsTableName = "cfn.confection_norm_nitki";
+        private const string ThreadNormsKeyColumn = "id";
 
-        public ThreadNormsDataService(DbService dbService, ILogger logger)
+        private readonly DbService _dbService;
+        private readonly DatabaseHelperSQL _dbHelper;
+        private readonly BulkHelper _bulkHelper = new BulkHelper();
+        private HashSet<string> _threadNormsTableColumns;
+
+        public ThreadNormsDataService(DbService dbService, DatabaseHelperSQL dbHelper, ILogger logger)
         {
-            _dbService = dbService;
+            _dbService = dbService ?? throw new ArgumentNullException(nameof(dbService));
+            _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
         }
 
         public Task<List<ThreadAssortModel>> LoadAssortsAsync()
@@ -55,29 +63,86 @@ namespace SewingProduction.Features.TeamWork.Services
         }
         public async Task<int> SaveAsync(ThreadNormDbRow row)
         {
-            var p = new DynamicParameters();
-            p.AddDynamicParams(new
-            {
-                row.id,
-                row.men,
-                row.tg_id_n,
-                row.ta_id,
-                row.norm,
-                row.kod_dr,
-                row.kod3,
-                row.kod_art,
-                row.date_change
-            });
+            if (row == null) throw new ArgumentNullException(nameof(row));
 
-            if (await ThreadNormsSaveSupportsComputerNameAsync())
+            await SaveAsync(new[] { row });
+            return row.id;
+        }
+
+        public async Task SaveAsync(IReadOnlyCollection<ThreadNormDbRow> rows)
+        {
+            if (rows == null) throw new ArgumentNullException(nameof(rows));
+            if (rows.Count == 0) return;
+
+            foreach (var row in rows)
             {
-                p.Add("@komp_change", row.date_change.HasValue ? Environment.MachineName : null);
+                row.komp_change = row.date_change.HasValue ? Environment.MachineName : null;
             }
 
-            return await _dbService.ExecuteScalarProcedureAsync<int>(
-                "cfn.ThreadNorms_Save",p
-               );
+            var rowsToInsert = rows.Where(x => x.id <= 0).ToList();
+            var rowsToUpdate = rows.Where(x => x.id > 0).ToList();
+            var excludeColumns = await GetThreadNormBulkExcludeColumnsAsync();
+
+            using (var connection = _dbHelper.GetConnection())
+            using (var transaction = connection.BeginTransaction())
+            {
+                try
+                {
+                    if (rowsToInsert.Count > 0)
+                    {
+                        _bulkHelper.BulkInsert(
+                            connection,
+                            rowsToInsert,
+                            ThreadNormsTableName,
+                            new[] { ThreadNormsKeyColumn },
+                            transaction,
+                            excludeColumns: excludeColumns);
+                    }
+
+                    if (rowsToUpdate.Count > 0)
+                    {
+                        _bulkHelper.BulkUpdate(
+                            connection,
+                            rowsToUpdate,
+                            ThreadNormsTableName,
+                            new[] { ThreadNormsKeyColumn },
+                            transaction,
+                            excludeColumns: excludeColumns);
+                    }
+
+                   transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+                try
+                {
+                    var p = new DynamicParameters();
+                    p.AddDynamicParams(new
+                    {
+                        rowsToUpdate[0].id,
+                        rowsToUpdate[0].men,
+                        rowsToUpdate[0].tg_id_n,
+                        rowsToUpdate[0].ta_id,
+                        rowsToUpdate[0].norm,
+                        rowsToUpdate[0].kod_dr,
+                        rowsToUpdate[0].kod3,
+                        rowsToUpdate[0].kod_art,
+                        rowsToUpdate[0].date_change
+                    });
+
+
+                    await _dbService.ExecuteScalarProcedureAsync<int>(
+                   "cfn.ThreadNorms_Save", p);
+                }
+                catch (Exception ex) {
+                    Debug.WriteLine(ex);
+                }
+            }
         }
+
         public Task DeleteAsync(ThreadNormRow row)
         {
             var p = new DynamicParameters();
@@ -87,35 +152,53 @@ namespace SewingProduction.Features.TeamWork.Services
                 p);
         }
 
-        private async Task<bool> ThreadNormsSaveSupportsComputerNameAsync()
+        private async Task<HashSet<string>> GetThreadNormBulkExcludeColumnsAsync()
         {
-            if (_threadNormsSaveHasKompNameParameter.HasValue)
+            var tableColumns = await GetThreadNormsTableColumnsAsync();
+            var modelColumns = typeof(ThreadNormDbRow)
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Select(x => x.Name);
+
+            return modelColumns
+                .Where(x => !tableColumns.Contains(x))
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+        }
+
+        private async Task<HashSet<string>> GetThreadNormsTableColumnsAsync()
+        {
+            if (_threadNormsTableColumns != null)
             {
-                return _threadNormsSaveHasKompNameParameter.Value;
+                return _threadNormsTableColumns;
             }
 
             const string query = @"
-SELECT TOP (1) 1
-FROM sys.parameters p
+SELECT c.name
+FROM sys.columns c
 INNER JOIN sys.objects o
-    ON o.object_id = p.object_id
+    ON o.object_id = c.object_id
 INNER JOIN sys.schemas s
     ON s.schema_id = o.schema_id
 WHERE s.name = @SchemaName
-  AND o.name = @ProcedureName
-  AND p.name = @ParameterName;";
+  AND o.name = @TableName;";
 
-            var result = await _dbService.GetFirstOrDefaultAsync<int?>(
+            var columns = await _dbService.GetListAsync<string>(
                 query,
                 new
                 {
                     SchemaName = "cfn",
-                    ProcedureName = "ThreadNorms_Save",
-                    ParameterName = "@komp_change"
+                    TableName = "confection_norm_nitki"
                 });
 
-            _threadNormsSaveHasKompNameParameter = result.HasValue;
-            return _threadNormsSaveHasKompNameParameter.Value;
+            _threadNormsTableColumns = (columns ?? new List<string>())
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+            if (!_threadNormsTableColumns.Contains(ThreadNormsKeyColumn))
+            {
+                throw new InvalidOperationException(
+                    $"В таблице {ThreadNormsTableName} не найден ключевой столбец {ThreadNormsKeyColumn}.");
+            }
+
+            return _threadNormsTableColumns;
         }
     }
 }

@@ -45,8 +45,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             InitializeComponent();
             CaptureDesignerVisibleColumns();
 
-            var dbService = new DbService(new DatabaseHelperSQL());
-            _dataService = new ThreadNormsDataService(dbService, _logger);
+            var dbHelper = new DatabaseHelperSQL();
+            var dbService = new DbService(dbHelper);
+            _dataService = new ThreadNormsDataService(dbService, dbHelper, _logger);
             _copyNotificationToolTip.IsBalloon = true;
             _copyNotificationToolTip.ToolTipIcon = ToolTipIcon.Info;
             _copyNotificationToolTip.ToolTipTitle = "Копирование норм ниток";
@@ -332,12 +333,17 @@ namespace SewingProduction.Features.TeamWork.Forms
                 return true;
             }
 
-            foreach (var row in changedRows)
+            var dbRows = changedRows
+                .Select(ThreadNormDbRow.ToDbRow)
+                .ToList();
+
+            await _dataService.SaveAsync(dbRows);
+
+            for (int i = 0; i < changedRows.Count; i++)
             {
-                var dbRow = ThreadNormDbRow.ToDbRow(row);
-                row.id = await _dataService.SaveAsync(dbRow);
-                row.IsNew = false;
-                row.IsModified = false;
+                changedRows[i].id = dbRows[i].id;
+                changedRows[i].IsNew = false;
+                changedRows[i].IsModified = false;
             }
 
             await LoadRowsAsync();
