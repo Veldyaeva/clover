@@ -30,7 +30,7 @@ namespace SewingProduction.form
 		private void InitializeComponent()
 		{
 			components = new System.ComponentModel.Container();
-			DevExpress.Utils.Drawing.StubGlyphOptions stubGlyphOptions2 = new DevExpress.Utils.Drawing.StubGlyphOptions();
+			DevExpress.Utils.Drawing.StubGlyphOptions stubGlyphOptions1 = new DevExpress.Utils.Drawing.StubGlyphOptions();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpravOborud));
 			oborudGrid = new DevExpress.XtraGrid.GridControl();
 			oborudList = new System.Windows.Forms.BindingSource(components);
@@ -281,7 +281,7 @@ namespace SewingProduction.form
 			col_text_ob.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			col_text_ob.AppearanceHeader.Options.UseTextOptions = true;
 			col_text_ob.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			behaviorManager1.SetBehaviors(col_text_ob, new DevExpress.Utils.Behaviors.Behavior[] { DevExpress.Utils.Behaviors.Common.StubGlyphBehavior.Create(typeof(DevExpress.XtraGrid.Views.Grid.BehaviorSource.StubGlyphBehaviorSourceForGridColumn), stubGlyphOptions2, new System.Drawing.Size(16, 16)) });
+			behaviorManager1.SetBehaviors(col_text_ob, new DevExpress.Utils.Behaviors.Behavior[] { DevExpress.Utils.Behaviors.Common.StubGlyphBehavior.Create(typeof(DevExpress.XtraGrid.Views.Grid.BehaviorSource.StubGlyphBehaviorSourceForGridColumn), stubGlyphOptions1, new System.Drawing.Size(16, 16)) });
 			col_text_ob.Caption = "Вид оборудования  (для РТ)";
 			col_text_ob.FieldName = "text_ob";
 			col_text_ob.MinWidth = 23;
