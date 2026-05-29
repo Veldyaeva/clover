@@ -127,7 +127,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView.Columns.AddRange(new GridColumn[] { colCategory, colCategoryName, colGroupName, colClassName, colTatName, colAssort, colThreadCode, gridColumn1, colNorm, colApproved, colDateChange, colId, colTcId, colTgId, colThreadDisplay });
             gridView.GridControl = gridControl;
             gridView.Name = "gridView";
-            gridView.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDown;
+            gridView.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDownFocused;
             gridView.OptionsNavigation.AutoFocusNewRow = true;
             gridView.OptionsView.ShowAutoFilterRow = true;
             gridView.OptionsView.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;

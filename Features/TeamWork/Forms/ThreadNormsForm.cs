@@ -47,7 +47,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             var dbHelper = new DatabaseHelperSQL();
             var dbService = new DbService(dbHelper);
-            _dataService = new ThreadNormsDataService(dbService, dbHelper, _logger);
+            _dataService = new ThreadNormsDataService(dbService, _logger);
             _copyNotificationToolTip.IsBalloon = true;
             _copyNotificationToolTip.ToolTipIcon = ToolTipIcon.Info;
             _copyNotificationToolTip.ToolTipTitle = "Копирование норм ниток";
@@ -302,6 +302,59 @@ namespace SewingProduction.Features.TeamWork.Forms
             bindingSource.ResetBindings(false);
         }
 
+        //private async Task<bool> SaveInternalAsync(bool showSuccessMessage)
+        //{
+        //    gridView.CloseEditor();
+        //    gridView.UpdateCurrentRow();
+
+        //    var invalid = _rows
+        //        .Select(ValidateRow)
+        //        .Where(result => !string.IsNullOrWhiteSpace(result.error))
+        //        .ToList();
+
+        //    if (invalid.Count > 0)
+        //    {
+        //        MessageBox.Show(invalid[0].error, "Валидация", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        return false;
+        //    }
+
+        //    if (!ValidateDuplicates())
+        //    {
+        //        return false;
+        //    }
+        //    var changedRows = _rows.Where(x => x.IsNew || x.IsModified).ToList();
+        //    if (changedRows.Count == 0)
+        //    {
+        //        if (showSuccessMessage)
+        //        {
+        //            MessageBox.Show("Изменений для сохранения нет.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        }
+
+        //        return true;
+        //    }
+
+        //    var dbRows = changedRows
+        //        .Select(ThreadNormDbRow.ToDbRow)
+        //        .ToList();
+
+        //    await _dataService.SaveAsync(dbRows);
+
+        //    for (int i = 0; i < changedRows.Count; i++)
+        //    {
+        //        changedRows[i].id = dbRows[i].id;
+        //        changedRows[i].IsNew = false;
+        //        changedRows[i].IsModified = false;
+        //    }
+
+        //    await LoadRowsAsync();
+        //    if (showSuccessMessage)
+        //    {
+        //        MessageBox.Show("Изменения сохранены.", "Справочник норм ниток", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //    }
+
+        //    return true;
+        //}
+
         private async Task<bool> SaveInternalAsync(bool showSuccessMessage)
         {
             gridView.CloseEditor();
@@ -333,17 +386,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                 return true;
             }
 
-            var dbRows = changedRows
-                .Select(ThreadNormDbRow.ToDbRow)
-                .ToList();
-
-            await _dataService.SaveAsync(dbRows);
-
-            for (int i = 0; i < changedRows.Count; i++)
+            foreach (var row in changedRows)
             {
-                changedRows[i].id = dbRows[i].id;
-                changedRows[i].IsNew = false;
-                changedRows[i].IsModified = false;
+                var dbRow = ThreadNormDbRow.ToDbRow(row);
+                row.id = await _dataService.SaveAsync(dbRow);
+                row.IsNew = false;
+                row.IsModified = false;
             }
 
             await LoadRowsAsync();
@@ -354,6 +402,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             return true;
         }
+
         private bool ValidateDuplicates()
         {
             var duplicates = _rows
