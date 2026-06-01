@@ -21,7 +21,6 @@ namespace SewingProduction.Features.Articul.Service
         public ArticulDataService()
         {
             _dbService = new DbService(new DatabaseHelperSQL());
-            //_dbHelper = new DatabaseHelper(); 
         }
 
         public async Task<List<AddNewKopmlModel>> GetArticulsListAsync()
