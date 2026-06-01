@@ -1,4 +1,4 @@
-14:38:11:552	[PermissionHelper] customGroupBoxFast: Просмотр=False, Редактор=True
+﻿14:38:11:552	[PermissionHelper] customGroupBoxFast: Просмотр=False, Редактор=True
 14:38:11:552	[Доступ Control] Объект: listBoxFast, Просмотр: False, Редактор: True
 14:38:11:552	[PermissionHelper] listBoxFast: Просмотр=False, Редактор=True
 14:38:11:552	[Доступ Control] Объект: customGroupBoxRole, Просмотр: False, Редактор: True
@@ -380,7 +380,7 @@
 14:38:24:605	ExpandGroupsOnIdle executed
 14:38:29:349	"SewingProduction.exe" (CoreCLR: clrhost). Загружено "C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App\8.0.23\System.Windows.Extensions.dll". Загрузка символов отключена параметром включения и исключения.
 14:38:31:349	LOAD: method=SewingProduction.Core.helpers.ServiceBrokerController+<>c__DisplayClass16_0.<InitCoreAsync>b__2, target=SewingProduction.Core.helpers.ServiceBrokerController+<>c__DisplayClass16_0
-14:38:33:099	[ServiceBrokerHelper] Source loaded: object=GetPlanZagrVyazNorm_ByTab3, rows=15
+14:38:33:099	[ServiceBrokerHelper] Source loaded: object=GetPlanZagrVyazNorm_ByTab1, rows=15
 14:38:33:099	LOAD: method=SewingProduction.Core.helpers.ServiceBrokerController+<>c__DisplayClass16_0.<InitCoreAsync>b__2, target=SewingProduction.Core.helpers.ServiceBrokerController+<>c__DisplayClass16_0
 14:38:33:099	[ServiceBrokerHelper] Source loaded: object=knitWorkingShiftNewCurrentSmen_view, rows=8
 14:38:33:099	[ServiceBrokerHelper] Rebuild completed: tables=3, deps=3, objects=2

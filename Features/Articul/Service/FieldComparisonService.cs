@@ -333,5 +333,7 @@ namespace SewingProduction.Features.Articul.Service
             { MessageBox.Show(ex.Message.ToString()); return Array.Empty<FieldComparisonItem>(); }
         }
     }
+
+
 }
 

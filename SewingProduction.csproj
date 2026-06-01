@@ -206,10 +206,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\AppIcons\favicon.ico" />
-    <Content Include="Resources\cat-cat-rainbow.gif" />
-    <EmbeddedResource Include="Resources\cat_square.gif">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
     <Content Include="Resources\loading_dude.gif" />
   </ItemGroup>
 
@@ -236,9 +232,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Core\Class\CustomControls\CustomLayoutControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomLayoutControl.cs" />
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -249,9 +243,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Update="Report\TimeSheetReportZl.cs">
-      <SubType>XtraReport</SubType>
-    </Compile>
+    <Compile Update="Report\TimeSheetReportZl.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -267,6 +259,9 @@
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Resources\cat_square.gif">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="Resources\free-icon-cursor-6825137.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

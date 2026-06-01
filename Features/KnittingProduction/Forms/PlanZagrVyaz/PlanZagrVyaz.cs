@@ -517,19 +517,29 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                             case 1:
                                 advBandedGridViewSmenZadany.TopRowIndex = xTopRowIndex;
                                 advBandedGridViewSmenZadany.FocusedRowHandle = xFocusedRowHandle;
+                                SmenZadanyFocusedRowChanged(advBandedGridViewSmenZadany, advBandedGridViewSmenZadany.FocusedRowHandle); // наряд-задание ВЗП
                                 break;
                             case 2:
                             case 3:
                                 gridViewSmenZadanyOtp.TopRowIndex = xTopRowIndex;
                                 gridViewSmenZadanyOtp.FocusedRowHandle = xFocusedRowHandle;
+                                SmenZadanyFocusedRowChanged(gridViewSmenZadanyOtp, gridViewSmenZadanyOtp.FocusedRowHandle); // наряд-задание Отп, РЦ
                                 break;
                         }
                     },
 
                     ["knitWorkingShiftNewCurrentSmen_view"] = async () =>
                     {
-                        SmenZadanyFocusedRowChanged(advBandedGridViewSmenZadany, advBandedGridViewSmenZadany.FocusedRowHandle); // наряд-задание ВЗП
-                        SmenZadanyFocusedRowChanged(gridViewSmenZadanyOtp, gridViewSmenZadanyOtp.FocusedRowHandle); // наряд-задание Отп, РЦ
+                        switch (vyazPodrKod)
+                        {
+                            case 1:
+                                SmenZadanyFocusedRowChanged(advBandedGridViewSmenZadany, advBandedGridViewSmenZadany.FocusedRowHandle); // наряд-задание ВЗП
+                                break;
+                            case 2:
+                            case 3:
+                                SmenZadanyFocusedRowChanged(gridViewSmenZadanyOtp, gridViewSmenZadanyOtp.FocusedRowHandle); // наряд-задание Отп, РЦ
+                                break;
+                        }
                     },
 
                     ["GetPlanZagrVyazByPachList"] = async () =>
@@ -6186,7 +6196,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     }
                     catch (Exception ex)
                     {
-                        await _logger.LogErrorAsync(ex, $"Ошибка печати накладной");
+                        await _logger.LogErrorAsync(ex, $"Ошибка печати назначений на В/М");
                     }
                     break;
                 case "lcg1LoadDataFromTSD":

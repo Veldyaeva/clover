@@ -1,5 +1,6 @@
 ﻿using SewingProduction.Features.Tabel.Models;
 using SewingProduction.Features.Tabel.Services;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 using System;
@@ -24,7 +25,7 @@ namespace SewingProduction.Features.Tabel.Forms
         int _id;
         int _tabno;
         string _fio;
-        public ChoosePrich(int id, int tabno, string fio)
+        public ChoosePrich(UserClass user,int id, int tabno, string fio) : base(user)
         {
             _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
@@ -36,6 +37,10 @@ namespace SewingProduction.Features.Tabel.Forms
             _fio = fio;
             this.FormBorderStyle = FormBorderStyle.None;
             this.ShowInTaskbar = false;
+        }
+        public ChoosePrich(UserClass User) : base(User)
+        {
+            InitializeComponent();
         }
 
         private async void ChoosePrich_Load(object sender, EventArgs e)

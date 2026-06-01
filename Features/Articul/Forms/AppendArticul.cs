@@ -234,7 +234,6 @@ namespace SewingProduction.Features.Articul.Forms
 
             if (canLink.IsSuccess)
             {
-
                 switch (_typeCreate)
                 {
                     case 0: // Создание
@@ -245,6 +244,9 @@ namespace SewingProduction.Features.Articul.Forms
 
                         break;
                     case 1: // Настройка для режима стыковки
+
+
+
                         break;
 
                 }

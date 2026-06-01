@@ -73,7 +73,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// Список SQL-объектов для отслеживания через ServiceBroker.
         /// </summary>
         private static readonly IReadOnlyList<string> _sbObjects =
-            new[] { "GetPlanZagrVyazNorm_ByTab3", "knitWorkingShiftNewCurrentSmen_view" };
+            new[] { "GetPlanZagrVyazNorm_ByTab1", "knitWorkingShiftNewCurrentSmen_view" };
         public IReadOnlyList<string> ServiceBrokerObjects => _sbObjects;
         /// <summary>
         /// Приоритеты обновления объектов (чем выше число, тем выше приоритет).
@@ -81,7 +81,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private static readonly IReadOnlyDictionary<string, int> _sbPriorities =
     new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
     {
-        { "GetPlanZagrVyazNorm_ByTab3", 10 },
+        { "GetPlanZagrVyazNorm_ByTab1", 10 },
         { "knitWorkingShiftNewCurrentSmen_view", 10 }
     };
         public IReadOnlyDictionary<string, int> RefreshPriorities => _sbPriorities;
@@ -94,7 +94,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             _ignoredServiceBrokerTables.UnionWith(new[]
             {
-                // GetPlanZagrVyazNorm_ByTab3 traverses broad reference/view dependencies.
+                // GetPlanZagrVyazNorm_ByTab1 traverses broad reference/view dependencies.
                 // Keep broker focused on operational plan/shift data and ignore static/reference sources.
                 "dbo.fio",
                 "dbo.gr_rab_dn",
@@ -159,6 +159,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private Button _adminSettingsButton;
         private CancellationTokenSource? _sbCts;
         private int _serviceBrokerShutdownStarted;
+        private int? _lastLocallyClosedShiftId;
+        private DateTime _lastLocalShiftCloseSuppressUntilUtc;
         
         /// <summary>
         /// Флаг активной смены.
@@ -539,11 +541,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     }
 
                     _sbController.MuteTable(KnitWorkingShiftTable, ShiftBrokerSelfMute);
+                    var closingShiftId = _currentShiftId;
                     var res = await _workSpaceService.CloseShiftAsync(new CloseShiftCommand
                     {
                         ShiftId = _currentShiftId.Value,
                         TabEnd = tabEnd,
-                        MinHours = 12m,
                         UserName = GetShiftAuditUserName()
                     });
 
@@ -592,6 +594,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     await LoadPlanForTabAsync(tabEnd, forceReload: true);
                     await RefreshFioListAsync();
                     ApplyShiftUi(false, null, null);
+                    RememberLocalShiftClose(closingShiftId);
                     return;
                 }
 
@@ -906,19 +909,26 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             BandedGridColumn dateStart = bandedGridColumn18;
             advBandedGridView1.CustomRowCellEdit += (s, e) =>
             {
+                GridView view = (GridView)PlanZagrVyazGridControl.FocusedView;
+                var currentRow = view?.GetRow(e.RowHandle) as KnitterPZVModel;
+                bool isCurrentTabRow =
+                    currentRow != null &&
+                    _currentLoadedTab.HasValue &&
+                    currentRow.pzvTab.HasValue &&
+                    currentRow.pzvTab.Value == _currentLoadedTab.Value;
+
                 if (e.Column != null && e.Column.FieldName == dateStart.FieldName)
                 {
                     var cellValue = e.CellValue;
                     bool isEmpty = cellValue == null ||
                                    cellValue == DBNull.Value ||
                                    (cellValue is DateTime dt && dt == DateTime.MinValue);
-                    e.RepositoryItem = isEmpty ? _pzvDateStartButtonEdit : _pzvDateStartTextEdit;
+                    e.RepositoryItem = isEmpty && isCurrentTabRow ? _pzvDateStartButtonEdit : _pzvDateStartTextEdit;
                 }
                 // Закончено
                 if (e.Column != null && e.Column.FieldName == bandedGridColumn19.FieldName)
                 {
                     // Кнопка "Завершить" показывается ТОЛЬКО если дата начала заполнена и дата окончания пуста
-                    GridView view = (GridView)PlanZagrVyazGridControl.FocusedView;
                     var startValue = view.GetRowCellValue(e.RowHandle, bandedGridColumn18);//advBandedGridView1.GetRowCellValue(e.RowHandle, bandedGridColumn18);
                     bool hasStart = !(startValue == null ||
                                       startValue == DBNull.Value ||
@@ -929,7 +939,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                                       endValue == DBNull.Value ||
                                       (endValue is DateTime edt && edt == DateTime.MinValue);
 
-                    e.RepositoryItem = (hasStart && isEndEmpty) ? _pzvDateEndButtonEdit : _pzvDateEndTextEdit;
+                    e.RepositoryItem = (hasStart && isEndEmpty && isCurrentTabRow) ? _pzvDateEndButtonEdit : _pzvDateEndTextEdit;
                 }
             };
             advBandedGridView1.CustomColumnDisplayText -= AdvBandedGridView1_CustomColumnDisplayText;
@@ -1364,6 +1374,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (row?.pzvID <= 0)
                 return false;
 
+            if (_currentLoadedTab.HasValue)
+            {
+                if (!row.pzvTab.HasValue || row.pzvTab.Value != _currentLoadedTab.Value)
+                {
+                    XtraMessageBox.Show(
+                        this,
+                        "Можно выполнять действие только по операциям, назначенным на текущий табельный номер.",
+                        caption,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return false;
+                }
+            }
+
             return _pzvActionValidator.ShowValidationMessage(MapToPzvOperList(row), validator, caption);
         }
 
@@ -1620,39 +1644,39 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             await ReloadCurrentTabAsync();
         }
 
-        private void InitAdminSettingsButton()
-        {
-            _adminSettingsButton = new Button
-            {
-                Text = "Админка",
-                AutoSize = true,
-                Anchor = AnchorStyles.Top | AnchorStyles.Right,
-                Location = new Point(this.ClientSize.Width - 220, 5)
-            };
-            Controls.Add(_adminSettingsButton);
-            _adminSettingsButton.BringToFront();
-            _adminSettingsButton.Click += (s, e) => ShowAdminSettingsDialog();
-        }
+        //private void InitAdminSettingsButton()
+        //{
+        //    _adminSettingsButton = new Button
+        //    {
+        //        Text = "Админка",
+        //        AutoSize = true,
+        //        Anchor = AnchorStyles.Top | AnchorStyles.Right,
+        //        Location = new Point(this.ClientSize.Width - 220, 5)
+        //    };
+        //    Controls.Add(_adminSettingsButton);
+        //    _adminSettingsButton.BringToFront();
+        //    _adminSettingsButton.Click += (s, e) => ShowAdminSettingsDialog();
+        //}
         #endregion
 
-        private void SetupStatusColumn()
-        {
-            // Индикатор в колонке статуса: часы факт / часы назначено
-            _statusProgressBar = new RepositoryItemProgressBar
-            {
-                Minimum = 0,
-                Maximum = 100,
-                ShowTitle = true,
-                PercentView = true
-            };
+        //private void SetupStatusColumn()
+        //{
+        //    // Индикатор в колонке статуса: часы факт / часы назначено
+        //    _statusProgressBar = new RepositoryItemProgressBar
+        //    {
+        //        Minimum = 0,
+        //        Maximum = 100,
+        //        ShowTitle = true,
+        //        PercentView = true
+        //    };
 
-            gridColumn8.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
-            gridColumn8.UnboundExpression = string.Empty;
-            gridColumn8.ColumnEdit = _statusProgressBar;
+        //    gridColumn8.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
+        //    gridColumn8.UnboundExpression = string.Empty;
+        //    gridColumn8.ColumnEdit = _statusProgressBar;
 
-            bandedGridView3.CustomUnboundColumnData -= BandedGridView3_CustomUnboundColumnData;
-            bandedGridView3.CustomUnboundColumnData += BandedGridView3_CustomUnboundColumnData;
-        }
+        //    bandedGridView3.CustomUnboundColumnData -= BandedGridView3_CustomUnboundColumnData;
+        //    bandedGridView3.CustomUnboundColumnData += BandedGridView3_CustomUnboundColumnData;
+        //}
 
         /// <summary>
         /// Настраивает подсветку текущей строки для bandedGridView3 и advBandedGridView1
@@ -2002,6 +2026,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     return;
                 }
 
+                if (_currentLoadedTab.HasValue && row?.pzvTab.HasValue == true && row.pzvTab.Value != _currentLoadedTab.Value)
+                {
+                    e.Appearance.BackColor = Color.WhiteSmoke;
+                    e.Appearance.BackColor2 = Color.GhostWhite;
+                    e.Appearance.ForeColor = Color.DimGray;
+                    e.Appearance.Options.UseForeColor = true;
+                    e.HighPriority = true;
+                    return;
+                }
+
                 // Подсветка фокусной строки (только если не незавершённая)
                 if (e.RowHandle == view.FocusedRowHandle)
                 {
@@ -2036,6 +2070,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     e.Appearance.BackColor = Color.LightCoral;
                     e.Appearance.BackColor2 = Color.LightCoral;
+                    e.HighPriority = true;
+                    return;
+                }
+
+                if (_currentLoadedTab.HasValue && row?.pzvTab.HasValue == true && row.pzvTab.Value != _currentLoadedTab.Value)
+                {
+                    e.Appearance.BackColor = Color.WhiteSmoke;
+                    e.Appearance.BackColor2 = Color.GhostWhite;
+                    e.Appearance.ForeColor = Color.DimGray;
+                    e.Appearance.Options.UseForeColor = true;
                     e.HighPriority = true;
                     return;
                 }
@@ -2238,15 +2282,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             SetViewState(advBandedGridView1);
         }
 
-        private (int? kwsId, bool onlyUnassigned, decimal maxHours, bool expandByNr, bool includeFinished) GetCurrentPlanQueryOptions()
+        private (int? kwsId, decimal maxHours, bool expandByNr, bool includeFinished) GetCurrentPlanQueryOptions()
         {
             bool isAdmin = _adminToggle?.Checked == true;
             bool isShiftOpen = _isShiftRunning && _currentShiftId.HasValue;
 
             return (
                 kwsId: isShiftOpen ? _currentShiftId : 0,
-                onlyUnassigned: !isShiftOpen && !_showAllAssignedWhenClosed,
-                maxHours: isShiftOpen ? 240m : _maxHoursClosedShift,
+               // onlyUnassigned: !isShiftOpen && !_showAllAssignedWhenClosed,
+                maxHours: isShiftOpen ? 14 : _maxHoursClosedShift,
                 expandByNr: _expandNrToggle?.Checked == true,
                 includeFinished: isAdmin);
         }
@@ -2316,7 +2360,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 tab,
                 options.kwsId,
                 _currentKmaId,
-                options.onlyUnassigned,
+              //  options.onlyUnassigned,
                 options.expandByNr,
                 options.maxHours,
                 includeFinished: options.includeFinished);
@@ -2429,7 +2473,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     LogSuccess($"Получен сигнал обновления для объекта {objectName}.", nameof(RestartDataByObjectNameAsync));
 
                     // Если это наша хранимая процедура плана - перезагружаем план
-                    if (string.Equals(objectName, "GetPlanZagrVyazNorm_ByTab3", StringComparison.OrdinalIgnoreCase)
+                    if (string.Equals(objectName, "GetPlanZagrVyazNorm_ByTab1", StringComparison.OrdinalIgnoreCase)
                         || string.Equals(objectName, "knitWorkingShiftNewCurrentSmen_view", StringComparison.OrdinalIgnoreCase))
                     {
                         if (_currentLoadedTab.HasValue)
@@ -2550,6 +2594,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (!IsMatchingBrokerTable(tableName, KnitWorkingShiftTable))
                 return false;
 
+            if (_sbController.Helper?.IsMutedTable(KnitWorkingShiftTable) == true
+                || _sbController.Helper?.IsMutedTable(tableName) == true)
+            {
+                LogSuccess("Игнорируем локальное broker-обновление смены (self-mute).", nameof(HandleShiftBrokerUpdateAsync));
+                return true;
+            }
+
             var previousShiftId = _currentShiftId;
             var previousTab = _currentLoadedTab;
 
@@ -2583,10 +2634,40 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (_currentShiftId.HasValue && _currentShiftId.Value == previousShiftId.Value)
                 return;
 
+            if (IsLocallyClosedShift(previousShiftId.Value))
+            {
+                LogSuccess(
+                    $"Игнорируем broker-событие закрытия для локально закрытой смены {previousShiftId.Value}.",
+                    nameof(HandleRemoteShiftClosedByBrokerAsync));
+                return;
+            }
+
             LogWarning(
                 $"Смена {previousShiftId.Value} закрыта вне текущей формы. Текущий табель: {previousTab.Value}.",
                 nameof(HandleRemoteShiftClosedByBrokerAsync));
             _ = ShowRemoteShiftClosedSplashAsync();
+        }
+
+        private void RememberLocalShiftClose(int? shiftId)
+        {
+            if (!shiftId.HasValue || shiftId.Value <= 0)
+                return;
+
+            _lastLocallyClosedShiftId = shiftId.Value;
+            _lastLocalShiftCloseSuppressUntilUtc = DateTime.UtcNow.Add(ShiftBrokerSelfMute + ShiftBrokerSelfMute);
+        }
+
+        private bool IsLocallyClosedShift(int shiftId)
+        {
+            if (!_lastLocallyClosedShiftId.HasValue || _lastLocallyClosedShiftId.Value != shiftId)
+                return false;
+
+            if (DateTime.UtcNow <= _lastLocalShiftCloseSuppressUntilUtc)
+                return true;
+
+            _lastLocallyClosedShiftId = null;
+            _lastLocalShiftCloseSuppressUntilUtc = default;
+            return false;
         }
 
         private static bool IsShiftEndBrokerUpdate(string? fieldsChangedCsv)

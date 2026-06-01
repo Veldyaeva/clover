@@ -1,19 +1,21 @@
-﻿using System;
+﻿using DevExpress.Data;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
+using SewingProduction.Extensions;
+using SewingProduction.Features.KnittingProduction.Models;
+using SewingProduction.Features.KnittingProduction.Services;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Helpers;
+using SewingProduction.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.Data;
-using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Grid.ViewInfo;
-using SewingProduction.Extensions;
-using SewingProduction.Features.KnittingProduction.Models;
-using SewingProduction.Features.KnittingProduction.Services;
-using SewingProduction.Helpers;
-using SewingProduction.Services;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
@@ -36,7 +38,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private BindingSource _planSezonZadKnitMachineLoadingSummaryBindingSource;
         private List<PlanSezonZadKnitMachineLoadingSummary> _planSezonZadKnitMachineLoadingSummaryData = new List<PlanSezonZadKnitMachineLoadingSummary>();
 
-        public KnittingMachinesUnitLoading(int xKmlID, string xKmlNumber)
+        public KnittingMachinesUnitLoading(UserClass User, int xKmlID, string xKmlNumber) : base(User)
         {
             InitializeComponent();
             _dbHelper = new DatabaseHelperSQL("ace");
@@ -47,6 +49,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _xKmlNumber = xKmlNumber;
             gridViewPlanSezonZadKnitMachineLoadingSummary.OptionsView.ShowColumnHeaders = false;
 
+        }
+        public KnittingMachinesUnitLoading(UserClass User) : base(User)
+        {
+            InitializeComponent();
         }
         private async Task InitializeBindingsAsync()
         {
