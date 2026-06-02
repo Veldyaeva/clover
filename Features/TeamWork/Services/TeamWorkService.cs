@@ -313,6 +313,10 @@ namespace SewingProduction.Features.TeamWork.Services
 
             try
             {
+                await _transactionBoundary.ExecuteInTransactionAsync(async () =>
+                {
+                    await _unitOfWork.UpdateKitKnittingTimeInMatr(annId);
+                });
                 var approvedAt = DateTime.Now;
                 await _transactionBoundary.ExecuteInTransactionAsync(async () =>
                 {

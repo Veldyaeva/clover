@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Dapper;
 using SewingProduction.Core.Class.Settings;
 
@@ -320,6 +321,12 @@ namespace SewingProduction.Helpers
             {
                 await operation.Invoke();
                 await CommitTransactionAsync();
+            }
+            catch (SqlException sqlEx)
+            {
+                await RollbackTransactionAsync();
+                MessageBox.Show(sqlEx.Message, "Ошибка", MessageBoxButtons.OK);
+                throw;
             }
             catch
             {
