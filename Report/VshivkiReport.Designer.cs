@@ -29,27 +29,27 @@ namespace SewingProduction.Report
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			DevExpress.DataAccess.ConnectionParameters.MsSqlConnectionParameters msSqlConnectionParameters1 = new DevExpress.DataAccess.ConnectionParameters.MsSqlConnectionParameters();
-			DevExpress.DataAccess.Sql.StoredProcQuery storedProcQuery1 = new DevExpress.DataAccess.Sql.StoredProcQuery();
-			DevExpress.DataAccess.Sql.QueryParameter queryParameter1 = new DevExpress.DataAccess.Sql.QueryParameter();
-			DevExpress.DataAccess.Sql.QueryParameter queryParameter2 = new DevExpress.DataAccess.Sql.QueryParameter();
-			DevExpress.DataAccess.Sql.QueryParameter queryParameter3 = new DevExpress.DataAccess.Sql.QueryParameter();
-			DevExpress.DataAccess.Sql.QueryParameter queryParameter4 = new DevExpress.DataAccess.Sql.QueryParameter();
+			DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings4 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
+			DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings5 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
+			DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings6 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
+			DevExpress.DataAccess.Sql.StoredProcQuery storedProcQuery4 = new DevExpress.DataAccess.Sql.StoredProcQuery();
+			DevExpress.DataAccess.Sql.QueryParameter queryParameter15 = new DevExpress.DataAccess.Sql.QueryParameter();
+			DevExpress.DataAccess.Sql.QueryParameter queryParameter16 = new DevExpress.DataAccess.Sql.QueryParameter();
+			DevExpress.DataAccess.Sql.QueryParameter queryParameter17 = new DevExpress.DataAccess.Sql.QueryParameter();
+			DevExpress.DataAccess.Sql.QueryParameter queryParameter18 = new DevExpress.DataAccess.Sql.QueryParameter();
+			DevExpress.DataAccess.Sql.QueryParameter queryParameter19 = new DevExpress.DataAccess.Sql.QueryParameter();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VshivkiReport));
-			DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings1 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
-			DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings2 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
-			DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings3 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
-			DevExpress.DataAccess.Sql.StoredProcQuery storedProcQuery2 = new DevExpress.DataAccess.Sql.StoredProcQuery();
-			DevExpress.DataAccess.Sql.QueryParameter queryParameter5 = new DevExpress.DataAccess.Sql.QueryParameter();
-			DevExpress.DataAccess.Sql.QueryParameter queryParameter6 = new DevExpress.DataAccess.Sql.QueryParameter();
-			DevExpress.DataAccess.Sql.QueryParameter queryParameter7 = new DevExpress.DataAccess.Sql.QueryParameter();
-			DevExpress.DataAccess.Sql.QueryParameter queryParameter8 = new DevExpress.DataAccess.Sql.QueryParameter();
-			DevExpress.DataAccess.Sql.QueryParameter queryParameter9 = new DevExpress.DataAccess.Sql.QueryParameter();
-			DevExpress.DataAccess.Sql.StoredProcQuery storedProcQuery3 = new DevExpress.DataAccess.Sql.StoredProcQuery();
-			DevExpress.DataAccess.Sql.QueryParameter queryParameter10 = new DevExpress.DataAccess.Sql.QueryParameter();
-			DevExpress.DataAccess.Sql.QueryParameter queryParameter11 = new DevExpress.DataAccess.Sql.QueryParameter();
-			DevExpress.DataAccess.Sql.QueryParameter queryParameter12 = new DevExpress.DataAccess.Sql.QueryParameter();
-			DevExpress.DataAccess.Sql.QueryParameter queryParameter13 = new DevExpress.DataAccess.Sql.QueryParameter();
+			DevExpress.DataAccess.Sql.StoredProcQuery storedProcQuery5 = new DevExpress.DataAccess.Sql.StoredProcQuery();
+			DevExpress.DataAccess.Sql.QueryParameter queryParameter20 = new DevExpress.DataAccess.Sql.QueryParameter();
+			DevExpress.DataAccess.Sql.QueryParameter queryParameter21 = new DevExpress.DataAccess.Sql.QueryParameter();
+			DevExpress.DataAccess.Sql.QueryParameter queryParameter22 = new DevExpress.DataAccess.Sql.QueryParameter();
+			DevExpress.DataAccess.Sql.QueryParameter queryParameter23 = new DevExpress.DataAccess.Sql.QueryParameter();
+			DevExpress.DataAccess.Sql.StoredProcQuery storedProcQuery6 = new DevExpress.DataAccess.Sql.StoredProcQuery();
+			DevExpress.DataAccess.Sql.QueryParameter queryParameter24 = new DevExpress.DataAccess.Sql.QueryParameter();
+			DevExpress.DataAccess.Sql.QueryParameter queryParameter25 = new DevExpress.DataAccess.Sql.QueryParameter();
+			DevExpress.DataAccess.Sql.QueryParameter queryParameter26 = new DevExpress.DataAccess.Sql.QueryParameter();
+			DevExpress.DataAccess.Sql.QueryParameter queryParameter27 = new DevExpress.DataAccess.Sql.QueryParameter();
+			DevExpress.DataAccess.Sql.QueryParameter queryParameter28 = new DevExpress.DataAccess.Sql.QueryParameter();
 			this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
 			this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
 			this.Detail = new DevExpress.XtraReports.UI.DetailBand();
@@ -75,7 +75,6 @@ namespace SewingProduction.Report
 			this.xrTableCell6 = new DevExpress.XtraReports.UI.XRTableCell();
 			this.xrLine1 = new DevExpress.XtraReports.UI.XRLine();
 			this.xrPictureBox1 = new DevExpress.XtraReports.UI.XRPictureBox();
-			this.sqlDataSource1 = new DevExpress.DataAccess.Sql.SqlDataSource(this.components);
 			this.Title = new DevExpress.XtraReports.UI.XRControlStyle();
 			this.DetailCaption1 = new DevExpress.XtraReports.UI.XRControlStyle();
 			this.DetailData1 = new DevExpress.XtraReports.UI.XRControlStyle();
@@ -87,6 +86,9 @@ namespace SewingProduction.Report
 			this.sqlDataSource2 = new DevExpress.DataAccess.Sql.SqlDataSource(this.components);
 			this.sqlDataSource3 = new DevExpress.DataAccess.Sql.SqlDataSource(this.components);
 			this._izdType = new DevExpress.XtraReports.Parameters.Parameter();
+			this._kod = new DevExpress.XtraReports.Parameters.Parameter();
+			this.sqlDataSource1 = new DevExpress.DataAccess.Sql.SqlDataSource(this.components);
+			this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
 			((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
 			// 
@@ -105,6 +107,7 @@ namespace SewingProduction.Report
 			// Detail
 			// 
 			this.Detail.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrLabel1,
             this.xrLabel6,
             this.xrLabel5,
             this.xrLabel4,
@@ -244,7 +247,7 @@ namespace SewingProduction.Report
 			// xrTable1
 			// 
 			this.xrTable1.Dpi = 25.4F;
-			this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 13.5F);
+			this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(0.006502301F, 17.20417F);
 			this.xrTable1.Name = "xrTable1";
 			this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(0.5291667F, 0.5291667F, 0F, 0F, 25.4F);
 			this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -405,44 +408,10 @@ namespace SewingProduction.Report
 			this.xrPictureBox1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "ImageUrl", "[logPath]")});
 			this.xrPictureBox1.ImageAlignment = DevExpress.XtraPrinting.ImageAlignment.MiddleCenter;
-			this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(3.524536F, 5.820833F);
+			this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(3.524536F, 4.504164F);
 			this.xrPictureBox1.Name = "xrPictureBox1";
 			this.xrPictureBox1.SizeF = new System.Drawing.SizeF(17.05093F, 8.995836F);
 			this.xrPictureBox1.Sizing = DevExpress.XtraPrinting.ImageSizeMode.ZoomImage;
-			// 
-			// sqlDataSource1
-			// 
-			this.sqlDataSource1.ConnectionName = "ACEConnectionString";
-			msSqlConnectionParameters1.AuthorizationType = DevExpress.DataAccess.ConnectionParameters.MsSqlAuthorizationType.SqlServer;
-			msSqlConnectionParameters1.DatabaseName = "ace";
-			msSqlConnectionParameters1.Encrypt = DevExpress.Utils.DefaultBoolean.False;
-			msSqlConnectionParameters1.Password = "kf,bhbyn";
-			msSqlConnectionParameters1.ServerName = "DBFSV\\DBF2008";
-			msSqlConnectionParameters1.UserName = "sa";
-			this.sqlDataSource1.ConnectionParameters = msSqlConnectionParameters1;
-			this.sqlDataSource1.Name = "sqlDataSource1";
-			storedProcQuery1.Name = "Query";
-			queryParameter1.Name = "@xNomZad";
-			queryParameter1.Type = typeof(global::DevExpress.DataAccess.Expression);
-			queryParameter1.Value = new DevExpress.DataAccess.Expression("?_nomZad", typeof(string));
-			queryParameter2.Name = "@xNom";
-			queryParameter2.Type = typeof(global::DevExpress.DataAccess.Expression);
-			queryParameter2.Value = new DevExpress.DataAccess.Expression("?_nom", typeof(int));
-			queryParameter3.Name = "@xProizvType";
-			queryParameter3.Type = typeof(global::DevExpress.DataAccess.Expression);
-			queryParameter3.Value = new DevExpress.DataAccess.Expression("?_proizvType", typeof(int));
-			queryParameter4.Name = "@xIzdType";
-			queryParameter4.Type = typeof(global::DevExpress.DataAccess.Expression);
-			queryParameter4.Value = new DevExpress.DataAccess.Expression("0", typeof(int));
-			storedProcQuery1.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
-            queryParameter1,
-            queryParameter2,
-            queryParameter3,
-            queryParameter4});
-			storedProcQuery1.StoredProcName = "getVshivkiInfo";
-			this.sqlDataSource1.Queries.AddRange(new DevExpress.DataAccess.Sql.SqlQuery[] {
-            storedProcQuery1});
-			this.sqlDataSource1.ResultSchemaSerializable = resources.GetString("sqlDataSource1.ResultSchemaSerializable");
 			// 
 			// Title
 			// 
@@ -495,20 +464,16 @@ namespace SewingProduction.Report
 			this._nomZad.AllowNull = true;
 			this._nomZad.Description = "nom_zad";
 			this._nomZad.Name = "_nomZad";
-			staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("102505474", "носки 102505474"));
-			staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("362501209", "трусы 362501209"));
-			this._nomZad.ValueSourceSettings = staticListLookUpSettings1;
+			staticListLookUpSettings4.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("102505474", "носки 102505474"));
+			staticListLookUpSettings4.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("362501209", "трусы 362501209"));
+			this._nomZad.ValueSourceSettings = staticListLookUpSettings4;
 			// 
 			// _nom
 			// 
 			this._nom.AllowNull = true;
 			this._nom.Description = "nom";
 			this._nom.Name = "_nom";
-			this._nom.Type = typeof(int);
-			this._nom.ValueInfo = "0";
-			staticListLookUpSettings2.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(8990, "носки 102505474"));
-			staticListLookUpSettings2.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(465751, "трусы 362501209"));
-			this._nom.ValueSourceSettings = staticListLookUpSettings2;
+			this._nom.ValueSourceSettings = staticListLookUpSettings5;
 			// 
 			// _proizvType
 			// 
@@ -517,73 +482,130 @@ namespace SewingProduction.Report
 			this._proizvType.Name = "_proizvType";
 			this._proizvType.Type = typeof(int);
 			this._proizvType.ValueInfo = "0";
-			staticListLookUpSettings3.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(2, "набор"));
-			staticListLookUpSettings3.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(1, "комплекты"));
-			this._proizvType.ValueSourceSettings = staticListLookUpSettings3;
+			staticListLookUpSettings6.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(2, "набор"));
+			staticListLookUpSettings6.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(1, "комплекты"));
+			this._proizvType.ValueSourceSettings = staticListLookUpSettings6;
 			// 
 			// sqlDataSource2
 			// 
 			this.sqlDataSource2.ConnectionName = "SewingProduction.Properties.Settings.ACEConnectionString";
 			this.sqlDataSource2.Name = "sqlDataSource2";
-			storedProcQuery2.Name = "getVshivkiInfo";
-			queryParameter5.Name = "@xNomZad";
-			queryParameter5.Type = typeof(global::DevExpress.DataAccess.Expression);
-			queryParameter5.Value = new DevExpress.DataAccess.Expression("", typeof(string));
-			queryParameter6.Name = "@xNom";
-			queryParameter6.Type = typeof(global::DevExpress.DataAccess.Expression);
-			queryParameter6.Value = new DevExpress.DataAccess.Expression("0", typeof(int));
-			queryParameter7.Name = "@xProizvType";
-			queryParameter7.Type = typeof(global::DevExpress.DataAccess.Expression);
-			queryParameter7.Value = new DevExpress.DataAccess.Expression("0", typeof(int));
-			queryParameter8.Name = "@xIzdType";
-			queryParameter8.Type = typeof(global::DevExpress.DataAccess.Expression);
-			queryParameter8.Value = new DevExpress.DataAccess.Expression("0", typeof(int));
-			queryParameter9.Name = "@xKod";
-			queryParameter9.Type = typeof(global::DevExpress.DataAccess.Expression);
-			queryParameter9.Value = new DevExpress.DataAccess.Expression("", typeof(string));
-			storedProcQuery2.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
-            queryParameter5,
-            queryParameter6,
-            queryParameter7,
-            queryParameter8,
-            queryParameter9});
-			storedProcQuery2.StoredProcName = "getVshivkiInfo";
+			storedProcQuery4.Name = "getVshivkiInfo";
+			queryParameter15.Name = "@xNomZad";
+			queryParameter15.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter15.Value = new DevExpress.DataAccess.Expression("", typeof(string));
+			queryParameter16.Name = "@xNom";
+			queryParameter16.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter16.Value = new DevExpress.DataAccess.Expression("0", typeof(int));
+			queryParameter17.Name = "@xProizvType";
+			queryParameter17.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter17.Value = new DevExpress.DataAccess.Expression("0", typeof(int));
+			queryParameter18.Name = "@xIzdType";
+			queryParameter18.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter18.Value = new DevExpress.DataAccess.Expression("0", typeof(int));
+			queryParameter19.Name = "@xKod";
+			queryParameter19.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter19.Value = new DevExpress.DataAccess.Expression("", typeof(string));
+			storedProcQuery4.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
+            queryParameter15,
+            queryParameter16,
+            queryParameter17,
+            queryParameter18,
+            queryParameter19});
+			storedProcQuery4.StoredProcName = "getVshivkiInfo";
 			this.sqlDataSource2.Queries.AddRange(new DevExpress.DataAccess.Sql.SqlQuery[] {
-            storedProcQuery2});
+            storedProcQuery4});
 			this.sqlDataSource2.ResultSchemaSerializable = resources.GetString("sqlDataSource2.ResultSchemaSerializable");
 			// 
 			// sqlDataSource3
 			// 
 			this.sqlDataSource3.ConnectionName = "SewingProduction.Properties.Settings.ACEConnectionString";
 			this.sqlDataSource3.Name = "sqlDataSource3";
-			storedProcQuery3.Name = "getVshivkiInfo";
-			queryParameter10.Name = "@xNomZad";
-			queryParameter10.Type = typeof(global::DevExpress.DataAccess.Expression);
-			queryParameter10.Value = new DevExpress.DataAccess.Expression("?_nomZad", typeof(string));
-			queryParameter11.Name = "@xNom";
-			queryParameter11.Type = typeof(global::DevExpress.DataAccess.Expression);
-			queryParameter11.Value = new DevExpress.DataAccess.Expression("?_nom", typeof(int));
-			queryParameter12.Name = "@xProizvType";
-			queryParameter12.Type = typeof(global::DevExpress.DataAccess.Expression);
-			queryParameter12.Value = new DevExpress.DataAccess.Expression("?_proizvType", typeof(int));
-			queryParameter13.Name = "@xIzdType";
-			queryParameter13.Type = typeof(global::DevExpress.DataAccess.Expression);
-			queryParameter13.Value = new DevExpress.DataAccess.Expression("?_izdType", typeof(int));
-			storedProcQuery3.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
-            queryParameter10,
-            queryParameter11,
-            queryParameter12,
-            queryParameter13});
-			storedProcQuery3.StoredProcName = "getVshivkiInfo";
+			storedProcQuery5.Name = "getVshivkiInfo";
+			queryParameter20.Name = "@xNomZad";
+			queryParameter20.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter20.Value = new DevExpress.DataAccess.Expression("?_nomZad", typeof(string));
+			queryParameter21.Name = "@xNom";
+			queryParameter21.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter21.Value = new DevExpress.DataAccess.Expression("?_nom", typeof(int));
+			queryParameter22.Name = "@xProizvType";
+			queryParameter22.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter22.Value = new DevExpress.DataAccess.Expression("?_proizvType", typeof(int));
+			queryParameter23.Name = "@xIzdType";
+			queryParameter23.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter23.Value = new DevExpress.DataAccess.Expression("?_izdType", typeof(int));
+			storedProcQuery5.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
+            queryParameter20,
+            queryParameter21,
+            queryParameter22,
+            queryParameter23});
+			storedProcQuery5.StoredProcName = "getVshivkiInfo";
 			this.sqlDataSource3.Queries.AddRange(new DevExpress.DataAccess.Sql.SqlQuery[] {
-            storedProcQuery3});
+            storedProcQuery5});
 			this.sqlDataSource3.ResultSchemaSerializable = resources.GetString("sqlDataSource3.ResultSchemaSerializable");
 			// 
 			// _izdType
 			// 
+			this._izdType.AllowNull = true;
+			this._izdType.Description = "izdType";
 			this._izdType.Name = "_izdType";
 			this._izdType.Type = typeof(int);
 			this._izdType.ValueInfo = "0";
+			// 
+			// _kod
+			// 
+			this._kod.AllowNull = true;
+			this._kod.Description = "kod";
+			this._kod.Name = "_kod";
+			// 
+			// sqlDataSource1
+			// 
+			this.sqlDataSource1.ConnectionName = "SewingProduction.Properties.Settings.ACEConnectionString";
+			this.sqlDataSource1.Name = "sqlDataSource1";
+			storedProcQuery6.Name = "getVshivkiInfo";
+			queryParameter24.Name = "@xNomZad";
+			queryParameter24.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter24.Value = new DevExpress.DataAccess.Expression("?_nomZad", typeof(string));
+			queryParameter25.Name = "@xNom";
+			queryParameter25.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter25.Value = new DevExpress.DataAccess.Expression("?_nom", typeof(int));
+			queryParameter26.Name = "@xProizvType";
+			queryParameter26.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter26.Value = new DevExpress.DataAccess.Expression("?_proizvType", typeof(int));
+			queryParameter27.Name = "@xIzdType";
+			queryParameter27.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter27.Value = new DevExpress.DataAccess.Expression("?_izdType", typeof(int));
+			queryParameter28.Name = "@xKod";
+			queryParameter28.Type = typeof(global::DevExpress.DataAccess.Expression);
+			queryParameter28.Value = new DevExpress.DataAccess.Expression("?_kod", typeof(string));
+			storedProcQuery6.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
+            queryParameter24,
+            queryParameter25,
+            queryParameter26,
+            queryParameter27,
+            queryParameter28});
+			storedProcQuery6.StoredProcName = "getVshivkiInfo";
+			this.sqlDataSource1.Queries.AddRange(new DevExpress.DataAccess.Sql.SqlQuery[] {
+            storedProcQuery6});
+			this.sqlDataSource1.ResultSchemaSerializable = resources.GetString("sqlDataSource1.ResultSchemaSerializable");
+			// 
+			// xrLabel1
+			// 
+			this.xrLabel1.AutoWidth = true;
+			this.xrLabel1.CanShrink = true;
+			this.xrLabel1.Dpi = 25.4F;
+			this.xrLabel1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[grup]\n")});
+			this.xrLabel1.Font = new DevExpress.Drawing.DXFont("Arial", 8F, DevExpress.Drawing.DXFontStyle.Bold);
+			this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 12.94967F);
+			this.xrLabel1.Multiline = true;
+			this.xrLabel1.Name = "xrLabel1";
+			this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(0.5291666F, 0.5291666F, 0F, 0F, 25.4F);
+			this.xrLabel1.SizeF = new System.Drawing.SizeF(24.1F, 4.2545F);
+			this.xrLabel1.StylePriority.UseFont = false;
+			this.xrLabel1.StylePriority.UseTextAlignment = false;
+			this.xrLabel1.Text = "xrLabel1";
+			this.xrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
 			// 
 			// VshivkiReport
 			// 
@@ -592,11 +614,11 @@ namespace SewingProduction.Report
             this.BottomMargin,
             this.Detail});
 			this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
-            this.sqlDataSource1,
             this.sqlDataSource2,
-            this.sqlDataSource3});
+            this.sqlDataSource3,
+            this.sqlDataSource1});
 			this.DataMember = "getVshivkiInfo";
-			this.DataSource = this.sqlDataSource3;
+			this.DataSource = this.sqlDataSource1;
 			this.Dpi = 25.4F;
 			this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
 			this.Margins = new DevExpress.Drawing.DXMargins(0F, 0F, 0F, 0F);
@@ -606,12 +628,15 @@ namespace SewingProduction.Report
 			this.ParameterPanelLayoutItems.AddRange(new DevExpress.XtraReports.Parameters.ParameterPanelLayoutItem[] {
             new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._nomZad, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
             new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._nom, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
-            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._proizvType, DevExpress.XtraReports.Parameters.Orientation.Horizontal)});
+            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._proizvType, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
+            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._izdType, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
+            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._kod, DevExpress.XtraReports.Parameters.Orientation.Horizontal)});
 			this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this._nomZad,
             this._nom,
             this._proizvType,
-            this._izdType});
+            this._izdType,
+            this._kod});
 			this.ReportUnit = DevExpress.XtraReports.UI.ReportUnit.Millimeters;
 			this.SnapGridSize = 2.5F;
 			this.StyleSheet.AddRange(new DevExpress.XtraReports.UI.XRControlStyle[] {
@@ -631,7 +656,6 @@ namespace SewingProduction.Report
         private DevExpress.XtraReports.UI.TopMarginBand TopMargin;
         private DevExpress.XtraReports.UI.BottomMarginBand BottomMargin;
         private DevExpress.XtraReports.UI.DetailBand Detail;
-        private DevExpress.DataAccess.Sql.SqlDataSource sqlDataSource1;
         private DevExpress.XtraReports.UI.XRControlStyle Title;
         private DevExpress.XtraReports.UI.XRControlStyle DetailCaption1;
         private DevExpress.XtraReports.UI.XRControlStyle DetailData1;
@@ -665,5 +689,8 @@ namespace SewingProduction.Report
 		private DevExpress.DataAccess.Sql.SqlDataSource sqlDataSource2;
 		private DevExpress.DataAccess.Sql.SqlDataSource sqlDataSource3;
 		private DevExpress.XtraReports.Parameters.Parameter _izdType;
+		private DevExpress.XtraReports.Parameters.Parameter _kod;
+		private DevExpress.DataAccess.Sql.SqlDataSource sqlDataSource1;
+		private DevExpress.XtraReports.UI.XRLabel xrLabel1;
 	}
 }

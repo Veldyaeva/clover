@@ -99,8 +99,8 @@ namespace SewingProduction.form
                     ["dbo.spoborudshv"] = new[]
                     {
                         "kod_ob","text_ob","text_ob_s","ko_ob_all","spec_ob","nastav","arhiv","no_spec",
-                        "pokaz_sp","id_class","show_for_plan","vid_shp","vid_vzp","vid_np","vid_rz"
-                    }
+                        "pokaz_sp","id_class","show_for_plan","vid_shp","vid_vzp","vid_np","vid_rz","vid_ob"
+					}
                 };
                 await _sbHub.SubscribeAsync(
                     ownerId: _sbHubOwnerId,
@@ -164,8 +164,9 @@ namespace SewingProduction.form
             //checkBox:
             checkBoxRedShow.Checked = GetCheckBoxValue("show_for_plan", gridView);
             checkBoxRedSpec.Checked = GetCheckBoxValue("spec_ob", gridView);
-            checkBoxRedArhiv.Checked = GetCheckBoxValue("arhiv", gridView);
-        }
+			checkBoxRedArhiv.Checked = GetCheckBoxValue("arhiv", gridView);
+			checkBoxRedVidOb.Checked = GetCheckBoxValue("vid_ob", gridView);
+		}
 
         // Кнопка Добавить
         private void simpleButtonAdd_Click(object sender, EventArgs e)
@@ -191,8 +192,9 @@ namespace SewingProduction.form
             //скрыть и тд:
             checkBoxAddShow.Checked = false;
             checkBoxAddSpec.Checked = false;
-            checkBoxAddArhiv.Checked = false;
-        }
+			checkBoxAddArhiv.Checked = false;
+			checkBoxAddVidOb.Checked = false;
+		}
 
         // Кнопка Отменить на вкладке Редактировать
         private void simpleButtonRedOtm_Click(object sender, EventArgs e)
@@ -208,8 +210,9 @@ namespace SewingProduction.form
             comboBoxRedNastav.Text = "";
             checkBoxRedShow.Checked = false;
             checkBoxRedSpec.Checked = false;
-            checkBoxRedArhiv.Checked = false;
-        }
+			checkBoxRedArhiv.Checked = false;
+			checkBoxRedVidOb.Checked = false;
+		}
 
         // Кнопка Отменить на вкладке Добавить
         private void simpleButtonAddOtm_Click(object sender, EventArgs e)
@@ -243,7 +246,7 @@ namespace SewingProduction.form
                 currentRowIndex = gridView1.FocusedRowHandle;
                 _spravOborudDataService.UpdateSpOborudShv(textBoxRedName.Text, textBoxRedSokrName.Text, comboBoxRedClass.Text,
                     comboBoxRedShp.SelectedIndex, comboBoxRedVzp.SelectedIndex, comboBoxRedNp.SelectedIndex, comboBoxRedRz.SelectedIndex,
-                    comboBoxRedNastav.SelectedIndex, checkBoxRedShow.Checked, checkBoxRedSpec.Checked, checkBoxRedArhiv.Checked,
+                    comboBoxRedNastav.SelectedIndex, checkBoxRedShow.Checked, checkBoxRedSpec.Checked, checkBoxRedArhiv.Checked, checkBoxRedVidOb.Checked,
                     textBoxRedKod.Text, comboBoxRedGrup.Text, comboBoxRedVidm.Text);
                 AddTab.TabPages[1].PageVisible = false;
             }
@@ -259,7 +262,7 @@ namespace SewingProduction.form
             {
                 _spravOborudDataService.InsertSpOborudShv(textBoxAddName.Text, textBoxAddSokrName.Text, comboBoxAddClass.Text,
                     comboBoxAddShp.SelectedIndex, comboBoxAddVzp.SelectedIndex, comboBoxAddNp.SelectedIndex, comboBoxAddRz.SelectedIndex,
-                    comboBoxAddNastav.SelectedIndex, checkBoxAddShow.Checked, checkBoxAddSpec.Checked, checkBoxAddArhiv.Checked,
+                    comboBoxAddNastav.SelectedIndex, checkBoxAddShow.Checked, checkBoxAddSpec.Checked, checkBoxAddArhiv.Checked, checkBoxAddVidOb.Checked,
                     textBoxAddKod.Text, comboBoxAddGrup.Text, comboBoxAddVidm.Text,
                     comboBoxAddClass.Text, comboBoxAddGrup.Text, comboBoxAddVidm.Text, textBoxAddKod.Text);
                 // Флаг для перехода вниз
