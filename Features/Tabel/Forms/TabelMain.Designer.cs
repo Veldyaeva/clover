@@ -77,6 +77,7 @@
             repositoryItemSpinEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             customLabel1 = new SewingProduction.Core.Class.CustomLabel();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            customSimpleButton9 = new SewingProduction.Core.Class.CustomSimpleButton();
             customSimpleButton8 = new SewingProduction.Core.Class.CustomSimpleButton();
             customSimpleButtonTabelLock = new SewingProduction.Core.Class.CustomSimpleButton();
             customSimpleButton2 = new SewingProduction.Core.Class.CustomSimpleButton();
@@ -110,6 +111,7 @@
             layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem21 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -119,8 +121,6 @@
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
-            customSimpleButton9 = new SewingProduction.Core.Class.CustomSimpleButton();
-            layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)customGridControlTimeSheet).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditPlan).BeginInit();
@@ -146,6 +146,7 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem11).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem20).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem21).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem22).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem17).BeginInit();
@@ -155,7 +156,6 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem22).BeginInit();
             SuspendLayout();
             // 
             // gridColumnDd1
@@ -181,9 +181,11 @@
             gridView1.Appearance.EvenRow.Options.UseBackColor = true;
             gridView1.Appearance.FixedLine.Options.UseTextOptions = true;
             gridView1.Appearance.FixedLine.TextOptions.Trimming = DevExpress.Utils.Trimming.None;
+            gridView1.Appearance.FocusedCell.BorderColor = System.Drawing.Color.Firebrick;
+            gridView1.Appearance.FocusedCell.Options.UseBorderColor = true;
+            gridView1.Appearance.FocusedRow.BorderColor = System.Drawing.Color.White;
             gridView1.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            gridView1.Appearance.FocusedRow.Options.UseBackColor = true;
-            gridView1.Appearance.FocusedRow.Options.UseFont = true;
+            gridView1.Appearance.FocusedRow.Options.UseBorderColor = true;
             gridView1.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9F);
             gridView1.Appearance.HeaderPanel.Options.UseFont = true;
             gridView1.Appearance.HeaderPanel.Options.UseTextOptions = true;
@@ -191,6 +193,7 @@
             gridView1.Appearance.Row.Options.UseTextOptions = true;
             gridView1.Appearance.Row.TextOptions.Trimming = DevExpress.Utils.Trimming.None;
             gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnCheckIncludePlan, gridColumnPomPech, gridColumnTabno, gridColumnFio, gridColumnTsplPart, gridColumnTsplPartOf, gridColumnDd1, gridColumnDd2, gridColumnDd3, gridColumnDd4, gridColumnDd5, gridColumnDd6, gridColumnDd7, gridColumnDd8, gridColumnDd9, gridColumnDd10, gridColumnDd11, gridColumnDd12, gridColumnDd13, gridColumnDd14, gridColumnDd15, gridColumnDd16, gridColumnDd17, gridColumnDd18, gridColumnDd19, gridColumnDd20, gridColumnDd21, gridColumnDd22, gridColumnDd23, gridColumnDd24, gridColumnDd25, gridColumnDd26, gridColumnDd27, gridColumnDd28, gridColumnDd29, gridColumnDd30, gridColumnDd31, gridColumnPodrTableID, gridColumnDlD, gridColumnUin });
+            gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.None;
             gridView1.GridControl = customGridControlTimeSheet;
             gridView1.Name = "gridView1";
             gridView1.OptionsView.EnableAppearanceEvenRow = true;
@@ -498,6 +501,20 @@
             layoutControl1.Size = new System.Drawing.Size(1532, 599);
             layoutControl1.TabIndex = 4;
             layoutControl1.Text = "layoutControl1";
+            // 
+            // customSimpleButton9
+            // 
+            customSimpleButton9.Appearance.Font = new System.Drawing.Font("Arial", 12F);
+            customSimpleButton9.Appearance.Options.UseFont = true;
+            customSimpleButton9.Appearance.Options.UseTextOptions = true;
+            customSimpleButton9.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            customSimpleButton9.Location = new System.Drawing.Point(24, 535);
+            customSimpleButton9.Name = "customSimpleButton9";
+            customSimpleButton9.Size = new System.Drawing.Size(159, 40);
+            customSimpleButton9.StyleController = layoutControl1;
+            customSimpleButton9.TabIndex = 16;
+            customSimpleButton9.Text = "Отклонения рабочего времени";
+            customSimpleButton9.Click += customSimpleButton9_Click;
             // 
             // customSimpleButton8
             // 
@@ -883,6 +900,16 @@
             layoutControlItem21.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem21.TextVisible = false;
             // 
+            // layoutControlItem22
+            // 
+            layoutControlItem22.Control = customSimpleButton9;
+            layoutControlItem22.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem22.MinSize = new System.Drawing.Size(139, 26);
+            layoutControlItem22.Name = "layoutControlItem22";
+            layoutControlItem22.Size = new System.Drawing.Size(163, 44);
+            layoutControlItem22.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem22.TextVisible = false;
+            // 
             // layoutControlItem13
             // 
             layoutControlItem13.ContentHorzAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -968,30 +995,6 @@
             layoutControlItem15.Size = new System.Drawing.Size(677, 47);
             layoutControlItem15.TextVisible = false;
             // 
-            // customSimpleButton9
-            // 
-            customSimpleButton9.Appearance.Font = new System.Drawing.Font("Arial", 12F);
-            customSimpleButton9.Appearance.Options.UseFont = true;
-            customSimpleButton9.Appearance.Options.UseTextOptions = true;
-            customSimpleButton9.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            customSimpleButton9.Location = new System.Drawing.Point(24, 535);
-            customSimpleButton9.Name = "customSimpleButton9";
-            customSimpleButton9.Size = new System.Drawing.Size(159, 40);
-            customSimpleButton9.StyleController = layoutControl1;
-            customSimpleButton9.TabIndex = 16;
-            customSimpleButton9.Text = "Отклонения рабочего времени";
-            customSimpleButton9.Click += customSimpleButton9_Click;
-            // 
-            // layoutControlItem22
-            // 
-            layoutControlItem22.Control = customSimpleButton9;
-            layoutControlItem22.Location = new System.Drawing.Point(0, 0);
-            layoutControlItem22.MinSize = new System.Drawing.Size(139, 26);
-            layoutControlItem22.Name = "layoutControlItem22";
-            layoutControlItem22.Size = new System.Drawing.Size(163, 44);
-            layoutControlItem22.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem22.TextVisible = false;
-            // 
             // TabelMain
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1027,6 +1030,7 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem11).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem20).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem21).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem22).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem17).EndInit();
@@ -1036,7 +1040,6 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem22).EndInit();
             ResumeLayout(false);
         }
 

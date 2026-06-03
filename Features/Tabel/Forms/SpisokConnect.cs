@@ -203,9 +203,11 @@ namespace SewingProduction.Features.Tabel.Forms
                 string middleName = gridView1.GetRowCellValue(rowHandle, "lastname").ToString();
                 int valueVerif1c = (int)gridView1.GetRowCellValue(rowHandle, "verif1c");
                 int tabno = (int)gridView1.GetRowCellValue(rowHandle, "tabno");
-                string naimenPodr = gridView1.GetRowCellValue(rowHandle, "naimen").ToString();
+                string naimenPodr = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "naimen"));
                 string nameGroup = gridView1.GetRowCellValue(rowHandle, "nameGroup").ToString();
-                if (valueVerif1c == 1)
+                object value = gridView1.GetRowCellValue(rowHandle, "date_u");
+                if (valueVerif1c == 1 && value == null && value == DBNull.Value)
+
                 {
                     MessageBox.Show("Увязка с 1с не требуется!");
                     return;

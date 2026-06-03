@@ -219,6 +219,7 @@ namespace SewingProduction.Features.Tabel.Forms
             lookUpEditGroup.Properties.DataSource = new BindingSource(workTypes, null);
             lookUpEditGroup.Properties.DisplayMember = "Value";
             lookUpEditGroup.Properties.ValueMember = "Key";
+        
             #region Увязка грида
             customGridControlTimeSheet.DataSource = _timeSheetBindingSource;
             gridColumnDd1.FieldName = "dd01";
@@ -280,7 +281,11 @@ namespace SewingProduction.Features.Tabel.Forms
             gridColumnFio.Width = 90;
             gridView1.OptionsView.EnableAppearanceEvenRow = false;
             gridView1.OptionsView.EnableAppearanceOddRow = false;
-
+            gridView1.OptionsSelection.EnableAppearanceFocusedRow = true;
+            gridView1.OptionsSelection.EnableAppearanceFocusedCell = true;
+            gridView1.Appearance.FocusedRow.BackColor = Color.Gainsboro;
+            gridView1.Appearance.FocusedRow.Options.UseBackColor = true;
+           gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.CellFocus;
 
             #endregion
         }
