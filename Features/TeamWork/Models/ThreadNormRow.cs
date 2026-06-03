@@ -167,7 +167,8 @@ namespace SewingProduction.Features.TeamWork.Models
         public string kod3 { get; set; }
         public string kod_art { get; set; }
         public DateTime? date_change { get; set; }
-        
+        public string komp_change { get; set; }
+
 
         public static ThreadNormDbRow ToDbRow(ThreadNormRow row)
         {

@@ -7,6 +7,7 @@ using SewingProduction.Models;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.ConstrainedExecution;
 using System.Threading.Tasks;
 
@@ -55,28 +56,35 @@ namespace SewingProduction.Features.TeamWork.Services
         }
         public async Task<int> SaveAsync(ThreadNormDbRow row)
         {
-            var p = new DynamicParameters();
-            p.AddDynamicParams(new
+            try
             {
-                row.id,
-                row.men,
-                row.tg_id_n,
-                row.ta_id,
-                row.norm,
-                row.kod_dr,
-                row.kod3,
-                row.kod_art,
-                row.date_change
-            });
+                var p = new DynamicParameters();
+                p.AddDynamicParams(new
+                {
+                    row.id,
+                    row.men,
+                    row.tg_id_n,
+                    row.ta_id,
+                    row.norm,
+                    row.kod_dr,
+                    row.kod3,
+                    row.kod_art,
+                    row.date_change
+                });
 
-            if (await ThreadNormsSaveSupportsComputerNameAsync())
-            {
-                p.Add("@komp_change", row.date_change.HasValue ? Environment.MachineName : null);
+                if (await ThreadNormsSaveSupportsComputerNameAsync())
+                {
+                    p.Add("@komp_change", row.date_change.HasValue ? Environment.MachineName : null);
+                }
+
+                return await _dbService.ExecuteScalarProcedureAsync<int>(
+                    "cfn.ThreadNorms_Save", p
+                   );
             }
-
-            return await _dbService.ExecuteScalarProcedureAsync<int>(
-                "cfn.ThreadNorms_Save",p
-               );
+            catch (Exception ex) {Debug.WriteLine(ex.Message+"123");
+                return 0;
+            }
+            
         }
         public Task DeleteAsync(ThreadNormRow row)
         {
