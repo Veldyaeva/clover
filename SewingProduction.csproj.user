@@ -4,6 +4,9 @@
     <_LastSelectedProfileId>D:\SewingProduction\Properties\PublishProfiles\ver.x32.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="Core\Class\CustomConnectedXtraReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Core\Class\CustomControlsThemeable.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -476,6 +479,9 @@
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\subreport\ZadanyKomplSostListReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\TestXtraReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\TimeSheetParsecOrionPrint.cs">
