@@ -1,6 +1,6 @@
 ﻿
 -- Группировка с отбором операций до 14 план. часов для вязальной машины (ВМ) 
-CREATE PROCEDURE dbo.GetPlanZagrVyazNorm_ByTab3
+CREATE PROCEDURE dbo.GetPlanZagrVyazNorm_ByTab1
      @Tab             INT            = 9797,
      @KwsId           INT            = 0,        -- ID смены. открытая смена => фильтр по смене
      @OnlyUnassigned  BIT            = 0,        -- закрытая/открытая смена. закрытая смена => только неназначенные

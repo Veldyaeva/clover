@@ -25,6 +25,7 @@ namespace SewingProduction.Core.Models
         public int Pr_nabor { get; set; }
         public int Tk_id { get; set; }
         public int Id_glav_gost { get; set; }
+        public short? Symbol { get; set; }
     }
     public class GostGrupIzdViewModel
     {
@@ -44,6 +45,17 @@ namespace SewingProduction.Core.Models
         public int Id_gost_parent { get; set; }
     }
 
+    public class GostSvPictModel
+    {
+        public int Id_pict { get; set; }
+        public int Id_art { get; set; }
+        public int Id_vidchel { get; set; }
+        public int Id_gost { get; set; }
+        public int Id_svyz { get; set; }
+        public int Arh { get; set; }
+        public string Ag_tnved { get; set; }
+        public int Ag_tk_id { get; set; }
+    }
     public class TmModel
     {
         public int M_id_sp { get; set; }
@@ -69,4 +81,44 @@ namespace SewingProduction.Core.Models
         public string Txt { get; set; }
     }
 
+    public class PrintSewnRazmKolRow
+    {
+        public string Kod { get; set; } = string.Empty;
+        public string Articul { get; set; } = string.Empty;
+        public string Mod { get; set; } = string.Empty;
+        public string Razm { get; set; } = string.Empty;
+        public int? Kol { get; set; }
+    }
+    public class ViewPlanSezonAll
+    {
+        public int Tk_id { get; set; }
+        public int T_typeUp { get; set; }
+    }
+    public class KomplNormalized
+    {
+        public string sost { get; set; }
+        public string sost1 { get; set; }
+        public string sost2 { get; set; }
+        public string sost3 { get; set; }
+    }
+    public class PrintSewnBlVshRow
+    {
+        public string Kod { get; set; } = string.Empty;
+        public string Grup { get; set; } = string.Empty;
+        public string Articul { get; set; } = string.Empty;
+        public string Mod { get; set; } = string.Empty;
+        public string Kle { get; set; } = string.Empty;
+        public string Razm { get; set; } = string.Empty;
+        public string Razm1 { get; set; } = string.Empty;
+        public string Razm2 { get; set; } = string.Empty;
+        public string Sost { get; set; } = string.Empty;
+        public string Sost2 { get; set; } = string.Empty;
+        public string Sost3 { get; set; } = string.Empty;
+        public int? IdGost { get; set; }
+        public string Gost { get; set; } = string.Empty;
+        public int? IdSvyaz { get; set; }
+        public string Kruj { get; set; } = string.Empty;
+        public string Symbol { get; set; } = string.Empty;
+	}
+	
 }

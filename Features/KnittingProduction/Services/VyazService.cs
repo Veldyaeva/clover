@@ -101,6 +101,11 @@ namespace SewingProduction.Features.KnittingProduction.Services
                     return result.ToList();
                 }
             }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"{ex.ErrorCode} - {ex.Message}", "Ошибка SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetKnitMachineClassList");
@@ -231,6 +236,7 @@ namespace SewingProduction.Features.KnittingProduction.Services
                     string query = $"SELECT * " +
                         $"  FROM planSezonZadKnitMachine " +
                         $"  WHERE pszkmKmlID = {kmlID} " +
+                        $"      AND (CAST(pszkmPlanDateFrom AS DATE) >= CAST(GETDATE() AS DATE) OR CAST(pszkmPlanDateTo AS DATE) >= CAST(GETDATE() AS DATE))" +
                         $"  ORDER BY pszkmYearMonthInt, pszkmPlanDateFrom";
                     var result = await connection.QueryAsync<PlanSezonZadKnitMachine>(query, new Dictionary<string, object> { });
                     return result.ToList();

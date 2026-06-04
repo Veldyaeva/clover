@@ -1043,9 +1043,9 @@
             ResumeLayout(false);
         }
 
-        #endregion
+		#endregion
 
-        private Core.Class.CustomGridControl customGridControlTimeSheet;
+		private Core.Class.CustomGridControl customGridControlTimeSheet;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private Core.Class.CustomLabel customLabel1;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;

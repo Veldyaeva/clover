@@ -120,7 +120,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application
         public PzvValidationResult ValidateCancelMasterConfirmation(PZVOperList row) =>
             Validate(row,
                 RowExists,
-                ShiftMustBeOpen,
+               // ShiftMustBeOpen,
                 MustHaveMachineOrAllowedDepartment,
                 DateNaznTabMustBeFilled,
                 DateStartMustBeFilled,
