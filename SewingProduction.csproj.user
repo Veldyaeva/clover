@@ -199,6 +199,9 @@
     <Compile Update="Features\Furnit\UserControl\FurnitZayavView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Features\Sprav\Forms\VyazKnitEconomAssortForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\Sprav\Reports\OborudBrigReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
@@ -320,9 +323,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\TeamWork\Forms\ThreadNormsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Features\TeamWork\Forms\VyazKnitEconomAssortForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\UserDistribution\Forms\AboutBox.cs">

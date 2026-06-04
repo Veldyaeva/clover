@@ -10,7 +10,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace SewingProduction.Features.TeamWork.Forms
+namespace SewingProduction.Features.Sprav.Forms
 {
     internal partial class VyazKnitEconomAssortForm
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace SewingProduction.Features.TeamWork.Models
+namespace SewingProduction.Features.Sprav.Models
 {
     /// <summary>
     /// Строка вьюхи dbo.view_seb_vyaz_econom_assort (калькуляция вязального ассортимента).
@@ -9,7 +9,8 @@ namespace SewingProduction.Features.TeamWork.Models
     {
         public int? nn { get; set; }
         public string nom_zadany { get; set; } = string.Empty;
-        public int? razm_ryad { get; set; }
+        /// <summary>Диапазон размеров (в БД строка, напр. «16-18 - 18-20»).</summary>
+        public string razm_ryad { get; set; } = string.Empty;
         public int? pach_min { get; set; }
         public int? pach_max { get; set; }
         public int? nom { get; set; }

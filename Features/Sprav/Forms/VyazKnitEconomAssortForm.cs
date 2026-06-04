@@ -1,9 +1,9 @@
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors.ButtonsPanelControl;
 using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Features.Sprav.DataService;
+using SewingProduction.Features.Sprav.Models;
 using SewingProduction.Features.TeamWork.Helpers;
-using SewingProduction.Features.TeamWork.Models;
-using SewingProduction.Features.TeamWork.Services;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
@@ -13,7 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SewingProduction.Features.TeamWork.Forms
+namespace SewingProduction.Features.Sprav.Forms
 {
     internal partial class VyazKnitEconomAssortForm : CustomForm
     {

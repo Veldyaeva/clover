@@ -1,9 +1,9 @@
-using SewingProduction.Features.TeamWork.Models;
+using SewingProduction.Features.Sprav.Models;
 using SewingProduction.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SewingProduction.Features.TeamWork.Services
+namespace SewingProduction.Features.Sprav.DataService
 {
     internal sealed class VyazKnitEconomAssortDataService
     {
