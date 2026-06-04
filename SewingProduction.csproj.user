@@ -358,6 +358,9 @@
     <Compile Update="Features\UserDistribution\Forms\Podr\RolePodr.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\UserDistribution\Forms\User\FormAccessViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\UserDistribution\Forms\User\ShareUser.cs">
       <SubType>Form</SubType>
     </Compile>
