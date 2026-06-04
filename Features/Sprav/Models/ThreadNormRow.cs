@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 
-namespace SewingProduction.Features.TeamWork.Models
+namespace SewingProduction.Features.Sprav.Models
 {
     public sealed class ThreadNormRow : INewable, IModifiable, IDeletable, INotifyPropertyChanged
     {
@@ -191,5 +191,13 @@ namespace SewingProduction.Features.TeamWork.Models
     {
         public int TAT_ID { get; set; }
         public string TAT_Name { get; set; } = string.Empty;
+    }
+
+    public sealed class ThreadMaterialOption
+    {
+        public string kod_dr { get; set; } = string.Empty;
+        public string kod3 { get; set; } = string.Empty;
+        public string kod_art { get; set; } = string.Empty;
+        public string displayText { get; set; } = string.Empty;
     }
 }

@@ -4,8 +4,9 @@ using DevExpress.XtraEditors.ButtonsPanelControl;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.Models;
-using SewingProduction.Features.TeamWork.Models;
-using SewingProduction.Features.TeamWork.Services;
+using SewingProduction.Features.Sprav.DataService;
+using SewingProduction.Features.Sprav.Models;
+using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
@@ -18,7 +19,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SewingProduction.Features.TeamWork.Forms
+namespace SewingProduction.Features.Sprav.Forms
 {
     internal partial class ThreadNormsForm : CustomForm
     {
@@ -901,12 +902,5 @@ namespace SewingProduction.Features.TeamWork.Forms
             return _materials.FirstOrDefault(x =>
                 int.TryParse(x.kod_dr, out var parsed) && parsed == kodDr);
         }
-    }
-    public sealed class ThreadMaterialOption
-    {
-        public string kod_dr { get; set; } = string.Empty;
-        public string kod3 { get; set; } = string.Empty;
-        public string kod_art { get; set; } = string.Empty;
-        public string displayText { get; set; } = string.Empty;
     }
 }
