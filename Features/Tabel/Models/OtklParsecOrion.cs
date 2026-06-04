@@ -15,6 +15,7 @@ namespace SewingProduction.Features.Tabel.Models
         public string DayValue { get; set;}
         public DateTime? t_in { get; set; }
         public DateTime? t_out { get; set; }
+        public int minutes_out { get; set; }
 
 
     }
