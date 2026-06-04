@@ -10,7 +10,7 @@ namespace SewingProduction.Features.Articul.Models
     public class PlanSezonAllModel
     {
         public int Psa_id { get; set; }
-        public decimal N { get; set; }
+        public int N { get; set; }
         public string Nn { get; set; }
         [NotMapped]
         public string Year { get { return Nn.Substring(0, 4); } }

@@ -110,7 +110,7 @@ namespace SewingProduction.Features.Articul.Service
                 SELECT sad.t_id
                 FROM sp_articul_dateopis_gl_1c sad
                 INNER JOIN plan_sezon_all psa ON LEFT(sad.nn,10) = psa.nn
-                WHERE psa.kodd = @kod
+                WHERE psa.kodd = @kod AND sad.t_id <> 0
                 GROUP BY sad.t_id
                 HAVING COUNT(DISTINCT sad.t_art_poln) > 1";
             return _dbHelper.Exists(query, new Dictionary<string, object> { { "@kod", $"{kod.Substring(0, 7)}" } });
@@ -324,7 +324,7 @@ namespace SewingProduction.Features.Articul.Service
             {
                 MessageBox.Show("Изменений не обнаружено!", "Сохранение",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return null;
+                //return null;
             }
 
             var finalJson = new
@@ -373,7 +373,6 @@ namespace SewingProduction.Features.Articul.Service
             if (nns.Count == 0)
                 return;
 
-            // ВАЖНО: в SQL ты читаешь $.selected_nn
             var jObj = Newtonsoft.Json.Linq.JObject.Parse(applyBaseJson);
             jObj["selected_nn"] = new Newtonsoft.Json.Linq.JArray(nns);
 
@@ -384,7 +383,6 @@ namespace SewingProduction.Features.Articul.Service
                 new { ListJson = finalJson }
             );
 
-            // Если процедура вернула ошибку через SELECT messageerror/error (как в твоём старом варианте)
             if (result != null && result.Count > 0)
             {
                 var row = result.First();
@@ -440,12 +438,16 @@ namespace SewingProduction.Features.Articul.Service
         #region EditNaborSostavPart
         public async Task UpdatePlanSezonAll(PlanSezonAllModel PSA)
         {
-            await _dbService.UpdateEntityAsync("plan_sezon_all", "Psa_id", PSA, true);
-        }
+			//await _dbService.UpdateEntityAsync("plan_sezon_all", "Psa_id", PSA, true);
+			await _dbService.UpdateFieldAsync("plan_sezon_all", "Tg_id_n", PSA.Tg_id_n, "Psa_id", PSA.Psa_id);
+			await _dbService.UpdateFieldAsync("plan_sezon_all", "Tgm_id_n", PSA.Tgm_id_n, "Psa_id", PSA.Psa_id);
+		}
         public async Task UpdateArtKomplekt(ArtKomplektModel AK)
         {
-            await _dbService.UpdateEntityAsync("art_komplekt", "Ak_id", AK, true);
-        }
+			//await _dbService.UpdateEntityAsync("art_komplekt", "Ak_id", AK, true);
+			await _dbService.UpdateFieldAsync("art_komplekt", "Tg_id_n", AK.Tg_id_n, "Ak_id", AK.Ak_id);
+			await _dbService.UpdateFieldAsync("art_komplekt", "Tgm_id_n", AK.Tgm_id_n, "Ak_id", AK.Ak_id);
+		}
         public async Task UpdateSpravNoskiDetal(int? id_spr, int? tcds_id)
         {
             await _dbService.UpdateFieldAsync("GLOBAL.PLANETA.dbo.TOVAR_CAT_DYNSIGN", "tcds_id_spr", id_spr, "tcds_id ", tcds_id);

@@ -346,16 +346,16 @@ namespace SewingProduction.Services
             }
         }
 
-        /// <summary>
-        /// Обновление данных в таблице
-        /// </summary>
-        /// <typeparam name="T">тип объекта</typeparam>
-        /// <param name="tableName">имя таблицы</param>
-        /// <param name="keyFieldName">имя ключевого параметра</param>
-        /// <param name="entity">объект обновления</param>
-        /// <param name="UseNull">true - исключает NULL</param>
-        /// <returns></returns>
-        public async Task UpdateEntityAsync<T>(string tableName, string keyFieldName, T entity, bool UseNull = false)
+		/// <summary>
+		/// Обновление данных в таблице
+		/// </summary>
+		/// <typeparam name="T">тип объекта</typeparam>
+		/// <param name="tableName">имя таблицы</param>
+		/// <param name="keyFieldName">имя ключевого параметра</param>
+		/// <param name="entity">объект обновления</param>
+		/// <param name="ignoreNulls">true - исключает NULL</param>
+		/// <returns></returns>
+		public async Task UpdateEntityAsync<T>(string tableName, string keyFieldName, T entity, bool ignoreNulls = false)
         {
             try
             {
@@ -372,7 +372,7 @@ namespace SewingProduction.Services
                 {
                     var value = prop.GetValue(entity);
 
-                    if (UseNull)
+                    if (ignoreNulls)
                     {
                         if (value == null || value == DBNull.Value)
                             continue;
@@ -518,7 +518,7 @@ namespace SewingProduction.Services
                     tableName,
                     keyFieldName,
                     entity,
-                    UseNull: skipNullOnUpdate);
+					ignoreNulls: skipNullOnUpdate);
 
                 return keyId;
             }

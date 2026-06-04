@@ -481,9 +481,6 @@
     <Compile Update="Report\subreport\ZadanyKomplSostListReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
-    <Compile Update="Report\TestXtraReport.cs">
-      <SubType>XtraReport</SubType>
-    </Compile>
     <Compile Update="Report\TimeSheetParsecOrionPrint.cs">
       <SubType>XtraReport</SubType>
     </Compile>
