@@ -1,6 +1,10 @@
-using DevExpress.XtraBars.Docking2010;
+﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors.ButtonsPanelControl;
 using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Features.Sprav.Application.Contexts;
+using SewingProduction.Features.Sprav.Application.Services;
+using SewingProduction.Features.Sprav.Application.UseCases;
+using SewingProduction.Features.Sprav.Application.Validation;
 using SewingProduction.Features.Sprav.DataService;
 using SewingProduction.Features.Sprav.Models;
 using SewingProduction.Features.TeamWork.Helpers;
@@ -21,10 +25,12 @@ namespace SewingProduction.Features.Sprav.Forms
         private const string HeaderButtonKnit = "vyaz-econom:knit";
         private const string HeaderButtonCord = "vyaz-econom:cord";
         private const string HeaderButtonRefresh = "vyaz-econom:refresh";
+        private const string HeaderButtonPrint = "vyaz-econom:print";
 
         private readonly ILogger _logger = new FileLogger();
         private readonly TWGridHelper _gridHelper = new TWGridHelper();
         private readonly VyazKnitEconomAssortDataService _dataService;
+        private readonly LoadVyazEconomPrintDataUseCase _loadPrintDataUseCase;
         private readonly BindingList<VyazKnitEconomAssortRow> _rows = new BindingList<VyazKnitEconomAssortRow>();
         private VyazEconomAssortPodrMode _podrMode = VyazEconomAssortPodrMode.Knit;
         private bool _isSyncingFilterButtons;
@@ -36,6 +42,9 @@ namespace SewingProduction.Features.Sprav.Forms
             var dbHelper = new DatabaseHelperSQL();
             var dbService = new DbService(dbHelper);
             _dataService = new VyazKnitEconomAssortDataService(dbService);
+            var printDataService = new VyazEconomPrintDataService(dbService);
+            var printValidator = new VyazEconomPrintValidator();
+            _loadPrintDataUseCase = new LoadVyazEconomPrintDataUseCase(printValidator, printDataService);
             bindingSource.DataSource = _rows;
             InitializeHeaderButtons();
         }
@@ -64,6 +73,7 @@ namespace SewingProduction.Features.Sprav.Forms
             SetHeaderButtonTag("Вязальный", HeaderButtonKnit);
             SetHeaderButtonTag("Шнуры", HeaderButtonCord);
             SetHeaderButtonTag("Обновить", HeaderButtonRefresh);
+            SetHeaderButtonTag("Печать калькуляция", HeaderButtonPrint);
             SetFilterControls(_podrMode);
         }
 
@@ -174,6 +184,68 @@ namespace SewingProduction.Features.Sprav.Forms
             if (tag == HeaderButtonRefresh)
             {
                 await LoadDataAsync();
+            }
+            else if (tag == HeaderButtonPrint)
+            {
+                await PrintCalculationAsync();
+            }
+        }
+
+        private async Task PrintCalculationAsync()
+        {
+            var row = gridView.GetFocusedRow() as VyazKnitEconomAssortRow;
+            var context = VyazEconomPrintContext.FromRow(row);
+            if (context == null)
+            {
+                MessageBox.Show(
+                    "Выберите строку в таблице.",
+                    "Печать калькуляция",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            gridView.ShowLoadingPanel();
+            try
+            {
+                var result = await _loadPrintDataUseCase.ExecuteAsync(context);
+                if (!result.Success)
+                {
+                    MessageBox.Show(
+                        result.ErrorMessage ?? "Не удалось подготовить данные для печати.",
+                        "Печать калькуляция",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var data = result.Data!;
+                MessageBox.Show(
+                    $"Данные для калькуляции загружены.\n\n" +
+                    $"Задание: {data.Header.ZadPl}\n" +
+                    $"Артикул: {data.Header.DisplayArticul}\n" +
+                    $"Пачки: {data.Diap.DiapPach}\n" +
+                    $"Количество: {data.Diap.Kol}\n" +
+                    $"Строк пряжи: {data.WoolLines.Count}\n" +
+                    $"Итого отделка: {data.Header.FinishingTotal:N2} руб.\n" +
+                    $"Итого себест.: {data.GrandTotalRub:N2} руб.\n\n" +
+                    "Экспорт в Excel будет подключён на следующем этапе.",
+                    "Печать калькуляция",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "VyazKnitEconomAssortForm.PrintCalculationAsync");
+                MessageBox.Show(
+                    $"Ошибка подготовки печати: {ex.Message}",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            finally
+            {
+                gridView.HideLoadingPanel();
             }
         }
 

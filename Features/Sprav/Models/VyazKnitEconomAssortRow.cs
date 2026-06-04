@@ -8,7 +8,7 @@ namespace SewingProduction.Features.Sprav.Models
     public sealed class VyazKnitEconomAssortRow
     {
         public int? nn { get; set; }
-        public int nom_zadany { get; set; } //= string.Empty;
+        public string nom_zadany { get; set; } = string.Empty;
         /// <summary>Диапазон размеров (в БД строка, напр. «16-18 - 18-20»).</summary>
         public string razm_ryad { get; set; } = string.Empty;
         public int? pach_min { get; set; }

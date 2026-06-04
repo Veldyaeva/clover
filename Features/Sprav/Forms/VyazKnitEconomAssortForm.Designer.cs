@@ -1,4 +1,4 @@
-using DevExpress.XtraEditors;
+﻿using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.ButtonsPanelControl;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
@@ -46,14 +46,15 @@ namespace SewingProduction.Features.Sprav.Forms
         private void InitializeComponent()
         {
             components = new Container();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions1 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions2 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions3 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions4 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions5 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions6 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions7 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            ButtonImageOptions buttonImageOptions1 = new ButtonImageOptions();
+            ButtonImageOptions buttonImageOptions2 = new ButtonImageOptions();
+            ButtonImageOptions buttonImageOptions3 = new ButtonImageOptions();
+            ButtonImageOptions buttonImageOptions4 = new ButtonImageOptions();
+            ButtonImageOptions buttonImageOptions5 = new ButtonImageOptions();
+            ButtonImageOptions buttonImageOptions6 = new ButtonImageOptions();
+            ButtonImageOptions buttonImageOptions7 = new ButtonImageOptions();
             ComponentResourceManager resources = new ComponentResourceManager(typeof(VyazKnitEconomAssortForm));
+            ButtonImageOptions buttonImageOptions8 = new ButtonImageOptions();
             gridControl = new CustomGridControl();
             bindingSource = new BindingSource(components);
             gridView = new GridView();
@@ -93,17 +94,13 @@ namespace SewingProduction.Features.Sprav.Forms
             gridControl.Location = new Point(5, 26);
             gridControl.MainView = gridView;
             gridControl.Name = "gridControl";
-            gridControl.Size = new Size(1254, 704);
+            gridControl.Size = new Size(1254, 730);
             gridControl.TabIndex = 0;
             gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView });
             // 
             // gridView
             // 
-            gridView.Columns.AddRange(new GridColumn[]
-            {
-                colNn, colNomZadany, colRazmRyad, colPachMin, colPachMax, colNom, colArticul, colMod,
-                colDateEconom, colLastOtmIzm, colGrup, colDataCdMin, colKoefZatrat, colIdPodr, colSebAll
-            });
+            gridView.Columns.AddRange(new GridColumn[] { colNn, colArticul, colMod, colNomZadany, colRazmRyad, colPachMin, colPachMax, colNom, colKoefZatrat, colDateEconom, colLastOtmIzm, colGrup, colDataCdMin, colIdPodr, colSebAll });
             gridView.GridControl = gridControl;
             gridView.Name = "gridView";
             gridView.OptionsBehavior.Editable = false;
@@ -114,7 +111,7 @@ namespace SewingProduction.Features.Sprav.Forms
             // 
             // colNn
             // 
-            colNn.Caption = "№";
+            colNn.Caption = "Код матр.";
             colNn.FieldName = "nn";
             colNn.Name = "colNn";
             colNn.Visible = true;
@@ -127,7 +124,7 @@ namespace SewingProduction.Features.Sprav.Forms
             colNomZadany.FieldName = "nom_zadany";
             colNomZadany.Name = "colNomZadany";
             colNomZadany.Visible = true;
-            colNomZadany.VisibleIndex = 1;
+            colNomZadany.VisibleIndex = 3;
             colNomZadany.Width = 90;
             // 
             // colRazmRyad
@@ -136,25 +133,25 @@ namespace SewingProduction.Features.Sprav.Forms
             colRazmRyad.FieldName = "razm_ryad";
             colRazmRyad.Name = "colRazmRyad";
             colRazmRyad.Visible = true;
-            colRazmRyad.VisibleIndex = 2;
+            colRazmRyad.VisibleIndex = 4;
             colRazmRyad.Width = 70;
             // 
             // colPachMin
             // 
-            colPachMin.Caption = "Пач. мин";
+            colPachMin.Caption = "Мин. пачка";
             colPachMin.FieldName = "pach_min";
             colPachMin.Name = "colPachMin";
             colPachMin.Visible = true;
-            colPachMin.VisibleIndex = 3;
+            colPachMin.VisibleIndex = 5;
             colPachMin.Width = 65;
             // 
             // colPachMax
             // 
-            colPachMax.Caption = "Пач. макс";
+            colPachMax.Caption = "Макс. пачка";
             colPachMax.FieldName = "pach_max";
             colPachMax.Name = "colPachMax";
             colPachMax.Visible = true;
-            colPachMax.VisibleIndex = 4;
+            colPachMax.VisibleIndex = 6;
             colPachMax.Width = 65;
             // 
             // colNom
@@ -163,7 +160,7 @@ namespace SewingProduction.Features.Sprav.Forms
             colNom.FieldName = "nom";
             colNom.Name = "colNom";
             colNom.Visible = true;
-            colNom.VisibleIndex = 5;
+            colNom.VisibleIndex = 7;
             colNom.Width = 60;
             // 
             // colArticul
@@ -172,7 +169,7 @@ namespace SewingProduction.Features.Sprav.Forms
             colArticul.FieldName = "articul";
             colArticul.Name = "colArticul";
             colArticul.Visible = true;
-            colArticul.VisibleIndex = 6;
+            colArticul.VisibleIndex = 1;
             colArticul.Width = 120;
             // 
             // colMod
@@ -181,7 +178,7 @@ namespace SewingProduction.Features.Sprav.Forms
             colMod.FieldName = "mod";
             colMod.Name = "colMod";
             colMod.Visible = true;
-            colMod.VisibleIndex = 7;
+            colMod.VisibleIndex = 2;
             colMod.Width = 80;
             // 
             // colDateEconom
@@ -192,7 +189,7 @@ namespace SewingProduction.Features.Sprav.Forms
             colDateEconom.FieldName = "date_econom";
             colDateEconom.Name = "colDateEconom";
             colDateEconom.Visible = true;
-            colDateEconom.VisibleIndex = 8;
+            colDateEconom.VisibleIndex = 9;
             colDateEconom.Width = 90;
             // 
             // colLastOtmIzm
@@ -200,8 +197,6 @@ namespace SewingProduction.Features.Sprav.Forms
             colLastOtmIzm.Caption = "Посл. отм. изм.";
             colLastOtmIzm.FieldName = "last_otm_izm";
             colLastOtmIzm.Name = "colLastOtmIzm";
-            colLastOtmIzm.Visible = true;
-            colLastOtmIzm.VisibleIndex = 9;
             colLastOtmIzm.Width = 80;
             // 
             // colGrup
@@ -215,7 +210,7 @@ namespace SewingProduction.Features.Sprav.Forms
             // 
             // colDataCdMin
             // 
-            colDataCdMin.Caption = "Дата CD мин";
+            colDataCdMin.Caption = "Мин дата";
             colDataCdMin.DisplayFormat.FormatString = "dd.MM.yyyy";
             colDataCdMin.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             colDataCdMin.FieldName = "data_cd_min";
@@ -232,7 +227,7 @@ namespace SewingProduction.Features.Sprav.Forms
             colKoefZatrat.FieldName = "koef_zatrat";
             colKoefZatrat.Name = "colKoefZatrat";
             colKoefZatrat.Visible = true;
-            colKoefZatrat.VisibleIndex = 12;
+            colKoefZatrat.VisibleIndex = 8;
             colKoefZatrat.Width = 80;
             // 
             // colIdPodr
@@ -241,7 +236,7 @@ namespace SewingProduction.Features.Sprav.Forms
             colIdPodr.FieldName = "id_podr";
             colIdPodr.Name = "colIdPodr";
             colIdPodr.Visible = true;
-            colIdPodr.VisibleIndex = 13;
+            colIdPodr.VisibleIndex = 12;
             colIdPodr.Width = 65;
             // 
             // colSebAll
@@ -252,7 +247,7 @@ namespace SewingProduction.Features.Sprav.Forms
             colSebAll.FieldName = "seb_all";
             colSebAll.Name = "colSebAll";
             colSebAll.Visible = true;
-            colSebAll.VisibleIndex = 14;
+            colSebAll.VisibleIndex = 13;
             colSebAll.Width = 90;
             // 
             // layoutControl1
@@ -277,17 +272,8 @@ namespace SewingProduction.Features.Sprav.Forms
             // 
             // layoutControlGroup2
             // 
-            buttonImageOptions6.Image = (Image)resources.GetObject("buttonImageOptions5.Image");
-            layoutControlGroup2.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[]
-            {
-                new GroupBoxButton("Носочный", true, buttonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, true, null, true, true, true, null, -1),
-                new GroupBoxButton("   |   ", true, buttonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1),
-                new GroupBoxButton("Вязальный", true, buttonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, true, null, true, true, true, null, -1),
-                new GroupBoxButton("   |   ", true, buttonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1),
-                new GroupBoxButton("Шнуры", true, buttonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, true, null, true, true, true, null, -1),
-                new GroupBoxButton("   |   ", true, buttonImageOptions7, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1),
-                new GroupBoxButton("Обновить", true, buttonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1)
-            });
+            buttonImageOptions7.Image = (Image)resources.GetObject("buttonImageOptions7.Image");
+            layoutControlGroup2.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new GroupBoxButton("Носочный", true, buttonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, true, null, true, true, true, null, -1), new GroupBoxButton("   |   ", true, buttonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new GroupBoxButton("Вязальный", true, buttonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, true, null, true, true, true, null, -1), new GroupBoxButton("   |   ", true, buttonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new GroupBoxButton("Шнуры", true, buttonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, true, null, true, true, true, null, -1), new GroupBoxButton("   |   ", true, buttonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new GroupBoxButton("Обновить", true, buttonImageOptions7, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new GroupBoxButton("   |   ", true, buttonImageOptions8, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new GroupBoxButton("Печать калькуляция", true, buttonImageOptions7, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
             layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { gridControlItem });
             layoutControlGroup2.Location = new Point(0, 0);
             layoutControlGroup2.Name = "layoutControlGroup2";
