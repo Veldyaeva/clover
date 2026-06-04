@@ -95,6 +95,7 @@ namespace SewingProduction
             miniToolStrip = new System.Windows.Forms.MenuStrip();
             barSubItem1 = new BarSubItem();
             barThreadNorm = new BarButtonItem();
+            barBtnVyazKnitEconomAssort = new BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)popupMenu1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)xtraTabbedMdiManager1).BeginInit();
@@ -114,8 +115,8 @@ namespace SewingProduction
             barManager1.DockControls.Add(barDockControlRight);
             barManager1.Form = this;
             barManager1.HideIfNoRight = true;
-            barManager1.Items.AddRange(new BarItem[] { skinBarSubItem1, skinDropDownButtonItem1, skinPaletteDropDownButtonItem1, skinBarSubItem2, skinDropDownButtonItem2, skinPaletteDropDownButtonItem2, barSubMenu, barBtnProfile, barBtnSettings, barBtnAbout, barBtnHelp, barSubSpr, barSubEquipment, barBtnEqInTeams, barBtnEqDirectory, barBtnEqTypes, barBtnClassMatrix, barBtnOperationTypes, barSubTeamsShop, barBtnTeams, barBtnShops, barBtnProdTypes, barBtnCalcCard1, barBtnWorkers, barBtnTariffs, barBtnNacenki, barBtnModelsMark, barSubDefects, barBtnSockDefects, barSubProduction, barSubKnitting, barBtnOperPlan, barBtnMasterDesk1, barBtnKnitterDesk, barBtnAnalytics, barSubSewing, barBtnMasterDesk, barBtnCutShop, barBtnTeamWork, barBtnArticle, barBtnCalcCard, barBtnTimesheet, barBtnQuestion, barBtnAt, barButtonItemSteamMasterWorkTable, barButtonItemCutMasterWorkTable, barButtonItemScreen, barSubReports, barBtnPublicArticul, barButtonItemBrigObject, barButtonItemExchangeApp, barSubItem1, barThreadNorm });
-            barManager1.MaxItemId = 53;
+            barManager1.Items.AddRange(new BarItem[] { skinBarSubItem1, skinDropDownButtonItem1, skinPaletteDropDownButtonItem1, skinBarSubItem2, skinDropDownButtonItem2, skinPaletteDropDownButtonItem2, barSubMenu, barBtnProfile, barBtnSettings, barBtnAbout, barBtnHelp, barSubSpr, barSubEquipment, barBtnEqInTeams, barBtnEqDirectory, barBtnEqTypes, barBtnClassMatrix, barBtnOperationTypes, barSubTeamsShop, barBtnTeams, barBtnShops, barBtnProdTypes, barBtnCalcCard1, barBtnWorkers, barBtnTariffs, barBtnNacenki, barBtnModelsMark, barSubDefects, barBtnSockDefects, barSubProduction, barSubKnitting, barBtnOperPlan, barBtnMasterDesk1, barBtnKnitterDesk, barBtnAnalytics, barSubSewing, barBtnMasterDesk, barBtnCutShop, barBtnTeamWork, barBtnArticle, barBtnCalcCard, barBtnTimesheet, barBtnQuestion, barBtnAt, barButtonItemSteamMasterWorkTable, barButtonItemCutMasterWorkTable, barButtonItemScreen, barSubReports, barBtnPublicArticul, barButtonItemBrigObject, barButtonItemExchangeApp, barSubItem1, barThreadNorm, barBtnVyazKnitEconomAssort });
+            barManager1.MaxItemId = 54;
             barManager1.SkipDevExpressSkinItems = true;
             // 
             // bar1
@@ -180,7 +181,7 @@ namespace SewingProduction
             // 
             barSubSpr.Caption = "Справочники";
             barSubSpr.Id = 11;
-            barSubSpr.LinksPersistInfo.AddRange(new LinkPersistInfo[] { new LinkPersistInfo(barSubEquipment), new LinkPersistInfo(barSubTeamsShop), new LinkPersistInfo(barBtnCalcCard1), new LinkPersistInfo(barBtnWorkers), new LinkPersistInfo(barBtnTariffs), new LinkPersistInfo(barBtnNacenki), new LinkPersistInfo(barBtnModelsMark), new LinkPersistInfo(barSubDefects), new LinkPersistInfo(barThreadNorm) });
+            barSubSpr.LinksPersistInfo.AddRange(new LinkPersistInfo[] { new LinkPersistInfo(barSubEquipment), new LinkPersistInfo(barSubTeamsShop), new LinkPersistInfo(barBtnCalcCard1), new LinkPersistInfo(barBtnWorkers), new LinkPersistInfo(barBtnTariffs), new LinkPersistInfo(barBtnNacenki), new LinkPersistInfo(barBtnModelsMark), new LinkPersistInfo(barSubDefects), new LinkPersistInfo(barThreadNorm), new LinkPersistInfo(barBtnVyazKnitEconomAssort) });
             barSubSpr.Name = "barSubSpr";
             barSubSpr.Tag = "справочникиToolStripMenuItem";
             // 
@@ -621,6 +622,13 @@ namespace SewingProduction
             barThreadNorm.Name = "barThreadNorm";
             barThreadNorm.ItemClick += barThreadNorm_ItemClick;
             // 
+            // barBtnVyazKnitEconomAssort
+            // 
+            barBtnVyazKnitEconomAssort.Caption = "Калькуляция вяз. ассорт.";
+            barBtnVyazKnitEconomAssort.Id = 53;
+            barBtnVyazKnitEconomAssort.Name = "barBtnVyazKnitEconomAssort";
+            barBtnVyazKnitEconomAssort.ItemClick += barBtnVyazKnitEconomAssort_ItemClick;
+            // 
             // SpMainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -720,6 +728,7 @@ namespace SewingProduction
         private BarSubItem barSubReports;
         private BarButtonItem barBtnPublicArticul;
         private BarButtonItem barThreadNorm;
+        private BarButtonItem barBtnVyazKnitEconomAssort;
         private BarSubItem barSubItem1;
     }
 }
