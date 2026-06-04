@@ -76,6 +76,7 @@
             colDayInTab = new DevExpress.XtraGrid.Columns.GridColumn();
             colTimeIn = new DevExpress.XtraGrid.Columns.GridColumn();
             colTimeOut = new DevExpress.XtraGrid.Columns.GridColumn();
+            colMinute = new DevExpress.XtraGrid.Columns.GridColumn();
             colNote = new DevExpress.XtraGrid.Columns.GridColumn();
             btnClose = new SewingProduction.Core.Class.CustomSimpleButton();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -185,7 +186,7 @@
             // 
             // gridView1
             // 
-            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colPodrazdelenie, colFio, colDate, colReason, colDayInTab, colTimeIn, colTimeOut, colNote });
+            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colPodrazdelenie, colFio, colDate, colReason, colDayInTab, colTimeIn, colTimeOut, colMinute, colNote });
             gridView1.DetailHeight = 404;
             gridView1.GridControl = gridControl1;
             gridView1.Name = "gridView1";
@@ -263,6 +264,13 @@
             colTimeOut.VisibleIndex = 6;
             colTimeOut.Width = 353;
             // 
+            // colMinute
+            // 
+            colMinute.Caption = "Минуты";
+            colMinute.Name = "colMinute";
+            colMinute.Visible = true;
+            colMinute.VisibleIndex = 7;
+            // 
             // colNote
             // 
             colNote.Caption = "Примечание";
@@ -270,7 +278,7 @@
             colNote.MinWidth = 23;
             colNote.Name = "colNote";
             colNote.Visible = true;
-            colNote.VisibleIndex = 7;
+            colNote.VisibleIndex = 8;
             colNote.Width = 92;
             // 
             // btnClose
@@ -415,5 +423,6 @@
             ResumeLayout(false);
             #endregion
         }
+        private DevExpress.XtraGrid.Columns.GridColumn colMinute;
     }
 }
