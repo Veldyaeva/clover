@@ -2,6 +2,7 @@
 using DevExpress.XtraEditors.ButtonsPanelControl;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Features.Sprav.Application.Contexts;
+using SewingProduction.Features.Sprav.Application.Export;
 using SewingProduction.Features.Sprav.Application.Services;
 using SewingProduction.Features.Sprav.Application.UseCases;
 using SewingProduction.Features.Sprav.Application.Validation;
@@ -30,7 +31,7 @@ namespace SewingProduction.Features.Sprav.Forms
         private readonly ILogger _logger = new FileLogger();
         private readonly TWGridHelper _gridHelper = new TWGridHelper();
         private readonly VyazKnitEconomAssortDataService _dataService;
-        private readonly LoadVyazEconomPrintDataUseCase _loadPrintDataUseCase;
+        private readonly PrintVyazEconomCalculationUseCase _printCalculationUseCase;
         private readonly BindingList<VyazKnitEconomAssortRow> _rows = new BindingList<VyazKnitEconomAssortRow>();
         private VyazEconomAssortPodrMode _podrMode = VyazEconomAssortPodrMode.Knit;
         private bool _isSyncingFilterButtons;
@@ -44,7 +45,13 @@ namespace SewingProduction.Features.Sprav.Forms
             _dataService = new VyazKnitEconomAssortDataService(dbService);
             var printDataService = new VyazEconomPrintDataService(dbService);
             var printValidator = new VyazEconomPrintValidator();
-            _loadPrintDataUseCase = new LoadVyazEconomPrintDataUseCase(printValidator, printDataService);
+            var loadPrintDataUseCase = new LoadVyazEconomPrintDataUseCase(printValidator, printDataService);
+            var excelExporter = new DevExpressVyazEconomExcelExporter();
+            var markPrintedUseCase = new MarkVyazEconomPrintedUseCase(printValidator, printDataService);
+            _printCalculationUseCase = new PrintVyazEconomCalculationUseCase(
+                loadPrintDataUseCase,
+                excelExporter,
+                markPrintedUseCase);
             bindingSource.DataSource = _rows;
             InitializeHeaderButtons();
         }
@@ -208,31 +215,29 @@ namespace SewingProduction.Features.Sprav.Forms
             gridView.ShowLoadingPanel();
             try
             {
-                var result = await _loadPrintDataUseCase.ExecuteAsync(context);
+                var result = await _printCalculationUseCase.ExecuteAsync(context);
+                if (result.IsCancelled)
+                {
+                    return;
+                }
+
                 if (!result.Success)
                 {
                     MessageBox.Show(
-                        result.ErrorMessage ?? "Не удалось подготовить данные для печати.",
+                        result.ErrorMessage ?? "Не удалось сформировать калькуляцию.",
                         "Печать калькуляция",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
                     return;
                 }
 
-                var data = result.Data!;
                 MessageBox.Show(
-                    $"Данные для калькуляции загружены.\n\n" +
-                    $"Задание: {data.Header.ZadPl}\n" +
-                    $"Артикул: {data.Header.DisplayArticul}\n" +
-                    $"Пачки: {data.Diap.DiapPach}\n" +
-                    $"Количество: {data.Diap.Kol}\n" +
-                    $"Строк пряжи: {data.WoolLines.Count}\n" +
-                    $"Итого отделка: {data.Header.FinishingTotal:N2} руб.\n" +
-                    $"Итого себест.: {data.GrandTotalRub:N2} руб.\n\n" +
-                    "Экспорт в Excel будет подключён на следующем этапе.",
+                    "Калькуляция сформирована.",
                     "Печать калькуляция",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
+
+                await LoadDataAsync();
             }
             catch (Exception ex)
             {

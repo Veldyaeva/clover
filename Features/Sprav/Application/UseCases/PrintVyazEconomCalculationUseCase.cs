@@ -1,6 +1,7 @@
 using SewingProduction.Features.Sprav.Application.Contexts;
 using SewingProduction.Features.Sprav.Application.Export;
 using SewingProduction.Features.Sprav.Application.Results;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -35,7 +36,18 @@ namespace SewingProduction.Features.Sprav.Application.UseCases
                 return OperationResult.Fail(loadResult.ErrorMessage ?? "Не удалось загрузить данные для печати.");
             }
 
-            await _excelExporter.ExportAsync(loadResult.Data, ct);
+            try
+            {
+                await _excelExporter.ExportAsync(loadResult.Data, ct);
+            }
+            catch (VyazEconomExportCancelledException)
+            {
+                return OperationResult.Cancelled();
+            }
+            catch (Exception ex)
+            {
+                return OperationResult.Fail($"Ошибка формирования Excel: {ex.Message}");
+            }
 
             return await _markPrinted.ExecuteAsync(context, ct);
         }
