@@ -25,6 +25,7 @@ namespace SewingProduction.Features.Sprav.Forms
         private const string HeaderButtonSock = "vyaz-econom:sock";
         private const string HeaderButtonKnit = "vyaz-econom:knit";
         private const string HeaderButtonCord = "vyaz-econom:cord";
+        private const string HeaderButtonShowAll = "vyaz-econom:show-all";
         private const string HeaderButtonRefresh = "vyaz-econom:refresh";
         private const string HeaderButtonPrint = "vyaz-econom:print";
 
@@ -79,8 +80,10 @@ namespace SewingProduction.Features.Sprav.Forms
             SetHeaderButtonTag("Носочный", HeaderButtonSock);
             SetHeaderButtonTag("Вязальный", HeaderButtonKnit);
             SetHeaderButtonTag("Шнуры", HeaderButtonCord);
+            SetHeaderButtonTag("Показать всё", HeaderButtonShowAll);
             SetHeaderButtonTag("Обновить", HeaderButtonRefresh);
             SetHeaderButtonTag("Печать калькуляция", HeaderButtonPrint);
+            SetShowAllControl(false);
             SetFilterControls(_podrMode);
         }
 
@@ -108,7 +111,8 @@ namespace SewingProduction.Features.Sprav.Forms
             try
             {
                 gridView.CloseEditor();
-                var loaded = await _dataService.LoadRowsAsync(_podrMode) ?? new System.Collections.Generic.List<VyazKnitEconomAssortRow>();
+                var loaded = await _dataService.LoadRowsAsync(_podrMode, IsHeaderButtonChecked(HeaderButtonShowAll))
+                    ?? new System.Collections.Generic.List<VyazKnitEconomAssortRow>();
 
                 _rows.RaiseListChangedEvents = false;
                 _rows.Clear();
@@ -157,6 +161,19 @@ namespace SewingProduction.Features.Sprav.Forms
                 SetHeaderButtonChecked(HeaderButtonSock, mode == VyazEconomAssortPodrMode.Sock);
                 SetHeaderButtonChecked(HeaderButtonKnit, mode == VyazEconomAssortPodrMode.Knit);
                 SetHeaderButtonChecked(HeaderButtonCord, mode == VyazEconomAssortPodrMode.Cord);
+            }
+            finally
+            {
+                _isSyncingFilterButtons = false;
+            }
+        }
+
+        private void SetShowAllControl(bool showAll)
+        {
+            _isSyncingFilterButtons = true;
+            try
+            {
+                SetHeaderButtonChecked(HeaderButtonShowAll, showAll);
             }
             finally
             {
@@ -273,10 +290,13 @@ namespace SewingProduction.Features.Sprav.Forms
                 case HeaderButtonCord:
                     await SelectFilterAsync(VyazEconomAssortPodrMode.Cord);
                     break;
+                case HeaderButtonShowAll:
+                    await LoadDataAsync();
+                    break;
             }
         }
 
-        private void layoutControlGroup2_CustomButtonUnchecked(object sender, BaseButtonEventArgs e)
+        private async void layoutControlGroup2_CustomButtonUnchecked(object sender, BaseButtonEventArgs e)
         {
             if (_isSyncingFilterButtons)
             {
@@ -284,6 +304,12 @@ namespace SewingProduction.Features.Sprav.Forms
             }
 
             var tag = (e.Button as GroupBoxButton)?.Tag as string;
+            if (tag == HeaderButtonShowAll)
+            {
+                await LoadDataAsync();
+                return;
+            }
+
             if (tag is HeaderButtonSock or HeaderButtonKnit or HeaderButtonCord)
             {
                 BeginInvoke(new MethodInvoker(RestoreFilterSelectionIfNeeded));
