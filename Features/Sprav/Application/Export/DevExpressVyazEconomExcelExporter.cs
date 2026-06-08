@@ -4,9 +4,9 @@ using SewingProduction.Features.Sprav.Application.Models.Print;
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace SewingProduction.Features.Sprav.Application.Export
 {
@@ -21,11 +21,7 @@ namespace SewingProduction.Features.Sprav.Application.Export
         {
             ct.ThrowIfCancellationRequested();
 
-            var filePath = GetFilePathFromDialog(data);
-            if (string.IsNullOrEmpty(filePath))
-            {
-                throw new VyazEconomExportCancelledException();
-            }
+            var filePath = CreateTempFilePath(data);
 
             using var spreadsheet = new SpreadsheetControl { Visible = false };
             spreadsheet.CreateNewDocument();
@@ -257,16 +253,29 @@ namespace SewingProduction.Features.Sprav.Application.Export
             range.Borders.SetAllBorders(Color.Black, BorderLineStyle.Thin);
         }
 
-        private static string? GetFilePathFromDialog(VyazEconomPrintDto data)
+        private static string CreateTempFilePath(VyazEconomPrintDto data)
         {
-            using var dialog = new SaveFileDialog
-            {
-                Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*",
-                Title = "Сохранить калькуляцию",
-                FileName = $"Калькуляция_{data.NomZadany}.xlsx"
-            };
+            var safeNomZadany = SanitizeFileName(data.NomZadany);
+            var fileName = $"Калькуляция_{safeNomZadany}_{DateTime.Now:yyyyMMdd_HHmmss}_{Guid.NewGuid():N}.xlsx";
 
-            return dialog.ShowDialog() == DialogResult.OK ? dialog.FileName : null;
+            return Path.Combine(Path.GetTempPath(), fileName);
+        }
+
+        private static string SanitizeFileName(string value)
+        {
+            var invalidChars = Path.GetInvalidFileNameChars();
+            var chars = (value ?? string.Empty).Trim().ToCharArray();
+
+            for (var i = 0; i < chars.Length; i++)
+            {
+                if (Array.IndexOf(invalidChars, chars[i]) >= 0)
+                {
+                    chars[i] = '_';
+                }
+            }
+
+            var safeValue = new string(chars);
+            return string.IsNullOrWhiteSpace(safeValue) ? "БезНомера" : safeValue;
         }
 
         private static void OpenFile(string filePath)

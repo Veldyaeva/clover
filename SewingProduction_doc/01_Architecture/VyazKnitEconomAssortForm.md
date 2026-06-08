@@ -93,11 +93,11 @@ SQL для печати вынесен в процедуры, см. [[Vyaz Econo
 1. Берётся focused row → `VyazEconomPrintContext.FromRow`
 2. Вызывается `PrintVyazEconomCalculationUseCase`
 3. Use-case загружает DTO через `LoadVyazEconomPrintDataUseCase`
-4. `DevExpressVyazEconomExcelExporter` сохраняет `.xlsx` и открывает файл
+4. `DevExpressVyazEconomExcelExporter` сохраняет временный `.xlsx` в `%TEMP%` и открывает файл
 5. `MarkVyazEconomPrintedUseCase` проставляет `date_econom`, только если дата ещё пустая
 6. Форма показывает сообщение об успехе и перезагружает грид через `LoadDataAsync()`
 
-Если пользователь отменяет сохранение Excel, операция завершается без ошибки и без обновления `date_econom`.
+Диалог сохранения не показывается. Если временный файл не удалось сохранить или открыть, операция завершается ошибкой и `date_econom` не обновляется.
 
 ## связанные заметки
 
