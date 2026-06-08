@@ -1,4 +1,4 @@
-using SewingProduction.Features.Sprav.Application.Contexts;
+﻿using SewingProduction.Features.Sprav.Application.Contexts;
 using SewingProduction.Features.Sprav.Application.Models.Print;
 using SewingProduction.Features.Sprav.Application.Results;
 using SewingProduction.Features.Sprav.Application.Services;
@@ -35,9 +35,19 @@ namespace SewingProduction.Features.Sprav.Application.UseCases
                 return VyazEconomPrintDataResult.Fail(validation.ErrorMessage ?? "Ошибка валидации.");
             }
 
-            var woolRows = await _dataService.GetWoolLinesAsync(context.IdPodr, context.NomZadany, ct);
-            var raskrRow = await _dataService.GetRaskrHeaderAsync(context.NomZadany, ct);
-            var diapRow = await _dataService.GetDiapAsync(context.NomZadany, ct);
+            var quarterYear = DateTime.Today.Month == 1
+                ? DateTime.Today.Year - 1
+                : DateTime.Today.Year;
+
+            var printRows = await _dataService.GetPrintRowsAsync(
+                context.IdPodr,
+                context.NomZadany,
+                quarterYear,
+                ct);
+
+            var woolRows = printRows.WoolRows;
+            var raskrRow = printRows.RaskrRow;
+            var diapRow = printRows.DiapRow;
 
             if (raskrRow == null)
             {
@@ -50,24 +60,11 @@ namespace SewingProduction.Features.Sprav.Application.UseCases
             }
 
             var diapKol = diapRow.kol!.Value;
-            var nakls = woolRows.Select(w => w.nakl).ToList();
-            var prihodRows = await _dataService.GetPrihodPryzByNaklsAsync(nakls, ct);
-            var prihodByNakl = prihodRows
+            var prihodByNakl = printRows.PrihodRows
                 .GroupBy(p => p.nakl.Trim(), StringComparer.OrdinalIgnoreCase)
                 .ToDictionary(g => g.Key, g => g.First(), StringComparer.OrdinalIgnoreCase);
 
-            var quarterYear = DateTime.Today.Month == 1
-                ? DateTime.Today.Year - 1
-                : DateTime.Today.Year;
-
-            var zvetsForQuarters = woolRows
-                .Select(w => w.zvet?.Trim() ?? string.Empty)
-                .Where(z => !string.IsNullOrEmpty(z))
-                .Distinct(StringComparer.OrdinalIgnoreCase)
-                .ToList();
-
-            var quarterRows = await _dataService.GetQuarterMaxPricesByZvetAsync(zvetsForQuarters, quarterYear, ct);
-            var quarterByZvet = quarterRows
+            var quarterByZvet = printRows.QuarterRows
                 .GroupBy(q => q.zvet.Trim(), StringComparer.OrdinalIgnoreCase)
                 .ToDictionary(g => g.Key, g => g.First(), StringComparer.OrdinalIgnoreCase);
 

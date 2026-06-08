@@ -489,6 +489,34 @@ namespace SewingProduction.Services
                 throw;
             }
         }
+
+        public async Task<TResult> QueryMultipleFromProcedureAsync<TResult>(
+            string procedureName,
+            object parameters,
+            Func<SqlMapper.GridReader, Task<TResult>> read,
+            int? commandTimeout = null)
+        {
+            try
+            {
+                using var connection = _dbHelper.GetConnection();
+                using var result = await connection.QueryMultipleAsync(
+                    procedureName,
+                    parameters,
+                    commandType: CommandType.StoredProcedure,
+                    commandTimeout: commandTimeout);
+
+                return await read(result);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(
+                    ex,
+                    $"Ошибка выполнения процедуры {procedureName}");
+
+                throw;
+            }
+        }
+
         public async Task<int> SaveEntityAsync<T>(
     string tableName,
     string keyFieldName,

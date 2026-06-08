@@ -1,4 +1,4 @@
-using DevExpress.Spreadsheet;
+﻿using DevExpress.Spreadsheet;
 using DevExpress.XtraSpreadsheet;
 using SewingProduction.Features.Sprav.Application.Models.Print;
 using System;
@@ -151,9 +151,10 @@ namespace SewingProduction.Features.Sprav.Application.Export
             SetFont(worksheet.Range.FromLTRB(0, 2, 0, 7), bold: true, size: 11);
             SetFont(worksheet.Range.FromLTRB(1, 2, 1, 7), bold: false, size: 11);
             SetFont(worksheet.Range.FromLTRB(1, 9, 1, 9), bold: true, size: 12);
+            SetFont(worksheet.Range.FromLTRB(0, 10, 0, 10), bold: true, size: 11);
             SetFont(worksheet.Range.FromLTRB(0, 11, 2, 11), bold: true, size: 12);
             SetFont(worksheet.Range.FromLTRB(0, 24, 0, 24), bold: true, size: 11);
-            SetFont(worksheet.Range.FromLTRB(0, 25, 5, 25), bold: true, size: 11);
+            SetFont(worksheet.Range.FromLTRB(0, 25, 9, 25), bold: true, size: 11);
             SetFont(worksheet.Range.FromLTRB(6, 25, 9, 25), bold: true, size: 11);
 
             ApplyBorder(worksheet.Range.FromLTRB(0, 2, 1, 7));
@@ -173,6 +174,7 @@ namespace SewingProduction.Features.Sprav.Application.Export
             SetAlignment(worksheet.Range.FromLTRB(0, 2, 0, 7), horizontalCenter: false);
             SetAlignment(worksheet.Range.FromLTRB(0, 11, 0, 21), horizontalCenter: false);
             SetAlignment(worksheet.Range.FromLTRB(0, 24, 0, 24), horizontalCenter: false);
+            SetAlignment(worksheet.Range.FromLTRB(0, 26, 0, 31), horizontalCenter: false);
         }
 
         private static void WriteFinishingRow(Worksheet ws, int row, string label, string mark, decimal? cost)

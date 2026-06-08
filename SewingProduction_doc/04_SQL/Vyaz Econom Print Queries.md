@@ -4,39 +4,56 @@
 
 SQL-источники для [[Vyaz Econom Print Flow]]. Реализация: `VyazEconomPrintDataService`.
 
-Все запросы вынесены из C# в серверные процедуры. Скрипты лежат в `sewingproduction/Features/Sprav/Sql/VyazEconom/`.
+Основная read-часть печати объединена в одну серверную процедуру с несколькими result set.
 
-## 1. Список пряжи
+## 1. Загрузка данных печати
 
-Процедура: `dbo.VyazEconomPrint_GetWoolLines`
+Процедура: `dbo.VyazEconomPrint_LoadData`
 
-Скрипт: `ACE.dbo.VyazEconomPrint_GetWoolLines.sql`
+Скрипт: `sewingproduction/Features/Sprav/Sql/VyazEconom/ACE.dbo.VyazEconomPrint_LoadData.sql`
+
+Параметры:
+
+```sql
+@IdPodr int,
+@NomZadany nvarchar(50),
+@Year int
+```
+
+Процедура возвращает result set в строгом порядке:
+
+| # | Данные | Модель C# |
+|---|--------|-----------|
+| 1 | Список пряжи из `dbo.v_spis_pryz` | `VyazEconomWoolRow` |
+| 2 | Шапка раскроя из `dbo.raskr_zeh_vyaz` | `VyazEconomRaskrRow` |
+| 3 | Диапазон пачек/размеров и количество | `VyazEconomDiapRow` |
+| 4 | Приход пряжи по накладным из набора пряжи | `VyazEconomPrihodPryzRow` |
+| 5 | Максимальные цены по кварталам по цветам из набора пряжи | `VyazEconomQuarterPriceRow` |
+
+В C# result set читаются через `DbService.QueryMultipleFromProcedureAsync`, затем упаковываются в `VyazEconomPrintRows`.
+
+## 2. Состав result set
+
+Список пряжи:
 
 ```sql
 SELECT nakl, kol, type_pryz, zvet
 FROM dbo.v_spis_pryz
-WHERE id_podr = @idPodr AND nom_zadany = @nomZadany
+WHERE id_podr = @IdPodr
+  AND nom_zadany = @NomZadany
 ```
 
-## 2. Шапка раскроя
-
-Процедура: `dbo.VyazEconomPrint_GetRaskrHeader`
-
-Скрипт: `ACE.dbo.VyazEconomPrint_GetRaskrHeader.sql`
+Шапка раскроя:
 
 ```sql
-SELECT TOP 1 ... 
+SELECT TOP 1 ...
 FROM dbo.raskr_zeh_vyaz
-WHERE zad_pl = @nomZadany
+WHERE zad_pl = @NomZadany
 ```
 
-Поля: `kod_k`, `articul`, `mod`, `articul_k`, `mod_k`, `zad_pl`, флаги отделки (`v`, `p`, `stir`, `pr_printer`, …), `v_seb`, `p_seb`.
+Поля: `kod_k`, `articul`, `mod`, `articul_k`, `mod_k`, `zad_pl`, флаги отделки (`v`, `p`, `stir`, `pr_printer`, ...), `v_seb`, `p_seb`.
 
-## 3. Диапазон пачек и размеров
-
-Процедура: `dbo.VyazEconomPrint_GetDiap`
-
-Скрипт: `ACE.dbo.VyazEconomPrint_GetDiap.sql`
+Диапазон пачек и размеров:
 
 ```sql
 SELECT
@@ -44,73 +61,58 @@ SELECT
   TRIM(STR(MIN(n_pach))) + ' - ' + TRIM(STR(MAX(n_pach))) AS diapPach,
   TRIM(MIN(razm)) + ' - ' + TRIM(MAX(razm)) AS diapSize
 FROM dbo.raskr_zeh_vyaz
-WHERE zad_pl = @nomZadany
+WHERE zad_pl = @NomZadany
 ```
 
-## 4. Приход пряжи партиями по накладной
-
-Процедура: `dbo.VyazEconomPrint_GetPrihodPryzByNakls`
-
-Скрипт: `ACE.dbo.VyazEconomPrint_GetPrihodPryzByNakls.sql`
+Приход пряжи:
 
 ```sql
+WITH NaklFilter AS (...)
 SELECT nakl, t_articul, zvet, seb_t_m
 FROM dbo.prihod_pryz
-WHERE nakl IN @nakls
+INNER JOIN NaklFilter ON ...
 ```
 
-В C# список накладных передаётся JSON-массивом `@NaklsJson`; процедура разбирает его через `OPENJSON`. Аналог VFP `SEEK(nakl)` — строки без записи в отчёт не попадают.
+`NaklFilter` строится внутри процедуры из строк `dbo.v_spis_pryz` для текущих `@IdPodr` и `@NomZadany`. Отдельный JSON-параметр больше не нужен.
 
-## 5. Макс. цена по кварталам партиями по цвету
-
-Процедура: `dbo.VyazEconomPrint_GetQuarterMaxPricesByZvet`
-
-Скрипт: `ACE.dbo.VyazEconomPrint_GetQuarterMaxPricesByZvet.sql`
-
-Один запрос вместо 4×N в VFP. Периоды года `@year`:
-
-| Квартал | Начало | Конец |
-|---------|--------|-------|
-| 1 | 01.01 | 31.03 |
-| 2 | 01.04 | 30.06 |
-| 3 | 01.07 | 30.09 |
-| 4 | 01.10 | 31.12 |
+Максимальная цена по кварталам:
 
 ```sql
+WITH ZvetFilter AS (...)
 SELECT pp.zvet,
-  MAX(CASE WHEN pv.data_sozd BETWEEN @q1Start AND @q1End THEN pp.seb_t_m END) AS Q1,
+  MAX(CASE WHEN pv.data_sozd >= @q1Start AND pv.data_sozd <= @q1End THEN pp.seb_t_m END) AS Q1,
   ...
-FROM prih_v v
-INNER JOIN prihod_v pv ON v.np_id = pv.np_id
-INNER JOIN prihod_pryz pp ON pv.kod_pr = pp.kod_pr
-WHERE pp.zvet IN @zvets
+FROM dbo.prih_v pv
+INNER JOIN dbo.prihod_v prv ON pv.np_id = prv.np_id
+INNER JOIN dbo.prihod_pryz pp ON prv.kod_pr = pp.kod_pr
+INNER JOIN ZvetFilter ON ...
 GROUP BY pp.zvet
 ```
 
-В C# список цветов передаётся JSON-массивом `@ZvetsJson`; процедура разбирает его через `OPENJSON`. Фильтр по `zvet` из строки пряжи (`listwool.zvet` в VFP).
+`ZvetFilter` строится внутри процедуры из строк `dbo.v_spis_pryz`. Периоды кварталов рассчитываются от `@Year`.
 
-## 6. Отметка печати
+## 3. Отметка печати
 
 Процедура: `dbo.VyazEconomPrint_MarkDateEconom`
 
-Скрипт: `ACE.dbo.VyazEconomPrint_MarkDateEconom.sql`
+Скрипт: `sewingproduction/Features/Sprav/Sql/VyazEconom/ACE.dbo.VyazEconomPrint_MarkDateEconom.sql`
 
 ```sql
 UPDATE dbo.seb_vyaz_econom
-SET date_econom = @today
-WHERE nn = @nn
+SET date_econom = @DateEconom
+WHERE nn = @Nn
   AND date_econom IS NULL
 ```
 
 Use-case: `MarkVyazEconomPrintedUseCase`.
 
-Дата печати не перезаписывается, если `date_econom` уже была заполнена.
+Отметка остаётся отдельной процедурой, потому что её можно выполнять только после успешного сохранения Excel. Дата печати не перезаписывается, если `date_econom` уже была заполнена.
 
-## 7. Загрузка грида ассортимента
+## 4. Загрузка грида ассортимента
 
 Процедура: `dbo.VyazKnitEconomAssort_LoadRows`
 
-Скрипт: `ACE.dbo.VyazKnitEconomAssort_LoadRows.sql`
+Скрипт: `sewingproduction/Features/Sprav/Sql/VyazEconom/ACE.dbo.VyazKnitEconomAssort_LoadRows.sql`
 
 Используется формой [[VyazKnitEconomAssortForm]], а не самим потоком печати.
 
