@@ -24,7 +24,7 @@ namespace SewingProduction.Services
     // Canonical file for further extensions: Services/ArtNormRepository.cs.
     public partial class ArtNormRepository
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         //    private readonly HybridLogger _logger = new HybridLogger();
         private readonly FileLogger _logger = new FileLogger();
         private readonly DbService _dbService;
@@ -34,7 +34,7 @@ namespace SewingProduction.Services
         /// Инициализирует новый экземпляр сервиса
         /// </summary>
         /// <param name="dbHelper">Помощник для работы с базой данных.</param>
-        public ArtNormRepository(DatabaseHelper dbHelper)
+        public ArtNormRepository(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
             _dbService = new DbService(_dbHelper);
@@ -123,7 +123,7 @@ namespace SewingProduction.Services
             string query = @" select 
                    AnnID, kod, grup, articul, mod, size_label, sek, sek_shv, sek_vyaz5, sek_vyaz6, sek_vyaz7, sek_vyaz10, sek_vyaz12, sek_vyazo,
                     sek_vyaz, sek_vyaz14, sek_vyaz70, sek_vyaz71, sek_vyaz72, sek_vyaz62, sek_vyaz18, sek_vyaz57, sek_kr, seb, 
-                    slogn, komment, annRecommendation as Reco, data_sozd, data_obn, diz, constr, status_ann.name AS statusText, status, parentId,
+                    slogn, komment, annRecommendation as Reco, data_sozd, data_obn, diz, constr, knitConstr, status_ann.name AS statusText, status, parentId,
                     annDateDel, annCompDel, annDateAdd, annCompAdd, arh
              FROM ArtNormNView JOIN status_ann ON status = status_id";
 
@@ -191,7 +191,7 @@ namespace SewingProduction.Services
                 annId, grup, articul, mod, size_label, sek, seb, sek_vyaz, 
             data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
             sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_vyaz18, sek_vyaz57, sek_kr, slogn, komment, annRecommendation as Reco,
-            data_sozd, diz, constr, annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId
+            data_sozd, diz, constr, knitConstr, annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId
         FROM ArtNormNView 
                             JOIN status_ann ON status = status_id
                             WHERE annId = @annId";
@@ -250,7 +250,7 @@ namespace SewingProduction.Services
                     v.annId, v.grup, v.articul, v.mod, v.size_label, v.sek, v.sek_vyaz,
                     v.data_obn, v.sek_shv, sa.name AS statusText, v.status, v.sek_vyazo, v.sek_vyaz5, 
                     v.sek_vyaz7, v.sek_vyaz12, v.sek_vyaz10, v.sek_vyaz6, v.sek_kr, v.slogn, v.komment, v.annRecommendation, 
-                    v.data_sozd, v.diz, v.constr, v.data_obn as dateUpdate, v.annDateDel, v.annCompDel, v.annDateAdd, v.annCompAdd, v.arh, v.parentId
+                    v.data_sozd, v.diz, v.constr, v.knitConstr, v.data_obn as dateUpdate, v.annDateDel, v.annCompDel, v.annDateAdd, v.annCompAdd, v.arh, v.parentId
                 FROM ArtNormNView v
                 JOIN status_ann sa ON v.status = sa.status_id 
                 WHERE v.status != 3"; // Статус "архивное"
@@ -282,7 +282,7 @@ namespace SewingProduction.Services
             string query = @"SELECT 
                 annId, grup, articul, mod, size_label, sek, sek_vyaz, data_obn, sek_shv, 
                 status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, 
-                sek_kr, slogn, komment, annRecommendation, data_sozd, diz, constr,
+                sek_kr, slogn, komment, annRecommendation, data_sozd, diz, constr, knitConstr,
                 annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId
                 FROM artNormNView 
                 WHERE status <> @StatusArchive AND articul LIKE @ArtPattern";
@@ -327,7 +327,7 @@ namespace SewingProduction.Services
             string query = $@"SELECT 
                 annId, grup, articul, mod, size_label, sek, sek_vyaz, data_obn, sek_shv, 
                 status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, 
-                sek_kr, slogn, komment, annRecommendation, data_sozd, diz, constr,
+                sek_kr, slogn, komment, annRecommendation, data_sozd, diz, constr, knitConstr,
                 annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId
                 FROM artNormNView 
                 WHERE status <> @StatusArchive AND ({string.Join(" OR ", conditions)})";
@@ -754,6 +754,21 @@ WHERE nr.annId = @annId";
             }
         }
 
+        public async Task<List<FioModel>> GetRelKnitConstructors()
+        {
+            string query = @"
+SELECT *
+FROM fio
+WHERE (rab LIKE '%технолог%' AND mast = 2 AND ftabn = 71 AND gr = 8 AND datau IS NULL)
+   OR tab = 10948";
+
+            using (var connection = _dbHelper.GetConnection())
+            {
+                var result = await connection.QueryAsync<FioModel>(query);
+                return result.ToList();
+            }
+        }
+
 
         public async Task DeleteRelatedNormTables(int annId)
         {
@@ -773,11 +788,11 @@ WHERE nr.annId = @annId";
 
     public sealed class JabberSender : IJabberSender
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         //    private readonly HybridLogger _logger = new HybridLogger();
         private readonly FileLogger _logger = new FileLogger();
         private readonly DbService _dbService;
-        public JabberSender(DatabaseHelper dbHelper)
+        public JabberSender(DatabaseHelperSQL dbHelper)
        => _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
         public async Task SendToBrigsAsync(IEnumerable<int> brigIds, string message, int idType = 14, int tester = 63)
         {

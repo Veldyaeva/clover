@@ -40,7 +40,7 @@ namespace SewingProduction
             get => tbViewType.Text;
             set => tbViewType.Text = value;
         }
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly ILogger _logger = new FileLogger();
         private readonly FurnitService _furnitService;
 
@@ -67,7 +67,7 @@ namespace SewingProduction
         public FurnitZayavView()
         {
             InitializeComponent();
-            _dbHelper = new DatabaseHelper("ace");
+            _dbHelper = new DatabaseHelperSQL("ace");
             _furnitService = new FurnitService(_dbHelper);
            // ThemeManager.UpdateTheme(this);
         }

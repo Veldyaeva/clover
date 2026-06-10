@@ -11,8 +11,8 @@ namespace SewingProduction.Features.Sprav.DataService
 {
     public class SpravOborudDataService
     {
-        private readonly DatabaseHelper _dbHelper;
-        public SpravOborudDataService(DatabaseHelper dbHelper)
+        private readonly DatabaseHelperSQL _dbHelper;
+        public SpravOborudDataService(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper;
         }
@@ -33,6 +33,7 @@ namespace SewingProduction.Features.Sprav.DataService
                                             oborud_shv_ob.text_ob AS text_ob_tip,spec_ob,
                                             spOborudMachine.name AS vidm,pokaz_sp,matrix_class.caption AS idClass,show_for_plan,
                                             (CASE arhiv WHEN 1 THEN 1 ELSE 0 END) AS arhiv,
+                                            (CASE vid_ob WHEN 1 THEN 1 ELSE 0 END) AS vid_ob,
                                             (CASE nastav WHEN 1 THEN 'оверлок' WHEN 2 THEN 'плоскошовка' WHEN 3 THEN 'универсалка' ELSE NULL END) AS nastav,
                                             (CASE vid_shp WHEN 1 THEN 'основное' WHEN 2 THEN 'дополнительное' ELSE NULL END) AS vid_shp,
                                             (CASE vid_vzp WHEN 1 THEN 'основное' WHEN 2 THEN 'дополнительное' ELSE NULL END) AS vid_vzp,
@@ -62,7 +63,7 @@ namespace SewingProduction.Features.Sprav.DataService
         }
         public void UpdateSpOborudShv(string SOStext_ob, string text_ob_s, string id_class,
                     object vid_shp, object vid_vzp, object vid_np, object vid_rz,
-                    object nastav, bool show_for_plan, bool spec_ob, bool arhiv,
+                    object nastav, bool show_for_plan, bool spec_ob, bool arhiv, bool vid_ob,
                     string kod_ob, string OSOtext_ob, string name)
         {
             string query = $"UPDATE spOborudShv " +
@@ -78,7 +79,8 @@ namespace SewingProduction.Features.Sprav.DataService
                                              $"nastav = @nastav, " +
                                              $"show_for_plan = @show_for_plan, " +
                                              $"spec_ob = @spec_ob, " +
-                                             $"arhiv = @arhiv " +
+                                             $"arhiv = @arhiv, " +
+                                             $"vid_ob = @vid_ob " +
                                          $" FROM spOborudShv,spOborudMachine,oborud_shv_ob " +
                                          $" WHERE kod_ob = @kod_ob" +
                                          $" AND oborud_shv_ob.text_ob = @OSOtext_ob " +
@@ -86,11 +88,11 @@ namespace SewingProduction.Features.Sprav.DataService
             _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@SOStext_ob", SOStext_ob } , { "@text_ob_s", text_ob_s } , { "@id_class", id_class } ,
                                                     { "@vid_shp", vid_shp }, { "@vid_vzp", vid_vzp } ,{ "@vid_np", vid_np } ,{ "@vid_rz", vid_rz } ,
                                                     { "@nastav", nastav } ,{ "@show_for_plan", show_for_plan }, { "@spec_ob", spec_ob } ,{ "@arhiv", arhiv } ,
-                                                    { "@kod_ob", kod_ob } ,{ "@OSOtext_ob", OSOtext_ob } ,{ "@name", name } });
+                                                    { "@kod_ob", kod_ob } ,{ "@OSOtext_ob", OSOtext_ob } ,{ "@name", name },{ "@vid_ob", vid_ob } });
         }
         public void InsertSpOborudShv(string SOStext_ob, string text_ob_s, string id_class,
                     object vid_shp, object vid_vzp, object vid_np, object vid_rz,
-                    object nastav, bool show_for_plan, bool spec_ob, bool arhiv,
+                    object nastav, bool show_for_plan, bool spec_ob, bool arhiv, bool vid_ob,
                     string kod_ob, string OSOtext_ob, string name,
                     string AddClass, string AddGrup, string AddVidm, string AddKod)
         {
@@ -115,11 +117,12 @@ namespace SewingProduction.Features.Sprav.DataService
                                         $"@nastav, " +
                                         $"@show_for_plan, " +
                                         $"@spec_ob, " +
-                                        $"@arhiv); " +
+                                        $"@arhiv, " +
+                                        $"@vid_ob); " +
                                         $"EXEC dbo.add_columns_plan_proz_mg @obor_n = {AddKod};";
             _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@SOStext_ob", SOStext_ob } , { "@text_ob_s", text_ob_s } , { "@id_class", id_class } ,
                                                     { "@vid_shp", vid_shp }, { "@vid_vzp", vid_vzp } ,{ "@vid_np", vid_np } ,{ "@vid_rz", vid_rz } ,
-                                                    { "@nastav", nastav } ,{ "@show_for_plan", show_for_plan }, { "@spec_ob", spec_ob } ,{ "@arhiv", arhiv } ,
+                                                    { "@nastav", nastav } ,{ "@show_for_plan", show_for_plan }, { "@spec_ob", spec_ob } ,{ "@arhiv", arhiv } ,{ "@vid_ob", vid_ob } ,
                                                     { "@kod_ob", kod_ob } ,{ "@OSOtext_ob", OSOtext_ob } ,{ "@name", name } ,
                                                     { "@AddClass", AddClass }  ,{ "@AddGrup", AddGrup }  ,{ "@AddVidm", AddVidm } });
         }

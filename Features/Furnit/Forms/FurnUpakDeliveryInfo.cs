@@ -14,7 +14,7 @@ namespace SewingProduction.form
     public partial class FurnUpakDeliveryInfo : CustomForm
     {
         // private 
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly FurnitService _furnitService;
         private readonly ILogger _logger = new FileLogger();
         private List<ReestrFurn> _currentReestrFurnData = new List<ReestrFurn>();
@@ -36,7 +36,7 @@ namespace SewingProduction.form
         public FurnUpakDeliveryInfo(string _kodF)
         {
             InitializeComponent();
-            _dbHelper = new DatabaseHelper("ace");
+            _dbHelper = new DatabaseHelperSQL("ace");
             _furnitService = new FurnitService(_dbHelper);
             tbKodF.Text = _kodF;
          //   ThemeManager.UpdateTheme(this);

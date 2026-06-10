@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,7 +36,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
             try
             {
-                await using var tx = await _shiftGateway.BeginShiftTransactionAsync().ConfigureAwait(false);
+                await using var tx = await _shiftGateway.BeginCloseShiftScopeAsync().ConfigureAwait(false);
 
                 var lockResult = await tx.TryAcquireShiftCloseLockAsync(command.ShiftId).ConfigureAwait(false);
                 if (!lockResult.CanClose)
@@ -44,7 +44,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                     return Failure(lockResult.Status, lockResult.ErrorMessage);
                 }
 
-                var unfinished = (await tx.GetUnfinishedOperationIdsForShiftAsync(command.ShiftId).ConfigureAwait(false))
+                var unfinished = (await tx.GetUnfinishedOperationIdsForShiftAsync(command.ShiftId, command.TabEnd).ConfigureAwait(false))
                     .Where(id => id > 0)
                     .Distinct()
                     .ToList();
@@ -63,7 +63,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
                 await tx.AdjustNotStartedBeforeShiftEndAsync(
                         command.ShiftId,
-                        command.MinHours,
+                        command.TabEnd,
+                       // command.MinHours,
                         command.UserName ?? string.Empty)
                     .ConfigureAwait(false);
 
@@ -74,8 +75,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                         closeResult.Status,
                         closeResult.ErrorMessage);
                 }
-
-                await tx.CommitAsync().ConfigureAwait(false);
 
                 return new CloseShiftResult
                 {

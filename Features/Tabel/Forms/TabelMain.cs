@@ -48,7 +48,7 @@ namespace SewingProduction.Features.Tabel.Forms
     {
 
         private string currentMG;
-        private static DatabaseHelper _dbHelper;
+        private static DatabaseHelperSQL _dbHelper;
         private static DbService _dbService;
         private readonly ILogger _logger = new FileLogger();
         private static TabelDataService _tabelDataService;
@@ -88,7 +88,7 @@ namespace SewingProduction.Features.Tabel.Forms
         public TabelMain(UserClass user) : base(user)
         {
             InitializeComponent();
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
             _tabelDataService = new TabelDataService(_dbHelper);
             currentMG = GetCurrentMg();
@@ -165,10 +165,6 @@ namespace SewingProduction.Features.Tabel.Forms
             gridView1.BestFitColumns();
             gridView1.EndUpdate();
 
-            //gridColumnFio.VisibleIndex = 3;
-            //gridColumnTabno.VisibleIndex = 2;
-            //gridColumnPomPech.VisibleIndex = 1;
-            //gridColumnCheckIncludePlan.VisibleIndex = 0;
         }
 
         private async void TabelMain_Load(object sender, EventArgs e)
@@ -177,14 +173,6 @@ namespace SewingProduction.Features.Tabel.Forms
             await Task.WhenAll(bindingsTask);
             CreateDayColumns(currentMG);
             CheckUserAccess(idUser);
-            if (idUser == 170 || idUser == 3)
-            {
-                layoutControlItem19.ContentVisible = true;
-            }
-            else
-            {
-                layoutControlItem19.ContentVisible = false;
-            }
         }
         private void RemoveDayColumns()
         {
@@ -226,9 +214,12 @@ namespace SewingProduction.Features.Tabel.Forms
             lookUpEditGr.Properties.DataSource = _spPodr;
             lookUpEditGr.Properties.DisplayMember = "naimen";
             lookUpEditGr.Properties.ValueMember = "tnid";
+            lookUpEditGr.Properties.Columns.Clear();
+            lookUpEditGr.Properties.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("naimen", "Подразделение"));
             lookUpEditGroup.Properties.DataSource = new BindingSource(workTypes, null);
             lookUpEditGroup.Properties.DisplayMember = "Value";
             lookUpEditGroup.Properties.ValueMember = "Key";
+        
             #region Увязка грида
             customGridControlTimeSheet.DataSource = _timeSheetBindingSource;
             gridColumnDd1.FieldName = "dd01";
@@ -290,7 +281,11 @@ namespace SewingProduction.Features.Tabel.Forms
             gridColumnFio.Width = 90;
             gridView1.OptionsView.EnableAppearanceEvenRow = false;
             gridView1.OptionsView.EnableAppearanceOddRow = false;
-
+            gridView1.OptionsSelection.EnableAppearanceFocusedRow = true;
+            gridView1.OptionsSelection.EnableAppearanceFocusedCell = true;
+            gridView1.Appearance.FocusedRow.BackColor = Color.Gainsboro;
+            gridView1.Appearance.FocusedRow.Options.UseBackColor = true;
+           gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.CellFocus;
 
             #endregion
         }
@@ -827,7 +822,7 @@ namespace SewingProduction.Features.Tabel.Forms
 
                 string query = $"update tabel_sp set {fieldName} = {value},tsPlPart = 0 where id = {id}";
                 _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { });
-                using (var prichIskl = new ChoosePrich(id, tabno, fio))
+                using (var prichIskl = new ChoosePrich(base.User, id, tabno, fio))
                 {
                     //Point mousePosition = Control.MousePosition;
                     //calculator.StartPosition = FormStartPosition.Manual;
@@ -1057,6 +1052,10 @@ namespace SewingProduction.Features.Tabel.Forms
 
         private void lookUpEditGroup_EditValueChanged(object sender, EventArgs e)
         {
+            lookUpEditGroupEditValueChanged();
+        }
+        public void lookUpEditGroupEditValueChanged()
+        {
             _timeSheetBindingSource.Clear();
             _timeSheetBindingSource.ResetBindings(false);
             int grId = Convert.ToInt32(lookUpEditGroup.EditValue);
@@ -1219,7 +1218,7 @@ namespace SewingProduction.Features.Tabel.Forms
             string naimen = lookUpEditGr.Text;
             int idGr = (int)lookUpEditGr.EditValue;
             int idGroup = (int)lookUpEditGroup.EditValue;
-            using (var Employee = new EmployeeTransfer(fio, naimen, idCurrent, idGroup, currentMG, tab))
+            using (var Employee = new EmployeeTransfer(base.User, fio, naimen, idCurrent, idGroup, currentMG, tab))
             {
                 if (Employee.ShowDialog() == DialogResult.OK)
                 {
@@ -1441,6 +1440,76 @@ namespace SewingProduction.Features.Tabel.Forms
                 mainForm.OpenForm(new TabelLock(CurrentUser.User));
             }
 
+        }
+
+        private void customSimpleButton8_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int grId = Convert.ToInt32(lookUpEditGroup.EditValue);
+                if (grId > 0)
+                {
+                    using (var formEdit = new TabNEdit(CurrentUser.User, grId))
+                    {
+                        Point cursorPos = Cursor.Position;
+                        Point safePosition = CalculateSafePosition(
+                            cursorPos,
+                            formEdit.Size);
+
+                        formEdit.StartPosition = FormStartPosition.Manual;
+                        formEdit.Location = safePosition;
+                        if (formEdit.ShowDialog() == DialogResult.OK)
+                        {
+                            lookUpEditGroupEditValueChanged();
+
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Выберите группу!");
+                }
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void customSimpleButton9_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int groupId = Convert.ToInt32(lookUpEditGroup.EditValue);
+                int grId = Convert.ToInt32(lookUpEditGr.EditValue);
+                if (grId > 0 && groupId > 0)
+                {
+                    using (var otklTab = new OtklTabel(CurrentUser.User, grId, currentMG, groupId, 0, _spPodr))
+                    {
+                        Point cursorPos = Cursor.Position;
+                        Point safePosition = CalculateSafePosition(
+                            cursorPos,
+                            otklTab.Size);
+
+                        otklTab.StartPosition = FormStartPosition.Manual;
+                        otklTab.Location = safePosition;
+                        if (otklTab.ShowDialog() == DialogResult.OK)
+                        {
+                            lookUpEditGroupEditValueChanged();
+
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Выберите группу или подразделение!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
         }
     }
 }

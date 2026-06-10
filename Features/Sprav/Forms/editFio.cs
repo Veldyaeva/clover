@@ -10,7 +10,7 @@ namespace SewingProduction.form
     public partial class EditFio : CustomForm
     {
         private readonly EditFioDataService _editFioDataService;
-        DatabaseHelper dbHelper = new DatabaseHelper();
+        DatabaseHelperSQL dbHelper = new DatabaseHelperSQL();
         private Person _person;
         private ToolTip toolTip = new ToolTip();
         bool isBusy = false;

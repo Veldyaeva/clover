@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -57,7 +57,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
     {
         public int ShiftId { get; init; }
         public int TabEnd { get; init; }
-        public decimal MinHours { get; init; } = 12m;
+//        public decimal MinHours { get; init; } = 12m;
         public string UserName { get; init; } = "";
     }
 

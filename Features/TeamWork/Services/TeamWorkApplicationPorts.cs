@@ -1,4 +1,4 @@
-using SewingProduction.Features.TeamWork.Models.UseCases;
+﻿using SewingProduction.Features.TeamWork.Models.UseCases;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
@@ -26,6 +26,7 @@ namespace SewingProduction.Features.TeamWork.Services
         Task BindArticleAsync(MyDataANN selectedAnn, MyDataART selectedArt);
         Task RollbackDraftAsync(int annId);
         Task UnbindArticleAsync(int annIdNzpRow, string kod, string articul);
+        Task UpdateKitKnittingTimeInMatr(int annId);
         Task MarkApprovedAsync(int annId, DateTime approvedAt);
         Task FinalizeArchAndCopyAsync(int sourceAnnId, int newAnnId, bool hasNzp);
         Task RollbackArchAndCopyAsync(int sourceAnnId, int? oldStatus, int? newAnnId);
@@ -48,13 +49,13 @@ namespace SewingProduction.Features.TeamWork.Services
     {
         private readonly ArtNormRepository _artNormRepository;
         private readonly DbService _dbService;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly ILogger _logger;
 
         public TeamWorkRepositoryAdapter(
             ArtNormRepository artNormRepository,
             DbService dbService,
-            DatabaseHelper dbHelper,
+            DatabaseHelperSQL dbHelper,
             ILogger logger)
         {
             _artNormRepository = artNormRepository;
@@ -110,12 +111,12 @@ namespace SewingProduction.Features.TeamWork.Services
     {
         private readonly ArtNormRepository _artNormRepository;
         private readonly DbService _dbService;
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
 
         public TeamWorkUnitOfWorkAdapter(
             ArtNormRepository artNormRepository,
             DbService dbService,
-            DatabaseHelper dbHelper)
+            DatabaseHelperSQL dbHelper)
         {
             _artNormRepository = artNormRepository;
             _dbService = dbService;
@@ -153,6 +154,10 @@ namespace SewingProduction.Features.TeamWork.Services
             await _dbService.UpdateFieldAsync(TableNames.Art, "annId", string.Empty, "left(kod, 7) = @kod AND articul = @art AND annID = @annId", parameters);
             await _dbService.UpdateFieldAsync(TableNames.Ann, "size_label", null, TableNames.AnnId, annIdNzpRow);
             await _dbService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, "parentId", annIdNzpRow);
+        }
+        public async Task UpdateKitKnittingTimeInMatr(int annId)
+        {
+            await _dbHelper.ExecuteQueryAsync("dbo.UpdateKitKnittingTime", new Dictionary<string, object> { { "@annId", annId } }, CommandType.StoredProcedure);
         }
 
         public async Task MarkApprovedAsync(int annId, DateTime approvedAt)
@@ -230,9 +235,9 @@ namespace SewingProduction.Features.TeamWork.Services
 
     public sealed class TeamWorkTransactionBoundaryAdapter : ITeamWorkTransactionBoundary
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
 
-        public TeamWorkTransactionBoundaryAdapter(DatabaseHelper dbHelper)
+        public TeamWorkTransactionBoundaryAdapter(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper;
         }

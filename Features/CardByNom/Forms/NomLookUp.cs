@@ -25,7 +25,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 {
     public partial class NomLookUp : Form
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly GridHelper _gridHelper;
         private readonly CardByNomService _cardByNomService;
         private readonly DbService _dbService;
@@ -45,7 +45,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         public NomLookUp(string _nomZadany, string _ko, string _articul, string _iz)
         {
             InitializeComponent();
-            _dbHelper = new DatabaseHelper("ace");
+            _dbHelper = new DatabaseHelperSQL("ace");
             _dbService = new DbService(_dbHelper);
             _cardByNomService = new CardByNomService(_dbHelper);
             _gridHelper = new GridHelper();

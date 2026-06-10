@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Dapper;
 using SewingProduction.Core.Class.Settings;
 
@@ -13,14 +14,14 @@ namespace SewingProduction.Helpers
     /// <summary>
     /// класс для работы с БД
     /// </summary>
-    public class DatabaseHelper
+    public class DatabaseHelperSQL
     {
         private readonly string _connectionString;
         private static string _globalConnectionString;
         private SqlTransaction _currentTransaction;
         private SqlConnection _currentConnection;
 
-        public DatabaseHelper(string _serv)
+        public DatabaseHelperSQL(string _serv)
         {
             switch (_serv.ToLower())
             {
@@ -48,6 +49,14 @@ namespace SewingProduction.Helpers
                 case "omsconnectionstring":
                     _connectionString = SewingProduction.Properties.Settings.Default.OMSConnectionString;
                     break;
+                //case "cleverPG":
+                //case "cleverPGconnectionstring":
+                //    _connectionString = SewingProduction.Properties.Settings.Default.CleverPGConnectionString;
+                //    break;
+                //case "cleverPG":
+                //case "cleverPGconnectionstring":
+                //    _connectionString = SewingProduction.Properties.Settings.Default.CleverPGConnectionString;
+                //    break;
                 default:
                     _connectionString = SewingProduction.Properties.Settings.Default.ACEConnectionString;
                     break;
@@ -58,7 +67,7 @@ namespace SewingProduction.Helpers
 
             _globalConnectionString = _connectionString;
         }
-        public DatabaseHelper() : this(SettingsManager.GetSelectedDatabase())
+        public DatabaseHelperSQL() : this(SettingsManager.GetSelectedDatabase())
         {
         }
         public static string GetGlobalConnectionString()
@@ -312,6 +321,12 @@ namespace SewingProduction.Helpers
             {
                 await operation.Invoke();
                 await CommitTransactionAsync();
+            }
+            catch (SqlException sqlEx)
+            {
+                await RollbackTransactionAsync();
+                MessageBox.Show(sqlEx.Message, "Ошибка", MessageBoxButtons.OK);
+                throw;
             }
             catch
             {

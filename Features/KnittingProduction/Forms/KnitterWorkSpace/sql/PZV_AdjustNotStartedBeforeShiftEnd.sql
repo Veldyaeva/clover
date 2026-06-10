@@ -1,12 +1,17 @@
-﻿
-CREATE PROCEDURE dbo.PZV_AdjustNotStartedBeforeShiftEnd
+﻿USE ACE
+GO
+
+ALTER PROCEDURE dbo.PZV_AdjustNotStartedBeforeShiftEnd
     @KwsId INT,
+    @Tab INT,
     @MinHours DECIMAL(18,2) = 12.0,
     @UserName sysname = NULL  -- чтобы писать кто закрыл
 AS
 BEGIN
     SET NOCOUNT ON;
-  SET XACT_ABORT ON;
+    DECLARE @hadXactAbortOn bit = CASE WHEN (16384 & @@OPTIONS) = 16384 THEN 1 ELSE 0 END;
+    IF (@hadXactAbortOn = 1)
+        SET XACT_ABORT OFF;
     /*
       Правила:
       - факт по машине = SUM(pzvNChasi) по строкам текущей смены, где операция начата (pzvDateStart IS NOT NULL)
@@ -18,6 +23,8 @@ BEGIN
 
    IF ISNULL(@KwsId,0) = 0
         THROW 50001, 'Смена не открыта', 1;
+    IF ISNULL(@Tab,0) = 0
+        THROW 50001, 'Не задан табельный номер для анализа смены', 1;
     IF @MinHours IS NULL OR @MinHours <= 0
         SET @MinHours = 12.0;
     DECLARE @now datetime = GETDATE();
@@ -29,7 +36,6 @@ BEGIN
     IF OBJECT_ID('tempdb..#Keep')        IS NOT NULL DROP TABLE #Keep;
 
         BEGIN TRY
-        BEGIN TRAN;
 
         -------------------------------------------------------------------
         -- 1) База по строкам смены (фиксируем снимок и берём блокировки)
@@ -52,6 +58,7 @@ BEGIN
         INTO #ShiftRows
         FROM dbo.planZagrVyaz p
         WHERE p.pzvKwsID = @KwsId
+          AND p.pzvTab = @Tab
           AND p.pzvKmlID IS NOT NULL;
 
         CREATE CLUSTERED INDEX IX__ShiftRows__Kml ON #ShiftRows(pzvKmlID, pzvID);
@@ -86,7 +93,8 @@ BEGIN
             SUM(FactHours) AS FactSum
         INTO #FactByMachine
         FROM #ShiftRows
-        WHERE pzvDateStart IS NOT NULL
+     --   WHERE pzvDateStart IS NOT NULL
+     WHERE pzvDateEnd IS NOT NULL
         GROUP BY pzvKmlID;
 
         CREATE UNIQUE CLUSTERED INDEX IX__FactByMachine ON #FactByMachine(pzvKmlID);
@@ -192,8 +200,28 @@ BEGIN
         --    - если FactSum >= MinHours => UNASSIGN
         --    - если FactSum <  MinHours => STORNO (через PZV_Split mode=2)
         -------------------------------------------------------------------
+SELECT
+    r.pzvID,
+    r.pzvKmlID,
+    r.FactSum,
+    r.NeedHours,
+    r.AssignedHours,
+    r.RunningAssigned,
+    CASE 
+        WHEN k.pzvID IS NOT NULL AND r.FactSum < @MinHours THEN 'KEEP_STORNO'
+        WHEN k.pzvID IS NULL AND r.FactSum < @MinHours THEN 'UNASSIGN_EXCESS'
+        WHEN r.FactSum >= @MinHours THEN 'UNASSIGN_FACT_OK'
+        ELSE 'UNKNOWN'
+    END AS PlannedAction
+FROM #Ranked r
+LEFT JOIN #Keep k ON k.pzvID = r.pzvID
+ORDER BY r.pzvKmlID, r.RunningAssigned, r.pzvID;
 
-        /* 6.1) UNASSIGN: FactSum >= MinHours */
+
+
+        /* 6.1) UNASSIGN: FactSum >= MinHours
+           - если факт по машине >= MinHours: снимаем все неначатые
+           - если факт < MinHours: снимаем только лишние неначатые, которые НЕ вошли в #Keep */
         UPDATE p
         SET
             p.pzvTab = 0,
@@ -213,8 +241,9 @@ BEGIN
         FROM dbo.planZagrVyaz p
         JOIN #NotStarted ns ON ns.pzvID = p.pzvID
         LEFT JOIN #Keep k ON k.pzvID = p.pzvID
-        WHERE k.pzvID IS NULL
-          AND ns.FactSum >= @MinHours
+        WHERE-- k.pzvID IS NULL ?????????????????          AND 
+          (ns.FactSum >= @MinHours
+          OR (ns.FactSum < @MinHours AND k.pzvID IS NULL))
           -- safety: вдруг строка уже стала начатой (гонка) — не трогаем
           AND p.pzvDateStart IS NULL
           AND p.pzvDateEnd IS NULL
@@ -239,16 +268,15 @@ BEGIN
         FROM #NotStarted ns
         LEFT JOIN #Keep k ON k.pzvID = ns.pzvID
         JOIN dbo.planZagrVyaz p WITH (UPDLOCK, HOLDLOCK) ON p.pzvID = ns.pzvID
-        WHERE k.pzvID IS NULL
+        WHERE k.pzvID IS NOT NULL
           AND ns.FactSum < @MinHours
           AND p.pzvDateStart IS NULL
           AND p.pzvDateEnd IS NULL
           AND ISNULL(p.pzvTab,0) <> 0
           AND p.pzvKwsID = @KwsId;
 
-        /* Важно: PZV_Split сама открывает транзакцию.
-           Внутри нашей транзакции это будет вложенная (savepoint) — норм.
-           Главное — фиксированный набор @toStorno и блокировка строк уже есть. */
+        /* PZV_Split сама защищает одну pzv-строку.
+           Здесь держим только фиксированный набор @toStorno, без общей транзакции на всю смену. */
         DECLARE @pzvId int;
 
         DECLARE c CURSOR LOCAL FAST_FORWARD FOR
@@ -316,7 +344,10 @@ BEGIN
         FROM #Ranked r
         JOIN #Keep k ON k.pzvID = r.pzvID;
 
-        COMMIT;
+        IF (@hadXactAbortOn = 1)
+            SET XACT_ABORT ON;
+        ELSE
+            SET XACT_ABORT OFF;
 
 --    UPDATE p
 --    SET
@@ -357,9 +388,13 @@ BEGIN
 
     END TRY
     BEGIN CATCH
-        IF @@TRANCOUNT > 0 ROLLBACK;
-        DECLARE @msg nvarchar(4000) = ERROR_MESSAGE();
-        THROW 51000, @msg, 1;
+        IF (@hadXactAbortOn = 1)
+            SET XACT_ABORT ON;
+        ELSE
+            SET XACT_ABORT OFF;
+
+        THROW;
     END CATCH
 END
+
 GO

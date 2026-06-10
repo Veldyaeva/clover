@@ -23,7 +23,7 @@ namespace SewingProduction.form
         public Fio(UserClass user, string tableSQL, string rusNameTableSQL) : base(user)
         {
             InitializeComponent();
-            DatabaseHelper dbHelper = new DatabaseHelper();
+            DatabaseHelperSQL dbHelper = new DatabaseHelperSQL();
             _fioDataService = new Features.Sprav.FioDataService(dbHelper);
             //  ThemeManager.UpdateTheme(this);
             //Таблица fio:

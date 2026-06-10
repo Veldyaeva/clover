@@ -18,7 +18,7 @@ namespace SewingProduction.Features.Articul.Forms
 {
     public partial class ArticulControl : DevExpress.XtraEditors.XtraUserControl
     {
-        private readonly DatabaseHelper _dbHelperAce;
+        private readonly DatabaseHelperSQL _dbHelperAce;
         private bool _isInitialized;
         private readonly ILogger _logger = new FileLogger();
         private const string LoggerContext = "ArticulControl";
@@ -314,7 +314,7 @@ namespace SewingProduction.Features.Articul.Forms
 
         public ArticulControl()
         {
-            _dbHelperAce = new DatabaseHelper();
+            _dbHelperAce = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelperAce);
             InitializeComponent();
 

@@ -34,7 +34,7 @@ namespace SewingProduction.form
         public SpravZeh(UserClass user, string tableSQL, string rusNameTableSQL) : base(user)
         {
             InitializeComponent();
-            DatabaseHelper dbHelper = new DatabaseHelper();
+            DatabaseHelperSQL dbHelper = new DatabaseHelperSQL();
             _spravZehDataService = new SpravZehDataService(dbHelper);
             _sbHub = AppServices.Services?.GetService<IAppServiceBrokerHub>() ?? new AppServiceBrokerHub();
           //  ThemeManager.UpdateTheme(this);
@@ -50,14 +50,14 @@ namespace SewingProduction.form
         public SpravZeh(UserClass user) : base(user)
         {
             InitializeComponent();
-            DatabaseHelper dbHelper = new DatabaseHelper();
+            DatabaseHelperSQL dbHelper = new DatabaseHelperSQL();
             _spravZehDataService = new SpravZehDataService(dbHelper);
             _sbHub = AppServices.Services?.GetService<IAppServiceBrokerHub>() ?? new AppServiceBrokerHub();
         }
         public SpravZeh()
         {
             InitializeComponent();
-            DatabaseHelper dbHelper = new DatabaseHelper();
+            DatabaseHelperSQL dbHelper = new DatabaseHelperSQL();
             _spravZehDataService = new SpravZehDataService(dbHelper);
             _sbHub = AppServices.Services?.GetService<IAppServiceBrokerHub>() ?? new AppServiceBrokerHub();
         }

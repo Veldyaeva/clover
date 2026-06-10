@@ -320,7 +320,7 @@ namespace SewingProduction.Core
                 .Any(s => string.Equals(s.SkinName, skinName, StringComparison.OrdinalIgnoreCase));
         private static void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<DatabaseHelper>();
+            services.AddSingleton<DatabaseHelperSQL>();
             services.AddSingleton<IAppServiceBrokerHub, AppServiceBrokerHub>();
             services.AddTransient<ILogger, HybridLogger>();
             services.AddTransient<IKnitterRepository, KnitterRepository>();

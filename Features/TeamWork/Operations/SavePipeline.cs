@@ -15,12 +15,12 @@ namespace SewingProduction.Features.TeamWork.Operations
 {
     public sealed class SavePipeline
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly ILogger _logger;
         private readonly Action _finalizeRecalculateNumbers;
         private readonly BulkHelper _bulkHelper = new BulkHelper();
 
-        public SavePipeline(DatabaseHelper dbHelper, ILogger logger, Action finalizeRecalculateNumbers)
+        public SavePipeline(DatabaseHelperSQL dbHelper, ILogger logger, Action finalizeRecalculateNumbers)
         {
             _dbHelper = dbHelper;
             _logger = logger;

@@ -1,6 +1,6 @@
 ﻿namespace SewingProduction.Report
 {
-    public partial class SockZadanyInfoReport : ConnectedXtraReport
+    public partial class SockZadanyInfoReport : SewingProduction.Report.ConnectedXtraReport
     {
         public SockZadanyInfoReport()
         {

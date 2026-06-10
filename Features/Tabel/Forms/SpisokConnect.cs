@@ -28,7 +28,7 @@ namespace SewingProduction.Features.Tabel.Forms
 {
     public partial class SpisokConnect : CustomForm
     {
-        private static DatabaseHelper _dbHelper;
+        private static DatabaseHelperSQL _dbHelper;
         private static DbService _dbService;
         private readonly ILogger _logger = new FileLogger();
         private BindingSource _spisokBindingSource;
@@ -42,7 +42,7 @@ namespace SewingProduction.Features.Tabel.Forms
         public SpisokConnect()
         {
             InitializeComponent();
-            _dbHelper = new DatabaseHelper();
+            _dbHelper = new DatabaseHelperSQL();
             _dbService = new DbService(_dbHelper);
             _tabelDataService = new TabelDataService(_dbHelper);
             _spisokNewBindingSource = new BindingSource();
@@ -203,12 +203,14 @@ namespace SewingProduction.Features.Tabel.Forms
                 string middleName = gridView1.GetRowCellValue(rowHandle, "lastname").ToString();
                 int valueVerif1c = (int)gridView1.GetRowCellValue(rowHandle, "verif1c");
                 int tabno = (int)gridView1.GetRowCellValue(rowHandle, "tabno");
-                string naimenPodr = gridView1.GetRowCellValue(rowHandle, "naimen").ToString();
+                string naimenPodr = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "naimen"));
                 string nameGroup = gridView1.GetRowCellValue(rowHandle, "nameGroup").ToString();
-                if (valueVerif1c == 1)
+                object value = gridView1.GetRowCellValue(rowHandle, "date_u");
+                if (valueVerif1c == 1 && value == null && value == DBNull.Value)
+
                 {
                     MessageBox.Show("Увязка с 1с не требуется!");
-                    //return;
+                    return;
                 }
                 using (var chooseForm = new ChooseUin(_user,lastName, firstName, middleName, tabno, naimenPodr, nameGroup))
                 {

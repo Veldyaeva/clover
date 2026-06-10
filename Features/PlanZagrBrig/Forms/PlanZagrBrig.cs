@@ -24,14 +24,14 @@ namespace SewingProduction.form
         public DataTable dtPzArticulList;
         public DataTable dtPzNomList;
         public DataTable dtPzOperList;
-        private readonly DatabaseHelper _dbHelperACE;
-        private readonly DatabaseHelper _dbHelperGLOBAL;
+        private readonly DatabaseHelperSQL _dbHelperACE;
+        private readonly DatabaseHelperSQL _dbHelperGLOBAL;
 
         public PlanZagrBrig()
         {
             InitializeComponent();
-            _dbHelperACE = new DatabaseHelper("ace");//Properties.Settings.Default.ACEConnectionString);
-            _dbHelperGLOBAL = new DatabaseHelper("global");
+            _dbHelperACE = new DatabaseHelperSQL("ace");//Properties.Settings.Default.ACEConnectionString);
+            _dbHelperGLOBAL = new DatabaseHelperSQL("global");
            // ThemeManager.UpdateTheme(this);
         }
         public PlanZagrBrig(UserClass user) : base(user)

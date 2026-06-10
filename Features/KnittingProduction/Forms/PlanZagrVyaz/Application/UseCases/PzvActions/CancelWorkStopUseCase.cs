@@ -32,6 +32,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms.PZVForm.Application
                 }
                 else
                 {
+                    _validator.ShowValidationMessage(
+                        row,
+                        _validator.ValidateCancelStopWork,
+                        "Отмена окончания выполнения операции");
                     row.ErrorSelection = 1;
                     row.SyncSelection = 0;
                 }

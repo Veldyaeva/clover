@@ -20,7 +20,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 {
     public partial class NormOperNew : CustomForm
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly DbService _dbService;
         private readonly ArtNormRepository _artNormService;
         private readonly ILogger _logger = new FileLogger();
@@ -38,10 +38,10 @@ namespace SewingProduction.Features.TeamWork.Forms
         public NormOperNew(int annId)
         {
             InitializeComponent();
-            var databaseServices = TeamWorkDependencyFactory.CreateDatabaseServices();
-            _dbHelper = databaseServices.DbHelper;
-            _dbService = databaseServices.DbService;
-            _artNormService = databaseServices.ArtNormRepository;
+			var databaseServices = TeamWorkDependencyFactory.CreateDatabaseServices();
+            _dbHelper = new DatabaseHelperSQL();
+            _dbService = new DbService(_dbHelper);
+            _artNormService = new ArtNormRepository(_dbHelper);
 
             _annId = annId;
            // ThemeManager.UpdateTheme(this);

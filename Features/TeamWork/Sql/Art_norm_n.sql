@@ -36,6 +36,7 @@ CREATE TABLE dbo.art_norm_n (
   data_sozd datetime NULL,
   diz int NULL,
   constr int NULL,
+  knitConstr int NULL,
   data_obn datetime NULL,
   sek_vyaz70 int NULL,
   sek_kr int NULL,

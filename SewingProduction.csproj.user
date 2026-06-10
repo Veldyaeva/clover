@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_LastSelectedProfileId>D:\Work\SewingProduction_Solution\sewingproduction\Properties\PublishProfiles\anyCPU.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>D:\SewingProduction\Properties\PublishProfiles\ver.x32.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="Core\Class\CustomConnectedXtraReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Core\Class\CustomControlsThemeable.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -58,6 +61,9 @@
     <Compile Update="Core\Class\SP_form.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Core\Forms\PrintSewn.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Core\Forms\TextSplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +107,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\CardByNom\Forms\NomLookUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\ExchangeApp\Forms\FrmExchangeManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\ExchangeApp\Forms\FrmExchangeManager.UIConfig.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\KnittingProduction\Forms\KnitterWorkSpace.cs">
@@ -214,6 +226,9 @@
     <Compile Update="Features\Tabel\Forms\EmployeeTransfer .cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\Tabel\Forms\OtklTabel.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\Tabel\Forms\OtvlRab.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,6 +239,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Tabel\Forms\TabelMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Tabel\Forms\TabNEdit.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Tabel\Reports\Blank.cs">
@@ -304,6 +322,9 @@
     <Compile Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.UiState.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\TeamWork\Forms\ThreadNormsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\UserDistribution\Forms\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -335,6 +356,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\UserDistribution\Forms\Podr\RolePodr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\User\FormAccessViewer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\UserDistribution\Forms\User\ShareUser.cs">
@@ -457,6 +481,12 @@
     <Compile Update="Report\subreport\SpisPryzDefectReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
+    <Compile Update="Report\subreport\ZadanyKomplSostListReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\TestXtraReport1.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Report\TimeSheetParsecOrionPrint.cs">
       <SubType>XtraReport</SubType>
     </Compile>
@@ -466,10 +496,19 @@
     <Compile Update="Report\TimeSheetReportSkladi.cs">
       <SubType>XtraReport</SubType>
     </Compile>
+    <Compile Update="Report\TimeSheetReportZl.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Report\VshivkiReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\PZVCurrentMachineAssignmentReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\VshivkiReportHol.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\TimeSheetOtklReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
   </ItemGroup>

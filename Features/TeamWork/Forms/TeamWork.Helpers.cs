@@ -236,7 +236,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             // Если есть group6 (создать из артикула) — можно пометить и её
             TagByCaption(layoutControlGroupPreArch, new[] {
-                ("Р’ Р°СЂС…РёРІ",                   "prearch:archive")
+                ("В архив",                   "prearch:archive")
             });
 
             if (layoutControlGroup6 != null)

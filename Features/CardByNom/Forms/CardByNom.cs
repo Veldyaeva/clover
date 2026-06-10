@@ -1,4 +1,12 @@
-﻿using DevExpress.Charts.Native;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using DevExpress.Charts.Native;
 using DevExpress.CodeParser;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
@@ -6,8 +14,10 @@ using DevExpress.XtraTab;
 using Microsoft.IdentityModel.Tokens;
 using SewingProduction.Core.Class;
 using SewingProduction.Core.Class.Settings;
+using SewingProduction.Core.Forms;
 using SewingProduction.Core.helpers;
 using SewingProduction.Core.Models;
+using SewingProduction.Core.services;
 using SewingProduction.Core.Services;
 using SewingProduction.Extensions;
 using SewingProduction.Features.Articul;
@@ -24,14 +34,6 @@ using SewingProduction.Models;
 using SewingProduction.report;
 using SewingProduction.Report;
 using SewingProduction.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Drawing;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using BindingSource = System.Windows.Forms.BindingSource;
 
 namespace SewingProduction
@@ -41,7 +43,7 @@ namespace SewingProduction
         public int fspecrez, uspecrez;
         public string fkodfd, ukodfd;
 
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         private readonly GridHelper _gridHelper;
         private readonly CardByNomService _cardByNomService;
         private readonly FurnitService _furnitService;
@@ -132,7 +134,7 @@ namespace SewingProduction
         {
 
             InitializeComponent();
-            _dbHelper = new DatabaseHelper("ace");
+            _dbHelper = new DatabaseHelperSQL("ace");
             _gridHelper = new GridHelper();
             _cardByNomService = new CardByNomService(_dbHelper);
             _furnitService = new FurnitService(_dbHelper);
@@ -1922,18 +1924,23 @@ namespace SewingProduction
             report1.Parameters["_rzuNom"].Value = selectedRow.Nom;
             report1.Parameters["_isChip"].Value = IsChip;
             report1.Parameters["_isUpak"].Value = 1;
+            report1.Parameters["_proizvType"].Value = customRadioGroup2.SelectedIndex;
+            report1.Parameters["_yearPach"].Value = Convert.ToInt32(tbYearPach.Text);
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
         }
         private void PrintMLRTUpak()
         {
+            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
+            //var selectedRowRas = _rasInfoByPachKodBindingSource.Current as RasInfo;
             int IsChip = Convert.ToInt32(this.cbIsChip.Checked);
             MlRtReport report1 = new MlRtReport();
-            report1.RequestParameters = false;
-            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
             report1.Parameters["_rzuNom"].Value = selectedRow.Nom;
             report1.Parameters["_isChip"].Value = IsChip;
             report1.Parameters["_isUpak"].Value = 1;
+            report1.Parameters["_proizvType"].Value = customRadioGroup2.SelectedIndex;
+            report1.Parameters["_yearPach"].Value = Convert.ToInt32(tbYearPach.Text);
+            report1.RequestParameters = false;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
         }
@@ -2283,7 +2290,8 @@ namespace SewingProduction
                     //MessageBox.Show("Печать");
                     SockZadanyInfoReport report1 = new SockZadanyInfoReport();
                     report1.RequestParameters = false;
-                    report1.Parameters["_nomZadany"].Value = tbNomZad.Text;
+                    //report1.Parameters["_nomZadany"].Value = tbNomZad.Text;
+                    report1.Parameters["_nomZadany"].Value = tbPsaNomZad.Text;
                     ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
                     reportPrintTool1.ShowPreviewDialog();
                     //tbNomZad.Text
@@ -2397,35 +2405,69 @@ namespace SewingProduction
 
         }
 
-        private void buttonVshivkiPrint_Click(object sender, EventArgs e)
+		#region Вшивка
+		PrintSewnDataService printSewnDataService = new PrintSewnDataService();
+		private async void buttonVshivkiPrint_Click(object sender, EventArgs e)
         {
-            VshivkiReport report1 = new VshivkiReport();
-            report1.RequestParameters = false;
-            //report1.Parameters["_rzuNom"].Value = tbRzuNom.Text;
-            //report1.Parameters["_isChip"].Value = IsChip;
-            //report1.Parameters["_isUpak"].Value = 0;
 
-            var selectedRow = _rasInfoByPachKodBindingSource.Current as RasInfo;
-            //if (selectedRow != null && Convert.ToInt32(tbRzuNom.Text) != 0)
+			var str = _rasInfoByPachKodBindingSource.Current as RasInfo;
+			if (str == null)
+				return;
 
-            if (selectedRow != null && selectedRow.RzuNom != 0 && Convert.ToInt32(selectedRow.PsaNomZad) != 0)
-            {
-                report1.Parameters["_nomZad"].Value = selectedRow.PsaNomZad;
-                report1.Parameters["_nomZad"].Visible = false;
-                report1.Parameters["_nom"].Value = selectedRow.RzuNom;
-                report1.Parameters["_nom"].Visible = false;
-                report1.Parameters["_proizvType"].Value = customRadioGroup2.SelectedIndex;
-                report1.Parameters["_proizvType"].Visible = false;
-                ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
-                reportPrintTool1.ShowPreviewDialog();
-            }
-            else
-            {
-                MessageBox.Show("Не выбран расчет для печати");
-            }
-        }
+			string nomZad = str.PsaNomZad?.ToString() ?? string.Empty;
+			if (string.IsNullOrWhiteSpace(nomZad))
+			{
+				MessageBox.Show("Не найден номер задания.");
+				return;
+			}
 
-        private async void textBoxIzNakl_KeyDown(object sender, KeyEventArgs e)
+			bool notPrintVsh = await printSewnDataService.GetNotPrintVshAsync(str.PsaNomZad);
+			if (notPrintVsh)
+			{
+				MessageBox.Show("На изделие не нужно печатать вшивки!");
+				return;
+			}
+
+			string articul = str.RzuArticul?.ToString() ?? string.Empty;
+			if (nomZad.StartsWith("32") && articul.StartsWith("7"))
+			{
+				MessageBox.Show("Текстильное производство печатать только на готовое изделие, на чехол не надо!");
+				return;
+			}
+
+			string nom = str.RzuNom.ToString() ?? string.Empty;
+			var printSewn = new PrintSewn(nom, str.PsaNomZad, customRadioGroup2.SelectedIndex);
+			printSewn.ShowDialog();
+			return;
+
+			//VshivkiReport report1 = new VshivkiReport();
+			//         report1.RequestParameters = false;
+			//         //report1.Parameters["_rzuNom"].Value = tbRzuNom.Text;
+			//         //report1.Parameters["_isChip"].Value = IsChip;
+			//         //report1.Parameters["_isUpak"].Value = 0;
+
+			//         var selectedRow = _rasInfoByPachKodBindingSource.Current as RasInfo;
+			//         //if (selectedRow != null && Convert.ToInt32(tbRzuNom.Text) != 0)
+
+			//         if (selectedRow != null && selectedRow.RzuNom != 0 && Convert.ToInt32(selectedRow.PsaNomZad) != 0)
+			//         {
+			//             report1.Parameters["_nomZad"].Value = selectedRow.PsaNomZad;
+			//             report1.Parameters["_nomZad"].Visible = false;
+			//             report1.Parameters["_nom"].Value = selectedRow.RzuNom;
+			//             report1.Parameters["_nom"].Visible = false;
+			//             report1.Parameters["_proizvType"].Value = customRadioGroup2.SelectedIndex;
+			//             report1.Parameters["_proizvType"].Visible = false;
+			//             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+			//             reportPrintTool1.ShowPreviewDialog();
+			//         }
+			//         else
+			//         {
+			//             MessageBox.Show("Не выбран расчет для печати");
+			//         }
+		}
+		#endregion
+
+		private async void textBoxIzNakl_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {

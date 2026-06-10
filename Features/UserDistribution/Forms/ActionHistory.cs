@@ -10,7 +10,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
     public partial class ActionHistory : CustomForm
     {
         private readonly ActionHistoryDataService _actionHistoryDataService;
-        DatabaseHelper dbHelper = new DatabaseHelper();
+        DatabaseHelperSQL dbHelper = new DatabaseHelperSQL();
         public ActionHistory(UserClass user) : base(user)
         {
             InitializeComponent();
@@ -26,8 +26,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
 
     public class ActionHistoryDataService
     {
-        private readonly DatabaseHelper _dbHelper;
-        public ActionHistoryDataService(DatabaseHelper dbHelper)
+        private readonly DatabaseHelperSQL _dbHelper;
+        public ActionHistoryDataService(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper;
         }

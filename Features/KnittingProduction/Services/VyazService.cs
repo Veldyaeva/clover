@@ -21,7 +21,7 @@ namespace SewingProduction.Features.KnittingProduction.Services
     /// </summary>
     public class VyazService
     {
-        private static DatabaseHelper _dbHelper;
+        private static DatabaseHelperSQL _dbHelper;
         private readonly DbService _dbService;
         //    private readonly HybridLogger _logger = new HybridLogger();
         private readonly FileLogger _logger = new FileLogger();
@@ -30,7 +30,7 @@ namespace SewingProduction.Features.KnittingProduction.Services
         /// Инициализирует новый экземпляр dbService.
         /// </summary>
         /// <param name="dbHelper">Помощник для работы с базой данных.</param>
-        public VyazService(DatabaseHelper dbHelper)
+        public VyazService(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
             _dbService = new DbService(_dbHelper);
@@ -100,6 +100,11 @@ namespace SewingProduction.Features.KnittingProduction.Services
                     var result = await connection.QueryAsync<KnitMachineClassList>(query, new Dictionary<string, object> { });
                     return result.ToList();
                 }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"{ex.ErrorCode} - {ex.Message}", "Ошибка SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
             }
             catch (Exception ex)
             {
@@ -231,6 +236,7 @@ namespace SewingProduction.Features.KnittingProduction.Services
                     string query = $"SELECT * " +
                         $"  FROM planSezonZadKnitMachine " +
                         $"  WHERE pszkmKmlID = {kmlID} " +
+                        $"      AND (CAST(pszkmPlanDateFrom AS DATE) >= CAST(GETDATE() AS DATE) OR CAST(pszkmPlanDateTo AS DATE) >= CAST(GETDATE() AS DATE))" +
                         $"  ORDER BY pszkmYearMonthInt, pszkmPlanDateFrom";
                     var result = await connection.QueryAsync<PlanSezonZadKnitMachine>(query, new Dictionary<string, object> { });
                     return result.ToList();
@@ -495,13 +501,13 @@ namespace SewingProduction.Features.KnittingProduction.Services
             }
         }
         
-        public async Task<BindingSource> GetPlanTotalQuantityByArticul(CancellationToken cancellationToken)
+        public async Task<BindingSource> GetPlanTotalQuantityByArticul(CancellationToken cancellationToken, int _vyazPodrKod)
         {
             try
             {
                 await using var connection = _dbHelper.GetConnection();
-                const string query = @"EXEC dbo.GetPlanTotalQuantityByArticul";
-                var command = new CommandDefinition(query, new { }, cancellationToken: cancellationToken);
+                const string query = @"EXEC dbo.GetPlanTotalQuantityByArticul @xPodrKod = @vyazPodrKod";
+                var command = new CommandDefinition(query, new { vyazPodrKod = _vyazPodrKod }, cancellationToken: cancellationToken);
 
                 var list = (await connection
                     .QueryAsync<PlanTotalQuantityByArticul>(command))

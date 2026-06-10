@@ -1,6 +1,7 @@
-using Dapper;
+﻿using Dapper;
 using DevExpress.Mvvm.Native;
 using SewingProduction.Core.Models;
+using SewingProduction.Features.Articul.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Interfaces;
 using System;
@@ -22,7 +23,7 @@ namespace SewingProduction.Services
     /// </summary>
     public class DbService
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelperSQL _dbHelper;
         //    private readonly HybridLogger _logger = new HybridLogger(); //убрала пока гибридный логгер, не хочу писать в базу
         private readonly FileLogger _logger = new FileLogger();
         private readonly BulkHelper _bulkHelper = new BulkHelper();
@@ -31,7 +32,7 @@ namespace SewingProduction.Services
         /// Инициализирует новый экземпляр dbService.
         /// </summary>
         /// <param name="dbHelper">Помощник для работы с базой данных.</param>
-        public DbService(DatabaseHelper dbHelper)
+        public DbService(DatabaseHelperSQL dbHelper)
         {
             _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
 
@@ -199,6 +200,27 @@ namespace SewingProduction.Services
                 throw; // Пробрасываем исключение, чтобы вызывающий код мог его обработать
             }
         }
+        public async Task<T> ExecuteScalarProcedureAsync<T>(string procName, DynamicParameters parameters)
+        {
+            try
+            {
+                using var connection = _dbHelper.GetConnection();
+                var result = await connection.ExecuteScalarAsync<T>(
+                    procName,
+                    parameters,
+                    commandType: CommandType.StoredProcedure
+                    );
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при выполнении процедуры {procName}");
+                throw;
+            }
+        }
+
+
         /// <summary>
         /// выполняет хранимую процедуру с возвратом статуса выполнения
         /// принимает имя процедуры и параметры вида 
@@ -324,16 +346,16 @@ namespace SewingProduction.Services
             }
         }
 
-        /// <summary>
-        /// Обновление данных в таблице
-        /// </summary>
-        /// <typeparam name="T">тип объекта</typeparam>
-        /// <param name="tableName">имя таблицы</param>
-        /// <param name="keyFieldName">имя ключевого параметра</param>
-        /// <param name="entity">объект обновления</param>
-        /// <param name="UseNull">true - исключает NULL</param>
-        /// <returns></returns>
-        public async Task UpdateEntityAsync<T>(string tableName, string keyFieldName, T entity, bool UseNull = false)
+		/// <summary>
+		/// Обновление данных в таблице
+		/// </summary>
+		/// <typeparam name="T">тип объекта</typeparam>
+		/// <param name="tableName">имя таблицы</param>
+		/// <param name="keyFieldName">имя ключевого параметра</param>
+		/// <param name="entity">объект обновления</param>
+		/// <param name="ignoreNulls">true - исключает NULL</param>
+		/// <returns></returns>
+		public async Task UpdateEntityAsync<T>(string tableName, string keyFieldName, T entity, bool ignoreNulls = false)
         {
             try
             {
@@ -350,7 +372,7 @@ namespace SewingProduction.Services
                 {
                     var value = prop.GetValue(entity);
 
-                    if (UseNull)
+                    if (ignoreNulls)
                     {
                         if (value == null || value == DBNull.Value)
                             continue;
@@ -432,7 +454,7 @@ namespace SewingProduction.Services
             if (exists != null)
             {
                 // обновление
-                await UpdateEntityAsync(tableName, keyFieldName, entity);
+                await UpdateEntityAsync(tableName, keyFieldName, entity, true);
                 return keyId;
             }
             else
@@ -441,8 +463,68 @@ namespace SewingProduction.Services
                 return await InsertEntityAsync(tableName, keyFieldName, entity);
             }
         }
+        public async Task<List<T>> GetListFromProcedureAsync<T>(
+    string procedureName,
+    object parameters = null,
+    int? commandTimeout = null)
+        {
+            try
+            {
+                using var connection = _dbHelper.GetConnection();
 
-        
+                var result = await connection.QueryAsync<T>(
+                    procedureName,
+                    parameters,
+                    commandType: CommandType.StoredProcedure,
+                    commandTimeout: commandTimeout);
+
+                return result.AsList();
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(
+                    ex,
+                    $"Ошибка выполнения процедуры {procedureName}");
+
+                throw;
+            }
+        }
+        public async Task<int> SaveEntityAsync<T>(
+    string tableName,
+    string keyFieldName,
+    T entity,
+    bool skipNullOnUpdate)
+        {
+            var keyProperty = typeof(T).GetProperty(keyFieldName);
+            if (keyProperty == null)
+                throw new Exception($"Ключевое поле {keyFieldName} не найдено в объекте {typeof(T).Name}");
+
+            var keyValue = keyProperty.GetValue(entity);
+
+            if (keyValue == null || (keyValue is int val && val == 0))
+                return await InsertEntityAsync(tableName, keyFieldName, entity);
+
+            int keyId = Convert.ToInt32(keyValue);
+
+            var filters = new Dictionary<string, object> { { keyFieldName, keyId } };
+            var exists = await SelectOneFieldAsync<int?>(
+                tableName,
+                keyFieldName,
+                filters);
+
+            if (exists != null)
+            {
+                await UpdateEntityAsync(
+                    tableName,
+                    keyFieldName,
+                    entity,
+					ignoreNulls: skipNullOnUpdate);
+
+                return keyId;
+            }
+
+            throw new Exception($"Запись {tableName}.{keyFieldName}={keyId} не найдена.");
+        }
         /*public async Task SaveListAsync<T>(BindingList<T> list, string tableName, string keyFieldName, List<int> deletedIds)
     where T : class, INewable, new()
         {

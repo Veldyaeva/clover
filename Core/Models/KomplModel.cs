@@ -23,7 +23,7 @@ namespace SewingProduction.Core.Models
         public string Kod9 { get; set; }
         public string Kod10 { get; set; }
 
-        public string CompName { get; set; } = Environment.MachineName;
+		public string CompName { get; set; } = Environment.MachineName;
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName) =>
