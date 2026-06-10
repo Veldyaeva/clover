@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -51,8 +52,13 @@ namespace SewingProduction.Features.Articul.Forms
 
             foreach (var kv in _controlToArtNormProperty)
             {
-                if (kv.Key != null && kv.Value != null)
-                    _propertyToControl[kv.Value.Name] = kv.Key;
+                if (kv.Key == null || kv.Value == null)
+                    continue;
+
+                if (IsEditBindingControl(kv.Key))
+                    continue;
+
+                _propertyToControl[kv.Value.Name] = kv.Key;
             }
             /*
             RegisterSeries("txbNorm_t", "Norm_t");
@@ -408,6 +414,7 @@ namespace SewingProduction.Features.Articul.Forms
                 var control = kv.Key;
                 var prop = kv.Value;
                 if (control == null || prop == null) continue;
+                if (!ShouldBindControl(control)) continue;
 
                 control.DataBindings.Clear();
 
@@ -452,6 +459,9 @@ namespace SewingProduction.Features.Articul.Forms
             // В read-only режиме не пишем обратно в модель
             var mode = _isReadOnly ? DataSourceUpdateMode.Never : DataSourceUpdateMode.OnPropertyChanged;
 
+            if (control is System.Windows.Forms.ComboBox)
+                return ("SelectedValue", mode);
+
             // CustomTextBox => TextBoxBase
             if (control is TextBoxBase)
                 return ("Text", mode);
@@ -460,7 +470,7 @@ namespace SewingProduction.Features.Articul.Forms
             if (control is CheckBox || control.GetType().Name.Contains("CheckBox"))
                 return ("Checked", mode);
 
-            // если где-то появятся DevExpress editors
+            // DevExpress editors
             if (control is BaseEdit)
                 return ("EditValue", mode);
 
@@ -471,24 +481,33 @@ namespace SewingProduction.Features.Articul.Forms
         {
             foreach (Control c in FieldComparisonService.GetAllControls(this))
             {
+                var readOnly = _isReadOnly || _alwaysReadOnlyControls.Contains(c);
+
                 switch (c)
                 {
                     case TextBoxBase tb:
-                        tb.ReadOnly = _isReadOnly;
-                        tb.TabStop = !_isReadOnly;
+                        tb.ReadOnly = readOnly;
+                        tb.TabStop = !readOnly;
                         break;
 
                     case CheckBox cb:
-                        cb.Enabled = !_isReadOnly;
-                        cb.TabStop = !_isReadOnly;
+                        cb.Enabled = !readOnly;
+                        cb.TabStop = !readOnly;
+                        break;
+
+                    case System.Windows.Forms.ComboBox combo:
+                        combo.Enabled = !readOnly;
+                        combo.TabStop = !readOnly;
                         break;
 
                     case BaseEdit be:
-                        be.Properties.ReadOnly = _isReadOnly;
-                        be.TabStop = !_isReadOnly;
+                        be.Properties.ReadOnly = readOnly;
+                        be.TabStop = !readOnly;
                         break;
                 }
             }
+
+            ApplyAlwaysReadOnlyControls();
         }
 
         private void AttachChangeHandlers()
