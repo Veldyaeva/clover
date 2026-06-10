@@ -63,7 +63,6 @@ namespace SewingProduction.Features.Articul.Forms
         private BindingSource _bindingSourceArtCommon;
         private BindingSource _bindingSourceArtCommonSave;
         private BindingSource _bindingSourceGostGrup;
-        private BindingSource _bindingSourceCard;
 
         public ArticulEditAdvance(UserClass user) : this(user, "", "")
         { }
@@ -88,7 +87,6 @@ namespace SewingProduction.Features.Articul.Forms
             _bindingSourceArtCommon = new BindingSource { };
             _bindingSourceArtCommonSave = new BindingSource { };
             _bindingSourceGostGrup = new BindingSource { };
-            _bindingSourceCard = new BindingSource { };
 
         }
         public ArticulEditAdvance(UserClass user, string kodd, string articul, string kod) : this(user, kodd, articul)
@@ -128,20 +126,18 @@ namespace SewingProduction.Features.Articul.Forms
         }
 
         /// <summary>
-        /// Инициализация размещённого на форме ArticulControl: загрузка карточки по kodd
-        /// и включение режима редактирования. Контрол работает с собственным
-        /// SpArticulPreviewModel и не вмешивается в текущий pipeline сохранения формы.
+        /// Инициализация размещённого на форме ArticulControl. Контрол привязывается к тому же
+        /// _bindingSourceArtCommon (SpArticulPreviewModel), что и поля формы, поэтому его правки
+        /// сохраняются существующим механизмом SaveChanges без отдельного pipeline.
         /// </summary>
         private async Task InitArticulCardAsync()
         {
             try
             {
-                var card = await _articulEdAdvDataService.GetCardPreviewByKoddAsync(_kodd);
-                if (card == null)
+                if (_bindingSourceArtCommon.Count == 0)
                     return;
 
-                _bindingSourceCard.DataSource = card;
-                articulControlCard.BindTo(_bindingSourceCard);
+                articulControlCard.BindTo(_bindingSourceArtCommon);
                 await articulControlCard.LoadImageAsync(_kodd);
                 await articulControlCard.EnableEditModeAsync();
             }
