@@ -21,11 +21,13 @@ using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.Intrinsics.X86;
 using System.Text;
@@ -48,7 +50,30 @@ namespace SewingProduction.Features.Articul.Forms
 
         private readonly ILogger _logger = new FileLogger();
 
+        private const string PermissionEditLinkedGost = "permArticulEditLinkedGost";
+        private const string PermissionEditLinkedFull = "permArticulEditLinkedFull";
+        private const string PermissionModeEditor = "Редактор";
+
+        private static readonly HashSet<string> GostEditableProperties =
+            new(StringComparer.OrdinalIgnoreCase)
+            {
+                nameof(ArticulModel.Id_gost),
+                nameof(ArticulModel.Ag_id),
+                nameof(ArticulModel.Grup)
+            };
+
+        private static readonly HashSet<string> SostavEditableProperties =
+            new(StringComparer.OrdinalIgnoreCase)
+            {
+                nameof(ArticulModel.Sost),
+                nameof(ArticulModel.Sost2),
+                nameof(ArticulModel.Sost3),
+                nameof(ArticulModel.Sostav)
+            };
+
         private ArticulModel _currentModel;
+        private ArticulModel _originalModelSnapshot;
+        private ArticulEditAccessPolicy _editPolicy = ArticulEditAccessPolicy.ReadOnly;
 
         private string _kodd;
         private string _kod;
@@ -94,6 +119,16 @@ namespace SewingProduction.Features.Articul.Forms
             _kod = kod;
         }
 
+        private sealed record ArticulEditAccessPolicy(
+            bool CanEditBase,
+            bool CanEditGost,
+            bool CanEditSostav)
+        {
+            public static ArticulEditAccessPolicy ReadOnly { get; } = new(false, false, false);
+            public bool CanEditAny => CanEditBase || CanEditGost || CanEditSostav;
+            public bool CanEditAll => CanEditBase && CanEditGost && CanEditSostav;
+        }
+
 
         private async void ArticulEditAdvance_Load(object sender, EventArgs e)
         {
@@ -119,9 +154,11 @@ namespace SewingProduction.Features.Articul.Forms
             await InitializeBindingsAsync();
             BindGostRazm();
 
-            CheckStatus();
+            await CheckStatusAsync();
 
             await InitArticulCardAsync();
+
+            CaptureOriginalModelSnapshot();
 
         }
 
@@ -139,14 +176,52 @@ namespace SewingProduction.Features.Articul.Forms
 
                 articulControlCard.BindTo(_bindingSourceArtCommon);
                 await articulControlCard.LoadImageAsync(_kodd);
-                await articulControlCard.EnableEditModeAsync();
+
+                if (CanEditArticulCard())
+                {
+                    await articulControlCard.EnableEditModeAsync();
+                    ApplyArticulCardEditPolicy();
+                }
+                else
+                {
+                    articulControlCard.SetViewMode();
+                    articulControlCard.IsReadOnly = true;
+                }
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка инициализации ArticulControl на ArticulEditAdvance");
             }
         }
-        private async void CheckStatus()
+        private bool CanEditArticulCard()
+        {
+            return _editPolicy.CanEditAll || CanEditOnlyGost();
+        }
+
+        private void ApplyArticulCardEditPolicy()
+        {
+            if (_editPolicy.CanEditAll)
+                return;
+
+            var editableProperties = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+            if (CanEditOnlyGost())
+            {
+                editableProperties.Add(nameof(ArticulModel.Id_gost));
+                editableProperties.Add(nameof(ArticulModel.Ag_id));
+            }
+
+            articulControlCard.ApplyEditableFields(editableProperties);
+        }
+
+        private bool CanEditOnlyGost()
+        {
+            return _editPolicy.CanEditGost
+                && !_editPolicy.CanEditBase
+                && !_editPolicy.CanEditSostav;
+        }
+
+        private async Task CheckStatusAsync()
         {
             try
             {
@@ -162,22 +237,7 @@ namespace SewingProduction.Features.Articul.Forms
 
                 _linkedWithMatrix = (matrStatustask.Result != null && matrStatustask.Result > 0);
 
-                if (_linkedWithMatrix)
-                {
-                    //layoutCommonArticul.Enabled = false;
-                    SetGroupReadOnly(layoutCommonArticul, true);
-                    SetGroupReadOnly(layoutGostInsert, true);
-                    SetGroupReadOnly(layoutSostav, true);
-
-                }
-                //есть дата описания модели - редактирование запрещено
-                if (_currentModel.DateOpis != null)
-                {
-                    layoutGostInsert.Enabled = false;
-                    //btEdit.Visible = false;
-                    layoutControlItem23.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-
-                }
+                ApplyEditPolicy();
             }
             catch (Exception ex)
             {
@@ -185,6 +245,73 @@ namespace SewingProduction.Features.Articul.Forms
                 throw;
             }
 
+        }
+
+        private ArticulEditAccessPolicy ResolveEditPolicy()
+        {
+            var hasFormEdit = HasEditPermission(nameof(ArticulEditAdvance));
+            if (!hasFormEdit)
+                return ArticulEditAccessPolicy.ReadOnly;
+
+            bool canEditBase;
+            bool canEditGost;
+            bool canEditSostav;
+
+            if (!_linkedWithMatrix)
+            {
+                canEditBase = true;
+                canEditGost = true;
+                canEditSostav = true;
+            }
+            else if (HasEditPermission(PermissionEditLinkedFull))
+            {
+                canEditBase = true;
+                canEditGost = true;
+                canEditSostav = true;
+            }
+            else if (HasEditPermission(PermissionEditLinkedGost))
+            {
+                canEditBase = false;
+                canEditGost = true;
+                canEditSostav = false;
+            }
+            else
+            {
+                return ArticulEditAccessPolicy.ReadOnly;
+            }
+
+            if (_currentModel?.DateOpis != null)
+                canEditGost = false;
+
+            return new ArticulEditAccessPolicy(
+                CanEditBase: canEditBase,
+                CanEditGost: canEditGost,
+                CanEditSostav: canEditSostav);
+        }
+
+        private bool HasEditPermission(string objectName)
+        {
+            return _user?.HasPermission(objectName, PermissionModeEditor) == true;
+        }
+
+        private void ApplyEditPolicy()
+        {
+            _editPolicy = ResolveEditPolicy();
+
+            SetGroupReadOnly(layoutCommonArticul, !_editPolicy.CanEditBase);
+            SetGroupReadOnly(layoutGostInsert, !_editPolicy.CanEditGost);
+            SetGroupReadOnly(layoutSostav, !_editPolicy.CanEditSostav);
+
+            layoutGostInsert.Enabled = true;
+
+            // Есть дата описания модели - редактирование ГОСТ остается запрещенным отдельным бизнес-правилом.
+            if (_currentModel.DateOpis != null)
+            {
+                SetGroupReadOnly(layoutGostInsert, true);
+                layoutGostInsert.Enabled = false;
+                //btEdit.Visible = false;
+                layoutControlItem23.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            }
         }
         private void SetGroupReadOnly(LayoutControlGroup group, bool readOnly)
         {
@@ -657,6 +784,95 @@ namespace SewingProduction.Features.Articul.Forms
             return _currentModel.IsModified || modyfiedRazm;
 
         }
+
+        private void CaptureOriginalModelSnapshot()
+        {
+            if (_currentModel == null)
+                return;
+
+            _originalModelSnapshot = ObjectCloneHelper.CloneWithExclusions(_currentModel);
+            _originalModelSnapshot.AcceptChanges();
+            _currentModel.AcceptChanges();
+        }
+
+        private bool ValidateSaveAllowedByPolicy()
+        {
+            if (_editPolicy.CanEditAll)
+                return true;
+
+            if (_originalModelSnapshot == null)
+            {
+                XtraMessageBox.Show(
+                    "Не удалось проверить права на сохранение: исходное состояние артикула не зафиксировано.",
+                    "Сохранение запрещено",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return false;
+            }
+
+            var deniedProperties = GetChangedPersistedProperties(_originalModelSnapshot, _currentModel)
+                .Where(propertyName => !IsPropertyAllowedByPolicy(propertyName))
+                .ToList();
+
+            if (HasRazmChanges() && !_editPolicy.CanEditBase)
+                deniedProperties.Insert(0, "размеры/коды");
+
+            if (deniedProperties.Count == 0)
+                return true;
+
+            var visibleNames = string.Join(", ", deniedProperties.Distinct().Take(8));
+            if (deniedProperties.Count > 8)
+                visibleNames += ", ...";
+
+            XtraMessageBox.Show(
+                $"Недостаточно прав для сохранения изменений: {visibleNames}.",
+                "Сохранение запрещено",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+            return false;
+        }
+
+        private bool HasRazmChanges()
+        {
+            return _bindingSourceArtKod.List
+                .OfType<ArticulModel>()
+                .Any(x => x?.IsModified == true || x?.IsNew == true || x?.IsDeleted == true);
+        }
+
+        private bool IsPropertyAllowedByPolicy(string propertyName)
+        {
+            if (_editPolicy.CanEditGost && GostEditableProperties.Contains(propertyName))
+                return true;
+
+            if (_editPolicy.CanEditSostav && SostavEditableProperties.Contains(propertyName))
+                return true;
+
+            if (_editPolicy.CanEditBase
+                && !GostEditableProperties.Contains(propertyName)
+                && !SostavEditableProperties.Contains(propertyName))
+                return true;
+
+            return false;
+        }
+
+        private static IEnumerable<string> GetChangedPersistedProperties(ArticulModel original, ArticulModel current)
+        {
+            foreach (var property in typeof(ArticulModel).GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                if (!property.CanRead || property.GetIndexParameters().Length > 0)
+                    continue;
+
+                if (property.GetCustomAttribute<NotMappedAttribute>() != null)
+                    continue;
+
+                var originalValue = property.GetValue(original);
+                var currentValue = property.GetValue(current);
+
+                if (!Equals(originalValue, currentValue))
+                    yield return property.Name;
+            }
+        }
+
         private async void SaveChanges(object sender, EventArgs e)
         {
             try
@@ -667,6 +883,11 @@ namespace SewingProduction.Features.Articul.Forms
                 _bindingSourceArtCommonSave.Clear();
                 //проверка на изменения
                 if (!isChangedData())
+                {
+                    return;
+                }
+
+                if (!ValidateSaveAllowedByPolicy())
                 {
                     return;
                 }
@@ -701,6 +922,7 @@ namespace SewingProduction.Features.Articul.Forms
 
 
                 XtraMessageBox.Show("Изменения успешно сохранены.", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CaptureOriginalModelSnapshot();
 
             }
             catch (Exception ex)

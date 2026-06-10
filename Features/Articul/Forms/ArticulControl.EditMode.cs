@@ -93,6 +93,22 @@ namespace SewingProduction.Features.Articul.Forms
             ApplyControlReadOnly(control, readOnly);
         }
 
+        public void ApplyEditableFields(IReadOnlySet<string> editableProperties)
+        {
+            if (editableProperties == null)
+                return;
+
+            foreach (Control control in FieldComparisonService.GetAllControls(this))
+            {
+                var editable = TryResolveEditPropertyName(control, out var propertyName)
+                    && editableProperties.Contains(propertyName);
+
+                ApplyControlReadOnly(control, !editable);
+            }
+
+            ApplyAlwaysReadOnlyControls();
+        }
+
         private void InitEditModeMetadata()
         {
             if (_editMetadataInitialized)
@@ -180,6 +196,28 @@ namespace SewingProduction.Features.Articul.Forms
         {
             foreach (var control in _alwaysReadOnlyControls)
                 ApplyControlReadOnly(control, true);
+        }
+
+        private bool TryResolveEditPropertyName(Control control, out string propertyName)
+        {
+            foreach (var pair in _editPropertyToControl)
+            {
+                if (ReferenceEquals(pair.Value, control))
+                {
+                    propertyName = pair.Key;
+                    return true;
+                }
+            }
+
+            if (_controlToArtNormProperty.TryGetValue(control, out var propertyInfo)
+                && propertyInfo != null)
+            {
+                propertyName = propertyInfo.Name;
+                return true;
+            }
+
+            propertyName = string.Empty;
+            return false;
         }
 
         private static void ApplyControlReadOnly(Control control, bool readOnly)
