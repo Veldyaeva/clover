@@ -1,10 +1,8 @@
 #nullable enable
 
 using DevExpress.XtraEditors;
-using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
 using DevExpress.XtraLayout.Utils;
-using SewingProduction.Core.Class;
 using SewingProduction.Features.Articul.Service;
 using System;
 using System.Collections.Generic;
@@ -25,16 +23,7 @@ namespace SewingProduction.Features.Articul.Forms
         private ArticulControlMode _mode = ArticulControlMode.View;
         private ArticulControlEditBinder? _editBinder;
         private readonly BindingSource _bindingSourceGostGrup = new();
-        private bool _editControlsInitialized;
-
-        private CustomComboBox? _cbTm;
-        private CustomComboBox? _cbSeason;
-        private CustomComboBox? _cbGrupMen;
-        private CustomComboBox? _cbCountry;
-        private CustomComboBox? _cbAssort;
-        private CustomSearchLookUpEdit? _cbTkan;
-        private CustomSearchLookUpEdit? _lookUpGost;
-        private SearchLookUpEdit? _lookUpGostGrup;
+        private bool _editMetadataInitialized;
 
         private readonly List<(LayoutControlItem View, LayoutControlItem Edit)> _viewEditLayoutPairs = new();
         private readonly HashSet<Control> _viewOnlyBindingControls = new();
@@ -51,7 +40,7 @@ namespace SewingProduction.Features.Articul.Forms
             if (_bs == null)
                 throw new InvalidOperationException("Перед включением режима редактирования вызовите BindTo.");
 
-            EnsureEditControlsCreated();
+            InitEditModeMetadata();
 
             await CommonSpravArticulEditAdvance.EnsureLoadedAsync(_dbService).ConfigureAwait(true);
             ct.ThrowIfCancellationRequested();
@@ -60,7 +49,7 @@ namespace SewingProduction.Features.Articul.Forms
             _editBinder.ConfigureLookups();
 
             AttachEditPropertyMappings();
-            _editBinder.WireCascadeEvents(_bs!);
+            _editBinder.WireCascadeEvents(_bs);
 
             _mode = ArticulControlMode.Edit;
             _comparisonMapBuilt = false;
@@ -104,28 +93,19 @@ namespace SewingProduction.Features.Articul.Forms
             ApplyControlReadOnly(control, readOnly);
         }
 
-        private void EnsureEditControlsCreated()
+        private void InitEditModeMetadata()
         {
-            if (_editControlsInitialized)
+            if (_editMetadataInitialized)
                 return;
 
-            _cbTm = CreateComboBox(nameof(_cbTm));
-            _cbSeason = CreateComboBox(nameof(_cbSeason));
-            _cbGrupMen = CreateComboBox(nameof(_cbGrupMen));
-            _cbCountry = CreateComboBox(nameof(_cbCountry));
-            _cbAssort = CreateComboBox(nameof(_cbAssort));
-            _cbTkan = CreateSearchLookUp(nameof(_cbTkan));
-            _lookUpGost = CreateSearchLookUp(nameof(_lookUpGost));
-            _lookUpGostGrup = CreateSearchLookUpGrup(nameof(_lookUpGostGrup));
-
-            AddEditPair(_cbTm, layoutControlItem9);
-            AddEditPair(_cbSeason, layoutControlItem14);
-            AddEditPair(_cbAssort, layoutControlItem16);
-            AddEditPair(_cbCountry, layoutControlItem18);
-            AddEditPair(_cbGrupMen, layoutControlItem21);
-            AddEditPair(_lookUpGostGrup, layoutControlItem7);
-            AddEditPair(_lookUpGost, layoutControlItem12);
-            AddEditPair(_cbTkan, layoutControlItem27);
+            _viewEditLayoutPairs.Add((layoutControlItem9, layoutItemEditTM));
+            _viewEditLayoutPairs.Add((layoutControlItem14, layoutItemEditSeason));
+            _viewEditLayoutPairs.Add((layoutControlItem16, layoutItemEditAssort));
+            _viewEditLayoutPairs.Add((layoutControlItem18, layoutItemEditCountry));
+            _viewEditLayoutPairs.Add((layoutControlItem21, layoutItemEditGrupMen));
+            _viewEditLayoutPairs.Add((layoutControlItem7, layoutItemEditGostGrup));
+            _viewEditLayoutPairs.Add((layoutControlItem12, layoutItemEditGost));
+            _viewEditLayoutPairs.Add((layoutControlItem27, layoutItemEditTkan));
 
             RegisterViewOnlyBindingControl(txbTM);
             RegisterViewOnlyBindingControl(txbSeason);
@@ -142,90 +122,23 @@ namespace SewingProduction.Features.Articul.Forms
             RegisterAlwaysReadOnlyControl(txbRazm);
             RegisterAlwaysReadOnlyControl(txbRazmPrint);
 
-            _editControlsInitialized = true;
+            _editMetadataInitialized = true;
         }
 
         private ArticulControlEditBinder CreateEditBinder()
         {
             return new ArticulControlEditBinder(
-                _cbTm!,
-                _cbSeason!,
-                _cbGrupMen!,
-                _cbCountry!,
-                _cbAssort!,
-                _cbTkan!,
-                _lookUpGost!,
-                _lookUpGostGrup!,
+                cbTM,
+                cbSeason,
+                cbGrupMen,
+                cbCountry,
+                cbAssort,
+                cbTkan,
+                lookUpGost,
+                lookUpGostGrup,
                 txbIdGost,
                 txbOpiGost,
                 _bindingSourceGostGrup);
-        }
-
-        private CustomComboBox CreateComboBox(string name)
-        {
-            var combo = new CustomComboBox
-            {
-                Name = name,
-                Font = customLayoutControl1.Font,
-                Visible = false
-            };
-            customLayoutControl1.Controls.Add(combo);
-            return combo;
-        }
-
-        private CustomSearchLookUpEdit CreateSearchLookUp(string name)
-        {
-            var sle = new CustomSearchLookUpEdit
-            {
-                Name = name,
-                Font = customLayoutControl1.Font,
-                Visible = false
-            };
-            sle.Properties.PopupView = new GridView();
-            customLayoutControl1.Controls.Add(sle);
-            return sle;
-        }
-
-        private SearchLookUpEdit CreateSearchLookUpGrup(string name)
-        {
-            var sle = new SearchLookUpEdit
-            {
-                Name = name,
-                Font = customLayoutControl1.Font,
-                Visible = false
-            };
-            sle.Properties.PopupView = new GridView();
-            customLayoutControl1.Controls.Add(sle);
-            return sle;
-        }
-
-        private void AddEditPair(Control editControl, LayoutControlItem viewItem)
-        {
-            var editItem = CloneLayoutItemForEdit(editControl, viewItem);
-            var parent = viewItem.Parent;
-            parent?.Add(editItem);
-            _viewEditLayoutPairs.Add((viewItem, editItem));
-        }
-
-        private static LayoutControlItem CloneLayoutItemForEdit(Control editControl, LayoutControlItem template)
-        {
-            var item = new LayoutControlItem
-            {
-                Control = editControl,
-                Location = template.Location,
-                Size = template.Size,
-                MinSize = template.MinSize,
-                MaxSize = template.MaxSize,
-                SizeConstraintsType = template.SizeConstraintsType,
-                Text = template.Text,
-                TextSize = template.TextSize,
-                TextAlignMode = template.TextAlignMode,
-                TextLocation = template.TextLocation,
-                TextToControlDistance = template.TextToControlDistance,
-                Visibility = LayoutVisibility.Never,
-                Name = $"lciEdit_{editControl.Name}"
-            };
-            return item;
         }
 
         private void ApplyModeVisibility()
@@ -242,22 +155,19 @@ namespace SewingProduction.Features.Articul.Forms
 
         private void AttachEditPropertyMappings()
         {
-            if (_editBinder == null)
-                return;
-
-            _editBinder.RegisterEditPropertyMappings(_controlToArtNormProperty, typeof(Models.SpArticulPreviewModel));
+            _editBinder?.RegisterEditPropertyMappings(_controlToArtNormProperty, typeof(Models.SpArticulPreviewModel));
         }
 
         private void RemoveEditPropertyMappings()
         {
-            if (_cbTm != null) _controlToArtNormProperty.Remove(_cbTm);
-            if (_cbSeason != null) _controlToArtNormProperty.Remove(_cbSeason);
-            if (_cbGrupMen != null) _controlToArtNormProperty.Remove(_cbGrupMen);
-            if (_cbCountry != null) _controlToArtNormProperty.Remove(_cbCountry);
-            if (_cbAssort != null) _controlToArtNormProperty.Remove(_cbAssort);
-            if (_cbTkan != null) _controlToArtNormProperty.Remove(_cbTkan);
-            if (_lookUpGost != null) _controlToArtNormProperty.Remove(_lookUpGost);
-            if (_lookUpGostGrup != null) _controlToArtNormProperty.Remove(_lookUpGostGrup);
+            _controlToArtNormProperty.Remove(cbTM);
+            _controlToArtNormProperty.Remove(cbSeason);
+            _controlToArtNormProperty.Remove(cbGrupMen);
+            _controlToArtNormProperty.Remove(cbCountry);
+            _controlToArtNormProperty.Remove(cbAssort);
+            _controlToArtNormProperty.Remove(cbTkan);
+            _controlToArtNormProperty.Remove(lookUpGost);
+            _controlToArtNormProperty.Remove(lookUpGostGrup);
         }
 
         private void RegisterViewOnlyBindingControl(Control control)
@@ -284,13 +194,13 @@ namespace SewingProduction.Features.Articul.Forms
                     cb.Enabled = !readOnly;
                     cb.TabStop = !readOnly;
                     break;
-                case BaseEdit be:
-                    be.Properties.ReadOnly = readOnly;
-                    be.TabStop = !readOnly;
-                    break;
                 case System.Windows.Forms.ComboBox combo:
                     combo.Enabled = !readOnly;
                     combo.TabStop = !readOnly;
+                    break;
+                case BaseEdit be:
+                    be.Properties.ReadOnly = readOnly;
+                    be.TabStop = !readOnly;
                     break;
             }
         }
@@ -305,17 +215,17 @@ namespace SewingProduction.Features.Articul.Forms
 
         private bool IsEditBindingControl(Control control)
         {
-            if (!_editControlsInitialized)
+            if (!_editMetadataInitialized)
                 return false;
 
-            return ReferenceEquals(control, _cbTm)
-                   || ReferenceEquals(control, _cbSeason)
-                   || ReferenceEquals(control, _cbGrupMen)
-                   || ReferenceEquals(control, _cbCountry)
-                   || ReferenceEquals(control, _cbAssort)
-                   || ReferenceEquals(control, _cbTkan)
-                   || ReferenceEquals(control, _lookUpGost)
-                   || ReferenceEquals(control, _lookUpGostGrup);
+            return ReferenceEquals(control, cbTM)
+                   || ReferenceEquals(control, cbSeason)
+                   || ReferenceEquals(control, cbGrupMen)
+                   || ReferenceEquals(control, cbCountry)
+                   || ReferenceEquals(control, cbAssort)
+                   || ReferenceEquals(control, cbTkan)
+                   || ReferenceEquals(control, lookUpGost)
+                   || ReferenceEquals(control, lookUpGostGrup);
         }
     }
 }

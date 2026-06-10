@@ -37,6 +37,7 @@ namespace SewingProduction.Features.Articul.Forms
             gcRazm = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             pictureBoxArticul = new System.Windows.Forms.PictureBox();
+            articulControlCard = new ArticulControl();
             txbSost3 = new CustomTextBoxEx();
             dataLayoutCommonArticul = new CustomLayoutControl();
             customLayoutControl1 = new CustomLayoutControl();
@@ -3001,11 +3002,20 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem24.Size = new System.Drawing.Size(113, 26);
             layoutControlItem24.TextVisible = false;
             // 
+            // articulControlCard
+            // 
+            articulControlCard.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            articulControlCard.Location = new System.Drawing.Point(13, 808);
+            articulControlCard.Name = "articulControlCard";
+            articulControlCard.Size = new System.Drawing.Size(1313, 330);
+            articulControlCard.TabIndex = 47;
+            // 
             // ArticulEditAdvance
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1339, 846);
+            ClientSize = new System.Drawing.Size(1339, 1150);
+            Controls.Add(articulControlCard);
             Controls.Add(customLayoutControl2);
             Controls.Add(layoutControl1);
             Controls.Add(dataLayoutCommonArticul);
@@ -3232,6 +3242,7 @@ namespace SewingProduction.Features.Articul.Forms
         private CustomGridControlColumn gridEditAdRazm;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewEditAdvRazm;
         private System.Windows.Forms.PictureBox pictureBoxArticul;
+        private ArticulControl articulControlCard;
         private DevExpress.XtraGrid.Columns.GridColumn gcEditKod;
         private DevExpress.XtraGrid.Columns.GridColumn gcRazm;
         private CustomCheckBox chbArh;

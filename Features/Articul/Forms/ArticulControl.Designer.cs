@@ -59,6 +59,25 @@ namespace SewingProduction.Features.Articul.Forms
             txbOpiGost = new DevExpress.XtraEditors.MemoEdit();
             chbKruj = new DevExpress.XtraEditors.CheckEdit();
             txbTkb = new DevExpress.XtraEditors.TextEdit();
+            cbTM = new CustomComboBox();
+            cbSeason = new CustomComboBox();
+            cbAssort = new CustomComboBox();
+            cbCountry = new CustomComboBox();
+            cbGrupMen = new CustomComboBox();
+            cbTkan = new SewingProduction.Core.Class.CustomSearchLookUpEdit();
+            cbTkanView = new DevExpress.XtraGrid.Views.Grid.GridView();
+            lookUpGost = new SewingProduction.Core.Class.CustomSearchLookUpEdit();
+            lookUpGostView = new DevExpress.XtraGrid.Views.Grid.GridView();
+            lookUpGostGrup = new DevExpress.XtraEditors.SearchLookUpEdit();
+            lookUpGostGrupView = new DevExpress.XtraGrid.Views.Grid.GridView();
+            layoutItemEditTM = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutItemEditSeason = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutItemEditAssort = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutItemEditCountry = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutItemEditGrupMen = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutItemEditGostGrup = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutItemEditGost = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutItemEditTkan = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem26 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -126,6 +145,20 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)txbOpiGost.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)chbKruj.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txbTkb.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)cbTkan.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)cbTkanView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)lookUpGost.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)lookUpGostView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)lookUpGostGrup.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)lookUpGostGrupView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutItemEditTM).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutItemEditSeason).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutItemEditAssort).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutItemEditCountry).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutItemEditGrupMen).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutItemEditGostGrup).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutItemEditGost).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutItemEditTkan).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem26).BeginInit();
@@ -230,6 +263,14 @@ namespace SewingProduction.Features.Articul.Forms
             customLayoutControl1.Controls.Add(txbOpiGost);
             customLayoutControl1.Controls.Add(chbKruj);
             customLayoutControl1.Controls.Add(txbTkb);
+            customLayoutControl1.Controls.Add(cbTM);
+            customLayoutControl1.Controls.Add(cbSeason);
+            customLayoutControl1.Controls.Add(cbAssort);
+            customLayoutControl1.Controls.Add(cbCountry);
+            customLayoutControl1.Controls.Add(cbGrupMen);
+            customLayoutControl1.Controls.Add(cbTkan);
+            customLayoutControl1.Controls.Add(lookUpGost);
+            customLayoutControl1.Controls.Add(lookUpGostGrup);
             customLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             customLayoutControl1.Font = new System.Drawing.Font("Arial", 9F);
             customLayoutControl1.Location = new System.Drawing.Point(0, 0);
@@ -680,7 +721,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             layoutControlGroup8.AppearanceGroup.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
             layoutControlGroup8.AppearanceGroup.Options.UseFont = true;
-            layoutControlGroup8.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem3, layoutControlItem8, layoutControlItem9, layoutControlItem14, layoutControlItem16, layoutControlItem18, layoutControlItem21, layoutControlItem4, layoutControlItem5, layoutControlItem2, layoutControlItem6 });
+            layoutControlGroup8.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem3, layoutControlItem8, layoutControlItem9, layoutControlItem14, layoutControlItem16, layoutControlItem18, layoutControlItem21, layoutControlItem4, layoutControlItem5, layoutControlItem2, layoutControlItem6, layoutItemEditTM, layoutItemEditSeason, layoutItemEditAssort, layoutItemEditCountry, layoutItemEditGrupMen });
             layoutControlGroup8.Location = new System.Drawing.Point(178, 0);
             layoutControlGroup8.Name = "layoutControlGroup8";
             layoutControlGroup8.OptionsItemText.TextAlignMode = DevExpress.XtraLayout.TextAlignModeGroup.AlignLocal;
@@ -803,7 +844,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             layoutControlGroup5.AppearanceGroup.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
             layoutControlGroup5.AppearanceGroup.Options.UseFont = true;
-            layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem7, layoutControlGroup7, layoutControlItem10, layoutControlItem15, layoutControlItem17, layoutControlItem19, layoutControlItem20, layoutControlItem27 });
+            layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem7, layoutControlGroup7, layoutControlItem10, layoutControlItem15, layoutControlItem17, layoutControlItem19, layoutControlItem20, layoutControlItem27, layoutItemEditGostGrup, layoutItemEditTkan });
             layoutControlGroup5.Location = new System.Drawing.Point(414, 0);
             layoutControlGroup5.Name = "layoutControlGroup5";
             layoutControlGroup5.OptionsItemText.TextAlignMode = DevExpress.XtraLayout.TextAlignModeGroup.AlignLocal;
@@ -824,7 +865,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // layoutControlGroup7
             // 
-            layoutControlGroup7.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem11, layoutControlItem12, layoutControlItem13 });
+            layoutControlGroup7.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem11, layoutControlItem12, layoutControlItem13, layoutItemEditGost });
             layoutControlGroup7.Location = new System.Drawing.Point(0, 26);
             layoutControlGroup7.Name = "layoutControlGroup7";
             layoutControlGroup7.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
@@ -935,6 +976,196 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem27.TextSize = new System.Drawing.Size(30, 13);
             layoutControlItem27.TextToControlDistance = 5;
             // 
+            // cbTM
+            // 
+            cbTM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbTM.Font = new System.Drawing.Font("Arial", 9F);
+            cbTM.FormattingEnabled = true;
+            cbTM.Location = new System.Drawing.Point(242, 78);
+            cbTM.Name = "cbTM";
+            cbTM.Size = new System.Drawing.Size(157, 24);
+            cbTM.TabIndex = 40;
+            cbTM.Visible = false;
+            // 
+            // cbSeason
+            // 
+            cbSeason.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbSeason.Font = new System.Drawing.Font("Arial", 9F);
+            cbSeason.FormattingEnabled = true;
+            cbSeason.Location = new System.Drawing.Point(242, 104);
+            cbSeason.Name = "cbSeason";
+            cbSeason.Size = new System.Drawing.Size(157, 24);
+            cbSeason.TabIndex = 41;
+            cbSeason.Visible = false;
+            // 
+            // cbAssort
+            // 
+            cbAssort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbAssort.Font = new System.Drawing.Font("Arial", 9F);
+            cbAssort.FormattingEnabled = true;
+            cbAssort.Location = new System.Drawing.Point(242, 130);
+            cbAssort.Name = "cbAssort";
+            cbAssort.Size = new System.Drawing.Size(157, 24);
+            cbAssort.TabIndex = 42;
+            cbAssort.Visible = false;
+            // 
+            // cbCountry
+            // 
+            cbCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbCountry.Font = new System.Drawing.Font("Arial", 9F);
+            cbCountry.FormattingEnabled = true;
+            cbCountry.Location = new System.Drawing.Point(242, 156);
+            cbCountry.Name = "cbCountry";
+            cbCountry.Size = new System.Drawing.Size(157, 24);
+            cbCountry.TabIndex = 43;
+            cbCountry.Visible = false;
+            // 
+            // cbGrupMen
+            // 
+            cbGrupMen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbGrupMen.Font = new System.Drawing.Font("Arial", 9F);
+            cbGrupMen.FormattingEnabled = true;
+            cbGrupMen.Location = new System.Drawing.Point(242, 182);
+            cbGrupMen.Name = "cbGrupMen";
+            cbGrupMen.Size = new System.Drawing.Size(157, 24);
+            cbGrupMen.TabIndex = 44;
+            cbGrupMen.Visible = false;
+            // 
+            // cbTkan
+            // 
+            cbTkan.Location = new System.Drawing.Point(598, 206);
+            cbTkan.Name = "cbTkan";
+            cbTkan.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            cbTkan.Properties.PopupView = cbTkanView;
+            cbTkan.Size = new System.Drawing.Size(79, 22);
+            cbTkan.StyleController = customLayoutControl1;
+            cbTkan.TabIndex = 45;
+            cbTkan.Visible = false;
+            // 
+            // cbTkanView
+            // 
+            cbTkanView.Name = "cbTkanView";
+            cbTkanView.OptionsView.ShowGroupPanel = false;
+            // 
+            // lookUpGost
+            // 
+            lookUpGost.Location = new System.Drawing.Point(557, 55);
+            lookUpGost.Name = "lookUpGost";
+            lookUpGost.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            lookUpGost.Properties.PopupView = lookUpGostView;
+            lookUpGost.Size = new System.Drawing.Size(117, 22);
+            lookUpGost.StyleController = customLayoutControl1;
+            lookUpGost.TabIndex = 46;
+            lookUpGost.Visible = false;
+            // 
+            // lookUpGostView
+            // 
+            lookUpGostView.Name = "lookUpGostView";
+            lookUpGostView.OptionsView.ShowGroupPanel = false;
+            // 
+            // lookUpGostGrup
+            // 
+            lookUpGostGrup.Location = new System.Drawing.Point(498, 26);
+            lookUpGostGrup.Name = "lookUpGostGrup";
+            lookUpGostGrup.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            lookUpGostGrup.Properties.PopupView = lookUpGostGrupView;
+            lookUpGostGrup.Size = new System.Drawing.Size(179, 22);
+            lookUpGostGrup.StyleController = customLayoutControl1;
+            lookUpGostGrup.TabIndex = 47;
+            lookUpGostGrup.Visible = false;
+            // 
+            // lookUpGostGrupView
+            // 
+            lookUpGostGrupView.Name = "lookUpGostGrupView";
+            lookUpGostGrupView.OptionsView.ShowGroupPanel = false;
+            // 
+            // layoutItemEditTM
+            // 
+            layoutItemEditTM.Control = cbTM;
+            layoutItemEditTM.Location = new System.Drawing.Point(0, 78);
+            layoutItemEditTM.Name = "layoutItemEditTM";
+            layoutItemEditTM.Size = new System.Drawing.Size(220, 26);
+            layoutItemEditTM.Text = "ТМ";
+            layoutItemEditTM.TextSize = new System.Drawing.Size(53, 13);
+            layoutItemEditTM.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            // 
+            // layoutItemEditSeason
+            // 
+            layoutItemEditSeason.Control = cbSeason;
+            layoutItemEditSeason.Location = new System.Drawing.Point(0, 104);
+            layoutItemEditSeason.Name = "layoutItemEditSeason";
+            layoutItemEditSeason.Size = new System.Drawing.Size(220, 26);
+            layoutItemEditSeason.Text = "Сезон";
+            layoutItemEditSeason.TextSize = new System.Drawing.Size(53, 13);
+            layoutItemEditSeason.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            // 
+            // layoutItemEditAssort
+            // 
+            layoutItemEditAssort.Control = cbAssort;
+            layoutItemEditAssort.Location = new System.Drawing.Point(0, 130);
+            layoutItemEditAssort.Name = "layoutItemEditAssort";
+            layoutItemEditAssort.Size = new System.Drawing.Size(220, 26);
+            layoutItemEditAssort.Text = "Ассорт.";
+            layoutItemEditAssort.TextSize = new System.Drawing.Size(53, 13);
+            layoutItemEditAssort.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            // 
+            // layoutItemEditCountry
+            // 
+            layoutItemEditCountry.Control = cbCountry;
+            layoutItemEditCountry.Location = new System.Drawing.Point(0, 156);
+            layoutItemEditCountry.Name = "layoutItemEditCountry";
+            layoutItemEditCountry.Size = new System.Drawing.Size(220, 26);
+            layoutItemEditCountry.Text = "Страна";
+            layoutItemEditCountry.TextSize = new System.Drawing.Size(53, 13);
+            layoutItemEditCountry.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            // 
+            // layoutItemEditGrupMen
+            // 
+            layoutItemEditGrupMen.Control = cbGrupMen;
+            layoutItemEditGrupMen.Location = new System.Drawing.Point(0, 182);
+            layoutItemEditGrupMen.Name = "layoutItemEditGrupMen";
+            layoutItemEditGrupMen.Size = new System.Drawing.Size(220, 26);
+            layoutItemEditGrupMen.Text = "Менеджер";
+            layoutItemEditGrupMen.TextSize = new System.Drawing.Size(53, 13);
+            layoutItemEditGrupMen.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            // 
+            // layoutItemEditGostGrup
+            // 
+            layoutItemEditGostGrup.Control = lookUpGostGrup;
+            layoutItemEditGostGrup.Location = new System.Drawing.Point(0, 0);
+            layoutItemEditGostGrup.Name = "layoutItemEditGostGrup";
+            layoutItemEditGostGrup.Size = new System.Drawing.Size(262, 26);
+            layoutItemEditGostGrup.Text = "Наим. по ГОСТ";
+            layoutItemEditGostGrup.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
+            layoutItemEditGostGrup.TextSize = new System.Drawing.Size(74, 13);
+            layoutItemEditGostGrup.TextToControlDistance = 5;
+            layoutItemEditGostGrup.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            // 
+            // layoutItemEditGost
+            // 
+            layoutItemEditGost.Control = lookUpGost;
+            layoutItemEditGost.Location = new System.Drawing.Point(100, 0);
+            layoutItemEditGost.Name = "layoutItemEditGost";
+            layoutItemEditGost.Size = new System.Drawing.Size(156, 26);
+            layoutItemEditGost.Text = "номер";
+            layoutItemEditGost.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
+            layoutItemEditGost.TextLocation = DevExpress.Utils.Locations.Left;
+            layoutItemEditGost.TextSize = new System.Drawing.Size(30, 13);
+            layoutItemEditGost.TextToControlDistance = 5;
+            layoutItemEditGost.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            // 
+            // layoutItemEditTkan
+            // 
+            layoutItemEditTkan.Control = cbTkan;
+            layoutItemEditTkan.Location = new System.Drawing.Point(144, 180);
+            layoutItemEditTkan.Name = "layoutItemEditTkan";
+            layoutItemEditTkan.Size = new System.Drawing.Size(118, 26);
+            layoutItemEditTkan.Text = "ткань";
+            layoutItemEditTkan.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
+            layoutItemEditTkan.TextSize = new System.Drawing.Size(30, 13);
+            layoutItemEditTkan.TextToControlDistance = 5;
+            layoutItemEditTkan.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            // 
             // splitterItem1
             // 
             splitterItem1.Location = new System.Drawing.Point(168, 0);
@@ -1043,6 +1274,20 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)txbOpiGost.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)chbKruj.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)txbTkb.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)cbTkan.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)cbTkanView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)lookUpGost.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)lookUpGostView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)lookUpGostGrup.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)lookUpGostGrupView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutItemEditTM).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutItemEditSeason).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutItemEditAssort).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutItemEditCountry).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutItemEditGrupMen).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutItemEditGostGrup).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutItemEditGost).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutItemEditTkan).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem26).EndInit();
@@ -1150,6 +1395,25 @@ namespace SewingProduction.Features.Articul.Forms
         private DevExpress.XtraLayout.SplitterItem splitterItem1;
         private DevExpress.XtraLayout.SplitterItem splitterItem2;
         private DevExpress.XtraLayout.SplitterItem splitterItem3;
+        private CustomComboBox cbTM;
+        private CustomComboBox cbSeason;
+        private CustomComboBox cbAssort;
+        private CustomComboBox cbCountry;
+        private CustomComboBox cbGrupMen;
+        private SewingProduction.Core.Class.CustomSearchLookUpEdit cbTkan;
+        private DevExpress.XtraGrid.Views.Grid.GridView cbTkanView;
+        private SewingProduction.Core.Class.CustomSearchLookUpEdit lookUpGost;
+        private DevExpress.XtraGrid.Views.Grid.GridView lookUpGostView;
+        private DevExpress.XtraEditors.SearchLookUpEdit lookUpGostGrup;
+        private DevExpress.XtraGrid.Views.Grid.GridView lookUpGostGrupView;
+        private DevExpress.XtraLayout.LayoutControlItem layoutItemEditTM;
+        private DevExpress.XtraLayout.LayoutControlItem layoutItemEditSeason;
+        private DevExpress.XtraLayout.LayoutControlItem layoutItemEditAssort;
+        private DevExpress.XtraLayout.LayoutControlItem layoutItemEditCountry;
+        private DevExpress.XtraLayout.LayoutControlItem layoutItemEditGrupMen;
+        private DevExpress.XtraLayout.LayoutControlItem layoutItemEditGostGrup;
+        private DevExpress.XtraLayout.LayoutControlItem layoutItemEditGost;
+        private DevExpress.XtraLayout.LayoutControlItem layoutItemEditTkan;
     }
 }
 

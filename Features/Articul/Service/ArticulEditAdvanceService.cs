@@ -54,6 +54,23 @@ namespace SewingProduction.Features.Articul.Service
                 return null;
             }
         }
+        /// <summary>
+        /// Загрузка карточки артикула (общие данные) по kodd в виде SpArticulPreviewModel
+        /// для размещаемого на форме ArticulControl.
+        /// </summary>
+        public async Task<SpArticulPreviewModel> GetCardPreviewByKoddAsync(string kodd)
+        {
+            try
+            {
+                string query = "select top 1 * from dbo.view_sp_articul_all WHERE kodd = @kodd";
+                return await _dbService.GetEntityAsync<SpArticulPreviewModel>(query, new { kodd });
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetCardPreviewByKoddAsync");
+                return null;
+            }
+        }
         public async Task<BindingList<GostRazmerNabViewModel>> GetGostRazmByIDAsync(int idgost)
         {
             try

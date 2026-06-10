@@ -63,6 +63,7 @@ namespace SewingProduction.Features.Articul.Forms
         private BindingSource _bindingSourceArtCommon;
         private BindingSource _bindingSourceArtCommonSave;
         private BindingSource _bindingSourceGostGrup;
+        private BindingSource _bindingSourceCard;
 
         public ArticulEditAdvance(UserClass user) : this(user, "", "")
         { }
@@ -87,6 +88,7 @@ namespace SewingProduction.Features.Articul.Forms
             _bindingSourceArtCommon = new BindingSource { };
             _bindingSourceArtCommonSave = new BindingSource { };
             _bindingSourceGostGrup = new BindingSource { };
+            _bindingSourceCard = new BindingSource { };
 
         }
         public ArticulEditAdvance(UserClass user, string kodd, string articul, string kod) : this(user, kodd, articul)
@@ -121,6 +123,32 @@ namespace SewingProduction.Features.Articul.Forms
 
             CheckStatus();
 
+            await InitArticulCardAsync();
+
+        }
+
+        /// <summary>
+        /// Инициализация размещённого на форме ArticulControl: загрузка карточки по kodd
+        /// и включение режима редактирования. Контрол работает с собственным
+        /// SpArticulPreviewModel и не вмешивается в текущий pipeline сохранения формы.
+        /// </summary>
+        private async Task InitArticulCardAsync()
+        {
+            try
+            {
+                var card = await _articulEdAdvDataService.GetCardPreviewByKoddAsync(_kodd);
+                if (card == null)
+                    return;
+
+                _bindingSourceCard.DataSource = card;
+                articulControlCard.BindTo(_bindingSourceCard);
+                await articulControlCard.LoadImageAsync(_kodd);
+                await articulControlCard.EnableEditModeAsync();
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка инициализации ArticulControl на ArticulEditAdvance");
+            }
         }
         private async void CheckStatus()
         {
