@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using SewingProduction.Core.Models;
-using SewingProduction.Features.TeamWork.Forms;
-using SewingProduction.Features.TeamWork.Models;
+using SewingProduction.Features.Sprav.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
@@ -11,7 +10,7 @@ using System.Diagnostics;
 using System.Runtime.ConstrainedExecution;
 using System.Threading.Tasks;
 
-namespace SewingProduction.Features.TeamWork.Services
+namespace SewingProduction.Features.Sprav.DataService
 {
 
     internal sealed class ThreadNormsDataService

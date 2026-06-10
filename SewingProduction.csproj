@@ -213,11 +213,13 @@
   <ItemGroup>
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.6.2" />
     <PackageReference Include="Dapper" Version="2.1.72" />
+    <PackageReference Include="DevExpress.Spreadsheet.Core" Version="25.2.5" />
     <PackageReference Include="DevExpress.Win" Version="25.2.5" />
     <PackageReference Include="DevExpress.Win.BonusSkins" Version="25.2.5" />
     <PackageReference Include="DevExpress.Win.Design" Version="25.2.5" />
     <PackageReference Include="DevExpress.Win.Printing" Version="25.2.5" />
     <PackageReference Include="DevExpress.Win.Reporting" Version="25.2.5" />
+    <PackageReference Include="DevExpress.Win.Spreadsheet" Version="25.2.5" />
     <PackageReference Include="DevExpress.Wpf.Core" Version="25.2.5" />
     <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.4" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.0" />
