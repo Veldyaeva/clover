@@ -1,19 +1,27 @@
-﻿using DevExpress.XtraEditors.ButtonsPanelControl;
+﻿using DevExpress.ChartRangeControlClient.Core;
+using DevExpress.XtraEditors.ButtonsPanelControl;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraLayout;
+using DevExpress.XtraMap.Drawing;
 using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
+using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using SewingProduction.Features.UserDistribution.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using BindingSource = System.Windows.Forms.BindingSource;
+using ToolTip = System.Windows.Forms.ToolTip;
+
 
 namespace SewingProduction.Features.Articul.Forms
 {
@@ -22,39 +30,58 @@ namespace SewingProduction.Features.Articul.Forms
         private int _typeCreate;
         private string _nn;
         private string _kod;
+        private ComparisonResult _comparisonResult;
+
+
         private BindingSource _bindingSourceArticul = new BindingSource();
         private BindingSource _bindingSourceRazms = new BindingSource();
+        private BindingSource _bindingSourceMatr = new BindingSource();
         private CreateArticulMatrService _createArticulMatrService = new CreateArticulMatrService();
         private ArticulEditAdvanceService _articulEdAdvDataService = new ArticulEditAdvanceService();
+        private readonly ToolTip _toolTip = new();
+
         private readonly ILogger _logger = new FileLogger();
 
         public AppendArticul(UserClass user) : base(user)
         {
             InitializeComponent();
             gridRazm.DataSource = _bindingSourceRazms;
-
         }
 
         public AppendArticul(UserClass user, string nn) : this(user)
         {
-            // 0 - создание,1 - стыковка
+            // 0 - создание
             _typeCreate = 0;
             _nn = nn;
         }
-        public AppendArticul(UserClass user, string nn, string kod) : this(user)
+        public AppendArticul(UserClass user, string nn, string kod, ComparisonResult comparisonResult) : this(user)
         {
-
-            // 0 - создание,1 - стыковка
+            // 1 - стыковка
             _typeCreate = 1;
             _nn = nn;
             _kod = kod;
+            _comparisonResult = comparisonResult;
         }
 
         private async void AppendArticul_Load(object sender, EventArgs e)
         {
-            _bindingSourceArticul.DataSource = await _createArticulMatrService.GetPreviewArticulAsync(_nn);
+            var curMatrTask = _createArticulMatrService.GetMatrForNNAsync(_nn);
+            // пока без пометки, не знаю понадобится ли в этом варианте
+            var curArticulTask = _createArticulMatrService.GetPreviewArticulAsync(_nn, _kod);
+            //var curArticulTask = _articulDataService.GetByKodAsync(_kod);
+
+            await Task.WhenAll(curMatrTask, curArticulTask);
+
+            _bindingSourceMatr.DataSource = new BindingList<CreateArticulMatrModel>(curMatrTask.Result);
+            _bindingSourceArticul.DataSource = curArticulTask.Result;
+
             InitializeBindings();
             BindGostRazm();
+
+            await ConfigureControlsByMode();
+
+            HighlightMismatches(this, _comparisonResult.Mismatches);
+
         }
         private void InitializeBindings()
         {
@@ -74,10 +101,50 @@ namespace SewingProduction.Features.Articul.Forms
             txtGrup.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.Grup), true);
             txtTkb.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.Tkb), true);
             txtAssort.DataBindings.Add("Text", _bindingSourceArticul, nameof(SpArticulPreviewModel.AssortName), true);
+            txtRazmNames.DataBindings.Add("Text", _bindingSourceMatr, nameof(CreateArticulMatrModel.RazmNames), true);
+
+            //всегда не активно
+            chkKruj.Enabled = false;
 
 
         }
+        private async Task ConfigureControlsByMode()
+        {
+            switch (_typeCreate)
+            {
+                case 0: // Создание
+                        // Настройка для режима создания
+                    break;
+                case 1: // Настройка для режима стыковки
 
+                    txtKod.Enabled = false;
+                    txtPo.Enabled = false;
+                    btnAccept.Text = "Применить";
+                    //неактивный грид с размерами 
+                    foreach (DevExpress.XtraGrid.Columns.GridColumn column in gridViewRazm.Columns)
+                    {
+                        column.OptionsColumn.ReadOnly = true;
+                        column.OptionsColumn.AllowEdit = false;
+                    }
+
+                    _bindingSourceRazms.DataSource = null;
+
+
+                    var curArt = _bindingSourceArticul.Current as SpArticulPreviewModel;
+                    _bindingSourceRazms.DataSource = await _createArticulMatrService.GetArticulRazmAsync(curArt.Kodd);
+
+
+                    break;
+                default:
+                    throw new InvalidOperationException("Недопустимый режим создания артикула.");
+            }
+        }
+        private void AppendArticul_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _bindingSourceArticul.Dispose();
+            _bindingSourceRazms.Dispose();
+            _bindingSourceMatr.Dispose();
+        }
         private async Task CreateRazm()
         {
             _bindingSourceArticul.EndEdit();
@@ -88,7 +155,11 @@ namespace SewingProduction.Features.Articul.Forms
             _bindingSourceRazms.DataSource = await _createArticulMatrService.GetMatrPlanRazm(_nn, kod, po);
 
         }
-
+        /// <summary>
+        /// обработчик нажатия на кнопки заголовка группы 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void layoutControlGroup1_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
         {
             if (sender is LayoutControlGroup group && e.Button is GroupBoxButton button)
@@ -132,9 +203,19 @@ namespace SewingProduction.Features.Articul.Forms
                 throw;
             }
         }
-
+        /// <summary>
+        /// проверка на минимальную длину кода артикула при попытке покинуть поле ввода
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtKod_Validating(object sender, CancelEventArgs e)
         {
+            if (!txtKod.Enabled || !txtKod.Visible)
+            {
+                e.Cancel = false;
+                return;
+            }
+
             string input = txtKod.Text;
             if (input.Length < 8)
             {
@@ -143,6 +224,85 @@ namespace SewingProduction.Features.Articul.Forms
                 txtKod.Focus();
             }
         }
+
+        private async void btnAccept_Click(object sender, EventArgs e)
+        {
+            var validator = new AppendArticulValidator(_bindingSourceArticul.Current as SpArticulPreviewModel);
+            try
+            {
+            var canLink = await validator.checkBeforPublish();
+
+            if (canLink.IsSuccess)
+            {
+                switch (_typeCreate)
+                {
+                    case 0: // Создание
+                        var listRazm = (BindingList<PlanRazmSetkaModel>)_bindingSourceRazms.DataSource;
+
+                            // проверки для кодов размеров в режиме создания
+                            canLink = await validator.CheckRazmKod(listRazm);
+
+                        break;
+                    case 1: // Настройка для режима стыковки
+
+
+
+                        break;
+
+                }
+            }
+
+                if (canLink.IsSuccess)
+                {
+                    MessageBox.Show("Проверка прошла успешно. Артикул можно создать/стыковать.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(@$"Невозможно выбрать эту модель для стыковки: {canLink.ErrorMessage}", "Проверка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при проверке артикула перед публикацией");
+                MessageBox.Show("Произошла ошибка при проверке артикула. Пожалуйста, попробуйте снова.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                validator = null;
+            }
+            
+        }
+
+        public void HighlightMismatches(Control parent,IEnumerable<FieldMismatch> mismatches)
+        {
+            var mismatchMap = mismatches
+                .ToDictionary(x => x.PropertyName, StringComparer.OrdinalIgnoreCase);
+
+            foreach (Control control in FieldComparisonService.GetAllControls(parent))
+            {
+                // сброс подсветки не нужно
+                //control.BackColor = SystemColors.Window;
+
+                foreach (Binding binding in control.DataBindings)
+                {
+                    string propertyName = binding.BindingMemberInfo.BindingField;
+
+                    if (mismatchMap.TryGetValue(propertyName, out var mismatch))
+                    {
+                        control.BackColor = Color.MistyRose;
+
+                        var tooltipText =
+                            $"Ожидалось: {mismatch.ExpectedDisplayValue ?? mismatch.ExpectedValue ?? ""}\n" +
+                            $"Фактически: {mismatch.ActualValue ?? ""}";
+
+                        _toolTip.SetToolTip(control, tooltipText);
+                        break;
+                    }
+                }
+            }
+        }
+
+
     }
 
 }

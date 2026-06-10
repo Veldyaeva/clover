@@ -617,8 +617,14 @@ namespace SewingProduction.Core.Models
         [NotMapped] public decimal? Sum_komplnum { get; set; }
         //---->
 
+        private string _kod_okpd2;
+        public  string Kod_okpd2
+        {
+            get => _kod_okpd2;
+            set => SetField(ref _kod_okpd2, value);
+        }
 
-        
+
 
 
     }

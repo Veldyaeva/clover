@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,10 @@ namespace SewingProduction.Features.Articul.Models
         /// повторный артикул
         /// </summary>
         public string RepeatArticle { get; set; }
+        /// <summary>
+        /// найденная модель по модели с учетом исключения FromAceToCle
+        /// </summary>
+        public string FoundMod { get; set; }
         /// <summary>
         /// менеджер
         /// </summary>
@@ -148,7 +153,21 @@ namespace SewingProduction.Features.Articul.Models
         /// </summary>
         public string Tkb {  get; set; }
         public DateTime? DateCertificationApproval { get; set; }
+        [NotMapped] public string Unic_IdGost_idAg { get => $"{Ag_id}|{Id_gost}";
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    return;
 
+                var parts = value.Split('|');
+                if (parts.Length != 2)
+                    return;
 
+                Ag_id = int.Parse(parts[0]);
+
+                if (int.TryParse(parts[1], out int idGost))
+                    Id_gost = idGost;
+            } // уникальное поле для поиска гост + группа по госту
+        }
     }
 }

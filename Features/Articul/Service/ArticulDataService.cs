@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 
-
+ 
 namespace SewingProduction.Features.Articul.Service
 {
     public class ArticulDataService
@@ -21,7 +21,6 @@ namespace SewingProduction.Features.Articul.Service
         public ArticulDataService()
         {
             _dbService = new DbService(new DatabaseHelperSQL());
-            //_dbHelper = new DatabaseHelper(); 
         }
 
         public async Task<List<AddNewKopmlModel>> GetArticulsListAsync()
@@ -121,7 +120,6 @@ namespace SewingProduction.Features.Articul.Service
                 await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetFileEskizForKod");
                 return null;
             }
-
         }
 
 

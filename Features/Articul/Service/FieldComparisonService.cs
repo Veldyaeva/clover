@@ -50,12 +50,22 @@ namespace SewingProduction.Features.Articul.Service
                         Control = null // Здесь можно добавить логику для определения связанного UI-контрола, если необходимо
                     };
 
-                    // Для подсветки учитываем все расхождения
+                        // Для подсветки учитываем все расхождения
                     result.Mismatches.Add(mismatch);
 
                     // Для итогового совпадения игнорируем "подсветить-но-не-валидировать" поля (например, Сезон)
-                    if (!IsHighlightOnlyField(item.PropertyName))
+                    if (!IsHighlightOnlyField(item.PropertyName) && !IsComplicateField(item.PropertyName))
                         result.SignificantMismatches.Add(mismatch);
+
+
+                    // для состава будет доп проверка, помечаем его для этого 
+                    if (IsComplicateField(item.PropertyName))
+                        result.ComplicateMismatches.Add(mismatch);
+
+                    // перечень полей, с расхождениямми которых мы соглашаемся и в дальнейшем переписываем их значениями новыми из матрицы
+                    if (IsAcceptMismatchesField(item.PropertyName))
+                        result.AcceptableMismatches.Add(mismatch);
+
                 }
 
                 return result;
@@ -88,6 +98,21 @@ namespace SewingProduction.Features.Articul.Service
 
         private static bool IsHighlightOnlyField(string propertyName) =>
             string.Equals(propertyName, nameof(SpArticulPreviewModel.SeasonName), StringComparison.OrdinalIgnoreCase);
+        
+        // сложное к проверке поле состав, где должно выполнятся еще ряд условий
+        private static bool IsComplicateField(string propertyName) => 
+            string.Equals(propertyName, nameof(SpArticulPreviewModel.Sost), StringComparison.OrdinalIgnoreCase);
+
+        // перечень полей, с расхождениямми которых мы соглашаемся и в дальнейшем переписываем их значениями новыми из матрицы
+        // !!!на sost наложены дополнительные ограничения!!!!
+        private static readonly HashSet<string> AcceptMismatchesFields = new(StringComparer.OrdinalIgnoreCase)
+        {
+            nameof(SpArticulPreviewModel.Sost),
+            nameof(SpArticulPreviewModel.SeasonName),
+        };
+
+        private static bool IsAcceptMismatchesField(string propertyName) =>
+            AcceptMismatchesFields.Contains(propertyName);
 
         private static bool AreEqualWithRules(FieldComparisonItem item, object? left, object? right)
         {
@@ -162,6 +187,17 @@ namespace SewingProduction.Features.Articul.Service
         private static bool IsNumeric(object value) =>
             value is byte or sbyte or short or ushort or int or uint or long or ulong
             or float or double or decimal;
+
+        public static IEnumerable<Control> GetAllControls(Control parent)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                yield return control;
+
+                foreach (var child in GetAllControls(control))
+                    yield return child;
+            }
+        }
     }
     public sealed class FieldComparisonItem
     {
@@ -185,9 +221,18 @@ namespace SewingProduction.Features.Articul.Service
     {
         // Подсветка ошибок делается по `Mismatches`,
         // а результат "совпало/не совпало" игнорирует часть полей (сезон).
-        public bool IsMatch => SignificantMismatches.Count == 0;
+        public bool  IsMatch { get => SignificantMismatches.Count == 0;}
+        // несовпадения
         public List<FieldMismatch> Mismatches { get; } = new();
+        // важные  к проверке
         public List<FieldMismatch> SignificantMismatches { get; } = new();
+        /// <summary>
+        /// дополнительная проверка при сравнении
+        /// </summary>
+        public List<FieldMismatch> ComplicateMismatches { get; } = new();
+
+        public List<FieldMismatch> AcceptableMismatches { get; } = new();
+
     }
     /// <summary>
     /// Построитель списка полей для сравнения модели CreateArticulMatrModel с моделью SpArticulPreviewModel.
@@ -268,13 +313,13 @@ namespace SewingProduction.Features.Articul.Service
                 {
                     PropertyName = nameof(SpArticulPreviewModel.Sost2),
                     ExpectedValue = row.Sost2,
-                    DisplayName = "Отделка"
+                    DisplayName = "Подклад / наполнитель"
                 },
                 new()
                 {
                     PropertyName = nameof(SpArticulPreviewModel.Sost3),
                     ExpectedValue = row.Sost3,
-                    DisplayName = "Подклад / наполнитель"
+                    DisplayName = "Отделка"
                 },
                 new()
                 {
@@ -288,5 +333,7 @@ namespace SewingProduction.Features.Articul.Service
             { MessageBox.Show(ex.Message.ToString()); return Array.Empty<FieldComparisonItem>(); }
         }
     }
+
+
 }
 

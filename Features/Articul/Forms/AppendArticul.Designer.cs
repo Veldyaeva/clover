@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppendArticul));
             txtArticul = new CustomTextBoxEx();
             customLayoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
+            txtRazmNames = new CustomTextBoxEx();
             gridNabor = new SewingProduction.Core.Class.CustomGridControl();
             gridViewNabor = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridRazm = new SewingProduction.Core.Class.CustomGridControl();
@@ -81,9 +82,13 @@
             layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
+            btnAccept = new SewingProduction.Core.Class.CustomSimpleButton();
+            btnCancel = new SewingProduction.Core.Class.CustomSimpleButton();
             ((System.ComponentModel.ISupportInitialize)txtArticul.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customLayoutControl1).BeginInit();
             customLayoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)txtRazmNames.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridNabor).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewNabor).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridRazm).BeginInit();
@@ -128,21 +133,27 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem11).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem15).BeginInit();
             SuspendLayout();
             // 
             // txtArticul
             // 
+            txtArticul.Enabled = false;
             txtArticul.Location = new System.Drawing.Point(111, 31);
             txtArticul.Name = "txtArticul";
             txtArticul.ObjectName = null;
             txtArticul.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtArticul.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             txtArticul.Properties.Appearance.Options.UseFont = true;
+            txtArticul.Properties.Appearance.Options.UseForeColor = true;
+            txtArticul.Properties.ReadOnly = true;
             txtArticul.Size = new System.Drawing.Size(409, 22);
             txtArticul.StyleController = customLayoutControl1;
             txtArticul.TabIndex = 4;
             // 
             // customLayoutControl1
             // 
+            customLayoutControl1.Controls.Add(txtRazmNames);
             customLayoutControl1.Controls.Add(gridNabor);
             customLayoutControl1.Controls.Add(gridRazm);
             customLayoutControl1.Controls.Add(txtPo);
@@ -168,8 +179,20 @@
             customLayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(580, 474, 650, 400);
             customLayoutControl1.Root = Root;
             customLayoutControl1.Size = new System.Drawing.Size(1159, 576);
-            customLayoutControl1.TabIndex = 1;
+            customLayoutControl1.TabIndex = 2;
             customLayoutControl1.Text = "customLayoutControl1";
+            // 
+            // txtRazmNames
+            // 
+            txtRazmNames.Location = new System.Drawing.Point(111, 367);
+            txtRazmNames.Name = "txtRazmNames";
+            txtRazmNames.ObjectName = null;
+            txtRazmNames.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtRazmNames.Properties.Appearance.Options.UseFont = true;
+            txtRazmNames.Properties.ReadOnly = true;
+            txtRazmNames.Size = new System.Drawing.Size(409, 22);
+            txtRazmNames.StyleController = customLayoutControl1;
+            txtRazmNames.TabIndex = 20;
             // 
             // gridNabor
             // 
@@ -256,7 +279,9 @@
             txtPo.Name = "txtPo";
             txtPo.ObjectName = null;
             txtPo.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtPo.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             txtPo.Properties.Appearance.Options.UseFont = true;
+            txtPo.Properties.Appearance.Options.UseForeColor = true;
             txtPo.Size = new System.Drawing.Size(112, 22);
             txtPo.StyleController = customLayoutControl1;
             txtPo.TabIndex = 2;
@@ -267,7 +292,9 @@
             txtKod.Name = "txtKod";
             txtKod.ObjectName = null;
             txtKod.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtKod.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             txtKod.Properties.Appearance.Options.UseFont = true;
+            txtKod.Properties.Appearance.Options.UseForeColor = true;
             txtKod.Size = new System.Drawing.Size(251, 22);
             txtKod.StyleController = customLayoutControl1;
             txtKod.TabIndex = 0;
@@ -280,6 +307,7 @@
             txtAssort.ObjectName = null;
             txtAssort.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             txtAssort.Properties.Appearance.Options.UseFont = true;
+            txtAssort.Properties.ReadOnly = true;
             txtAssort.Size = new System.Drawing.Size(409, 22);
             txtAssort.StyleController = customLayoutControl1;
             txtAssort.TabIndex = 17;
@@ -291,6 +319,7 @@
             txtTkb.ObjectName = null;
             txtTkb.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             txtTkb.Properties.Appearance.Options.UseFont = true;
+            txtTkb.Properties.ReadOnly = true;
             txtTkb.Size = new System.Drawing.Size(409, 22);
             txtTkb.StyleController = customLayoutControl1;
             txtTkb.TabIndex = 16;
@@ -302,6 +331,7 @@
             txtGrup.ObjectName = null;
             txtGrup.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             txtGrup.Properties.Appearance.Options.UseFont = true;
+            txtGrup.Properties.ReadOnly = true;
             txtGrup.Size = new System.Drawing.Size(409, 22);
             txtGrup.StyleController = customLayoutControl1;
             txtGrup.TabIndex = 15;
@@ -313,6 +343,7 @@
             txtGostName.ObjectName = null;
             txtGostName.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             txtGostName.Properties.Appearance.Options.UseFont = true;
+            txtGostName.Properties.ReadOnly = true;
             txtGostName.Size = new System.Drawing.Size(334, 22);
             txtGostName.StyleController = customLayoutControl1;
             txtGostName.TabIndex = 14;
@@ -324,12 +355,14 @@
             txtIdGost.ObjectName = null;
             txtIdGost.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             txtIdGost.Properties.Appearance.Options.UseFont = true;
+            txtIdGost.Properties.ReadOnly = true;
             txtIdGost.Size = new System.Drawing.Size(71, 22);
             txtIdGost.StyleController = customLayoutControl1;
             txtIdGost.TabIndex = 13;
             // 
             // chkKruj
             // 
+            chkKruj.Enabled = false;
             chkKruj.Font = new System.Drawing.Font("Arial", 10F);
             chkKruj.Location = new System.Drawing.Point(111, 239);
             chkKruj.Name = "chkKruj";
@@ -339,77 +372,101 @@
             // 
             // txtSost3
             // 
+            txtSost3.Enabled = false;
             txtSost3.Location = new System.Drawing.Point(111, 213);
             txtSost3.Name = "txtSost3";
             txtSost3.ObjectName = null;
             txtSost3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             txtSost3.Properties.Appearance.Options.UseFont = true;
+            txtSost3.Properties.ReadOnly = true;
             txtSost3.Size = new System.Drawing.Size(409, 22);
             txtSost3.StyleController = customLayoutControl1;
             txtSost3.TabIndex = 11;
             // 
             // txtSeason
             // 
+            txtSeason.Enabled = false;
             txtSeason.Location = new System.Drawing.Point(111, 83);
             txtSeason.Name = "txtSeason";
             txtSeason.ObjectName = null;
             txtSeason.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtSeason.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             txtSeason.Properties.Appearance.Options.UseFont = true;
+            txtSeason.Properties.Appearance.Options.UseForeColor = true;
+            txtSeason.Properties.ReadOnly = true;
             txtSeason.Size = new System.Drawing.Size(409, 22);
             txtSeason.StyleController = customLayoutControl1;
             txtSeason.TabIndex = 6;
             // 
             // txtSost2
             // 
+            txtSost2.Enabled = false;
             txtSost2.Location = new System.Drawing.Point(111, 187);
             txtSost2.Name = "txtSost2";
             txtSost2.ObjectName = null;
             txtSost2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             txtSost2.Properties.Appearance.Options.UseFont = true;
+            txtSost2.Properties.ReadOnly = true;
             txtSost2.Size = new System.Drawing.Size(409, 22);
             txtSost2.StyleController = customLayoutControl1;
             txtSost2.TabIndex = 10;
             // 
             // txtMod
             // 
+            txtMod.Enabled = false;
             txtMod.Location = new System.Drawing.Point(111, 57);
             txtMod.Name = "txtMod";
             txtMod.ObjectName = null;
             txtMod.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtMod.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             txtMod.Properties.Appearance.Options.UseFont = true;
+            txtMod.Properties.Appearance.Options.UseForeColor = true;
+            txtMod.Properties.ReadOnly = true;
             txtMod.Size = new System.Drawing.Size(409, 22);
             txtMod.StyleController = customLayoutControl1;
             txtMod.TabIndex = 5;
             // 
             // txtSost
             // 
+            txtSost.Enabled = false;
             txtSost.Location = new System.Drawing.Point(111, 161);
             txtSost.Name = "txtSost";
             txtSost.ObjectName = null;
             txtSost.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtSost.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             txtSost.Properties.Appearance.Options.UseFont = true;
+            txtSost.Properties.Appearance.Options.UseForeColor = true;
+            txtSost.Properties.ReadOnly = true;
             txtSost.Size = new System.Drawing.Size(409, 22);
             txtSost.StyleController = customLayoutControl1;
             txtSost.TabIndex = 9;
             // 
             // txtTM
             // 
+            txtTM.Enabled = false;
             txtTM.Location = new System.Drawing.Point(111, 135);
             txtTM.Name = "txtTM";
             txtTM.ObjectName = null;
             txtTM.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtTM.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             txtTM.Properties.Appearance.Options.UseFont = true;
+            txtTM.Properties.Appearance.Options.UseForeColor = true;
+            txtTM.Properties.ReadOnly = true;
             txtTM.Size = new System.Drawing.Size(409, 22);
             txtTM.StyleController = customLayoutControl1;
             txtTM.TabIndex = 8;
             // 
             // txtGrupMenName
             // 
+            txtGrupMenName.Enabled = false;
             txtGrupMenName.Location = new System.Drawing.Point(111, 109);
             txtGrupMenName.Name = "txtGrupMenName";
             txtGrupMenName.ObjectName = null;
             txtGrupMenName.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtGrupMenName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             txtGrupMenName.Properties.Appearance.Options.UseFont = true;
+            txtGrupMenName.Properties.Appearance.Options.UseForeColor = true;
+            txtGrupMenName.Properties.ReadOnly = true;
             txtGrupMenName.Size = new System.Drawing.Size(409, 22);
             txtGrupMenName.StyleController = customLayoutControl1;
             txtGrupMenName.TabIndex = 7;
@@ -446,9 +503,9 @@
             // 
             // emptySpaceItem3
             // 
-            emptySpaceItem3.Location = new System.Drawing.Point(0, 368);
+            emptySpaceItem3.Location = new System.Drawing.Point(0, 394);
             emptySpaceItem3.Name = "emptySpaceItem3";
-            emptySpaceItem3.Size = new System.Drawing.Size(525, 118);
+            emptySpaceItem3.Size = new System.Drawing.Size(525, 92);
             // 
             // emptySpaceItem4
             // 
@@ -503,11 +560,11 @@
             // layoutControlGroup3
             // 
             layoutControlGroup3.GroupStyle = DevExpress.Utils.GroupStyle.Light;
-            layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem4, layoutControlItem5, layoutControlItem6, layoutControlItem7, layoutControlItem8, layoutControlItem9, layoutControlItem10, layoutControlItem12, layoutControlItem13, layoutControlItem14, layoutControlItem11 });
+            layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem4, layoutControlItem5, layoutControlItem6, layoutControlItem7, layoutControlItem8, layoutControlItem9, layoutControlItem10, layoutControlItem12, layoutControlItem13, layoutControlItem14, layoutControlItem11, layoutControlItem15 });
             layoutControlGroup3.Location = new System.Drawing.Point(0, 26);
             layoutControlGroup3.Name = "layoutControlGroup3";
             layoutControlGroup3.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup3.Size = new System.Drawing.Size(525, 342);
+            layoutControlGroup3.Size = new System.Drawing.Size(525, 368);
             layoutControlGroup3.TextVisible = false;
             // 
             // layoutControlItem1
@@ -635,19 +692,54 @@
             layoutControlItem11.Size = new System.Drawing.Size(338, 26);
             layoutControlItem11.TextVisible = false;
             // 
+            // layoutControlItem15
+            // 
+            layoutControlItem15.Control = txtRazmNames;
+            layoutControlItem15.CustomizationFormText = "Размеры матрицы";
+            layoutControlItem15.Location = new System.Drawing.Point(0, 336);
+            layoutControlItem15.Name = "layoutControlItem15";
+            layoutControlItem15.Size = new System.Drawing.Size(519, 26);
+            layoutControlItem15.Text = "Размеры матрицы";
+            layoutControlItem15.TextSize = new System.Drawing.Size(94, 13);
+            // 
+            // btnAccept
+            // 
+            btnAccept.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            btnAccept.Appearance.Options.UseFont = true;
+            btnAccept.Location = new System.Drawing.Point(305, 645);
+            btnAccept.Name = "btnAccept";
+            btnAccept.Size = new System.Drawing.Size(164, 25);
+            btnAccept.TabIndex = 1;
+            btnAccept.Text = "Добавить в справочник";
+            btnAccept.Click += btnAccept_Click;
+            // 
+            // btnCancel
+            // 
+            btnCancel.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            btnCancel.Appearance.Options.UseFont = true;
+            btnCancel.Location = new System.Drawing.Point(540, 645);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new System.Drawing.Size(75, 25);
+            btnCancel.TabIndex = 0;
+            btnCancel.Text = "Отмена";
+            // 
             // AppendArticul
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1159, 694);
+            Controls.Add(btnCancel);
+            Controls.Add(btnAccept);
             Controls.Add(customLayoutControl1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "AppendArticul";
-            Text = "AppendArticul";
+            Text = "Стыковка артикула";
+            FormClosing += AppendArticul_FormClosing;
             Load += AppendArticul_Load;
             ((System.ComponentModel.ISupportInitialize)txtArticul.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)customLayoutControl1).EndInit();
             customLayoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)txtRazmNames.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridNabor).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewNabor).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridRazm).EndInit();
@@ -692,6 +784,7 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem11).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem15).EndInit();
             ResumeLayout(false);
         }
 
@@ -749,5 +842,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcKod;
         private DevExpress.XtraGrid.Columns.GridColumn gcRazm;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit1;
+        private Core.Class.CustomSimpleButton btnAccept;
+        private Core.Class.CustomSimpleButton btnCancel;
+        private CustomTextBoxEx txtRazmNames;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
     }
 }

@@ -68,7 +68,7 @@ namespace SewingProduction.Features.Articul.Forms
 
         private void RegisterSeries(string controlPrefix, string propertyPrefix)
         {
-            foreach (var c in GetAllControls(this))
+            foreach (var c in FieldComparisonService.GetAllControls(this))
             {
                 if (string.IsNullOrWhiteSpace(c.Name)) continue;
                 if (!c.Name.StartsWith(controlPrefix, StringComparison.Ordinal)) continue;
@@ -89,7 +89,7 @@ namespace SewingProduction.Features.Articul.Forms
             return start < name.Length ? name.Substring(start) : null;
         }
 
-        public ComparisonResult CompareAndHighlight(IEnumerable<FieldComparisonItem> items)
+        public async Task<ComparisonResult> CompareAndHighlight(IEnumerable<FieldComparisonItem> items)
         {
             var result = new ComparisonResult();
             try
@@ -107,7 +107,8 @@ namespace SewingProduction.Features.Articul.Forms
             }
             catch (Exception ex)
             {
-                _=SafeLogAsync(() => _logger.LogErrorAsync(ex, $"{LoggerContext}.CompareAndHighlight"));
+                //_=SafeLogAsync(() => _logger.LogErrorAsync(ex, $"{LoggerContext}.CompareAndHighlight"));
+                await _logger.LogErrorAsync(ex, $"{LoggerContext}.CompareAndHighlight");
                 return result;
             }
             return result;
@@ -468,7 +469,7 @@ namespace SewingProduction.Features.Articul.Forms
 
         private void ApplyReadOnlyState()
         {
-            foreach (Control c in GetAllControls(this))
+            foreach (Control c in FieldComparisonService.GetAllControls(this))
             {
                 switch (c)
                 {
@@ -490,14 +491,6 @@ namespace SewingProduction.Features.Articul.Forms
             }
         }
 
-        private static IEnumerable<Control> GetAllControls(Control root)
-        {
-            foreach (Control c in root.Controls)
-            {
-                yield return c;
-                foreach (var cc in GetAllControls(c)) yield return cc;
-            }
-        }
         private void AttachChangeHandlers()
         {
             // Инициализируем маппинг Control -> PropertyInfo один раз
