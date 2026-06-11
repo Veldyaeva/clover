@@ -7,6 +7,7 @@ using SewingProduction.Features.Sprav.Application.Services;
 using SewingProduction.Features.Sprav.Application.UseCases;
 using SewingProduction.Features.Sprav.Application.Validation;
 using SewingProduction.Features.Sprav.DataService;
+using SewingProduction.Extensions;
 using SewingProduction.Features.Sprav.Models;
 using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Features.UserDistribution.Helpers;
@@ -54,12 +55,14 @@ namespace SewingProduction.Features.Sprav.Forms
                 excelExporter,
                 markPrintedUseCase);
             bindingSource.DataSource = _rows;
+            gridView.ApplyReadOnly();
             InitializeHeaderButtons();
         }
 
         private async void VyazKnitEconomAssortForm_Load(object sender, EventArgs e)
         {
             _gridHelper.LoadGridViewSettings(gridView, "VyazKnitEconomAssortGrid.xml");
+            gridView.ApplyReadOnly();
             await LoadDataAsync();
         }
 
