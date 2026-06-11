@@ -248,11 +248,11 @@ namespace SewingProduction.Features.Sprav.Forms
                     return;
                 }
 
-                MessageBox.Show(
-                    "Калькуляция сформирована.",
-                    "Печать калькуляция",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                //MessageBox.Show(
+                //    "Калькуляция сформирована.",
+                //    "Печать калькуляция",
+                //    MessageBoxButtons.OK,
+                //    MessageBoxIcon.Information);
 
                 await LoadDataAsync();
             }
