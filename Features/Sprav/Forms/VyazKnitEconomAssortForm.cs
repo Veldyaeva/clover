@@ -56,7 +56,13 @@ namespace SewingProduction.Features.Sprav.Forms
                 markPrintedUseCase);
             bindingSource.DataSource = _rows;
             gridView.ApplyReadOnly();
+            gridView.PopupMenuShowing += GridCopyPopupMenuShowing;
             InitializeHeaderButtons();
+        }
+
+        private void GridCopyPopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            GridContextMenuHelper.AddCopyCellMenuItem(sender, e);
         }
 
         private async void VyazKnitEconomAssortForm_Load(object sender, EventArgs e)
