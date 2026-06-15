@@ -6,7 +6,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>False</UseWPF>
     <StartupObject>SewingProduction.Core.Program</StartupObject>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <ApplicationIcon>Resources\AppIcons\favicon.ico</ApplicationIcon>
     <SignAssembly>False</SignAssembly>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -21,13 +21,6 @@
     <Compile Remove="Features\Articul\Forms\Articul_lena.cs" />
     <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace.patched.cs" />
     <Compile Remove="Features\KnittingProduction\Forms\PlanZagrVyaz\PlanZagrVyaz.ServiceBroker.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="SplashImages\**\*">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
   </ItemGroup>
 
 	<ItemGroup>

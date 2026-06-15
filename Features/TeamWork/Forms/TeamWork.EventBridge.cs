@@ -317,7 +317,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                             try
                             {
-                                decimal updatedSeb = await _artNormService.getArtNormnSeb(row.AnnID);
+                                decimal updatedSeb = await _teamWorkService.GetAnnCostAsync(row.AnnID);
                                 row.Seb = updatedSeb;
                                 row.dateUpdate = DateTime.Now;
                             }

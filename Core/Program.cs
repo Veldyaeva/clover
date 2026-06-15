@@ -14,6 +14,7 @@ using SewingProduction.Core.interfaces;
 using SewingProduction.Core.services;
 using SewingProduction.Features.KnittingProduction.Forms;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service;
+using SewingProduction.Core.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using System;
@@ -96,7 +97,8 @@ namespace SewingProduction.Core
                 DevExpress.XtraEditors.Controls.Localizer.Active = new SewingProduction.CustomControls.RuEditorsLocalizer();
 
                 Application.EnableVisualStyles();
-                EnsureSeasonImagesInRoaming();
+                SplashImageStorage.EnsureCachedBeforeSplash(_logger);
+                SplashImageStorage.StartBackgroundSync(_logger);
                 Application.SetCompatibleTextRenderingDefault(false);
                 DapperMappings.Configure();
 
@@ -129,6 +131,9 @@ namespace SewingProduction.Core
                         splashScreen.Update();
                         Application.DoEvents();
 
+                        var splashTimer = Stopwatch.StartNew();
+                        const int MinSplashMs = 2000;
+
                     if (!ValidateSystemDate(out var dateError))
                     {
                         MessageBox.Show(dateError,
@@ -140,7 +145,6 @@ namespace SewingProduction.Core
                     }
 
                     SpMainForm mainForm = new SpMainForm();
-                    Thread.Sleep(2000);
 
                     //ThemeManager.LoadTheme();
 
@@ -173,7 +177,15 @@ namespace SewingProduction.Core
                     //XtraReportsLocalizer.Active = new DxReportsLocalizerRu(traceUnknown);
                     //PrintingSystemLocalizer.Active = new DxPrintingLocalizerRu(traceUnknown);
                     PreviewLocalizer.Active = new DxPreviewLocalizerRu();
-                    
+
+                    // Держим сплэш минимум MinSplashMs. Если загрузка заняла дольше — не ждём.
+                    // DoEvents позволяет сплэшу перерисовываться во время ожидания.
+                    while (splashTimer.ElapsedMilliseconds < MinSplashMs)
+                    {
+                        Application.DoEvents();
+                        Thread.Sleep(30);
+                    }
+
                         splashScreen.Close();
 
                         Application.Run(mainForm);
@@ -368,69 +380,6 @@ namespace SewingProduction.Core
                 try { _ = _logger.LogErrorAsync(e.Exception, "TaskScheduler UnobservedTaskException"); } catch { }
                 e.SetObserved();
             };
-        }
-
-        private static void EnsureSeasonImagesInRoaming()
-        {
-            string sourceRoot = Path.Combine(AppContext.BaseDirectory, "SplashImages");
-            string destinationRoot = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "SewingProduction",
-                "SplashImages");
-
-            try
-            {
-                if (!Directory.Exists(sourceRoot))
-                {
-                    return;
-                }
-
-                Directory.CreateDirectory(destinationRoot);
-
-                foreach (string sourceFile in Directory.GetFiles(sourceRoot, "*", SearchOption.AllDirectories))
-                {
-                    string relativePath = Path.GetRelativePath(sourceRoot, sourceFile);
-                    string destinationFile = Path.Combine(destinationRoot, relativePath);
-                    string destinationDir = Path.GetDirectoryName(destinationFile);
-                    if (!string.IsNullOrEmpty(destinationDir))
-                    {
-                        Directory.CreateDirectory(destinationDir);
-                    }
-
-                    if (NeedToCopyFile(sourceFile, destinationFile))
-                    {
-                        File.Copy(sourceFile, destinationFile, true);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                try
-                {
-                    _ = _logger.LogErrorAsync(
-                        ex,
-                        $"Failed to seed splash images. Source='{sourceRoot}', Destination='{destinationRoot}', Error='{ex.Message}'");
-                }
-                catch { }
-            }
-        }
-
-        private static bool NeedToCopyFile(string sourceFile, string destinationFile)
-        {
-            if (!File.Exists(destinationFile))
-            {
-                return true;
-            }
-
-            var sourceInfo = new FileInfo(sourceFile);
-            var destinationInfo = new FileInfo(destinationFile);
-
-            if (sourceInfo.Length != destinationInfo.Length)
-            {
-                return true;
-            }
-
-            return sourceInfo.LastWriteTimeUtc > destinationInfo.LastWriteTimeUtc;
         }
 
         private static bool ValidateSystemDate(out string errorMessage)

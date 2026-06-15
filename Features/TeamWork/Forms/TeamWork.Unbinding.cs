@@ -165,7 +165,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                     if (annId > 0)
                     {
-                        var nzpData = await _articlesQueryService.LoadNzpAsync(annId);
+                        var nzpData = await _teamWorkService.LoadNzpAsync(annId);
                         if (workDivisionGridView.Name == "ANNgridView")
                         {
                             _nzpListWd?.BulkLoad(nzpData ?? new List<NZPByKoddRt>());

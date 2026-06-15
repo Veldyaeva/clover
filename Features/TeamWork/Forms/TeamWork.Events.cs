@@ -389,7 +389,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 await Task.Delay(200, token);
                 token.ThrowIfCancellationRequested();
 
-                var tRelated = LoadRelatedDataFromView(annId, token);
+                var tRelated = LoadRelatedData(annId, token);
                 token.ThrowIfCancellationRequested();
                 var tNzp = LoadNZP(annId, token);
                 token.ThrowIfCancellationRequested();
@@ -423,8 +423,8 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 await _logger.LogEventAsync($"Начало поиска артикулов по тексту: '{searchText}' в таблицах WDtoBind и unboundArts", "SearchArticulesByText");
 
-                var wdToBindTask = _articlesQueryService.SearchCurrentWorkDivisionsAsync(searchText);
-                var unboundArtsTask = _articlesQueryService.SearchUnboundArticlesAsync(searchText);
+                var wdToBindTask = _teamWorkService.SearchCurrentWorkDivisionsAsync(searchText);
+                var unboundArtsTask = _teamWorkService.SearchUnboundArticlesAsync(searchText);
 
                 await Task.WhenAll(wdToBindTask, unboundArtsTask);
 
@@ -492,7 +492,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 GridControlBindedArts,
                 _nzpListWd,
                 (System.Windows.Forms.BindingSource)_nzpByKoddRtSourceWd,
-                async token => await _articlesQueryService.LoadNzpAsync(annId, token),
+                async token => await _teamWorkService.LoadNzpAsync(annId, token),
                 ct);
             // Обновляем источник данных и представление после асинхронной загрузки
             GridControlBindedArts?.RefreshDataSource();
@@ -532,6 +532,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Подписываемся на событие закрытия формы для обработки результата
                 teamWorkAdvanceTW.FormClosed += async (s, args) =>
                 {
+                    try
+                    {
                     if (teamWorkAdvanceTW.DialogResult == DialogResult.OK)
                     {
                         var updatedItem = teamWorkAdvanceTW.CreatedAnn;
@@ -564,6 +566,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                         // Отображаем сообщение об успешном редактировании
                         //MessageBox.Show("Запись успешно отредактирована.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         await _logger.LogEventAsync("Запись успешно отредактирована.", "ButtonEditWD");
+                    }
+                    }
+                    catch (Exception ex)
+                    {
+                        await _logger.LogErrorAsync(ex, "ButtonEditWd_Click_Internal: FormClosed");
                     }
                 };
             }
@@ -639,6 +646,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Подписываемся на событие закрытия формы для обработки результата
                 teamWorkAdvanceTW.FormClosed += async (s, args) =>
                 {
+                    try
+                    {
                     if (teamWorkAdvanceTW.DialogResult == DialogResult.OK)
                     {
                         updatedArtNormN = teamWorkAdvanceTW.CreatedAnn;
@@ -693,6 +702,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                                 gridView,
                                 forMyDataAnnView ? null : _bindingList);
                         }
+                    }
+                    }
+                    catch (Exception ex)
+                    {
+                        await _logger.LogErrorAsync(ex, "ButtonEditWd_Click_Internal2: FormClosed");
                     }
                 };
             }
@@ -791,6 +805,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Подписываемся на событие закрытия формы для обработки результата
                 teamWorkAdvanceTW.FormClosed += async (s, args) =>
                 {
+                    try
+                    {
                     // 5. Обрабатываем результат диалога
                     if (teamWorkAdvanceTW.DialogResult == DialogResult.OK)
                     {
@@ -852,6 +868,11 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                         await _teamWorkService.RollbackDraftAsync(newAnnId);
                     }
+                    }
+                    catch (Exception ex)
+                    {
+                        await _logger.LogErrorAsync(ex, "simpleButton2_Click_Internal: FormClosed");
+                    }
                 };
             }
             catch (Exception ex)
@@ -889,19 +910,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
                 }
 
-                // Получаем выбранные строки
-                var selectedRowHandles = ANNgridView.GetSelectedRows();
-
-                // Если нет выбранных строк, берем текущую строку
-                if (selectedRowHandles == null || selectedRowHandles.Length == 0)
-                {
-                    if (ANNgridView.FocusedRowHandle < 0)
-                    {
-                        MessageBox.Show("Выберите записи для пометки на удаление.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                    selectedRowHandles = new int[] { ANNgridView.FocusedRowHandle };
-                }
+                var selectedRowHandles = GetSelectedOrFocusedRowHandles(ANNgridView, "Выберите записи для пометки на удаление.");
+                if (selectedRowHandles == null) return;
 
                 var selectedItems = new List<ArtNormN>();
                 var alreadyMarkedItems = new List<ArtNormN>();
@@ -1081,19 +1091,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                     activeBindingSource = _bindingSource;
                 }
 
-                // Получаем выбранные строки
-                var selectedRowHandles = activeGridView.GetSelectedRows();
-
-                // Если нет выбранных строк, берем текущую строку
-                if (selectedRowHandles == null || selectedRowHandles.Length == 0)
+                var selectedRowHandles = GetSelectedOrFocusedRowHandles(activeGridView, $"Выберите записи для обновления даты на вкладке \"{gridType}\".");
+                if (selectedRowHandles == null)
                 {
-                    if (activeGridView.FocusedRowHandle < 0)
-                    {
-                        MessageBox.Show($"Выберите записи для обновления даты на вкладке \"{gridType}\".", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        await _logger.LogWarningAsync($"Попытка обновления даты без выбора строк на вкладке \"{gridType}\"", "SetUpdateDate_Internal");
-                        return;
-                    }
-                    selectedRowHandles = new int[] { activeGridView.FocusedRowHandle };
+                    await _logger.LogWarningAsync($"Попытка обновления даты без выбора строк на вкладке \"{gridType}\"", "SetUpdateDate_Internal");
+                    return;
                 }
 
                 var selectedItems = new List<object>();
@@ -1336,19 +1338,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
                 }
 
-                // Получаем выбранные строки
-                var selectedRowHandles = ANNgridView.GetSelectedRows();
-
-                // Если нет выбранных строк, берем текущую строку
-                if (selectedRowHandles == null || selectedRowHandles.Length == 0)
+                var selectedRowHandles = GetSelectedOrFocusedRowHandles(ANNgridView, "Выберите записи для архивирования.");
+                if (selectedRowHandles == null)
                 {
-                    if (ANNgridView.FocusedRowHandle < 0)
-                    {
-                        MessageBox.Show("Выберите записи для архивирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        await _logger.LogWarningAsync("Попытка архивирования без выбора строк", "SetArchiveStatus_Internal");
-                        return;
-                    }
-                    selectedRowHandles = new int[] { ANNgridView.FocusedRowHandle };
+                    await _logger.LogWarningAsync("Попытка архивирования без выбора строк", "SetArchiveStatus_Internal");
+                    return;
                 }
 
                 var selectedItems = new List<ArtNormN>();
@@ -1537,14 +1531,14 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void layoutControlGroupPreArch_CustomButtonClick(object sender, BaseButtonEventArgs e)
+        private async void layoutControlGroupPreArch_CustomButtonClick(object sender, BaseButtonEventArgs e)
         {
             var tag = (e.Button as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton)?.Tag as string;
             switch (tag)
             {
                 case "prearch:archive":
                     {
-                        Arch(sender, e);
+                        await Arch(sender, e);
                         break;
                     }
             }
@@ -1556,10 +1550,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             int rowNumber = ANNgridView.FocusedRowHandle;
 
+            var selectedAnn = ANNgridView.GetRow(rowNumber) as ArtNormN;
+            if (selectedAnn == null) return;
+
             NormRaszForEconomist report1 = new NormRaszForEconomist();
             //report1.RequestParameters = false;
-            var selectedAnn = ANNgridView.GetRow(rowNumber) as ArtNormN;
-
             report1.Parameters["_annId"].Value = selectedAnn.AnnID;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();

@@ -12,16 +12,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 {
     public partial class TeamWork
     {
-        private void CancelAllLoads()
-        {
-            try
-            {
-                var old = Interlocked.Exchange(ref _loadCts, new CancellationTokenSource());
-                old?.Cancel();
-                old?.Dispose();
-            }
-            catch (Exception ex) { Debug.WriteLine(ex.Message); }
-        }
+        private void CancelAllLoads() => _presenter.CancelAllLoads();
 
         private void ModeRadio_CheckedChanged(object sender, EventArgs e)
         {
@@ -199,13 +190,16 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        // Открыть журнал изменений разделения труда (art_norm_n_updLog) для выбранного AnnID
-        // Источник лога: ANN
-        private void customSimpleButtonAnnLog_Click(object sender, EventArgs e)
+        private void customSimpleButtonAnnLog_Click(object sender, EventArgs e) =>
+            OpenLogForm(LogSourceType.Ann);
+
+        private void customSimpleButtonRaszLog_Click(object sender, EventArgs e) =>
+            OpenLogForm(LogSourceType.Rasz);
+
+        private void OpenLogForm(LogSourceType sourceType)
         {
             try
             {
-                // Получаем AnnID из текущей строки основного грида
                 int annId = 0;
                 if (ANNgridView != null && ANNgridView.FocusedRowHandle >= 0)
                 {
@@ -213,69 +207,19 @@ namespace SewingProduction.Features.TeamWork.Forms
                     annId = row?.AnnID ?? 0;
                 }
 
-                // Открываем форму лога, передавая AnnID и тип источника (ANN)
-                var logForm = annId > 0 ? new Log(annId, LogSourceType.Ann) : new Log();
+                var logForm = annId > 0 ? new Log(annId, sourceType) : new Log();
                 logForm.StartPosition = FormStartPosition.CenterParent;
                 logForm.Show(this);
             }
             catch (Exception ex)
             {
-                _logger?.LogErrorAsync(ex, "Ошибка при открытии формы AnnLog");
+                _logger?.LogErrorAsync(ex, $"Ошибка при открытии журнала {sourceType}");
                 MessageBox.Show($"Не удалось открыть журнал: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        // Открыть журнал изменений норм раскроя (norm_rasz_updLog) для выбранного AnnID
-        // Источник лога: RASZ
-        private void customSimpleButtonRaszLog_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Получаем AnnID из текущей строки основного грида
-                int annId = 0;
-                if (ANNgridView != null && ANNgridView.FocusedRowHandle >= 0)
-                {
-                    var row = ANNgridView.GetRow(ANNgridView.FocusedRowHandle) as ArtNormN;
-                    annId = row?.AnnID ?? 0;
-                }
+        private CancellationToken StartNewLoadToken() => _presenter.StartNewLoad();
 
-                // Открываем форму лога, передавая AnnID и тип источника (RASZ)
-                var logForm = annId > 0 ? new Log(annId, LogSourceType.Rasz) : new Log();
-                logForm.StartPosition = FormStartPosition.CenterParent;
-                logForm.Show(this);
-            }
-            catch (Exception ex)
-            {
-                _logger?.LogErrorAsync(ex, "Ошибка при открытии формы AnnLog");
-                MessageBox.Show($"Не удалось открыть журнал: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        /// <summary>Начинаем новую загрузку: отменяем старую, создаем новый CTS и возвращаем токен</summary>
-        private CancellationToken StartNewLoadToken()
-        {
-            var old = Interlocked.Exchange(ref _loadCts, new CancellationTokenSource());
-            if (old != null)
-            {
-                try { old.Cancel(); }
-                catch { /* игнор */ }
-                finally { old.Dispose(); }
-            }
-
-            return _loadCts.Token;
-        }
-
-        /// Вызываем, когда надо просто грохнуть текущую загрузку
-        /// (смена вкладки, закрытие формы и т.п.)
-        private void CancelCurrentLoad()
-        {
-            var old = Interlocked.Exchange(ref _loadCts, null);
-            if (old != null)
-            {
-                try { old.Cancel(); }
-                catch { /* игнор */ }
-                finally { old.Dispose(); }
-            }
-        }
+        private void CancelCurrentLoad() => _presenter.CancelCurrentLoad();
     }
 }

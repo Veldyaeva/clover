@@ -27,14 +27,7 @@ namespace SewingProduction.Services
         public static int BufferId
         {
             get => _bufferId;
-            private set
-            {
-                if (_bufferId != value)
-                {
-                    _bufferId = value;
-                    OnBufferChanged();
-                }
-            }
+            private set => _bufferId = value;
         }
 
         /// <summary>
@@ -51,14 +44,7 @@ namespace SewingProduction.Services
         public static string BufferText
         {
             get => _bufferText;
-            private set
-            {
-                if (_bufferText != value)
-                {
-                    _bufferText = value;
-                    OnBufferChanged();
-                }
-            }
+            private set => _bufferText = value;
         }
 
         /// <summary>
@@ -67,11 +53,7 @@ namespace SewingProduction.Services
         public static ArtNormN BufferData
         {
             get => _bufferData;
-            private set
-            {
-                _bufferData = value;
-                OnBufferChanged();
-            }
+            private set => _bufferData = value;
         }
 
         /// <summary>
@@ -116,8 +98,8 @@ namespace SewingProduction.Services
             _bufferIds.AddRange(ids);
             BufferId = ids.FirstOrDefault();
             BufferText = displayText;
-            // Создаем клон данных вместо сохранения прямой ссылки для избежания проблем
             BufferData = data?.Clone();
+            OnBufferChanged();
         }
 
         /// <summary>
@@ -129,6 +111,7 @@ namespace SewingProduction.Services
             BufferId = 0;
             BufferText = string.Empty;
             BufferData = null;
+            OnBufferChanged();
         }
 
         /// <summary>

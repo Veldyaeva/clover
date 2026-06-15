@@ -178,19 +178,40 @@ namespace SewingProduction.Core.Class.Settings
 
         private static AppSettings Load()
         {
-            if (File.Exists(SettingsPath))
+            if (!File.Exists(SettingsPath))
+                return new AppSettings();
+
+            try
             {
-                try
-                {
-                    var json = File.ReadAllText(SettingsPath);
-                    return JsonConvert.DeserializeObject<AppSettings>(json) ?? new AppSettings();
-                }
-                catch
-                {
-                    return new AppSettings();
-                }
+                var json = File.ReadAllText(SettingsPath);
+                return JsonConvert.DeserializeObject<AppSettings>(json) ?? new AppSettings();
             }
-            return new AppSettings();
+            catch (Exception ex)
+            {
+                TryBackupCorruptedSettings();
+                System.Windows.Forms.MessageBox.Show(
+                    $"Файл настроек повреждён и был сброшен.\n" +
+                    $"Резервная копия сохранена рядом с исходным файлом.\n\n" +
+                    $"Причина: {ex.Message}",
+                    "SewingProduction — настройки сброшены",
+                    System.Windows.Forms.MessageBoxButtons.OK,
+                    System.Windows.Forms.MessageBoxIcon.Warning);
+                return new AppSettings();
+            }
+        }
+
+        private static void TryBackupCorruptedSettings()
+        {
+            try
+            {
+                string stamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                string backupPath = SettingsPath + $".bak_{stamp}";
+                File.Copy(SettingsPath, backupPath, overwrite: true);
+            }
+            catch
+            {
+                // резервная копия не критична — продолжаем
+            }
         }
         public static void SetFontSize(int size)
         {

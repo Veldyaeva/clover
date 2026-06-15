@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using SewingProduction.Core.Helpers;
 
 namespace SewingProduction
 {
@@ -63,10 +64,7 @@ namespace SewingProduction
 
         private void LoadBackgroundImagesFromSettings()
         {
-            string settingsFolder = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "SewingProduction",
-                "SplashImages");
+            string settingsFolder = SplashImageStorage.GetCacheRoot();
 
             if (!Directory.Exists(settingsFolder))
             {
