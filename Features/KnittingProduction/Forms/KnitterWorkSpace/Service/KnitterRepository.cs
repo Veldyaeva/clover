@@ -650,6 +650,30 @@ ORDER BY kwsDateStart DESC";
 			}
 		}
 
+        public async Task<List<ShiftHistoryModel>> GetShiftsByTabAsync(int tab)
+        {
+            try
+            {
+                using var connection = _dbHelper.GetConnection();
+                const string sql = @"
+SELECT TOP 30
+    kwsID       AS KwsID,
+    kwsTabStart AS TabStart,
+    kwsDateStart AS DateStart,
+    kwsDateEnd   AS DateEnd
+FROM ACE.dbo.knitWorkingShiftNew
+WHERE kwsTabStart = @tab
+  AND kwsDateDel IS NULL
+ORDER BY kwsDateStart DESC";
+                var list = await connection.QueryAsync<ShiftHistoryModel>(sql, new { tab });
+                return list.AsList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"GetShiftsByTabAsync failed (tab={tab})", ex);
+            }
+        }
+
         public Task<IKnitterShiftTransaction> BeginShiftTransactionAsync()
         {
             var connection = _dbHelper.GetConnection();

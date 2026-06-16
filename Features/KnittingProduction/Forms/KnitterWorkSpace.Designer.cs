@@ -163,6 +163,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand25 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             gridBand26 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             bandedGridColumn32 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            shiftSelectorLookupEdit = new DevExpress.XtraEditors.GridLookUpEdit();
+            shiftSelectorView = new DevExpress.XtraGrid.Views.Grid.GridView();
+            layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)advBandedGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PlanZagrVyazGridControl).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bandedGridView3).BeginInit();
@@ -186,6 +189,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem10).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)shiftSelectorLookupEdit.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)shiftSelectorView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem11).BeginInit();
             SuspendLayout();
             // 
             // advBandedGridView1
@@ -936,6 +942,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             dataLayoutControl1.Controls.Add(TabGridLookUpEdit);
             dataLayoutControl1.Controls.Add(_adminToggle);
             dataLayoutControl1.Controls.Add(_expandNrToggle);
+            dataLayoutControl1.Controls.Add(shiftSelectorLookupEdit);
             dataLayoutControl1.Dock = DockStyle.Fill;
             dataLayoutControl1.Location = new System.Drawing.Point(0, 0);
             dataLayoutControl1.Name = "dataLayoutControl1";
@@ -1027,12 +1034,36 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _expandNrToggle.UseVisualStyleBackColor = true;
             _expandNrToggle.Visible = false;
             _expandNrToggle.CheckedChanged += ExpandNrToggle_CheckedChanged;
-            // 
+            //
+            // shiftSelectorView
+            //
+            shiftSelectorView.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            shiftSelectorView.Name = "shiftSelectorView";
+            shiftSelectorView.OptionsSelection.EnableAppearanceFocusedCell = false;
+            shiftSelectorView.OptionsView.ShowGroupPanel = false;
+            shiftSelectorView.OptionsView.ColumnAutoWidth = true;
+            //
+            // shiftSelectorLookupEdit
+            //
+            shiftSelectorLookupEdit.Location = new System.Drawing.Point(174, 60);
+            shiftSelectorLookupEdit.Name = "shiftSelectorLookupEdit";
+            shiftSelectorLookupEdit.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
+            shiftSelectorLookupEdit.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            shiftSelectorLookupEdit.Properties.Appearance.Options.UseFont = true;
+            shiftSelectorLookupEdit.Properties.DisplayMember = "DisplayText";
+            shiftSelectorLookupEdit.Properties.NullText = "[текущий режим]";
+            shiftSelectorLookupEdit.Properties.PopupView = shiftSelectorView;
+            shiftSelectorLookupEdit.Properties.ValueMember = "KwsID";
+            shiftSelectorLookupEdit.Size = new System.Drawing.Size(400, 26);
+            shiftSelectorLookupEdit.StyleController = dataLayoutControl1;
+            shiftSelectorLookupEdit.TabIndex = 9;
+            shiftSelectorLookupEdit.EditValueChanged += ShiftSelectorLookup_EditValueChanged;
+            //
             // Root
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, layoutControlItem3, layoutControlItem4, layoutControlItem9, layoutControlItem5, simpleLabelItem1, layoutControlGroup1, layoutControlItem8, layoutControlItem10 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, layoutControlItem3, layoutControlItem4, layoutControlItem9, layoutControlItem5, simpleLabelItem1, layoutControlGroup1, layoutControlItem8, layoutControlItem10, layoutControlItem11 });
             Root.Name = "Root";
             Root.Size = new System.Drawing.Size(1329, 617);
             Root.TextVisible = false;
@@ -1113,9 +1144,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             layoutControlGroup1.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Обновить", true, buttonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Свернуть всё", true, buttonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Показать всё", true, buttonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Свернуть до пачки", true, buttonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Показать всё", true, buttonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, false, null, -1) });
             layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1 });
-            layoutControlGroup1.Location = new System.Drawing.Point(0, 48);
+            layoutControlGroup1.Location = new System.Drawing.Point(0, 88);
             layoutControlGroup1.Name = "layoutControlGroup1";
-            layoutControlGroup1.Size = new System.Drawing.Size(1309, 549);
+            layoutControlGroup1.Size = new System.Drawing.Size(1309, 509);
             layoutControlGroup1.Text = " ";
             layoutControlGroup1.CustomButtonClick += layoutControlGroup1_CustomButtonClick;
             // 
@@ -1124,7 +1155,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem1.Control = PlanZagrVyazGridControl;
             layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(1285, 504);
+            layoutControlItem1.Size = new System.Drawing.Size(1285, 464);
             layoutControlItem1.TextVisible = false;
             // 
             // layoutControlItem8
@@ -1142,7 +1173,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem10.Name = "layoutControlItem10";
             layoutControlItem10.Size = new System.Drawing.Size(102, 24);
             layoutControlItem10.TextVisible = false;
-            // 
+            //
+            // layoutControlItem11
+            //
+            layoutControlItem11.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            layoutControlItem11.AppearanceItemCaption.Options.UseFont = true;
+            layoutControlItem11.Control = shiftSelectorLookupEdit;
+            layoutControlItem11.Location = new System.Drawing.Point(0, 48);
+            layoutControlItem11.Name = "layoutControlItem11";
+            layoutControlItem11.Size = new System.Drawing.Size(1309, 40);
+            layoutControlItem11.Text = "История смен";
+            layoutControlItem11.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
+            layoutControlItem11.TextSize = new System.Drawing.Size(120, 19);
+            layoutControlItem11.TextToControlDistance = 5;
+            //
             // gridBand20
             // 
             gridBand20.Caption = "gridBand20";
@@ -1436,6 +1480,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem10).EndInit();
+            ((System.ComponentModel.ISupportInitialize)shiftSelectorLookupEdit.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)shiftSelectorView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem11).EndInit();
             ResumeLayout(false);
         }
 
@@ -1543,6 +1590,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand33;
         private CheckBox _adminToggle;
         private CheckBox _expandNrToggle;
+        private DevExpress.XtraEditors.GridLookUpEdit shiftSelectorLookupEdit;
+        private DevExpress.XtraGrid.Views.Grid.GridView shiftSelectorView;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand57;
