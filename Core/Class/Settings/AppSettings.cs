@@ -328,6 +328,41 @@ namespace SewingProduction.Core.Class.Settings
                     throw new Exception($"Неизвестное имя строки подключения: '{dbKey}'");
             }
         }
+
+        public static string GetCurrentConnectionName()
+        {
+            var dbKey = GetSelectedDatabase();
+
+            switch (dbKey.ToLower())
+            {
+                case "ace":
+                case "aceconnectionstring":
+                    return "SewingProduction.Properties.Settings.ACEConnectionString";
+
+                case "ace_test":
+                case "acetestconnectionstring":
+                    return "SewingProduction.Properties.Settings.ACEtestConnectionString";
+
+                case "ace_backup":
+                case "acebackupconnectionstring":
+                    return "SewingProduction.Properties.Settings.ACEbackupConnectionString";
+
+                case "ace_backup_new":
+                case "acebackupnewconnectionstring":
+                    return "SewingProduction.Properties.Settings.ACEbackupnewConnectionString";
+
+                case "oms":
+                case "omsconnectionstring":
+                    return "SewingProduction.Properties.Settings.OMSConnectionString";
+
+                case "global":
+                case "globalconnectionstring":
+                    return "SewingProduction.Properties.Settings.GlobalConnectionString";
+
+                default:
+                    return "SewingProduction.Properties.Settings.ACEConnectionString";
+            }
+        }
         #endregion
         #region ServiceBroker
         public static ServiceBrokerSettings GetServiceBrokerSettings()
