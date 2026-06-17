@@ -37,5 +37,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         public Task<(int? shiftId, int? tabStart, DateTime? dateStart)> GetOpenShiftByZoneAsync(int kmaId) => _uiGateway.GetOpenShiftByZoneAsync(kmaId);
 
         public Task<List<ShiftHistoryModel>> GetShiftsByTabAsync(int tab) => _uiGateway.GetShiftsByTabAsync(tab);
+
+        public Task<List<ShiftHistoryModel>> GetShiftsByKmaAsync(int kmaId) => _uiGateway.GetShiftsByKmaAsync(kmaId);
     }
 }

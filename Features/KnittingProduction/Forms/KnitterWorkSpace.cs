@@ -163,7 +163,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private DateTime _lastLocalShiftCloseSuppressUntilUtc;
 
         private int? _selectedHistoricalShiftId;
-        private bool IsHistoryMode => _selectedHistoricalShiftId.HasValue;
+        private int? _historyPreviousTab;
+        private bool IsHistoryMode => _selectedHistoricalShiftId.HasValue && _selectedHistoricalShiftId != _currentShiftId;
 
         /// <summary>
         /// Флаг активной смены.
@@ -274,72 +275,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 SetupIdleTimer();
                 SetupShiftTimer();
                 _gridVisualService.Initialize();
-                SetupRowStyling();
-                bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
-                advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
-                bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
-                ConfigureShiftSelectorView();
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(this, $"Ошибка инициализации формы: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                LogError(ex, "Ctor.UserClass");
-            }
-        }
-
-        /// <summary>
-        /// Вариант конструктора с внедрением зависимостей (DI).
-        /// </summary>
-        /// <param name="orchestrator">Оркестратор доменной логики.</param>
-        public KnitterWorkSpace(IKnitterOrchestrator orchestrator, IKnitterShiftGateway shiftWorkflowGateway)
-        {
-            try
-            {
-                System.Diagnostics.Debug.WriteLine("[KnitterWorkSpace] ctor(IKnitterOrchestrator, IKnitterShiftGateway) start");
-                InitializeComponent();
-                _sbController = new ServiceBrokerController(this);
-                _sbHub = AppServices.Services.GetRequiredService<IAppServiceBrokerHub>();
-                _pzvActionValidator = new PzvActionValidator(new DatabaseHelperSQL());
-                _orchestrator = orchestrator ?? throw new ArgumentNullException(nameof(orchestrator));
-                _workSpaceService = new KnitterWorkSpaceService(shiftWorkflowGateway ?? throw new ArgumentNullException(nameof(shiftWorkflowGateway)), _logger);
-                InitServiceBrokerIgnoredTables();
-                _planFocusService = new KnitterPlanFocusService(this, PlanZagrVyazGridControl, bandedGridView3);
-                _gridVisualService = new KnitterGridVisualService(
-                    bandedGridView3,
-                    advBandedGridView1,
-                    gridColumn8,
-                    () => _planPresenter.AllRows ?? Array.Empty<KnitterPZVModel>(),
-                    LogError);
-                _blinkController = new KnitterBlinkController(simpleButton2);
-                _idleSplashController = new KnitterIdleSplashController(
-                    this,
-                    this,
-                    dataLayoutControl1,
-                    () => int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tab) ? tab : (int?)null,
-                    tab =>
-                    {
-                        FioGridLookUpEdit.EditValue = tab;
-                        TabGridLookUpEdit.EditValue = tab;
-                    },
-                    Close,
-                    LogWarning);
-                dataLayoutControl1.DataSource = _planBindingSource;
-                PlanZagrVyazGridControl.DataSource = _planBindingSource;
-                // Детализация на втором уровне настраивается в Designer: advBandedGridView1 является шаблоном уровня "ArtNom"
-                this.Load += async (s, e) =>
-                {
-                    System.Diagnostics.Debug.WriteLine("[KnitterWorkSpace] Load event start");
-                    await InitializeAsync();
-                    _sbCts = new CancellationTokenSource();
-                    await InitServiceBrokerAsync(_sbCts.Token);
-                    InitHeaderButtonTags();
-                };
-                this.FormClosing += KnitterWorkSpace_FormClosing;
-                SetupPzvDateStartColumn();
-                SetupIdleTimer();
-                SetupShiftTimer();
-                //InitAdminSettingsButton();
-                _gridVisualService.Initialize();
                 SetupBlinkTimers();
                 SetupRowStyling();
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
@@ -350,7 +285,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             catch (Exception ex)
             {
                 XtraMessageBox.Show(this, $"Ошибка инициализации формы: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                LogError(ex, "Ctor.OrchestratorAndShiftWorkflowGateway");
+                LogError(ex, "Ctor.UserClass");
             }
         }
 
@@ -1651,7 +1586,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private async void ExpandNrToggle_CheckedChanged(object sender, EventArgs e)
         {
-            await ReloadCurrentTabAsync();
+            if (IsHistoryMode)
+                ShiftSelectorLookup_EditValueChanged(shiftSelectorLookupEdit, EventArgs.Empty);
+            else
+                await ReloadCurrentTabAsync();
         }
 
         //private void InitAdminSettingsButton()
@@ -2140,6 +2078,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private async Task ReloadCurrentTabAsync()
         {
+            if (IsHistoryMode)
+            {
+                LogSuccess("Пропускаем перезагрузку — активен режим истории смены.", nameof(ReloadCurrentTabAsync));
+                return;
+            }
+
             if (int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tab) && tab > 0)
             {
                 await LoadPlanForTabAsync(tab, forceReload: true);
@@ -2623,6 +2567,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (!IsMatchingBrokerTable(tableName, KnitWorkingShiftTable))
                 return false;
 
+            if (IsHistoryMode)
+            {
+                LogSuccess("Пропускаем broker-обновление смены — активен режим истории.", nameof(HandleShiftBrokerUpdateAsync));
+                return true;
+            }
+
             if (_sbController.Helper?.IsMutedTable(KnitWorkingShiftTable) == true
                 || _sbController.Helper?.IsMutedTable(tableName) == true)
             {
@@ -2818,7 +2768,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
-                var shifts = await _orchestrator.GetShiftsByTabAsync(tab);
+                List<ShiftHistoryModel> shifts;
+                if (_currentKmaId.HasValue && _currentKmaId.Value > 0)
+                    shifts = await _orchestrator.GetShiftsByKmaAsync(_currentKmaId.Value);
+                else
+                    shifts = await _orchestrator.GetShiftsByTabAsync(tab);
+
                 shifts ??= new List<ShiftHistoryModel>();
 
                 shiftSelectorLookupEdit.EditValueChanged -= ShiftSelectorLookup_EditValueChanged;
@@ -2845,6 +2800,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private void ClearHistoryMode()
         {
             _selectedHistoricalShiftId = null;
+            RestoreHistoryFioTab();
 
             shiftSelectorLookupEdit.EditValueChanged -= ShiftSelectorLookup_EditValueChanged;
             try
@@ -2872,6 +2828,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     kwsId <= 0)
                 {
                     _selectedHistoricalShiftId = null;
+                    RestoreHistoryFioTab();
                     UpdateShiftDisplay();
                     simpleButton2.Enabled = true;
                     if (TryGetSelectedTab(out var tabCurrent))
@@ -2879,11 +2836,18 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     return;
                 }
 
-                _selectedHistoricalShiftId = kwsId;
-                simpleButton2.Enabled = false;
-
-                if (!TryGetSelectedTab(out var tab))
+                var shifts = shiftSelectorLookupEdit.Properties.DataSource as List<ShiftHistoryModel>;
+                var selectedShift = shifts?.FirstOrDefault(s => s.KwsID == kwsId);
+                int tab = selectedShift?.TabStart ?? 0;
+                if (tab <= 0 && !TryGetSelectedTab(out tab))
                     return;
+
+                _selectedHistoricalShiftId = kwsId;
+                simpleButton2.Enabled = _currentShiftId.HasValue && kwsId == _currentShiftId.Value;
+
+                // Обновляем FIO/таб на оператора исторической смены (без триггера событий)
+                if (selectedShift != null)
+                    ApplyHistoryFioTab(selectedShift.TabStart);
 
                 var plan = await _orchestrator.GetPlanByTabAsync(
                     tab,
@@ -2897,13 +2861,55 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 ApplyPlanToUi(tab, plan, focusSnap);
                 ApplyShiftEditMode(false);
 
-                var shifts = shiftSelectorLookupEdit.Properties.DataSource as List<ShiftHistoryModel>;
-                var selectedShift = shifts?.FirstOrDefault(s => s.KwsID == kwsId);
-                UpdateShiftInfoForHistoryMode(selectedShift, plan);
+                // Текущая смена — показываем обычный заголовок, историческая — «История #X ...»
+                if (kwsId == _currentShiftId.GetValueOrDefault())
+                    UpdateShiftDisplay();
+                else
+                    UpdateShiftInfoForHistoryMode(selectedShift, plan);
             }
             catch (Exception ex)
             {
                 LogError(ex, nameof(ShiftSelectorLookup_EditValueChanged));
+            }
+        }
+
+        private void ApplyHistoryFioTab(int tabStart)
+        {
+            if (!int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int currentTab) || currentTab != tabStart)
+            {
+                if (!_historyPreviousTab.HasValue)
+                    _historyPreviousTab = currentTab > 0 ? currentTab : (int?)null;
+
+                FioGridLookUpEdit.EditValueChanged -= FioGridLookUpEdit_EditValueChanged;
+                try
+                {
+                    FioGridLookUpEdit.EditValue = tabStart;
+                    TabGridLookUpEdit.EditValue = tabStart;
+                }
+                finally
+                {
+                    FioGridLookUpEdit.EditValueChanged += FioGridLookUpEdit_EditValueChanged;
+                }
+            }
+        }
+
+        private void RestoreHistoryFioTab()
+        {
+            if (!_historyPreviousTab.HasValue)
+                return;
+
+            int restoreTab = _historyPreviousTab.Value;
+            _historyPreviousTab = null;
+
+            FioGridLookUpEdit.EditValueChanged -= FioGridLookUpEdit_EditValueChanged;
+            try
+            {
+                FioGridLookUpEdit.EditValue = restoreTab;
+                TabGridLookUpEdit.EditValue = restoreTab;
+            }
+            finally
+            {
+                FioGridLookUpEdit.EditValueChanged += FioGridLookUpEdit_EditValueChanged;
             }
         }
 

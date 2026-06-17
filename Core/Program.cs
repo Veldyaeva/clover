@@ -339,7 +339,6 @@ namespace SewingProduction.Core
             services.AddTransient<IKnitterWorkSpaceUiGateway, KnitterRepository>();
             services.AddTransient<IKnitterShiftGateway, KnitterRepository>();
             services.AddTransient<IKnitterOrchestrator, KnitterOrchestrator>();
-            services.AddTransient<KnitterWorkSpace>();
         }
         private static void SetIEFeatureMode()
         {

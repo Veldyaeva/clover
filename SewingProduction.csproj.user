@@ -13,6 +13,9 @@
     <Compile Update="Core\Class\CustomControls\CustomBarManager.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomGridLookUpEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Core\Class\CustomControls\CustomLayoutControl.cs">
       <SubType>Component</SubType>
     </Compile>
