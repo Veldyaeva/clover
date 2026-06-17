@@ -621,7 +621,8 @@ namespace SewingProduction.Features.Articul.Forms
 
             var expectedGostGroupName = _gostGroupAll?
                 .FirstOrDefault(x => x.Ag_id == matrixRow.Ag_id)?
-                .Ag_name_sokr;
+                .N_i;
+                //.Ag_name_sokr;
 
             return compareItems
                 .Select(item => string.Equals(item.PropertyName, nameof(SpArticulPreviewModel.Ag_id), StringComparison.OrdinalIgnoreCase)

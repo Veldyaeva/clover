@@ -155,7 +155,7 @@ namespace SewingProduction.Features.Articul.Models
         public DateTime? DateCertificationApproval { get; set; }
         [NotMapped] public string Unic_IdGost_idAg { get => $"{Ag_id}|{Id_gost}";
             set
-            {
+            {// уникальное поле для поиска гост + группа по госту
                 if (string.IsNullOrWhiteSpace(value))
                     return;
 
@@ -167,7 +167,7 @@ namespace SewingProduction.Features.Articul.Models
 
                 if (int.TryParse(parts[1], out int idGost))
                     Id_gost = idGost;
-            } // уникальное поле для поиска гост + группа по госту
+            } 
         }
     }
 }

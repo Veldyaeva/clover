@@ -21,7 +21,7 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using BindingSource = System.Windows.Forms.BindingSource;
 using ToolTip = System.Windows.Forms.ToolTip;
-
+using System.Reflection;
 
 namespace SewingProduction.Features.Articul.Forms
 {
@@ -227,7 +227,10 @@ namespace SewingProduction.Features.Articul.Forms
 
         private async void btnAccept_Click(object sender, EventArgs e)
         {
-            var validator = new AppendArticulValidator(_bindingSourceArticul.Current as SpArticulPreviewModel);
+            var curRowSpArt = _bindingSourceArticul.Current as SpArticulPreviewModel;
+
+
+            var validator = new AppendArticulValidator(curRowSpArt);
             try
             {
             var canLink = await validator.checkBeforPublish();
@@ -251,6 +254,11 @@ namespace SewingProduction.Features.Articul.Forms
 
                 }
             }
+            
+               
+                 ApplyAcceptableMismatches(curRowSpArt, _comparisonResult);
+               
+                _bindingSourceArticul.ResetBindings(false);
 
                 if (canLink.IsSuccess)
                 {
@@ -272,7 +280,36 @@ namespace SewingProduction.Features.Articul.Forms
             }
             
         }
+        //считывает расхождения из comparisonResult и записывает значения в модель
+        private static void ApplyAcceptableMismatches<TModel>(
+                TModel model,
+                ComparisonResult comparisonResult)
+                where TModel : class
+        {
+            if (model == null)
+                throw new ArgumentNullException(nameof(model));
 
+            if (comparisonResult == null)
+                throw new ArgumentNullException(nameof(comparisonResult));
+
+            foreach (FieldMismatch mismatch in comparisonResult.AcceptableMismatches)
+            {
+                PropertyInfo? property = typeof(TModel).GetProperty(
+                    mismatch.DatabasePropertyName,
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.IgnoreCase);
+
+                if (property == null)
+                    continue;
+
+                if (!property.CanWrite)
+                    continue;
+
+                object? value = mismatch.DatabaseValue;
+                property.SetValue(model, value);
+
+            }
+        }
+       
         public void HighlightMismatches(Control parent,IEnumerable<FieldMismatch> mismatches)
         {
             var mismatchMap = mismatches
