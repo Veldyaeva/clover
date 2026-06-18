@@ -33,10 +33,15 @@ namespace SewingProduction.Features.Articul.Service
 
                 foreach (var item in expectedItems)
                 {
-                    var prop = modelType.GetProperty(item.PropertyName);
+                    //var prop = modelType.GetProperty(item.PropertyName);
+                    var prop = modelType.GetProperty(item.EffectivePropertyName);
                     if (prop == null)
                         continue;
                     var actual = prop.GetValue(actualModel);
+
+                    //var databaseprop = modelType.GetProperty(item.EffectivePropertyName);
+
+                    //var databaseactual = databaseprop.GetValue(actualModel);
 
                     if (AreEqualWithRules(item, actual, item.ExpectedValue))
                         continue;
@@ -46,7 +51,8 @@ namespace SewingProduction.Features.Articul.Service
                         PropertyName = item.PropertyName,
                         ActualValue = actual,
                         ExpectedValue = item.ExpectedValue,
-                        ExpectedDisplayValue = item.ExpectedDisplayValue ?? item.ExpectedValue,
+                        ExpectedDisplayValue = item.EffectiveExpectedValue,
+                        DatabasePropertyName = item.EffectivePropertyName,
                         Control = null // Здесь можно добавить логику для определения связанного UI-контрола, если необходимо
                     };
 
@@ -116,7 +122,7 @@ namespace SewingProduction.Features.Articul.Service
 
         private static bool AreEqualWithRules(FieldComparisonItem item, object? left, object? right)
         {
-            if (string.Equals(item.PropertyName, nameof(SpArticulPreviewModel.Articul), StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(item.EffectivePropertyName, nameof(SpArticulPreviewModel.Articul), StringComparison.OrdinalIgnoreCase))
             {
                 // в матрице заполнен "повторный артикул" — сравниваем строго 
                 if (item.FullMatch)
@@ -202,10 +208,19 @@ namespace SewingProduction.Features.Articul.Service
     public sealed class FieldComparisonItem
     {
         public string PropertyName { get; init; } = "";
+        //public object? ExpectedValue { get; init; }
         public object? ExpectedValue { get; init; }
         public object? ExpectedDisplayValue { get; init; }
         public string? DisplayName { get; init; }
         public bool FullMatch { get; init; }
+        //реальное поле таблицы sp_articul
+        public string? DatabasePropertyName { get; init; }
+        public object? DatabaseValue { get; init; }
+
+        //если реальное поле совпадает с именем PropertyName, то можно не указывать DatabasePropertyName, а пользоваться EffectivePropertyName
+        public string EffectivePropertyName => DatabasePropertyName ?? PropertyName;
+
+        public object EffectiveExpectedValue => ExpectedDisplayValue ?? ExpectedValue;
     }
 
     public sealed class FieldMismatch
@@ -215,6 +230,8 @@ namespace SewingProduction.Features.Articul.Service
         public object? ExpectedDisplayValue { get; init; }
         public object? ActualValue { get; init; }
         public Control? Control { get; init; }
+        public string DatabasePropertyName { get; init; }
+
     }
 
     public sealed class ComparisonResult
@@ -253,7 +270,7 @@ namespace SewingProduction.Features.Articul.Service
                     PropertyName = nameof(SpArticulPreviewModel.Articul),
                     ExpectedValue = string.IsNullOrWhiteSpace(row.RepeatArticle) ? row.Articul : row.RepeatArticle,
                     DisplayName = string.IsNullOrWhiteSpace(row.RepeatArticle) ? "Артикул" : "Артикул (повторный)",
-                    FullMatch = !string.IsNullOrWhiteSpace(row.RepeatArticle),
+                    FullMatch = !string.IsNullOrWhiteSpace(row.RepeatArticle)
                 },
                 new()
                 {
@@ -264,7 +281,7 @@ namespace SewingProduction.Features.Articul.Service
                 new()
                 {
                     PropertyName = nameof(SpArticulPreviewModel.TmName),
-                    ExpectedValue = row.Tm_name,
+                    ExpectedValue = row.TmName,
                     DisplayName = "ТМ"
                 },
                 new()
@@ -276,21 +293,32 @@ namespace SewingProduction.Features.Articul.Service
                 new()
                 {
                     PropertyName = nameof(SpArticulPreviewModel.SeasonName),
-                    ExpectedValue = row.Tsn_name,
-                    DisplayName = "Сезон"
+                    ExpectedValue = row.Baza,
+                    ExpectedDisplayValue = row.SeasonName,
+                    DisplayName = "Сезон",
+                    DatabasePropertyName = nameof(SpArticulPreviewModel.Baza),
+                    DatabaseValue = row.Baza
+
                 },
                 new()
                 {
                     PropertyName = nameof(SpArticulPreviewModel.AssortName),
-                    ExpectedValue = row.AssortName, 
+                    ExpectedValue = row.AssortName,
                     DisplayName = "Ассортимент"
                 },
+                
+
                 new()
                 {
-                    PropertyName = nameof(SpArticulPreviewModel.Ag_id),
+                    PropertyName = nameof(SpArticulPreviewModel.Grup),
                     ExpectedValue = row.Ag_id,
-                    DisplayName = "Группа"
+                    ExpectedDisplayValue = row.Grup,
+                    DisplayName = "Группа",
+                    DatabasePropertyName = nameof(SpArticulPreviewModel.Ag_id),
+                    DatabaseValue = row.Ag_id
+
                 },
+
                 new()
                 {
                     PropertyName = nameof(SpArticulPreviewModel.GrupMenName),
