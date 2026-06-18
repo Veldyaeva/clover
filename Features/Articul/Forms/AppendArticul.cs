@@ -295,7 +295,7 @@ namespace SewingProduction.Features.Articul.Forms
             foreach (FieldMismatch mismatch in comparisonResult.AcceptableMismatches)
             {
                 PropertyInfo? property = typeof(TModel).GetProperty(
-                    mismatch.DatabasePropertyName,
+                    mismatch.DatabasePropertyName ,
                     BindingFlags.Instance | BindingFlags.Public | BindingFlags.IgnoreCase);
 
                 if (property == null)
@@ -304,7 +304,7 @@ namespace SewingProduction.Features.Articul.Forms
                 if (!property.CanWrite)
                     continue;
 
-                object? value = mismatch.DatabaseValue;
+                object? value = mismatch.ExpectedValue;
                 property.SetValue(model, value);
 
             }

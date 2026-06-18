@@ -36,10 +36,12 @@ namespace SewingProduction.Features.Articul.Models
         /// <summary>
         /// сезон
         /// </summary>
-        public string Tsn_name { get; set; }
+        public string SeasonName { get; set; }
         /// <summary>
         /// товарная группа
         /// </summary>
+        ///
+
         public int Men_int { get; set; }
         /// <summary>
         /// идентификатор сезона
@@ -63,14 +65,15 @@ namespace SewingProduction.Features.Articul.Models
         public string Articul { get; set; }
         public string MatrixGrupName { get; set; }
         public DateTime? DatePublic { get; set; }
-        /// <summary>
-        /// торговая марка
-        /// </summary>
-        public string Tm_name { get; set; }
+       
         /// <summary>
         /// Торговая марка (*, -, +, , 5)
         /// </summary>
         public string Kle {  get; set; }
+        /// <summary>
+        /// Товарная марка
+        /// </summary>
+        public string TmName { get; set; }
         /// <summary>
         /// группа
         /// </summary>
