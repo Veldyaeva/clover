@@ -79,9 +79,6 @@
     <Compile Update="Features\Articul\Forms\ArticulControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Features\Articul\Forms\ArticulControl.EditMode.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="Features\Articul\Forms\ArticulEditAdvance.cs">
       <SubType>Form</SubType>
     </Compile>

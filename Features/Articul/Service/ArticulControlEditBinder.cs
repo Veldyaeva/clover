@@ -29,6 +29,7 @@ namespace SewingProduction.Features.Articul.Service
         private readonly SearchLookUpEdit _lookUpGostGrup;
         private readonly TextEdit _txbIdGost;
         private readonly MemoEdit _txbOpiGost;
+        private readonly TextEdit _txbPo;
         private readonly BindingSource _gostGrupSource;
 
         private BindingSource? _dataSource;
@@ -45,6 +46,7 @@ namespace SewingProduction.Features.Articul.Service
             SearchLookUpEdit lookUpGostGrup,
             TextEdit txbIdGost,
             MemoEdit txbOpiGost,
+            TextEdit txbPo,
             BindingSource gostGrupSource)
         {
             _cbTm = cbTm ?? throw new ArgumentNullException(nameof(cbTm));
@@ -57,6 +59,7 @@ namespace SewingProduction.Features.Articul.Service
             _lookUpGostGrup = lookUpGostGrup ?? throw new ArgumentNullException(nameof(lookUpGostGrup));
             _txbIdGost = txbIdGost ?? throw new ArgumentNullException(nameof(txbIdGost));
             _txbOpiGost = txbOpiGost ?? throw new ArgumentNullException(nameof(txbOpiGost));
+            _txbPo = txbPo ?? throw new ArgumentNullException(nameof(txbPo));
             _gostGrupSource = gostGrupSource ?? throw new ArgumentNullException(nameof(gostGrupSource));
         }
 
@@ -85,6 +88,7 @@ namespace SewingProduction.Features.Articul.Service
             map[_cbTkan] = modelType.GetProperty(nameof(ArticulModel.Tkb))!;
             map[_lookUpGost] = modelType.GetProperty(nameof(ArticulModel.Id_gost))!;
             map[_lookUpGostGrup] = modelType.GetProperty(nameof(ArticulModel.Ag_id))!;
+            map[_txbPo] = modelType.GetProperty(nameof(ArticulModel.Po))!;
         }
 
         public void WireCascadeEvents(BindingSource dataSource)
@@ -127,6 +131,7 @@ namespace SewingProduction.Features.Articul.Service
                 [nameof(ArticulModel.Tkb)] = _cbTkan,
                 [nameof(ArticulModel.Id_gost)] = _lookUpGost,
                 [nameof(ArticulModel.Ag_id)] = _lookUpGostGrup,
+                [nameof(ArticulModel.Po)] = _txbPo,
             };
         }
 

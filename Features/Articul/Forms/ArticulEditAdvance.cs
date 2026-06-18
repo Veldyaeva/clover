@@ -152,8 +152,8 @@ namespace SewingProduction.Features.Articul.Forms
             BindGostRazm();
 
             // view_sp_articul_all не включает po — восполняем из _bindingSourceArtKod.
-            // После этого _currentModel.Po является единственным источником истины:
-            // его читают txbPo (через биндинг) и IsSingleCodeEditMode.
+            // В группе po делит изделия на отдельные коды: если po заполнено,
+            // дальше редактирование ограничивается выбранной po.
             if (string.IsNullOrWhiteSpace(_currentModel?.Po))
             {
                 var po = _bindingSourceArtKod.List.OfType<ArticulModel>()
@@ -163,7 +163,7 @@ namespace SewingProduction.Features.Articul.Forms
                     _currentModel!.Po = po;
             }
 
-            // Фильтр грида: при наличии пометки — только коды с этой пометкой,
+            // Фильтр грида: при наличии пометки — только код этой пометки,
             // иначе — все не-удалённые коды группы.
             ApplyRazmFilter();
 
@@ -849,7 +849,7 @@ namespace SewingProduction.Features.Articul.Forms
         }
 
         /// <summary>
-        /// Пометка на конкретном коде: сохраняем только его, не распространяя на группу.
+        /// Пометка po делит группу: сохраняем только код выбранной пометки.
         /// </summary>
         private bool IsSingleCodeEditMode()
             => !string.IsNullOrWhiteSpace(_currentModel?.Po);
@@ -865,25 +865,22 @@ namespace SewingProduction.Features.Articul.Forms
         {
             var items = _bindingSourceArtKod.List.OfType<ArticulModel>();
             if (IsSingleCodeEditMode())
-                items = items.Where(IsSelectedSingleCode);
+                items = items.Where(IsSelectedPoCode);
             return items.Any(x => x?.IsModified == true || x?.IsNew == true || x?.IsDeleted == true);
         }
 
         /// <summary>
         /// Устанавливает фильтр грида размеров:
-        /// при наличии пометки — только коды этой пометки, иначе — все не-удалённые.
+        /// при наличии пометки — только код этой пометки, иначе — все не-удалённые.
         /// </summary>
         private void ApplyRazmFilter()
         {
             if (IsSingleCodeEditMode())
             {
-                var selectedKod = GetSelectedKod();
                 gridViewEditAdvRazm.ActiveFilterCriteria =
                     DevExpress.Data.Filtering.CriteriaOperator.And(
                         new DevExpress.Data.Filtering.BinaryOperator("IsDeleted", false),
-                        !string.IsNullOrWhiteSpace(selectedKod)
-                            ? BuildTrimEqualsCriteria(nameof(ArticulModel.Kod), selectedKod)
-                            : BuildTrimEqualsCriteria(nameof(ArticulModel.Po), _currentModel!.Po));
+                        BuildTrimEqualsCriteria(nameof(ArticulModel.Po), _currentModel!.Po));
             }
             else
             {
@@ -901,14 +898,8 @@ namespace SewingProduction.Features.Articul.Forms
                 DevExpress.Data.Filtering.BinaryOperatorType.Equal);
         }
 
-        private bool IsSelectedSingleCode(ArticulModel item)
-        {
-            var selectedKod = GetSelectedKod();
-            if (!string.IsNullOrWhiteSpace(selectedKod))
-                return KodMatches(item.Kod, selectedKod);
-
-            return PoMatches(item.Po, _currentModel?.Po);
-        }
+        private bool IsSelectedPoCode(ArticulModel item)
+            => PoMatches(item.Po, _currentModel?.Po);
 
         private static bool KodMatches(string? itemKod, string? selectedKod)
             => string.Equals(itemKod?.Trim(), selectedKod?.Trim(), StringComparison.OrdinalIgnoreCase);
@@ -975,9 +966,8 @@ namespace SewingProduction.Features.Articul.Forms
                 {
                     var item = (ArticulModel)_bindingSourceArtKod[i];
 
-                    // Если на коде стоит пометка — сохраняем только его,
-                    // не распространяя изменения на коды с другой пометкой.
-                    if (singleMode && !IsSelectedSingleCode(item))
+                    // Если группа разделена пометками — сохраняем только выбранную po.
+                    if (singleMode && !IsSelectedPoCode(item))
                         continue;
 
                     var newItem = ObjectCloneHelper.CloneWithExclusions(_currentModel, clone =>
