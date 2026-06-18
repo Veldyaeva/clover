@@ -148,11 +148,27 @@ namespace SewingProduction.Features.Articul.Forms
             //доступ на определенную колонку
             //gridEditAdRazm.InitializeAccess(_user, this.Name, new List<string> { "view_sp_articul" });
 
-            //фильтр на удаленные записи
-            gridViewEditAdvRazm.ActiveFilterString = "[IsDeleted] = false";
-
             await InitializeBindingsAsync();
             BindGostRazm();
+
+            // view_sp_articul_all не включает po — восполняем из _bindingSourceArtKod.
+            // После этого _currentModel.Po является единственным источником истины:
+            // его читают txbPo (через биндинг) и IsSingleCodeEditMode.
+            if (string.IsNullOrWhiteSpace(_currentModel?.Po))
+            {
+                var po = _bindingSourceArtKod.List.OfType<ArticulModel>()
+                    .FirstOrDefault(x => KodMatches(x.Kod, GetSelectedKod()))
+                    ?.Po;
+                if (!string.IsNullOrWhiteSpace(po))
+                    _currentModel!.Po = po;
+            }
+
+            // Фильтр грида: при наличии пометки — только коды с этой пометкой,
+            // иначе — все не-удалённые коды группы.
+            ApplyRazmFilter();
+
+            if (IsSingleCodeEditMode())
+                this.Text += $"  [по: {_currentModel!.Po.Trim()}]";
 
             await CheckStatusAsync();
 
@@ -349,7 +365,7 @@ namespace SewingProduction.Features.Articul.Forms
             try
             {
                 //загрузка перечня кодов из справочника общая информация
-                _bindingSourceArtCommon.DataSource = await _articulEdAdvDataService.GetCommonArtByKoddAsync(this._kodd);
+                _bindingSourceArtCommon.DataSource = await _articulEdAdvDataService.GetCommonArtByKoddAsync(this._kodd, _kod);
                 //пересчет при смене значений в модели
                 WireModelOnce();
 
@@ -832,12 +848,73 @@ namespace SewingProduction.Features.Articul.Forms
             return false;
         }
 
+        /// <summary>
+        /// Пометка на конкретном коде: сохраняем только его, не распространяя на группу.
+        /// </summary>
+        private bool IsSingleCodeEditMode()
+            => !string.IsNullOrWhiteSpace(_currentModel?.Po);
+
+        private string GetSelectedKod()
+        {
+            return !string.IsNullOrWhiteSpace(_kod)
+                ? _kod
+                : _currentModel?.Kod;
+        }
+
         private bool HasRazmChanges()
         {
-            return _bindingSourceArtKod.List
-                .OfType<ArticulModel>()
-                .Any(x => x?.IsModified == true || x?.IsNew == true || x?.IsDeleted == true);
+            var items = _bindingSourceArtKod.List.OfType<ArticulModel>();
+            if (IsSingleCodeEditMode())
+                items = items.Where(IsSelectedSingleCode);
+            return items.Any(x => x?.IsModified == true || x?.IsNew == true || x?.IsDeleted == true);
         }
+
+        /// <summary>
+        /// Устанавливает фильтр грида размеров:
+        /// при наличии пометки — только коды этой пометки, иначе — все не-удалённые.
+        /// </summary>
+        private void ApplyRazmFilter()
+        {
+            if (IsSingleCodeEditMode())
+            {
+                var selectedKod = GetSelectedKod();
+                gridViewEditAdvRazm.ActiveFilterCriteria =
+                    DevExpress.Data.Filtering.CriteriaOperator.And(
+                        new DevExpress.Data.Filtering.BinaryOperator("IsDeleted", false),
+                        !string.IsNullOrWhiteSpace(selectedKod)
+                            ? BuildTrimEqualsCriteria(nameof(ArticulModel.Kod), selectedKod)
+                            : BuildTrimEqualsCriteria(nameof(ArticulModel.Po), _currentModel!.Po));
+            }
+            else
+            {
+                gridViewEditAdvRazm.ActiveFilterString = "[IsDeleted] = false";
+            }
+        }
+
+        private static DevExpress.Data.Filtering.CriteriaOperator BuildTrimEqualsCriteria(string propertyName, string value)
+        {
+            return new DevExpress.Data.Filtering.BinaryOperator(
+                new DevExpress.Data.Filtering.FunctionOperator(
+                    DevExpress.Data.Filtering.FunctionOperatorType.Trim,
+                    new DevExpress.Data.Filtering.OperandProperty(propertyName)),
+                new DevExpress.Data.Filtering.OperandValue(value?.Trim() ?? string.Empty),
+                DevExpress.Data.Filtering.BinaryOperatorType.Equal);
+        }
+
+        private bool IsSelectedSingleCode(ArticulModel item)
+        {
+            var selectedKod = GetSelectedKod();
+            if (!string.IsNullOrWhiteSpace(selectedKod))
+                return KodMatches(item.Kod, selectedKod);
+
+            return PoMatches(item.Po, _currentModel?.Po);
+        }
+
+        private static bool KodMatches(string? itemKod, string? selectedKod)
+            => string.Equals(itemKod?.Trim(), selectedKod?.Trim(), StringComparison.OrdinalIgnoreCase);
+
+        private static bool PoMatches(string? itemPo, string? modelPo)
+            => string.Equals(itemPo?.Trim(), modelPo?.Trim(), StringComparison.Ordinal);
 
         private bool IsPropertyAllowedByPolicy(string propertyName)
         {
@@ -892,16 +969,22 @@ namespace SewingProduction.Features.Articul.Forms
                     return;
                 }
 
+                bool singleMode = IsSingleCodeEditMode();
+
                 for (int i = 0; i < _bindingSourceArtKod.Count; i++)
                 {
                     var item = (ArticulModel)_bindingSourceArtKod[i];
+
+                    // Если на коде стоит пометка — сохраняем только его,
+                    // не распространяя изменения на коды с другой пометкой.
+                    if (singleMode && !IsSelectedSingleCode(item))
+                        continue;
 
                     var newItem = ObjectCloneHelper.CloneWithExclusions(_currentModel, clone =>
                     {
                         clone.Kod = item.Kod;
                         clone.Razm = item.Razm;
                         clone.Po = item.Po;
-                        //если изменены общие данные или размер - помечаем на сохранение
                         clone.IsModified = (_currentModel.IsModified || item.IsModified);
                         clone.IsNew = item.IsNew;
                         clone.IsDeleted = item.IsDeleted;
@@ -1141,7 +1224,7 @@ namespace SewingProduction.Features.Articul.Forms
             if (row != null)
             {
                 row.IsNew = true;
-                row.Po = _currentModel.Po;
+                row.Po = _currentModel?.Po ?? string.Empty;
                 row.Ko = _currentModel.Ko;
             }
 

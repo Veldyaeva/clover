@@ -774,12 +774,14 @@ namespace SewingProduction.Features.Articul
                 LogWarning("Попытка редактирования без выбранного артикула.", nameof(EditArtciul));
                 return;
             }
-            var kodd = (bsPreview.Current as SpArtPreviewModel).Kodd;
-            var articul = (bsPreview.Current as SpArtPreviewModel).Articul.Trim();
+            var current = bsPreview.Current as SpArtPreviewModel;
+            var kodd = current.Kodd;
+            var kod = current.Kod;
+            var articul = current.Articul.Trim();
 
             if (this.MdiParent is SpMainForm mainForm)
             {
-                mainForm.OpenForm(new ArticulEditAdvance(CurrentUser.User, kodd, articul));
+                mainForm.OpenForm(new ArticulEditAdvance(CurrentUser.User, kodd, articul, kod));
             }
         }
         //???

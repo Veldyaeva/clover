@@ -37,12 +37,17 @@ namespace SewingProduction.Features.Articul.Service
                 return null;
             }
         }
-        public async Task<BindingList<SpArticulPreviewModel>> GetCommonArtByKoddAsync(string kodd)
+        public async Task<BindingList<SpArticulPreviewModel>> GetCommonArtByKoddAsync(string kodd, string kod = null)
         {
             try
             {
-                string query = "select top 1 * from dbo.view_sp_articul_all WHERE kodd = @kodd";
-                return new BindingList<SpArticulPreviewModel>(await _dbService.GetListAsync<SpArticulPreviewModel>(query, new { kodd }));
+                string query = string.IsNullOrWhiteSpace(kod)
+                    ? "select top 1 * from dbo.view_sp_articul_all WHERE kodd = @kodd"
+                    : "select top 1 * from dbo.view_sp_articul_all WHERE kod = @kod";
+                return new BindingList<SpArticulPreviewModel>(
+                    await _dbService.GetListAsync<SpArticulPreviewModel>(
+                        query,
+                        new { kodd, kod }));
             }
             catch (Exception ex)
             {

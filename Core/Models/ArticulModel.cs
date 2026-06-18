@@ -618,7 +618,7 @@ namespace SewingProduction.Core.Models
         //---->
 
         private string _kod_okpd2;
-        public  string Kod_okpd2
+        public  string Kodokpd2
         {
             get => _kod_okpd2;
             set => SetField(ref _kod_okpd2, value);
