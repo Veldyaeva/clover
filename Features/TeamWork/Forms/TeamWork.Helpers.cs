@@ -33,27 +33,6 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // Включаем автоматическое сохранение настроек для всех CustomGridControl
                 this.EnableAutoGridSettings(true);
-
-                //// Загружаем настройки для обычных GridControl (не CustomGridControl)
-                //_gridHelper.LoadGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
-                //_gridHelper.LoadGridViewSettings(gridViewRaszTW, "gridView1Layout.xml");
-                //_gridHelper.LoadGridViewSettings(gridViewKontTW, "gridView4Layout.xml");
-                //_gridHelper.LoadGridViewSettings(normRaszTab, "gridView6Layout.xml");
-                //_gridHelper.LoadGridViewSettings(gridView_unboundArts, "gridView_unboundArtsLayout.xml");
-                //_gridHelper.LoadGridViewSettings(gridView_wdToBind, "gridView_wdToBindLayout.xml");
-                //_gridHelper.LoadGridViewSettings(gridViewPreArch, "gridViewPreArchLayout.xml");
-                //_gridHelper.LoadGridViewSettings(gridViewNZP, "gridViewNZPLayout.xml");
-                //_gridHelper.LoadGridViewSettings(gridView_binded, "gridView_bindedLayout.xml");
-
-                //// Добавляем другие гриды, если они есть
-                //if (gridViewRaskrTW != null)
-                //    _gridHelper.LoadGridViewSettings(gridViewRaskrTW, "gridViewRaskrTWLayout.xml");
-                //if (gridViewBindedArts != null)
-                //    _gridHelper.LoadGridViewSettings(gridViewBindedArts, "gridView5Layout.xml");
-                //if (normKontTab != null)
-                //    _gridHelper.LoadGridViewSettings(normKontTab, "gridView2Layout.xml");
-                //if (normRaskArt != null)
-                //    _gridHelper.LoadGridViewSettings(normRaskArt, "gridView3Layout.xml");
             }
             catch (Exception ex)
             {
@@ -72,27 +51,6 @@ namespace SewingProduction.Features.TeamWork.Forms
 
 
                 this.SaveAllGridSettings();
-
-                //// Сохраняем настройки для обычных GridControl (не CustomGridControl)
-                //_gridHelper.SaveGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
-                //_gridHelper.SaveGridViewSettings(gridViewRaszTW, "gridView1Layout.xml");
-                //_gridHelper.SaveGridViewSettings(gridViewKontTW, "gridView4Layout.xml");
-                //_gridHelper.SaveGridViewSettings(normRaszTab, "gridView6Layout.xml");
-                //_gridHelper.SaveGridViewSettings(gridView_unboundArts, "gridView_unboundArtsLayout.xml");
-                //_gridHelper.SaveGridViewSettings(gridView_wdToBind, "gridView_wdToBindLayout.xml");
-                //_gridHelper.SaveGridViewSettings(gridViewPreArch, "gridViewPreArchLayout.xml");
-                //_gridHelper.SaveGridViewSettings(gridViewNZP, "gridViewNZPLayout.xml");
-                //_gridHelper.SaveGridViewSettings(gridView_binded, "gridView_bindedLayout.xml");
-
-                //// Добавляем другие гриды, если они есть
-                //if (gridViewRaskrTW != null)
-                //    _gridHelper.SaveGridViewSettings(gridViewRaskrTW, "gridViewRaskrTWLayout.xml");
-                //if (gridViewBindedArts != null)
-                //    _gridHelper.SaveGridViewSettings(gridViewBindedArts, "gridView5Layout.xml");
-                //if (normKontTab != null)
-                //    _gridHelper.SaveGridViewSettings(normKontTab, "gridView2Layout.xml");
-                //if (normRaskArt != null)
-                //    _gridHelper.SaveGridViewSettings(normRaskArt, "gridView3Layout.xml");
             }
             catch (Exception ex)
             {
@@ -738,7 +696,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             string imagePath = null;
             try
             {
-                imagePath = await _artNormService.GetImage(annId, kod);
+                imagePath = await _teamWorkService.GetArticleImageAsync(annId, kod);
                 if (!string.IsNullOrEmpty(imagePath))
                 {
                     pictureBox.ImageLocation = imagePath;
@@ -1231,19 +1189,22 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
+        private int[] GetSelectedOrFocusedRowHandles(GridView gridView, string emptyWarning)
+        {
+            var selected = gridView.GetSelectedRows();
+            if (selected != null && selected.Length > 0) return selected;
+            if (gridView.FocusedRowHandle >= 0) return new[] { gridView.FocusedRowHandle };
+            MessageBox.Show(emptyWarning, "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return null;
+        }
+
     }
     public static class DemoHelper
     {
 
-        public static Image GetDeleteImage()
-        {
-            return GetImage(Brushes.Red);
-        }
+        public static Image GetDeleteImage() => GetImage(Brushes.Red);
 
-        public static Image GetEditImage()
-        {
-            return GetImage(Brushes.Green);
-        }
+        public static Image GetEditImage() => GetImage(Brushes.Green);
 
         public static Image GetImage(Brush b)
         {

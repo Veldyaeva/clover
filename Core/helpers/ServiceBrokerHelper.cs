@@ -69,7 +69,6 @@ namespace SewingProduction.Core.helpers
         private readonly ConcurrentQueue<ObjectTableFieldMatch> _pending;
         private CancellationTokenRegistration _stopReg;
         private int _disposeState = 0; // 0=not disposed, 1=disposing/disposed
-        private int _disposed; // 0 = не disposed, 1 = disposed
 
         private sealed class DependencyItem
         {
@@ -310,23 +309,15 @@ namespace SewingProduction.Core.helpers
         /// <summary>Забрать список ObjectName, которые нужно перезапустить.</summary>
         public List<string> DrainPending()
         {
-            try
-            {
-                var result = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var result = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-                while (_pending.TryDequeue(out var item))
-                {
-                    if (!string.IsNullOrWhiteSpace(item.ObjectName))
-                        result.Add(item.ObjectName);
-                }
-
-                return result.ToList();
-            }
-            catch (Exception ex)
+            while (_pending.TryDequeue(out var item))
             {
-                MessageBox.Show($"Ошибка ServiceBrokerHelper.InitAndStartAsync: {ex.Message}");
-                return new List<string>();
+                if (!string.IsNullOrWhiteSpace(item.ObjectName))
+                    result.Add(item.ObjectName);
             }
+
+            return result.ToList();
         }
 
         /// <summary>Список union-полей, которые слушаем по таблице (для дебага).</summary>
@@ -429,8 +420,6 @@ namespace SewingProduction.Core.helpers
 
         private void RebuildIndex()
         {
-            try
-            {
             _depsByTable.Clear();
             _unionFieldsByTable.Clear();
 
@@ -491,12 +480,7 @@ namespace SewingProduction.Core.helpers
                         _unionFieldsByTable[tableKey] = union;
                     }
                     foreach (var f in fields) union.Add(f);
-                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка ServiceBrokerHelper.RebuildIndex: {ex.Message}");
             }
         }
 

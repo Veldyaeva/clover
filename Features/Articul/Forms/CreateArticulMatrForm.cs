@@ -119,8 +119,8 @@ namespace SewingProduction.Features.Articul.Forms
         {
             gcGrupmen_name.FieldName = nameof(CreateArticulMatrModel.Grupmen_name);
             gcCertGrupmen_name.FieldName = nameof(CreateArticulMatrModel.Grupmen_name);
-            gcTsn_name.FieldName = nameof(CreateArticulMatrModel.Tsn_name);
-            gcCertTsn_name.FieldName = nameof(CreateArticulMatrModel.Tsn_name);
+            gcTsn_name.FieldName = nameof(CreateArticulMatrModel.SeasonName);
+            gcCertTsn_name.FieldName = nameof(CreateArticulMatrModel.SeasonName);
             gcTb_id.FieldName = nameof(CreateArticulMatrModel.Tb_id);
             gcCertTb_id.FieldName = nameof(CreateArticulMatrModel.Tb_id);
             gcMod.FieldName = nameof(CreateArticulMatrModel.Mod);
@@ -129,8 +129,8 @@ namespace SewingProduction.Features.Articul.Forms
             gcCertFoundMod.FieldName = nameof(CreateArticulMatrModel.FoundMod);
             gcArticul.FieldName = nameof(CreateArticulMatrModel.Articul);
             gcCertArticul.FieldName = nameof(CreateArticulMatrModel.Articul);
-            gcTm_name.FieldName = nameof(CreateArticulMatrModel.Tm_name);
-            gcCertTm_name.FieldName = nameof(CreateArticulMatrModel.Tm_name);
+            gcTm_name.FieldName = nameof(CreateArticulMatrModel.SeasonName);
+            gcCertTm_name.FieldName = nameof(CreateArticulMatrModel.SeasonName);
             gcGrup.FieldName = nameof(CreateArticulMatrModel.Grup);
             gcCertGrup.FieldName = nameof(CreateArticulMatrModel.Grup);
             gcText_mo.FieldName = nameof(CreateArticulMatrModel.Text_mo);
@@ -616,25 +616,8 @@ namespace SewingProduction.Features.Articul.Forms
         {
             var compareItems = CreateArticulMatrComparisonBuilder.Build(matrixRow);
 
-            if (compareItems.Count == 0)
-                return compareItems;
+            return compareItems;
 
-            var expectedGostGroupName = _gostGroupAll?
-                .FirstOrDefault(x => x.Ag_id == matrixRow.Ag_id)?
-                .Ag_name_sokr;
-
-            return compareItems
-                .Select(item => string.Equals(item.PropertyName, nameof(SpArticulPreviewModel.Ag_id), StringComparison.OrdinalIgnoreCase)
-                    ? new FieldComparisonItem
-                    {
-                        PropertyName = item.PropertyName,
-                        ExpectedValue = item.ExpectedValue,
-                        ExpectedDisplayValue = string.IsNullOrWhiteSpace(expectedGostGroupName) ? item.ExpectedValue : expectedGostGroupName,
-                        DisplayName = item.DisplayName,
-                        FullMatch = item.FullMatch
-                    }
-                    : item)
-                .ToList();
         }
 
         private async void btnSelectModel_Click(object sender, EventArgs e)

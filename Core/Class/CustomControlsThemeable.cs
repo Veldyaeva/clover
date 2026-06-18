@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SewingProduction
 {
@@ -731,37 +732,7 @@ namespace SewingProduction
             {
                 return;
             }
-            // сохраняем пользователя
             InitializeRuntime(user ?? throw new ArgumentNullException(nameof(user)));
-            return;
-            // подписка на загрузку формы (для логирования и прав доступа - существующий код)
-            this.Load += async (s, e) =>
-            {
-                if (IsPreview) return;
-                await ActionLogger.Log(_user.UserId, "Открытие формы", NameForm: this.GetType().Name);
-
-                // Включаем автоматическое сохранение настроек для всех CustomGridControl
-                InitializeAutoGridSettings();
-
-                CustomForm_Load(s, e);
-            };
-
-            // Сохраняем настройки при закрытии формы
-            this.FormClosing += (s, e) =>
-            {
-                if (IsPreview) return;
-                this.SaveAllGridSettings();
-            };
-
-            this.FormClosed += async (s, e) =>
-            {
-                if (IsPreview) return;
-                foreach (Control c in this.Controls)
-                {
-                    ClearBindings(c);
-                }
-                
-            };
         }
         private void InitializeRuntime(UserClass user)
         {
@@ -776,12 +747,18 @@ namespace SewingProduction
             this.Load += async (s, e) =>
             {
                 if (IsPreview) return;
-                await ActionLogger.Log(_user.UserId, "РћС‚РєСЂС‹С‚РёРµ С„РѕСЂРјС‹", NameForm: this.GetType().Name);
 
-                // Включаем автоматическое сохранение настроек для всех CustomGridControl.
+                try
+                {
+                    await ActionLogger.Log(_user.UserId, "Открытие формы", NameForm: this.GetType().Name);
+                }
+                catch (Exception logEx)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[CustomForm] ActionLogger.Log failed: {logEx.Message}");
+                }
+
                 InitializeAutoGridSettings();
-
-                CustomForm_Load(s, e);
+                await CustomForm_LoadAsync(s, e);
             };
 
             // Сохраняем настройки при закрытии формы.
@@ -866,7 +843,7 @@ namespace SewingProduction
             }
         }
 
-        private async void CustomForm_Load(object sender, EventArgs e)
+        private async Task CustomForm_LoadAsync(object sender, EventArgs e)
         {
             if (IsPreview || _user == null)
                 return;
@@ -950,7 +927,6 @@ namespace SewingProduction
                     else
                         themeable.ApplyPermission(user);
                 }
-
                 // Обработка табов — обязательно
                 if (ctrl is DevExpress.XtraTab.XtraTabControl tabControl)
                 {

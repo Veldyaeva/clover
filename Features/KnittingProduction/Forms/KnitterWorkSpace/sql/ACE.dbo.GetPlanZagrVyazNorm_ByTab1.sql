@@ -124,6 +124,60 @@ IF @HasShift = 1 AND ISNULL(@Tab,0) = 0
 
             ISNULL(pm.data_cd_new, psz.data_cd) AS data_cd,
 
+            -- Остаток той же операции после частичного факта:
+            -- например, из 10 левых рукавов сделали 3, оставшиеся 7 идут первыми в следующую смену.
+            CASE
+                WHEN rzv.pach_kod IS NOT NULL
+                 AND ISNULL(pzv.pzvIDParent, 0) <> 0
+                 AND pzv.pzvDateEnd IS NULL
+                 AND ISNULL(pzv.pzvKol, 0) > 0
+                 AND EXISTS (
+                    SELECT 1
+                    FROM dbo.planZagrVyaz p_done
+                    JOIN ACE.dbo.knitWorkingShiftNew AS kws_done
+                         ON kws_done.kwsID = p_done.pzvKwsID
+                    WHERE p_done.pzvID = pzv.pzvIDParent
+                      AND ISNULL(p_done.pzvNrID, 0) = ISNULL(pzv.pzvNrID, 0)
+                      AND p_done.pzvDateEnd IS NOT NULL
+                      AND kws_done.kwsKmaID = @KmaId
+                      AND kws_done.kwsDateEnd IS NOT NULL
+                      AND kws_done.kwsDateDel IS NULL
+                 )
+                 AND NOT EXISTS (
+                    SELECT 1
+                    FROM dbo.planZagrVyaz p_neg
+                    WHERE p_neg.pzvIDParent = pzv.pzvIDParent
+                      AND ISNULL(p_neg.pzvKol, 0) < 0
+                 )
+                THEN 1
+                ELSE 0
+            END AS IsSplitUnfinishedInPack,
+
+            -- Начатая пачка: часть этой пачки уже завершили в закрытой смене зоны,
+            -- значит неназначенные строки пачки должны идти следующим приоритетом.
+            CASE
+                WHEN rzv.pach_kod IS NOT NULL
+                 AND ISNULL(pzv.pzvTab, 0) = 0
+                 AND EXISTS (
+                    SELECT 1
+                    FROM dbo.planZagrVyaz p_done
+                    JOIN dbo.raskr_zeh_vyaz AS rzv_done
+                         ON rzv_done.zad_pl = p_done.pzvNomZad
+                        AND rzv_done.nom = p_done.pzvNom
+                        AND rzv_done.nom_n = p_done.pzvNomN
+                    JOIN ACE.dbo.knitWorkingShiftNew AS kws_done
+                         ON kws_done.kwsID = p_done.pzvKwsID
+                    WHERE rzv_done.pach_kod = rzv.pach_kod
+                      AND p_done.pzvID <> pzv.pzvID
+                      AND p_done.pzvDateEnd IS NOT NULL
+                      AND kws_done.kwsKmaID = @KmaId
+                      AND kws_done.kwsDateEnd IS NOT NULL
+                      AND kws_done.kwsDateDel IS NULL
+                )
+                THEN 1
+                ELSE 0
+            END AS IsStartedPack,
+
             CASE WHEN ISNULL(pzv.pzvTab,0) = 0 THEN 0 ELSE 1 END AS IsAssignedAny,
             CASE
     WHEN ISNULL(@KwsId,0) = 0 THEN 0      -- закрытая смена: таб игнорируем
@@ -245,9 +299,11 @@ LEFT JOIN dbo.raskr_zeh_vyaz AS rzv
             SELECT
                 f.*,
                 CASE
-                    WHEN f.pach_kod IS NOT NULL AND f.HasAssignedInPack = 1 THEN 1
-                    WHEN (f.pach_kod IS NULL OR f.HasAssignedInPack = 0) AND f.HasAssignedInAnn = 1 THEN 2
-                    ELSE 3
+                    WHEN f.IsSplitUnfinishedInPack = 1 THEN 0
+                    WHEN f.IsStartedPack = 1 THEN 1
+                    WHEN f.pach_kod IS NOT NULL AND f.HasAssignedInPack = 1 THEN 2
+                    WHEN (f.pach_kod IS NULL OR f.HasAssignedInPack = 0) AND f.HasAssignedInAnn = 1 THEN 3
+                    ELSE 4
                 END AS PriorityGroup
             FROM #Flags f
             WHERE f.pzvKwsID = @KwsId
@@ -275,13 +331,16 @@ LEFT JOIN dbo.raskr_zeh_vyaz AS rzv
             SELECT
                 f.*,
                 CASE
-                    WHEN f.pach_kod IS NOT NULL AND f.HasAssignedInPack = 1 THEN 1
-                    WHEN (f.pach_kod IS NULL OR f.HasAssignedInPack = 0) AND f.HasAssignedInAnn = 1 THEN 2
-                    ELSE 3
+                    WHEN f.IsSplitUnfinishedInPack = 1 THEN 0
+                    WHEN f.IsStartedPack = 1 THEN 1
+                    WHEN f.pach_kod IS NOT NULL AND f.HasAssignedInPack = 1 THEN 2
+                    WHEN (f.pach_kod IS NULL OR f.HasAssignedInPack = 0) AND f.HasAssignedInAnn = 1 THEN 3
+                    ELSE 4
                 END AS PriorityGroup
             FROM #Flags f
             WHERE
               f.IsAssignedAny = 0
+              OR f.IsSplitUnfinishedInPack = 1
         )
 
 ,Ranked AS (
@@ -309,7 +368,9 @@ SELECT
 
 FROM Ranked r
 WHERE
-      r.RunningHoursByMachine <= @MaxHours
+      r.IsSplitUnfinishedInPack = 1
+   OR r.IsStartedPack = 1
+   OR r.RunningHoursByMachine <= @MaxHours
    OR (r.RunningHoursByMachine > @MaxHours AND r.RunningHoursByMachine - r.TaskHours < @MaxHours)
 
 ORDER BY

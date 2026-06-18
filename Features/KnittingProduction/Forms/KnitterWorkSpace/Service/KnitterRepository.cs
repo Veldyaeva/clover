@@ -650,6 +650,56 @@ ORDER BY kwsDateStart DESC";
 			}
 		}
 
+        public async Task<List<ShiftHistoryModel>> GetShiftsByTabAsync(int tab)
+        {
+            try
+            {
+                using var connection = _dbHelper.GetConnection();
+                const string sql = @"
+SELECT TOP 30
+    kwsID       AS KwsID,
+    kwsTabStart AS TabStart,
+    kwsDateStart AS DateStart,
+    kwsDateEnd   AS DateEnd
+FROM ACE.dbo.knitWorkingShiftNew
+WHERE kwsTabStart = @tab
+  AND kwsDateDel IS NULL
+ORDER BY kwsDateStart DESC";
+                var list = await connection.QueryAsync<ShiftHistoryModel>(sql, new { tab });
+                return list.AsList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"GetShiftsByTabAsync failed (tab={tab})", ex);
+            }
+        }
+
+        public async Task<List<ShiftHistoryModel>> GetShiftsByKmaAsync(int kmaId)
+        {
+            try
+            {
+                using var connection = _dbHelper.GetConnection();
+                const string sql = @"
+SELECT TOP 50
+    k.kwsID        AS KwsID,
+    k.kwsTabStart  AS TabStart,
+    k.kwsDateStart AS DateStart,
+    k.kwsDateEnd   AS DateEnd,
+    ISNULL(f.fio, CAST(k.kwsTabStart AS VARCHAR)) AS FioName
+FROM ACE.dbo.knitWorkingShiftNew k
+LEFT JOIN dbo.fio f ON f.tab = k.kwsTabStart
+WHERE k.kwsKmaID = @kmaId
+  AND k.kwsDateDel IS NULL
+ORDER BY k.kwsDateStart DESC";
+                var list = await connection.QueryAsync<ShiftHistoryModel>(sql, new { kmaId });
+                return list.AsList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"GetShiftsByKmaAsync failed (kmaId={kmaId})", ex);
+            }
+        }
+
         public Task<IKnitterShiftTransaction> BeginShiftTransactionAsync()
         {
             var connection = _dbHelper.GetConnection();
