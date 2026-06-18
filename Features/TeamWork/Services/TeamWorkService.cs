@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Features.TeamWork.Models.UseCases;
@@ -22,14 +23,22 @@ namespace SewingProduction.Features.TeamWork.Services
         private readonly ITeamWorkTransactionBoundary _transactionBoundary;
         private readonly ITeamWorkNotificationService _notificationService;
         private readonly ILogger _logger;
+        private readonly TeamWorkArticlesQueryService _articlesQuery;
 
-        public TeamWorkOrchestrator(ITeamWorkRepository repository, ITeamWorkUnitOfWork unitOfWork, ITeamWorkTransactionBoundary transactionBoundary, ITeamWorkNotificationService notificationService, ILogger logger)
+        public TeamWorkOrchestrator(
+            ITeamWorkRepository repository,
+            ITeamWorkUnitOfWork unitOfWork,
+            ITeamWorkTransactionBoundary transactionBoundary,
+            ITeamWorkNotificationService notificationService,
+            ILogger logger,
+            TeamWorkArticlesQueryService articlesQuery)
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
             _transactionBoundary = transactionBoundary;
             _notificationService = notificationService;
             _logger = logger;
+            _articlesQuery = articlesQuery ?? throw new ArgumentNullException(nameof(articlesQuery));
         }
 
         /// <summary>
@@ -88,7 +97,7 @@ namespace SewingProduction.Features.TeamWork.Services
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё Р Рў AnnID={annId}");
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки РТ AnnID={annId}");
                 return null;
             }
         }
@@ -170,7 +179,7 @@ namespace SewingProduction.Features.TeamWork.Services
         {
             if (draft == null)
             {
-                return new DuplicateDraftResult { Success = false, Error = "Р§РµСЂРЅРѕРІРёРє Р Рў РЅРµ Р·Р°РґР°РЅ." };
+                return new DuplicateDraftResult { Success = false, Error = "Черновик РТ не задан." };
             }
 
             try
@@ -186,7 +195,7 @@ namespace SewingProduction.Features.TeamWork.Services
                     return new DuplicateDraftResult
                     {
                         Success = false,
-                        Error = "РћС€РёР±РєР° РїСЂРё СЃРѕР·РґР°РЅРёРё С‡РµСЂРЅРѕРІРёРєР° Р Рў РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С…."
+                        Error = "Ошибка при создании черновика РТ в базе данных."
                     };
                 }
 
@@ -200,7 +209,7 @@ namespace SewingProduction.Features.TeamWork.Services
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "РћС€РёР±РєР° РІ CreateWorkDivisionDraftAsync");
+                await _logger.LogErrorAsync(ex, "Ошибка в CreateWorkDivisionDraftAsync");
                 return new DuplicateDraftResult { Success = false, Error = ex.Message };
             }
         }
@@ -316,6 +325,7 @@ namespace SewingProduction.Features.TeamWork.Services
                 var approvedAt = DateTime.Now;
                 await _transactionBoundary.ExecuteInTransactionAsync(async () =>
                 {
+                    await _unitOfWork.UpdateKitKnittingTimeInMatr(annId);
                     await _unitOfWork.MarkApprovedAsync(annId, approvedAt);
                 });
 
@@ -405,6 +415,33 @@ namespace SewingProduction.Features.TeamWork.Services
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка RollbackArchAndCopyAsync source={sourceAnnId}, new={newAnnId}");
                 return false;
+            }
+        }
+
+        public async Task<FinalizePreArchiveResult> FinalizePreArchiveTransitionAsync(int annId)
+        {
+            try
+            {
+                var sourceAnn = await _repository.GetWorkDivisionAsync(annId);
+                if (sourceAnn == null)
+                    return new FinalizePreArchiveResult { Success = false, Error = "Запись не найдена" };
+
+                int childAnnId = await _repository.FindChildAnnIdAsync(annId);
+
+                await _transactionBoundary.ExecuteInTransactionAsync(async () =>
+                {
+                    await _unitOfWork.FinalizePreArchiveAsync(annId, childAnnId);
+                });
+
+                sourceAnn.Status = (int)Status.Archive;
+                sourceAnn.StatusText = StatusHelper.GetStatusText(sourceAnn.Status);
+
+                return new FinalizePreArchiveResult { Success = true, UpdatedSourceAnn = sourceAnn };
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"FinalizePreArchiveTransitionAsync annId={annId}");
+                return new FinalizePreArchiveResult { Success = false, Error = ex.Message };
             }
         }
 
@@ -516,21 +553,6 @@ namespace SewingProduction.Features.TeamWork.Services
 
             try
             {
-                string sqlQuery = @"UPDATE sa
-                    SET sa.arh = 1
-                    FROM dbo.sp_articul AS sa
-                    JOIN dbo.art_norm_n AS ann ON ann.AnnID = sa.AnnID
-                    WHERE left(sa.kod, 7) = @kod
-                    AND sa.articul = @art
-                    AND ann.annID = @annId";
-
-                var parameters = new Dictionary<string, object>
-                {
-                    { "@annId", annId },
-                    { "@art", articul },
-                    { "@kod", kod }
-                };
-
                 await _transactionBoundary.ExecuteInTransactionAsync(async () =>
                 {
                     await _unitOfWork.UpdateSpArticulArchAsync(annId, kod, articul);
@@ -584,6 +606,76 @@ namespace SewingProduction.Features.TeamWork.Services
             const string tail = "\n...(сообщение обрезано)";
             return full.Substring(0, Math.Max(0, maxLen - tail.Length)) + tail;
         }
+
+        // ─── Изображения, стоимость, оповещения ──────────────────────────
+
+        public Task<string> GetArticleImageAsync(int? annId, int? kod = null) =>
+            _repository.GetArticleImageAsync(annId, kod);
+
+        public Task<decimal> GetAnnCostAsync(int annId) =>
+            _repository.GetAnnCostAsync(annId);
+
+        public Task SendMessageToBrigadesAsync(int annId, string message) =>
+            SendToBrigadesAsync(annId, message);
+
+        // ─── Справочные данные ────────────────────────────────────────────
+
+        public async Task<FioDataResult> LoadFioDataAsync()
+        {
+            try
+            {
+                var designersTask = _repository.GetDesignersAsync();
+                var knitTask = _repository.GetKnitConstructorsAsync();
+                await Task.WhenAll(designersTask, knitTask);
+                return new FioDataResult
+                {
+                    Designers = await designersTask ?? new List<FioModel>(),
+                    KnitConstructors = await knitTask ?? new List<FioModel>()
+                };
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "TeamWorkOrchestrator.LoadFioDataAsync");
+                return new FioDataResult();
+            }
+        }
+
+        public Task TriggerSecondsRecalculationAsync() => _repository.ExecutePztOperUpdateAsync();
+
+        // ─── Вкладка "Работа с артикулами" ───────────────────────────────
+
+        public Task<List<MyDataART>> LoadUnboundArticlesAsync() =>
+            _articlesQuery.LoadUnboundArticlesAsync();
+
+        public Task<List<MyDataART>> SearchUnboundArticlesAsync(string searchText) =>
+            _articlesQuery.SearchUnboundArticlesAsync(searchText);
+
+        public Task<List<MyDataANN>> LoadCurrentWorkDivisionsAsync(bool includeAll) =>
+            _articlesQuery.LoadCurrentWorkDivisionsAsync(includeAll);
+
+        public Task<List<MyDataANN>> SearchCurrentWorkDivisionsAsync(string searchText) =>
+            _articlesQuery.SearchCurrentWorkDivisionsAsync(searchText);
+
+        public Task<List<MyDataANN>> LoadWorkDivisionsByArticulAsync(string articul) =>
+            _articlesQuery.LoadWorkDivisionsByArticulAsync(articul);
+
+        public Task<List<NormRasz>> LoadNormRaszAsync(int annId, CancellationToken ct = default) =>
+            _articlesQuery.LoadNormRaszAsync(annId, ct);
+
+        public Task<List<NormRask>> LoadNormRaskAsync(int annId, CancellationToken ct = default) =>
+            _articlesQuery.LoadNormRaskAsync(annId, ct);
+
+        public Task<List<NormKont>> LoadNormKontAsync(int annId, CancellationToken ct = default) =>
+            _articlesQuery.LoadNormKontAsync(annId, ct);
+
+        public Task<List<NZPByKoddRt>> LoadNzpAsync(int annId, CancellationToken ct = default) =>
+            _articlesQuery.LoadNzpAsync(annId, ct);
+
+        public Task<List<MyDataANN>> LoadPreArchiveAsync() =>
+            _articlesQuery.LoadPreArchiveAsync();
+
+        public Task<List<ArtNormN>> LoadArchiveAsync() =>
+            _articlesQuery.LoadArchiveAsync();
 
         private async Task<BatchStatusUpdateResult> UpdateStatusesAsync(IEnumerable<int> annIds, int status)
         {

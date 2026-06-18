@@ -382,7 +382,7 @@ namespace SewingProduction.Features.Sprav.Forms
                 customGroupBoxAdd.Visible = false;
 
                 tarifLoad(model.pc_id);
-                Application.DoEvents(); //задержка
+                System.Windows.Forms.Application.DoEvents(); //задержка
                 int rowHandle = gridViewZp.LocateByValue("constant_name", model.constant_name);
                 if (_addMode)
                     rowHandle = gridViewZp.DataRowCount - 1;

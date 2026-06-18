@@ -25,21 +25,17 @@ namespace SewingProduction.Features.TeamWork.Forms
 {
     public partial class TeamWork : CustomForm
     {
-        private readonly DatabaseHelperSQL _dbHelper;
-        private readonly DbService _dbService;
-        private readonly ArtNormRepository _artNormService; // репозиторий данных
-        private readonly JabberSender _jabberSender;
-        private int selectedRowHandle = -1;
         private readonly ILogger _logger = new FileLogger();
         private readonly TWGridHelper _gridHelper = new TWGridHelper();
         private readonly SplitContainerHelper _splitContainerHelper = new SplitContainerHelper();
         private readonly FormSettingsHelper _formSettingsHelper = new FormSettingsHelper();
         private readonly SecondsUpdateManager _secondsUpdateManager;
         private readonly ITeamWorkOrchestrator _teamWorkService;
-        private readonly TeamWorkArticlesQueryService _articlesQueryService;
         private UIHelper _uiHelper;
+        private TeamWorkDataCoordinator _presenter;
         private int bufferId = 0;
         private BindingList<ArtNormN> _bindingList;
+
         private BindingSource _bindingSource;
         private bool _hasUnsavedChanges = false;
         private BindingSource _nzpByKoddRtSourceArt;
@@ -54,7 +50,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private BindingSource _normKontBindingSourceTW;
         private static List<FioModel> _cachedFioData;
         private static List<FioModel> _cachedKnitConstrFioData;
-        private List<FioModel> fioList;
+        private static readonly SemaphoreSlim _fioLoadLock = new SemaphoreSlim(1, 1);
         private BindingList<MyDataANN> _preArchList;
         private BindingSource _preArchBindingSource;
         private BindingList<ArtNormN> _archList;
@@ -94,9 +90,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         private List<PodrVyazModel> podrVyazList;
         private List<OborudShvModel> oborudShvList;
 
-        private CancellationTokenSource _loadCts = new CancellationTokenSource();
-
-
         public TeamWork(UserClass user) : base(user)
         {
             InitializeComponent();
@@ -107,14 +100,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             DapperMappings.Configure();
 
             var coreServices = TeamWorkDependencyFactory.CreateCoreServices(_logger);
-            _dbHelper = new DatabaseHelperSQL();
-            _dbService = coreServices.DbService;
-            _artNormService = coreServices.ArtNormRepository;
-            _jabberSender = (JabberSender)coreServices.JabberSender;
-            _secondsUpdateManager = new SecondsUpdateManager(_artNormService, _logger);
             _teamWorkService = coreServices.Orchestrator;
-            _articlesQueryService = new TeamWorkArticlesQueryService(_artNormService, _dbService, _logger);
+            _secondsUpdateManager = new SecondsUpdateManager(_teamWorkService, _logger);
             _uiHelper = new UIHelper(_logger);
+            _presenter = new TeamWorkDataCoordinator(_teamWorkService, _logger);
 
             // Инициализация основных BindingList и BindingSource
             _bindingList = new BindingList<ArtNormN>();

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading;
 using System.Threading.Tasks;
 using Dapper;
 using SewingProduction.Core.Class.Settings;
@@ -17,8 +18,17 @@ namespace SewingProduction.Helpers
     {
         private readonly string _connectionString;
         private static string _globalConnectionString;
-        private SqlTransaction _currentTransaction;
-        private SqlConnection _currentConnection;
+
+        // AsyncLocal изолирует транзакцию в пределах одной async-цепочки.
+        // Экземпляр DatabaseHelperSQL может быть Singleton — гонок нет.
+        private static readonly AsyncLocal<AmbientState?> _ambient = new AsyncLocal<AmbientState?>();
+
+        private sealed class AmbientState
+        {
+            public SqlConnection Connection { get; }
+            public SqlTransaction Transaction { get; }
+            public AmbientState(SqlConnection conn, SqlTransaction tx) { Connection = conn; Transaction = tx; }
+        }
 
         public DatabaseHelperSQL(string _serv)
         {
@@ -81,20 +91,26 @@ namespace SewingProduction.Helpers
         public SqlConnection GetConnection()
         {
             var connection = new SqlConnection(_connectionString);
-
-            // Открываем соединение сразу, чтобы вызывающий код мог выполнять bulk-операции без задержек
             if (connection.State != ConnectionState.Open)
-            {
                 connection.Open();
-            }
-
             return connection;
         }
 
-        private bool HasActiveTransaction =>
-            _currentTransaction != null &&
-            _currentConnection != null &&
-            _currentConnection.State == ConnectionState.Open;
+        public async Task<SqlConnection> GetConnectionAsync()
+        {
+            var connection = new SqlConnection(_connectionString);
+            await connection.OpenAsync();
+            return connection;
+        }
+
+        private static bool HasActiveTransaction
+        {
+            get
+            {
+                var s = _ambient.Value;
+                return s != null && s.Connection?.State == ConnectionState.Open;
+            }
+        }
 
         #region async
         /// <summary>
@@ -105,8 +121,9 @@ namespace SewingProduction.Helpers
         /// <returns>DataTable</returns>
         public async Task<DataTable> ExecuteQueryAsync(string query, Dictionary<string, object> parameters = null, CommandType type = CommandType.Text)
         {
-            var useAmbientTransaction = HasActiveTransaction;
-            var connection = useAmbientTransaction ? _currentConnection : new SqlConnection(_connectionString);
+            var ambient = _ambient.Value;
+            var useAmbientTransaction = ambient != null && ambient.Connection?.State == ConnectionState.Open;
+            var connection = useAmbientTransaction ? ambient!.Connection : new SqlConnection(_connectionString);
             try
             {
                 using (var command = new SqlCommand(query, connection))
@@ -114,7 +131,7 @@ namespace SewingProduction.Helpers
                     DataTable table = new DataTable();
                     command.CommandType = type;
                     if (useAmbientTransaction)
-                        command.Transaction = _currentTransaction;
+                        command.Transaction = ambient!.Transaction;
                     if (parameters != null)
                     {
                         foreach (var param in parameters)
@@ -123,10 +140,10 @@ namespace SewingProduction.Helpers
                         }
                     }
                     if (!useAmbientTransaction)
-                        await connection.OpenAsync(); // Асинхронное подключение к БД
-                    using (var adapter = new SqlDataAdapter(command))
+                        await connection.OpenAsync();
+                    using (var reader = await command.ExecuteReaderAsync())
                     {
-                        adapter.Fill(table);
+                        table.Load(reader);
                         return table;
                     }
                 }
@@ -145,8 +162,9 @@ namespace SewingProduction.Helpers
         /// <param name="parameters">параметры</param>
         public async Task ExecuteNonQueryAsync(string query, Dictionary<string, object> parameters = null)
         {
-            var useAmbientTransaction = HasActiveTransaction;
-            var connection = useAmbientTransaction ? _currentConnection : new SqlConnection(_connectionString);
+            var ambient = _ambient.Value;
+            var useAmbientTransaction = ambient != null && ambient.Connection?.State == ConnectionState.Open;
+            var connection = useAmbientTransaction ? ambient!.Connection : new SqlConnection(_connectionString);
             try
             {
                 if (!useAmbientTransaction)
@@ -154,7 +172,7 @@ namespace SewingProduction.Helpers
                 using (var command = new SqlCommand(query, connection))
                 {
                     if (useAmbientTransaction)
-                        command.Transaction = _currentTransaction;
+                        command.Transaction = ambient!.Transaction;
                     if (parameters != null)
                     {
                         foreach (var param in parameters)
@@ -180,8 +198,9 @@ namespace SewingProduction.Helpers
         /// <returns>Количество затронутых строк</returns>
         public async Task<int> ExecuteNonQueryWithRowCountAsync(string query, Dictionary<string, object> parameters = null)
         {
-            var useAmbientTransaction = HasActiveTransaction;
-            var connection = useAmbientTransaction ? _currentConnection : new SqlConnection(_connectionString);
+            var ambient = _ambient.Value;
+            var useAmbientTransaction = ambient != null && ambient.Connection?.State == ConnectionState.Open;
+            var connection = useAmbientTransaction ? ambient!.Connection : new SqlConnection(_connectionString);
             try
             {
                 if (!useAmbientTransaction)
@@ -189,7 +208,7 @@ namespace SewingProduction.Helpers
                 using (var command = new SqlCommand(query, connection))
                 {
                     if (useAmbientTransaction)
-                        command.Transaction = _currentTransaction;
+                        command.Transaction = ambient!.Transaction;
                     if (parameters != null)
                     {
                         foreach (var param in parameters)
@@ -215,8 +234,9 @@ namespace SewingProduction.Helpers
         public async Task<int> ExecuteScalarAsync(string query, Dictionary<string, object> parameters = null)
         {
             int res = -1;
-            var useAmbientTransaction = HasActiveTransaction;
-            var connection = useAmbientTransaction ? _currentConnection : new SqlConnection(_connectionString);
+            var ambient = _ambient.Value;
+            var useAmbientTransaction = ambient != null && ambient.Connection?.State == ConnectionState.Open;
+            var connection = useAmbientTransaction ? ambient!.Connection : new SqlConnection(_connectionString);
             try
             {
                 if (!useAmbientTransaction)
@@ -224,7 +244,7 @@ namespace SewingProduction.Helpers
                 using (var command = new SqlCommand(query, connection))
                 {
                     if (useAmbientTransaction)
-                        command.Transaction = _currentTransaction;
+                        command.Transaction = ambient!.Transaction;
                     if (parameters != null)
                     {
                         foreach (var param in parameters)
@@ -247,13 +267,14 @@ namespace SewingProduction.Helpers
         {
             try
             {
-                var useAmbientTransaction = HasActiveTransaction;
-                var connection = useAmbientTransaction ? _currentConnection : new SqlConnection(_connectionString);
+                var ambient = _ambient.Value;
+                var useAmbientTransaction = ambient != null && ambient.Connection?.State == ConnectionState.Open;
+                var connection = useAmbientTransaction ? ambient!.Connection : new SqlConnection(_connectionString);
                 try
                 {
                     if (!useAmbientTransaction)
                         await connection.OpenAsync();
-                    var result = await connection.ExecuteScalarAsync(query, parameters, transaction: useAmbientTransaction ? _currentTransaction : null);
+                    var result = await connection.ExecuteScalarAsync(query, parameters, transaction: useAmbientTransaction ? ambient!.Transaction : null);
 
                     if (result == null || result == DBNull.Value)
                         return default;
@@ -282,35 +303,43 @@ namespace SewingProduction.Helpers
         /// <returns></returns>
         public async Task<SqlTransaction> BeginTransactionAsync()
         {
-            _currentConnection = new SqlConnection(_connectionString);
-
-            if (_currentConnection.State != ConnectionState.Open)
-            {
-                await _currentConnection.OpenAsync();
-            }
-
-            _currentTransaction = _currentConnection.BeginTransaction();
-            return _currentTransaction;
+            var connection = new SqlConnection(_connectionString);
+            await connection.OpenAsync();
+            var transaction = connection.BeginTransaction();
+            _ambient.Value = new AmbientState(connection, transaction);
+            return transaction;
         }
-        public async Task CommitTransactionAsync()
+
+        public Task CommitTransactionAsync()
         {
-            if (_currentTransaction != null)
+            var state = _ambient.Value;
+            if (state != null)
             {
-                _currentTransaction.Commit();
-                _currentConnection.Close();
-                _currentTransaction = null;
-                _currentConnection = null;
+                try { state.Transaction.Commit(); }
+                finally
+                {
+                    state.Transaction.Dispose();
+                    state.Connection.Dispose();
+                    _ambient.Value = null;
+                }
             }
+            return Task.CompletedTask;
         }
-        public async Task RollbackTransactionAsync()
+
+        public Task RollbackTransactionAsync()
         {
-            if (_currentTransaction != null)
+            var state = _ambient.Value;
+            if (state != null)
             {
-                _currentTransaction.Rollback();
-                _currentConnection.Close();
-                _currentTransaction = null;
-                _currentConnection = null;
+                try { state.Transaction.Rollback(); }
+                finally
+                {
+                    state.Transaction.Dispose();
+                    state.Connection.Dispose();
+                    _ambient.Value = null;
+                }
             }
+            return Task.CompletedTask;
         }
 
         public async Task ExecuteInTransactionAsync(Func<Task> operation)
@@ -320,6 +349,11 @@ namespace SewingProduction.Helpers
             {
                 await operation.Invoke();
                 await CommitTransactionAsync();
+            }
+            catch (SqlException)
+            {
+                await RollbackTransactionAsync();
+                throw;
             }
             catch
             {

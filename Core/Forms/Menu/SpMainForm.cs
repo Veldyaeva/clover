@@ -417,6 +417,13 @@ namespace SewingProduction
 
         }
         #endregion
+
+        #region калькуляция вязального ассортимента
+        private void barBtnVyazKnitEconomAssort_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenForm(new VyazKnitEconomAssortForm(_user), e.Item);
+        }
+        #endregion
         //private void barButtonTSDAdmin_ItemClick(object sender, ItemClickEventArgs e)
         //{
         //    OpenForm(new TSDAccessManagement(CurrentUser.User), e.Item);

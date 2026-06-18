@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors.ButtonsPanelControl;
 using SewingProduction.Features.TeamWork.Services;
+using SewingProduction.Helpers;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -44,7 +45,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                var service = new BaseNodeLibraryService(_dbHelper, _logger);
+                var service = new BaseNodeLibraryService(new DatabaseHelperSQL(), _logger);
                 using var form = new BaseNodeLibraryEditorForm(
                     User,
                     service,

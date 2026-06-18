@@ -33,12 +33,17 @@ namespace SewingProduction.Features.TeamWork.Services
                 databaseServices.DbHelper);
             var notificationService = new TeamWorkNotificationServiceAdapter(jabberSender);
             var transactionBoundary = new TeamWorkTransactionBoundaryAdapter(databaseServices.DbHelper);
+            var articlesQueryService = new TeamWorkArticlesQueryService(
+                databaseServices.ArtNormRepository,
+                databaseServices.DbService,
+                logger);
             var orchestrator = new TeamWorkOrchestrator(
                 repository,
                 unitOfWork,
                 transactionBoundary,
                 notificationService,
-                logger);
+                logger,
+                articlesQueryService);
 
             return new TeamWorkCoreServices(
                 databaseServices.DbHelper,

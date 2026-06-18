@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Features.TeamWork.Services;
 using SewingProduction.Models;
 using SewingProduction.Services;
 
@@ -11,13 +12,13 @@ namespace SewingProduction.Helpers
 {
     public class SecondsUpdateManager
     {
-        private readonly ArtNormRepository _artNormService;
+        private readonly ITeamWorkOrchestrator _teamWorkService;
         private readonly ILogger _logger;
         private CancellationTokenSource _updateCts;
 
-        public SecondsUpdateManager(ArtNormRepository artNormService, ILogger logger)
+        public SecondsUpdateManager(ITeamWorkOrchestrator teamWorkService, ILogger logger)
         {
-            _artNormService = artNormService;
+            _teamWorkService = teamWorkService;
             _logger = logger;
         }
 
@@ -40,7 +41,7 @@ namespace SewingProduction.Helpers
                 statusCallback?.Invoke("⏳ Пересчёт секунд...");
 
                 // Сначала получаем текущие данные для немедленного обновления UI
-                var currentAnn = await _artNormService.GetArtNormDataById(annId);
+                var currentAnn = await _teamWorkService.LoadWorkDivisionAsync(annId);
                 if (currentAnn != null)
                 {
                     UpdateAnnInGridView(currentAnn, gridView, bindingList);
@@ -48,7 +49,7 @@ namespace SewingProduction.Helpers
                 }
 
                 // Запускаем SQL процедуру пересчёта (если она ещё не запущена)
-                await _artNormService.ExecutePztOperUpdateAsync();
+                await _teamWorkService.TriggerSecondsRecalculationAsync();
 
                 // Периодически проверяем обновления с увеличивающимся интервалом
                 var delays = new[] { 1000, 2000, 3000, 5000, 10000, 15000 }; // мс
@@ -66,7 +67,7 @@ namespace SewingProduction.Helpers
 
                     try
                     {
-                        var updatedAnn = await _artNormService.GetArtNormDataById(annId);
+                        var updatedAnn = await _teamWorkService.LoadWorkDivisionAsync(annId);
                         if (updatedAnn != null)
                         {
                             // Проверяем, обновились ли данные

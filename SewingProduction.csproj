@@ -6,7 +6,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>False</UseWPF>
     <StartupObject>SewingProduction.Core.Program</StartupObject>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <ApplicationIcon>Resources\AppIcons\favicon.ico</ApplicationIcon>
     <SignAssembly>False</SignAssembly>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -21,13 +21,6 @@
     <Compile Remove="Features\Articul\Forms\Articul_lena.cs" />
     <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace.patched.cs" />
     <Compile Remove="Features\KnittingProduction\Forms\PlanZagrVyaz\PlanZagrVyaz.ServiceBroker.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="SplashImages\**\*">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
   </ItemGroup>
 
 	<ItemGroup>
@@ -220,7 +213,7 @@
     <PackageReference Include="DevExpress.Win.Reporting" Version="25.2.5" />
     <PackageReference Include="DevExpress.Wpf.Core" Version="25.2.5" />
     <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.4" />
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.4" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.5" />
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="10.0.5" />

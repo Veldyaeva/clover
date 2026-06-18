@@ -161,7 +161,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private int _serviceBrokerShutdownStarted;
         private int? _lastLocallyClosedShiftId;
         private DateTime _lastLocalShiftCloseSuppressUntilUtc;
-        
+
+        private int? _selectedHistoricalShiftId;
+        private bool IsHistoryMode => _selectedHistoricalShiftId.HasValue;
+
         /// <summary>
         /// Флаг активной смены.
         /// </summary>
@@ -275,6 +278,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
+                ConfigureShiftSelectorView();
             }
             catch (Exception ex)
             {
@@ -341,6 +345,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
+                ConfigureShiftSelectorView();
             }
             catch (Exception ex)
             {
@@ -502,9 +507,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     PlanZagrVyazGridControl.RefreshDataSource();
                     TabGridLookUpEdit.EditValue = null;
                     _currentLoadedTab = null;
+                    ClearHistoryMode();
                     return;
                 }
 
+                await LoadShiftsForTabAsync(tab);
                 await LoadPlanForTabAsync(tab);
             }
             catch (SqlException ex)
@@ -1536,6 +1543,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (IsDisposed || Disposing)
                 return;
 
+            if (IsHistoryMode)
+                return;
+
             if (Interlocked.Exchange(ref _shiftStateSyncInProgress, 1) != 0)
                 return;
 
@@ -2211,30 +2221,43 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         /// <summary>
         /// Централизованно применяет состояние смены к UI и поведению гридов.
+        /// Обновляет кнопку и режим редактирования только при реальном изменении состояния.
         /// </summary>
         private void ApplyShiftUi(bool isRunning, int? shiftId, DateTime? shiftStart)
         {
+            bool stateChanged = _isShiftRunning != isRunning || _currentShiftId != shiftId;
+
             _isShiftRunning = isRunning;
             _currentShiftId = shiftId;
             _shiftStartTime = shiftStart;
 
-            if (isRunning && shiftStart.HasValue)
+            if (stateChanged)
             {
-                simpleButton2.Text = "Закончить смену";
-                _shiftTimer.Start();
+                if (isRunning && shiftStart.HasValue)
+                {
+                    simpleButton2.Text = "Закончить смену";
+                    _shiftTimer.Start();
+                }
+                else
+                {
+                    _shiftTimer.Stop();
+                    simpleButton2.Text = "Начать смену";
+                }
+                ApplyShiftEditMode(isRunning);
             }
-            else
+            else if (isRunning && shiftStart.HasValue && !_shiftTimer.Enabled)
             {
-                _shiftTimer.Stop();
-                simpleButton2.Text = "Начать смену";
+                _shiftTimer.Start();
             }
 
             UpdateShiftDisplay();
-            ApplyShiftEditMode(isRunning);
         }
 
         private void UpdateShiftDisplay()
         {
+            if (IsHistoryMode)
+                return;
+
             if (_currentShiftId.HasValue)
             {
                 if (_isShiftRunning && _shiftStartTime.HasValue)
@@ -2470,6 +2493,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 await InvokeOnUiAsync(async () =>
                 {
+                    if (IsHistoryMode)
+                    {
+                        LogSuccess($"Пропускаем broker-обновление объекта {objectName} — активен режим истории смены.", nameof(RestartDataByObjectNameAsync));
+                        return;
+                    }
+
                     LogSuccess($"Получен сигнал обновления для объекта {objectName}.", nameof(RestartDataByObjectNameAsync));
 
                     // Если это наша хранимая процедура плана - перезагружаем план
@@ -2767,6 +2796,141 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 }
             }
         }
+
+        #region Shift History
+
+        /// <summary>
+        /// Добавляет столбец "Смена" в попап-вью лукапа выбора смены.
+        /// Контрол и layout item созданы в Designer; здесь — только настройка GridView.
+        /// </summary>
+        private void ConfigureShiftSelectorView()
+        {
+            var col = shiftSelectorView.Columns.AddField(nameof(ShiftHistoryModel.DisplayText));
+            col.Caption = "Смена";
+            col.Visible = true;
+            col.Width = 340;
+        }
+
+        /// <summary>
+        /// Загружает список смен для выбранного сотрудника и сбрасывает текущий выбор смены.
+        /// </summary>
+        private async Task LoadShiftsForTabAsync(int tab)
+        {
+            try
+            {
+                var shifts = await _orchestrator.GetShiftsByTabAsync(tab);
+                shifts ??= new List<ShiftHistoryModel>();
+
+                shiftSelectorLookupEdit.EditValueChanged -= ShiftSelectorLookup_EditValueChanged;
+                try
+                {
+                    shiftSelectorLookupEdit.Properties.DataSource = shifts;
+                    shiftSelectorLookupEdit.EditValue = null;
+                    _selectedHistoricalShiftId = null;
+                }
+                finally
+                {
+                    shiftSelectorLookupEdit.EditValueChanged += ShiftSelectorLookup_EditValueChanged;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex, nameof(LoadShiftsForTabAsync));
+            }
+        }
+
+        /// <summary>
+        /// Сбрасывает режим истории без перезагрузки плана (при очистке ФИО).
+        /// </summary>
+        private void ClearHistoryMode()
+        {
+            _selectedHistoricalShiftId = null;
+
+            shiftSelectorLookupEdit.EditValueChanged -= ShiftSelectorLookup_EditValueChanged;
+            try
+            {
+                shiftSelectorLookupEdit.Properties.DataSource = null;
+                shiftSelectorLookupEdit.EditValue = null;
+            }
+            finally
+            {
+                shiftSelectorLookupEdit.EditValueChanged += ShiftSelectorLookup_EditValueChanged;
+            }
+        }
+
+        /// <summary>
+        /// Обработчик выбора смены в лукапе истории.
+        /// При выборе — загружает операции этой смены в режиме только для чтения.
+        /// При сбросе — возвращает к текущему режиму.
+        /// </summary>
+        private async void ShiftSelectorLookup_EditValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (shiftSelectorLookupEdit?.EditValue == null ||
+                    !int.TryParse(shiftSelectorLookupEdit.EditValue.ToString(), out int kwsId) ||
+                    kwsId <= 0)
+                {
+                    _selectedHistoricalShiftId = null;
+                    UpdateShiftDisplay();
+                    simpleButton2.Enabled = true;
+                    if (TryGetSelectedTab(out var tabCurrent))
+                        await LoadPlanForTabAsync(tabCurrent, forceReload: true);
+                    return;
+                }
+
+                _selectedHistoricalShiftId = kwsId;
+                simpleButton2.Enabled = false;
+
+                if (!TryGetSelectedTab(out var tab))
+                    return;
+
+                var plan = await _orchestrator.GetPlanByTabAsync(
+                    tab,
+                    kwsId: kwsId,
+                    kmaId: _currentKmaId,
+                    expandAssignedByNrId: _expandNrToggle?.Checked == true,
+                    maxHours: 9999m,
+                    includeFinished: true);
+
+                var focusSnap = _planFocusService.CaptureCurrent();
+                ApplyPlanToUi(tab, plan, focusSnap);
+                ApplyShiftEditMode(false);
+
+                var shifts = shiftSelectorLookupEdit.Properties.DataSource as List<ShiftHistoryModel>;
+                var selectedShift = shifts?.FirstOrDefault(s => s.KwsID == kwsId);
+                UpdateShiftInfoForHistoryMode(selectedShift, plan);
+            }
+            catch (Exception ex)
+            {
+                LogError(ex, nameof(ShiftSelectorLookup_EditValueChanged));
+            }
+        }
+
+        /// <summary>
+        /// Обновляет simpleLabelItem1 с информацией о просматриваемой исторической смене.
+        /// </summary>
+        private void UpdateShiftInfoForHistoryMode(
+            ShiftHistoryModel shift,
+            List<KnitterPZVModel> plan = null)
+        {
+            if (shift == null)
+            {
+                UpdateShiftDisplay();
+                return;
+            }
+
+            decimal planH = plan?.Sum(r => r.PlanChas_UI ?? 0m) ?? 0m;
+            decimal factH = plan?.Sum(r => r.FactChas_UI ?? 0m) ?? 0m;
+
+            string dateRange = shift.DateStart.HasValue
+                ? $"{shift.DateStart:dd.MM HH:mm} – {(shift.DateEnd.HasValue ? shift.DateEnd.Value.ToString("HH:mm dd.MM") : "открыта")}"
+                : string.Empty;
+
+            simpleLabelItem1.Text = $"История #{shift.KwsID} | {dateRange} | план: {planH:0.##} ч / факт: {factH:0.##} ч";
+        }
+
+        #endregion
 
         #region Header Buttons
 

@@ -1,3 +1,4 @@
+﻿using SewingProduction;
 using SewingProduction.Features.TeamWork.Models.UseCases;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
@@ -13,11 +14,16 @@ namespace SewingProduction.Features.TeamWork.Services
     public interface ITeamWorkRepository
     {
         Task<List<FioModel>> GetDesignersAsync();
+        Task<List<FioModel>> GetKnitConstructorsAsync();
+        Task<string> GetArticleImageAsync(int? annId, int? kod);
+        Task<decimal> GetAnnCostAsync(int annId);
+        Task<int> FindChildAnnIdAsync(int parentAnnId);
         Task<List<ArtNormN>> GetWorkDivisionsAsync();
         Task<ArtNormN> GetWorkDivisionAsync(int annId);
         Task<RelatedDataResult> GetRelatedDataAsync(int annId);
         Task<int[]> GetWorkingBrigIdsAsync(int annId);
         Task<string> TryBuildApprovalDiffAsync(int annId, DateTime approvedAt);
+        Task ExecutePztOperUpdateAsync();
     }
 
     public interface ITeamWorkUnitOfWork
@@ -26,8 +32,10 @@ namespace SewingProduction.Features.TeamWork.Services
         Task BindArticleAsync(MyDataANN selectedAnn, MyDataART selectedArt);
         Task RollbackDraftAsync(int annId);
         Task UnbindArticleAsync(int annIdNzpRow, string kod, string articul);
+        Task UpdateKitKnittingTimeInMatr(int annId);
         Task MarkApprovedAsync(int annId, DateTime approvedAt);
         Task FinalizeArchAndCopyAsync(int sourceAnnId, int newAnnId, bool hasNzp);
+        Task FinalizePreArchiveAsync(int sourceAnnId, int childAnnId);
         Task RollbackArchAndCopyAsync(int sourceAnnId, int? oldStatus, int? newAnnId);
         Task<int> MarkForDeletionAsync(int annId, DateTime currentDate, string computerName);
         Task UpdateStatusAsync(int annId, int status);
@@ -65,6 +73,17 @@ namespace SewingProduction.Features.TeamWork.Services
 
         public Task<List<FioModel>> GetDesignersAsync() => _artNormRepository.GetRelDesigner();
 
+        public Task<List<FioModel>> GetKnitConstructorsAsync() => _artNormRepository.GetRelKnitConstructors();
+
+        public Task<string> GetArticleImageAsync(int? annId, int? kod) => _artNormRepository.GetImage(annId, kod);
+
+        public Task<decimal> GetAnnCostAsync(int annId) => _artNormRepository.getArtNormnSeb(annId);
+
+        public Task<int> FindChildAnnIdAsync(int parentAnnId) =>
+            _dbService.GetEntityAsync<int>(
+                "SELECT annId FROM art_norm_n WHERE parentId = @parentId",
+                new { parentId = parentAnnId });
+
         public Task<List<ArtNormN>> GetWorkDivisionsAsync() => _artNormRepository.GetArtNormData();
 
         public Task<ArtNormN> GetWorkDivisionAsync(int annId) => _artNormRepository.GetArtNormDataById(annId);
@@ -95,6 +114,8 @@ namespace SewingProduction.Features.TeamWork.Services
                 .ToArray()
                 ?? Array.Empty<int>();
         }
+
+        public Task ExecutePztOperUpdateAsync() => _artNormRepository.ExecutePztOperUpdateAsync();
 
         public async Task<string> TryBuildApprovalDiffAsync(int annId, DateTime approvedAt)
         {
@@ -154,6 +175,10 @@ namespace SewingProduction.Features.TeamWork.Services
             await _dbService.UpdateFieldAsync(TableNames.Ann, "size_label", null, TableNames.AnnId, annIdNzpRow);
             await _dbService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, "parentId", annIdNzpRow);
         }
+        public async Task UpdateKitKnittingTimeInMatr(int annId)
+        {
+            await _dbHelper.ExecuteQueryAsync("dbo.UpdateKitKnittingTime", new Dictionary<string, object> { { "@annId", annId } }, CommandType.StoredProcedure);
+        }
 
         public async Task MarkApprovedAsync(int annId, DateTime approvedAt)
         {
@@ -170,6 +195,13 @@ namespace SewingProduction.Features.TeamWork.Services
             {
                 await _dbService.UpdateFieldAsync("sp_Articul", "annId", newAnnId, "annId", sourceAnnId);
             }
+        }
+
+        public async Task FinalizePreArchiveAsync(int sourceAnnId, int childAnnId)
+        {
+            await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", (int)Status.Archive, TableNames.AnnId, sourceAnnId);
+            await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", (int)Status.Actual, TableNames.AnnId, childAnnId);
+            await _dbService.UpdateFieldAsync("sp_Articul", "annId", sourceAnnId, "annId", childAnnId);
         }
 
         public async Task RollbackArchAndCopyAsync(int sourceAnnId, int? oldStatus, int? newAnnId)

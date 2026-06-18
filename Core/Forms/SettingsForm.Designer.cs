@@ -115,6 +115,7 @@ namespace SewingProduction.form
 			layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
 			layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
 			layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+			tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			((System.ComponentModel.ISupportInitialize)colorPickEditLabel.Properties).BeginInit();
 			contextMenuReset.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)colorPickEditTextBox.Properties).BeginInit();
@@ -146,6 +147,7 @@ namespace SewingProduction.form
 			((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
 			((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
 			((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
+			tableLayoutPanel1.SuspendLayout();
 			SuspendLayout();
 			// 
 			// customLabelTheme
@@ -292,7 +294,7 @@ namespace SewingProduction.form
 			// customButtonSaveExit
 			// 
 			customButtonSaveExit.Font = new System.Drawing.Font("Arial", 10F);
-			customButtonSaveExit.Location = new System.Drawing.Point(339, 488);
+			customButtonSaveExit.Location = new System.Drawing.Point(3, 468);
 			customButtonSaveExit.Name = "customButtonSaveExit";
 			customButtonSaveExit.Size = new System.Drawing.Size(251, 29);
 			customButtonSaveExit.TabIndex = 14;
@@ -696,11 +698,12 @@ namespace SewingProduction.form
 			// 
 			// tabSettings
 			// 
-			tabSettings.Location = new System.Drawing.Point(12, 30);
+			tabSettings.Dock = System.Windows.Forms.DockStyle.Fill;
+			tabSettings.Location = new System.Drawing.Point(3, 3);
 			tabSettings.Name = "tabSettings";
 			tabSettings.ObjectName = null;
 			tabSettings.SelectedTabPage = mainSettings;
-			tabSettings.Size = new System.Drawing.Size(909, 452);
+			tabSettings.Size = new System.Drawing.Size(927, 459);
 			tabSettings.TabIndex = 39;
 			tabSettings.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { mainSettings, themeSettings, myPrinterSettings, allPrinterSettings });
 			tabSettings.SelectedPageChanged += tabSettings_SelectedPageChanged;
@@ -718,7 +721,7 @@ namespace SewingProduction.form
 			mainSettings.Controls.Add(customCheckBoxSokrNameTabs);
 			mainSettings.Controls.Add(customCheckBoxPovtOpenTabs);
 			mainSettings.Name = "mainSettings";
-			mainSettings.Size = new System.Drawing.Size(907, 427);
+			mainSettings.Size = new System.Drawing.Size(925, 434);
 			mainSettings.Text = "Основные";
 			// 
 			// themeSettings
@@ -743,7 +746,7 @@ namespace SewingProduction.form
 			themeSettings.Controls.Add(customLabel3);
 			themeSettings.Controls.Add(colorPickEditLabelGridColor);
 			themeSettings.Name = "themeSettings";
-			themeSettings.Size = new System.Drawing.Size(907, 427);
+			themeSettings.Size = new System.Drawing.Size(925, 434);
 			themeSettings.Text = "Тема";
 			// 
 			// myPrinterSettings
@@ -753,7 +756,7 @@ namespace SewingProduction.form
 			myPrinterSettings.Controls.Add(comboBoxPrinters);
 			myPrinterSettings.Controls.Add(gridControlPrinters);
 			myPrinterSettings.Name = "myPrinterSettings";
-			myPrinterSettings.Size = new System.Drawing.Size(907, 427);
+			myPrinterSettings.Size = new System.Drawing.Size(925, 434);
 			myPrinterSettings.Text = "Мои принтеры";
 			// 
 			// customLabelDefPrint
@@ -810,7 +813,7 @@ namespace SewingProduction.form
 			// 
 			allPrinterSettings.Controls.Add(customLayoutControl1);
 			allPrinterSettings.Name = "allPrinterSettings";
-			allPrinterSettings.Size = new System.Drawing.Size(907, 427);
+			allPrinterSettings.Size = new System.Drawing.Size(925, 434);
 			allPrinterSettings.Text = "Администрирование принтеров";
 			// 
 			// customLayoutControl1
@@ -821,11 +824,12 @@ namespace SewingProduction.form
 			customLayoutControl1.Controls.Add(customButtonDel);
 			customLayoutControl1.Controls.Add(customGridControlParam);
 			customLayoutControl1.Controls.Add(gridPrinterParameters);
+			customLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
 			customLayoutControl1.Font = new System.Drawing.Font("Arial", 10F);
-			customLayoutControl1.Location = new System.Drawing.Point(8, 1);
+			customLayoutControl1.Location = new System.Drawing.Point(0, 0);
 			customLayoutControl1.Name = "customLayoutControl1";
 			customLayoutControl1.Root = Root;
-			customLayoutControl1.Size = new System.Drawing.Size(896, 419);
+			customLayoutControl1.Size = new System.Drawing.Size(925, 434);
 			customLayoutControl1.TabIndex = 1;
 			customLayoutControl1.Text = "customLayoutControl1";
 			// 
@@ -834,7 +838,7 @@ namespace SewingProduction.form
 			customLabel9.Appearance.Options.UseTextOptions = true;
 			customLabel9.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
 			customLabel9.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-			customLabel9.Location = new System.Drawing.Point(12, 394);
+			customLabel9.Location = new System.Drawing.Point(12, 409);
 			customLabel9.Name = "customLabel9";
 			customLabel9.Size = new System.Drawing.Size(298, 13);
 			customLabel9.StyleController = customLayoutControl1;
@@ -845,9 +849,9 @@ namespace SewingProduction.form
 			// customButtonSaveParam
 			// 
 			customButtonSaveParam.Font = new System.Drawing.Font("Arial", 10F);
-			customButtonSaveParam.Location = new System.Drawing.Point(685, 270);
+			customButtonSaveParam.Location = new System.Drawing.Point(707, 280);
 			customButtonSaveParam.Name = "customButtonSaveParam";
-			customButtonSaveParam.Size = new System.Drawing.Size(199, 38);
+			customButtonSaveParam.Size = new System.Drawing.Size(206, 39);
 			customButtonSaveParam.TabIndex = 7;
 			customButtonSaveParam.Text = "↑ Сохранить";
 			customButtonSaveParam.UseVisualStyleBackColor = true;
@@ -856,9 +860,9 @@ namespace SewingProduction.form
 			// customButtonAdd
 			// 
 			customButtonAdd.Font = new System.Drawing.Font("Arial", 10F);
-			customButtonAdd.Location = new System.Drawing.Point(685, 312);
+			customButtonAdd.Location = new System.Drawing.Point(707, 323);
 			customButtonAdd.Name = "customButtonAdd";
-			customButtonAdd.Size = new System.Drawing.Size(199, 37);
+			customButtonAdd.Size = new System.Drawing.Size(206, 38);
 			customButtonAdd.TabIndex = 6;
 			customButtonAdd.Text = "← Добавить";
 			customButtonAdd.UseVisualStyleBackColor = true;
@@ -867,9 +871,9 @@ namespace SewingProduction.form
 			// customButtonDel
 			// 
 			customButtonDel.Font = new System.Drawing.Font("Arial", 10F);
-			customButtonDel.Location = new System.Drawing.Point(685, 353);
+			customButtonDel.Location = new System.Drawing.Point(707, 365);
 			customButtonDel.Name = "customButtonDel";
-			customButtonDel.Size = new System.Drawing.Size(199, 37);
+			customButtonDel.Size = new System.Drawing.Size(206, 40);
 			customButtonDel.TabIndex = 5;
 			customButtonDel.Text = "← Удалить";
 			customButtonDel.UseVisualStyleBackColor = true;
@@ -878,11 +882,11 @@ namespace SewingProduction.form
 			// customGridControlParam
 			// 
 			customGridControlParam.Font = new System.Drawing.Font("Arial", 10F);
-			customGridControlParam.Location = new System.Drawing.Point(685, 12);
+			customGridControlParam.Location = new System.Drawing.Point(707, 12);
 			customGridControlParam.MainView = gridViewParam;
 			customGridControlParam.MenuManager = barManager1;
 			customGridControlParam.Name = "customGridControlParam";
-			customGridControlParam.Size = new System.Drawing.Size(199, 254);
+			customGridControlParam.Size = new System.Drawing.Size(206, 264);
 			customGridControlParam.TabIndex = 4;
 			customGridControlParam.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewParam });
 			// 
@@ -917,7 +921,7 @@ namespace SewingProduction.form
 			gridPrinterParameters.MainView = gridViewPrinterParameters;
 			gridPrinterParameters.MenuManager = barManager1;
 			gridPrinterParameters.Name = "gridPrinterParameters";
-			gridPrinterParameters.Size = new System.Drawing.Size(669, 378);
+			gridPrinterParameters.Size = new System.Drawing.Size(691, 393);
 			gridPrinterParameters.TabIndex = 0;
 			gridPrinterParameters.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewPrinterParameters });
 			// 
@@ -1031,7 +1035,7 @@ namespace SewingProduction.form
 			Root.GroupBordersVisible = false;
 			Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem4, layoutControlItem5, layoutControlItem6 });
 			Root.Name = "Root";
-			Root.Size = new System.Drawing.Size(896, 419);
+			Root.Size = new System.Drawing.Size(925, 434);
 			Root.TextVisible = false;
 			// 
 			// layoutControlItem1
@@ -1039,56 +1043,70 @@ namespace SewingProduction.form
 			layoutControlItem1.Control = gridPrinterParameters;
 			layoutControlItem1.Location = new System.Drawing.Point(0, 0);
 			layoutControlItem1.Name = "layoutControlItem1";
-			layoutControlItem1.Size = new System.Drawing.Size(673, 382);
+			layoutControlItem1.Size = new System.Drawing.Size(695, 397);
 			layoutControlItem1.TextVisible = false;
 			// 
 			// layoutControlItem2
 			// 
 			layoutControlItem2.Control = customGridControlParam;
-			layoutControlItem2.Location = new System.Drawing.Point(673, 0);
+			layoutControlItem2.Location = new System.Drawing.Point(695, 0);
 			layoutControlItem2.Name = "layoutControlItem2";
-			layoutControlItem2.Size = new System.Drawing.Size(203, 258);
+			layoutControlItem2.Size = new System.Drawing.Size(210, 268);
 			layoutControlItem2.TextVisible = false;
 			// 
 			// layoutControlItem3
 			// 
 			layoutControlItem3.Control = customButtonDel;
-			layoutControlItem3.Location = new System.Drawing.Point(673, 341);
+			layoutControlItem3.Location = new System.Drawing.Point(695, 353);
 			layoutControlItem3.Name = "layoutControlItem3";
-			layoutControlItem3.Size = new System.Drawing.Size(203, 41);
+			layoutControlItem3.Size = new System.Drawing.Size(210, 44);
 			layoutControlItem3.TextVisible = false;
 			// 
 			// layoutControlItem4
 			// 
 			layoutControlItem4.Control = customButtonAdd;
-			layoutControlItem4.Location = new System.Drawing.Point(673, 300);
+			layoutControlItem4.Location = new System.Drawing.Point(695, 311);
 			layoutControlItem4.Name = "layoutControlItem4";
-			layoutControlItem4.Size = new System.Drawing.Size(203, 41);
+			layoutControlItem4.Size = new System.Drawing.Size(210, 42);
 			layoutControlItem4.TextVisible = false;
 			// 
 			// layoutControlItem5
 			// 
 			layoutControlItem5.Control = customButtonSaveParam;
-			layoutControlItem5.Location = new System.Drawing.Point(673, 258);
+			layoutControlItem5.Location = new System.Drawing.Point(695, 268);
 			layoutControlItem5.Name = "layoutControlItem5";
-			layoutControlItem5.Size = new System.Drawing.Size(203, 42);
+			layoutControlItem5.Size = new System.Drawing.Size(210, 43);
 			layoutControlItem5.TextVisible = false;
 			// 
 			// layoutControlItem6
 			// 
 			layoutControlItem6.Control = customLabel9;
-			layoutControlItem6.Location = new System.Drawing.Point(0, 382);
+			layoutControlItem6.Location = new System.Drawing.Point(0, 397);
 			layoutControlItem6.Name = "layoutControlItem6";
-			layoutControlItem6.Size = new System.Drawing.Size(876, 17);
+			layoutControlItem6.Size = new System.Drawing.Size(905, 17);
 			layoutControlItem6.TextVisible = false;
+			// 
+			// tableLayoutPanel1
+			// 
+			tableLayoutPanel1.ColumnCount = 1;
+			tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			tableLayoutPanel1.Controls.Add(tabSettings, 0, 0);
+			tableLayoutPanel1.Controls.Add(customButtonSaveExit, 0, 1);
+			tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+			tableLayoutPanel1.Location = new System.Drawing.Point(0, 24);
+			tableLayoutPanel1.Name = "tableLayoutPanel1";
+			tableLayoutPanel1.RowCount = 2;
+			tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.4643555F));
+			tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.53564167F));
+			tableLayoutPanel1.Size = new System.Drawing.Size(933, 503);
+			tableLayoutPanel1.TabIndex = 44;
 			// 
 			// SettingsForm
 			// 
 			AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			ClientSize = new System.Drawing.Size(933, 547);
-			Controls.Add(tabSettings);
-			Controls.Add(customButtonSaveExit);
+			Controls.Add(tableLayoutPanel1);
 			Controls.Add(barDockControlLeft);
 			Controls.Add(barDockControlRight);
 			Controls.Add(barDockControlBottom);
@@ -1132,6 +1150,7 @@ namespace SewingProduction.form
 			((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
 			((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
 			((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
+			tableLayoutPanel1.ResumeLayout(false);
 			ResumeLayout(false);
 			PerformLayout();
 		}
@@ -1221,5 +1240,6 @@ namespace SewingProduction.form
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
 		private CustomLabel customLabel9;
 		private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 	}
 }

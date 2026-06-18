@@ -254,8 +254,7 @@ namespace SewingProduction.Features.Articul.Forms
 
                 }
             }
-            
-               
+
                  ApplyAcceptableMismatches(curRowSpArt, _comparisonResult);
                
                 _bindingSourceArticul.ResetBindings(false);
@@ -306,6 +305,8 @@ namespace SewingProduction.Features.Articul.Forms
 
                 object? value = mismatch.ExpectedValue;
                 property.SetValue(model, value);
+
+
 
             }
         }

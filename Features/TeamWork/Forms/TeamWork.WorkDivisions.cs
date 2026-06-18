@@ -32,32 +32,34 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// <returns></returns>
         private async Task LoadWorkDivisions(CancellationToken ct, bool loadRelatedData = true)
         {
+            ANNgridControl?.BeginUpdate();
             try
             {
-                ANNgridControl?.BeginUpdate();
-                ct.ThrowIfCancellationRequested();
-                // Получаем данные
-                var reloadResult = await _teamWorkService.LoadWorkDivisionsWithFocusAsync();
-                ct.ThrowIfCancellationRequested();
+                var reloadResult = await _presenter.LoadWorkDivisionsAsync(ct);
+                if (reloadResult == null) return; // отменено
 
-                var fioList = reloadResult.Designers ?? new List<FioModel>();
-                ArtNormN.FioSource = fioList;
-                _cachedFioData = fioList.Count > 0 ? new List<FioModel>(fioList) : _cachedFioData;
-
-                var data = reloadResult.Data;
-                ct.ThrowIfCancellationRequested();
-
-                if (data == null || data.Count == 0)
+                if (!reloadResult.Success || reloadResult.Data == null || reloadResult.Data.Count == 0)
                 {
                     _bindingList?.Clear();
                     if (_bindingSource != null) _bindingSource.DataSource = _bindingList;
                     _bindingSource?.ResetBindings(false);
-                    MessageBox.Show("Нет данных для загрузки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    await _logger.LogWarningAsync("Нет данных для загрузки в текущие работы", "LoadData");
+                    if (!reloadResult.Success)
+                        MessageBox.Show("Ошибка загрузки разделений труда.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                        MessageBox.Show("Нет данных для загрузки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    await _logger.LogWarningAsync(reloadResult.Error ?? "Нет данных", "LoadWorkDivisions");
                     return;
                 }
 
-                // Настраиваем отображение GridView
+                var fioList = reloadResult.Designers ?? new List<FioModel>();
+                ArtNormN.FioSource = fioList;
+                if (fioList.Count > 0)
+                {
+                    await _fioLoadLock.WaitAsync();
+                    try { _cachedFioData = fioList; }
+                    finally { _fioLoadLock.Release(); }
+                }
+
                 ANNgridView.OptionsView.EnableAppearanceEvenRow = true;
                 ANNgridView.OptionsView.EnableAppearanceOddRow = true;
                 ANNgridView.OptionsView.ShowAutoFilterRow = true;
@@ -65,74 +67,55 @@ namespace SewingProduction.Features.TeamWork.Forms
                 ANNgridView.OptionsView.ShowIndicator = false;
                 ANNgridView.OptionsView.ShowPreview = false;
 
-
-                // Сохраняем текущую позицию
                 int currentPosition = _bindingSource.Position;
-
-                // Назначаем новые данные
-                _bindingList.BulkLoad(data);
-                _bindingSource.DataSource = _bindingList; // если ещё не привязано
-
+                _bindingList.BulkLoad(reloadResult.Data);
+                _bindingSource.DataSource = _bindingList;
                 ANNgridControl.DataSource = _bindingSource;
-
-                // Применяем фильтры после привязки источника данных
                 filterTable();
-
-                // Устанавливаем позицию сразу после DataSource
                 _bindingSource.Position = currentPosition < _bindingSource.Count ? currentPosition : 0;
-
-                // Устанавливаем привязки после позиции
                 BindTextFields();
                 InitializeBindings();
 
-                await _logger.LogEventAsync("Данные загружены успешно", "LoadData");
-                // Включаем обновление UI
-                ANNgridControl.EndUpdate();
-                // Загружаем связанные данные для текущей строки, а не для первой
-                int targetAnnId = 0;
-                try
+                await _logger.LogEventAsync("Данные загружены успешно", "LoadWorkDivisions");
+
+                if (loadRelatedData)
                 {
-                    if (ANNgridView != null && ANNgridView.FocusedRowHandle >= 0)
-                    {
-                        if (ANNgridView.GetRow(ANNgridView.FocusedRowHandle) is ArtNormN focusedRow)
-                            targetAnnId = focusedRow.AnnID;
-                    }
-
-                    if (targetAnnId == 0 && _bindingSource != null)
-                    {
-                        int pos = _bindingSource.Position;
-                        if (pos >= 0 && pos < _bindingList.Count)
-                            targetAnnId = _bindingList[pos].AnnID;
-                    }
-
-                    if (targetAnnId == 0 && _bindingList.Count > 0)
-                        targetAnnId = _bindingList[0].AnnID;
+                    int targetAnnId = ResolveTargetAnnId();
+                    if (targetAnnId > 0)
+                        await LoadRelatedData(targetAnnId, ct);
                 }
-                catch (Exception ex)
-                {
-                    await _logger.LogErrorAsync(ex, "LoadWorkDivisions: failed to resolve targetAnnId");
-                }
-
-                if (loadRelatedData && targetAnnId > 0)
-                    await LoadRelatedData(targetAnnId);
-            }
-            catch (OperationCanceledException)
-            {
-                // просто выходим — загрузку отменили (сменили вкладку / закрыли форму)
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в LoadWorkDivisions: {ex.Message}");
+                await _logger.LogErrorAsync(ex, "LoadWorkDivisions");
                 _bindingList?.Clear();
-                if (_bindingSource != null) _bindingSource.DataSource = _bindingList;
                 _bindingSource?.ResetBindings(false);
-                MessageBox.Show("Произошла ошибка при загрузке разделений труда.", "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Произошла ошибка при загрузке разделений труда.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
                 ANNgridControl?.EndUpdate();
             }
+        }
+
+        private int ResolveTargetAnnId()
+        {
+            try
+            {
+                if (ANNgridView != null && ANNgridView.FocusedRowHandle >= 0)
+                    if (ANNgridView.GetRow(ANNgridView.FocusedRowHandle) is ArtNormN row)
+                        return row.AnnID;
+
+                if (_bindingSource != null)
+                {
+                    int pos = _bindingSource.Position;
+                    if (pos >= 0 && pos < _bindingList.Count)
+                        return _bindingList[pos].AnnID;
+                }
+
+                return _bindingList.Count > 0 ? _bindingList[0].AnnID : 0;
+            }
+            catch { return 0; }
         }
 
         /// <summary>
@@ -237,22 +220,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                if (annId <= 0)
-                {
-                    await _logger.LogEventAsync("LoadRelatedData: Некорректный AnnID", "LoadRelatedData");
-                    return;
-                }
-
-                cancellationToken.ThrowIfCancellationRequested();
-
-                // Используем TeamWorkService для получения данных
-                var result = await _teamWorkService.RefreshRelatedDataAsync(annId);
-
-                cancellationToken.ThrowIfCancellationRequested();
+                var result = await _presenter.LoadRelatedDataAsync(annId, cancellationToken);
+                if (result == null) return; // отменено
 
                 if (result.Success)
                 {
-                    // Используем UIHelper для обновления UI
                     await _uiHelper.UpdateRelatedDataUIAsync(
                         result,
                         _normRaskListTW,
@@ -263,97 +235,20 @@ namespace SewingProduction.Features.TeamWork.Forms
                         gridControlKontTW,
                         this);
 
-                    cancellationToken.ThrowIfCancellationRequested();
-
-                    // Загружаем и привязываем FIO списки
                     await LoadAndBindFioListsAsync();
-
                     await _logger.LogEventAsync($"Связанные данные для AnnID: {annId} успешно загружены", "LoadRelatedData");
                 }
                 else
                 {
-                    await _logger.LogErrorAsync(new Exception(result.Error), $"Ошибка при загрузке связанных данных для AnnID: {annId}");
+                    await _logger.LogErrorAsync(new Exception(result.Error), $"Ошибка загрузки связанных данных AnnID={annId}");
                 }
-            }
-            catch (OperationCanceledException)
-            {
-                await _logger.LogEventAsync($"Загрузка связанных данных для AnnID: {annId} отменена", "LoadRelatedData");
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка при загрузке связанных данных для AnnID: {annId}");
+                await _logger.LogErrorAsync(ex, $"LoadRelatedData AnnID={annId}");
             }
         }
 
-        /// <summary>
-        /// Загружаем связанные данные из normraszview (без CancellationToken, но с возможностью отмены через внешний токен)
-        /// </summary>
-        private async Task LoadRelatedDataFromView(int annId, CancellationToken ct)
-        {
-            ct.ThrowIfCancellationRequested();
-
-            // Загружаем данные в фоновом потоке
-            var dataLoadTask = Task.Run(async () =>
-            {
-                ct.ThrowIfCancellationRequested();
-
-                // Параллельная загрузка данных из БД
-                Task<List<NormRask>> normRaskTask = _artNormService.GetRelatedNormRask(annId);
-                Task<List<NormKont>> normKontTask = _artNormService.GetRelatedNormKont(annId);
-                Task<List<NormRasz>> normRaszTask = _artNormService.GetRelatedNormRasz(annId); // Этот метод использует normraszview
-
-                ct.ThrowIfCancellationRequested();
-
-                var normRaskResult = await normRaskTask;
-                var normKontResult = await normKontTask;
-                var normRaszResult = await normRaszTask;
-
-                ct.ThrowIfCancellationRequested();
-
-                return new { normRaskResult, normKontResult, normRaszResult };
-            }, ct);
-
-            var data = await dataLoadTask;
-            ct.ThrowIfCancellationRequested();
-
-            // Обновление UI должно происходить в UI потоке
-            if (this.InvokeRequired)
-            {
-                await this.InvokeAsync(() =>
-                {
-                    _normRaskListTW.BulkLoad(data.normRaskResult);
-                    _normKontListTW.BulkLoad(data.normKontResult);
-                    _normRaszListTW.BulkLoad(data.normRaszResult); // Данные из normraszview
-                });
-            }
-            else
-            {
-                _normRaskListTW.BulkLoad(data.normRaskResult);
-                _normKontListTW.BulkLoad(data.normKontResult);
-                _normRaszListTW.BulkLoad(data.normRaszResult); // Данные из normraszview
-            }
-
-            ct.ThrowIfCancellationRequested();
-
-            await LoadAndBindFioListsAsync();
-
-            // Сортировка детализирующих таблиц после загрузки данных - тоже в UI потоке
-            if (this.InvokeRequired)
-            {
-                await this.InvokeAsync(() =>
-                {
-                    if (gridControlRaszTW.MainView is GridView raszView) TWGridHelper.sortGridView(raszView);
-                    if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
-                    if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
-                });
-            }
-            else
-            {
-                if (gridControlRaszTW.MainView is GridView raszView) TWGridHelper.sortGridView(raszView);
-                if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
-                if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
-            }
-        }
         /// <summary>
         /// Обновляем статус кнопки "Отвязать" в зависимости от НЗП
         /// </summary>
@@ -412,37 +307,27 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                if (_cachedFioData == null)
+                if (_cachedFioData == null || _cachedKnitConstrFioData == null)
                 {
-                    var fioData = await _artNormService.GetRelDesigner();
-                    if (fioData != null && fioData.Count > 0)
+                    await _fioLoadLock.WaitAsync();
+                    try
                     {
-                        _cachedFioData = new List<FioModel>(fioData);
-                        await _logger.LogEventAsync("FIO загружено и закешировано", "LoadAndBindFioListsAsync");
+                        if (_cachedFioData == null || _cachedKnitConstrFioData == null)
+                        {
+                            var fioResult = await _teamWorkService.LoadFioDataAsync();
+                            if (fioResult.Designers.Count > 0)
+                                _cachedFioData = fioResult.Designers;
+                            if (fioResult.KnitConstructors.Count > 0)
+                                _cachedKnitConstrFioData = fioResult.KnitConstructors;
+                        }
                     }
-                    else
+                    finally
                     {
-                        await _logger.LogEventAsync("Пустой список FIO", "LoadAndBindFioListsAsync");
-                        return;
+                        _fioLoadLock.Release();
                     }
                 }
-                // Устанавливаем общий источник для модели ArtNormN
+
                 ArtNormN.FioSource = _cachedFioData;
-
-                if (_cachedKnitConstrFioData == null)
-                {
-                    var knitConstrData = await _artNormService.GetRelKnitConstructors();
-                    if (knitConstrData != null && knitConstrData.Count > 0)
-                    {
-                        _cachedKnitConstrFioData = new List<FioModel>(knitConstrData);
-                        await _logger.LogEventAsync("FIO конструкторов-программистов загружено и закешировано", "LoadAndBindFioListsAsync");
-                    }
-                    else
-                    {
-                        await _logger.LogEventAsync("Пустой список FIO конструкторов-программистов", "LoadAndBindFioListsAsync");
-                    }
-                }
-
                 ArtNormN.KnitConstrSource = _cachedKnitConstrFioData;
                 _bindingSource.DataSource = _bindingList;
                 _bindingSource.ResetBindings(false);
@@ -521,10 +406,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             var view = ANNgridView;
             var rowHandle = view.FocusedRowHandle;
+            if (rowHandle < 0) return;
             var dateUpdate = view.GetRowCellValue(rowHandle, "dateUpdate");
-            int annId = (int)view.GetRowCellValue(rowHandle, "AnnID");
-            string articul = view.GetRowCellValue(rowHandle, "Articul").ToString();
-            int slogn = (int)view.GetRowCellValue(rowHandle, "Slogn");
+            int annId = Convert.ToInt32(view.GetRowCellValue(rowHandle, "AnnID") ?? 0);
+            string articul = view.GetRowCellValue(rowHandle, "Articul")?.ToString() ?? string.Empty;
+            int slogn = Convert.ToInt32(view.GetRowCellValue(rowHandle, "Slogn") ?? 0);
             bool hasKnittingOps = _normRaszListTW?.Any(r => r.annId == annId && (r.KodPodr == 1 || r.KodProizv == 3)) ?? false;
             if (!hasKnittingOps && slogn is 0)
             { _ = MessageBox.Show("Сложность не может быть равна нулю."); return; }
@@ -735,6 +621,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             // Обработка результата по закрытию формы
             teamWork_AdvanceTW.FormClosed += async (s, args) =>
             {
+                try
+                {
                 if (teamWork_AdvanceTW.DialogResult == DialogResult.OK)
                 {
                     var createdItem = teamWork_AdvanceTW.CreatedAnn;
@@ -796,36 +684,33 @@ namespace SewingProduction.Features.TeamWork.Forms
                     ANNgridControl.RefreshDataSource();
                     ANNgridView.RefreshData();
                 }
+                }
+                catch (Exception ex)
+                {
+                    await _logger.LogErrorAsync(ex, "ButtonPreliminaryWd_Click_Internal: FormClosed");
+                }
             };
         }
 
-        
+
         private async Task Arch(object sender, EventArgs e)
         {
             int rowHandle = gridViewPreArch.FocusedRowHandle;
             MyDataANN Row = gridViewPreArch.GetRow(rowHandle) as MyDataANN;
-            int newId = Row.AnnID;
-            ArtNormN oldRow = await _dbService.GetEntityAsync<ArtNormN>(@"Select * from ArtNormNView where annId = @newId", new { newId });
-            int oldId = oldRow.AnnID;
-            int newRowId = await _dbService.GetEntityAsync<int>(@"select annId from art_norm_n where parentId = @oldId", new { oldId });
-            if (oldRow == null) return;
+            if (Row == null) return;
 
-            await _logger.LogEventAsync($"Установка нового статуса: {Status.Archive}", "Arch");
+            var result = await _teamWorkService.FinalizePreArchiveTransitionAsync(Row.AnnID);
+            if (!result.Success)
+            {
+                await _logger.LogErrorAsync(new Exception(result.Error), "Arch");
+                return;
+            }
 
-            oldRow.Status = (int)Status.Archive;
-            oldRow.StatusText = StatusHelper.GetStatusText((int)Status.Archive);
+            if (result.UpdatedSourceAnn != null)
+                UpdateRowInBindingList(result.UpdatedSourceAnn);
 
-            await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", oldRow.Status, TableNames.AnnId, oldRow.AnnID);
-            await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", Status.Actual, TableNames.AnnId, newRowId);
-            UpdateRowInBindingList(oldRow);
-
-            await _dbService.UpdateFieldAsync("sp_Articul", "annId", oldRow.AnnID, "annId", newRowId);
-
-            // Обновляем данные архива после перевода из предварительного архива
             await RefreshArchData();
-
-            await _logger.LogEventAsync($"Запись ID={oldRow.AnnID} архивирована. Артикулы {""} привязаны к новой записи {oldRow.ParentId}", "Arch");
-
+            await _logger.LogEventAsync($"Запись ID={Row.AnnID} архивирована", "Arch");
         }
 
         #endregion
@@ -875,13 +760,16 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
                 editForm.FormClosed += async (s, args) =>
                 {
-                    if (editForm.DialogResult == DialogResult.OK)
+                    try
                     {
-                        await HandleSuccessfulEdit(selectedItem, editForm.CreatedAnn, hasNZP);
+                        if (editForm.DialogResult == DialogResult.OK)
+                            await HandleSuccessfulEdit(selectedItem, editForm.CreatedAnn, hasNZP);
+                        else
+                            await HandleCancelledEdit(selectedItem, newRow, oldStatus);
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        await HandleCancelledEdit(selectedItem, newRow, oldStatus);
+                        await _logger.LogErrorAsync(ex, "ArchAndCopy: FormClosed");
                     }
                 };
             }
@@ -929,16 +817,15 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // 2. Копируем строку (метод может быть вынесен отдельно по аналогии с CopyRow)
                 newRow = await CopyRowGeneric(selectedItem, hasNZP, list, bindingSource, forMyDataAnnView);
-                newRow.dateCreate = DateTime.Now;
-                newRow.dateUpdate = null;
-                await _logger.LogEventAsync($"Создана новая запись со статусом: {newRow?.Status}", "ArchAndCopy");
-
                 if (newRow == null)
                 {
                     MessageBox.Show("Не удалось создать новую запись.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     await _logger.LogWarningAsync("Не удалось создать новую запись при архивировании", "ArchAndCopy");
                     return;
                 }
+                newRow.dateCreate = DateTime.Now;
+                newRow.dateUpdate = null;
+                await _logger.LogEventAsync($"Создана новая запись со статусом: {newRow.Status}", "ArchAndCopy");
 
                 // 3. Открываем форму редактирования новой записи (немодально)
                 var editForm = OpenAdvanceFormNonModal(bufferId, (int)Mode.ArchAndCopy, newRow.AnnID, selectedItem.AnnID);
@@ -948,13 +835,16 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
                 editForm.FormClosed += async (s, args) =>
                 {
-                    if (editForm.DialogResult == DialogResult.OK)
+                    try
                     {
-                        await HandleSuccessfulEdit(selectedItem, editForm.CreatedAnn, hasNZP);
+                        if (editForm.DialogResult == DialogResult.OK)
+                            await HandleSuccessfulEdit(selectedItem, editForm.CreatedAnn, hasNZP);
+                        else
+                            await HandleCancelledEdit(selectedItem, newRow, oldStatus);
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        await HandleCancelledEdit(selectedItem, newRow, oldStatus);
+                        await _logger.LogErrorAsync(ex, "ArchAndCopy: FormClosed");
                     }
                 };
             }
