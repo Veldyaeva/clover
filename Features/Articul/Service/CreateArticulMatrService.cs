@@ -353,10 +353,10 @@ namespace SewingProduction.Features.Articul.Service
                 Articul = matrArt.Articul,
                 Mod = matrArt.Article,
                 Baza = matrArt.Baza,// сезон
-                SeasonName = matrArt.Tsn_name,
+                SeasonName = matrArt.SeasonName,
                 Grupp = matrArt.Men_int,
                 GrupMenName = matrArt.Grupmen_name,
-                TmName = matrArt.Tm_name,
+                TmName = matrArt.SeasonName,
                 Kle = matrArt.Kle,//ТМ sp 
                 Sost = matrArt.Sost,
                 Sost2 = matrArt.Sost2,

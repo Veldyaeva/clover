@@ -36,10 +36,12 @@ namespace SewingProduction.Features.Articul.Models
         /// <summary>
         /// сезон
         /// </summary>
-        public string Tsn_name { get; set; }
+        public string SeasonName { get; set; }
         /// <summary>
         /// товарная группа
         /// </summary>
+        ///
+
         public int Men_int { get; set; }
         /// <summary>
         /// идентификатор сезона
@@ -63,14 +65,15 @@ namespace SewingProduction.Features.Articul.Models
         public string Articul { get; set; }
         public string MatrixGrupName { get; set; }
         public DateTime? DatePublic { get; set; }
-        /// <summary>
-        /// торговая марка
-        /// </summary>
-        public string Tm_name { get; set; }
+       
         /// <summary>
         /// Торговая марка (*, -, +, , 5)
         /// </summary>
         public string Kle {  get; set; }
+        /// <summary>
+        /// Товарная марка
+        /// </summary>
+        public string TmName { get; set; }
         /// <summary>
         /// группа
         /// </summary>
@@ -155,7 +158,7 @@ namespace SewingProduction.Features.Articul.Models
         public DateTime? DateCertificationApproval { get; set; }
         [NotMapped] public string Unic_IdGost_idAg { get => $"{Ag_id}|{Id_gost}";
             set
-            {
+            {// уникальное поле для поиска гост + группа по госту
                 if (string.IsNullOrWhiteSpace(value))
                     return;
 
@@ -167,7 +170,7 @@ namespace SewingProduction.Features.Articul.Models
 
                 if (int.TryParse(parts[1], out int idGost))
                     Id_gost = idGost;
-            } // уникальное поле для поиска гост + группа по госту
+            } 
         }
     }
 }

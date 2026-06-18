@@ -159,9 +159,6 @@ namespace SewingProduction.Features.Articul.Service
             return CheckResult.Success();
         }
 
-
-
-
     }
 
     public class CheckResult
