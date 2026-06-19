@@ -143,9 +143,6 @@ namespace SewingProduction.Features.Articul.Forms
             cbTM = new CustomComboBox();
             cbuKod_t1 = new CustomSearchLookUpEdit();
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem25 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutCommonArticul = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -168,6 +165,9 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem21 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
+            Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem25 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem30 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem31 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -179,10 +179,34 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem35 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroup6 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlGroup12 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem23 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem24 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem26 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutSumZP = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem89 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem91 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem88 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem90 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem96 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem97 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem92 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem93 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem94 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem95 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem98 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem100 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem101 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlGroup11 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem82 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem83 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem84 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem85 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem86 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem87 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutTkans = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem51 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem52 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -207,14 +231,6 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem48 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem49 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem50 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlGroup9 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlItem68 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem69 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem70 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem71 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem72 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem73 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem74 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutOpis_t = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem75 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem76 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -231,28 +247,15 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem66 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem67 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem61 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutSumZP = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlItem89 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem91 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem88 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem90 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem96 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem97 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem92 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem93 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem94 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem95 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem98 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem100 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem101 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlGroup11 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlItem82 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem83 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem84 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem85 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem86 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem87 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlGroup9 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem68 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem69 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem70 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem71 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem72 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem73 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem74 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             customLayoutControl1 = new CustomLayoutControl();
             layoutControlGroup7 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -264,9 +267,6 @@ namespace SewingProduction.Features.Articul.Forms
             emptySpaceItem6 = new DevExpress.XtraLayout.EmptySpaceItem();
             customLayoutControl2 = new CustomLayoutControl();
             layoutControlGroup10 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlGroup12 = new DevExpress.XtraLayout.LayoutControlGroup();
-            emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)gridEditAdRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewEditAdvRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit1).BeginInit();
@@ -351,9 +351,6 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)txbMod.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cbuKod_t1.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem25).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutCommonArticul).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem17).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem18).BeginInit();
@@ -376,6 +373,9 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem20).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem21).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem22).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem25).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem30).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem31).BeginInit();
@@ -387,10 +387,34 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem35).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem10).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem16).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup12).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem23).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem24).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem16).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem26).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutSumZP).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem89).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem91).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem88).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem90).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem96).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem97).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem92).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem93).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem94).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem95).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem98).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem100).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem101).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem19).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup11).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem82).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem83).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem84).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem85).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem86).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem87).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutTkans).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem51).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem52).BeginInit();
@@ -415,14 +439,6 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem48).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem49).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem50).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup9).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem68).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem69).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem70).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem71).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem72).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem73).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem74).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutOpis_t).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem75).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem76).BeginInit();
@@ -439,28 +455,15 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem66).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem67).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem61).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutSumZP).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem89).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem91).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem88).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem90).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem96).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem97).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem92).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem93).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem94).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem95).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem98).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem100).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem101).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup11).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem82).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem83).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem84).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem85).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem86).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem87).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem19).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup9).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem68).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem69).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem70).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem71).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem72).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem73).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem74).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customLayoutControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).BeginInit();
@@ -472,9 +475,6 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customLayoutControl2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup10).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup12).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
             SuspendLayout();
             // 
             // gridEditAdRazm
@@ -684,12 +684,13 @@ namespace SewingProduction.Features.Articul.Forms
             customSimpleButton1.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             customSimpleButton1.AppearanceDisabled.Options.UseBackColor = true;
             customSimpleButton1.AppearanceDisabled.Options.UseForeColor = true;
+            customSimpleButton1.ImageOptions.Image = Properties.Resources.iconsetsymbols3_16x16;
             customSimpleButton1.Location = new System.Drawing.Point(17, 625);
             customSimpleButton1.Name = "customSimpleButton1";
             customSimpleButton1.Size = new System.Drawing.Size(271, 22);
             customSimpleButton1.StyleController = dataLayoutCommonArticul;
             customSimpleButton1.TabIndex = 41;
-            customSimpleButton1.Text = "customSimpleButton1";
+            customSimpleButton1.Text = "Сохранить";
             customSimpleButton1.Click += SaveChanges;
             // 
             // btDel
@@ -1861,33 +1862,6 @@ namespace SewingProduction.Features.Articul.Forms
             gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
             gridView1.OptionsView.ShowGroupPanel = false;
             // 
-            // Root
-            // 
-            Root.CustomizationFormText = "Основная информация";
-            Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem3, layoutControlItem25, layoutControlGroup3, layoutControlGroup6, layoutSumZP, layoutControlItem19, layoutControlGroup5 });
-            Root.Name = "Root";
-            Root.Size = new System.Drawing.Size(1361, 664);
-            // 
-            // layoutControlItem3
-            // 
-            layoutControlItem3.Control = pictureBoxArticul;
-            layoutControlItem3.Location = new System.Drawing.Point(0, 0);
-            layoutControlItem3.MinSize = new System.Drawing.Size(120, 120);
-            layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new System.Drawing.Size(285, 180);
-            layoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem3.TextVisible = false;
-            // 
-            // layoutControlItem25
-            // 
-            layoutControlItem25.Control = articulControlCard;
-            layoutControlItem25.Location = new System.Drawing.Point(285, 0);
-            layoutControlItem25.Name = "layoutControlItem25";
-            layoutControlItem25.Size = new System.Drawing.Size(880, 333);
-            layoutControlItem25.TextVisible = false;
-            // 
             // layoutCommonArticul
             // 
             layoutCommonArticul.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -2137,6 +2111,33 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem22.Text = "подклад\\наполнитель";
             layoutControlItem22.TextSize = new System.Drawing.Size(114, 13);
             // 
+            // Root
+            // 
+            Root.CustomizationFormText = "Основная информация";
+            Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            Root.GroupBordersVisible = false;
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem3, layoutControlItem25, layoutControlGroup3, layoutControlGroup6, layoutSumZP, layoutControlItem19, layoutControlGroup5 });
+            Root.Name = "Root";
+            Root.Size = new System.Drawing.Size(1361, 664);
+            // 
+            // layoutControlItem3
+            // 
+            layoutControlItem3.Control = pictureBoxArticul;
+            layoutControlItem3.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem3.MinSize = new System.Drawing.Size(120, 120);
+            layoutControlItem3.Name = "layoutControlItem3";
+            layoutControlItem3.Size = new System.Drawing.Size(285, 180);
+            layoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem3.TextVisible = false;
+            // 
+            // layoutControlItem25
+            // 
+            layoutControlItem25.Control = articulControlCard;
+            layoutControlItem25.Location = new System.Drawing.Point(285, 0);
+            layoutControlItem25.Name = "layoutControlItem25";
+            layoutControlItem25.Size = new System.Drawing.Size(880, 333);
+            layoutControlItem25.TextVisible = false;
+            // 
             // layoutControlGroup3
             // 
             layoutControlGroup3.CustomizationFormText = "Отделка";
@@ -2228,14 +2229,14 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem10.Size = new System.Drawing.Size(281, 402);
             layoutControlItem10.TextVisible = false;
             // 
-            // layoutControlItem16
+            // layoutControlGroup12
             // 
-            layoutControlItem16.Control = btAdd;
-            layoutControlItem16.CustomizationFormText = "add";
-            layoutControlItem16.Location = new System.Drawing.Point(0, 0);
-            layoutControlItem16.Name = "layoutControlItem16";
-            layoutControlItem16.Size = new System.Drawing.Size(94, 26);
-            layoutControlItem16.TextVisible = false;
+            layoutControlGroup12.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem23, layoutControlItem24, layoutControlItem16, layoutControlItem26 });
+            layoutControlGroup12.Location = new System.Drawing.Point(0, 402);
+            layoutControlGroup12.Name = "layoutControlGroup12";
+            layoutControlGroup12.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            layoutControlGroup12.Size = new System.Drawing.Size(281, 58);
+            layoutControlGroup12.TextVisible = false;
             // 
             // layoutControlItem23
             // 
@@ -2255,6 +2256,15 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem24.Size = new System.Drawing.Size(86, 26);
             layoutControlItem24.TextVisible = false;
             // 
+            // layoutControlItem16
+            // 
+            layoutControlItem16.Control = btAdd;
+            layoutControlItem16.CustomizationFormText = "add";
+            layoutControlItem16.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem16.Name = "layoutControlItem16";
+            layoutControlItem16.Size = new System.Drawing.Size(94, 26);
+            layoutControlItem16.TextVisible = false;
+            // 
             // layoutControlItem26
             // 
             layoutControlItem26.Control = customSimpleButton1;
@@ -2262,6 +2272,299 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem26.Name = "layoutControlItem26";
             layoutControlItem26.Size = new System.Drawing.Size(275, 26);
             layoutControlItem26.TextVisible = false;
+            // 
+            // layoutSumZP
+            // 
+            layoutSumZP.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem89, layoutControlItem91, layoutControlItem88, layoutControlItem90, layoutControlItem96, layoutControlItem97, layoutControlItem92, layoutControlItem93, layoutControlItem94, layoutControlItem95, layoutControlItem98, layoutControlItem100, layoutControlItem101 });
+            layoutSumZP.Location = new System.Drawing.Point(1165, 229);
+            layoutSumZP.Name = "item1";
+            layoutSumZP.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            layoutSumZP.Size = new System.Drawing.Size(176, 415);
+            layoutSumZP.Text = "ЗП";
+            // 
+            // layoutControlItem89
+            // 
+            layoutControlItem89.Control = txtSum_dopopl;
+            layoutControlItem89.CustomizationFormText = "доп.оплата";
+            layoutControlItem89.Location = new System.Drawing.Point(0, 28);
+            layoutControlItem89.MinSize = new System.Drawing.Size(135, 26);
+            layoutControlItem89.Name = "layoutControlItem89";
+            layoutControlItem89.OptionsTableLayoutItem.RowIndex = 1;
+            layoutControlItem89.Size = new System.Drawing.Size(170, 28);
+            layoutControlItem89.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem89.Text = "доп.оплата";
+            layoutControlItem89.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem89.TextSize = new System.Drawing.Size(76, 13);
+            layoutControlItem89.TextToControlDistance = 5;
+            // 
+            // layoutControlItem91
+            // 
+            layoutControlItem91.Control = txtSum_sebraskr;
+            layoutControlItem91.Location = new System.Drawing.Point(0, 84);
+            layoutControlItem91.MinSize = new System.Drawing.Size(135, 26);
+            layoutControlItem91.Name = "layoutControlItem91";
+            layoutControlItem91.Size = new System.Drawing.Size(170, 28);
+            layoutControlItem91.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem91.Text = "раскрой";
+            layoutControlItem91.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem91.TextSize = new System.Drawing.Size(76, 20);
+            layoutControlItem91.TextToControlDistance = 5;
+            // 
+            // layoutControlItem88
+            // 
+            layoutControlItem88.Control = txtSum_zarpl;
+            layoutControlItem88.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem88.MinSize = new System.Drawing.Size(135, 26);
+            layoutControlItem88.Name = "layoutControlItem88";
+            layoutControlItem88.OptionsTableLayoutItem.ColumnIndex = 1;
+            layoutControlItem88.Size = new System.Drawing.Size(170, 28);
+            layoutControlItem88.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem88.Text = "зарплата РТ";
+            layoutControlItem88.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem88.TextSize = new System.Drawing.Size(76, 13);
+            layoutControlItem88.TextToControlDistance = 5;
+            // 
+            // layoutControlItem90
+            // 
+            layoutControlItem90.Control = txtSum_strvznos;
+            layoutControlItem90.Location = new System.Drawing.Point(0, 56);
+            layoutControlItem90.MinSize = new System.Drawing.Size(135, 26);
+            layoutControlItem90.Name = "layoutControlItem90";
+            layoutControlItem90.OptionsTableLayoutItem.ColumnIndex = 1;
+            layoutControlItem90.OptionsTableLayoutItem.RowIndex = 1;
+            layoutControlItem90.Size = new System.Drawing.Size(170, 28);
+            layoutControlItem90.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem90.Text = "ст.взносы";
+            layoutControlItem90.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem90.TextSize = new System.Drawing.Size(76, 13);
+            layoutControlItem90.TextToControlDistance = 5;
+            // 
+            // layoutControlItem96
+            // 
+            layoutControlItem96.Control = txtKoef_d;
+            layoutControlItem96.Location = new System.Drawing.Point(0, 226);
+            layoutControlItem96.MinSize = new System.Drawing.Size(135, 26);
+            layoutControlItem96.Name = "layoutControlItem96";
+            layoutControlItem96.OptionsTableLayoutItem.RowIndex = 4;
+            layoutControlItem96.Size = new System.Drawing.Size(170, 28);
+            layoutControlItem96.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem96.Text = "коэф.ВЭД и ДГ";
+            layoutControlItem96.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem96.TextSize = new System.Drawing.Size(76, 13);
+            layoutControlItem96.TextToControlDistance = 5;
+            // 
+            // layoutControlItem97
+            // 
+            layoutControlItem97.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
+            layoutControlItem97.AppearanceItemCaption.Options.UseFont = true;
+            layoutControlItem97.Control = txtSeb_proizv;
+            layoutControlItem97.Location = new System.Drawing.Point(0, 254);
+            layoutControlItem97.MinSize = new System.Drawing.Size(135, 26);
+            layoutControlItem97.Name = "layoutControlItem97";
+            layoutControlItem97.OptionsTableLayoutItem.ColumnIndex = 1;
+            layoutControlItem97.OptionsTableLayoutItem.RowIndex = 4;
+            layoutControlItem97.Size = new System.Drawing.Size(170, 29);
+            layoutControlItem97.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem97.Text = "произв.себ.";
+            layoutControlItem97.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem97.TextSize = new System.Drawing.Size(76, 14);
+            layoutControlItem97.TextToControlDistance = 5;
+            // 
+            // layoutControlItem92
+            // 
+            layoutControlItem92.Control = txtSum_komplnum;
+            layoutControlItem92.Location = new System.Drawing.Point(0, 112);
+            layoutControlItem92.MinSize = new System.Drawing.Size(135, 26);
+            layoutControlItem92.Name = "layoutControlItem92";
+            layoutControlItem92.OptionsTableLayoutItem.RowIndex = 2;
+            layoutControlItem92.Size = new System.Drawing.Size(170, 28);
+            layoutControlItem92.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem92.Text = "компл. и нумер.";
+            layoutControlItem92.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem92.TextSize = new System.Drawing.Size(76, 13);
+            layoutControlItem92.TextToControlDistance = 5;
+            // 
+            // layoutControlItem93
+            // 
+            layoutControlItem93.Control = txtSeb_z;
+            layoutControlItem93.Location = new System.Drawing.Point(0, 140);
+            layoutControlItem93.MinSize = new System.Drawing.Size(135, 26);
+            layoutControlItem93.Name = "layoutControlItem93";
+            layoutControlItem93.OptionsTableLayoutItem.ColumnIndex = 1;
+            layoutControlItem93.OptionsTableLayoutItem.RowIndex = 2;
+            layoutControlItem93.Size = new System.Drawing.Size(170, 29);
+            layoutControlItem93.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem93.Text = "зарплата";
+            layoutControlItem93.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem93.TextSize = new System.Drawing.Size(76, 13);
+            layoutControlItem93.TextToControlDistance = 5;
+            // 
+            // layoutControlItem94
+            // 
+            layoutControlItem94.Control = txtSeb_dop;
+            layoutControlItem94.Location = new System.Drawing.Point(0, 169);
+            layoutControlItem94.MinSize = new System.Drawing.Size(135, 26);
+            layoutControlItem94.Name = "layoutControlItem94";
+            layoutControlItem94.OptionsTableLayoutItem.RowIndex = 3;
+            layoutControlItem94.Size = new System.Drawing.Size(170, 28);
+            layoutControlItem94.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem94.Text = "пр.затраты";
+            layoutControlItem94.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem94.TextSize = new System.Drawing.Size(76, 13);
+            layoutControlItem94.TextToControlDistance = 5;
+            // 
+            // layoutControlItem95
+            // 
+            layoutControlItem95.Control = txtKoef_pr;
+            layoutControlItem95.Location = new System.Drawing.Point(0, 197);
+            layoutControlItem95.MinSize = new System.Drawing.Size(135, 26);
+            layoutControlItem95.Name = "layoutControlItem95";
+            layoutControlItem95.OptionsTableLayoutItem.ColumnIndex = 1;
+            layoutControlItem95.OptionsTableLayoutItem.RowIndex = 3;
+            layoutControlItem95.Size = new System.Drawing.Size(170, 29);
+            layoutControlItem95.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem95.Text = "коэф.затрат";
+            layoutControlItem95.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem95.TextSize = new System.Drawing.Size(76, 13);
+            layoutControlItem95.TextToControlDistance = 5;
+            // 
+            // layoutControlItem98
+            // 
+            layoutControlItem98.Control = txtKoef;
+            layoutControlItem98.Location = new System.Drawing.Point(0, 283);
+            layoutControlItem98.MinSize = new System.Drawing.Size(135, 26);
+            layoutControlItem98.Name = "layoutControlItem98";
+            layoutControlItem98.OptionsTableLayoutItem.RowIndex = 5;
+            layoutControlItem98.Size = new System.Drawing.Size(170, 28);
+            layoutControlItem98.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem98.Text = "коэф.";
+            layoutControlItem98.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem98.TextSize = new System.Drawing.Size(76, 13);
+            layoutControlItem98.TextToControlDistance = 5;
+            // 
+            // layoutControlItem100
+            // 
+            layoutControlItem100.Control = txtKod;
+            layoutControlItem100.Location = new System.Drawing.Point(0, 311);
+            layoutControlItem100.MinSize = new System.Drawing.Size(144, 26);
+            layoutControlItem100.Name = "layoutControlItem100";
+            layoutControlItem100.Size = new System.Drawing.Size(170, 33);
+            layoutControlItem100.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem100.Text = "расч.реком.цена";
+            layoutControlItem100.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem100.TextLocation = DevExpress.Utils.Locations.Left;
+            layoutControlItem100.TextSize = new System.Drawing.Size(85, 13);
+            layoutControlItem100.TextToControlDistance = 5;
+            // 
+            // layoutControlItem101
+            // 
+            layoutControlItem101.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
+            layoutControlItem101.AppearanceItemCaption.Options.UseFont = true;
+            layoutControlItem101.Control = txtSeb_rekom;
+            layoutControlItem101.Location = new System.Drawing.Point(0, 344);
+            layoutControlItem101.Name = "layoutControlItem101";
+            layoutControlItem101.Size = new System.Drawing.Size(170, 44);
+            layoutControlItem101.Text = "рекомендованная цена";
+            layoutControlItem101.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem101.TextLocation = DevExpress.Utils.Locations.Top;
+            layoutControlItem101.TextSize = new System.Drawing.Size(118, 13);
+            layoutControlItem101.TextToControlDistance = 5;
+            // 
+            // layoutControlItem19
+            // 
+            layoutControlItem19.Control = chbArh;
+            layoutControlItem19.Location = new System.Drawing.Point(1165, 0);
+            layoutControlItem19.Name = "layoutControlItem19";
+            layoutControlItem19.Size = new System.Drawing.Size(176, 24);
+            layoutControlItem19.TextVisible = false;
+            // 
+            // layoutControlGroup5
+            // 
+            layoutControlGroup5.GroupStyle = DevExpress.Utils.GroupStyle.Light;
+            layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup11, layoutTkans, layoutNorms, layoutSeb, layoutOpis_t, layoutBrak, layoutControlGroup9, emptySpaceItem1 });
+            layoutControlGroup5.Location = new System.Drawing.Point(285, 333);
+            layoutControlGroup5.Name = "layoutControlGroup5";
+            layoutControlGroup5.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            layoutControlGroup5.Size = new System.Drawing.Size(880, 311);
+            layoutControlGroup5.TextVisible = false;
+            // 
+            // layoutControlGroup11
+            // 
+            layoutControlGroup11.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem82, layoutControlItem83, layoutControlItem84, layoutControlItem85, layoutControlItem86, layoutControlItem87 });
+            layoutControlGroup11.Location = new System.Drawing.Point(0, 0);
+            layoutControlGroup11.Name = "layoutControlGroup11";
+            layoutControlGroup11.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            layoutControlGroup11.Size = new System.Drawing.Size(117, 209);
+            // 
+            // layoutControlItem82
+            // 
+            layoutControlItem82.Control = txtNorm_t;
+            layoutControlItem82.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem82.MinSize = new System.Drawing.Size(109, 26);
+            layoutControlItem82.Name = "layoutControlItem82";
+            layoutControlItem82.Size = new System.Drawing.Size(111, 30);
+            layoutControlItem82.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem82.Text = "норма/м";
+            layoutControlItem82.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem82.TextSize = new System.Drawing.Size(50, 13);
+            layoutControlItem82.TextToControlDistance = 5;
+            // 
+            // layoutControlItem83
+            // 
+            layoutControlItem83.Control = txtSeb_all;
+            layoutControlItem83.Location = new System.Drawing.Point(0, 30);
+            layoutControlItem83.MinSize = new System.Drawing.Size(109, 26);
+            layoutControlItem83.Name = "layoutControlItem83";
+            layoutControlItem83.Size = new System.Drawing.Size(111, 48);
+            layoutControlItem83.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem83.Text = "руб.";
+            layoutControlItem83.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem83.TextSize = new System.Drawing.Size(50, 13);
+            layoutControlItem83.TextToControlDistance = 5;
+            // 
+            // layoutControlItem84
+            // 
+            layoutControlItem84.Control = txtSek;
+            layoutControlItem84.Location = new System.Drawing.Point(0, 78);
+            layoutControlItem84.Name = "layoutControlItem84";
+            layoutControlItem84.Size = new System.Drawing.Size(111, 26);
+            layoutControlItem84.Text = "норма/сек";
+            layoutControlItem84.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem84.TextSize = new System.Drawing.Size(50, 13);
+            layoutControlItem84.TextToControlDistance = 5;
+            // 
+            // layoutControlItem85
+            // 
+            layoutControlItem85.Control = txtSek_vyaz;
+            layoutControlItem85.Location = new System.Drawing.Point(0, 104);
+            layoutControlItem85.Name = "layoutControlItem85";
+            layoutControlItem85.Size = new System.Drawing.Size(111, 26);
+            layoutControlItem85.Text = "вяз.";
+            layoutControlItem85.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem85.TextSize = new System.Drawing.Size(50, 13);
+            layoutControlItem85.TextToControlDistance = 5;
+            // 
+            // layoutControlItem86
+            // 
+            layoutControlItem86.Control = txtSek_shv;
+            layoutControlItem86.Location = new System.Drawing.Point(0, 130);
+            layoutControlItem86.Name = "layoutControlItem86";
+            layoutControlItem86.Size = new System.Drawing.Size(111, 26);
+            layoutControlItem86.Text = "шв.";
+            layoutControlItem86.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem86.TextSize = new System.Drawing.Size(50, 13);
+            layoutControlItem86.TextToControlDistance = 5;
+            // 
+            // layoutControlItem87
+            // 
+            layoutControlItem87.Control = txtSek_kr;
+            layoutControlItem87.Location = new System.Drawing.Point(0, 156);
+            layoutControlItem87.Name = "layoutControlItem87";
+            layoutControlItem87.Size = new System.Drawing.Size(111, 26);
+            layoutControlItem87.Text = "кр.";
+            layoutControlItem87.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem87.TextSize = new System.Drawing.Size(50, 13);
+            layoutControlItem87.TextToControlDistance = 5;
             // 
             // layoutTkans
             // 
@@ -2463,72 +2766,6 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem50.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem50.TextVisible = false;
             // 
-            // layoutControlGroup9
-            // 
-            layoutControlGroup9.CustomizationFormText = "кф качества";
-            layoutControlGroup9.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem68, layoutControlItem69, layoutControlItem70, layoutControlItem71, layoutControlItem72, layoutControlItem73, layoutControlItem74 });
-            layoutControlGroup9.Location = new System.Drawing.Point(422, 0);
-            layoutControlGroup9.Name = "layoutControlGroup9";
-            layoutControlGroup9.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup9.Size = new System.Drawing.Size(452, 209);
-            layoutControlGroup9.Text = "Кф кач";
-            // 
-            // layoutControlItem68
-            // 
-            layoutControlItem68.Control = customTextBoxEx1;
-            layoutControlItem68.Location = new System.Drawing.Point(0, 0);
-            layoutControlItem68.Name = "layoutControlItem68";
-            layoutControlItem68.Size = new System.Drawing.Size(446, 26);
-            layoutControlItem68.TextVisible = false;
-            // 
-            // layoutControlItem69
-            // 
-            layoutControlItem69.Control = customTextBoxEx2;
-            layoutControlItem69.Location = new System.Drawing.Point(0, 26);
-            layoutControlItem69.Name = "layoutControlItem69";
-            layoutControlItem69.Size = new System.Drawing.Size(446, 26);
-            layoutControlItem69.TextVisible = false;
-            // 
-            // layoutControlItem70
-            // 
-            layoutControlItem70.Control = customTextBoxEx3;
-            layoutControlItem70.Location = new System.Drawing.Point(0, 52);
-            layoutControlItem70.Name = "layoutControlItem70";
-            layoutControlItem70.Size = new System.Drawing.Size(446, 26);
-            layoutControlItem70.TextVisible = false;
-            // 
-            // layoutControlItem71
-            // 
-            layoutControlItem71.Control = customTextBoxEx4;
-            layoutControlItem71.Location = new System.Drawing.Point(0, 78);
-            layoutControlItem71.Name = "layoutControlItem71";
-            layoutControlItem71.Size = new System.Drawing.Size(446, 26);
-            layoutControlItem71.TextVisible = false;
-            // 
-            // layoutControlItem72
-            // 
-            layoutControlItem72.Control = customTextBoxEx5;
-            layoutControlItem72.Location = new System.Drawing.Point(0, 104);
-            layoutControlItem72.Name = "layoutControlItem72";
-            layoutControlItem72.Size = new System.Drawing.Size(446, 26);
-            layoutControlItem72.TextVisible = false;
-            // 
-            // layoutControlItem73
-            // 
-            layoutControlItem73.Control = customTextBoxEx6;
-            layoutControlItem73.Location = new System.Drawing.Point(0, 130);
-            layoutControlItem73.Name = "layoutControlItem73";
-            layoutControlItem73.Size = new System.Drawing.Size(446, 26);
-            layoutControlItem73.TextVisible = false;
-            // 
-            // layoutControlItem74
-            // 
-            layoutControlItem74.Control = customTextBoxEx7;
-            layoutControlItem74.Location = new System.Drawing.Point(0, 156);
-            layoutControlItem74.Name = "layoutControlItem74";
-            layoutControlItem74.Size = new System.Drawing.Size(446, 26);
-            layoutControlItem74.TextVisible = false;
-            // 
             // layoutOpis_t
             // 
             layoutOpis_t.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem75, layoutControlItem76, layoutControlItem77, layoutControlItem78, layoutControlItem79, layoutControlItem80, layoutControlItem81 });
@@ -2660,288 +2897,77 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem61.Size = new System.Drawing.Size(55, 26);
             layoutControlItem61.TextVisible = false;
             // 
-            // layoutSumZP
+            // layoutControlGroup9
             // 
-            layoutSumZP.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem89, layoutControlItem91, layoutControlItem88, layoutControlItem90, layoutControlItem96, layoutControlItem97, layoutControlItem92, layoutControlItem93, layoutControlItem94, layoutControlItem95, layoutControlItem98, layoutControlItem100, layoutControlItem101 });
-            layoutSumZP.Location = new System.Drawing.Point(1165, 229);
-            layoutSumZP.Name = "item1";
-            layoutSumZP.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutSumZP.Size = new System.Drawing.Size(176, 415);
-            layoutSumZP.Text = "ЗП";
+            layoutControlGroup9.CustomizationFormText = "кф качества";
+            layoutControlGroup9.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem68, layoutControlItem69, layoutControlItem70, layoutControlItem71, layoutControlItem72, layoutControlItem73, layoutControlItem74 });
+            layoutControlGroup9.Location = new System.Drawing.Point(422, 0);
+            layoutControlGroup9.Name = "layoutControlGroup9";
+            layoutControlGroup9.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            layoutControlGroup9.Size = new System.Drawing.Size(452, 209);
+            layoutControlGroup9.Text = "Кф кач";
             // 
-            // layoutControlItem89
+            // layoutControlItem68
             // 
-            layoutControlItem89.Control = txtSum_dopopl;
-            layoutControlItem89.CustomizationFormText = "доп.оплата";
-            layoutControlItem89.Location = new System.Drawing.Point(0, 28);
-            layoutControlItem89.MinSize = new System.Drawing.Size(135, 26);
-            layoutControlItem89.Name = "layoutControlItem89";
-            layoutControlItem89.OptionsTableLayoutItem.RowIndex = 1;
-            layoutControlItem89.Size = new System.Drawing.Size(170, 28);
-            layoutControlItem89.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem89.Text = "доп.оплата";
-            layoutControlItem89.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            layoutControlItem89.TextSize = new System.Drawing.Size(76, 13);
-            layoutControlItem89.TextToControlDistance = 5;
+            layoutControlItem68.Control = customTextBoxEx1;
+            layoutControlItem68.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem68.Name = "layoutControlItem68";
+            layoutControlItem68.Size = new System.Drawing.Size(446, 26);
+            layoutControlItem68.TextVisible = false;
             // 
-            // layoutControlItem91
+            // layoutControlItem69
             // 
-            layoutControlItem91.Control = txtSum_sebraskr;
-            layoutControlItem91.Location = new System.Drawing.Point(0, 84);
-            layoutControlItem91.MinSize = new System.Drawing.Size(135, 26);
-            layoutControlItem91.Name = "layoutControlItem91";
-            layoutControlItem91.Size = new System.Drawing.Size(170, 28);
-            layoutControlItem91.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem91.Text = "раскрой";
-            layoutControlItem91.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            layoutControlItem91.TextSize = new System.Drawing.Size(76, 20);
-            layoutControlItem91.TextToControlDistance = 5;
+            layoutControlItem69.Control = customTextBoxEx2;
+            layoutControlItem69.Location = new System.Drawing.Point(0, 26);
+            layoutControlItem69.Name = "layoutControlItem69";
+            layoutControlItem69.Size = new System.Drawing.Size(446, 26);
+            layoutControlItem69.TextVisible = false;
             // 
-            // layoutControlItem88
+            // layoutControlItem70
             // 
-            layoutControlItem88.Control = txtSum_zarpl;
-            layoutControlItem88.Location = new System.Drawing.Point(0, 0);
-            layoutControlItem88.MinSize = new System.Drawing.Size(135, 26);
-            layoutControlItem88.Name = "layoutControlItem88";
-            layoutControlItem88.OptionsTableLayoutItem.ColumnIndex = 1;
-            layoutControlItem88.Size = new System.Drawing.Size(170, 28);
-            layoutControlItem88.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem88.Text = "зарплата РТ";
-            layoutControlItem88.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            layoutControlItem88.TextSize = new System.Drawing.Size(76, 13);
-            layoutControlItem88.TextToControlDistance = 5;
+            layoutControlItem70.Control = customTextBoxEx3;
+            layoutControlItem70.Location = new System.Drawing.Point(0, 52);
+            layoutControlItem70.Name = "layoutControlItem70";
+            layoutControlItem70.Size = new System.Drawing.Size(446, 26);
+            layoutControlItem70.TextVisible = false;
             // 
-            // layoutControlItem90
+            // layoutControlItem71
             // 
-            layoutControlItem90.Control = txtSum_strvznos;
-            layoutControlItem90.Location = new System.Drawing.Point(0, 56);
-            layoutControlItem90.MinSize = new System.Drawing.Size(135, 26);
-            layoutControlItem90.Name = "layoutControlItem90";
-            layoutControlItem90.OptionsTableLayoutItem.ColumnIndex = 1;
-            layoutControlItem90.OptionsTableLayoutItem.RowIndex = 1;
-            layoutControlItem90.Size = new System.Drawing.Size(170, 28);
-            layoutControlItem90.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem90.Text = "ст.взносы";
-            layoutControlItem90.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            layoutControlItem90.TextSize = new System.Drawing.Size(76, 13);
-            layoutControlItem90.TextToControlDistance = 5;
+            layoutControlItem71.Control = customTextBoxEx4;
+            layoutControlItem71.Location = new System.Drawing.Point(0, 78);
+            layoutControlItem71.Name = "layoutControlItem71";
+            layoutControlItem71.Size = new System.Drawing.Size(446, 26);
+            layoutControlItem71.TextVisible = false;
             // 
-            // layoutControlItem96
+            // layoutControlItem72
             // 
-            layoutControlItem96.Control = txtKoef_d;
-            layoutControlItem96.Location = new System.Drawing.Point(0, 226);
-            layoutControlItem96.MinSize = new System.Drawing.Size(135, 26);
-            layoutControlItem96.Name = "layoutControlItem96";
-            layoutControlItem96.OptionsTableLayoutItem.RowIndex = 4;
-            layoutControlItem96.Size = new System.Drawing.Size(170, 28);
-            layoutControlItem96.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem96.Text = "коэф.ВЭД и ДГ";
-            layoutControlItem96.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            layoutControlItem96.TextSize = new System.Drawing.Size(76, 13);
-            layoutControlItem96.TextToControlDistance = 5;
+            layoutControlItem72.Control = customTextBoxEx5;
+            layoutControlItem72.Location = new System.Drawing.Point(0, 104);
+            layoutControlItem72.Name = "layoutControlItem72";
+            layoutControlItem72.Size = new System.Drawing.Size(446, 26);
+            layoutControlItem72.TextVisible = false;
             // 
-            // layoutControlItem97
+            // layoutControlItem73
             // 
-            layoutControlItem97.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-            layoutControlItem97.AppearanceItemCaption.Options.UseFont = true;
-            layoutControlItem97.Control = txtSeb_proizv;
-            layoutControlItem97.Location = new System.Drawing.Point(0, 254);
-            layoutControlItem97.MinSize = new System.Drawing.Size(135, 26);
-            layoutControlItem97.Name = "layoutControlItem97";
-            layoutControlItem97.OptionsTableLayoutItem.ColumnIndex = 1;
-            layoutControlItem97.OptionsTableLayoutItem.RowIndex = 4;
-            layoutControlItem97.Size = new System.Drawing.Size(170, 29);
-            layoutControlItem97.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem97.Text = "произв.себ.";
-            layoutControlItem97.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            layoutControlItem97.TextSize = new System.Drawing.Size(76, 14);
-            layoutControlItem97.TextToControlDistance = 5;
+            layoutControlItem73.Control = customTextBoxEx6;
+            layoutControlItem73.Location = new System.Drawing.Point(0, 130);
+            layoutControlItem73.Name = "layoutControlItem73";
+            layoutControlItem73.Size = new System.Drawing.Size(446, 26);
+            layoutControlItem73.TextVisible = false;
             // 
-            // layoutControlItem92
+            // layoutControlItem74
             // 
-            layoutControlItem92.Control = txtSum_komplnum;
-            layoutControlItem92.Location = new System.Drawing.Point(0, 112);
-            layoutControlItem92.MinSize = new System.Drawing.Size(135, 26);
-            layoutControlItem92.Name = "layoutControlItem92";
-            layoutControlItem92.OptionsTableLayoutItem.RowIndex = 2;
-            layoutControlItem92.Size = new System.Drawing.Size(170, 28);
-            layoutControlItem92.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem92.Text = "компл. и нумер.";
-            layoutControlItem92.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            layoutControlItem92.TextSize = new System.Drawing.Size(76, 13);
-            layoutControlItem92.TextToControlDistance = 5;
+            layoutControlItem74.Control = customTextBoxEx7;
+            layoutControlItem74.Location = new System.Drawing.Point(0, 156);
+            layoutControlItem74.Name = "layoutControlItem74";
+            layoutControlItem74.Size = new System.Drawing.Size(446, 26);
+            layoutControlItem74.TextVisible = false;
             // 
-            // layoutControlItem93
+            // emptySpaceItem1
             // 
-            layoutControlItem93.Control = txtSeb_z;
-            layoutControlItem93.Location = new System.Drawing.Point(0, 140);
-            layoutControlItem93.MinSize = new System.Drawing.Size(135, 26);
-            layoutControlItem93.Name = "layoutControlItem93";
-            layoutControlItem93.OptionsTableLayoutItem.ColumnIndex = 1;
-            layoutControlItem93.OptionsTableLayoutItem.RowIndex = 2;
-            layoutControlItem93.Size = new System.Drawing.Size(170, 29);
-            layoutControlItem93.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem93.Text = "зарплата";
-            layoutControlItem93.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            layoutControlItem93.TextSize = new System.Drawing.Size(76, 13);
-            layoutControlItem93.TextToControlDistance = 5;
-            // 
-            // layoutControlItem94
-            // 
-            layoutControlItem94.Control = txtSeb_dop;
-            layoutControlItem94.Location = new System.Drawing.Point(0, 169);
-            layoutControlItem94.MinSize = new System.Drawing.Size(135, 26);
-            layoutControlItem94.Name = "layoutControlItem94";
-            layoutControlItem94.OptionsTableLayoutItem.RowIndex = 3;
-            layoutControlItem94.Size = new System.Drawing.Size(170, 28);
-            layoutControlItem94.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem94.Text = "пр.затраты";
-            layoutControlItem94.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            layoutControlItem94.TextSize = new System.Drawing.Size(76, 13);
-            layoutControlItem94.TextToControlDistance = 5;
-            // 
-            // layoutControlItem95
-            // 
-            layoutControlItem95.Control = txtKoef_pr;
-            layoutControlItem95.Location = new System.Drawing.Point(0, 197);
-            layoutControlItem95.MinSize = new System.Drawing.Size(135, 26);
-            layoutControlItem95.Name = "layoutControlItem95";
-            layoutControlItem95.OptionsTableLayoutItem.ColumnIndex = 1;
-            layoutControlItem95.OptionsTableLayoutItem.RowIndex = 3;
-            layoutControlItem95.Size = new System.Drawing.Size(170, 29);
-            layoutControlItem95.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem95.Text = "коэф.затрат";
-            layoutControlItem95.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            layoutControlItem95.TextSize = new System.Drawing.Size(76, 13);
-            layoutControlItem95.TextToControlDistance = 5;
-            // 
-            // layoutControlItem98
-            // 
-            layoutControlItem98.Control = txtKoef;
-            layoutControlItem98.Location = new System.Drawing.Point(0, 283);
-            layoutControlItem98.MinSize = new System.Drawing.Size(135, 26);
-            layoutControlItem98.Name = "layoutControlItem98";
-            layoutControlItem98.OptionsTableLayoutItem.RowIndex = 5;
-            layoutControlItem98.Size = new System.Drawing.Size(170, 28);
-            layoutControlItem98.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem98.Text = "коэф.";
-            layoutControlItem98.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            layoutControlItem98.TextSize = new System.Drawing.Size(76, 13);
-            layoutControlItem98.TextToControlDistance = 5;
-            // 
-            // layoutControlItem100
-            // 
-            layoutControlItem100.Control = txtKod;
-            layoutControlItem100.Location = new System.Drawing.Point(0, 311);
-            layoutControlItem100.MinSize = new System.Drawing.Size(144, 26);
-            layoutControlItem100.Name = "layoutControlItem100";
-            layoutControlItem100.Size = new System.Drawing.Size(170, 33);
-            layoutControlItem100.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem100.Text = "расч.реком.цена";
-            layoutControlItem100.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            layoutControlItem100.TextLocation = DevExpress.Utils.Locations.Left;
-            layoutControlItem100.TextSize = new System.Drawing.Size(85, 13);
-            layoutControlItem100.TextToControlDistance = 5;
-            // 
-            // layoutControlItem101
-            // 
-            layoutControlItem101.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-            layoutControlItem101.AppearanceItemCaption.Options.UseFont = true;
-            layoutControlItem101.Control = txtSeb_rekom;
-            layoutControlItem101.Location = new System.Drawing.Point(0, 344);
-            layoutControlItem101.Name = "layoutControlItem101";
-            layoutControlItem101.Size = new System.Drawing.Size(170, 44);
-            layoutControlItem101.Text = "рекомендованная цена";
-            layoutControlItem101.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            layoutControlItem101.TextLocation = DevExpress.Utils.Locations.Top;
-            layoutControlItem101.TextSize = new System.Drawing.Size(118, 13);
-            layoutControlItem101.TextToControlDistance = 5;
-            // 
-            // layoutControlGroup11
-            // 
-            layoutControlGroup11.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem82, layoutControlItem83, layoutControlItem84, layoutControlItem85, layoutControlItem86, layoutControlItem87 });
-            layoutControlGroup11.Location = new System.Drawing.Point(0, 0);
-            layoutControlGroup11.Name = "layoutControlGroup11";
-            layoutControlGroup11.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup11.Size = new System.Drawing.Size(117, 209);
-            // 
-            // layoutControlItem82
-            // 
-            layoutControlItem82.Control = txtNorm_t;
-            layoutControlItem82.Location = new System.Drawing.Point(0, 0);
-            layoutControlItem82.MinSize = new System.Drawing.Size(109, 26);
-            layoutControlItem82.Name = "layoutControlItem82";
-            layoutControlItem82.Size = new System.Drawing.Size(111, 30);
-            layoutControlItem82.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem82.Text = "норма/м";
-            layoutControlItem82.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            layoutControlItem82.TextSize = new System.Drawing.Size(50, 13);
-            layoutControlItem82.TextToControlDistance = 5;
-            // 
-            // layoutControlItem83
-            // 
-            layoutControlItem83.Control = txtSeb_all;
-            layoutControlItem83.Location = new System.Drawing.Point(0, 30);
-            layoutControlItem83.MinSize = new System.Drawing.Size(109, 26);
-            layoutControlItem83.Name = "layoutControlItem83";
-            layoutControlItem83.Size = new System.Drawing.Size(111, 48);
-            layoutControlItem83.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem83.Text = "руб.";
-            layoutControlItem83.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            layoutControlItem83.TextSize = new System.Drawing.Size(50, 13);
-            layoutControlItem83.TextToControlDistance = 5;
-            // 
-            // layoutControlItem84
-            // 
-            layoutControlItem84.Control = txtSek;
-            layoutControlItem84.Location = new System.Drawing.Point(0, 78);
-            layoutControlItem84.Name = "layoutControlItem84";
-            layoutControlItem84.Size = new System.Drawing.Size(111, 26);
-            layoutControlItem84.Text = "норма/сек";
-            layoutControlItem84.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            layoutControlItem84.TextSize = new System.Drawing.Size(50, 13);
-            layoutControlItem84.TextToControlDistance = 5;
-            // 
-            // layoutControlItem85
-            // 
-            layoutControlItem85.Control = txtSek_vyaz;
-            layoutControlItem85.Location = new System.Drawing.Point(0, 104);
-            layoutControlItem85.Name = "layoutControlItem85";
-            layoutControlItem85.Size = new System.Drawing.Size(111, 26);
-            layoutControlItem85.Text = "вяз.";
-            layoutControlItem85.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            layoutControlItem85.TextSize = new System.Drawing.Size(50, 13);
-            layoutControlItem85.TextToControlDistance = 5;
-            // 
-            // layoutControlItem86
-            // 
-            layoutControlItem86.Control = txtSek_shv;
-            layoutControlItem86.Location = new System.Drawing.Point(0, 130);
-            layoutControlItem86.Name = "layoutControlItem86";
-            layoutControlItem86.Size = new System.Drawing.Size(111, 26);
-            layoutControlItem86.Text = "шв.";
-            layoutControlItem86.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            layoutControlItem86.TextSize = new System.Drawing.Size(50, 13);
-            layoutControlItem86.TextToControlDistance = 5;
-            // 
-            // layoutControlItem87
-            // 
-            layoutControlItem87.Control = txtSek_kr;
-            layoutControlItem87.Location = new System.Drawing.Point(0, 156);
-            layoutControlItem87.Name = "layoutControlItem87";
-            layoutControlItem87.Size = new System.Drawing.Size(111, 26);
-            layoutControlItem87.Text = "кр.";
-            layoutControlItem87.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            layoutControlItem87.TextSize = new System.Drawing.Size(50, 13);
-            layoutControlItem87.TextToControlDistance = 5;
-            // 
-            // layoutControlItem19
-            // 
-            layoutControlItem19.Control = chbArh;
-            layoutControlItem19.Location = new System.Drawing.Point(1165, 0);
-            layoutControlItem19.Name = "layoutControlItem19";
-            layoutControlItem19.Size = new System.Drawing.Size(176, 24);
-            layoutControlItem19.TextVisible = false;
+            emptySpaceItem1.Location = new System.Drawing.Point(0, 209);
+            emptySpaceItem1.Name = "emptySpaceItem1";
+            emptySpaceItem1.Size = new System.Drawing.Size(874, 96);
             // 
             // customLayoutControl1
             // 
@@ -3031,31 +3057,6 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlGroup10.GroupBordersVisible = false;
             layoutControlGroup10.Name = "layoutControlGroup10";
             layoutControlGroup10.Size = new System.Drawing.Size(319, 285);
-            // 
-            // layoutControlGroup5
-            // 
-            layoutControlGroup5.GroupStyle = DevExpress.Utils.GroupStyle.Light;
-            layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup11, layoutTkans, layoutNorms, layoutSeb, layoutOpis_t, layoutBrak, layoutControlGroup9, emptySpaceItem1 });
-            layoutControlGroup5.Location = new System.Drawing.Point(285, 333);
-            layoutControlGroup5.Name = "layoutControlGroup5";
-            layoutControlGroup5.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup5.Size = new System.Drawing.Size(880, 311);
-            layoutControlGroup5.TextVisible = false;
-            // 
-            // layoutControlGroup12
-            // 
-            layoutControlGroup12.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem23, layoutControlItem24, layoutControlItem16, layoutControlItem26 });
-            layoutControlGroup12.Location = new System.Drawing.Point(0, 402);
-            layoutControlGroup12.Name = "layoutControlGroup12";
-            layoutControlGroup12.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup12.Size = new System.Drawing.Size(281, 58);
-            layoutControlGroup12.TextVisible = false;
-            // 
-            // emptySpaceItem1
-            // 
-            emptySpaceItem1.Location = new System.Drawing.Point(0, 209);
-            emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new System.Drawing.Size(874, 96);
             // 
             // ArticulEditAdvance
             // 
@@ -3153,9 +3154,6 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)txbMod.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)cbuKod_t1.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)Root).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem25).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutCommonArticul).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem17).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem18).EndInit();
@@ -3178,6 +3176,9 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem20).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem21).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem22).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Root).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem25).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem30).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem31).EndInit();
@@ -3189,10 +3190,34 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem35).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup6).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem10).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem16).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup12).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem23).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem24).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem16).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem26).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutSumZP).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem89).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem91).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem88).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem90).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem96).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem97).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem92).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem93).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem94).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem95).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem98).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem100).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem101).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem19).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup11).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem82).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem83).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem84).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem85).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem86).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem87).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutTkans).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem51).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem52).EndInit();
@@ -3217,14 +3242,6 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem48).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem49).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem50).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup9).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem68).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem69).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem70).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem71).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem72).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem73).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem74).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutOpis_t).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem75).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem76).EndInit();
@@ -3241,28 +3258,15 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem66).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem67).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem61).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutSumZP).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem89).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem91).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem88).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem90).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem96).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem97).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem92).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem93).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem94).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem95).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem98).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem100).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem101).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup11).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem82).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem83).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem84).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem85).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem86).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem87).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem19).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup9).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem68).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem69).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem70).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem71).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem72).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem73).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem74).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)customLayoutControl1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup7).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).EndInit();
@@ -3274,9 +3278,6 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem6).EndInit();
             ((System.ComponentModel.ISupportInitialize)customLayoutControl2).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup10).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup12).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
             ResumeLayout(false);
         }
 
