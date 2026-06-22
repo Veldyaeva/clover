@@ -21,7 +21,17 @@
     <Compile Remove="Features\Articul\Forms\Articul_lena.cs" />
     <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace.patched.cs" />
     <Compile Remove="Features\KnittingProduction\Forms\PlanZagrVyaz\PlanZagrVyaz.ServiceBroker.cs" />
+    <Compile Remove="tools\SewingProduction.Documentation\**\*.cs" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="tools\SewingProduction.Documentation\SewingProduction.Documentation.csproj"
+                      ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <Target Name="VerifyGeneratedHelp" AfterTargets="Build">
+    <Exec Command="dotnet &quot;$(MSBuildProjectDirectory)\tools\SewingProduction.Documentation\bin\$(Configuration)\net8.0\SewingProduction.Documentation.dll&quot; check --source &quot;$(MSBuildProjectDirectory)\SewingProduction_doc&quot; --output &quot;$(MSBuildProjectDirectory)\Help&quot;" />
+  </Target>
 
 	<ItemGroup>
 		<Content Include="Help\**\*.html">

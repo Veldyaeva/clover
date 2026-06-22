@@ -3,6 +3,8 @@
 /.vs/
 /bin/
 /obj/
+**/bin/
+**/obj/
 /Features/TeamWork/Forms/TeamWork.Articles.resx
 /Features/TeamWork/Forms/TeamWork.Events.resx
 /Features/TeamWork/Forms/TeamWork.Helpers.resx
