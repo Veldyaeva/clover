@@ -5,6 +5,7 @@ using SewingProduction.Features.Yarn.Services;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
+using DevExpress.XtraGrid.Views.Base;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace SewingProduction.Features.Yarn.Forms
         private readonly ILogger _logger = new FileLogger();
         private readonly YarnDataService _dataService;
         private readonly BindingList<YarnCardRow> _rows = new BindingList<YarnCardRow>();
+        private readonly BindingList<YarnCardRow> _colorResults = new BindingList<YarnCardRow>();
 
         public YarnForm(UserClass user) : base(user)
         {
@@ -26,8 +28,12 @@ namespace SewingProduction.Features.Yarn.Forms
             var dbService = new DbService(dbHelper);
             _dataService = new YarnDataService(dbService, dbHelper);
             bindingSource.DataSource = _rows;
+            bsColorResult.DataSource = _colorResults;
             gridView.ApplyReadOnly();
+            gridViewColor.ApplyReadOnly();
             gridView.PopupMenuShowing += (s, e) =>
+                GridContextMenuHelper.AddCopyCellMenuItem(s, e);
+            gridViewColor.PopupMenuShowing += (s, e) =>
                 GridContextMenuHelper.AddCopyCellMenuItem(s, e);
             btnHistory.Enabled = false;
             btnObnovit.Enabled = false;
@@ -49,6 +55,45 @@ namespace SewingProduction.Features.Yarn.Forms
                 return;
 
             await LoadCardDataAsync(nakl);
+        }
+
+        private async void txtColorSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter)
+                return;
+
+            e.SuppressKeyPress = true;
+            var color = txtColorSearch.Text?.Trim();
+            if (string.IsNullOrWhiteSpace(color))
+                return;
+
+            try
+            {
+                var data = await _dataService.SearchByColorAsync(color);
+                _colorResults.Clear();
+                foreach (var row in data)
+                    _colorResults.Add(row);
+                gridColorResult.RefreshDataSource();
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "YarnForm.txtColorSearch_KeyDown");
+                MessageBox.Show($"Ошибка поиска: {ex.Message}",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void gridViewColor_DoubleClick(object sender, EventArgs e)
+        {
+            if (gridViewColor.FocusedRowHandle < 0)
+                return;
+
+            var row = gridViewColor.GetRow(gridViewColor.FocusedRowHandle) as YarnCardRow;
+            if (row == null || string.IsNullOrWhiteSpace(row.nakl))
+                return;
+
+            txtNakl.Text = row.nakl.Trim();
+            _ = LoadCardDataAsync(row.nakl.Trim());
         }
 
         private void btnHistory_Click(object sender, EventArgs e)

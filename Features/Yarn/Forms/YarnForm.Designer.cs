@@ -16,22 +16,30 @@ namespace SewingProduction.Features.Yarn.Forms
         private DevExpress.XtraLayout.LayoutControlGroup rootGroup;
         private DevExpress.XtraLayout.LayoutControlGroup grpInputs;
         private DevExpress.XtraLayout.LayoutControlGroup grpGrid;
+        private DevExpress.XtraLayout.LayoutControlGroup grpColorSearch;
 
         private CustomTextBoxEx txtNakl;
         private CustomTextBoxEx txtArticul;
         private CustomTextBoxEx txtSebUpr;
         private CustomTextBoxEx txtSebDok;
+        private CustomTextBoxEx txtColorSearch;
         private CustomSimpleButton btnObnovit;
         private CustomSimpleButton btnCalc;
         private CustomSimpleButton btnHistory;
+
         private CustomGridControl gridControl;
         private GridView gridView;
         private BindingSource bindingSource;
-
         private GridColumn colNakl;
         private GridColumn colArticul;
         private GridColumn colZvet;
         private GridColumn colSebTM;
+
+        private CustomGridControl gridColorResult;
+        private GridView gridViewColor;
+        private BindingSource bsColorResult;
+        private GridColumn colCrNakl;
+        private GridColumn colCrArticul;
 
         private DevExpress.XtraLayout.LayoutControlItem lciNakl;
         private DevExpress.XtraLayout.LayoutControlItem lciArticul;
@@ -41,8 +49,11 @@ namespace SewingProduction.Features.Yarn.Forms
         private DevExpress.XtraLayout.LayoutControlItem lciBtnObnovit;
         private DevExpress.XtraLayout.LayoutControlItem lciBtnHistory;
         private DevExpress.XtraLayout.LayoutControlItem lciGrid;
+        private DevExpress.XtraLayout.LayoutControlItem lciColorSearch;
+        private DevExpress.XtraLayout.LayoutControlItem lciGridColor;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpace1;
-        private DevExpress.XtraLayout.SplitterItem splitter1;
+        private DevExpress.XtraLayout.SplitterItem splitterH;
+        private DevExpress.XtraLayout.SplitterItem splitterV;
 
         protected override void Dispose(bool disposing)
         {
@@ -58,9 +69,11 @@ namespace SewingProduction.Features.Yarn.Forms
             txtArticul = new CustomTextBoxEx();
             txtSebUpr = new CustomTextBoxEx();
             txtSebDok = new CustomTextBoxEx();
+            txtColorSearch = new CustomTextBoxEx();
             btnCalc = new CustomSimpleButton();
             btnObnovit = new CustomSimpleButton();
             btnHistory = new CustomSimpleButton();
+
             gridControl = new CustomGridControl();
             bindingSource = new BindingSource(components);
             gridView = new GridView();
@@ -68,10 +81,18 @@ namespace SewingProduction.Features.Yarn.Forms
             colArticul = new GridColumn();
             colZvet = new GridColumn();
             colSebTM = new GridColumn();
+
+            gridColorResult = new CustomGridControl();
+            bsColorResult = new BindingSource(components);
+            gridViewColor = new GridView();
+            colCrNakl = new GridColumn();
+            colCrArticul = new GridColumn();
+
             layoutControl = new DevExpress.XtraLayout.LayoutControl();
             rootGroup = new DevExpress.XtraLayout.LayoutControlGroup();
             grpInputs = new DevExpress.XtraLayout.LayoutControlGroup();
             grpGrid = new DevExpress.XtraLayout.LayoutControlGroup();
+            grpColorSearch = new DevExpress.XtraLayout.LayoutControlGroup();
             lciNakl = new DevExpress.XtraLayout.LayoutControlItem();
             lciArticul = new DevExpress.XtraLayout.LayoutControlItem();
             lciSebUpr = new DevExpress.XtraLayout.LayoutControlItem();
@@ -80,21 +101,29 @@ namespace SewingProduction.Features.Yarn.Forms
             lciBtnObnovit = new DevExpress.XtraLayout.LayoutControlItem();
             lciBtnHistory = new DevExpress.XtraLayout.LayoutControlItem();
             lciGrid = new DevExpress.XtraLayout.LayoutControlItem();
+            lciColorSearch = new DevExpress.XtraLayout.LayoutControlItem();
+            lciGridColor = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpace1 = new DevExpress.XtraLayout.EmptySpaceItem();
-            splitter1 = new DevExpress.XtraLayout.SplitterItem();
+            splitterH = new DevExpress.XtraLayout.SplitterItem();
+            splitterV = new DevExpress.XtraLayout.SplitterItem();
 
             ((ISupportInitialize)txtNakl.Properties).BeginInit();
             ((ISupportInitialize)txtArticul.Properties).BeginInit();
             ((ISupportInitialize)txtSebUpr.Properties).BeginInit();
             ((ISupportInitialize)txtSebDok.Properties).BeginInit();
+            ((ISupportInitialize)txtColorSearch.Properties).BeginInit();
             ((ISupportInitialize)gridControl).BeginInit();
             ((ISupportInitialize)bindingSource).BeginInit();
             ((ISupportInitialize)gridView).BeginInit();
+            ((ISupportInitialize)gridColorResult).BeginInit();
+            ((ISupportInitialize)bsColorResult).BeginInit();
+            ((ISupportInitialize)gridViewColor).BeginInit();
             ((ISupportInitialize)layoutControl).BeginInit();
             layoutControl.SuspendLayout();
             ((ISupportInitialize)rootGroup).BeginInit();
             ((ISupportInitialize)grpInputs).BeginInit();
             ((ISupportInitialize)grpGrid).BeginInit();
+            ((ISupportInitialize)grpColorSearch).BeginInit();
             ((ISupportInitialize)lciNakl).BeginInit();
             ((ISupportInitialize)lciArticul).BeginInit();
             ((ISupportInitialize)lciSebUpr).BeginInit();
@@ -103,8 +132,11 @@ namespace SewingProduction.Features.Yarn.Forms
             ((ISupportInitialize)lciBtnObnovit).BeginInit();
             ((ISupportInitialize)lciBtnHistory).BeginInit();
             ((ISupportInitialize)lciGrid).BeginInit();
+            ((ISupportInitialize)lciColorSearch).BeginInit();
+            ((ISupportInitialize)lciGridColor).BeginInit();
             ((ISupportInitialize)emptySpace1).BeginInit();
-            ((ISupportInitialize)splitter1).BeginInit();
+            ((ISupportInitialize)splitterH).BeginInit();
+            ((ISupportInitialize)splitterV).BeginInit();
             SuspendLayout();
             //
             // txtNakl
@@ -153,6 +185,18 @@ namespace SewingProduction.Features.Yarn.Forms
             txtSebDok.Size = new Size(250, 22);
             txtSebDok.TabIndex = 3;
             //
+            // txtColorSearch
+            //
+            txtColorSearch.Name = "txtColorSearch";
+            txtColorSearch.ObjectName = null;
+            txtColorSearch.Properties.Appearance.Font = new Font("Arial", 10F);
+            txtColorSearch.Properties.Appearance.Options.UseFont = true;
+            txtColorSearch.Properties.NullValuePrompt = "введите цвет и нажмите Enter";
+            txtColorSearch.Properties.NullValuePromptShowForEmptyValue = true;
+            txtColorSearch.Size = new Size(200, 22);
+            txtColorSearch.TabIndex = 8;
+            txtColorSearch.KeyDown += txtColorSearch_KeyDown;
+            //
             // btnCalc
             //
             btnCalc.Appearance.Font = new Font("Arial", 9F);
@@ -183,13 +227,13 @@ namespace SewingProduction.Features.Yarn.Forms
             btnHistory.Text = "История изменений";
             btnHistory.Click += btnHistory_Click;
             //
-            // gridControl
+            // gridControl (main)
             //
             gridControl.DataSource = bindingSource;
             gridControl.Font = new Font("Arial", 10F);
             gridControl.MainView = gridView;
             gridControl.Name = "gridControl";
-            gridControl.Size = new Size(880, 400);
+            gridControl.Size = new Size(650, 400);
             gridControl.TabIndex = 7;
             gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView });
             //
@@ -212,7 +256,7 @@ namespace SewingProduction.Features.Yarn.Forms
             gridView.Appearance.FocusedRow.Options.UseBackColor = true;
             gridView.RowHeight = 24;
             //
-            // colNakl
+            // main grid columns
             //
             colNakl.Caption = "Карта";
             colNakl.FieldName = "nakl";
@@ -220,27 +264,21 @@ namespace SewingProduction.Features.Yarn.Forms
             colNakl.Visible = true;
             colNakl.VisibleIndex = 0;
             colNakl.Width = 120;
-            //
-            // colArticul
-            //
+
             colArticul.Caption = "Артикул";
             colArticul.FieldName = "t_articul";
             colArticul.Name = "colArticul";
             colArticul.Visible = true;
             colArticul.VisibleIndex = 1;
             colArticul.Width = 250;
-            //
-            // colZvet
-            //
+
             colZvet.Caption = "Цвет";
             colZvet.FieldName = "zvet";
             colZvet.Name = "colZvet";
             colZvet.Visible = true;
             colZvet.VisibleIndex = 2;
             colZvet.Width = 180;
-            //
-            // colSebTM
-            //
+
             colSebTM.Caption = "Себестоимость";
             colSebTM.FieldName = "seb_t_m";
             colSebTM.Name = "colSebTM";
@@ -250,20 +288,67 @@ namespace SewingProduction.Features.Yarn.Forms
             colSebTM.DisplayFormat.FormatString = "N3";
             colSebTM.Width = 150;
             //
+            // gridColorResult (color search)
+            //
+            gridColorResult.DataSource = bsColorResult;
+            gridColorResult.Font = new Font("Arial", 10F);
+            gridColorResult.MainView = gridViewColor;
+            gridColorResult.Name = "gridColorResult";
+            gridColorResult.Size = new Size(280, 400);
+            gridColorResult.TabIndex = 9;
+            gridColorResult.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewColor });
+            //
+            // gridViewColor
+            //
+            gridViewColor.Columns.AddRange(new GridColumn[] { colCrNakl, colCrArticul });
+            gridViewColor.GridControl = gridColorResult;
+            gridViewColor.Name = "gridViewColor";
+            gridViewColor.OptionsBehavior.Editable = false;
+            gridViewColor.OptionsBehavior.ReadOnly = true;
+            gridViewColor.OptionsView.ShowAutoFilterRow = true;
+            gridViewColor.OptionsView.ShowGroupPanel = false;
+            gridViewColor.OptionsView.ColumnAutoWidth = true;
+            gridViewColor.OptionsView.ShowIndicator = false;
+            gridViewColor.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewColor.Appearance.EvenRow.BackColor = Color.FromArgb(245, 248, 252);
+            gridViewColor.Appearance.EvenRow.Options.UseBackColor = true;
+            gridViewColor.Appearance.FocusedRow.BackColor = Color.FromArgb(210, 228, 248);
+            gridViewColor.Appearance.FocusedRow.Options.UseBackColor = true;
+            gridViewColor.RowHeight = 24;
+            gridViewColor.DoubleClick += gridViewColor_DoubleClick;
+            //
+            // color result columns
+            //
+            colCrNakl.Caption = "Карта";
+            colCrNakl.FieldName = "nakl";
+            colCrNakl.Name = "colCrNakl";
+            colCrNakl.Visible = true;
+            colCrNakl.VisibleIndex = 0;
+            colCrNakl.Width = 100;
+
+            colCrArticul.Caption = "Артикул";
+            colCrArticul.FieldName = "t_articul";
+            colCrArticul.Name = "colCrArticul";
+            colCrArticul.Visible = true;
+            colCrArticul.VisibleIndex = 1;
+            colCrArticul.Width = 150;
+            //
             // layoutControl
             //
             layoutControl.Controls.Add(txtNakl);
             layoutControl.Controls.Add(txtArticul);
             layoutControl.Controls.Add(txtSebUpr);
             layoutControl.Controls.Add(txtSebDok);
+            layoutControl.Controls.Add(txtColorSearch);
             layoutControl.Controls.Add(btnCalc);
             layoutControl.Controls.Add(btnObnovit);
             layoutControl.Controls.Add(btnHistory);
             layoutControl.Controls.Add(gridControl);
+            layoutControl.Controls.Add(gridColorResult);
             layoutControl.Dock = DockStyle.Fill;
             layoutControl.Name = "layoutControl";
             layoutControl.Root = rootGroup;
-            layoutControl.Size = new Size(900, 700);
+            layoutControl.Size = new Size(1100, 700);
             layoutControl.TabIndex = 0;
             //
             // rootGroup
@@ -271,37 +356,78 @@ namespace SewingProduction.Features.Yarn.Forms
             rootGroup.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             rootGroup.GroupBordersVisible = false;
             rootGroup.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-                grpInputs, splitter1, grpGrid });
+                grpInputs, splitterV, grpColorSearch, splitterH, grpGrid });
+            rootGroup.LayoutMode = DevExpress.XtraLayout.Utils.LayoutMode.Table;
             rootGroup.Name = "rootGroup";
             rootGroup.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
-            rootGroup.Size = new Size(900, 700);
+            rootGroup.Size = new Size(1100, 700);
+
+            var columnDef1 = new DevExpress.XtraLayout.ColumnDefinition();
+            columnDef1.SizeType = SizeType.Percent;
+            columnDef1.Width = 65;
+            var columnDef2 = new DevExpress.XtraLayout.ColumnDefinition();
+            columnDef2.SizeType = SizeType.AutoSize;
+            var columnDef3 = new DevExpress.XtraLayout.ColumnDefinition();
+            columnDef3.SizeType = SizeType.Percent;
+            columnDef3.Width = 35;
+            rootGroup.OptionsTableLayoutGroup.ColumnDefinitions.AddRange(new DevExpress.XtraLayout.ColumnDefinition[] { columnDef1, columnDef2, columnDef3 });
+
+            var rowDef1 = new DevExpress.XtraLayout.RowDefinition();
+            rowDef1.SizeType = SizeType.Absolute;
+            rowDef1.Height = 210;
+            var rowDef2 = new DevExpress.XtraLayout.RowDefinition();
+            rowDef2.SizeType = SizeType.AutoSize;
+            var rowDef3 = new DevExpress.XtraLayout.RowDefinition();
+            rowDef3.SizeType = SizeType.Percent;
+            rowDef3.Height = 100;
+            rootGroup.OptionsTableLayoutGroup.RowDefinitions.AddRange(new DevExpress.XtraLayout.RowDefinition[] { rowDef1, rowDef2, rowDef3 });
             //
-            // grpInputs
+            // grpInputs (row 0, col 0)
             //
             grpInputs.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
                 lciNakl, lciArticul, lciSebUpr, lciBtnCalc, lciSebDok,
                 lciBtnObnovit, lciBtnHistory, emptySpace1 });
-            grpInputs.Location = new Point(0, 0);
             grpInputs.Name = "grpInputs";
             grpInputs.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
-            grpInputs.Size = new Size(892, 210);
             grpInputs.Text = "Пряжа";
+            grpInputs.OptionsTableLayoutItem.RowIndex = 0;
+            grpInputs.OptionsTableLayoutItem.ColumnIndex = 0;
             //
-            // splitter1
+            // splitterV (row 0, col 1) — vertical splitter between inputs and color search
             //
-            splitter1.AllowHotTrack = true;
-            splitter1.Location = new Point(0, 210);
-            splitter1.Name = "splitter1";
-            splitter1.Size = new Size(892, 10);
+            splitterV.AllowHotTrack = true;
+            splitterV.Name = "splitterV";
+            splitterV.OptionsTableLayoutItem.RowIndex = 0;
+            splitterV.OptionsTableLayoutItem.ColumnIndex = 1;
+            splitterV.OptionsTableLayoutItem.RowSpan = 3;
             //
-            // grpGrid
+            // grpColorSearch (row 0, col 2) — right panel
+            //
+            grpColorSearch.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { lciColorSearch, lciGridColor });
+            grpColorSearch.Name = "grpColorSearch";
+            grpColorSearch.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
+            grpColorSearch.Text = "Поиск по цвету";
+            grpColorSearch.AppearanceGroup.Font = new Font("Arial", 10F, FontStyle.Bold);
+            grpColorSearch.AppearanceGroup.Options.UseFont = true;
+            grpColorSearch.OptionsTableLayoutItem.RowIndex = 0;
+            grpColorSearch.OptionsTableLayoutItem.ColumnIndex = 2;
+            grpColorSearch.OptionsTableLayoutItem.RowSpan = 3;
+            //
+            // splitterH (row 1, col 0) — horizontal splitter between inputs and grid
+            //
+            splitterH.AllowHotTrack = true;
+            splitterH.Name = "splitterH";
+            splitterH.OptionsTableLayoutItem.RowIndex = 1;
+            splitterH.OptionsTableLayoutItem.ColumnIndex = 0;
+            //
+            // grpGrid (row 2, col 0)
             //
             grpGrid.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { lciGrid });
-            grpGrid.Location = new Point(0, 220);
             grpGrid.Name = "grpGrid";
             grpGrid.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
-            grpGrid.Size = new Size(892, 472);
             grpGrid.Text = "Данные карты";
+            grpGrid.OptionsTableLayoutItem.RowIndex = 2;
+            grpGrid.OptionsTableLayoutItem.ColumnIndex = 0;
             //
             // lciNakl
             //
@@ -390,7 +516,22 @@ namespace SewingProduction.Features.Yarn.Forms
             emptySpace1.AllowHotTrack = false;
             emptySpace1.Location = new Point(360, 126);
             emptySpace1.Name = "emptySpace1";
-            emptySpace1.Size = new Size(524, 44);
+            emptySpace1.Size = new Size(300, 44);
+            //
+            // lciColorSearch
+            //
+            lciColorSearch.Control = txtColorSearch;
+            lciColorSearch.Location = new Point(0, 0);
+            lciColorSearch.Name = "lciColorSearch";
+            lciColorSearch.Size = new Size(300, 30);
+            lciColorSearch.TextVisible = false;
+            //
+            // lciGridColor
+            //
+            lciGridColor.Control = gridColorResult;
+            lciGridColor.Location = new Point(0, 30);
+            lciGridColor.Name = "lciGridColor";
+            lciGridColor.TextVisible = false;
             //
             // lciGrid
             //
@@ -402,9 +543,9 @@ namespace SewingProduction.Features.Yarn.Forms
             //
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(900, 700);
+            ClientSize = new Size(1100, 700);
             Controls.Add(layoutControl);
-            MinimumSize = new Size(700, 500);
+            MinimumSize = new Size(800, 500);
             Name = "YarnForm";
             Text = "Пряжа";
             Load += YarnForm_Load;
@@ -412,14 +553,19 @@ namespace SewingProduction.Features.Yarn.Forms
             ((ISupportInitialize)txtArticul.Properties).EndInit();
             ((ISupportInitialize)txtSebUpr.Properties).EndInit();
             ((ISupportInitialize)txtSebDok.Properties).EndInit();
+            ((ISupportInitialize)txtColorSearch.Properties).EndInit();
             ((ISupportInitialize)gridControl).EndInit();
             ((ISupportInitialize)bindingSource).EndInit();
             ((ISupportInitialize)gridView).EndInit();
+            ((ISupportInitialize)gridColorResult).EndInit();
+            ((ISupportInitialize)bsColorResult).EndInit();
+            ((ISupportInitialize)gridViewColor).EndInit();
             ((ISupportInitialize)layoutControl).EndInit();
             layoutControl.ResumeLayout(false);
             ((ISupportInitialize)rootGroup).EndInit();
             ((ISupportInitialize)grpInputs).EndInit();
             ((ISupportInitialize)grpGrid).EndInit();
+            ((ISupportInitialize)grpColorSearch).EndInit();
             ((ISupportInitialize)lciNakl).EndInit();
             ((ISupportInitialize)lciArticul).EndInit();
             ((ISupportInitialize)lciSebUpr).EndInit();
@@ -428,8 +574,11 @@ namespace SewingProduction.Features.Yarn.Forms
             ((ISupportInitialize)lciBtnObnovit).EndInit();
             ((ISupportInitialize)lciBtnHistory).EndInit();
             ((ISupportInitialize)lciGrid).EndInit();
+            ((ISupportInitialize)lciColorSearch).EndInit();
+            ((ISupportInitialize)lciGridColor).EndInit();
             ((ISupportInitialize)emptySpace1).EndInit();
-            ((ISupportInitialize)splitter1).EndInit();
+            ((ISupportInitialize)splitterH).EndInit();
+            ((ISupportInitialize)splitterV).EndInit();
             ResumeLayout(false);
         }
     }

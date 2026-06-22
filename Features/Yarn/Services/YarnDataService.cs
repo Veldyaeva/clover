@@ -45,6 +45,22 @@ namespace SewingProduction.Features.Yarn.Services
             return await _dbService.GetEntityAsync<decimal?>(sql, new { Nakl = nakl });
         }
 
+        public Task<List<YarnCardRow>> SearchByColorAsync(string color)
+        {
+            const string sql = @"
+                SELECT DISTINCT
+                    RTRIM(pp.nakl)       AS nakl,
+                    RTRIM(pp.t_articul)  AS t_articul,
+                    RTRIM(pp.zvet)       AS zvet,
+                    pp.seb_t_m
+                FROM dbo.prihod_pryz pp WITH (NOLOCK)
+                INNER JOIN dbo.prihod_v pv WITH (NOLOCK) ON pp.kod_pr = pv.kod_pr
+                WHERE pp.zvet LIKE '%' + @Color + '%'
+                ORDER BY pp.nakl";
+
+            return _dbService.GetListAsync<YarnCardRow>(sql, new { Color = color });
+        }
+
         public Task<List<YarnCostHistoryRow>> LoadCostHistoryAsync(string kodd, string kod, bool filterByKod)
         {
             var sql = @"
