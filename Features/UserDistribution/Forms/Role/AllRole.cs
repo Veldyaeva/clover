@@ -49,9 +49,52 @@ namespace SewingProduction.Features.UserDistribution.Forms
         }
         private async void customGridControlRoles_Load(object sender, EventArgs e)
         {
+            if (!await EnsureCurrentUserLoadedAsync())
+                return;
+
             await Roles_Load();
             LoadUserPermissions();
             await LoadEditableCreatorIds();
+        }
+
+        private async Task<bool> EnsureCurrentUserLoadedAsync()
+        {
+            if (_user == null || _user.UserId <= 0)
+            {
+                MessageBox.Show(
+                    "Не удалось определить текущего пользователя. Откройте форму после повторного входа в программу.",
+                    "Добавление роли",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(_user.UserName))
+            {
+                try
+                {
+                    await _user.LoadUserData();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        "Не удалось загрузить данные текущего пользователя: " + ex.Message,
+                        "Добавление роли",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(_user.UserName))
+                return true;
+
+            MessageBox.Show(
+                "У текущего пользователя не задан логин. Добавление роли невозможно.",
+                "Добавление роли",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+            return false;
         }
 
         private async Task Roles_Load()
@@ -101,6 +144,9 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 }
                 else
                 {
+                    if (!await EnsureCurrentUserLoadedAsync())
+                        return;
+
                     int newId = await _allRoleDataService.InsertRoles(RoleName, Description, _user.UserId);
                     row["RoleID"] = newId;
                 }
@@ -113,6 +159,11 @@ namespace SewingProduction.Features.UserDistribution.Forms
                     MessageBox.Show($"Роль с именем \"{RoleName}\" уже существует. Имя должно быть уникальным.", "Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 else
                     MessageBox.Show("Ошибка базы данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                gridViewRoles.DeleteRow(gridViewRoles.FocusedRowHandle);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Не удалось добавить роль: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 gridViewRoles.DeleteRow(gridViewRoles.FocusedRowHandle);
             }
         }
@@ -445,7 +496,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         public async Task<DataTable> GetRoles(int userId)
         {
             string query = @"
-            SELECT r.RoleID, r.RoleName, r.Description, u.UserName
+            SELECT r.RoleID, r.RoleName, r.Description, ISNULL(u.UserName, N'') AS UserName
             FROM Roles r
             JOIN Users u ON r.CreatorID = u.UserID
             WHERE NOT EXISTS(
