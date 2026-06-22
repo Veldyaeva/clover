@@ -45,6 +45,29 @@ namespace SewingProduction.Features.Yarn.Services
             return await _dbService.GetEntityAsync<decimal?>(sql, new { Nakl = nakl });
         }
 
+        public Task<List<YarnCostHistoryRow>> LoadCostHistoryAsync(string kodd, string kod, bool filterByKod)
+        {
+            var sql = @"
+                SELECT *
+                FROM dbo.history_smena_seb_rekom WITH (NOLOCK)
+                WHERE kodd = @Kodd"
+                + (filterByKod ? " AND kod = @Kod" : "")
+                + " ORDER BY data_izm";
+
+            return _dbService.GetListAsync<YarnCostHistoryRow>(sql, new { Kodd = kodd, Kod = kod });
+        }
+
+        public Task<List<YarnArticulHistoryRow>> LoadArticulHistoryAsync(string kod)
+        {
+            const string sql = @"
+                SELECT komp_user, data_smena, kod, field_name, field_n_k, old_value, new_value
+                FROM dbo.history_smena_articul2015 WITH (NOLOCK)
+                WHERE kod = @Kod
+                ORDER BY data_smena DESC";
+
+            return _dbService.GetListAsync<YarnArticulHistoryRow>(sql, new { Kod = kod });
+        }
+
         public async Task<YarnRecalcResult> RecalculateCostAsync(string nakl, string kodArt)
         {
             using var connection = _dbHelper.GetConnection();

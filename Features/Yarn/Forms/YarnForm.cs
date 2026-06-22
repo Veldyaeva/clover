@@ -29,6 +29,8 @@ namespace SewingProduction.Features.Yarn.Forms
             gridView.ApplyReadOnly();
             gridView.PopupMenuShowing += (s, e) =>
                 GridContextMenuHelper.AddCopyCellMenuItem(s, e);
+            btnHistory.Enabled = false;
+            btnObnovit.Enabled = false;
         }
 
         private void YarnForm_Load(object sender, EventArgs e)
@@ -47,6 +49,20 @@ namespace SewingProduction.Features.Yarn.Forms
                 return;
 
             await LoadCardDataAsync(nakl);
+        }
+
+        private void btnHistory_Click(object sender, EventArgs e)
+        {
+            var kodArt = txtArticul.Text?.Trim();
+            if (string.IsNullOrWhiteSpace(kodArt))
+            {
+                MessageBox.Show("Сначала загрузите данные карты.", "Внимание",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var historyForm = new YarnHistoryForm(_dataService, kodArt, kodArt, "");
+            historyForm.ShowDialog(this);
         }
 
         private async void btnCalc_Click(object sender, EventArgs e)
@@ -150,7 +166,11 @@ namespace SewingProduction.Features.Yarn.Forms
 
                 gridControl.RefreshDataSource();
 
-                if (data.Count > 0)
+                bool hasData = data.Count > 0;
+                btnObnovit.Enabled = hasData;
+                btnHistory.Enabled = hasData;
+
+                if (hasData)
                 {
                     txtArticul.Text = data.First().t_articul?.Trim() ?? "";
                     txtSebUpr.Text = data.First().seb_t_m?.ToString("F3") ?? "";
