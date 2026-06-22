@@ -1,11 +1,9 @@
-using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Extensions;
 using SewingProduction.Features.Yarn.Models;
 using SewingProduction.Features.Yarn.Services;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
-using DevExpress.XtraGrid.Views.Base;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -18,8 +16,9 @@ namespace SewingProduction.Features.Yarn.Forms
     {
         private readonly ILogger _logger = new FileLogger();
         private readonly YarnDataService _dataService;
-        private readonly BindingList<YarnCardRow> _rows = new BindingList<YarnCardRow>();
-        private readonly BindingList<YarnCardRow> _colorResults = new BindingList<YarnCardRow>();
+        private readonly BindingList<YarnCardRow> _yarnRows = new();
+        private readonly BindingList<YarnCardRow> _colorRows = new();
+        private readonly BindingList<FabricSpreadingRow> _spreadingRows = new();
 
         public YarnForm(UserClass user) : base(user)
         {
@@ -27,109 +26,65 @@ namespace SewingProduction.Features.Yarn.Forms
             var dbHelper = new DatabaseHelperSQL();
             var dbService = new DbService(dbHelper);
             _dataService = new YarnDataService(dbService, dbHelper);
-            bindingSource.DataSource = _rows;
-            bsColorResult.DataSource = _colorResults;
-            gridView.ApplyReadOnly();
-            gridViewColor.ApplyReadOnly();
-            gridView.PopupMenuShowing += (s, e) =>
-                GridContextMenuHelper.AddCopyCellMenuItem(s, e);
-            gridViewColor.PopupMenuShowing += (s, e) =>
-                GridContextMenuHelper.AddCopyCellMenuItem(s, e);
-            btnHistory.Enabled = false;
+
+            bsYarnData.DataSource = _yarnRows;
+            bsColorResult.DataSource = _colorRows;
+            bsSpreading.DataSource = _spreadingRows;
+
+            gvYarnData.PopupMenuShowing += (s, e) => GridContextMenuHelper.AddCopyCellMenuItem(s, e);
+            gvColorResult.PopupMenuShowing += (s, e) => GridContextMenuHelper.AddCopyCellMenuItem(s, e);
+            gvSpreading.PopupMenuShowing += (s, e) => GridContextMenuHelper.AddCopyCellMenuItem(s, e);
+
             btnObnovit.Enabled = false;
+            btnHistory.Enabled = false;
         }
 
         private void YarnForm_Load(object sender, EventArgs e)
         {
-            txtNakl.Focus();
+            splitMain.SplitterDistance = splitMain.Width / 2;
+            txtFabricNakl.Focus();
         }
+
+        // ==================== Полотно ====================
+
+        private void txtFabricNakl_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter) return;
+            e.SuppressKeyPress = true;
+            // TODO: загрузка данных карты полотна
+        }
+
+        private void btnFabricReplace_Click(object sender, EventArgs e)
+        {
+            // TODO: замена себестоимости полотна
+        }
+
+        // ==================== Пряжа ====================
 
         private async void txtNakl_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode != Keys.Enter)
-                return;
-
+            if (e.KeyCode != Keys.Enter) return;
             e.SuppressKeyPress = true;
             var nakl = txtNakl.Text?.Trim();
-            if (string.IsNullOrWhiteSpace(nakl))
-                return;
-
-            await LoadCardDataAsync(nakl);
-        }
-
-        private async void txtColorSearch_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode != Keys.Enter)
-                return;
-
-            e.SuppressKeyPress = true;
-            var color = txtColorSearch.Text?.Trim();
-            if (string.IsNullOrWhiteSpace(color))
-                return;
-
-            try
-            {
-                var data = await _dataService.SearchByColorAsync(color);
-                _colorResults.Clear();
-                foreach (var row in data)
-                    _colorResults.Add(row);
-                gridColorResult.RefreshDataSource();
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "YarnForm.txtColorSearch_KeyDown");
-                MessageBox.Show($"Ошибка поиска: {ex.Message}",
-                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void gridViewColor_DoubleClick(object sender, EventArgs e)
-        {
-            if (gridViewColor.FocusedRowHandle < 0)
-                return;
-
-            var row = gridViewColor.GetRow(gridViewColor.FocusedRowHandle) as YarnCardRow;
-            if (row == null || string.IsNullOrWhiteSpace(row.nakl))
-                return;
-
-            txtNakl.Text = row.nakl.Trim();
-            _ = LoadCardDataAsync(row.nakl.Trim());
-        }
-
-        private void btnHistory_Click(object sender, EventArgs e)
-        {
-            var kodArt = txtArticul.Text?.Trim();
-            if (string.IsNullOrWhiteSpace(kodArt))
-            {
-                MessageBox.Show("Сначала загрузите данные карты.", "Внимание",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            var historyForm = new YarnHistoryForm(_dataService, kodArt, kodArt, "");
-            historyForm.ShowDialog(this);
+            if (!string.IsNullOrWhiteSpace(nakl))
+                await LoadYarnCardAsync(nakl);
         }
 
         private async void btnCalc_Click(object sender, EventArgs e)
         {
             var nakl = txtNakl.Text?.Trim();
-            if (string.IsNullOrWhiteSpace(nakl) || nakl == "0")
-                return;
-
+            if (string.IsNullOrWhiteSpace(nakl) || nakl == "0") return;
             try
             {
-                var newSeb = await _dataService.CalculateCostAsync(nakl);
-                if (newSeb.HasValue)
-                    txtSebUpr.Text = newSeb.Value.ToString("F2");
-                else
-                    MessageBox.Show("Карта не найдена!", "Внимание",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                var seb = await _dataService.CalculateCostAsync(nakl);
+                txtSebUpr.Text = seb.HasValue ? seb.Value.ToString("F2") : "";
+                if (!seb.HasValue)
+                    MessageBox.Show("Карта не найдена!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "YarnForm.btnCalc_Click");
-                MessageBox.Show($"Ошибка расчета: {ex.Message}",
-                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -137,85 +92,95 @@ namespace SewingProduction.Features.Yarn.Forms
         {
             var nakl = txtNakl.Text?.Trim();
             if (string.IsNullOrWhiteSpace(nakl) || nakl == "0")
-            {
-                MessageBox.Show("Введите номер карты пряжи!", "Внимание",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            { MessageBox.Show("Введите номер карты пряжи!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
 
             var kodArt = txtArticul.Text?.Trim();
             if (string.IsNullOrWhiteSpace(kodArt))
-            {
-                MessageBox.Show("Сначала загрузите данные карты (нажмите Enter в поле номера).",
-                    "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            { MessageBox.Show("Сначала загрузите данные карты.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
 
-            if (kodArt.Length > 7)
-                kodArt = kodArt.Substring(0, 7);
+            if (kodArt.Length > 7) kodArt = kodArt.Substring(0, 7);
 
-            if (MessageBox.Show(
-                    "Обновить себестоимость в п\\ф и приходных накладных?",
-                    "Подтверждение",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question) != DialogResult.Yes)
-            {
+            if (MessageBox.Show("Обновить себестоимость в п\\ф и приходных накладных?", "Подтверждение",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 return;
-            }
 
             btnObnovit.Enabled = false;
-            gridView.ShowLoadingPanel();
             try
             {
                 var result = await _dataService.RecalculateCostAsync(nakl, kodArt);
-
                 if (!result.IsOk)
-                {
-                    MessageBox.Show(result.MessageError, "Ошибка",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+                { MessageBox.Show(result.MessageError, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
 
-                if (result.SebUpr.HasValue)
-                    txtSebUpr.Text = result.SebUpr.Value.ToString("F3");
+                if (result.SebUpr.HasValue) txtSebUpr.Text = result.SebUpr.Value.ToString("F3");
+                await LoadYarnCardAsync(nakl);
 
-                await LoadCardDataAsync(nakl);
-
-                MessageBox.Show(
-                    "Себестоимость пересчитана в п\\ф и расходных накладных!",
-                    "Информация",
+                MessageBox.Show("Себестоимость пересчитана в п\\ф и расходных накладных!", "Информация",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "YarnForm.btnObnovit_Click");
-                MessageBox.Show($"Ошибка пересчета: {ex.Message}",
-                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
+            finally { btnObnovit.Enabled = true; }
+        }
+
+        private void btnHistory_Click(object sender, EventArgs e)
+        {
+            var kodArt = txtArticul.Text?.Trim();
+            if (string.IsNullOrWhiteSpace(kodArt))
+            { MessageBox.Show("Сначала загрузите данные карты.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
+
+            new YarnHistoryForm(_dataService, kodArt, kodArt, "").ShowDialog(this);
+        }
+
+        // ==================== Поиск по цвету ====================
+
+        private async void txtColorSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter) return;
+            e.SuppressKeyPress = true;
+            var color = txtColorSearch.Text?.Trim();
+            if (string.IsNullOrWhiteSpace(color)) return;
+            try
             {
-                btnObnovit.Enabled = true;
-                gridView.HideLoadingPanel();
+                var data = await _dataService.SearchByColorAsync(color);
+                _colorRows.Clear();
+                foreach (var r in data) _colorRows.Add(r);
+                gridColorResult.RefreshDataSource();
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "YarnForm.txtColorSearch_KeyDown");
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private async Task LoadCardDataAsync(string nakl)
+        private void gvColorResult_DoubleClick(object sender, EventArgs e)
+        {
+            if (gvColorResult.FocusedRowHandle < 0) return;
+            var row = gvColorResult.GetRow(gvColorResult.FocusedRowHandle) as YarnCardRow;
+            if (row == null || string.IsNullOrWhiteSpace(row.nakl)) return;
+            txtNakl.Text = row.nakl.Trim();
+            _ = LoadYarnCardAsync(row.nakl.Trim());
+        }
+
+        // ==================== Data ====================
+
+        private async Task LoadYarnCardAsync(string nakl)
         {
             try
             {
                 var data = await _dataService.LoadCardDataAsync(nakl);
+                _yarnRows.Clear();
+                foreach (var r in data) _yarnRows.Add(r);
+                gridYarnData.RefreshDataSource();
 
-                _rows.Clear();
-                foreach (var row in data)
-                    _rows.Add(row);
+                bool ok = data.Count > 0;
+                btnObnovit.Enabled = ok;
+                btnHistory.Enabled = ok;
 
-                gridControl.RefreshDataSource();
-
-                bool hasData = data.Count > 0;
-                btnObnovit.Enabled = hasData;
-                btnHistory.Enabled = hasData;
-
-                if (hasData)
+                if (ok)
                 {
                     txtArticul.Text = data.First().t_articul?.Trim() ?? "";
                     txtSebUpr.Text = data.First().seb_t_m?.ToString("F3") ?? "";
@@ -224,15 +189,13 @@ namespace SewingProduction.Features.Yarn.Forms
                 {
                     txtArticul.Text = "";
                     txtSebUpr.Text = "";
-                    MessageBox.Show("Карта не найдена!", "Внимание",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Карта не найдена!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "YarnForm.LoadCardDataAsync");
-                MessageBox.Show($"Ошибка загрузки данных: {ex.Message}",
-                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await _logger.LogErrorAsync(ex, "YarnForm.LoadYarnCardAsync");
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
