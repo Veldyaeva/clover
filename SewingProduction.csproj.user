@@ -211,6 +211,9 @@
     <Compile Update="Features\Sprav\Forms\VyazKnitEconomAssortForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\Yarn\Forms\YarnForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <EmbeddedResource Update="Features\Sprav\Forms\VyazKnitEconomAssortForm.resx">
       <DependentUpon>VyazKnitEconomAssortForm.cs</DependentUpon>
     </EmbeddedResource>
