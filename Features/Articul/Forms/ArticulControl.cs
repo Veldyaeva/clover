@@ -1,5 +1,8 @@
-using DevExpress.XtraEditors;
+﻿using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.DXErrorProvider;
+using DevExpress.XtraLayout;
+using DevExpress.XtraLayout.Utils;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
 using SewingProduction.Helpers;
@@ -10,11 +13,14 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SewingProduction.Features.Articul.Forms
 {
+    public enum ArticulControlMode { View, Edit }
+
     public partial class ArticulControl : DevExpress.XtraEditors.XtraUserControl
     {
         private readonly DatabaseHelperSQL _dbHelperAce;
@@ -33,7 +39,12 @@ namespace SewingProduction.Features.Articul.Forms
 
         private readonly Dictionary<Control, Color> _originalBackColors = new();
         private readonly Dictionary<Control, Color> _originalForeColors = new();
+        private readonly Dictionary<Control, Color> _originalEditorBackColors = new();
+        private readonly Dictionary<Control, Color> _originalEditorBorderColors = new();
         private readonly Dictionary<Control, bool> _originalUseForeColors = new();
+        private readonly Dictionary<Control, bool> _originalUseBackColors = new();
+        private readonly Dictionary<Control, bool> _originalUseBorderColors = new();
+        private readonly Dictionary<Control, (CheckBoxStyle Style, Color Checked, Color Unchecked, Color Grayed)> _originalCheckBoxStyles = new();
         private readonly FieldComparisonService _comparisonService = new();
         private bool _comparisonMapBuilt;
         /// <summary>
@@ -45,10 +56,15 @@ namespace SewingProduction.Features.Articul.Forms
 
             foreach (var kv in _controlToArtNormProperty)
             {
-                if (kv.Key != null && kv.Value != null)
-                    _propertyToControl[kv.Value.Name] = kv.Key;
-            }
+                if (kv.Key == null || kv.Value == null)
+                    continue;
 
+                if (IsEditBindingControl(kv.Key))
+                    continue;
+
+                _propertyToControl[kv.Value.Name] = kv.Key;
+            }
+            /*
             RegisterSeries("txbNorm_t", "Norm_t");
             RegisterSeries("txbTkanSeb_t", "Seb_t");
             RegisterSeries("txbBrak", "Brak_t");
@@ -56,11 +72,13 @@ namespace SewingProduction.Features.Articul.Forms
             RegisterSeries("txbKfKach", "Kf_tkan_kach");
             RegisterSeries("txbOpis_t", "Opis_t");
             RegisterSeries("tkb", "Tkb");
+            */
+            _propertyToControl[nameof(SpArticulPreviewModel.Ag_id)] = txbGrup;
         }
 
         private void RegisterSeries(string controlPrefix, string propertyPrefix)
         {
-            foreach (var c in GetAllControls(this))
+            foreach (var c in FieldComparisonService.GetAllControls(this))
             {
                 if (string.IsNullOrWhiteSpace(c.Name)) continue;
                 if (!c.Name.StartsWith(controlPrefix, StringComparison.Ordinal)) continue;
@@ -81,7 +99,7 @@ namespace SewingProduction.Features.Articul.Forms
             return start < name.Length ? name.Substring(start) : null;
         }
 
-        public ComparisonResult CompareAndHighlight(IEnumerable<FieldComparisonItem> items)
+        public async Task<ComparisonResult> CompareAndHighlight(IEnumerable<FieldComparisonItem> items)
         {
             var result = new ComparisonResult();
             try
@@ -94,12 +112,13 @@ namespace SewingProduction.Features.Articul.Forms
                 foreach (var mismatch in result.Mismatches)
                 {
                     if (_propertyToControl.TryGetValue(mismatch.PropertyName, out var control))
-                        MarkMismatch(control);
+                        MarkMismatch(control, mismatch);
                 }
             }
             catch (Exception ex)
             {
-                _=SafeLogAsync(() => _logger.LogErrorAsync(ex, $"{LoggerContext}.CompareAndHighlight"));
+                //_=SafeLogAsync(() => _logger.LogErrorAsync(ex, $"{LoggerContext}.CompareAndHighlight"));
+                await _logger.LogErrorAsync(ex, $"{LoggerContext}.CompareAndHighlight");
                 return result;
             }
             return result;
@@ -118,8 +137,10 @@ namespace SewingProduction.Features.Articul.Forms
             _dx.ClearErrors();
         }
 
-        private void MarkMismatch(Control c)
+        private void MarkMismatch(Control c, FieldMismatch mismatch)
         {
+            var tooltipText = BuildMismatchTooltipText(mismatch);
+
             if (!_originalBackColors.ContainsKey(c))
                 _originalBackColors[c] = c.BackColor;
 
@@ -131,21 +152,71 @@ namespace SewingProduction.Features.Articul.Forms
                     _originalUseForeColors[c] = ce.Properties.Appearance.Options.UseForeColor;
                 }
 
+                if (!_originalEditorBackColors.ContainsKey(c))
+                {
+                    _originalEditorBackColors[c] = ce.Properties.Appearance.BackColor;
+                    _originalUseBackColors[c] = ce.Properties.Appearance.Options.UseBackColor;
+                }
+
+                if (!_originalEditorBorderColors.ContainsKey(c))
+                {
+                    _originalEditorBorderColors[c] = ce.Properties.Appearance.BorderColor;
+                    _originalUseBorderColors[c] = ce.Properties.Appearance.Options.UseBorderColor;
+                }
+
+                if (!_originalCheckBoxStyles.ContainsKey(c))
+                {
+                    _originalCheckBoxStyles[c] = (
+                        ce.Properties.CheckBoxOptions.Style,
+                        ce.Properties.CheckBoxOptions.SvgColorChecked,
+                        ce.Properties.CheckBoxOptions.SvgColorUnchecked,
+                        ce.Properties.CheckBoxOptions.SvgColorGrayed);
+                }
+
                 ce.Properties.Appearance.ForeColor = Color.Red;
+                ce.Properties.Appearance.BackColor = Color.MistyRose;
+                ce.Properties.Appearance.BorderColor = Color.Red;
                 ce.ForeColor = Color.Red;
                 ce.Properties.Appearance.Options.UseForeColor = true;
-                _dx.SetError(ce, "Значение отличается");
+                ce.Properties.Appearance.Options.UseBackColor = true;
+                ce.Properties.Appearance.Options.UseBorderColor = true;
+                ce.Properties.CheckBoxOptions.Style = CheckBoxStyle.SvgCheckBox1;
+                ce.Properties.CheckBoxOptions.SvgColorChecked = Color.Red;
+                ce.Properties.CheckBoxOptions.SvgColorUnchecked = Color.Red;
+                ce.Properties.CheckBoxOptions.SvgColorGrayed = Color.Red;
+                _dx.SetError(ce, tooltipText);
             }
             else if (c is BaseEdit be)
             {
                 be.Properties.Appearance.BackColor = Color.MistyRose;
-                _dx.SetError(be, "Значение отличается");
+                _dx.SetError(be, tooltipText);
             }
             else
             {
                 c.BackColor = Color.MistyRose;
-                _dx.SetError(c, "Значение отличается");
+                _dx.SetError(c, tooltipText);
             }
+        }
+
+        private static string BuildMismatchTooltipText(FieldMismatch mismatch)
+        {
+            return $"Значение отличается.{Environment.NewLine}Ожидаемое значение: {FormatComparisonValue(mismatch.ExpectedDisplayValue ?? mismatch.ExpectedValue)}";
+        }
+
+        private static string FormatComparisonValue(object? value)
+        {
+            if (value == null)
+                return "(пусто)";
+
+            return value switch
+            {
+                string s => string.IsNullOrWhiteSpace(s) ? "(пусто)" : s.Trim(),
+                bool b => b ? "Да" : "Нет",
+                DateTime dt => dt.ToString("dd.MM.yyyy", CultureInfo.CurrentCulture),
+                DateTimeOffset dto => dto.ToString("dd.MM.yyyy", CultureInfo.CurrentCulture),
+                IFormattable formattable => formattable.ToString(null, CultureInfo.CurrentCulture) ?? "(пусто)",
+                _ => value.ToString() ?? "(пусто)"
+            };
         }
 
         private void ClearMark(Control c)
@@ -162,6 +233,39 @@ namespace SewingProduction.Features.Articul.Forms
                 {
                     ce.Properties.Appearance.Options.UseForeColor = use;
                     _originalUseForeColors.Remove(c);
+                }
+
+                if (_originalEditorBackColors.TryGetValue(c, out var back))
+                {
+                    ce.Properties.Appearance.BackColor = back;
+                    _originalEditorBackColors.Remove(c);
+                }
+
+                if (_originalUseBackColors.TryGetValue(c, out var useBack))
+                {
+                    ce.Properties.Appearance.Options.UseBackColor = useBack;
+                    _originalUseBackColors.Remove(c);
+                }
+
+                if (_originalEditorBorderColors.TryGetValue(c, out var border))
+                {
+                    ce.Properties.Appearance.BorderColor = border;
+                    _originalEditorBorderColors.Remove(c);
+                }
+
+                if (_originalUseBorderColors.TryGetValue(c, out var useBorder))
+                {
+                    ce.Properties.Appearance.Options.UseBorderColor = useBorder;
+                    _originalUseBorderColors.Remove(c);
+                }
+
+                if (_originalCheckBoxStyles.TryGetValue(c, out var originalStyle))
+                {
+                    ce.Properties.CheckBoxOptions.Style = originalStyle.Style;
+                    ce.Properties.CheckBoxOptions.SvgColorChecked = originalStyle.Checked;
+                    ce.Properties.CheckBoxOptions.SvgColorUnchecked = originalStyle.Unchecked;
+                    ce.Properties.CheckBoxOptions.SvgColorGrayed = originalStyle.Grayed;
+                    _originalCheckBoxStyles.Remove(c);
                 }
             }
             else
@@ -314,6 +418,7 @@ namespace SewingProduction.Features.Articul.Forms
                 var control = kv.Key;
                 var prop = kv.Value;
                 if (control == null || prop == null) continue;
+                if (!ShouldBindControl(control)) continue;
 
                 control.DataBindings.Clear();
 
@@ -358,6 +463,9 @@ namespace SewingProduction.Features.Articul.Forms
             // В read-only режиме не пишем обратно в модель
             var mode = _isReadOnly ? DataSourceUpdateMode.Never : DataSourceUpdateMode.OnPropertyChanged;
 
+            if (control is System.Windows.Forms.ComboBox)
+                return ("SelectedValue", mode);
+
             // CustomTextBox => TextBoxBase
             if (control is TextBoxBase)
                 return ("Text", mode);
@@ -366,7 +474,7 @@ namespace SewingProduction.Features.Articul.Forms
             if (control is CheckBox || control.GetType().Name.Contains("CheckBox"))
                 return ("Checked", mode);
 
-            // если где-то появятся DevExpress editors
+            // DevExpress editors
             if (control is BaseEdit)
                 return ("EditValue", mode);
 
@@ -375,36 +483,37 @@ namespace SewingProduction.Features.Articul.Forms
 
         private void ApplyReadOnlyState()
         {
-            foreach (Control c in GetAllControls(this))
+            foreach (Control c in FieldComparisonService.GetAllControls(this))
             {
+                var readOnly = _isReadOnly || _alwaysReadOnlyControls.Contains(c);
+
                 switch (c)
                 {
                     case TextBoxBase tb:
-                        tb.ReadOnly = _isReadOnly;
-                        tb.TabStop = !_isReadOnly;
+                        tb.ReadOnly = readOnly;
+                        tb.TabStop = !readOnly;
                         break;
 
                     case CheckBox cb:
-                        cb.Enabled = !_isReadOnly;
-                        cb.TabStop = !_isReadOnly;
+                        cb.Enabled = !readOnly;
+                        cb.TabStop = !readOnly;
+                        break;
+
+                    case System.Windows.Forms.ComboBox combo:
+                        combo.Enabled = !readOnly;
+                        combo.TabStop = !readOnly;
                         break;
 
                     case BaseEdit be:
-                        be.Properties.ReadOnly = _isReadOnly;
-                        be.TabStop = !_isReadOnly;
+                        be.Properties.ReadOnly = readOnly;
+                        be.TabStop = !readOnly;
                         break;
                 }
             }
+
+            ApplyAlwaysReadOnlyControls();
         }
 
-        private static IEnumerable<Control> GetAllControls(Control root)
-        {
-            foreach (Control c in root.Controls)
-            {
-                yield return c;
-                foreach (var cc in GetAllControls(c)) yield return cc;
-            }
-        }
         private void AttachChangeHandlers()
         {
             // Инициализируем маппинг Control -> PropertyInfo один раз
@@ -449,5 +558,256 @@ namespace SewingProduction.Features.Articul.Forms
 
 
         }
+
+        #region Edit mode
+
+        private ArticulControlMode _mode = ArticulControlMode.View;
+        private ArticulControlEditBinder? _editBinder;
+        private readonly BindingSource _bindingSourceGostGrup = new();
+        private bool _editMetadataInitialized;
+
+        private readonly List<(LayoutControlItem View, LayoutControlItem Edit)> _viewEditLayoutPairs = new();
+        private readonly HashSet<Control> _viewOnlyBindingControls = new();
+        private readonly HashSet<Control> _alwaysReadOnlyControls = new();
+        private readonly Dictionary<string, Control> _editPropertyToControl =
+            new(StringComparer.OrdinalIgnoreCase);
+
+        public ArticulControlMode Mode => _mode;
+
+        public async Task EnableEditModeAsync(CancellationToken ct = default)
+        {
+            ct.ThrowIfCancellationRequested();
+
+            if (_bs == null)
+                throw new InvalidOperationException("Перед включением режима редактирования вызовите BindTo.");
+
+            InitEditModeMetadata();
+
+            await CommonSpravArticulEditAdvance.EnsureLoadedAsync(_dbService).ConfigureAwait(true);
+            ct.ThrowIfCancellationRequested();
+
+            _editBinder ??= CreateEditBinder();
+            _editBinder.ConfigureLookups();
+
+            AttachEditPropertyMappings();
+            _editBinder.WireCascadeEvents(_bs);
+
+            _mode = ArticulControlMode.Edit;
+            _comparisonMapBuilt = false;
+
+            _editPropertyToControl.Clear();
+            foreach (var kv in _editBinder.BuildEditPropertyToControlMap())
+                _editPropertyToControl[kv.Key] = kv.Value;
+
+            ApplyModeVisibility();
+            IsReadOnly = false;
+
+            RecreateBindingsUpdateMode();
+        }
+
+        public void SetViewMode()
+        {
+            if (_mode == ArticulControlMode.View)
+                return;
+
+            _editBinder?.UnwireCascadeEvents();
+            _mode = ArticulControlMode.View;
+            RemoveEditPropertyMappings();
+            _comparisonMapBuilt = false;
+            _editPropertyToControl.Clear();
+            ApplyModeVisibility();
+            IsReadOnly = true;
+            RecreateBindingsUpdateMode();
+        }
+
+        /// <summary>
+        /// Точка расширения для будущих ограничений редактирования по данным и правам.
+        /// </summary>
+        public void SetFieldReadOnly(string propertyName, bool readOnly)
+        {
+            if (string.IsNullOrWhiteSpace(propertyName))
+                return;
+
+            if (!_editPropertyToControl.TryGetValue(propertyName, out var control) || control == null)
+                return;
+
+            ApplyControlReadOnly(control, readOnly);
+        }
+
+        public void ApplyEditableFields(IReadOnlySet<string> editableProperties)
+        {
+            if (editableProperties == null)
+                return;
+
+            foreach (Control control in FieldComparisonService.GetAllControls(this))
+            {
+                var editable = TryResolveEditPropertyName(control, out var propertyName)
+                    && editableProperties.Contains(propertyName);
+
+                ApplyControlReadOnly(control, !editable);
+            }
+
+            ApplyAlwaysReadOnlyControls();
+        }
+
+        private void InitEditModeMetadata()
+        {
+            if (_editMetadataInitialized)
+                return;
+
+            _viewEditLayoutPairs.Add((layoutControlItem9, layoutItemEditTM));
+            _viewEditLayoutPairs.Add((layoutControlItem14, layoutItemEditSeason));
+            _viewEditLayoutPairs.Add((layoutControlItem16, layoutItemEditAssort));
+            _viewEditLayoutPairs.Add((layoutControlItem18, layoutItemEditCountry));
+            _viewEditLayoutPairs.Add((layoutControlItem21, layoutItemEditGrupMen));
+            _viewEditLayoutPairs.Add((layoutControlItem7, layoutItemEditGostGrup));
+            _viewEditLayoutPairs.Add((layoutControlItem12, layoutItemEditGost));
+            _viewEditLayoutPairs.Add((layoutControlItem27, layoutItemEditTkan));
+
+            RegisterViewOnlyBindingControl(txbTM);
+            RegisterViewOnlyBindingControl(txbSeason);
+            RegisterViewOnlyBindingControl(txbAssort);
+            RegisterViewOnlyBindingControl(txbCountry);
+            RegisterViewOnlyBindingControl(txbGrupMenName);
+            RegisterViewOnlyBindingControl(txbGrup);
+            RegisterViewOnlyBindingControl(txbNameGost);
+            RegisterViewOnlyBindingControl(txbTkb);
+            RegisterViewOnlyBindingControl(txbOpiGost);
+
+            RegisterAlwaysReadOnlyControl(txbKod);
+            RegisterAlwaysReadOnlyControl(txbPo);
+            RegisterAlwaysReadOnlyControl(txbRazm);
+            RegisterAlwaysReadOnlyControl(txbRazmPrint);
+
+            _editMetadataInitialized = true;
+        }
+
+        private ArticulControlEditBinder CreateEditBinder()
+        {
+            return new ArticulControlEditBinder(
+                cbTM,
+                cbSeason,
+                cbGrupMen,
+                cbCountry,
+                cbAssort,
+                cbTkan,
+                lookUpGost,
+                lookUpGostGrup,
+                txbIdGost,
+                txbOpiGost,
+                txbPo,
+                _bindingSourceGostGrup);
+        }
+
+        private void ApplyModeVisibility()
+        {
+            var showEdit = _mode == ArticulControlMode.Edit;
+            foreach (var (view, edit) in _viewEditLayoutPairs)
+            {
+                view.Visibility = showEdit ? LayoutVisibility.Never : LayoutVisibility.Always;
+                edit.Visibility = showEdit ? LayoutVisibility.Always : LayoutVisibility.Never;
+                if (edit.Control != null)
+                    edit.Control.Visible = showEdit;
+            }
+        }
+
+        private void AttachEditPropertyMappings()
+        {
+            _editBinder?.RegisterEditPropertyMappings(_controlToArtNormProperty, typeof(Models.SpArticulPreviewModel));
+        }
+
+        private void RemoveEditPropertyMappings()
+        {
+            _controlToArtNormProperty.Remove(cbTM);
+            _controlToArtNormProperty.Remove(cbSeason);
+            _controlToArtNormProperty.Remove(cbGrupMen);
+            _controlToArtNormProperty.Remove(cbCountry);
+            _controlToArtNormProperty.Remove(cbAssort);
+            _controlToArtNormProperty.Remove(cbTkan);
+            _controlToArtNormProperty.Remove(lookUpGost);
+            _controlToArtNormProperty.Remove(lookUpGostGrup);
+        }
+
+        private void RegisterViewOnlyBindingControl(Control control)
+            => _viewOnlyBindingControls.Add(control);
+
+        private void RegisterAlwaysReadOnlyControl(Control control)
+            => _alwaysReadOnlyControls.Add(control);
+
+        private void ApplyAlwaysReadOnlyControls()
+        {
+            foreach (var control in _alwaysReadOnlyControls)
+                ApplyControlReadOnly(control, true);
+        }
+
+        private bool TryResolveEditPropertyName(Control control, out string propertyName)
+        {
+            foreach (var pair in _editPropertyToControl)
+            {
+                if (ReferenceEquals(pair.Value, control))
+                {
+                    propertyName = pair.Key;
+                    return true;
+                }
+            }
+
+            if (_controlToArtNormProperty.TryGetValue(control, out var propertyInfo)
+                && propertyInfo != null)
+            {
+                propertyName = propertyInfo.Name;
+                return true;
+            }
+
+            propertyName = string.Empty;
+            return false;
+        }
+
+        private static void ApplyControlReadOnly(Control control, bool readOnly)
+        {
+            switch (control)
+            {
+                case TextBoxBase tb:
+                    tb.ReadOnly = readOnly;
+                    tb.TabStop = !readOnly;
+                    break;
+                case CheckBox cb:
+                    cb.Enabled = !readOnly;
+                    cb.TabStop = !readOnly;
+                    break;
+                case System.Windows.Forms.ComboBox combo:
+                    combo.Enabled = !readOnly;
+                    combo.TabStop = !readOnly;
+                    break;
+                case BaseEdit be:
+                    be.Properties.ReadOnly = readOnly;
+                    be.TabStop = !readOnly;
+                    break;
+            }
+        }
+
+        private bool ShouldBindControl(Control control)
+        {
+            if (_mode == ArticulControlMode.View)
+                return true;
+
+            return !_viewOnlyBindingControls.Contains(control);
+        }
+
+        private bool IsEditBindingControl(Control control)
+        {
+            if (!_editMetadataInitialized)
+                return false;
+
+            return ReferenceEquals(control, cbTM)
+                   || ReferenceEquals(control, cbSeason)
+                   || ReferenceEquals(control, cbGrupMen)
+                   || ReferenceEquals(control, cbCountry)
+                   || ReferenceEquals(control, cbAssort)
+                   || ReferenceEquals(control, cbTkan)
+                   || ReferenceEquals(control, lookUpGost)
+                   || ReferenceEquals(control, lookUpGostGrup);
+        }
+
+        #endregion
     }
 }

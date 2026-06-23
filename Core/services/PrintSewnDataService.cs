@@ -213,19 +213,19 @@ namespace SewingProduction.Core.services
 
             return Convert.ToInt32(result);
         }
-        public async Task<bool> IsNaborOdezhdyAsync(string kod7)
+        public async Task<bool> IsNaborAsync(string kod)
         {
-            if (string.IsNullOrWhiteSpace(kod7))
+            if (string.IsNullOrWhiteSpace(kod))
                 return false;
 
             string query = @"
             SELECT TOP 1 1
             FROM view_articulNaborSostav
-            WHERE SUBSTRING(kod, 1, 7) = @kod7";
+            WHERE SUBSTRING(kod, 1, 7) = SUBSTRING(@kod, 1, 7)";
 
             object result = await _dbHelper.ExecuteScalarAsync(query, new Dictionary<string, object>
             {
-                { "@kod7", kod7 }
+                { "@kod", kod }
             });
 
             return result != null && result != DBNull.Value;
@@ -286,11 +286,6 @@ namespace SewingProduction.Core.services
 
         #endregion
         #endregion
-        public async Task<List<FormModel>> CheckMatrix()
-        {
-            string query = "SELECT ProjectFormsID, NameForm, NameFormRus, CreatorID FROM ProjectForms";
-            return await _dbService.GetListAsync<FormModel>(query, new { });
-        }
         public async Task SaveAsync(ArticulModel model)
         {
             await _dbService.SaveEntityAsync("sp_articul", "Kod", model);

@@ -131,7 +131,7 @@ namespace SewingProduction.Core.Forms
 			createReport(2);
 		}
 		#endregion
-		private void createReport(int izdType = 0)
+		private async void createReport(int izdType = 0)
 		{
 			var selectedRows = GetSelectedRows();
 
@@ -148,18 +148,15 @@ namespace SewingProduction.Core.Forms
 				string kod = row.kod_izd?.ToString() ?? string.Empty;
 				int proizvType = row.proizvType ?? 0;
 
-				Debug.WriteLine("nomZad " + nomZad);
-				Debug.WriteLine("nom " + nom);
-				Debug.WriteLine("kod " + kod);
-				Debug.WriteLine("_kod " + _kod);
-
 				VshivkiReport report1 = new VshivkiReport();
 				if (string.IsNullOrWhiteSpace(_kod))
 					requestParameters(report1, proizvType, izdType, nomZad, nom, "0");
 				else
 					requestParameters(report1, proizvType, izdType, nomZad, "0", kod);
-				ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
-				reportPrintTool1.ShowPreviewDialog();
+				//ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+				//reportPrintTool1.ShowPreviewDialog();
+
+				await report1.ShowOrPrintBySettingsAsync(this);
 
 				if (customCheckBoxNomPach.Checked)
 				{
@@ -168,8 +165,9 @@ namespace SewingProduction.Core.Forms
 						requestParameters(report2, proizvType, izdType, nomZad, nom);
 					else
 						requestParameters(report2, proizvType, izdType, kod: kod);
-					ReportPrintTool reportPrintTool2 = new ReportPrintTool(report2);
-					reportPrintTool2.ShowPreviewDialog();
+					//ReportPrintTool reportPrintTool2 = new ReportPrintTool(report2);
+					//reportPrintTool2.ShowPreviewDialog();					
+					await report2.ShowOrPrintBySettingsAsync(this);
 				}
 			}
 		}

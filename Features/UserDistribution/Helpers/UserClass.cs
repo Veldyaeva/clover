@@ -25,6 +25,15 @@ namespace SewingProduction.Features.UserDistribution.Helpers
         public List<UserClass> Children { get; set; } = new List<UserClass>();
         public DataTable myObjectForm;
         
+        public static string WinUserName
+        {
+            get
+            {
+                string computerName = Environment.MachineName;
+                string userName = Environment.UserName;
+                return $"{computerName} # {userName}";
+            }
+        }
         public UserClass()
         {
             _userClassDataService = new UserClassDataService(dbHelper);

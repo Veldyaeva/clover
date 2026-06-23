@@ -1,7 +1,10 @@
 
+/SplashImages/
 /.vs/
 /bin/
 /obj/
+**/bin/
+**/obj/
 /Features/TeamWork/Forms/TeamWork.Articles.resx
 /Features/TeamWork/Forms/TeamWork.Events.resx
 /Features/TeamWork/Forms/TeamWork.Helpers.resx
@@ -17,3 +20,7 @@
 *.0.102_IsDockerContainer.dotnetUserLevelCache
 *.0.102_MachineId.dotnetUserLevelCache
 *.v1.dotnetUserLevelCache
+
+# Visual Studio temporary resource files
+*~RF*.TMP
+*.TMP

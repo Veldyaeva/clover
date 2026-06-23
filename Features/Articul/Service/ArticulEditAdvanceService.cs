@@ -37,20 +37,21 @@ namespace SewingProduction.Features.Articul.Service
                 return null;
             }
         }
-        public async Task<BindingList<ArticulModel>> GetCommonArtByKoddAsync(string kodd)
+        public async Task<BindingList<SpArticulPreviewModel>> GetCommonArtByKoddAsync(string kodd, string kod = null)
         {
             try
             {
-                string query = "select top 1 * from dbo.view_sp_articul_all WHERE kodd = @kodd";
-                //var bb = await _dbService.GetListAsync<ArticulModel>(query, new { kodd });
-                //var ret = new BindingList<ArticulModel>(bb);
-                //bb = null;
-                //return ret;
-                return new BindingList<ArticulModel>(await _dbService.GetListAsync<ArticulModel>(query, new { kodd }));
+                string query = string.IsNullOrWhiteSpace(kod)
+                    ? "select top 1 * from dbo.view_sp_articul_all WHERE kodd = @kodd"
+                    : "select top 1 * from dbo.view_sp_articul_all WHERE kod = @kod";
+                return new BindingList<SpArticulPreviewModel>(
+                    await _dbService.GetListAsync<SpArticulPreviewModel>(
+                        query,
+                        new { kodd, kod }));
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetArtByKoddAsync");
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetCommonArtByKoddAsync");
                 return null;
             }
         }

@@ -1,4 +1,3 @@
-using DevExpress.DataAccess.ConnectionParameters;
 using DevExpress.DataAccess.Sql;
 using DevExpress.XtraReports.UI;
 using SewingProduction.Core.Class.Settings;
@@ -15,14 +14,12 @@ namespace SewingProduction.Core.helpers
             if (report == null)
                 return;
 
-            var connectionString = SettingsManager.GetCurrentConnectionString();
-            if (string.IsNullOrWhiteSpace(connectionString))
-                return;
+            var connectionName = SettingsManager.GetCurrentConnectionName();
 
             report.DataSourceDemanded -= Report_DataSourceDemanded;
             report.DataSourceDemanded += Report_DataSourceDemanded;
 
-            ApplyToReportTree(report, connectionString, new HashSet<XtraReport>());
+            ApplyToReportTree(report, connectionName, new HashSet<XtraReport>());
         }
 
         private static void Report_DataSourceDemanded(object sender, EventArgs e)
@@ -30,30 +27,27 @@ namespace SewingProduction.Core.helpers
             if (sender is not XtraReport report)
                 return;
 
-            var connectionString = SettingsManager.GetCurrentConnectionString();
-            if (string.IsNullOrWhiteSpace(connectionString))
-                return;
-
-            ApplyToReportTree(report, connectionString, new HashSet<XtraReport>());
+            var connectionName = SettingsManager.GetCurrentConnectionName();
+            ApplyToReportTree(report, connectionName, new HashSet<XtraReport>());
         }
 
-        private static void ApplyToReportTree(XtraReport report, string connectionString, ISet<XtraReport> visitedReports)
+        private static void ApplyToReportTree(XtraReport report, string connectionName, ISet<XtraReport> visitedReports)
         {
             if (!visitedReports.Add(report))
                 return;
 
-            ApplyDataSources(report, connectionString);
+            ApplyDataSources(report, connectionName);
 
             foreach (var subreport in report.AllControls<XRSubreport>())
             {
                 if (subreport.ReportSource != null)
-                    ApplyToReportTree(subreport.ReportSource, connectionString, visitedReports);
+                    ApplyToReportTree(subreport.ReportSource, connectionName, visitedReports);
             }
         }
 
-        private static void ApplyDataSources(XtraReport report, string connectionString)
+        private static void ApplyDataSources(XtraReport report, string connectionName)
         {
-            ApplySqlDataSource(report.DataSource as SqlDataSource, connectionString);
+            ApplySqlDataSource(report.DataSource as SqlDataSource, connectionName);
 
             if (report.ComponentStorage == null)
                 return;
@@ -61,16 +55,17 @@ namespace SewingProduction.Core.helpers
             foreach (IComponent component in report.ComponentStorage)
             {
                 if (component is SqlDataSource sqlDataSource)
-                    ApplySqlDataSource(sqlDataSource, connectionString);
+                    ApplySqlDataSource(sqlDataSource, connectionName);
             }
         }
 
-        private static void ApplySqlDataSource(SqlDataSource sqlDataSource, string connectionString)
+        private static void ApplySqlDataSource(SqlDataSource sqlDataSource, string connectionName)
         {
             if (sqlDataSource == null)
                 return;
 
-            sqlDataSource.ConnectionParameters = new CustomStringConnectionParameters(connectionString);
+            sqlDataSource.ConnectionName = connectionName;
+            sqlDataSource.ConnectionParameters = null;
         }
     }
 }

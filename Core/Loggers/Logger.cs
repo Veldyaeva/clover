@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SewingProduction.Helpers;
@@ -29,8 +29,8 @@ namespace SewingProduction
 
         private void EnsureLogTableExists()
         {
-            string query = "IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Logs' AND xtype='U') " +
-                           "CREATE TABLE Logs (Id INT IDENTITY(1,1) PRIMARY KEY, Timestamp DATETIME, Message NVARCHAR(MAX), StackTrace NVARCHAR(MAX), Context NVARCHAR(255))";
+            string query = "IF OBJECT_ID('dbo.Logs', 'U') IS NULL " +
+                           "CREATE TABLE dbo.Logs (Id INT IDENTITY(1,1) PRIMARY KEY, Timestamp DATETIME, Message NVARCHAR(MAX), StackTrace NVARCHAR(MAX), Context NVARCHAR(255))";
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -111,81 +111,59 @@ namespace SewingProduction
     public class FileLogger : ILogger
     {
         private static readonly string logDirectory = "logs";
-        private static readonly object _lock = new object();
+        private static readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
 
         static FileLogger()
         {
             if (!Directory.Exists(logDirectory))
-            {
                 Directory.CreateDirectory(logDirectory);
-            }
         }
 
-        public async Task LogErrorAsync(Exception ex, string context = "")
-        {
-            var logEntry = new LogEntry
+        public Task LogErrorAsync(Exception ex, string context = "")
+            => WriteLogAsync(new LogEntry
             {
                 Timestamp = DateTime.UtcNow.ToString("o"),
                 Message = ex.Message,
                 StackTrace = ex.StackTrace,
                 Context = context
-            };
+            });
 
-            await WriteLogAsync(logEntry);
-        }
-
-        public async Task LogEventAsync(string eventMessage, string context = "")
-        {
-            var logEntry = new LogEntry
+        public Task LogEventAsync(string eventMessage, string context = "")
+            => WriteLogAsync(new LogEntry
             {
                 Timestamp = DateTime.UtcNow.ToString("o"),
                 Message = eventMessage,
                 StackTrace = "",
                 Context = context
-            };
+            });
 
-            await WriteLogAsync(logEntry);
-        }
-
-        public async Task LogWarningAsync(string eventMessage, string context = "")
-        {
-            var logEntry = new LogEntry
+        public Task LogWarningAsync(string eventMessage, string context = "")
+            => WriteLogAsync(new LogEntry
             {
                 Timestamp = DateTime.UtcNow.ToString("o"),
                 Message = "WARNING!!!: " + eventMessage,
                 StackTrace = "",
                 Context = context
-            };
+            });
 
-            await WriteLogAsync(logEntry);
-        }
-
-
+        // Формат: NDJSON — одна запись в строке, O(1) append вместо O(n) read-rewrite.
         private static async Task WriteLogAsync(LogEntry logEntry)
         {
-            string logFileName = Path.Combine(logDirectory, $"log_{DateTime.UtcNow:yyyy-MM-dd}.json");
+            string logFileName = Path.Combine(logDirectory, $"log_{DateTime.UtcNow:yyyy-MM-dd}.jsonl");
+            string line = JsonConvert.SerializeObject(logEntry) + Environment.NewLine;
 
-            lock (_lock)
+            await _semaphore.WaitAsync();
+            try
             {
-                try
-                {
-                    List<LogEntry> logs = new List<LogEntry>();
-
-                    if (File.Exists(logFileName))
-                    {
-                        string existingLogs = File.ReadAllText(logFileName);
-                        logs = JsonConvert.DeserializeObject<List<LogEntry>>(existingLogs) ?? new List<LogEntry>();
-                    }
-
-                    logs.Add(logEntry);
-
-                    string json = JsonConvert.SerializeObject(logs, Formatting.Indented);
-                    File.WriteAllText(logFileName, json);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Ошибка при записи логов: " + ex.Message);
-                }
+                await File.AppendAllTextAsync(logFileName, line);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ошибка при записи логов: " + ex.Message);
+            }
+            finally
+            {
+                _semaphore.Release();
             }
         }
 

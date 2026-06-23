@@ -75,24 +75,31 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             teamWorkAdvanceTW.FormClosed += async (s, args) =>
             {
-                if (teamWorkAdvanceTW.DialogResult == DialogResult.OK)
+                try
                 {
-                    CopyedWorkDivisionShell = teamWorkAdvanceTW.CreatedAnn;
-                    if (CopyedWorkDivisionShell == null) return;
+                    if (teamWorkAdvanceTW.DialogResult == DialogResult.OK)
+                    {
+                        CopyedWorkDivisionShell = teamWorkAdvanceTW.CreatedAnn;
+                        if (CopyedWorkDivisionShell == null) return;
 
-                    _bindingList.Add(CopyedWorkDivisionShell);
-                    _bindingSource.ResetBindings(false);
-                    TryFocusAndRefreshRowByAnnId(ANNgridView, CopyedWorkDivisionShell.AnnID);
+                        _bindingList.Add(CopyedWorkDivisionShell);
+                        _bindingSource.ResetBindings(false);
+                        TryFocusAndRefreshRowByAnnId(ANNgridView, CopyedWorkDivisionShell.AnnID);
+                    }
+                    else
+                    {
+                        // Возврат к исходной строке
+                        TryFocusAndRefreshRowByAnnId(ANNgridView, selectedAnnToDuplicate.AnnID);
+
+                        // Удаляем созданную запись из списка и базы
+                        _bindingList.Remove(CopyedWorkDivisionShell);
+                        _bindingSource.ResetBindings(false);
+                        await _teamWorkService.RollbackDraftAsync(newAnnId);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    // Возврат к исходной строке
-                    TryFocusAndRefreshRowByAnnId(ANNgridView, selectedAnnToDuplicate.AnnID);
-
-                    // Удаляем созданную запись из списка и базы
-                    _bindingList.Remove(CopyedWorkDivisionShell);
-                    _bindingSource.ResetBindings(false);
-                    await _teamWorkService.RollbackDraftAsync(newAnnId);
+                    await _logger.LogErrorAsync(ex, "CopyRowAsync: FormClosed");
                 }
             };
         }
@@ -107,26 +114,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                List<Brig> brigades = await _artNormService.GetWorkingBrigs(annId);
-                var brigIds = brigades?
-    .Select(b => b.id_brig)
-    .Where(id => id > 0)
-    .Distinct()
-    .ToArray();
-
-                if (brigIds is { Length: > 0 })
-                {
-                    await _jabberSender.SendToBrigsAsync(brigIds, msg);
-                    await _logger.LogEventAsync(
-                        $"Отправлено '{msg}' в {brigIds.Length} бригад(ы) для annId={annId}",
-                        "EditWd_Internal2");
-                }
-                else
-                {
-                    await _logger.LogEventAsync(
-                        $"Бригад для рассылки не найдено (annId={annId})",
-                        "EditWd_Internal2");
-                }
+                await _teamWorkService.SendMessageToBrigadesAsync(annId, msg);
             }
             catch (Exception ex)
             {

@@ -21,11 +21,13 @@ using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.Intrinsics.X86;
 using System.Text;
@@ -41,13 +43,37 @@ namespace SewingProduction.Features.Articul.Forms
         private DatabaseHelperSQL _dbHelper;
         private DbService _dbService;
         private static BulkHelper _bulkHelper;
+        
 
         //private ArticulDataService _articulDataService;
         private ArticulEditAdvanceService _articulEdAdvDataService;
 
         private readonly ILogger _logger = new FileLogger();
 
+        private const string PermissionEditLinkedGost = "permArticulEditLinkedGost";
+        private const string PermissionEditLinkedFull = "permArticulEditLinkedFull";
+        private const string PermissionModeEditor = "Редактор";
+
+        private static readonly HashSet<string> GostEditableProperties =
+            new(StringComparer.OrdinalIgnoreCase)
+            {
+                nameof(ArticulModel.Id_gost),
+                nameof(ArticulModel.Ag_id),
+                nameof(ArticulModel.Grup)
+            };
+
+        private static readonly HashSet<string> SostavEditableProperties =
+            new(StringComparer.OrdinalIgnoreCase)
+            {
+                nameof(ArticulModel.Sost),
+                nameof(ArticulModel.Sost2),
+                nameof(ArticulModel.Sost3),
+                nameof(ArticulModel.Sostav)
+            };
+
         private ArticulModel _currentModel;
+        private ArticulModel _originalModelSnapshot;
+        private ArticulEditAccessPolicy _editPolicy = ArticulEditAccessPolicy.ReadOnly;
 
         private string _kodd;
         private string _kod;
@@ -93,6 +119,16 @@ namespace SewingProduction.Features.Articul.Forms
             _kod = kod;
         }
 
+        private sealed record ArticulEditAccessPolicy(
+            bool CanEditBase,
+            bool CanEditGost,
+            bool CanEditSostav)
+        {
+            public static ArticulEditAccessPolicy ReadOnly { get; } = new(false, false, false);
+            public bool CanEditAny => CanEditBase || CanEditGost || CanEditSostav;
+            public bool CanEditAll => CanEditBase && CanEditGost && CanEditSostav;
+        }
+
 
         private async void ArticulEditAdvance_Load(object sender, EventArgs e)
         {
@@ -112,16 +148,96 @@ namespace SewingProduction.Features.Articul.Forms
             //доступ на определенную колонку
             //gridEditAdRazm.InitializeAccess(_user, this.Name, new List<string> { "view_sp_articul" });
 
-            //фильтр на удаленные записи
-            gridViewEditAdvRazm.ActiveFilterString = "[IsDeleted] = false";
-
             await InitializeBindingsAsync();
             BindGostRazm();
 
-            CheckStatus();
+            // view_sp_articul_all не включает po — восполняем из _bindingSourceArtKod.
+            // В группе po делит изделия на отдельные коды: если po заполнено,
+            // дальше редактирование ограничивается выбранной po.
+            if (string.IsNullOrWhiteSpace(_currentModel?.Po))
+            {
+                var po = _bindingSourceArtKod.List.OfType<ArticulModel>()
+                    .FirstOrDefault(x => KodMatches(x.Kod, GetSelectedKod()))
+                    ?.Po;
+                if (!string.IsNullOrWhiteSpace(po))
+                    _currentModel!.Po = po;
+            }
+
+            // Фильтр грида: при наличии пометки — только код этой пометки,
+            // иначе — все не-удалённые коды группы.
+            ApplyRazmFilter();
+
+            if (IsSingleCodeEditMode())
+                this.Text += $"  [по: {_currentModel!.Po.Trim()}]";
+
+            await CheckStatusAsync();
+
+            await InitArticulCardAsync();
+
+            CaptureOriginalModelSnapshot();
 
         }
-        private async void CheckStatus()
+
+        /// <summary>
+        /// Инициализация размещённого на форме ArticulControl. Контрол привязывается к тому же
+        /// _bindingSourceArtCommon (SpArticulPreviewModel), что и поля формы, поэтому его правки
+        /// сохраняются существующим механизмом SaveChanges без отдельного pipeline.
+        /// </summary>
+        private async Task InitArticulCardAsync()
+        {
+            try
+            {
+                if (_bindingSourceArtCommon.Count == 0)
+                    return;
+
+                articulControlCard.BindTo(_bindingSourceArtCommon);
+                await articulControlCard.LoadImageAsync(_kodd);
+
+                if (CanEditArticulCard())
+                {
+                    await articulControlCard.EnableEditModeAsync();
+                    ApplyArticulCardEditPolicy();
+                }
+                else
+                {
+                    articulControlCard.SetViewMode();
+                    articulControlCard.IsReadOnly = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка инициализации ArticulControl на ArticulEditAdvance");
+            }
+        }
+        private bool CanEditArticulCard()
+        {
+            return _editPolicy.CanEditAll || CanEditOnlyGost();
+        }
+
+        private void ApplyArticulCardEditPolicy()
+        {
+            if (_editPolicy.CanEditAll)
+                return;
+
+            var editableProperties = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+            if (CanEditOnlyGost())
+            {
+                editableProperties.Add(nameof(ArticulModel.Id_gost));
+                editableProperties.Add(nameof(ArticulModel.Ag_id));
+            }
+
+            articulControlCard.ApplyEditableFields(editableProperties);
+        }
+
+        private bool CanEditOnlyGost()
+        {
+            return _editPolicy.CanEditGost
+                && !_editPolicy.CanEditBase
+                && !_editPolicy.CanEditSostav;
+        }
+
+        private async Task CheckStatusAsync()
         {
             try
             {
@@ -137,22 +253,7 @@ namespace SewingProduction.Features.Articul.Forms
 
                 _linkedWithMatrix = (matrStatustask.Result != null && matrStatustask.Result > 0);
 
-                if (_linkedWithMatrix)
-                {
-                    //layoutCommonArticul.Enabled = false;
-                    SetGroupReadOnly(layoutCommonArticul, true);
-                    SetGroupReadOnly(layoutGostInsert, true);
-                    SetGroupReadOnly(layoutSostav, true);
-
-                }
-                //есть дата описания модели - редактирование запрещено
-                if (_currentModel.DateOpis != null)
-                {
-                    layoutGostInsert.Enabled = false;
-                    //btEdit.Visible = false;
-                    layoutControlItem23.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-
-                }
+                ApplyEditPolicy();
             }
             catch (Exception ex)
             {
@@ -160,6 +261,73 @@ namespace SewingProduction.Features.Articul.Forms
                 throw;
             }
 
+        }
+
+        private ArticulEditAccessPolicy ResolveEditPolicy()
+        {
+            var hasFormEdit = HasEditPermission(nameof(ArticulEditAdvance));
+            if (!hasFormEdit)
+                return ArticulEditAccessPolicy.ReadOnly;
+
+            bool canEditBase;
+            bool canEditGost;
+            bool canEditSostav;
+
+            if (!_linkedWithMatrix)
+            {
+                canEditBase = true;
+                canEditGost = true;
+                canEditSostav = true;
+            }
+            else if (HasEditPermission(PermissionEditLinkedFull))
+            {
+                canEditBase = true;
+                canEditGost = true;
+                canEditSostav = true;
+            }
+            else if (HasEditPermission(PermissionEditLinkedGost))
+            {
+                canEditBase = false;
+                canEditGost = true;
+                canEditSostav = false;
+            }
+            else
+            {
+                return ArticulEditAccessPolicy.ReadOnly;
+            }
+
+            if (_currentModel?.DateOpis != null)
+                canEditGost = false;
+
+            return new ArticulEditAccessPolicy(
+                CanEditBase: canEditBase,
+                CanEditGost: canEditGost,
+                CanEditSostav: canEditSostav);
+        }
+
+        private bool HasEditPermission(string objectName)
+        {
+            return _user?.HasPermission(objectName, PermissionModeEditor) == true;
+        }
+
+        private void ApplyEditPolicy()
+        {
+            _editPolicy = ResolveEditPolicy();
+
+            SetGroupReadOnly(layoutCommonArticul, !_editPolicy.CanEditBase);
+            SetGroupReadOnly(layoutGostInsert, !_editPolicy.CanEditGost);
+            SetGroupReadOnly(layoutSostav, !_editPolicy.CanEditSostav);
+
+            layoutGostInsert.Enabled = true;
+
+            // Есть дата описания модели - редактирование ГОСТ остается запрещенным отдельным бизнес-правилом.
+            if (_currentModel.DateOpis != null)
+            {
+                SetGroupReadOnly(layoutGostInsert, true);
+                layoutGostInsert.Enabled = false;
+                //btEdit.Visible = false;
+                layoutControlItem23.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            }
         }
         private void SetGroupReadOnly(LayoutControlGroup group, bool readOnly)
         {
@@ -197,7 +365,7 @@ namespace SewingProduction.Features.Articul.Forms
             try
             {
                 //загрузка перечня кодов из справочника общая информация
-                _bindingSourceArtCommon.DataSource = await _articulEdAdvDataService.GetCommonArtByKoddAsync(this._kodd);
+                _bindingSourceArtCommon.DataSource = await _articulEdAdvDataService.GetCommonArtByKoddAsync(this._kodd, _kod);
                 //пересчет при смене значений в модели
                 WireModelOnce();
 
@@ -480,6 +648,11 @@ namespace SewingProduction.Features.Articul.Forms
                         var props = bs.CurrencyManager?.GetItemProperties();
                         if (props == null)
                             throw new InvalidOperationException("BindingSource не инициализирован");
+                        
+                        var propTag = edit.Tag as String;
+                        if (propTag == "NO")
+                            continue;
+                        
                         // удаление префикса txt или txb controlName.Substring(3);
                         string propName = edit.Name.Length > 3 ? edit.Name[3..] : edit.Name;
 
@@ -627,6 +800,147 @@ namespace SewingProduction.Features.Articul.Forms
             return _currentModel.IsModified || modyfiedRazm;
 
         }
+
+        private void CaptureOriginalModelSnapshot()
+        {
+            if (_currentModel == null)
+                return;
+
+            _originalModelSnapshot = ObjectCloneHelper.CloneWithExclusions(_currentModel);
+            _originalModelSnapshot.AcceptChanges();
+            _currentModel.AcceptChanges();
+        }
+
+        private bool ValidateSaveAllowedByPolicy()
+        {
+            if (_editPolicy.CanEditAll)
+                return true;
+
+            if (_originalModelSnapshot == null)
+            {
+                XtraMessageBox.Show(
+                    "Не удалось проверить права на сохранение: исходное состояние артикула не зафиксировано.",
+                    "Сохранение запрещено",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return false;
+            }
+
+            var deniedProperties = GetChangedPersistedProperties(_originalModelSnapshot, _currentModel)
+                .Where(propertyName => !IsPropertyAllowedByPolicy(propertyName))
+                .ToList();
+
+            if (HasRazmChanges() && !_editPolicy.CanEditBase)
+                deniedProperties.Insert(0, "размеры/коды");
+
+            if (deniedProperties.Count == 0)
+                return true;
+
+            var visibleNames = string.Join(", ", deniedProperties.Distinct().Take(8));
+            if (deniedProperties.Count > 8)
+                visibleNames += ", ...";
+
+            XtraMessageBox.Show(
+                $"Недостаточно прав для сохранения изменений: {visibleNames}.",
+                "Сохранение запрещено",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+            return false;
+        }
+
+        /// <summary>
+        /// Пометка po делит группу: сохраняем только код выбранной пометки.
+        /// </summary>
+        private bool IsSingleCodeEditMode()
+            => !string.IsNullOrWhiteSpace(_currentModel?.Po);
+
+        private string GetSelectedKod()
+        {
+            return !string.IsNullOrWhiteSpace(_kod)
+                ? _kod
+                : _currentModel?.Kod;
+        }
+
+        private bool HasRazmChanges()
+        {
+            var items = _bindingSourceArtKod.List.OfType<ArticulModel>();
+            if (IsSingleCodeEditMode())
+                items = items.Where(IsSelectedPoCode);
+            return items.Any(x => x?.IsModified == true || x?.IsNew == true || x?.IsDeleted == true);
+        }
+
+        /// <summary>
+        /// Устанавливает фильтр грида размеров:
+        /// при наличии пометки — только код этой пометки, иначе — все не-удалённые.
+        /// </summary>
+        private void ApplyRazmFilter()
+        {
+            if (IsSingleCodeEditMode())
+            {
+                gridViewEditAdvRazm.ActiveFilterCriteria =
+                    DevExpress.Data.Filtering.CriteriaOperator.And(
+                        new DevExpress.Data.Filtering.BinaryOperator("IsDeleted", false),
+                        BuildTrimEqualsCriteria(nameof(ArticulModel.Po), _currentModel!.Po));
+            }
+            else
+            {
+                gridViewEditAdvRazm.ActiveFilterString = "[IsDeleted] = false";
+            }
+        }
+
+        private static DevExpress.Data.Filtering.CriteriaOperator BuildTrimEqualsCriteria(string propertyName, string value)
+        {
+            return new DevExpress.Data.Filtering.BinaryOperator(
+                new DevExpress.Data.Filtering.FunctionOperator(
+                    DevExpress.Data.Filtering.FunctionOperatorType.Trim,
+                    new DevExpress.Data.Filtering.OperandProperty(propertyName)),
+                new DevExpress.Data.Filtering.OperandValue(value?.Trim() ?? string.Empty),
+                DevExpress.Data.Filtering.BinaryOperatorType.Equal);
+        }
+
+        private bool IsSelectedPoCode(ArticulModel item)
+            => PoMatches(item.Po, _currentModel?.Po);
+
+        private static bool KodMatches(string? itemKod, string? selectedKod)
+            => string.Equals(itemKod?.Trim(), selectedKod?.Trim(), StringComparison.OrdinalIgnoreCase);
+
+        private static bool PoMatches(string? itemPo, string? modelPo)
+            => string.Equals(itemPo?.Trim(), modelPo?.Trim(), StringComparison.Ordinal);
+
+        private bool IsPropertyAllowedByPolicy(string propertyName)
+        {
+            if (_editPolicy.CanEditGost && GostEditableProperties.Contains(propertyName))
+                return true;
+
+            if (_editPolicy.CanEditSostav && SostavEditableProperties.Contains(propertyName))
+                return true;
+
+            if (_editPolicy.CanEditBase
+                && !GostEditableProperties.Contains(propertyName)
+                && !SostavEditableProperties.Contains(propertyName))
+                return true;
+
+            return false;
+        }
+
+        private static IEnumerable<string> GetChangedPersistedProperties(ArticulModel original, ArticulModel current)
+        {
+            foreach (var property in typeof(ArticulModel).GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                if (!property.CanRead || property.GetIndexParameters().Length > 0)
+                    continue;
+
+                if (property.GetCustomAttribute<NotMappedAttribute>() != null)
+                    continue;
+
+                var originalValue = property.GetValue(original);
+                var currentValue = property.GetValue(current);
+
+                if (!Equals(originalValue, currentValue))
+                    yield return property.Name;
+            }
+        }
+
         private async void SaveChanges(object sender, EventArgs e)
         {
             try
@@ -641,16 +955,26 @@ namespace SewingProduction.Features.Articul.Forms
                     return;
                 }
 
+                if (!ValidateSaveAllowedByPolicy())
+                {
+                    return;
+                }
+
+                bool singleMode = IsSingleCodeEditMode();
+
                 for (int i = 0; i < _bindingSourceArtKod.Count; i++)
                 {
                     var item = (ArticulModel)_bindingSourceArtKod[i];
+
+                    // Если группа разделена пометками — сохраняем только выбранную po.
+                    if (singleMode && !IsSelectedPoCode(item))
+                        continue;
 
                     var newItem = ObjectCloneHelper.CloneWithExclusions(_currentModel, clone =>
                     {
                         clone.Kod = item.Kod;
                         clone.Razm = item.Razm;
                         clone.Po = item.Po;
-                        //если изменены общие данные или размер - помечаем на сохранение
                         clone.IsModified = (_currentModel.IsModified || item.IsModified);
                         clone.IsNew = item.IsNew;
                         clone.IsDeleted = item.IsDeleted;
@@ -671,6 +995,7 @@ namespace SewingProduction.Features.Articul.Forms
 
 
                 XtraMessageBox.Show("Изменения успешно сохранены.", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CaptureOriginalModelSnapshot();
 
             }
             catch (Exception ex)
@@ -889,7 +1214,7 @@ namespace SewingProduction.Features.Articul.Forms
             if (row != null)
             {
                 row.IsNew = true;
-                row.Po = _currentModel.Po;
+                row.Po = _currentModel?.Po ?? string.Empty;
                 row.Ko = _currentModel.Ko;
             }
 

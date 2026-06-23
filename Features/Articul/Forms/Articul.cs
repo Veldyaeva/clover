@@ -20,6 +20,7 @@ using SewingProduction.Features.Articul.Helpers;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
 using SewingProduction.Features.CuttingProduction.Models;
+using SewingProduction.Features.Yarn.Forms;
 using SewingProduction.Features.UserDistribution.Class;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
@@ -273,7 +274,9 @@ namespace SewingProduction.Features.Articul
             try
             {
                 var list = await _articulDataService.GetArtPreviewAsyncBindingList();
-                bsPreview.RaiseListChangedEvents = false;
+                bsPreview.DataSource = list;
+
+                /*bsPreview.RaiseListChangedEvents = false;
                 try
                 {
                     _previewList.Clear();
@@ -285,6 +288,7 @@ namespace SewingProduction.Features.Articul
                     bsPreview.RaiseListChangedEvents = true;
                     bsPreview.ResetBindings(false);
                 }
+                */
             }
             finally
             {
@@ -297,7 +301,6 @@ namespace SewingProduction.Features.Articul
             {
                 // включить редактирование (если нужно)
                 // articulControl1.IsReadOnly = false;
-
 
                 // (желательно) чтобы при повторном вызове не плодились биндинги
                 chbIsUpak.DataBindings.Clear();
@@ -687,6 +690,14 @@ namespace SewingProduction.Features.Articul
             }
         }
 
+        private void OpenPryazhaForm()
+        {
+            if (this.MdiParent is SpMainForm mainForm)
+            {
+                mainForm.OpenForm(new YarnForm(User));
+            }
+        }
+
         private async void csButtonNew_Click(object sender, EventArgs e)
         {
             using (EditArticul f = new EditArticul(_currentUser))
@@ -772,12 +783,14 @@ namespace SewingProduction.Features.Articul
                 LogWarning("Попытка редактирования без выбранного артикула.", nameof(EditArtciul));
                 return;
             }
-            var kodd = (bsPreview.Current as SpArtPreviewModel).Kodd;
-            var articul = (bsPreview.Current as SpArtPreviewModel).Articul.Trim();
+            var current = bsPreview.Current as SpArtPreviewModel;
+            var kodd = current.Kodd;
+            var kod = current.Kod;
+            var articul = current.Articul.Trim();
 
             if (this.MdiParent is SpMainForm mainForm)
             {
-                mainForm.OpenForm(new ArticulEditAdvance(CurrentUser.User, kodd, articul));
+                mainForm.OpenForm(new ArticulEditAdvance(CurrentUser.User, kodd, articul, kod));
             }
         }
         //???
@@ -873,6 +886,7 @@ namespace SewingProduction.Features.Articul
             TagByCaption(layoutControlGroup1, new (string caption, string tag)[] {
                 ("Карточка", "articulCard"),
                 ("Архив", "arch"),
+                ("Пряжа", "pryazha"),
             });
 
         }
@@ -905,6 +919,9 @@ namespace SewingProduction.Features.Articul
                 {
                     case "articulCard":
                         customButtonKart_Click(sender, EventArgs.Empty);
+                        break;
+                    case "pryazha":
+                        OpenPryazhaForm();
                         break;
                     default:
                         // Если тег не установлен, пытаемся определить по Caption

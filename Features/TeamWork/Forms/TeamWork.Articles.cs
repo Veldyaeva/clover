@@ -304,7 +304,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     gridControl_unboundArts,
                     _myDataArtList,
                     _myDataArtBindingSource,
-                    async _ => await _articlesQueryService.LoadUnboundArticlesAsync(),
+                    async _ => await _teamWorkService.LoadUnboundArticlesAsync(),
                     cancellationToken);
 
                 await _logger.LogEventAsync($"Загружено {_myDataArtList.Count} записей MyDataART.", "MyDataArtLoad");
@@ -340,7 +340,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _myDataAnnBindingSource,
                     async _ =>
                     {
-                        return await _articlesQueryService.LoadCurrentWorkDivisionsAsync(loadAll);
+                        return await _teamWorkService.LoadCurrentWorkDivisionsAsync(loadAll);
                     },
                     cancellationToken);
             }
@@ -362,7 +362,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                return await _articlesQueryService.LoadWorkDivisionsByArticulAsync(articul);
+                return await _teamWorkService.LoadWorkDivisionsByArticulAsync(articul);
             }
             catch (Exception ex)
             {
@@ -446,7 +446,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 customGridControl3,
                 _normRaszListArticles,
                 _normRaszBindingSourceArticles,
-                async token => await _articlesQueryService.LoadNormRaszAsync(annId, token),
+                async token => await _teamWorkService.LoadNormRaszAsync(annId, token),
                 cancellationToken);
         }
 
@@ -464,7 +464,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 customGridControl2,
                 _normRaskListArticles,
                 _normRaskBindingSourceArticles,
-                async token => await _articlesQueryService.LoadNormRaskAsync(annId, token),
+                async token => await _teamWorkService.LoadNormRaskAsync(annId, token),
                 cancellationToken);
         }
 
@@ -482,7 +482,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGridControl1,
             _normKontListArticles,
             _normKontBindingSourceArticles,
-            async token => await _articlesQueryService.LoadNormKontAsync(annId, token),
+            async token => await _teamWorkService.LoadNormKontAsync(annId, token),
             cancellationToken);
     }
 
@@ -507,7 +507,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 gridControlNZP,
                 _nzpListArt,
                 _nzpByKoddRtSourceArt,
-                async token => await _articlesQueryService.LoadNzpAsync(annId, token),
+                async token => await _teamWorkService.LoadNzpAsync(annId, token),
                 cancellationToken); 
             Debug.WriteLine($"LoadNZPForArticlesTab DB/load: {swDb.ElapsedMilliseconds} ms");
 
@@ -521,7 +521,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                string query = "SELECT * FROM artNormNView WHERE status = 4";
                 if (_preArchList == null || _preArchBindingSource == null)
                 {
                     await _logger.LogErrorAsync(new NullReferenceException("_preArchList or _preArchBindingSource is null"), "PreArchLoad failed initialization check.");
@@ -532,7 +531,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     gridControlPreArch,
                     _preArchList,
                     _preArchBindingSource,
-                    async _ => await _articlesQueryService.LoadPreArchiveAsync(),
+                    async _ => await _teamWorkService.LoadPreArchiveAsync(),
                     cancellationToken);
 
                 await _logger.LogEventAsync($"Загружено {_preArchList.Count} записей в предварительный архив.", "PreArchLoad");
@@ -555,7 +554,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                string query = "SELECT * FROM artNormNView WHERE status = 3";
                 if (_archList == null || _archBindingSource == null)
                 {
                     await _logger.LogErrorAsync(new NullReferenceException("_archList or _archBindingSource is null"), "ArchLoad failed initialization check.");
@@ -568,7 +566,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _archBindingSource,
                     async _ =>
                     {
-                        return await _articlesQueryService.LoadArchiveAsync();
+                        return await _teamWorkService.LoadArchiveAsync();
                     },
                     cancellationToken);
 
@@ -997,19 +995,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
                 }
 
-                // Получаем выбранные строки
-                var selectedRowHandles = archiveGridView.GetSelectedRows();
-
-                // Если нет выбранных строк, берем текущую строку
-                if (selectedRowHandles == null || selectedRowHandles.Length == 0)
+                var selectedRowHandles = GetSelectedOrFocusedRowHandles(archiveGridView, "Выберите записи для восстановления из архива.");
+                if (selectedRowHandles == null)
                 {
-                    if (archiveGridView.FocusedRowHandle < 0)
-                    {
-                        MessageBox.Show("Выберите записи для восстановления из архива.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        await _logger.LogWarningAsync("Попытка восстановления из архива без выбора строк", "RestoreFromArchive_Internal");
-                        return;
-                    }
-                    selectedRowHandles = new int[] { archiveGridView.FocusedRowHandle };
+                    await _logger.LogWarningAsync("Попытка восстановления из архива без выбора строк", "RestoreFromArchive_Internal");
+                    return;
                 }
 
                 var selectedItems = new List<ArtNormN>();

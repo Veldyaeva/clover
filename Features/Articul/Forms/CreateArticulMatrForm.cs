@@ -1,10 +1,17 @@
 using DevExpress.Mvvm.Native;
+using DevExpress.XtraBars.Customization;
+using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using SewingProduction.Core.Models;
 using SewingProduction.Core.Services;
+using SewingProduction.Features.Articul.Helpers;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
+using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
+using SewingProduction.Features.UserDistribution.Class;
+using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
@@ -13,6 +20,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -40,8 +48,8 @@ namespace SewingProduction.Features.Articul.Forms
 
         private readonly BindingSource _bsDetails = new(); // источник для деталей
 
-        private bool _lastCompareResult;
-
+        private ComparisonResult _comparisonResult;
+        private readonly Dictionary<string, Image> _imageCache = new();
         public CreateArticulMatrForm(UserClass user) : base(user)
         {
             _dbHelper = new DatabaseHelperSQL();
@@ -49,6 +57,7 @@ namespace SewingProduction.Features.Articul.Forms
 
             InitializeComponent();
 
+            _user = user;
 
             _bindingSourceArtMatr = new BindingSource { };
             _bindingSourceArticulCompare = new BindingSource { };
@@ -62,6 +71,24 @@ namespace SewingProduction.Features.Articul.Forms
         }
 
         private async void CreateArticulMatr_Load(object sender, EventArgs e)
+        {
+            await LoadOrRefreshData();
+
+            articulControl1.BindTo(_bsDetails);
+            articulControl1.IsReadOnly = true;
+
+            InitializeBindings();
+            //BindGost();
+            BindGostGrupp();
+
+            //в зависимости от прав пользователя - разрешаем или запрещаем редактирование грида 
+            _isEditing = customSimpleButtonPermissions.Visible;
+            //_isEditing = false;
+
+            SetPermisions();
+
+        }
+        private async Task LoadOrRefreshData()
         {
             //загрузка данных для отображения в гриде
             gridViewArtMatr.ShowLoadingPanel();
@@ -78,20 +105,8 @@ namespace SewingProduction.Features.Articul.Forms
             gridViewArtMatr.HideLoadingPanel();
             gridViewArtMatrEdit.HideLoadingPanel();
 
-            articulControl1.BindTo(_bsDetails);
-            articulControl1.IsReadOnly = true;
-
-
-
-            InitializeBindings();
-            BindGost();
-            BindGostGrupp();
-
-            //в зависимости от прав пользователя - разрешаем или запрещаем редактирование грида 
-            _isEditing = customSimpleButtonPermissions.Visible;
-            SetPermisions();
-
         }
+
         /// <summary>
         /// в зависимости от прав пользователя - разрешаем или запрещаем редактирование грида 
         /// </summary>
@@ -104,16 +119,18 @@ namespace SewingProduction.Features.Articul.Forms
         {
             gcGrupmen_name.FieldName = nameof(CreateArticulMatrModel.Grupmen_name);
             gcCertGrupmen_name.FieldName = nameof(CreateArticulMatrModel.Grupmen_name);
-            gcTsn_name.FieldName = nameof(CreateArticulMatrModel.Tsn_name);
-            gcCertTsn_name.FieldName = nameof(CreateArticulMatrModel.Tsn_name);
+            gcTsn_name.FieldName = nameof(CreateArticulMatrModel.SeasonName);
+            gcCertTsn_name.FieldName = nameof(CreateArticulMatrModel.SeasonName);
             gcTb_id.FieldName = nameof(CreateArticulMatrModel.Tb_id);
             gcCertTb_id.FieldName = nameof(CreateArticulMatrModel.Tb_id);
             gcMod.FieldName = nameof(CreateArticulMatrModel.Mod);
             gcCertMod.FieldName = nameof(CreateArticulMatrModel.Mod);
+            gcFoundMod.FieldName = nameof(CreateArticulMatrModel.FoundMod);
+            gcCertFoundMod.FieldName = nameof(CreateArticulMatrModel.FoundMod);
             gcArticul.FieldName = nameof(CreateArticulMatrModel.Articul);
             gcCertArticul.FieldName = nameof(CreateArticulMatrModel.Articul);
-            gcTm_name.FieldName = nameof(CreateArticulMatrModel.Tm_name);
-            gcCertTm_name.FieldName = nameof(CreateArticulMatrModel.Tm_name);
+            gcTm_name.FieldName = nameof(CreateArticulMatrModel.SeasonName);
+            gcCertTm_name.FieldName = nameof(CreateArticulMatrModel.SeasonName);
             gcGrup.FieldName = nameof(CreateArticulMatrModel.Grup);
             gcCertGrup.FieldName = nameof(CreateArticulMatrModel.Grup);
             gcText_mo.FieldName = nameof(CreateArticulMatrModel.Text_mo);
@@ -142,19 +159,23 @@ namespace SewingProduction.Features.Articul.Forms
             gcCertRazmNames.FieldName = nameof(CreateArticulMatrModel.RazmNames);
             gcDatePublic.FieldName = nameof(CreateArticulMatrModel.DatePublic);
             gcCertDatePublic.FieldName = nameof(CreateArticulMatrModel.DatePublic);
-            gcArticle.FieldName = nameof(CreateArticulMatrModel.Article);
-            gcCertArticle.FieldName = nameof(CreateArticulMatrModel.Article);
+            gcModMatrix.FieldName = nameof(CreateArticulMatrModel.ModMatrix);
+            gcCertModMatrix.FieldName = nameof(CreateArticulMatrModel.ModMatrix);
             gcRepeatArticle.FieldName = nameof(CreateArticulMatrModel.RepeatArticle);
             gcCertRepeatArticle.FieldName = nameof(CreateArticulMatrModel.RepeatArticle);
 
 
             //поля уточнения для отд сертификации
             gcCertidGost.FieldName = nameof(CreateArticulMatrModel.Id_gost);
-            gcCertAgid.FieldName = nameof(CreateArticulMatrModel.Ag_id);
+            gcidGost.FieldName = nameof(CreateArticulMatrModel.Id_gost);
+            //CreateArticulMatrModel.Ag_id
+            gcCertAgid.FieldName = nameof(CreateArticulMatrModel.Unic_IdGost_idAg);
+            gcAgid.FieldName = nameof(CreateArticulMatrModel.Unic_IdGost_idAg);
+            
             gcCertDateCertificationApproval.FieldName = nameof(CreateArticulMatrModel.DateCertificationApproval);
             //запрет редактирования полей, которые не должны редактироваться напрямую пользователем, а заполняются через выбор из справочника и/или автоматически
             gcCertDateCertificationApproval.OptionsColumn.AllowEdit = false;
-
+            //перечень моделей для стыковки gridViewArtCompare
             gcKoddCompare.FieldName = nameof(SpArtPreviewModel.Kodd);
             gcGrupCompare.FieldName = nameof(SpArtPreviewModel.Grup);
             gcArticulCompare.FieldName = nameof(SpArtPreviewModel.Articul);
@@ -164,44 +185,44 @@ namespace SewingProduction.Features.Articul.Forms
 
         }
 
-        private async void BindGost()
-        {
-            try
-            {
-                var ri = repositoryItemSearchLookUpEdit1;
-                ri.DataSource = await _createArticulMatrService.GetGostAsync();
-                ri.DisplayMember = nameof(GostModel.Id_gost);
-                ri.ValueMember = nameof(GostModel.Id_gost);
-                // Колонки выпадающего списка (по желанию)
+        //private async void BindGost()
+        //{
+        //    try
+        //    {
+        //        var ri = repositoryItemSearchLookUpEdit1;
+        //        ri.DataSource = await _createArticulMatrService.GetGostAsync();
+        //        ri.DisplayMember = nameof(GostModel.Id_gost);
+        //        ri.ValueMember = nameof(GostModel.Id_gost);
+        //        // Колонки выпадающего списка (по желанию)
 
-                var view = ri.PopupView as DevExpress.XtraGrid.Views.Grid.GridView;
-                if (view == null)
-                    throw new InvalidOperationException("PopupView не GridView");
-                view.OptionsView.ShowColumnHeaders = true;
-                view.OptionsView.ShowIndicator = false;
-                view.OptionsView.ShowAutoFilterRow = true; // ⭐ фильтр по колонкам
-                view.OptionsBehavior.Editable = false;
-                view.OptionsSelection.EnableAppearanceFocusedCell = false;
-                view.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-                view.Columns.Clear();
+        //        var view = ri.PopupView as DevExpress.XtraGrid.Views.Grid.GridView;
+        //        if (view == null)
+        //            throw new InvalidOperationException("PopupView не GridView");
+        //        view.OptionsView.ShowColumnHeaders = true;
+        //        view.OptionsView.ShowIndicator = false;
+        //        view.OptionsView.ShowAutoFilterRow = true; // ⭐ фильтр по колонкам
+        //        view.OptionsBehavior.Editable = false;
+        //        view.OptionsSelection.EnableAppearanceFocusedCell = false;
+        //        view.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+        //        view.Columns.Clear();
 
-                view.Columns.AddVisible(nameof(GostModel.Id_gost), "ID");
-                view.Columns.AddVisible(nameof(GostModel.Name_gost), "Название");
-                view.Columns.AddVisible(nameof(GostModel.Opi_gost), "Описание");
-                //view.BestFitColumns();
+        //        view.Columns.AddVisible(nameof(GostModel.Id_gost), "ID");
+        //        view.Columns.AddVisible(nameof(GostModel.Name_gost), "Название");
+        //        view.Columns.AddVisible(nameof(GostModel.Opi_gost), "Описание");
+        //        //view.BestFitColumns();
 
-                ri.NullText = ""; // что показывать, если значение null
-                //ri.ShowHeader = false;
-                //ri.ShowFooter = false;
-                ri.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor; // запрет ввода, только выбор
-                ri.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок ГОСТ");
-                throw;
-            }
-        }
+        //        ri.NullText = ""; // что показывать, если значение null
+        //        //ri.ShowHeader = false;
+        //        //ri.ShowFooter = false;
+        //        ri.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor; // запрет ввода, только выбор
+        //        ri.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок ГОСТ");
+        //        throw;
+        //    }
+        //}
         private async void BindGostGrupp()
         {
             try
@@ -210,7 +231,16 @@ namespace SewingProduction.Features.Articul.Forms
                 // после выбора госта - фильтрация групп по госту происходит в repositoryItemSearchLookUpEdit2_BeforePopup
                 ri.DataSource = _gostGroupAll;
                 ri.DisplayMember = nameof(GostGrupIzdViewModel.N_i);
-                ri.ValueMember = nameof(GostGrupIzdViewModel.Ag_id);
+                //ri.ValueMember = nameof(GostGrupIzdViewModel.Ag_id);
+                ri.ValueMember = nameof(GostGrupIzdViewModel.Unic_IdGost_idAg);
+
+                //колонка с картинкой 
+                var pictureEdit = new RepositoryItemPictureEdit
+                {
+                    SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom,
+                    NullText = ""
+                };
+
                 // Колонки выпадающего списка (по желанию)
                 var view = ri.PopupView as DevExpress.XtraGrid.Views.Grid.GridView;
                 if (view == null)
@@ -220,12 +250,36 @@ namespace SewingProduction.Features.Articul.Forms
                 view.OptionsView.ShowAutoFilterRow = true; // ⭐ фильтр по колонкам
                 view.OptionsBehavior.Editable = false;
                 view.OptionsSelection.EnableAppearanceFocusedCell = false;
-                view.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+
+                //view.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+                // Для картинок в popup лучше отключить focus-рамку:  (Если нужно оставить фокус, но не на ячейке с картинкой: view.FocusRectStyle = DrawFocusRectStyle.RowFocus;)
+                view.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.None;
+                view.OptionsSelection.EnableAppearanceFocusedCell = false;
+                view.OptionsSelection.EnableAppearanceFocusedRow = true;
+
                 view.Columns.Clear();
 
-                view.Columns.AddVisible(nameof(GostGrupIzdViewModel.Ag_id), "ID");
+                view.Columns.AddVisible(nameof(GostGrupIzdViewModel.Id_gost), "Гост");
+                view.Columns.AddVisible(nameof(GostGrupIzdViewModel.Ag_id), "Номер группы");
                 view.Columns.AddVisible(nameof(GostGrupIzdViewModel.N_i), "Название");
                 view.Columns.AddVisible(nameof(GostGrupIzdViewModel.Ag_name_sokr), "Сокращенное назв.");
+                view.Columns.AddVisible(nameof(GostGrupIzdViewModel.Care_instructions), "Инструкции по уходу");
+
+                #region описание картинки
+                var imageCol = view.Columns.AddVisible("Picture", "Символы по уходы");
+                imageCol.UnboundType = DevExpress.Data.UnboundColumnType.Object;
+                imageCol.ColumnEdit = pictureEdit;
+                imageCol.Width = 190;
+                imageCol.OptionsColumn.AllowEdit = false;
+
+                view.RowHeight = 48;
+                view.OptionsView.RowAutoHeight = true;
+
+                view.CustomUnboundColumnData -= View_CustomUnboundColumnData;
+                view.CustomUnboundColumnData += View_CustomUnboundColumnData;
+                #endregion
+
+                view.RefreshData();
 
                 ri.NullText = ""; // что показывать, если значение null
 
@@ -239,60 +293,118 @@ namespace SewingProduction.Features.Articul.Forms
                 throw;
             }
         }
-        private void repositoryItemSearchLookUpEdit1_CloseUp(object sender, DevExpress.XtraEditors.Controls.CloseUpEventArgs e)
+        private void View_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
         {
-            try
-            {
-                if (!e.AcceptValue) return; // если пользователь отменил выбор, не обновляем данные
+            if (!e.IsGetData || e.Column.FieldName != "Picture")
+                return;
 
-                // сохраняем текущее редактирование, чтобы получить актуальное значение 
-                var view = gridViewArtMatrEdit;
-                view.PostEditor();
-                view.UpdateCurrentRow();
+            //var view = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
+            //var row = view.GetRow(e.ListSourceRowIndex) as GostGrupIzdViewModel;
+            if (e.ListSourceRowIndex < 0)
+                return;
 
-                var currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
+            var list = repositoryItemSearchLookUpEdit2.DataSource as IList<GostGrupIzdViewModel>;
+            if (list == null || e.ListSourceRowIndex >= list.Count)
+                return;
 
-                //скидываем группу госта при изменении самого госта, чтобы не было "висячих" групп, не относящихся к выбранному госту
-                currentItem.Ag_id = 0;
+            var row = list[e.ListSourceRowIndex];
+            e.Value = GetImage(row?.CareImagePath);
+        }
+        private Image? GetImage(string? path)
+        {
+            if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
+                return null;
 
-                view.PostEditor();
-                view.UpdateCurrentRow();
+            if (_imageCache.TryGetValue(path, out var cached))
+                return cached;
 
-            }
-            catch (Exception ex)
-            {
-                _logger.LogErrorAsync(ex, "Ошибка при изменении госта (lookUpGost_EditValueChanged)");
-                throw;
-            }
+            byte[] bytes = File.ReadAllBytes(path); // файл не блокируется
+
+            using var ms = new MemoryStream(bytes);
+            //Делает полноценную копию картинки, можно безопасно закрыть stream, файл не блокируется
+            using var original = Image.FromStream(ms);
+
+            //var image = new Bitmap(original, new Size(160, 32)); -- задавался определенный размер картинки, убрала 
+            var image = new Bitmap(original);
+            _imageCache[path] = image;
+            return image;
         }
 
-        private void repositoryItemSearchLookUpEdit2_BeforePopup(object sender, EventArgs e)
+
+        private void repositoryItemSearchLookUpEdit2_CloseUp(object sender, DevExpress.XtraEditors.Controls.CloseUpEventArgs e)
         {
-            try
-            {
-                var editor = gridViewArtMatrEdit.ActiveEditor as DevExpress.XtraEditors.SearchLookUpEdit;
-                if (editor == null)
-                    return;
+            //try
+            //{
+            //    if (!e.AcceptValue) return; // если пользователь отменил выбор, не обновляем данные
 
-                if (sender == null) return;
+            //    // сохраняем текущее редактирование, чтобы получить актуальное значение 
+            //    var view = gridViewArtMatrEdit;
+            //    view.PostEditor();
+            //    view.UpdateCurrentRow();
 
-                var _currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
-                var idGost = _currentItem.Id_gost;
-                editor.Properties.DataSource = _gostGroupAll
-                    .Where(x => x.Id_gost == idGost)
-                    .ToList();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogErrorAsync(ex, "Ошибка при открытии выпадающего списка групп ГОСТ");
-                throw;
-            }
+            //    var currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
 
+            //    //скидываем гост при изменении группы, чтобы не было "висячих" гостов
+            //    //currentItem.Id_gost = 0;
+
+            //    ////обновляем значение ГОСТ из выбранной группы
+            //    //var editor = sender as DevExpress.XtraEditors.SearchLookUpEdit;
+            //    //if (editor == null)
+            //    //    return;
+
+            //    //var viewLookUp = repositoryItemSearchLookUpEdit2.PopupView
+            //    //    as DevExpress.XtraGrid.Views.Grid.GridView;
+
+            //    //if (viewLookUp == null)
+            //    //    return;
+
+            //    //int rowHandle = viewLookUp.FocusedRowHandle;
+
+            //    //var selectedRow = view.GetRow(rowHandle) as GostGrupIzdViewModel;
+
+            //    //if (selectedRow == null)
+            //    //    return;
+
+            //    //currentItem.Id_gost = selectedRow.Id_gost;
+
+            //    //view.PostEditor();
+            //    //// когда пользователь изменил значение в гриде
+            //    //view.UpdateCurrentRow();
+
+            //    //// говорит привязанным контролам: “текущий объект изменился, перечитайте его”, Использовать, когда сами изменили объект в коде
+            //    //_bindingSourceArtMatr.ResetCurrentItem();
+            //}
+            //catch (Exception ex)
+            //{
+            //    _logger.LogErrorAsync(ex, "Ошибка при изменении группы ГОСТ (CloseUp)");
+            //    throw;
+            //}
         }
 
+        //private void repositoryItemSearchLookUpEdit1_BeforePopup(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        var editor = gridViewArtMatrEdit.ActiveEditor as DevExpress.XtraEditors.SearchLookUpEdit;
+        //        if (editor == null)
+        //            return;
+
+        //        if (sender == null) return;
+
+        //        var currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
+        //        var idGrup = currentItem.Ag_id;
+        //        editor.Properties.DataSource = _gostGroupAll
+        //            .Where(x => x.Ag_id == idGrup)
+        //            .ToList();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogErrorAsync(ex, "Ошибка при открытии выпадающего списка групп ГОСТ");
+        //        throw;
+        //    }
+        //}
         private async void gridViewArtMatrEdit_DoubleClick(object sender, EventArgs e)
         {
-
             try
             {
                 var view = sender as GridView;
@@ -300,6 +412,7 @@ namespace SewingProduction.Features.Articul.Forms
 
                 Point pt = view.GridControl.PointToClient(Control.MousePosition);
                 GridHitInfo hit = view.CalcHitInfo(pt);
+                // при doubleClick на указанных столбцах произойдет установка или снятие даты утверждения
                 if (hit.InRowCell && (hit.Column == gcCertidGost || hit.Column == gcCertAgid || hit.Column == gcCertDateCertificationApproval) && hit.RowHandle >= 0)
                 {
                     var _currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
@@ -317,7 +430,7 @@ namespace SewingProduction.Features.Articul.Forms
                     if (_currentItem.Id_gost == 0 && _currentItem.Ag_id == 0)
                     {
                         MessageBox.Show("Для утверждения необходимо выбрать ГОСТ и группу ГОСТ", "Невозможно утвердить", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        //_currentItem.DateCertificationApproval = null;
+                        //currentItem.DateCertificationApproval = null;
                     }
                     else
                     {
@@ -354,17 +467,9 @@ namespace SewingProduction.Features.Articul.Forms
         {
             try
             {
-                //var view = gridArtMatr.FocusedView as GridView;
-                //var currentRow = null as CreateArticulMatrModel ;
-
-                //if (view.SelectedRowsCount == 1)
-                //{
-                //    int rowHandle = view.GetSelectedRows()[0];
-                //    currentRow = view.GetRow(rowHandle) as CreateArticulMatrModel;
-                //}
-
                 articulControl1.ClearComparisonHighlight();   //очищаем подсветку сравнения при смене артикула в матрице, чтобы не было "висячей" подсветки от предыдущего сравнения
-                _bsDetails.Clear();// очищаем детали от предыдущего сравнения
+                ArticulControlBindingHelper.ClearDetails(_bsDetails);// очищаем детали от предыдущего сравнения
+                articulControl1.ClearImage();
                 var currentRow = _bindingSourceArtMatr.Current as CreateArticulMatrModel;// получаем текущую выбранную строку из матрицы
                 if (currentRow == null)// если строка не выбрана, выходим из метода
                     return;
@@ -375,12 +480,50 @@ namespace SewingProduction.Features.Articul.Forms
                 pictureBoxMatrix.ImageLocation = string.IsNullOrWhiteSpace(imagePath) ? null : imagePath;// отображаем эскиз, если он есть, или очищаем картинку, если эскиза нет
 
                 await fillCompareTable();
-
+                UpdateEditPermissionByApprovalDate();
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при загрузке данных для сравнения артикула");
                 throw;
+            }
+        }
+        private async void gridViewArtMatrEdit_FocusedColumnChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedColumnChangedEventArgs e)
+        {
+            try
+            {
+                UpdateEditPermissionByApprovalDate();
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при загрузке данных для сравнения артикула");
+                throw;
+            }
+        }
+        /// <summary>
+        /// установка разрешения редактировать гост и группу по гост при наличии даты утверждения
+        /// </summary>
+        private void UpdateEditPermissionByApprovalDate()
+        {
+            var currentRow = _bindingSourceArtMatr.Current as CreateArticulMatrModel;// получаем текущую выбранную строку из матрицы
+            if (currentRow == null)
+                return;
+            if (gridArtMatr.FocusedView == gridViewArtMatrEdit)
+            {
+                gridViewArtMatrEdit.CloseEditor();
+                //запрещаем редактировать, если есть дата утверждения
+                if (currentRow.DateCertificationApproval != null)
+                {
+                    gcCertAgid.OptionsColumn.AllowEdit = false;
+                    gcCertAgid.OptionsColumn.ReadOnly = true;
+                }
+                else
+                {
+                    gcCertAgid.OptionsColumn.AllowEdit = true;
+                    gcCertAgid.OptionsColumn.ReadOnly = false;
+                }
+                gridViewArtMatrEdit.RefreshData();
+                gridArtMatr.Refresh();
             }
         }
 
@@ -390,9 +533,10 @@ namespace SewingProduction.Features.Articul.Forms
             string kod = currentRow1?.Kod;// извлекаем код артикула для загрузки деталей, если строка выбрана, или null, если строка не выбрана
 
             gridViewArtCompare.ShowLoadingPanel();// показываем индикатор загрузки, так как загрузка деталей может занять некоторое время
-            _bsDetails?.Clear();// очищаем предыдущие детали, чтобы не было "висячих" данных от предыдущего сравнения, пока загружаются новые детали
+            ArticulControlBindingHelper.ClearDetails(_bsDetails);// очищаем предыдущие детали, чтобы не было "висячих" данных от предыдущего сравнения, пока загружаются новые детали
+            articulControl1.ClearImage();
             //          _bsDetails.DataSource = await _articulDataService.GetByKodAsync(kod);
-            await CompareSelectedArticulAsync();// загружаем детали для выбранного артикула сравнения и выполняем сравнение с текущим артикулом матрицы, результат сравнения сохраняем в поле _lastCompareResult, чтобы при сохранении матрицы знать, нужно ли сохранять изменения или нет
+            await CompareSelectedArticulAsync();// загружаем детали для выбранного артикула сравнения и выполняем сравнение с текущим артикулом матрицы, результат сравнения сохраняем в поле _comparisonResult, чтобы при сохранении матрицы знать, нужно ли сохранять изменения или нет
             gridViewArtCompare.HideLoadingPanel();// скрываем индикатор загрузки после завершения загрузки деталей и сравнения
         }
 
@@ -406,7 +550,6 @@ namespace SewingProduction.Features.Articul.Forms
         {
             try
             {
-                //var currentRow = _bindingSourceArticulCompare.Current as SpArticulPreviewModel;// получаем текущую выбранную строку из грида сравнения
                 await fillCompareTable();
             }
             catch (Exception ex)
@@ -432,37 +575,167 @@ namespace SewingProduction.Features.Articul.Forms
             {
                 var matrixRow = _bindingSourceArtMatr.Current as CreateArticulMatrModel;// получаем текущую выбранную строку из матрицы, с которой будем сравнивать
                 var compareRow = _bindingSourceArticulCompare.Current as SpArtPreviewModel;// получаем текущую выбранную строку из грида сравнения, с которой будем сравнивать
-                
 
                 articulControl1.ClearComparisonHighlight();// очищаем предыдущую подсветку сравнения, чтобы не было "висячей" подсветки от предыдущего сравнения
 
                 string kod = compareRow?.Kod;// извлекаем код артикула для загрузки деталей, если строка выбрана, или null, если строка не выбрана
 
-                //SpArticulPreviewModel comparePreview = await _articulDataService.GetByKodAsync(kod);
-
-
                 if (matrixRow == null || compareRow == null || string.IsNullOrWhiteSpace(compareRow.Kod))// если не выбрана строка для сравнения или в выбранной строке нет кода артикула для сравнения, очищаем детали и выходим из метода, так как нечего сравнивать
                 {
-                    _bsDetails.Clear();// очищаем детали, чтобы не было "висячих" данных от предыдущего сравнения, так как нет артикула для сравнения
-                    _lastCompareResult = false;
+                    ArticulControlBindingHelper.ClearDetails(_bsDetails);// очищаем детали, чтобы не было "висячих" данных от предыдущего сравнения, так как нет артикула для сравнения
+                    articulControl1.ClearImage();
+                    _comparisonResult = null;
                     return;
                 }
 
-                var details = await _articulDataService.GetByKodAsync(compareRow.Kod);// загружаем детали для выбранного артикула сравнения
-                _bsDetails.DataSource = details;// устанавливаем источник данных для деталей, которые отображаются в articulControl1, при этом articulControl1 должен автоматически обновить отображение деталей, так как он привязан к _bsDetails
-                _bsDetails.ResetBindings(false);// сбрасываем привязки, чтобы гарантировать обновление отображения деталей в articulControl1, так как мы изменили источник данных
+                var detailsTask = _articulDataService.GetByKodAsync(compareRow.Kod);// загружаем детали для выбранного артикула сравнения
+                var imageTask = articulControl1.LoadImageAsync(compareRow.Kodd);// загружаем изображение артикула так же, как в форме Articul
 
-                var compareItems = CreateArticulMatrComparisonBuilder.Build(matrixRow);// создаем список полей для сравнения на основе текущей строки матрицы, который будет использоваться в articulControl1 для сравнения и подсветки различий
-                var result = articulControl1.CompareAndHighlight(compareItems);// выполняем сравнение и подсветку различий в articulControl1, результат сравнения сохраняем в переменной result, которая содержит информацию о том, совпадают ли артикулы полностью (IsMatch) и какие поля отличаются (Mismatches)
-                                                                               // тут можно сохранить флаг в поле формы
-                _lastCompareResult = result.IsMatch;// сохраняем результат сравнения в поле формы, чтобы при сохранении матрицы знать, нужно ли сохранять изменения или нет, так как если артикулы совпадают полностью, то сохранять изменения не нужно, так как они не изменились по сравнению с выбранным артикулом сравнения
+                await Task.WhenAll(detailsTask, imageTask);
+
+                var details = await detailsTask;
+                ArticulControlBindingHelper.SetDetails(_bsDetails, details);// устанавливаем источник данных для деталей, которые отображаются в articulControl1
+
+                var compareItems = BuildComparisonItems(matrixRow);// создаем список полей для сравнения на основе текущей строки матрицы, который будет использоваться в articulControl1 для сравнения и подсветки различий
+                var result = await articulControl1.CompareAndHighlight(compareItems);// выполняем сравнение и подсветку различий в articulControl1, результат сравнения сохраняем в переменной result, которая содержит информацию о том, совпадают ли артикулы полностью (IsMatch) и какие поля отличаются (Mismatches)
+                                                                                     // тут можно сохранить флаг в поле формы
+                _comparisonResult = result;// сохраняем результат сравнения в поле формы, чтобы при сохранении матрицы знать, нужно ли сохранять изменения или нет, так как если артикулы совпадают полностью, то сохранять изменения не нужно, так как они не изменились по сравнению с выбранным артикулом сравнения
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message.ToString() +"213");
-                _lastCompareResult = false;
+                MessageBox.Show(ex.Message.ToString() + "213");
+
+                _comparisonResult = null;
+
             }
 
         }
+
+        private IReadOnlyList<FieldComparisonItem> BuildComparisonItems(CreateArticulMatrModel matrixRow)
+        {
+            var compareItems = CreateArticulMatrComparisonBuilder.Build(matrixRow);
+
+            return compareItems;
+
+        }
+
+        private async void btnSelectModel_Click(object sender, EventArgs e)
+        {
+            var curMatr = _bindingSourceArtMatr.Current as CreateArticulMatrModel;// получаем текущую выбранную строку из матрицы
+            if (curMatr == null)
+                return;
+
+
+            var curCompareRow = _bindingSourceArticulCompare.Current as SpArtPreviewModel;
+            ArticulComparisonValidator objArticulChecks = new ArticulComparisonValidator(curMatr, curCompareRow);
+
+            // проверка  при расхождении в составе
+            if (_comparisonResult.ComplicateMismatches.Count > 0)
+            {
+                var canChSost = await objArticulChecks.canChangeArticulSost();
+                if (!canChSost.IsSuccess)
+                {
+                    MessageBox.Show(@$"Невозможно выбрать эту модель для стыковки: 
+                        {canChSost.ErrorMessage}", "Проверка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    objArticulChecks = null;
+                    return;
+                }
+            }
+
+            //все совпало по выбранной модели
+            if (_comparisonResult.IsMatch)
+            {
+                // проверки перед выбором модели 
+                var canLink = await objArticulChecks.canLinkArticul();
+
+                if (canLink.IsSuccess)
+                {
+                    using (AppendArticul f = new AppendArticul(CurrentUser.User, curMatr.Nn, curCompareRow.Kod, _comparisonResult))
+                    {
+                        if (f.ShowDialog() == DialogResult.OK)
+                        {
+                            await LoadOrRefreshData();
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(@$"Невозможно выбрать эту модель для стыковки: 
+                        {canLink.ErrorMessage}", "Проверка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                objArticulChecks = null;
+            }
+            else
+            {
+                MessageBox.Show("Текущий артикул матрицы и выбранный артикул не совпадают. Пожалуйста, выберите другой артикул для стыковки или создайте новый.", "Несовпадение артикулов", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private async void btnAddModel_Click(object sender, EventArgs e)
+        {
+            var curMatr = _bindingSourceArtMatr.Current as CreateArticulMatrModel;// получаем текущую выбранную строку из матрицы
+            if (curMatr == null)
+                return;
+            var currArt = _bindingSourceArticulCompare.Current as SpArtPreviewModel;// получаем текущую выбранную строку из грида сравнения
+            if (currArt == null)
+                return;
+
+
+            using (AppendArticul f = new AppendArticul(CurrentUser.User, curMatr.Nn))
+            {
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    await LoadOrRefreshData();
+                }
+
+                //if (f.ShowDialog() == DialogResult.OK)
+                //{
+                //    await RefreshArtPreviewAsync();
+                //    LogSuccess("Создан новый артикул через форму EditArticul.", nameof(csButtonNew_Click));
+                //}
+            }
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            foreach (var image in _imageCache.Values)
+                image.Dispose();
+
+            _imageCache.Clear();
+
+            base.OnFormClosed(e);
+        }
+
+        private async void repositoryItemSearchLookUpEdit2_EditValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var editor = sender as DevExpress.XtraEditors.SearchLookUpEdit;
+                if (editor == null)
+                    return;
+
+                var selectedRow = editor.Properties.GetRowByKeyValue(editor.EditValue)
+                    as GostGrupIzdViewModel;
+
+                if (selectedRow == null)
+                    return;
+                var currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
+                if (currentItem == null)
+                    return;
+
+                currentItem.Id_gost = selectedRow.Id_gost;
+                currentItem.Ag_id = selectedRow.Ag_id;
+                _bindingSourceArtMatr.ResetCurrentItem();
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при выборе группы ");
+                throw;
+            }
+
+        }
+
+        
     }
 }

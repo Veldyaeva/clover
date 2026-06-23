@@ -73,12 +73,24 @@ namespace SewingProduction.Features.Tabel.Forms
             colTimeOut.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             colTimeOut.DisplayFormat.FormatString = "dd.MM.yyyy HH:mm:ss";
             colPodrazdelenie.FieldName = "naimen";
+            colPodrazdelenie.VisibleIndex = 0;
             colFio.FieldName = "fio";
+            colFio.VisibleIndex = 1;
             colDate.FieldName = "dat";
+            colDate.VisibleIndex = 2;
             colReason.FieldName = "prichina";
+            colReason.VisibleIndex = 3;
             colTimeIn.FieldName = "t_in";
+            colTimeIn.VisibleIndex = 4;
             colTimeOut.FieldName = "t_out";
+            colTimeOut.VisibleIndex = 5;
             colDayInTab.FieldName = "DayValue";
+            colDayInTab.VisibleIndex = 6;
+            colMinute.FieldName = "minutes_out";
+            colMinute.VisibleIndex = 7;
+            colMinute.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            colMinute.DisplayFormat.FormatString = "#;-#;''";
+            gridView1.BestFitColumns();
         }
         private void FillMonths()
         {

@@ -28,7 +28,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         var articlesForm = this as dynamic;
                         if (articlesForm != null)
                         {
-                            await articlesForm.RefreshNormRaskForArticlesTab(annId, _loadCts.Token);
+                            await articlesForm.RefreshNormRaskForArticlesTab(annId, _presenter.CurrentToken);
                         }
                     }
                 }
