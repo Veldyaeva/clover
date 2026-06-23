@@ -20,3 +20,7 @@
 *.0.102_IsDockerContainer.dotnetUserLevelCache
 *.0.102_MachineId.dotnetUserLevelCache
 *.v1.dotnetUserLevelCache
+
+# Visual Studio temporary resource files
+*~RF*.TMP
+*.TMP
